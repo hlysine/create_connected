@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "create:gearbox"
+    },
+    {
+      "item": "create:large_cogwheel"
+    }
+  ],
+  "result": {
+    "item": "create_connected:unidirectional_gearbox"
+  }
+}
