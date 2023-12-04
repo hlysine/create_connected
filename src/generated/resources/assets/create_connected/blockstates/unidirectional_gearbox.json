@@ -2,17 +2,14 @@
   "variants": {
     "axis=x": {
       "model": "create_connected:block/unidirectional_gearbox/block",
-      "uvlock": false,
       "x": 90,
       "y": 90
     },
     "axis=y": {
-      "model": "create_connected:block/unidirectional_gearbox/block",
-      "uvlock": false
+      "model": "create_connected:block/unidirectional_gearbox/block"
     },
     "axis=z": {
       "model": "create_connected:block/unidirectional_gearbox/block",
-      "uvlock": false,
       "x": 90,
       "y": 180
     }

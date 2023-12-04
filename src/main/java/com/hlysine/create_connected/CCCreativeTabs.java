@@ -18,6 +18,7 @@ public class CCCreativeTabs {
             .displayItems((params, output) -> {
                 output.accept(CCBlocks.UNIDIRECTIONAL_GEARBOX.asStack());
                 output.accept(CCItems.VERTICAL_UNIDIRECTIONAL_GEARBOX.asStack());
+                output.accept(CCBlocks.OVERSTRESS_CLUTCH.asStack());
             })
             .build());
 
