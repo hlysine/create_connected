@@ -2,38 +2,30 @@ package com.hlysine.create_connected.content.overstressclutch;
 
 import com.hlysine.create_connected.CCBlockEntityTypes;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
-import com.simibubi.create.content.fluids.tank.FluidTankBlockEntity;
-import com.simibubi.create.content.kinetics.RotationPropagator;
 import com.simibubi.create.content.kinetics.base.AbstractEncasedShaftBlock;
-import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
 import com.simibubi.create.foundation.block.IBE;
-import net.minecraft.core.BlockPos;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.util.RandomSource;
+import com.simibubi.create.foundation.utility.Lang;
+import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.context.UseOnContext;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.ticks.TickPriority;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
+import org.jetbrains.annotations.NotNull;
 
 public class OverstressClutchBlock extends AbstractEncasedShaftBlock implements IWrenchable, IBE<OverstressClutchBlockEntity> {
-
-    public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
+    public static final EnumProperty<ClutchState> STATE = EnumProperty.create("state", ClutchState.class);
 
     public OverstressClutchBlock(Properties properties) {
         super(properties);
-        registerDefaultState(defaultBlockState().setValue(POWERED, false));
+        registerDefaultState(defaultBlockState().setValue(STATE, ClutchState.COUPLED));
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(POWERED);
+        builder.add(STATE);
         super.createBlockStateDefinition(builder);
     }
 
@@ -53,4 +45,12 @@ public class OverstressClutchBlock extends AbstractEncasedShaftBlock implements 
         return InteractionResult.SUCCESS;
     }
 
+    public enum ClutchState implements StringRepresentable {
+        COUPLED, UNCOUPLING, UNCOUPLED;
+
+        @Override
+        public @NotNull String getSerializedName() {
+            return Lang.asId(name());
+        }
+    }
 }

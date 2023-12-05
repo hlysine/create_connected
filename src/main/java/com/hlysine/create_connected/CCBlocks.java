@@ -9,10 +9,20 @@ import com.simibubi.create.foundation.data.AssetLookup;
 import com.simibubi.create.foundation.data.BlockStateGen;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.foundation.data.SharedProperties;
+import com.tterrag.registrate.providers.DataGenContext;
+import com.tterrag.registrate.providers.RegistrateBlockstateProvider;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.material.MapColor;
+import net.minecraftforge.client.model.generators.ModelFile;
 
+import java.util.Locale;
+import java.util.function.Function;
+
+import static com.simibubi.create.foundation.data.AssetLookup.partialBaseModel;
 import static com.simibubi.create.foundation.data.BlockStateGen.axisBlock;
 import static com.simibubi.create.foundation.data.ModelGen.customItemModel;
 import static com.simibubi.create.foundation.data.TagGen.axeOrPickaxe;
@@ -28,7 +38,7 @@ public class CCBlocks {
             .onRegister(CreateRegistrate.connectedTextures(() -> new EncasedCTBehaviour(AllSpriteShifts.ANDESITE_CASING)))
             .onRegister(CreateRegistrate.casingConnectivity((block, cc) -> cc.make(block, AllSpriteShifts.ANDESITE_CASING,
                     (s, f) -> f.getAxis() == s.getValue(ParallelGearboxBlock.AXIS))))
-            .blockstate((c, p) -> axisBlock(c, p, $ -> AssetLookup.partialBaseModel(c, p), false))
+            .blockstate((c, p) -> axisBlock(c, p, $ -> partialBaseModel(c, p), false))
             .item()
             .transform(customItemModel())
             .register();
@@ -40,11 +50,21 @@ public class CCBlocks {
             .addLayer(() -> RenderType::cutoutMipped)
             .transform(BlockStressDefaults.setNoImpact())
             .transform(axeOrPickaxe())
-            .blockstate((c, p) -> BlockStateGen.axisBlock(c, p, AssetLookup.forPowered(c, p)))
+            .blockstate((c, p) -> BlockStateGen.axisBlock(c, p,
+                    forBoolean(c, state -> state.getValue(OverstressClutchBlock.STATE) == OverstressClutchBlock.ClutchState.UNCOUPLED, "uncoupled", p)
+            ))
             .item()
             .transform(customItemModel())
             .register();
 
     public static void register() {
+    }
+
+    public static Function<BlockState, ModelFile> forBoolean(DataGenContext<?, ?> ctx,
+                                                             Function<BlockState, Boolean> condition,
+                                                             String key,
+                                                             RegistrateBlockstateProvider prov) {
+        return state -> condition.apply(state) ? partialBaseModel(ctx, prov, key)
+                : partialBaseModel(ctx, prov);
     }
 }
