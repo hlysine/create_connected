@@ -32,6 +32,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Predicate;
 
@@ -53,8 +54,9 @@ public class ShearPinBlock extends AbstractBEShaftBlock<ShearPinBlockEntity> {
         return CCBlockEntityTypes.SHEAR_PIN.get();
     }
 
+    @SuppressWarnings("deprecation")
     @Override
-    public void tick(BlockState pState, ServerLevel pLevel, BlockPos pPos, RandomSource pRandom) {
+    public void tick(@NotNull BlockState pState, ServerLevel pLevel, @NotNull BlockPos pPos, @NotNull RandomSource pRandom) {
         BlockEntity be = pLevel.getBlockEntity(pPos);
         if (!(be instanceof ShearPinBlockEntity))
             return;
@@ -70,8 +72,9 @@ public class ShearPinBlock extends AbstractBEShaftBlock<ShearPinBlockEntity> {
         return CCBlocks.SHEAR_PIN.has(state);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
-    public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
+    public @NotNull VoxelShape getShape(BlockState state, @NotNull BlockGetter worldIn, @NotNull BlockPos pos, @NotNull CollisionContext context) {
         return AllShapes.SIX_VOXEL_POLE.get(state.getValue(AXIS));
     }
 
@@ -85,9 +88,10 @@ public class ShearPinBlock extends AbstractBEShaftBlock<ShearPinBlockEntity> {
         return .125f;
     }
 
+    @SuppressWarnings("deprecation")
     @Override
-    public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand,
-                                 BlockHitResult ray) {
+    public @NotNull InteractionResult use(@NotNull BlockState state, @NotNull Level world, @NotNull BlockPos pos, Player player, @NotNull InteractionHand hand,
+                                          @NotNull BlockHitResult ray) {
         if (player.isShiftKeyDown() || !player.mayBuild())
             return InteractionResult.PASS;
 

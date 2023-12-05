@@ -1,7 +1,6 @@
 package com.hlysine.create_connected.content.shearpin;
 
 import com.hlysine.create_connected.CCBlocks;
-import com.hlysine.create_connected.content.overstressclutch.OverstressClutchBlock.ClutchState;
 import com.simibubi.create.content.kinetics.KineticNetwork;
 import com.simibubi.create.content.kinetics.base.IRotate;
 import com.simibubi.create.content.kinetics.simpleRelays.BracketedKineticBlockEntity;
@@ -9,8 +8,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.ticks.TickPriority;
-
-import static com.hlysine.create_connected.content.overstressclutch.OverstressClutchBlock.STATE;
 
 public class ShearPinBlockEntity extends BracketedKineticBlockEntity {
 

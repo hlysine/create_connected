@@ -17,6 +17,7 @@ import net.minecraft.world.level.block.state.StateDefinition.Builder;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.pathfinder.PathComputationType;
+import org.jetbrains.annotations.NotNull;
 
 public abstract class AbstractBEShaftBlock<T extends KineticBlockEntity> extends RotatedPillarKineticBlock
         implements IBE<T>, ProperWaterloggedBlock {
@@ -26,8 +27,9 @@ public abstract class AbstractBEShaftBlock<T extends KineticBlockEntity> extends
         registerDefaultState(super.defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, false));
     }
 
+    @SuppressWarnings("deprecation")
     @Override
-    public boolean isPathfindable(BlockState state, BlockGetter reader, BlockPos pos, PathComputationType type) {
+    public boolean isPathfindable(@NotNull BlockState state, @NotNull BlockGetter reader, @NotNull BlockPos pos, @NotNull PathComputationType type) {
         return false;
     }
 
@@ -41,8 +43,9 @@ public abstract class AbstractBEShaftBlock<T extends KineticBlockEntity> extends
         return state.getValue(AXIS);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
-    public FluidState getFluidState(BlockState state) {
+    public @NotNull FluidState getFluidState(@NotNull BlockState state) {
         return fluidState(state);
     }
 
@@ -51,9 +54,14 @@ public abstract class AbstractBEShaftBlock<T extends KineticBlockEntity> extends
         super.createBlockStateDefinition(builder.add(BlockStateProperties.WATERLOGGED));
     }
 
+    @SuppressWarnings("deprecation")
     @Override
-    public BlockState updateShape(BlockState state, Direction direction, BlockState neighbourState, LevelAccessor world,
-                                  BlockPos pos, BlockPos neighbourPos) {
+    public @NotNull BlockState updateShape(@NotNull BlockState state,
+                                           @NotNull Direction direction,
+                                           @NotNull BlockState neighbourState,
+                                           @NotNull LevelAccessor world,
+                                           @NotNull BlockPos pos,
+                                           @NotNull BlockPos neighbourPos) {
         updateWater(world, state, pos);
         return state;
     }
