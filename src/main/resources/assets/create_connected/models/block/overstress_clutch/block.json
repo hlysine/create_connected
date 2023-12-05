@@ -1,7 +1,7 @@
 {
-	"parent": "create:block/gearshift/block",
+	"parent": "create:block/clutch/block",
     "textures": {
-        "0": "create:block/clutch_off",
-		"particle": "create:block/clutch_off"
+        "0": "create_connected:block/overstress_clutch_off",
+		"particle": "create_connected:block/overstress_clutch_off"
     }
 }
