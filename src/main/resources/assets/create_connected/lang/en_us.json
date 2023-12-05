@@ -6,5 +6,7 @@
   "block.create_connected.overstress_clutch": "Overstress Clutch",
   "create_connected.overstress_clutch.uncouple_delay": "Uncouple Delay",
 
+  "block.create_connected.shear_pin": "Shear Pin",
+
   "item.create_connected.vertical_parallel_gearbox": "Vertical Parallel Gearbox"
 }

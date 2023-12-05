@@ -1,0 +1,14 @@
+{
+  "type": "create:cutting",
+  "ingredients": [
+    {
+      "item": "create:shaft"
+    }
+  ],
+  "processingTime": 200,
+  "results": [
+    {
+      "item": "create_connected:shear_pin"
+    }
+  ]
+}

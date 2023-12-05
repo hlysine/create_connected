@@ -4,6 +4,9 @@ import com.hlysine.create_connected.content.overstressclutch.OverstressClutchBlo
 import com.hlysine.create_connected.content.parallelgearbox.ParallelGearboxBlockEntity;
 import com.hlysine.create_connected.content.parallelgearbox.ParallelGearboxInstance;
 import com.hlysine.create_connected.content.parallelgearbox.ParallelGearboxRenderer;
+import com.hlysine.create_connected.content.shearpin.ShearPinBlockEntity;
+import com.simibubi.create.content.kinetics.simpleRelays.BracketedKineticBlockEntityInstance;
+import com.simibubi.create.content.kinetics.simpleRelays.BracketedKineticBlockEntityRenderer;
 import com.simibubi.create.content.kinetics.transmission.SplitShaftInstance;
 import com.simibubi.create.content.kinetics.transmission.SplitShaftRenderer;
 import com.simibubi.create.foundation.data.CreateRegistrate;
@@ -25,6 +28,14 @@ public class CCBlockEntityTypes {
             .instance(() -> SplitShaftInstance::new, false)
             .validBlocks(CCBlocks.OVERSTRESS_CLUTCH)
             .renderer(() -> SplitShaftRenderer::new)
+            .register();
+
+
+    public static final BlockEntityEntry<ShearPinBlockEntity> SHEAR_PIN = REGISTRATE
+            .blockEntity("shear_pin", ShearPinBlockEntity::new)
+            .instance(() -> BracketedKineticBlockEntityInstance::new, false)
+            .validBlocks(CCBlocks.SHEAR_PIN)
+            .renderer(() -> BracketedKineticBlockEntityRenderer::new)
             .register();
 
     public static void register() {

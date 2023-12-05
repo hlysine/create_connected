@@ -1,5 +1,6 @@
 {
   "block.create_connected.overstress_clutch": "Overstress Clutch",
   "block.create_connected.parallel_gearbox": "Parallel Gearbox",
+  "block.create_connected.shear_pin": "Shear Pin",
   "item.create_connected.vertical_parallel_gearbox": "Vertical Parallel Gearbox"
 }
