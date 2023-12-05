@@ -1,5 +1,6 @@
 package com.hlysine.create_connected.content.overstressclutch;
 
+import com.hlysine.create_connected.CCBlocks;
 import com.hlysine.create_connected.content.overstressclutch.OverstressClutchBlock.ClutchState;
 import com.simibubi.create.content.kinetics.KineticNetwork;
 import com.simibubi.create.content.kinetics.RotationPropagator;
@@ -22,6 +23,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.ticks.TickPriority;
 
 import java.util.List;
 
@@ -29,8 +31,8 @@ import static com.hlysine.create_connected.content.overstressclutch.OverstressCl
 
 public class OverstressClutchBlockEntity extends SplitShaftBlockEntity {
 
-    protected int delay;
-    ScrollValueBehaviour maxDelay;
+    public int delay;
+    public ScrollValueBehaviour maxDelay;
 
     public OverstressClutchBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
@@ -75,6 +77,8 @@ public class OverstressClutchBlockEntity extends SplitShaftBlockEntity {
             if (isOverStressed() && getBlockState().getValue(STATE) == ClutchState.COUPLED) {
                 if (level != null) {
                     level.setBlock(getBlockPos(), getBlockState().setValue(STATE, ClutchState.UNCOUPLING), 2 | 16);
+                    delay = maxDelay.getValue() - 1;
+                    sendData();
                 }
             }
         }
@@ -111,33 +115,10 @@ public class OverstressClutchBlockEntity extends SplitShaftBlockEntity {
 
     @Override
     public void tick() {
-        ClutchState state = getBlockState().getValue(STATE);
-        boolean atMax = delay >= maxDelay.getValue();
-        boolean atMin = delay <= 0;
-        updateState(state, atMax, atMin);
-
         super.tick();
-    }
-
-    protected void updateState(ClutchState state, boolean atMax, boolean atMin) {
-        if (state == ClutchState.COUPLED || state == ClutchState.UNCOUPLED) {
-            if (delay != 0) {
-                delay = 0;
-            }
-            return;
+        if (getBlockState().getValue(STATE) == ClutchState.UNCOUPLING && level != null && !level.isClientSide) {
+            level.scheduleTick(getBlockPos(), CCBlocks.OVERSTRESS_CLUTCH.get(), 0, TickPriority.EXTREMELY_HIGH);
         }
-        if (atMin) {
-            delay = maxDelay.getValue();
-            return;
-        }
-        if (delay == 1) {
-            if (!level.isClientSide) {
-                level.setBlockAndUpdate(worldPosition, getBlockState().setValue(STATE, ClutchState.UNCOUPLED));
-                RotationPropagator.handleRemoved(level, getBlockPos(), this);
-                return;
-            }
-        }
-        delay--;
     }
 
     @Override
