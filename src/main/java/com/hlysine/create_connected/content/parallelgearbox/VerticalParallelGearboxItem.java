@@ -1,7 +1,6 @@
-package com.hlysine.create_connected.content.unidirectionalgearbox;
+package com.hlysine.create_connected.content.parallelgearbox;
 
 import com.hlysine.create_connected.CCBlocks;
-import com.simibubi.create.AllBlocks;
 import com.simibubi.create.content.kinetics.base.IRotate;
 import com.simibubi.create.foundation.utility.Iterate;
 import net.minecraft.core.BlockPos;
@@ -17,15 +16,15 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
 import java.util.Map;
 
-public class VerticalUnidirectionalGearboxItem extends BlockItem {
+public class VerticalParallelGearboxItem extends BlockItem {
 
-    public VerticalUnidirectionalGearboxItem(Properties builder) {
-        super(CCBlocks.UNIDIRECTIONAL_GEARBOX.get(), builder);
+    public VerticalParallelGearboxItem(Properties builder) {
+        super(CCBlocks.PARALLEL_GEARBOX.get(), builder);
     }
 
     @Override
     public String getDescriptionId() {
-        return "item.create_connected.vertical_unidirectional_gearbox";
+        return "item.create_connected.vertical_parallel_gearbox";
     }
 
     @Override

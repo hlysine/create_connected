@@ -14,10 +14,10 @@ public class CCCreativeTabs {
     public static final RegistryObject<CreativeModeTab> MAIN = CREATIVE_MODE_TABS.register("main", () -> CreativeModeTab.builder()
             .title(Component.translatable("itemGroup.create_connected.main"))
             .withTabsBefore(AllCreativeModeTabs.PALETTES_CREATIVE_TAB.getKey())
-            .icon(CCBlocks.UNIDIRECTIONAL_GEARBOX::asStack)
+            .icon(CCBlocks.PARALLEL_GEARBOX::asStack)
             .displayItems((params, output) -> {
-                output.accept(CCBlocks.UNIDIRECTIONAL_GEARBOX.asStack());
-                output.accept(CCItems.VERTICAL_UNIDIRECTIONAL_GEARBOX.asStack());
+                output.accept(CCBlocks.PARALLEL_GEARBOX.asStack());
+                output.accept(CCItems.VERTICAL_PARALLEL_GEARBOX.asStack());
                 output.accept(CCBlocks.OVERSTRESS_CLUTCH.asStack());
             })
             .build());

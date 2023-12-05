@@ -1,7 +1,7 @@
 package com.hlysine.create_connected;
 
 import com.hlysine.create_connected.content.overstressclutch.OverstressClutchBlock;
-import com.hlysine.create_connected.content.unidirectionalgearbox.UnidirectionalGearboxBlock;
+import com.hlysine.create_connected.content.parallelgearbox.ParallelGearboxBlock;
 import com.simibubi.create.AllSpriteShifts;
 import com.simibubi.create.content.decoration.encasing.EncasedCTBehaviour;
 import com.simibubi.create.content.kinetics.BlockStressDefaults;
@@ -20,14 +20,14 @@ import static com.simibubi.create.foundation.data.TagGen.axeOrPickaxe;
 public class CCBlocks {
     private static final CreateRegistrate REGISTRATE = CreateConnected.getRegistrate();
 
-    public static final BlockEntry<UnidirectionalGearboxBlock> UNIDIRECTIONAL_GEARBOX = REGISTRATE.block("unidirectional_gearbox", UnidirectionalGearboxBlock::new)
+    public static final BlockEntry<ParallelGearboxBlock> PARALLEL_GEARBOX = REGISTRATE.block("parallel_gearbox", ParallelGearboxBlock::new)
             .initialProperties(SharedProperties::stone)
             .properties(p -> p.noOcclusion().mapColor(MapColor.PODZOL))
             .transform(BlockStressDefaults.setNoImpact())
             .transform(axeOrPickaxe())
             .onRegister(CreateRegistrate.connectedTextures(() -> new EncasedCTBehaviour(AllSpriteShifts.ANDESITE_CASING)))
             .onRegister(CreateRegistrate.casingConnectivity((block, cc) -> cc.make(block, AllSpriteShifts.ANDESITE_CASING,
-                    (s, f) -> f.getAxis() == s.getValue(UnidirectionalGearboxBlock.AXIS))))
+                    (s, f) -> f.getAxis() == s.getValue(ParallelGearboxBlock.AXIS))))
             .blockstate((c, p) -> axisBlock(c, p, $ -> AssetLookup.partialBaseModel(c, p), false))
             .item()
             .transform(customItemModel())

@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "create_connected:vertical_parallel_gearbox"
+    }
+  ],
+  "result": {
+    "item": "create_connected:parallel_gearbox"
+  }
+}

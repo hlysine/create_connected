@@ -1,6 +1,6 @@
 {
   "values": [
-    "create_connected:unidirectional_gearbox",
+    "create_connected:parallel_gearbox",
     "create_connected:overstress_clutch"
   ]
 }

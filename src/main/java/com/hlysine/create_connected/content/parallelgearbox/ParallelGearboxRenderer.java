@@ -1,4 +1,4 @@
-package com.hlysine.create_connected.content.unidirectionalgearbox;
+package com.hlysine.create_connected.content.parallelgearbox;
 
 import com.jozufozu.flywheel.backend.Backend;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -17,14 +17,14 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Axis;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
-public class UnidirectionalGearboxRenderer extends KineticBlockEntityRenderer<UnidirectionalGearboxBlockEntity> {
+public class ParallelGearboxRenderer extends KineticBlockEntityRenderer<ParallelGearboxBlockEntity> {
 
-    public UnidirectionalGearboxRenderer(BlockEntityRendererProvider.Context context) {
+    public ParallelGearboxRenderer(BlockEntityRendererProvider.Context context) {
         super(context);
     }
 
     @Override
-    protected void renderSafe(UnidirectionalGearboxBlockEntity be, float partialTicks, PoseStack ms, MultiBufferSource buffer,
+    protected void renderSafe(ParallelGearboxBlockEntity be, float partialTicks, PoseStack ms, MultiBufferSource buffer,
                               int light, int overlay) {
         if (Backend.canUseInstancing(be.getLevel())) return;
 
@@ -44,7 +44,7 @@ public class UnidirectionalGearboxRenderer extends KineticBlockEntityRenderer<Un
             if (be.getSpeed() != 0 && be.hasSource()) {
                 BlockPos source = be.source.subtract(be.getBlockPos());
                 Direction sourceFacing = Direction.getNearest(source.getX(), source.getY(), source.getZ());
-                angle *= UnidirectionalGearboxBlockEntity.getRotationSpeedModifier(direction, sourceFacing);
+                angle *= ParallelGearboxBlockEntity.getRotationSpeedModifier(direction, sourceFacing);
             }
 
             angle += offset;

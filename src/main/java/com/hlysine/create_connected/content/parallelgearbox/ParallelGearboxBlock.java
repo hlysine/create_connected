@@ -1,14 +1,9 @@
-package com.hlysine.create_connected.content.unidirectionalgearbox;
+package com.hlysine.create_connected.content.parallelgearbox;
 
 import com.hlysine.create_connected.CCBlockEntityTypes;
 import com.hlysine.create_connected.CCItems;
-import com.simibubi.create.AllItems;
-import com.simibubi.create.content.kinetics.base.AbstractEncasedShaftBlock;
-import com.simibubi.create.content.kinetics.base.DirectionalKineticBlock;
 import com.simibubi.create.content.kinetics.base.RotatedPillarKineticBlock;
-import com.simibubi.create.content.kinetics.transmission.SplitShaftBlockEntity;
 import com.simibubi.create.foundation.block.IBE;
-import com.tterrag.registrate.util.entry.BlockEntityEntry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Axis;
@@ -23,12 +18,11 @@ import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.phys.HitResult;
 
-import java.util.Arrays;
 import java.util.List;
 
-public class UnidirectionalGearboxBlock extends RotatedPillarKineticBlock implements IBE<UnidirectionalGearboxBlockEntity> {
+public class ParallelGearboxBlock extends RotatedPillarKineticBlock implements IBE<ParallelGearboxBlockEntity> {
 
-    public UnidirectionalGearboxBlock(Properties properties) {
+    public ParallelGearboxBlock(Properties properties) {
         super(properties);
     }
 
@@ -42,7 +36,7 @@ public class UnidirectionalGearboxBlock extends RotatedPillarKineticBlock implem
     public List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
         if (state.getValue(AXIS).isVertical())
             return super.getDrops(state, builder);
-        return List.of(new ItemStack(CCItems.VERTICAL_UNIDIRECTIONAL_GEARBOX.get()));
+        return List.of(new ItemStack(CCItems.VERTICAL_PARALLEL_GEARBOX.get()));
     }
 
     @Override
@@ -50,7 +44,7 @@ public class UnidirectionalGearboxBlock extends RotatedPillarKineticBlock implem
                                        Player player) {
         if (state.getValue(AXIS).isVertical())
             return super.getCloneItemStack(state, target, world, pos, player);
-        return new ItemStack(CCItems.VERTICAL_UNIDIRECTIONAL_GEARBOX.get());
+        return new ItemStack(CCItems.VERTICAL_PARALLEL_GEARBOX.get());
     }
 
     @Override
@@ -69,12 +63,12 @@ public class UnidirectionalGearboxBlock extends RotatedPillarKineticBlock implem
     }
 
     @Override
-    public Class<UnidirectionalGearboxBlockEntity> getBlockEntityClass() {
-        return UnidirectionalGearboxBlockEntity.class;
+    public Class<ParallelGearboxBlockEntity> getBlockEntityClass() {
+        return ParallelGearboxBlockEntity.class;
     }
 
     @Override
-    public BlockEntityType<? extends UnidirectionalGearboxBlockEntity> getBlockEntityType() {
-        return CCBlockEntityTypes.UNIDIRECTIONAL_GEARBOX.get();
+    public BlockEntityType<? extends ParallelGearboxBlockEntity> getBlockEntityType() {
+        return CCBlockEntityTypes.PARALLEL_GEARBOX.get();
     }
 }

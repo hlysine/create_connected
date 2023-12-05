@@ -1,4 +1,4 @@
-package com.hlysine.create_connected.content.unidirectionalgearbox;
+package com.hlysine.create_connected.content.parallelgearbox;
 
 
 import java.util.EnumMap;
@@ -18,12 +18,12 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
-public class UnidirectionalGearboxInstance extends KineticBlockEntityInstance<UnidirectionalGearboxBlockEntity> {
+public class ParallelGearboxInstance extends KineticBlockEntityInstance<ParallelGearboxBlockEntity> {
 
     protected final EnumMap<Direction, RotatingData> keys;
     protected Direction sourceFacing;
 
-    public UnidirectionalGearboxInstance(MaterialManager materialManager, UnidirectionalGearboxBlockEntity blockEntity) {
+    public ParallelGearboxInstance(MaterialManager materialManager, ParallelGearboxBlockEntity blockEntity) {
         super(materialManager, blockEntity);
 
         keys = new EnumMap<>(Direction.class);
@@ -60,7 +60,7 @@ public class UnidirectionalGearboxInstance extends KineticBlockEntityInstance<Un
         float speed = blockEntity.getSpeed();
 
         if (speed != 0 && sourceFacing != null) {
-            speed *= UnidirectionalGearboxBlockEntity.getRotationSpeedModifier(direction, sourceFacing);
+            speed *= ParallelGearboxBlockEntity.getRotationSpeedModifier(direction, sourceFacing);
         }
         return speed;
     }

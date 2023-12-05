@@ -1,8 +1,8 @@
 {
   "itemGroup.create_connected.main": "Create: Connected",
 
-  "block.create_connected.unidirectional_gearbox": "Unidirectional Gearbox",
+  "block.create_connected.parallel_gearbox": "Parallel Gearbox",
   "block.create_connected.overstress_clutch": "Overstress Clutch",
 
-  "item.create_connected.vertical_unidirectional_gearbox": "Vertical Unidirectional Gearbox"
+  "item.create_connected.vertical_parallel_gearbox": "Vertical Parallel Gearbox"
 }

@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "create_connected:unidirectional_gearbox"
+          "name": "create_connected:parallel_gearbox"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "create_connected:blocks/unidirectional_gearbox"
+  "random_sequence": "create_connected:blocks/parallel_gearbox"
 }

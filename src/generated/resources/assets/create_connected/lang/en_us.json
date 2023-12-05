@@ -1,5 +1,5 @@
 {
   "block.create_connected.overstress_clutch": "Overstress Clutch",
-  "block.create_connected.unidirectional_gearbox": "Unidirectional Gearbox",
-  "item.create_connected.vertical_unidirectional_gearbox": "Vertical Unidirectional Gearbox"
+  "block.create_connected.parallel_gearbox": "Parallel Gearbox",
+  "item.create_connected.vertical_parallel_gearbox": "Vertical Parallel Gearbox"
 }

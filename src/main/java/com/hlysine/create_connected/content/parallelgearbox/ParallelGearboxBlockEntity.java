@@ -1,4 +1,4 @@
-package com.hlysine.create_connected.content.unidirectionalgearbox;
+package com.hlysine.create_connected.content.parallelgearbox;
 
 
 import com.simibubi.create.content.kinetics.transmission.SplitShaftBlockEntity;
@@ -9,9 +9,9 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
 @MethodsReturnNonnullByDefault
-public class UnidirectionalGearboxBlockEntity extends SplitShaftBlockEntity {
+public class ParallelGearboxBlockEntity extends SplitShaftBlockEntity {
 
-    public UnidirectionalGearboxBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
+    public ParallelGearboxBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
     }
 
