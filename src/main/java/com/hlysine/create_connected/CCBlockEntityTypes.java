@@ -1,6 +1,7 @@
 package com.hlysine.create_connected;
 
 import com.hlysine.create_connected.content.inverted_clutch.InvertedClutchBlockEntity;
+import com.hlysine.create_connected.content.inverted_gearshift.InvertedGearshiftBlockEntity;
 import com.hlysine.create_connected.content.overstressclutch.OverstressClutchBlockEntity;
 import com.hlysine.create_connected.content.parallelgearbox.ParallelGearboxBlockEntity;
 import com.hlysine.create_connected.content.parallelgearbox.ParallelGearboxInstance;
@@ -43,6 +44,13 @@ public class CCBlockEntityTypes {
             .blockEntity("inverted_clutch", InvertedClutchBlockEntity::new)
             .instance(() -> SplitShaftInstance::new, false)
             .validBlocks(CCBlocks.INVERTED_CLUTCH)
+            .renderer(() -> SplitShaftRenderer::new)
+            .register();
+
+    public static final BlockEntityEntry<InvertedGearshiftBlockEntity> INVERTED_GEARSHIFT = REGISTRATE
+            .blockEntity("inverted_gearshift", InvertedGearshiftBlockEntity::new)
+            .instance(() -> SplitShaftInstance::new, false)
+            .validBlocks(CCBlocks.INVERTED_GEARSHIFT)
             .renderer(() -> SplitShaftRenderer::new)
             .register();
 

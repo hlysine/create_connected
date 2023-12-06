@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "create:gearshift"
+    }
+  ],
+  "result": {
+    "item": "create_connected:inverted_gearshift"
+  }
+}

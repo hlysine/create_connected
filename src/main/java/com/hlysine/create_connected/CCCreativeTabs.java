@@ -17,6 +17,7 @@ public class CCCreativeTabs {
             .icon(CCBlocks.PARALLEL_GEARBOX::asStack)
             .displayItems((params, output) -> {
                 output.accept(CCBlocks.INVERTED_CLUTCH.asStack());
+                output.accept(CCBlocks.INVERTED_GEARSHIFT.asStack());
                 output.accept(CCBlocks.PARALLEL_GEARBOX.asStack());
                 output.accept(CCItems.VERTICAL_PARALLEL_GEARBOX.asStack());
                 output.accept(CCBlocks.SHEAR_PIN.asStack());

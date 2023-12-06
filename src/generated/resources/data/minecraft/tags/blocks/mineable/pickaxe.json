@@ -3,6 +3,7 @@
     "create_connected:parallel_gearbox",
     "create_connected:overstress_clutch",
     "create_connected:shear_pin",
-    "create_connected:inverted_clutch"
+    "create_connected:inverted_clutch",
+    "create_connected:inverted_gearshift"
   ]
 }

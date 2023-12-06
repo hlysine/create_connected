@@ -1,6 +1,7 @@
 package com.hlysine.create_connected;
 
 import com.hlysine.create_connected.content.inverted_clutch.InvertedClutchBlock;
+import com.hlysine.create_connected.content.inverted_gearshift.InvertedGearshiftBlock;
 import com.hlysine.create_connected.content.overstressclutch.OverstressClutchBlock;
 import com.hlysine.create_connected.content.parallelgearbox.ParallelGearboxBlock;
 import com.hlysine.create_connected.content.shearpin.ShearPinBlock;
@@ -71,6 +72,17 @@ public class CCBlocks {
             .register();
 
     public static final BlockEntry<InvertedClutchBlock> INVERTED_CLUTCH = REGISTRATE.block("inverted_clutch", InvertedClutchBlock::new)
+            .initialProperties(SharedProperties::stone)
+            .properties(p -> p.noOcclusion().mapColor(MapColor.PODZOL))
+            .addLayer(() -> RenderType::cutoutMipped)
+            .transform(BlockStressDefaults.setNoImpact())
+            .transform(axeOrPickaxe())
+            .blockstate((c, p) -> BlockStateGen.axisBlock(c, p, AssetLookup.forPowered(c, p)))
+            .item()
+            .transform(customItemModel())
+            .register();
+
+    public static final BlockEntry<InvertedGearshiftBlock> INVERTED_GEARSHIFT = REGISTRATE.block("inverted_gearshift", InvertedGearshiftBlock::new)
             .initialProperties(SharedProperties::stone)
             .properties(p -> p.noOcclusion().mapColor(MapColor.PODZOL))
             .addLayer(() -> RenderType::cutoutMipped)
