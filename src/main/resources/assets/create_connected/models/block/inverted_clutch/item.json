@@ -1,0 +1,6 @@
+{
+  "parent": "create:item/clutch",
+  "textures": {
+    "0": "create_connected:block/inverted_clutch_off"
+  }
+}

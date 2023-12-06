@@ -1,5 +1,6 @@
 package com.hlysine.create_connected;
 
+import com.hlysine.create_connected.content.inverted_clutch.InvertedClutchBlockEntity;
 import com.hlysine.create_connected.content.overstressclutch.OverstressClutchBlockEntity;
 import com.hlysine.create_connected.content.parallelgearbox.ParallelGearboxBlockEntity;
 import com.hlysine.create_connected.content.parallelgearbox.ParallelGearboxInstance;
@@ -36,6 +37,13 @@ public class CCBlockEntityTypes {
             .instance(() -> BracketedKineticBlockEntityInstance::new, false)
             .validBlocks(CCBlocks.SHEAR_PIN)
             .renderer(() -> BracketedKineticBlockEntityRenderer::new)
+            .register();
+
+    public static final BlockEntityEntry<InvertedClutchBlockEntity> INVERTED_CLUTCH = REGISTRATE
+            .blockEntity("inverted_clutch", InvertedClutchBlockEntity::new)
+            .instance(() -> SplitShaftInstance::new, false)
+            .validBlocks(CCBlocks.INVERTED_CLUTCH)
+            .renderer(() -> SplitShaftRenderer::new)
             .register();
 
     public static void register() {
