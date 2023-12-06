@@ -1,12 +1,10 @@
 {
   "itemGroup.create_connected.main": "Create: Connected",
-
   "block.create_connected.parallel_gearbox": "Parallel Gearbox",
-
   "block.create_connected.overstress_clutch": "Overstress Clutch",
   "create_connected.overstress_clutch.uncouple_delay": "Uncouple Delay",
-
+  "create_connected.gui.overstress_clutch.uncoupled": "Uncoupled",
+  "create_connected.gui.overstress_clutch.uncoupled_explanation": "This clutch is _uncoupled_ due to stress. Fix the network before _resetting_ this clutch with a _wrench_.",
   "block.create_connected.shear_pin": "Shear Pin",
-
   "item.create_connected.vertical_parallel_gearbox": "Vertical Parallel Gearbox"
 }

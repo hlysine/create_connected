@@ -1,6 +1,7 @@
 package com.hlysine.create_connected.content.overstressclutch;
 
 import com.hlysine.create_connected.CCBlocks;
+import com.hlysine.create_connected.Lang;
 import com.hlysine.create_connected.content.overstressclutch.OverstressClutchBlock.ClutchState;
 import com.simibubi.create.content.kinetics.KineticNetwork;
 import com.simibubi.create.content.kinetics.RotationPropagator;
@@ -10,8 +11,8 @@ import com.simibubi.create.content.redstone.diodes.BrassDiodeBlock;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.*;
 import com.simibubi.create.foundation.blockEntity.behaviour.scrollValue.ScrollValueBehaviour;
+import com.simibubi.create.foundation.item.TooltipHelper;
 import com.simibubi.create.foundation.utility.Components;
-import com.simibubi.create.foundation.utility.Lang;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -28,6 +29,7 @@ import net.minecraft.world.ticks.TickPriority;
 import java.util.List;
 
 import static com.hlysine.create_connected.content.overstressclutch.OverstressClutchBlock.STATE;
+import static net.minecraft.ChatFormatting.GOLD;
 
 public class OverstressClutchBlockEntity extends SplitShaftBlockEntity {
 
@@ -105,8 +107,29 @@ public class OverstressClutchBlockEntity extends SplitShaftBlockEntity {
         return 1;
     }
 
-    public void unpowerClutch() {
+    @Override
+    public boolean addToTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
+        boolean added = super.addToTooltip(tooltip, isPlayerSneaking);
+
         if (getBlockState().getValue(STATE) == ClutchState.UNCOUPLED) {
+            Lang.translate("gui.overstress_clutch.uncoupled")
+                    .style(GOLD)
+                    .forGoggles(tooltip);
+            Component hint = Lang.translateDirect("gui.overstress_clutch.uncoupled_explanation");
+            List<Component> cutString = TooltipHelper.cutTextComponent(hint, TooltipHelper.Palette.GRAY_AND_WHITE);
+            for (Component component : cutString)
+                Lang.builder()
+                        .add(component.copy())
+                        .forGoggles(tooltip);
+            added = true;
+        }
+
+        return added;
+    }
+
+    public void resetClutch() {
+        if (getBlockState().getValue(STATE) == ClutchState.UNCOUPLED) {
+            assert level != null;
             level.setBlock(getBlockPos(), getBlockState().setValue(STATE, ClutchState.COUPLED), 2);
             RotationPropagator.handleRemoved(level, getBlockPos(), this);
             RotationPropagator.handleAdded(level, getBlockPos(), this);
@@ -120,6 +143,7 @@ public class OverstressClutchBlockEntity extends SplitShaftBlockEntity {
             level.scheduleTick(getBlockPos(), CCBlocks.OVERSTRESS_CLUTCH.get(), 0, TickPriority.EXTREMELY_HIGH);
         }
     }
+
 
     @Override
     protected void read(CompoundTag compound, boolean clientPacket) {
