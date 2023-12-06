@@ -11,6 +11,8 @@ import net.minecraft.world.ticks.TickPriority;
 
 public class ShearPinBlockEntity extends BracketedKineticBlockEntity {
 
+    static final int RANDOM_DELAY = 5;
+
     public ShearPinBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
     }
@@ -22,7 +24,7 @@ public class ShearPinBlockEntity extends BracketedKineticBlockEntity {
         if (IRotate.StressImpact.isEnabled()) {
             if (isOverStressed()) {
                 if (level != null) {
-                    level.scheduleTick(getBlockPos(), CCBlocks.SHEAR_PIN.get(), 0, TickPriority.EXTREMELY_HIGH);
+                    level.scheduleTick(getBlockPos(), CCBlocks.SHEAR_PIN.get(), level.random.nextInt(RANDOM_DELAY), TickPriority.EXTREMELY_HIGH);
                 }
             }
         }

@@ -58,7 +58,9 @@ public class ShearPinBlock extends AbstractBEShaftBlock<ShearPinBlockEntity> {
     @Override
     public void tick(@NotNull BlockState pState, ServerLevel pLevel, @NotNull BlockPos pPos, @NotNull RandomSource pRandom) {
         BlockEntity be = pLevel.getBlockEntity(pPos);
-        if (!(be instanceof ShearPinBlockEntity))
+        if (!(be instanceof ShearPinBlockEntity kte))
+            return;
+        if (!kte.isOverStressed())
             return;
 
         if (!pLevel.isClientSide) {
