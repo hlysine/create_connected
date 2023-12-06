@@ -1,28 +1,33 @@
 package com.hlysine.create_connected;
 
+import com.hlysine.create_connected.content.copycat.CopycatSlabBlock;
+import com.hlysine.create_connected.content.copycat.CopycatSlabModel;
 import com.hlysine.create_connected.content.inverted_clutch.InvertedClutchBlock;
 import com.hlysine.create_connected.content.inverted_gearshift.InvertedGearshiftBlock;
 import com.hlysine.create_connected.content.overstressclutch.OverstressClutchBlock;
 import com.hlysine.create_connected.content.parallelgearbox.ParallelGearboxBlock;
 import com.hlysine.create_connected.content.shearpin.ShearPinBlock;
 import com.simibubi.create.AllSpriteShifts;
+import com.simibubi.create.AllTags;
+import com.simibubi.create.content.decoration.copycat.CopycatPanelBlock;
+import com.simibubi.create.content.decoration.copycat.CopycatPanelModel;
 import com.simibubi.create.content.decoration.encasing.EncasedCTBehaviour;
 import com.simibubi.create.content.kinetics.BlockStressDefaults;
 import com.simibubi.create.content.kinetics.simpleRelays.BracketedKineticBlockModel;
-import com.simibubi.create.foundation.data.AssetLookup;
-import com.simibubi.create.foundation.data.BlockStateGen;
-import com.simibubi.create.foundation.data.CreateRegistrate;
-import com.simibubi.create.foundation.data.SharedProperties;
+import com.simibubi.create.foundation.data.*;
 import com.tterrag.registrate.providers.DataGenContext;
 import com.tterrag.registrate.providers.RegistrateBlockstateProvider;
+import com.tterrag.registrate.util.DataIngredient;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.client.model.generators.ModelFile;
 
 import java.util.function.Function;
 
+import static com.simibubi.create.Create.REGISTRATE;
 import static com.simibubi.create.foundation.data.AssetLookup.partialBaseModel;
 import static com.simibubi.create.foundation.data.BlockStateGen.axisBlock;
 import static com.simibubi.create.foundation.data.ModelGen.customItemModel;
@@ -92,6 +97,16 @@ public class CCBlocks {
             .item()
             .transform(customItemModel())
             .register();
+
+    public static final BlockEntry<CopycatSlabBlock> COPYCAT_SLAB =
+            REGISTRATE.block("copycat_slab", CopycatSlabBlock::new)
+                    .transform(BuilderTransformers.copycat())
+                    .onRegister(CreateRegistrate.blockModel(() -> CopycatSlabModel::new))
+                    .item()
+                    .recipe((c, p) -> p.stonecutting(DataIngredient.tag(AllTags.forgeItemTag("ingots/zinc")),
+                            RecipeCategory.BUILDING_BLOCKS, c::get, 2))
+                    .transform(customItemModel("copycat_base", "slab"))
+                    .register();
 
     public static void register() {
     }

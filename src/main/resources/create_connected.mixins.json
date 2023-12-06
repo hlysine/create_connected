@@ -1,0 +1,16 @@
+{
+  "required": true,
+  "package": "com.hlysine.create_connected.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "minVersion": "0.8",
+  "refmap": "create_connected.refmap.json",
+  "plugin": "com.hlysine.create_connected.mixin.MixinPlugin",
+  "mixins": [
+    "CopycatModelInvoker"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
