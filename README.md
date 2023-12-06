@@ -16,7 +16,18 @@ A Create mod add-on adding quality-of-life blocks that you wish existed in Creat
 
 ## Features
 
-- I don't know... Any ideas?
+- Inverted Clutch
+  - A clutch that is uncoupled unless powered
+- Inverted Gearshift
+  - A gearshift that changes rotation direction unless powered
+- Parallel Gearbox
+  - A gearbox with all 4 sides spinning in the same direction
+- Shear Pin
+  - A single-use connector that breaks when the network is overstressed.
+- Overstress Clutch
+  - A clutch that uncouples after a set delay when the network is overstressed. Can be reset with a wrench.
+- Copycat Slab
+  - Slab-shaped copycat that can also be placed vertically. Puts trapdoors and iron bars in the center. 
 
 [//]: # (## Download)
 
