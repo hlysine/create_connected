@@ -1,9 +1,18 @@
 {
   "block.create_connected.copycat_slab": "qɐןS ʇɐɔʎdoƆ",
+  "block.create_connected.copycat_slab.tooltip.behaviour1": "˙ןɐıɹǝʇɐɯ ǝɥʇ ‾ʇǝsǝɹ‾ oʇ ‾ɥɔuǝɹM‾ ɐ ǝs∩ ˙ǝʇɐʇs ‾pǝɹǝʍod‾ ɹo ‾uoıʇɐʇuǝıɹo‾ ǝןɔʎɔ oʇ ‾uıɐbɐ ʞɔıןƆ‾ ˙ǝןqıssod ɟı ‾ןɐıɹǝʇɐɯ‾ sʇı sɐ ‾ɯǝʇı pןǝɥ‾ sǝıןddⱯ",
+  "block.create_connected.copycat_slab.tooltip.condition1": "pǝʞɔıןƆ-ᴚ uǝɥM",
+  "block.create_connected.copycat_slab.tooltip.summary": "˙ɯǝɥʇ ‾sɹǝʇuǝɔ‾ puɐ ‾sɹoopdɐɹ⟘‾ puɐ ‾sɹɐᗺ‾ sʇdǝɔɔɐ osןⱯ ˙qɐןs ǝʌıʇɐɹoɔǝp ɐ oʇuı ‾ʞɔoןq ןןnɟ‾ ʎuɐ ‾sʇɹǝʌuoƆ‾",
   "block.create_connected.inverted_clutch": "ɥɔʇnןƆ pǝʇɹǝʌuI",
   "block.create_connected.inverted_gearshift": "ʇɟıɥsɹɐǝ⅁ pǝʇɹǝʌuI",
   "block.create_connected.overstress_clutch": "ɥɔʇnןƆ ssǝɹʇsɹǝʌO",
   "block.create_connected.parallel_gearbox": "xoqɹɐǝ⅁ ןǝןןɐɹɐԀ",
   "block.create_connected.shear_pin": "uıԀ ɹɐǝɥS",
-  "item.create_connected.vertical_parallel_gearbox": "xoqɹɐǝ⅁ ןǝןןɐɹɐԀ ןɐɔıʇɹǝΛ"
+  "create.item_attributes.id_contains": "ᗡI uı \"%1$s\" pɹoʍ ǝɥʇ sɐɥ",
+  "create.item_attributes.id_contains.inverted": "ᗡI uı \"%1$s\" pɹoʍ ǝɥʇ ǝʌɐɥ ʇou sǝop",
+  "create_connected.gui.overstress_clutch.uncoupled": "pǝןdnoɔu∩",
+  "create_connected.gui.overstress_clutch.uncoupled_explanation": "˙‾ɥɔuǝɹʍ‾ ɐ ɥʇıʍ ɥɔʇnןɔ sıɥʇ ‾buıʇʇǝsǝɹ‾ ǝɹoɟǝq ʞɹoʍʇǝu ǝɥʇ xıℲ ˙ssǝɹʇs oʇ ǝnp ‾pǝןdnoɔun‾ sı ɥɔʇnןɔ sıɥ⟘",
+  "create_connected.overstress_clutch.uncouple_delay": "ʎɐןǝᗡ ǝןdnoɔu∩",
+  "item.create_connected.vertical_parallel_gearbox": "xoqɹɐǝ⅁ ןǝןןɐɹɐԀ ןɐɔıʇɹǝΛ",
+  "itemGroup.create_connected.main": "pǝʇɔǝuuoƆ :ǝʇɐǝɹƆ"
 }
