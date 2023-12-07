@@ -1,11 +1,9 @@
 {
   "type": "minecraft:crafting_shapeless",
+  "category": "misc",
   "ingredients": [
     {
-      "item": "create:gearbox"
-    },
-    {
-      "item": "create:large_cogwheel"
+      "item": "create_connected:vertical_parallel_gearbox"
     }
   ],
   "result": {

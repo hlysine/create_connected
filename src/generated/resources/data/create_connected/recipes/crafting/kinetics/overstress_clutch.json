@@ -1,11 +1,12 @@
 {
   "type": "minecraft:crafting_shapeless",
+  "category": "misc",
   "ingredients": [
     {
-      "item": "create:andesite_casing"
+      "item": "create:shaft"
     },
     {
-      "item": "create:shaft"
+      "item": "create:andesite_casing"
     },
     {
       "item": "create:electron_tube"
