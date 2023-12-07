@@ -69,6 +69,15 @@ public class CCStandardRecipes extends CreateRecipeProvider {
                     .requires(AllItems.IRON_SHEET)
             );
 
+    GeneratedRecipe BRASS_GEARBOX = create(CCBlocks.BRASS_GEARBOX).unlockedBy(AllBlocks.ROTATION_SPEED_CONTROLLER::get)
+            .viaShaped(b -> b
+                    .define('c', AllBlocks.COGWHEEL)
+                    .define('s', AllBlocks.ROTATION_SPEED_CONTROLLER)
+                    .pattern(" c ")
+                    .pattern("csc")
+                    .pattern(" c ")
+            );
+
     private final Marker PALETTES = enterFolder("palettes");
 
     GeneratedRecipe COPYCAT_SLAB_FROM_PANELS = create(CCBlocks.COPYCAT_SLAB).withSuffix("_from_panels").unlockedBy(AllBlocks.COPYCAT_PANEL::get)

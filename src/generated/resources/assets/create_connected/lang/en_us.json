@@ -1,4 +1,5 @@
 {
+  "block.create_connected.brass_gearbox": "Brass Gearbox",
   "block.create_connected.centrifugal_clutch": "Centrifugal Clutch",
   "block.create_connected.copycat_slab": "Copycat Slab",
   "block.create_connected.copycat_slab.tooltip.behaviour1": "Applies _held item_ as its _material_ if possible. _Click again_ to cycle _orientation_ or _powered_ state. Use a _Wrench_ to _reset_ the material.",
@@ -15,6 +16,7 @@
   "create_connected.gui.overstress_clutch.uncoupled": "Uncoupled",
   "create_connected.gui.overstress_clutch.uncoupled_explanation": "This clutch is _uncoupled_ due to stress. Fix the network before _resetting_ this clutch with a _wrench_.",
   "create_connected.overstress_clutch.uncouple_delay": "Uncouple Delay",
+  "item.create_connected.vertical_brass_gearbox": "Vertical Brass Gearbox",
   "item.create_connected.vertical_parallel_gearbox": "Vertical Parallel Gearbox",
   "itemGroup.create_connected.main": "Create: Connected"
 }

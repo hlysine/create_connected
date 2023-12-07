@@ -6,6 +6,7 @@
     "create_connected:inverted_clutch",
     "create_connected:inverted_gearshift",
     "create_connected:centrifugal_clutch",
+    "create_connected:brass_gearbox",
     "create_connected:copycat_slab"
   ]
 }

@@ -1,5 +1,6 @@
 package com.hlysine.create_connected;
 
+import com.hlysine.create_connected.content.brassgearbox.BrassGearboxBlock;
 import com.hlysine.create_connected.content.centrifugalclutch.CentrifugalClutchBlock;
 import com.hlysine.create_connected.content.copycat.CopycatSlabBlock;
 import com.hlysine.create_connected.content.copycat.CopycatSlabModel;
@@ -8,6 +9,7 @@ import com.hlysine.create_connected.content.inverted_gearshift.InvertedGearshift
 import com.hlysine.create_connected.content.overstressclutch.OverstressClutchBlock;
 import com.hlysine.create_connected.content.parallelgearbox.ParallelGearboxBlock;
 import com.hlysine.create_connected.content.shearpin.ShearPinBlock;
+import com.hlysine.create_connected.datagen.CCBlockStateGen;
 import com.simibubi.create.AllSpriteShifts;
 import com.simibubi.create.AllTags;
 import com.simibubi.create.content.decoration.encasing.EncasedCTBehaviour;
@@ -104,6 +106,19 @@ public class CCBlocks {
             .transform(BlockStressDefaults.setNoImpact())
             .transform(axeOrPickaxe())
             .blockstate((c, p) -> p.directionalBlock(c.get(), forBoolean(c, state -> state.getValue(CentrifugalClutchBlock.UNCOUPLED), "uncoupled", p)))
+            .item()
+            .transform(customItemModel())
+            .register();
+
+    public static final BlockEntry<BrassGearboxBlock> BRASS_GEARBOX = REGISTRATE.block("brass_gearbox", BrassGearboxBlock::new)
+            .initialProperties(SharedProperties::stone)
+            .properties(p -> p.noOcclusion().mapColor(MapColor.PODZOL))
+            .transform(BlockStressDefaults.setNoImpact())
+            .transform(axeOrPickaxe())
+            .onRegister(CreateRegistrate.connectedTextures(() -> new EncasedCTBehaviour(AllSpriteShifts.BRASS_CASING)))
+            .onRegister(CreateRegistrate.casingConnectivity((block, cc) -> cc.make(block, AllSpriteShifts.BRASS_CASING,
+                    (s, f) -> f.getAxis() == s.getValue(BrassGearboxBlock.AXIS))))
+            .blockstate(CCBlockStateGen.brassGearbox())
             .item()
             .transform(customItemModel())
             .register();

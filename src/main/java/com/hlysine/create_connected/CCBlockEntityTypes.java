@@ -1,5 +1,8 @@
 package com.hlysine.create_connected;
 
+import com.hlysine.create_connected.content.brassgearbox.BrassGearboxBlockEntity;
+import com.hlysine.create_connected.content.brassgearbox.BrassGearboxInstance;
+import com.hlysine.create_connected.content.brassgearbox.BrassGearboxRenderer;
 import com.hlysine.create_connected.content.centrifugalclutch.CentrifugalClutchBlockEntity;
 import com.hlysine.create_connected.content.inverted_clutch.InvertedClutchBlockEntity;
 import com.hlysine.create_connected.content.inverted_gearshift.InvertedGearshiftBlockEntity;
@@ -61,6 +64,14 @@ public class CCBlockEntityTypes {
             .validBlocks(CCBlocks.CENTRIFUGAL_CLUTCH)
             .renderer(() -> SplitShaftRenderer::new)
             .register();
+
+    public static final BlockEntityEntry<BrassGearboxBlockEntity> BRASS_GEARBOX = REGISTRATE
+            .blockEntity("brass_gearbox", BrassGearboxBlockEntity::new)
+            .instance(() -> BrassGearboxInstance::new, false)
+            .validBlocks(CCBlocks.BRASS_GEARBOX)
+            .renderer(() -> BrassGearboxRenderer::new)
+            .register();
+
 
     public static void register() {
     }
