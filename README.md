@@ -26,6 +26,8 @@ A Create mod add-on adding quality-of-life blocks that you wish existed in Creat
   - A single-use connector that breaks when the network is overstressed.
 - Overstress Clutch
   - A clutch that uncouples after a set delay when the network is overstressed. Can be reset with a wrench.
+- Centrifugal Clutch
+  - A clutch that is only coupled if the input RPM is faster than a configurable threshold.
 - Copycat Slab
   - Slab-shaped copycat that can also be placed vertically. Puts trapdoors and iron bars in the center. 
 
