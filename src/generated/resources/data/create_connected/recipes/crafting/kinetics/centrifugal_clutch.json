@@ -9,13 +9,13 @@
       "item": "create:andesite_casing"
     },
     {
-      "item": "create:electron_tube"
+      "item": "create:speedometer"
     },
     {
       "item": "create:iron_sheet"
     }
   ],
   "result": {
-    "item": "create_connected:overstress_clutch"
+    "item": "create_connected:centrifugal_clutch"
   }
 }

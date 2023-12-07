@@ -1,4 +1,5 @@
 {
+  "block.create_connected.centrifugal_clutch": "ɥɔʇnןƆ ןɐbnɟıɹʇuǝƆ",
   "block.create_connected.copycat_slab": "qɐןS ʇɐɔʎdoƆ",
   "block.create_connected.copycat_slab.tooltip.behaviour1": "˙ןɐıɹǝʇɐɯ ǝɥʇ ‾ʇǝsǝɹ‾ oʇ ‾ɥɔuǝɹM‾ ɐ ǝs∩ ˙ǝʇɐʇs ‾pǝɹǝʍod‾ ɹo ‾uoıʇɐʇuǝıɹo‾ ǝןɔʎɔ oʇ ‾uıɐbɐ ʞɔıןƆ‾ ˙ǝןqıssod ɟı ‾ןɐıɹǝʇɐɯ‾ sʇı sɐ ‾ɯǝʇı pןǝɥ‾ sǝıןddⱯ",
   "block.create_connected.copycat_slab.tooltip.condition1": "pǝʞɔıןƆ-ᴚ uǝɥM",
@@ -10,6 +11,7 @@
   "block.create_connected.shear_pin": "uıԀ ɹɐǝɥS",
   "create.item_attributes.id_contains": "ᗡI uı \"%1$s\" pɹoʍ ǝɥʇ sɐɥ",
   "create.item_attributes.id_contains.inverted": "ᗡI uı \"%1$s\" pɹoʍ ǝɥʇ ǝʌɐɥ ʇou sǝop",
+  "create_connected.centrifugal_clutch.speed_threshold": "pןoɥsǝɹɥ⟘ pǝǝdS",
   "create_connected.gui.overstress_clutch.uncoupled": "pǝןdnoɔu∩",
   "create_connected.gui.overstress_clutch.uncoupled_explanation": "˙‾ɥɔuǝɹʍ‾ ɐ ɥʇıʍ ɥɔʇnןɔ sıɥʇ ‾buıʇʇǝsǝɹ‾ ǝɹoɟǝq ʞɹoʍʇǝu ǝɥʇ xıℲ ˙ssǝɹʇs oʇ ǝnp ‾pǝןdnoɔun‾ sı ɥɔʇnןɔ sıɥ⟘",
   "create_connected.overstress_clutch.uncouple_delay": "ʎɐןǝᗡ ǝןdnoɔu∩",

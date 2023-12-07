@@ -1,0 +1,7 @@
+{
+	"parent": "create:block/clutch/block",
+    "textures": {
+        "0": "create_connected:block/centrifugal_clutch_off",
+		"particle": "create_connected:block/centrifugal_clutch_off"
+    }
+}

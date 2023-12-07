@@ -61,6 +61,14 @@ public class CCStandardRecipes extends CreateRecipeProvider {
     GeneratedRecipe PARALLEL_GEARBOX_CYCLE =
             conversionCycle(ImmutableList.of(CCBlocks.PARALLEL_GEARBOX, CCItems.VERTICAL_PARALLEL_GEARBOX));
 
+    GeneratedRecipe CENTRIFUGAL_CLUTCH = create(CCBlocks.CENTRIFUGAL_CLUTCH).unlockedBy(AllBlocks.SPEEDOMETER::get)
+            .viaShapeless(b -> b
+                    .requires(AllBlocks.SHAFT)
+                    .requires(AllBlocks.ANDESITE_CASING)
+                    .requires(AllBlocks.SPEEDOMETER)
+                    .requires(AllItems.IRON_SHEET)
+            );
+
     private final Marker PALETTES = enterFolder("palettes");
 
     GeneratedRecipe COPYCAT_SLAB_FROM_PANELS = create(CCBlocks.COPYCAT_SLAB).withSuffix("_from_panels").unlockedBy(AllBlocks.COPYCAT_PANEL::get)

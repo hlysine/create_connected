@@ -1,8 +1,9 @@
 {
-  "create_connected.gui.overstress_clutch.uncoupled": "Uncoupled",
-  "create_connected.gui.overstress_clutch.uncoupled_explanation": "This clutch is _uncoupled_ due to stress. Fix the network before _resetting_ this clutch with a _wrench_.",
   "create.item_attributes.id_contains": "has the word \"%1$s\" in ID",
   "create.item_attributes.id_contains.inverted": "does not have the word \"%1$s\" in ID",
+  "create_connected.centrifugal_clutch.speed_threshold": "Speed Threshold",
+  "create_connected.gui.overstress_clutch.uncoupled": "Uncoupled",
+  "create_connected.gui.overstress_clutch.uncoupled_explanation": "This clutch is _uncoupled_ due to stress. Fix the network before _resetting_ this clutch with a _wrench_.",
   "create_connected.overstress_clutch.uncouple_delay": "Uncouple Delay",
   "itemGroup.create_connected.main": "Create: Connected"
 }
