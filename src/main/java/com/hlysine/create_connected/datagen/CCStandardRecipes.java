@@ -49,6 +49,7 @@ public class CCStandardRecipes extends CreateRecipeProvider {
                     .requires(AllBlocks.SHAFT)
                     .requires(AllBlocks.ANDESITE_CASING)
                     .requires(AllItems.ELECTRON_TUBE)
+                    .requires(AllItems.IRON_SHEET)
             );
 
     GeneratedRecipe PARALLEL_GEARBOX = create(CCBlocks.PARALLEL_GEARBOX).unlockedBy(AllBlocks.LARGE_COGWHEEL::get)
