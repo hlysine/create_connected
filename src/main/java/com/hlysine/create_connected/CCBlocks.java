@@ -1,5 +1,6 @@
 package com.hlysine.create_connected;
 
+import com.hlysine.create_connected.content.WrenchableBlock;
 import com.hlysine.create_connected.content.brassgearbox.BrassGearboxBlock;
 import com.hlysine.create_connected.content.centrifugalclutch.CentrifugalClutchBlock;
 import com.hlysine.create_connected.content.copycat.CopycatSlabBlock;
@@ -22,7 +23,6 @@ import com.tterrag.registrate.util.DataIngredient;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.MapColor;
@@ -31,7 +31,7 @@ import net.minecraftforge.client.model.generators.ModelFile;
 import java.util.function.Function;
 
 import static com.simibubi.create.foundation.data.AssetLookup.partialBaseModel;
-import static com.simibubi.create.foundation.data.BlockStateGen.*;
+import static com.simibubi.create.foundation.data.BlockStateGen.axisBlock;
 import static com.simibubi.create.foundation.data.ModelGen.customItemModel;
 import static com.simibubi.create.foundation.data.TagGen.axeOrPickaxe;
 import static com.simibubi.create.foundation.data.TagGen.pickaxeOnly;
@@ -125,7 +125,7 @@ public class CCBlocks {
             .transform(customItemModel())
             .register();
 
-    public static final BlockEntry<Block> EMPTY_FAN_CATALYST = REGISTRATE.block("empty_fan_catalyst", Block::new)
+    public static final BlockEntry<WrenchableBlock> EMPTY_FAN_CATALYST = REGISTRATE.block("empty_fan_catalyst", WrenchableBlock::new)
             .initialProperties(() -> Blocks.IRON_BLOCK)
             .properties(p -> p
                     .mapColor(MapColor.TERRACOTTA_YELLOW)
@@ -141,7 +141,7 @@ public class CCBlocks {
             .transform(customItemModel())
             .register();
 
-    public static final BlockEntry<Block> FAN_BLASTING_CATALYST = REGISTRATE.block("fan_blasting_catalyst", Block::new)
+    public static final BlockEntry<WrenchableBlock> FAN_BLASTING_CATALYST = REGISTRATE.block("fan_blasting_catalyst", WrenchableBlock::new)
             .initialProperties(() -> Blocks.IRON_BLOCK)
             .properties(p -> p
                     .mapColor(MapColor.TERRACOTTA_YELLOW)
@@ -159,7 +159,7 @@ public class CCBlocks {
             .transform(customItemModel())
             .register();
 
-    public static final BlockEntry<Block> FAN_SMOKING_CATALYST = REGISTRATE.block("fan_smoking_catalyst", Block::new)
+    public static final BlockEntry<WrenchableBlock> FAN_SMOKING_CATALYST = REGISTRATE.block("fan_smoking_catalyst", WrenchableBlock::new)
             .initialProperties(() -> Blocks.IRON_BLOCK)
             .properties(p -> p
                     .mapColor(MapColor.TERRACOTTA_YELLOW)
@@ -177,7 +177,7 @@ public class CCBlocks {
             .transform(customItemModel())
             .register();
 
-    public static final BlockEntry<Block> FAN_SPLASHING_CATALYST = REGISTRATE.block("fan_splashing_catalyst", Block::new)
+    public static final BlockEntry<WrenchableBlock> FAN_SPLASHING_CATALYST = REGISTRATE.block("fan_splashing_catalyst", WrenchableBlock::new)
             .initialProperties(() -> Blocks.IRON_BLOCK)
             .properties(p -> p
                     .mapColor(MapColor.TERRACOTTA_YELLOW)
@@ -197,7 +197,7 @@ public class CCBlocks {
             .transform(customItemModel())
             .register();
 
-    public static final BlockEntry<Block> FAN_HAUNTING_CATALYST = REGISTRATE.block("fan_haunting_catalyst", Block::new)
+    public static final BlockEntry<WrenchableBlock> FAN_HAUNTING_CATALYST = REGISTRATE.block("fan_haunting_catalyst", WrenchableBlock::new)
             .initialProperties(() -> Blocks.IRON_BLOCK)
             .properties(p -> p
                     .mapColor(MapColor.TERRACOTTA_YELLOW)
