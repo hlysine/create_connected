@@ -16,22 +16,30 @@ A Create mod add-on adding quality-of-life blocks that you wish existed in Creat
 
 ## Features
 
+- Item Attributes
+  - New attributes for the Attribute Filter designed for easy item sorting
+- Brass Gearbox
+  - A gearbox where the rotation direction of all 4 sides are independently configurable
+- Centrifugal Clutch
+  - A clutch that is only coupled if the input RPM is faster than a configurable threshold
+- Copycat Slab
+  - Slab-shaped copycat that can also be placed vertically. Puts trapdoors and iron bars in the center
 - Inverted Clutch
   - A clutch that is uncoupled unless powered
 - Inverted Gearshift
   - A gearshift that changes rotation direction unless powered
+- Overstress Clutch
+  - A clutch that uncouples after a set delay when the network is overstressed. Can be reset with a wrench
 - Parallel Gearbox
   - A gearbox with all 4 sides spinning in the same direction
 - Shear Pin
-  - A single-use connector that breaks when the network is overstressed.
-- Overstress Clutch
-  - A clutch that uncouples after a set delay when the network is overstressed. Can be reset with a wrench.
-- Centrifugal Clutch
-  - A clutch that is only coupled if the input RPM is faster than a configurable threshold.
-- Copycat Slab
-  - Slab-shaped copycat that can also be placed vertically. Puts trapdoors and iron bars in the center. 
+  - An early-game, single-use connector that breaks when the network is overstressed
+- Fan Catalysts
+  - A series of blocks that trap liquid/fire for safe and dedicated bulk processing
 
-[//]: # (## Download)
+## Download
+
+This mod is super early in development and THINGS WILL BREAK. Do NOT use this mod in your main worlds/servers at the moment.
 
 [//]: # ()
 [//]: # (Find this mod on [**Modrinth**]&#40;https://modrinth.com/mod/create-connected&#41; or [**CurseForge**]&#40;https://legacy.curseforge.com/minecraft/mc-mods/create-connected&#41;.)
