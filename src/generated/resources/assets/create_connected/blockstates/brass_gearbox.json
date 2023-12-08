@@ -130,83 +130,67 @@
     },
     "axis=z,face_1_flipped=false,face_2_flipped=false,face_3_flipped=false,face_4_flipped=false": {
       "model": "create_connected:block/brass_gearbox",
-      "x": 90,
-      "y": 180
+      "x": 90
     },
     "axis=z,face_1_flipped=false,face_2_flipped=false,face_3_flipped=false,face_4_flipped=true": {
       "model": "create_connected:block/brass_gearbox_4",
-      "x": 90,
-      "y": 180
+      "x": 90
     },
     "axis=z,face_1_flipped=false,face_2_flipped=false,face_3_flipped=true,face_4_flipped=false": {
       "model": "create_connected:block/brass_gearbox_3",
-      "x": 90,
-      "y": 180
+      "x": 90
     },
     "axis=z,face_1_flipped=false,face_2_flipped=false,face_3_flipped=true,face_4_flipped=true": {
       "model": "create_connected:block/brass_gearbox_3_4",
-      "x": 90,
-      "y": 180
+      "x": 90
     },
     "axis=z,face_1_flipped=false,face_2_flipped=true,face_3_flipped=false,face_4_flipped=false": {
       "model": "create_connected:block/brass_gearbox_2",
-      "x": 90,
-      "y": 180
+      "x": 90
     },
     "axis=z,face_1_flipped=false,face_2_flipped=true,face_3_flipped=false,face_4_flipped=true": {
       "model": "create_connected:block/brass_gearbox_2_4",
-      "x": 90,
-      "y": 180
+      "x": 90
     },
     "axis=z,face_1_flipped=false,face_2_flipped=true,face_3_flipped=true,face_4_flipped=false": {
       "model": "create_connected:block/brass_gearbox_2_3",
-      "x": 90,
-      "y": 180
+      "x": 90
     },
     "axis=z,face_1_flipped=false,face_2_flipped=true,face_3_flipped=true,face_4_flipped=true": {
       "model": "create_connected:block/brass_gearbox_2_3_4",
-      "x": 90,
-      "y": 180
+      "x": 90
     },
     "axis=z,face_1_flipped=true,face_2_flipped=false,face_3_flipped=false,face_4_flipped=false": {
       "model": "create_connected:block/brass_gearbox_1",
-      "x": 90,
-      "y": 180
+      "x": 90
     },
     "axis=z,face_1_flipped=true,face_2_flipped=false,face_3_flipped=false,face_4_flipped=true": {
       "model": "create_connected:block/brass_gearbox_1_4",
-      "x": 90,
-      "y": 180
+      "x": 90
     },
     "axis=z,face_1_flipped=true,face_2_flipped=false,face_3_flipped=true,face_4_flipped=false": {
       "model": "create_connected:block/brass_gearbox_1_3",
-      "x": 90,
-      "y": 180
+      "x": 90
     },
     "axis=z,face_1_flipped=true,face_2_flipped=false,face_3_flipped=true,face_4_flipped=true": {
       "model": "create_connected:block/brass_gearbox_1_3_4",
-      "x": 90,
-      "y": 180
+      "x": 90
     },
     "axis=z,face_1_flipped=true,face_2_flipped=true,face_3_flipped=false,face_4_flipped=false": {
       "model": "create_connected:block/brass_gearbox_1_2",
-      "x": 90,
-      "y": 180
+      "x": 90
     },
     "axis=z,face_1_flipped=true,face_2_flipped=true,face_3_flipped=false,face_4_flipped=true": {
       "model": "create_connected:block/brass_gearbox_1_2_4",
-      "x": 90,
-      "y": 180
+      "x": 90
     },
     "axis=z,face_1_flipped=true,face_2_flipped=true,face_3_flipped=true,face_4_flipped=false": {
       "model": "create_connected:block/brass_gearbox_1_2_3",
-      "x": 90,
-      "y": 180
+      "x": 90
     },
     "axis=z,face_1_flipped=true,face_2_flipped=true,face_3_flipped=true,face_4_flipped=true": {
       "model": "create_connected:block/brass_gearbox_1_2_3_4",
-      "x": 90,
-      "y": 180
+      "x": 90
     }
   }
 }

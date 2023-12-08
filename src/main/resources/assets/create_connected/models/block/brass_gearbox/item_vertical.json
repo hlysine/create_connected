@@ -6,6 +6,7 @@
 		"1": "create:block/axis_top",
 		"gearbox_top": "create:block/brass_casing",
 		"gearbox": "create_connected:block/brass_gearbox_bottom",
+		"gearbox_toggled": "create_connected:block/brass_gearbox_top",
 		"particle": "create:block/axis"
 	},
 	"elements": [
@@ -42,8 +43,8 @@
 			"faces": {
 				"north": {"uv": [2, 1, 14, 15], "rotation": 90, "texture": "#gearbox"},
 				"south": {"uv": [2, 1, 14, 15], "rotation": 90, "texture": "#gearbox"},
-				"up": {"uv": [2, 1, 14, 15], "rotation": 90, "texture": "#gearbox"},
-				"down": {"uv": [2, 1, 14, 15], "rotation": 90, "texture": "#gearbox"}
+				"up": {"uv": [2, 1, 14, 15], "rotation": 270, "texture": "#gearbox_toggled"},
+				"down": {"uv": [2, 1, 14, 15], "rotation": 270, "texture": "#gearbox_toggled"}
 			}
 		},
 		{

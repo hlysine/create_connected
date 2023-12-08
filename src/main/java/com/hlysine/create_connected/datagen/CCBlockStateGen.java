@@ -6,13 +6,16 @@ import com.simibubi.create.foundation.utility.Iterate;
 import com.tterrag.registrate.providers.DataGenContext;
 import com.tterrag.registrate.providers.RegistrateBlockstateProvider;
 import com.tterrag.registrate.util.nullness.NonNullBiConsumer;
+import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
 
 import java.util.Vector;
-
-import static com.simibubi.create.foundation.data.BlockStateGen.axisBlock;
+import java.util.function.Function;
 
 public class CCBlockStateGen {
 
@@ -42,12 +45,31 @@ public class CCBlockStateGen {
                             );
             Function4<Boolean, Boolean, Boolean, Boolean, ModelFile> modelFunc = (f1, f2, f3, f4) -> models.get((f1 ? 8 : 0) + (f2 ? 4 : 0) + (f3 ? 2 : 0) + (f4 ? 1 : 0));
 
-            axisBlock(c, p, state -> modelFunc.apply(
+            noZRotationAxisBlock(c, p, state -> modelFunc.apply(
                     state.getValue(BrassGearboxBlock.FACE_1_FLIPPED),
                     state.getValue(BrassGearboxBlock.FACE_2_FLIPPED),
                     state.getValue(BrassGearboxBlock.FACE_3_FLIPPED),
                     state.getValue(BrassGearboxBlock.FACE_4_FLIPPED)
             ));
         };
+    }
+
+    public static <T extends Block> void noZRotationAxisBlock(DataGenContext<Block, T> ctx, RegistrateBlockstateProvider prov,
+                                                              Function<BlockState, ModelFile> modelFunc) {
+        noZRotationAxisBlock(ctx, prov, modelFunc, false);
+    }
+
+    public static <T extends Block> void noZRotationAxisBlock(DataGenContext<Block, T> ctx, RegistrateBlockstateProvider prov,
+                                                              Function<BlockState, ModelFile> modelFunc, boolean uvLock) {
+        prov.getVariantBuilder(ctx.getEntry())
+                .forAllStatesExcept(state -> {
+                    Direction.Axis axis = state.getValue(BlockStateProperties.AXIS);
+                    return ConfiguredModel.builder()
+                            .modelFile(modelFunc.apply(state))
+                            .uvLock(uvLock)
+                            .rotationX(axis == Direction.Axis.Y ? 0 : 90)
+                            .rotationY(axis == Direction.Axis.X ? 90 : 0)
+                            .build();
+                }, BlockStateProperties.WATERLOGGED);
     }
 }

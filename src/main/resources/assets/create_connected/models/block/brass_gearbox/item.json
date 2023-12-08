@@ -3,7 +3,8 @@
 	"parent": "block/block",
 	"textures": {
 		"0": "create:block/brass_casing",
-		"1": "create_connected:block/brass_gearbox_bottom",
+		"1_bottom": "create_connected:block/brass_gearbox_bottom",
+		"1_top": "create_connected:block/brass_gearbox_top",
 		"particle": "create:block/axis",
 		"1_0": "create:block/axis",
 		"1_1": "create:block/axis_top"
@@ -27,10 +28,10 @@
 			"from": [1, 2, 1],
 			"to": [15, 14, 15],
 			"faces": {
-				"north": {"uv": [1, 2, 15, 14], "texture": "#1"},
-				"east": {"uv": [1, 2, 15, 14], "texture": "#1"},
-				"south": {"uv": [1, 2, 15, 14], "texture": "#1"},
-				"west": {"uv": [1, 2, 15, 14], "texture": "#1"}
+				"north": {"uv": [1, 2, 15, 14], "texture": "#1_bottom"},
+				"east": {"uv": [1, 2, 15, 14], "texture": "#1_top"},
+				"south": {"uv": [1, 2, 15, 14], "texture": "#1_bottom"},
+				"west": {"uv": [1, 2, 15, 14], "texture": "#1_top"}
 			}
 		},
 		{
