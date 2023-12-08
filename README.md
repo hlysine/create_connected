@@ -3,13 +3,9 @@
 <h1 align="center">Create: Connected</h1>
 
 <p align="center">
-
-    <a href="https://www.curseforge.com/minecraft/mc-mods/create-connected/files"><img src="https://cf.way2muchnoise.eu/versions/947914_all.svg"></a>
-
-    <a href="https://modrinth.com/mod/create-connected/"><img src="https://img.shields.io/modrinth/dt/Vg5TIO6d?style=flat&label=Modrinth"></a>
-
-    <a href="https://www.curseforge.com/minecraft/mc-mods/create-connected"><img src="https://img.shields.io/curseforge/dt/947914?style=flat&label=CurseForge"></a>
-
+<a href="https://www.curseforge.com/minecraft/mc-mods/create-connected/files"><img src="https://cf.way2muchnoise.eu/versions/947914_all.svg"></a>
+<a href="https://modrinth.com/mod/create-connected/"><img src="https://img.shields.io/modrinth/dt/Vg5TIO6d?style=flat&label=Modrinth"></a>
+<a href="https://www.curseforge.com/minecraft/mc-mods/create-connected"><img src="https://img.shields.io/curseforge/dt/947914?style=flat&label=CurseForge"></a>
 </p>
 
 A Create mod add-on adding quality-of-life blocks that you wish existed in Create.
@@ -41,8 +37,7 @@ A Create mod add-on adding quality-of-life blocks that you wish existed in Creat
 
 This mod is super early in development and THINGS WILL BREAK. Do NOT use this mod in your main worlds/servers at the moment.
 
-[//]: # ()
-[//]: # (Find this mod on [**Modrinth**]&#40;https://modrinth.com/mod/create-connected&#41; or [**CurseForge**]&#40;https://legacy.curseforge.com/minecraft/mc-mods/create-connected&#41;.)
+Find this mod on [**Modrinth**](https://modrinth.com/mod/create-connected) or [**CurseForge**](https://legacy.curseforge.com/minecraft/mc-mods/create-connected).
 
 ## Usage
 
