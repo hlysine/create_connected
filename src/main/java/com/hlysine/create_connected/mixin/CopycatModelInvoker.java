@@ -14,7 +14,7 @@ import java.util.List;
 
 @Mixin(CopycatModel.class)
 public interface CopycatModelInvoker {
-    @Invoker("getCroppedQuads")
+    @Invoker(value = "getCroppedQuads", remap = false)
     List<BakedQuad> invokeGetCroppedQuads(BlockState state, Direction side, RandomSource rand,
                                           BlockState material, ModelData wrappedData, RenderType renderType);
 }

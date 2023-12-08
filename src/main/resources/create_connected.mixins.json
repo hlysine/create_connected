@@ -6,7 +6,11 @@
   "refmap": "create_connected.refmap.json",
   "plugin": "com.hlysine.create_connected.mixin.MixinPlugin",
   "mixins": [
-    "CopycatModelInvoker"
+    "CopycatModelInvoker",
+    "FanProcessingMixins$BlastingMixin",
+    "FanProcessingMixins$HauntingMixin",
+    "FanProcessingMixins$SmokingMixin",
+    "FanProcessingMixins$SplashingMixin"
   ],
   "client": [
   ],

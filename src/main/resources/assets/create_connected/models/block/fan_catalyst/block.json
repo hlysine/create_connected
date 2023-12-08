@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "create_connected:block/fan_catalyst",
+    "particle": "create:block/brass_block"
+  }
+}

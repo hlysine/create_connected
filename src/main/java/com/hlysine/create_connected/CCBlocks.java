@@ -4,6 +4,7 @@ import com.hlysine.create_connected.content.brassgearbox.BrassGearboxBlock;
 import com.hlysine.create_connected.content.centrifugalclutch.CentrifugalClutchBlock;
 import com.hlysine.create_connected.content.copycat.CopycatSlabBlock;
 import com.hlysine.create_connected.content.copycat.CopycatSlabModel;
+import com.hlysine.create_connected.content.fancatalyst.FanCatalystBlock;
 import com.hlysine.create_connected.content.inverted_clutch.InvertedClutchBlock;
 import com.hlysine.create_connected.content.inverted_gearshift.InvertedGearshiftBlock;
 import com.hlysine.create_connected.content.overstressclutch.OverstressClutchBlock;
@@ -20,19 +21,29 @@ import com.tterrag.registrate.providers.DataGenContext;
 import com.tterrag.registrate.providers.RegistrateBlockstateProvider;
 import com.tterrag.registrate.util.DataIngredient;
 import com.tterrag.registrate.util.entry.BlockEntry;
+import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.core.BlockPos;
 import net.minecraft.data.recipes.RecipeCategory;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.FluidTags;
+import net.minecraft.world.level.BlockAndTintGetter;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.client.model.generators.ModelFile;
+import net.minecraftforge.common.Tags;
 
 import java.util.function.Function;
 
+import static com.simibubi.create.Create.REGISTRATE;
 import static com.simibubi.create.foundation.data.AssetLookup.partialBaseModel;
 import static com.simibubi.create.foundation.data.BlockStateGen.axisBlock;
+import static com.simibubi.create.foundation.data.BlockStateGen.simpleCubeAll;
 import static com.simibubi.create.foundation.data.ModelGen.customItemModel;
-import static com.simibubi.create.foundation.data.TagGen.axeOrPickaxe;
-import static com.simibubi.create.foundation.data.TagGen.pickaxeOnly;
+import static com.simibubi.create.foundation.data.TagGen.*;
 
 @SuppressWarnings("removal")
 public class CCBlocks {
@@ -119,6 +130,22 @@ public class CCBlocks {
             .onRegister(CreateRegistrate.casingConnectivity((block, cc) -> cc.make(block, AllSpriteShifts.BRASS_CASING,
                     (s, f) -> f.getAxis() == s.getValue(BrassGearboxBlock.AXIS))))
             .blockstate(CCBlockStateGen.brassGearbox())
+            .item()
+            .transform(customItemModel())
+            .register();
+
+    public static final BlockEntry<FanCatalystBlock> FAN_CATALYST = REGISTRATE.block("fan_catalyst", FanCatalystBlock::new)
+            .initialProperties(() -> Blocks.IRON_BLOCK)
+            .properties(p -> p.mapColor(MapColor.TERRACOTTA_YELLOW).requiresCorrectToolForDrops().noOcclusion().lightLevel(FanCatalystBlock::getLight))
+            .addLayer(() -> RenderType::translucent)
+            .transform(pickaxeOnly())
+            .blockstate(CCBlockStateGen.fanCatalyst())
+            .color(() -> CCColorHandlers::waterTint)
+            .tag(AllTags.AllBlockTags.FAN_TRANSPARENT.tag)
+            .tag(AllTags.AllBlockTags.FAN_PROCESSING_CATALYSTS_BLASTING.tag)
+            .tag(AllTags.AllBlockTags.FAN_PROCESSING_CATALYSTS_HAUNTING.tag)
+            .tag(AllTags.AllBlockTags.FAN_PROCESSING_CATALYSTS_SMOKING.tag)
+            .tag(AllTags.AllBlockTags.FAN_PROCESSING_CATALYSTS_SPLASHING.tag)
             .item()
             .transform(customItemModel())
             .register();

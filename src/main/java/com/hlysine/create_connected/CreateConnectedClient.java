@@ -12,6 +12,7 @@ public class CreateConnectedClient {
         CCPartialModels.register();
         modEventBus.addListener(CreateConnectedClient::init);
     }
+
     public static void init(final FMLClientSetupEvent event) {
     }
 }

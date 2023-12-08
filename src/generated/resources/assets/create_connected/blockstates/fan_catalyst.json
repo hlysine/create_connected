@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "content=fire": {
+      "model": "create_connected:block/fan_catalyst/block_fire"
+    },
+    "content=lava": {
+      "model": "create_connected:block/fan_catalyst/block_lava"
+    },
+    "content=none": {
+      "model": "create_connected:block/fan_catalyst/block"
+    },
+    "content=soul_fire": {
+      "model": "create_connected:block/fan_catalyst/block_soul_fire"
+    },
+    "content=water": {
+      "model": "create_connected:block/fan_catalyst/block_water"
+    }
+  }
+}
