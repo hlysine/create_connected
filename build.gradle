@@ -284,5 +284,18 @@ publishMods {
         accessToken = secrets.MODRINTH_TOKEN
         projectId = "Vg5TIO6d"
         minecraftVersions.add("1.20.1")
+
+        requires {
+            id = "LNytGWDc"
+        }
+        optional {
+            id = "u6dRKJwZ"
+        }
+    }
+
+    curseforge {
+        accessToken = secrets.CURSEFORGE_TOKEN
+        projectId = "947914"
+        minecraftVersions.add("1.20.1")
     }
 }

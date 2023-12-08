@@ -2,15 +2,15 @@
 
 <h1 align="center">Create: Connected</h1>
 
-[//]: # (<p align="center">)
+<p align="center">
 
-[//]: # (    <a href="https://www.curseforge.com/minecraft/mc-mods/create-connected/files"><img src="https://cf.way2muchnoise.eu/versions/936020_all.svg"></a>)
+    <a href="https://www.curseforge.com/minecraft/mc-mods/create-connected/files"><img src="https://cf.way2muchnoise.eu/versions/947914_all.svg"></a>
 
-[//]: # (    <a href="https://modrinth.com/mod/create-connected/"><img src="https://img.shields.io/modrinth/dt/wPQ6GgFE?style=flat&label=Modrinth"></a>)
+    <a href="https://modrinth.com/mod/create-connected/"><img src="https://img.shields.io/modrinth/dt/Vg5TIO6d?style=flat&label=Modrinth"></a>
 
-[//]: # (    <a href="https://www.curseforge.com/minecraft/mc-mods/create-connected"><img src="https://img.shields.io/curseforge/dt/936020?style=flat&label=CurseForge"></a>)
+    <a href="https://www.curseforge.com/minecraft/mc-mods/create-connected"><img src="https://img.shields.io/curseforge/dt/947914?style=flat&label=CurseForge"></a>
 
-[//]: # (</p>)
+</p>
 
 A Create mod add-on adding quality-of-life blocks that you wish existed in Create.
 
