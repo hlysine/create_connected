@@ -24,6 +24,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.SimpleCraftingRecipeSerializer;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.crafting.conditions.ICondition;
 import net.minecraftforge.common.crafting.conditions.ModLoadedCondition;
@@ -78,6 +79,20 @@ public class CCStandardRecipes extends CreateRecipeProvider {
                     .pattern(" c ")
             );
 
+    GeneratedRecipe EMPTY_FAN_CATALYST = create(CCBlocks.EMPTY_FAN_CATALYST).unlockedBy(AllBlocks.BRASS_BLOCK::get)
+            .viaShaped(b -> b
+                    .define('b', AllBlocks.BRASS_BLOCK)
+                    .define('i', Blocks.IRON_BARS)
+                    .pattern(" i ")
+                    .pattern("ibi")
+                    .pattern(" i ")
+            );
+
+    GeneratedRecipe EMPTY_CATALYST_FROM_BLASTING = clearFanCatalyst("blasting", CCBlocks.FAN_BLASTING_CATALYST);
+    GeneratedRecipe EMPTY_CATALYST_FROM_SMOKING = clearFanCatalyst("smoking", CCBlocks.FAN_SMOKING_CATALYST);
+    GeneratedRecipe EMPTY_CATALYST_FROM_SPLASHING = clearFanCatalyst("splashing", CCBlocks.FAN_SPLASHING_CATALYST);
+    GeneratedRecipe EMPTY_CATALYST_FROM_HAUNTING = clearFanCatalyst("haunting", CCBlocks.FAN_HAUNTING_CATALYST);
+
     private final Marker PALETTES = enterFolder("palettes");
 
     GeneratedRecipe COPYCAT_SLAB_FROM_PANELS = create(CCBlocks.COPYCAT_SLAB).withSuffix("_from_panels").unlockedBy(AllBlocks.COPYCAT_PANEL::get)
@@ -131,6 +146,15 @@ public class CCStandardRecipes extends CreateRecipeProvider {
                     .viaShapeless(b -> b.requires(currentEntry.get()));
         }
         return result;
+    }
+
+    GeneratedRecipe clearFanCatalyst(String key, ItemProviderEntry<? extends ItemLike> from) {
+        return create(CCBlocks.EMPTY_FAN_CATALYST)
+                .withSuffix("_from_" + key)
+                .unlockedBy(CCBlocks.EMPTY_FAN_CATALYST::get)
+                .viaShapeless(b -> b
+                        .requires(from)
+                );
     }
 
     protected static class Marker {

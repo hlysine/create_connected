@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "create_connected:block/fan_blasting_catalyst/block"
+    }
+  }
+}

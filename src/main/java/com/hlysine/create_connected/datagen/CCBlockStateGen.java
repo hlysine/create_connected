@@ -1,7 +1,6 @@
 package com.hlysine.create_connected.datagen;
 
 import com.hlysine.create_connected.content.brassgearbox.BrassGearboxBlock;
-import com.hlysine.create_connected.content.fancatalyst.FanCatalystBlock;
 import com.mojang.datafixers.util.Function4;
 import com.simibubi.create.foundation.utility.Iterate;
 import com.tterrag.registrate.providers.DataGenContext;
@@ -18,28 +17,7 @@ import net.minecraftforge.client.model.generators.ModelFile;
 import java.util.Vector;
 import java.util.function.Function;
 
-import static com.simibubi.create.foundation.data.BlockStateGen.simpleBlock;
-
 public class CCBlockStateGen {
-
-    public static <B extends FanCatalystBlock> NonNullBiConsumer<DataGenContext<Block, B>, RegistrateBlockstateProvider> fanCatalyst() {
-        return (c, p) -> {
-            ModelFile modelNone = p.models().getExistingFile(p.modLoc("block/" + c.getName() + "/block"));
-            ModelFile modelWater = p.models().getExistingFile(p.modLoc("block/" + c.getName() + "/block_water"));
-            ModelFile modelLava = p.models().getExistingFile(p.modLoc("block/" + c.getName() + "/block_lava"));
-            ModelFile modelFire = p.models().getExistingFile(p.modLoc("block/" + c.getName() + "/block_fire"));
-            ModelFile modelSoulFire = p.models().getExistingFile(p.modLoc("block/" + c.getName() + "/block_soul_fire"));
-            Function<FanCatalystBlock.CatalystContent, ModelFile> modelFunc = (content) -> switch (content) {
-                case NONE -> modelNone;
-                case WATER -> modelWater;
-                case LAVA -> modelLava;
-                case FIRE -> modelFire;
-                case SOUL_FIRE -> modelSoulFire;
-            };
-
-            simpleBlock(c, p, state -> modelFunc.apply(state.getValue(FanCatalystBlock.CONTENT)));
-        };
-    }
 
     public static <B extends BrassGearboxBlock> NonNullBiConsumer<DataGenContext<Block, B>, RegistrateBlockstateProvider> brassGearbox() {
         return (c, p) -> {

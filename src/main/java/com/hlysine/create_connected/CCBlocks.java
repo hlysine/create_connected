@@ -4,7 +4,6 @@ import com.hlysine.create_connected.content.brassgearbox.BrassGearboxBlock;
 import com.hlysine.create_connected.content.centrifugalclutch.CentrifugalClutchBlock;
 import com.hlysine.create_connected.content.copycat.CopycatSlabBlock;
 import com.hlysine.create_connected.content.copycat.CopycatSlabModel;
-import com.hlysine.create_connected.content.fancatalyst.FanCatalystBlock;
 import com.hlysine.create_connected.content.inverted_clutch.InvertedClutchBlock;
 import com.hlysine.create_connected.content.inverted_gearshift.InvertedGearshiftBlock;
 import com.hlysine.create_connected.content.overstressclutch.OverstressClutchBlock;
@@ -21,29 +20,21 @@ import com.tterrag.registrate.providers.DataGenContext;
 import com.tterrag.registrate.providers.RegistrateBlockstateProvider;
 import com.tterrag.registrate.util.DataIngredient;
 import com.tterrag.registrate.util.entry.BlockEntry;
-import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.core.BlockPos;
 import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.FluidTags;
-import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.client.model.generators.ModelFile;
-import net.minecraftforge.common.Tags;
 
 import java.util.function.Function;
 
-import static com.simibubi.create.Create.REGISTRATE;
 import static com.simibubi.create.foundation.data.AssetLookup.partialBaseModel;
-import static com.simibubi.create.foundation.data.BlockStateGen.axisBlock;
-import static com.simibubi.create.foundation.data.BlockStateGen.simpleCubeAll;
+import static com.simibubi.create.foundation.data.BlockStateGen.*;
 import static com.simibubi.create.foundation.data.ModelGen.customItemModel;
-import static com.simibubi.create.foundation.data.TagGen.*;
+import static com.simibubi.create.foundation.data.TagGen.axeOrPickaxe;
+import static com.simibubi.create.foundation.data.TagGen.pickaxeOnly;
 
 @SuppressWarnings("removal")
 public class CCBlocks {
@@ -134,18 +125,92 @@ public class CCBlocks {
             .transform(customItemModel())
             .register();
 
-    public static final BlockEntry<FanCatalystBlock> FAN_CATALYST = REGISTRATE.block("fan_catalyst", FanCatalystBlock::new)
+    public static final BlockEntry<Block> EMPTY_FAN_CATALYST = REGISTRATE.block("empty_fan_catalyst", Block::new)
             .initialProperties(() -> Blocks.IRON_BLOCK)
-            .properties(p -> p.mapColor(MapColor.TERRACOTTA_YELLOW).requiresCorrectToolForDrops().noOcclusion().lightLevel(FanCatalystBlock::getLight))
-            .addLayer(() -> RenderType::translucent)
+            .properties(p -> p
+                    .mapColor(MapColor.TERRACOTTA_YELLOW)
+                    .requiresCorrectToolForDrops()
+                    .noOcclusion()
+                    .isRedstoneConductor((state, level, pos) -> false)
+            )
+            .addLayer(() -> RenderType::cutoutMipped)
             .transform(pickaxeOnly())
-            .blockstate(CCBlockStateGen.fanCatalyst())
-            .color(() -> CCColorHandlers::waterTint)
+            .blockstate((c, p) -> p.simpleBlock(c.getEntry(), AssetLookup.partialBaseModel(c, p)))
+            .tag(AllTags.AllBlockTags.FAN_TRANSPARENT.tag)
+            .item()
+            .transform(customItemModel())
+            .register();
+
+    public static final BlockEntry<Block> FAN_BLASTING_CATALYST = REGISTRATE.block("fan_blasting_catalyst", Block::new)
+            .initialProperties(() -> Blocks.IRON_BLOCK)
+            .properties(p -> p
+                    .mapColor(MapColor.TERRACOTTA_YELLOW)
+                    .requiresCorrectToolForDrops()
+                    .noOcclusion()
+                    .lightLevel(s -> 10)
+                    .isRedstoneConductor((state, level, pos) -> false)
+            )
+            .addLayer(() -> RenderType::cutoutMipped)
+            .transform(pickaxeOnly())
+            .blockstate((c, p) -> p.simpleBlock(c.getEntry(), AssetLookup.partialBaseModel(c, p)))
             .tag(AllTags.AllBlockTags.FAN_TRANSPARENT.tag)
             .tag(AllTags.AllBlockTags.FAN_PROCESSING_CATALYSTS_BLASTING.tag)
-            .tag(AllTags.AllBlockTags.FAN_PROCESSING_CATALYSTS_HAUNTING.tag)
+            .item()
+            .transform(customItemModel())
+            .register();
+
+    public static final BlockEntry<Block> FAN_SMOKING_CATALYST = REGISTRATE.block("fan_smoking_catalyst", Block::new)
+            .initialProperties(() -> Blocks.IRON_BLOCK)
+            .properties(p -> p
+                    .mapColor(MapColor.TERRACOTTA_YELLOW)
+                    .requiresCorrectToolForDrops()
+                    .noOcclusion()
+                    .lightLevel(s -> 10)
+                    .isRedstoneConductor((state, level, pos) -> false)
+            )
+            .addLayer(() -> RenderType::cutoutMipped)
+            .transform(pickaxeOnly())
+            .blockstate((c, p) -> p.simpleBlock(c.getEntry(), AssetLookup.partialBaseModel(c, p)))
+            .tag(AllTags.AllBlockTags.FAN_TRANSPARENT.tag)
             .tag(AllTags.AllBlockTags.FAN_PROCESSING_CATALYSTS_SMOKING.tag)
+            .item()
+            .transform(customItemModel())
+            .register();
+
+    public static final BlockEntry<Block> FAN_SPLASHING_CATALYST = REGISTRATE.block("fan_splashing_catalyst", Block::new)
+            .initialProperties(() -> Blocks.IRON_BLOCK)
+            .properties(p -> p
+                    .mapColor(MapColor.TERRACOTTA_YELLOW)
+                    .requiresCorrectToolForDrops()
+                    .noOcclusion()
+                    .isRedstoneConductor((state, level, pos) -> false)
+            )
+            .addLayer(() -> RenderType::translucent)
+            .transform(pickaxeOnly())
+            .blockstate((c, p) -> p.simpleBlock(c.getEntry(), AssetLookup.partialBaseModel(c, p)))
+            .color(() -> CCColorHandlers::waterBlockTint)
+            .lang("Fan Washing Catalyst")
+            .tag(AllTags.AllBlockTags.FAN_TRANSPARENT.tag)
             .tag(AllTags.AllBlockTags.FAN_PROCESSING_CATALYSTS_SPLASHING.tag)
+            .item()
+            .color(() -> CCColorHandlers::waterItemTint)
+            .transform(customItemModel())
+            .register();
+
+    public static final BlockEntry<Block> FAN_HAUNTING_CATALYST = REGISTRATE.block("fan_haunting_catalyst", Block::new)
+            .initialProperties(() -> Blocks.IRON_BLOCK)
+            .properties(p -> p
+                    .mapColor(MapColor.TERRACOTTA_YELLOW)
+                    .requiresCorrectToolForDrops()
+                    .noOcclusion()
+                    .lightLevel(s -> 5)
+                    .isRedstoneConductor((state, level, pos) -> false)
+            )
+            .addLayer(() -> RenderType::cutoutMipped)
+            .transform(pickaxeOnly())
+            .blockstate((c, p) -> p.simpleBlock(c.getEntry(), AssetLookup.partialBaseModel(c, p)))
+            .tag(AllTags.AllBlockTags.FAN_TRANSPARENT.tag)
+            .tag(AllTags.AllBlockTags.FAN_PROCESSING_CATALYSTS_HAUNTING.tag)
             .item()
             .transform(customItemModel())
             .register();

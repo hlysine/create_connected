@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "b": {
+      "item": "create:brass_block"
+    },
+    "i": {
+      "item": "minecraft:iron_bars"
+    }
+  },
+  "pattern": [
+    " i ",
+    "ibi",
+    " i "
+  ],
+  "result": {
+    "item": "create_connected:empty_fan_catalyst"
+  },
+  "show_notification": true
+}

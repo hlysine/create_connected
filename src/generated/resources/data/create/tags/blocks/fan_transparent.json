@@ -1,5 +1,9 @@
 {
   "values": [
-    "create_connected:fan_catalyst"
+    "create_connected:empty_fan_catalyst",
+    "create_connected:fan_blasting_catalyst",
+    "create_connected:fan_smoking_catalyst",
+    "create_connected:fan_splashing_catalyst",
+    "create_connected:fan_haunting_catalyst"
   ]
 }

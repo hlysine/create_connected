@@ -1,0 +1,16 @@
+{
+  "type": "create:item_application",
+  "ingredients": [
+    {
+      "item": "create_connected:empty_fan_catalyst"
+    },
+    {
+      "item": "minecraft:netherrack"
+    }
+  ],
+  "results": [
+    {
+      "item": "create_connected:fan_smoking_catalyst"
+    }
+  ]
+}
