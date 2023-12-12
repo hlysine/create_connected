@@ -1,6 +1,7 @@
 package com.hlysine.create_connected;
 
 import com.hlysine.create_connected.content.WrenchableBlock;
+import com.hlysine.create_connected.content.brake.BrakeBlock;
 import com.hlysine.create_connected.content.brassgearbox.BrassGearboxBlock;
 import com.hlysine.create_connected.content.centrifugalclutch.CentrifugalClutchBlock;
 import com.hlysine.create_connected.content.copycat.CopycatSlabBlock;
@@ -121,6 +122,17 @@ public class CCBlocks {
             .onRegister(CreateRegistrate.casingConnectivity((block, cc) -> cc.make(block, AllSpriteShifts.BRASS_CASING,
                     (s, f) -> f.getAxis() == s.getValue(BrassGearboxBlock.AXIS))))
             .blockstate(CCBlockStateGen.brassGearbox())
+            .item()
+            .transform(customItemModel())
+            .register();
+
+    public static final BlockEntry<BrakeBlock> BRAKE = REGISTRATE.block("brake", BrakeBlock::new)
+            .initialProperties(SharedProperties::stone)
+            .properties(p -> p.noOcclusion().mapColor(MapColor.PODZOL))
+            .addLayer(() -> RenderType::cutoutMipped)
+            .transform(BlockStressDefaults.setImpact(16384))
+            .transform(axeOrPickaxe())
+            .blockstate((c, p) -> BlockStateGen.axisBlock(c, p, AssetLookup.forPowered(c, p)))
             .item()
             .transform(customItemModel())
             .register();

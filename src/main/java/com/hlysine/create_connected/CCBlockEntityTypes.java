@@ -1,5 +1,6 @@
 package com.hlysine.create_connected;
 
+import com.hlysine.create_connected.content.brake.BrakeBlockEntity;
 import com.hlysine.create_connected.content.brassgearbox.BrassGearboxBlockEntity;
 import com.hlysine.create_connected.content.brassgearbox.BrassGearboxInstance;
 import com.hlysine.create_connected.content.brassgearbox.BrassGearboxRenderer;
@@ -70,6 +71,13 @@ public class CCBlockEntityTypes {
             .instance(() -> BrassGearboxInstance::new, false)
             .validBlocks(CCBlocks.BRASS_GEARBOX)
             .renderer(() -> BrassGearboxRenderer::new)
+            .register();
+
+    public static final BlockEntityEntry<BrakeBlockEntity> BRAKE = REGISTRATE
+            .blockEntity("brake", BrakeBlockEntity::new)
+            .instance(() -> SplitShaftInstance::new, false)
+            .validBlocks(CCBlocks.BRAKE)
+            .renderer(() -> SplitShaftRenderer::new)
             .register();
 
 

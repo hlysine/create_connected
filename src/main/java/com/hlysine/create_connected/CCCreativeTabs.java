@@ -25,6 +25,7 @@ public class CCCreativeTabs {
                 output.accept(CCBlocks.SHEAR_PIN.asStack());
                 output.accept(CCBlocks.OVERSTRESS_CLUTCH.asStack());
                 output.accept(CCBlocks.CENTRIFUGAL_CLUTCH.asStack());
+                output.accept(CCBlocks.BRAKE.asStack());
                 output.accept(CCBlocks.EMPTY_FAN_CATALYST.asStack());
                 output.accept(CCBlocks.FAN_BLASTING_CATALYST.asStack());
                 output.accept(CCBlocks.FAN_SMOKING_CATALYST.asStack());

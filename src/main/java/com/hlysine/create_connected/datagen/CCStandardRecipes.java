@@ -79,6 +79,14 @@ public class CCStandardRecipes extends CreateRecipeProvider {
                     .pattern(" c ")
             );
 
+    GeneratedRecipe BRAKE = create(CCBlocks.BRAKE).unlockedBy(Blocks.OBSIDIAN::asItem)
+            .viaShapeless(b -> b
+                    .requires(AllBlocks.SHAFT)
+                    .requires(AllBlocks.ANDESITE_CASING)
+                    .requires(Blocks.REDSTONE_WIRE)
+                    .requires(Blocks.OBSIDIAN)
+            );
+
     GeneratedRecipe EMPTY_FAN_CATALYST = create(CCBlocks.EMPTY_FAN_CATALYST).unlockedBy(AllBlocks.BRASS_BLOCK::get)
             .viaShaped(b -> b
                     .define('b', AllBlocks.BRASS_BLOCK)
