@@ -4,8 +4,8 @@ import com.hlysine.create_connected.content.brassgearbox.BrassGearboxBlockEntity
 import com.hlysine.create_connected.content.brassgearbox.BrassGearboxInstance;
 import com.hlysine.create_connected.content.brassgearbox.BrassGearboxRenderer;
 import com.hlysine.create_connected.content.centrifugalclutch.CentrifugalClutchBlockEntity;
-import com.hlysine.create_connected.content.inverted_clutch.InvertedClutchBlockEntity;
-import com.hlysine.create_connected.content.inverted_gearshift.InvertedGearshiftBlockEntity;
+import com.hlysine.create_connected.content.invertedclutch.InvertedClutchBlockEntity;
+import com.hlysine.create_connected.content.invertedgearshift.InvertedGearshiftBlockEntity;
 import com.hlysine.create_connected.content.overstressclutch.OverstressClutchBlockEntity;
 import com.hlysine.create_connected.content.parallelgearbox.ParallelGearboxBlockEntity;
 import com.hlysine.create_connected.content.parallelgearbox.ParallelGearboxInstance;

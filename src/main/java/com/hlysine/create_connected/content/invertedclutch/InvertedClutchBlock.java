@@ -1,4 +1,4 @@
-package com.hlysine.create_connected.content.inverted_clutch;
+package com.hlysine.create_connected.content.invertedclutch;
 
 import com.hlysine.create_connected.CCBlockEntityTypes;
 import com.simibubi.create.content.kinetics.transmission.ClutchBlock;
