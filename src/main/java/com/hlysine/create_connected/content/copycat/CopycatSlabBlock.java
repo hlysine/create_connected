@@ -2,7 +2,7 @@ package com.hlysine.create_connected.content.copycat;
 
 import com.hlysine.create_connected.CCBlocks;
 import com.hlysine.create_connected.CCShapes;
-import com.simibubi.create.content.decoration.copycat.CopycatPanelBlock;
+import com.simibubi.create.content.decoration.copycat.WaterloggedCopycatBlock;
 import com.simibubi.create.foundation.placement.IPlacementHelper;
 import com.simibubi.create.foundation.placement.PlacementHelpers;
 import com.simibubi.create.foundation.placement.PlacementOffset;
@@ -14,23 +14,42 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Mirror;
+import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.block.state.properties.SlabType;
+import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.function.Predicate;
 
-public class CopycatSlabBlock extends CopycatPanelBlock {
+import static net.minecraft.core.Direction.*;
+
+public class CopycatSlabBlock extends WaterloggedCopycatBlock {
+
+    public static final EnumProperty<Axis> AXIS = BlockStateProperties.AXIS;
+    public static final EnumProperty<SlabType> SLAB_TYPE = BlockStateProperties.SLAB_TYPE;
 
     private static final int placementHelperId = PlacementHelpers.register(new PlacementHelper());
 
     public CopycatSlabBlock(Properties pProperties) {
         super(pProperties);
-        registerDefaultState(defaultBlockState().setValue(FACING, Direction.UP));
+        registerDefaultState(defaultBlockState()
+                .setValue(AXIS, Axis.Y)
+                .setValue(SLAB_TYPE, SlabType.BOTTOM));
     }
 
     @Override
@@ -51,8 +70,209 @@ public class CopycatSlabBlock extends CopycatPanelBlock {
     }
 
     @Override
+    public boolean isIgnoredConnectivitySide(BlockAndTintGetter reader, BlockState state, Direction face,
+                                             BlockPos fromPos, BlockPos toPos) {
+        Axis axis = state.getValue(AXIS);
+        BlockState toState = reader.getBlockState(toPos);
+
+        if (toState.is(this)) {
+            // connecting to another copycat slab
+            if (toState.getValue(AXIS) != axis) return true;
+            return getFaceContact(state, face) != getFaceContact(toState, face);
+        } else {
+            // do not connect slab sides
+            if (face.getAxis() != axis) return true;
+            // connecting to another block
+            return getFaceContact(state, face) != FaceContact.FULL;
+        }
+    }
+
+    @Override
+    public boolean canConnectTexturesToward(BlockAndTintGetter reader, BlockPos fromPos, BlockPos toPos,
+                                            BlockState state) {
+        Axis axis = state.getValue(AXIS);
+        BlockState toState = reader.getBlockState(toPos);
+
+        BlockPos diff = toPos.subtract(fromPos);
+        int coord = axis.choose(diff.getX(), diff.getY(), diff.getZ());
+
+        if (coord != 0) {
+            Direction face = Direction.fromAxisAndDirection(axis, coord == 1 ? AxisDirection.POSITIVE : AxisDirection.NEGATIVE);
+            if (toState.is(this)) {
+                return getFaceContact(state, face).hasContact() && getFaceContact(toState, face.getOpposite()).hasContact();
+            } else {
+                return getFaceContact(state, face).hasContact();
+            }
+        }
+
+        if (toState.trySetValue(WATERLOGGED, false) == state.trySetValue(WATERLOGGED, false) && coord == 0)
+            return true;
+
+        return false;
+    }
+
+    @Override
+    public boolean canFaceBeOccluded(BlockState state, Direction face) {
+        return getFaceContact(state, face).hasContact();
+    }
+
+    @Override
+    public boolean shouldFaceAlwaysRender(BlockState state, Direction face) {
+        return !getFaceContact(state, face).hasContact();
+    }
+
+    @Override
+    public BlockState getStateForPlacement(BlockPlaceContext context) {
+        BlockState stateForPlacement = super.getStateForPlacement(context);
+        BlockPos blockPos = context.getClickedPos();
+        BlockState state = context.getLevel().getBlockState(blockPos);
+        if (state.is(this)) {
+            return state
+                    .setValue(SLAB_TYPE, SlabType.DOUBLE)
+                    .setValue(WATERLOGGED, false);
+        } else {
+            Axis axis = context.getNearestLookingDirection().getAxis();
+            boolean flag = switch (axis) {
+                case X -> context.getClickLocation().x - (double) blockPos.getX() > 0.5D;
+                case Y -> context.getClickLocation().y - (double) blockPos.getY() > 0.5D;
+                case Z -> context.getClickLocation().z - (double) blockPos.getZ() > 0.5D;
+            };
+            Direction clickedFace = context.getClickedFace();
+            return stateForPlacement
+                    .setValue(AXIS, axis)
+                    .setValue(SLAB_TYPE, clickedFace == Direction.fromAxisAndDirection(axis, AxisDirection.POSITIVE) || clickedFace.getAxis() != axis && !flag ? SlabType.BOTTOM : SlabType.TOP);
+        }
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    public boolean canBeReplaced(BlockState pState, BlockPlaceContext pUseContext) {
+        ItemStack itemstack = pUseContext.getItemInHand();
+        SlabType slabtype = pState.getValue(SLAB_TYPE);
+        Axis axis = pState.getValue(AXIS);
+        if (slabtype != SlabType.DOUBLE && itemstack.is(this.asItem())) {
+            boolean flag = switch (axis) {
+                case X -> pUseContext.getClickLocation().x - (double) pUseContext.getClickedPos().getX() > 0.5D;
+                case Y -> pUseContext.getClickLocation().y - (double) pUseContext.getClickedPos().getY() > 0.5D;
+                case Z -> pUseContext.getClickLocation().z - (double) pUseContext.getClickedPos().getZ() > 0.5D;
+            };
+            Direction direction = pUseContext.getClickedFace();
+            if (slabtype == SlabType.BOTTOM) {
+                return direction == Direction.fromAxisAndDirection(axis, AxisDirection.POSITIVE) || flag;
+            } else {
+                return direction == Direction.fromAxisAndDirection(axis, AxisDirection.NEGATIVE) || !flag;
+            }
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
+        super.createBlockStateDefinition(pBuilder.add(AXIS).add(SLAB_TYPE));
+    }
+
+    @Override
     public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
-        return CCShapes.CASING_8PX.get(pState.getValue(FACING));
+        SlabType type = pState.getValue(SLAB_TYPE);
+        Axis axis = pState.getValue(AXIS);
+        if (type == SlabType.DOUBLE) {
+            return Shapes.block();
+        } else if (type == SlabType.BOTTOM) {
+            return CCShapes.CASING_8PX.get(axis);
+        } else {
+            return CCShapes.CASING_8PX_TOP.get(axis);
+        }
+    }
+
+    @Override
+    public boolean isPathfindable(BlockState pState, BlockGetter pLevel, BlockPos pPos, PathComputationType pType) {
+        return false;
+    }
+
+    @Override
+    public boolean supportsExternalFaceHiding(BlockState state) {
+        return true;
+    }
+
+    @Override
+    public boolean hidesNeighborFace(BlockGetter level, BlockPos pos, BlockState state, BlockState neighborState,
+                                     Direction dir) {
+        if (state.is(this) == neighborState.is(this)) {
+            if (getMaterial(level, pos).skipRendering(getMaterial(level, pos.relative(dir)), dir.getOpposite()))
+                return getFaceContact(state, dir) == getFaceContact(neighborState, dir.getOpposite());
+        }
+
+        return getFaceContact(state, dir) == FaceContact.FULL
+                && getMaterial(level, pos).skipRendering(neighborState, dir.getOpposite());
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    public @NotNull BlockState rotate(@NotNull BlockState state, Rotation rot) {
+        return setApparentDirection(state, rot.rotate(getApparentDirection(state)));
+    }
+
+    @Override
+    @SuppressWarnings("deprecation")
+    public @NotNull BlockState mirror(BlockState state, Mirror mirrorIn) {
+        return state.rotate(mirrorIn.getRotation(getApparentDirection(state)));
+    }
+
+    /**
+     * Return the area of the face that is at the edge of the block.
+     */
+    public static FaceContact getFaceContact(BlockState state, Direction face) {
+        SlabType slab = state.getValue(SLAB_TYPE);
+
+        if (state.getValue(AXIS) != face.getAxis()) {
+            return FaceContact.forSlabSide(slab);
+        }
+
+        return switch (slab) {
+            case TOP -> FaceContact.fullOrNone(face.getAxisDirection() == AxisDirection.POSITIVE);
+            case BOTTOM -> FaceContact.fullOrNone(face.getAxisDirection() == AxisDirection.NEGATIVE);
+            case DOUBLE -> FaceContact.FULL;
+        };
+    }
+
+    public static Direction getApparentDirection(BlockState state) {
+        return Direction.fromAxisAndDirection(state.getValue(AXIS), state.getValue(SLAB_TYPE) == SlabType.BOTTOM ? AxisDirection.NEGATIVE : AxisDirection.POSITIVE);
+    }
+
+    public static BlockState setApparentDirection(BlockState state, Direction direction) {
+        SlabType type = state.getValue(SLAB_TYPE);
+        if (type == SlabType.DOUBLE) {
+            return state.setValue(AXIS, direction.getAxis());
+        }
+        if (getApparentDirection(state).getAxisDirection() != direction.getAxisDirection()) {
+            return state.setValue(AXIS, direction.getAxis()).setValue(SLAB_TYPE, type == SlabType.BOTTOM ? SlabType.TOP : SlabType.BOTTOM);
+        } else {
+            return state.setValue(AXIS, direction.getAxis());
+        }
+    }
+
+    private enum FaceContact {
+        FULL,
+        TOP,
+        BOTTOM,
+        NONE;
+
+        public static FaceContact forSlabSide(SlabType type) {
+            return switch (type) {
+                case TOP -> TOP;
+                case BOTTOM -> BOTTOM;
+                case DOUBLE -> FULL;
+            };
+        }
+
+        public static FaceContact fullOrNone(boolean value) {
+            return value ? FULL : NONE;
+        }
+
+        public boolean hasContact() {
+            return this != NONE;
+        }
     }
 
     @MethodsReturnNonnullByDefault
@@ -71,8 +291,7 @@ public class CopycatSlabBlock extends CopycatPanelBlock {
         public PlacementOffset getOffset(Player player, Level world, BlockState state, BlockPos pos,
                                          BlockHitResult ray) {
             List<Direction> directions = IPlacementHelper.orderedByDistanceExceptAxis(pos, ray.getLocation(),
-                    state.getValue(FACING)
-                            .getAxis(),
+                    state.getValue(AXIS),
                     dir -> world.getBlockState(pos.relative(dir))
                             .canBeReplaced());
 
@@ -80,7 +299,7 @@ public class CopycatSlabBlock extends CopycatPanelBlock {
                 return PlacementOffset.fail();
             else {
                 return PlacementOffset.success(pos.relative(directions.get(0)),
-                        s -> s.setValue(FACING, state.getValue(FACING)));
+                        s -> s.setValue(AXIS, state.getValue(AXIS)).setValue(SLAB_TYPE, state.getValue(SLAB_TYPE)));
             }
         }
     }
