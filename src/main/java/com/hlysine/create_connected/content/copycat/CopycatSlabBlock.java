@@ -9,6 +9,7 @@ import com.simibubi.create.foundation.placement.PlacementOffset;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Vec3i;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -78,12 +79,12 @@ public class CopycatSlabBlock extends WaterloggedCopycatBlock {
         if (toState.is(this)) {
             // connecting to another copycat slab
             if (toState.getValue(AXIS) != axis) return true;
-            return getFaceContact(state, face) != getFaceContact(toState, face);
+            return getFaceShape(state, face) != getFaceShape(toState, face);
         } else {
             // do not connect slab sides
             if (face.getAxis() != axis) return true;
             // connecting to another block
-            return getFaceContact(state, face) != FaceContact.FULL;
+            return getFaceShape(state, face) != FaceShape.FULL;
         }
     }
 
@@ -94,36 +95,35 @@ public class CopycatSlabBlock extends WaterloggedCopycatBlock {
         BlockState toState = reader.getBlockState(toPos);
 
         BlockPos diff = toPos.subtract(fromPos);
-        int coord = axis.choose(diff.getX(), diff.getY(), diff.getZ());
-
-        if (coord != 0) {
-            Direction face = Direction.fromAxisAndDirection(axis, coord == 1 ? AxisDirection.POSITIVE : AxisDirection.NEGATIVE);
-            if (toState.is(this)) {
-                return getFaceContact(state, face).hasContact() && getFaceContact(toState, face.getOpposite()).hasContact();
-            } else {
-                return getFaceContact(state, face).hasContact();
-            }
+        if (diff.equals(Vec3i.ZERO)) {
+            return true;
+        }
+        Direction face = Direction.fromDelta(diff.getX(), diff.getY(), diff.getZ());
+        if (face == null) {
+            return false;
         }
 
-        if (toState.trySetValue(WATERLOGGED, false) == state.trySetValue(WATERLOGGED, false) && coord == 0)
-            return true;
-
-        return false;
+        if (toState.is(this)) {
+            return getFaceShape(state, face) == getFaceShape(toState, face.getOpposite());
+        } else {
+            return face.getAxis() != axis;
+        }
     }
 
     @Override
     public boolean canFaceBeOccluded(BlockState state, Direction face) {
-        return getFaceContact(state, face).hasContact();
+        return getFaceShape(state, face).hasContact();
     }
 
     @Override
     public boolean shouldFaceAlwaysRender(BlockState state, Direction face) {
-        return !getFaceContact(state, face).hasContact();
+        return !getFaceShape(state, face).hasContact();
     }
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         BlockState stateForPlacement = super.getStateForPlacement(context);
+        assert stateForPlacement != null;
         BlockPos blockPos = context.getClickedPos();
         BlockState state = context.getLevel().getBlockState(blockPos);
         if (state.is(this)) {
@@ -172,8 +172,9 @@ public class CopycatSlabBlock extends WaterloggedCopycatBlock {
         super.createBlockStateDefinition(pBuilder.add(AXIS).add(SLAB_TYPE));
     }
 
+    @SuppressWarnings("deprecation")
     @Override
-    public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
+    public @NotNull VoxelShape getShape(BlockState pState, @NotNull BlockGetter pLevel, @NotNull BlockPos pPos, @NotNull CollisionContext pContext) {
         SlabType type = pState.getValue(SLAB_TYPE);
         Axis axis = pState.getValue(AXIS);
         if (type == SlabType.DOUBLE) {
@@ -185,8 +186,9 @@ public class CopycatSlabBlock extends WaterloggedCopycatBlock {
         }
     }
 
+    @SuppressWarnings("deprecation")
     @Override
-    public boolean isPathfindable(BlockState pState, BlockGetter pLevel, BlockPos pPos, PathComputationType pType) {
+    public boolean isPathfindable(@NotNull BlockState pState, @NotNull BlockGetter pLevel, @NotNull BlockPos pPos, @NotNull PathComputationType pType) {
         return false;
     }
 
@@ -200,10 +202,10 @@ public class CopycatSlabBlock extends WaterloggedCopycatBlock {
                                      Direction dir) {
         if (state.is(this) == neighborState.is(this)) {
             if (getMaterial(level, pos).skipRendering(getMaterial(level, pos.relative(dir)), dir.getOpposite()))
-                return getFaceContact(state, dir) == getFaceContact(neighborState, dir.getOpposite());
+                return getFaceShape(state, dir) == getFaceShape(neighborState, dir.getOpposite());
         }
 
-        return getFaceContact(state, dir) == FaceContact.FULL
+        return getFaceShape(state, dir) == FaceShape.FULL
                 && getMaterial(level, pos).skipRendering(neighborState, dir.getOpposite());
     }
 
@@ -222,17 +224,17 @@ public class CopycatSlabBlock extends WaterloggedCopycatBlock {
     /**
      * Return the area of the face that is at the edge of the block.
      */
-    public static FaceContact getFaceContact(BlockState state, Direction face) {
+    public static FaceShape getFaceShape(BlockState state, Direction face) {
         SlabType slab = state.getValue(SLAB_TYPE);
 
         if (state.getValue(AXIS) != face.getAxis()) {
-            return FaceContact.forSlabSide(slab);
+            return FaceShape.forSlabSide(slab);
         }
 
         return switch (slab) {
-            case TOP -> FaceContact.fullOrNone(face.getAxisDirection() == AxisDirection.POSITIVE);
-            case BOTTOM -> FaceContact.fullOrNone(face.getAxisDirection() == AxisDirection.NEGATIVE);
-            case DOUBLE -> FaceContact.FULL;
+            case TOP -> FaceShape.fullOrNone(face.getAxisDirection() == AxisDirection.POSITIVE);
+            case BOTTOM -> FaceShape.fullOrNone(face.getAxisDirection() == AxisDirection.NEGATIVE);
+            case DOUBLE -> FaceShape.FULL;
         };
     }
 
@@ -252,13 +254,13 @@ public class CopycatSlabBlock extends WaterloggedCopycatBlock {
         }
     }
 
-    private enum FaceContact {
+    private enum FaceShape {
         FULL,
         TOP,
         BOTTOM,
         NONE;
 
-        public static FaceContact forSlabSide(SlabType type) {
+        public static FaceShape forSlabSide(SlabType type) {
             return switch (type) {
                 case TOP -> TOP;
                 case BOTTOM -> BOTTOM;
@@ -266,7 +268,7 @@ public class CopycatSlabBlock extends WaterloggedCopycatBlock {
             };
         }
 
-        public static FaceContact fullOrNone(boolean value) {
+        public static FaceShape fullOrNone(boolean value) {
             return value ? FULL : NONE;
         }
 
