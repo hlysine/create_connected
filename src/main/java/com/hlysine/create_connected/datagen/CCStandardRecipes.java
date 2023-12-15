@@ -116,6 +116,13 @@ public class CCStandardRecipes extends CreateRecipeProvider {
                     .pattern("ss")
             );
 
+    GeneratedRecipe COPYCAT_BLOCK_FROM_SLABS = create(CCBlocks.COPYCAT_BLOCK).withSuffix("_from_slabs").unlockedBy(CCBlocks.COPYCAT_SLAB::get)
+            .viaShaped(b -> b
+                    .define('s', CCBlocks.COPYCAT_SLAB)
+                    .pattern("s")
+                    .pattern("s")
+            );
+
     String currentFolder = "";
 
     Marker enterFolder(String folder) {

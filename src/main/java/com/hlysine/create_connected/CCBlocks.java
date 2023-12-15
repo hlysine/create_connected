@@ -4,6 +4,8 @@ import com.hlysine.create_connected.content.WrenchableBlock;
 import com.hlysine.create_connected.content.brake.BrakeBlock;
 import com.hlysine.create_connected.content.brassgearbox.BrassGearboxBlock;
 import com.hlysine.create_connected.content.centrifugalclutch.CentrifugalClutchBlock;
+import com.hlysine.create_connected.content.copycat.CopycatBlockBlock;
+import com.hlysine.create_connected.content.copycat.CopycatBlockModel;
 import com.hlysine.create_connected.content.copycat.CopycatSlabBlock;
 import com.hlysine.create_connected.content.copycat.CopycatSlabModel;
 import com.hlysine.create_connected.content.invertedclutch.InvertedClutchBlock;
@@ -25,7 +27,6 @@ import com.tterrag.registrate.util.entry.BlockEntry;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.client.model.generators.ModelFile;
@@ -236,6 +237,16 @@ public class CCBlocks {
                     .recipe((c, p) -> p.stonecutting(DataIngredient.tag(AllTags.forgeItemTag("ingots/zinc")),
                             RecipeCategory.BUILDING_BLOCKS, c, 2))
                     .transform(customItemModel("copycat_base", "slab"))
+                    .register();
+
+    public static final BlockEntry<CopycatBlockBlock> COPYCAT_BLOCK =
+            REGISTRATE.block("copycat_block", CopycatBlockBlock::new)
+                    .transform(BuilderTransformers.copycat())
+                    .onRegister(CreateRegistrate.blockModel(() -> CopycatBlockModel::new))
+                    .item()
+                    .recipe((c, p) -> p.stonecutting(DataIngredient.tag(AllTags.forgeItemTag("ingots/zinc")),
+                            RecipeCategory.BUILDING_BLOCKS, c, 1))
+                    .transform(customItemModel("copycat_base", "block"))
                     .register();
 
     public static void register() {

@@ -27,7 +27,6 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.SlabType;
-import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -37,7 +36,8 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 import java.util.function.Predicate;
 
-import static net.minecraft.core.Direction.*;
+import static net.minecraft.core.Direction.Axis;
+import static net.minecraft.core.Direction.AxisDirection;
 
 public class CopycatSlabBlock extends WaterloggedCopycatBlock {
 
@@ -184,12 +184,6 @@ public class CopycatSlabBlock extends WaterloggedCopycatBlock {
         } else {
             return CCShapes.CASING_8PX_TOP.get(axis);
         }
-    }
-
-    @SuppressWarnings("deprecation")
-    @Override
-    public boolean isPathfindable(@NotNull BlockState pState, @NotNull BlockGetter pLevel, @NotNull BlockPos pPos, @NotNull PathComputationType pType) {
-        return false;
     }
 
     @Override
