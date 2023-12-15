@@ -8,6 +8,7 @@
     "create_connected:brass_gearbox",
     "create_connected:brake",
     "create_connected:copycat_slab",
-    "create_connected:copycat_block"
+    "create_connected:copycat_block",
+    "create_connected:copycat_beam"
   ]
 }

@@ -4,10 +4,7 @@ import com.hlysine.create_connected.content.WrenchableBlock;
 import com.hlysine.create_connected.content.brake.BrakeBlock;
 import com.hlysine.create_connected.content.brassgearbox.BrassGearboxBlock;
 import com.hlysine.create_connected.content.centrifugalclutch.CentrifugalClutchBlock;
-import com.hlysine.create_connected.content.copycat.CopycatBlockBlock;
-import com.hlysine.create_connected.content.copycat.CopycatBlockModel;
-import com.hlysine.create_connected.content.copycat.CopycatSlabBlock;
-import com.hlysine.create_connected.content.copycat.CopycatSlabModel;
+import com.hlysine.create_connected.content.copycat.*;
 import com.hlysine.create_connected.content.invertedclutch.InvertedClutchBlock;
 import com.hlysine.create_connected.content.invertedgearshift.InvertedGearshiftBlock;
 import com.hlysine.create_connected.content.overstressclutch.OverstressClutchBlock;
@@ -247,6 +244,16 @@ public class CCBlocks {
                     .recipe((c, p) -> p.stonecutting(DataIngredient.tag(AllTags.forgeItemTag("ingots/zinc")),
                             RecipeCategory.BUILDING_BLOCKS, c, 1))
                     .transform(customItemModel("copycat_base", "block"))
+                    .register();
+
+    public static final BlockEntry<CopycatBeamBlock> COPYCAT_BEAM =
+            REGISTRATE.block("copycat_beam", CopycatBeamBlock::new)
+                    .transform(BuilderTransformers.copycat())
+                    .onRegister(CreateRegistrate.blockModel(() -> CopycatBeamModel::new))
+                    .item()
+                    .recipe((c, p) -> p.stonecutting(DataIngredient.tag(AllTags.forgeItemTag("ingots/zinc")),
+                            RecipeCategory.BUILDING_BLOCKS, c, 4))
+                    .transform(customItemModel("copycat_base", "beam"))
                     .register();
 
     public static void register() {

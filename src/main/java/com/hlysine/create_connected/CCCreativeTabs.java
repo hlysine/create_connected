@@ -33,6 +33,7 @@ public class CCCreativeTabs {
                 output.accept(CCBlocks.FAN_HAUNTING_CATALYST.asStack());
                 output.accept(CCBlocks.COPYCAT_BLOCK.asStack());
                 output.accept(CCBlocks.COPYCAT_SLAB.asStack());
+                output.accept(CCBlocks.COPYCAT_BEAM.asStack());
             })
             .build());
 

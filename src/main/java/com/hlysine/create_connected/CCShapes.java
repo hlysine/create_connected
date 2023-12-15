@@ -8,6 +8,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 public class CCShapes {
     public static final VoxelShaper CASING_8PX = shape(0, 0, 0, 16, 8, 16).forAxis();
     public static final VoxelShaper CASING_8PX_TOP = shape(0, 8, 0, 16, 16, 16).forAxis();
+    public static final VoxelShaper CASING_8PX_CENTERED = shape(4, 0, 4, 12, 16, 12).forAxis();
 
     private static AllShapes.Builder shape(VoxelShape shape) {
         return new AllShapes.Builder(shape);

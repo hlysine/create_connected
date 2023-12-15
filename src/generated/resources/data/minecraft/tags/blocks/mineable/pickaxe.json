@@ -14,6 +14,7 @@
     "create_connected:fan_splashing_catalyst",
     "create_connected:fan_haunting_catalyst",
     "create_connected:copycat_slab",
-    "create_connected:copycat_block"
+    "create_connected:copycat_block",
+    "create_connected:copycat_beam"
   ]
 }

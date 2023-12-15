@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "create:copycat_step"
+    }
+  ],
+  "result": {
+    "item": "create_connected:copycat_beam"
+  }
+}
