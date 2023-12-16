@@ -64,7 +64,7 @@ public class BrassGearboxBlock extends RotatedPillarKineticBlock implements IBE<
 
     @SuppressWarnings("deprecation")
     @Override
-    public @NotNull List<ItemStack> getDrops(BlockState state, LootParams.@NotNull Builder builder) {
+    public @NotNull List<ItemStack> getDrops(BlockState state, @NotNull LootParams.Builder builder) {
         if (state.getValue(AXIS).isVertical())
             return super.getDrops(state, builder);
         return List.of(new ItemStack(CCItems.VERTICAL_PARALLEL_GEARBOX.get()));
