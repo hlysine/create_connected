@@ -1,0 +1,17 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "create_connected:block/six_way_gearbox/block",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "create_connected:block/six_way_gearbox/block"
+    },
+    "axis=z": {
+      "model": "create_connected:block/six_way_gearbox/block",
+      "x": 90,
+      "y": 180
+    }
+  }
+}

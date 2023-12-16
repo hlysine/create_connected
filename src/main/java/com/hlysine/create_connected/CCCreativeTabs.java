@@ -20,6 +20,8 @@ public class CCCreativeTabs {
                 output.accept(CCBlocks.INVERTED_GEARSHIFT.asStack());
                 output.accept(CCBlocks.PARALLEL_GEARBOX.asStack());
                 output.accept(CCItems.VERTICAL_PARALLEL_GEARBOX.asStack());
+                output.accept(CCBlocks.SIX_WAY_GEARBOX.asStack());
+                output.accept(CCItems.VERTICAL_SIX_WAY_GEARBOX.asStack());
                 output.accept(CCBlocks.BRASS_GEARBOX.asStack());
                 output.accept(CCItems.VERTICAL_BRASS_GEARBOX.asStack());
                 output.accept(CCBlocks.SHEAR_PIN.asStack());

@@ -2,6 +2,7 @@ package com.hlysine.create_connected;
 
 import com.hlysine.create_connected.content.brassgearbox.VerticalBrassGearboxItem;
 import com.hlysine.create_connected.content.parallelgearbox.VerticalParallelGearboxItem;
+import com.hlysine.create_connected.content.sixwaygearbox.VerticalSixWayGearboxItem;
 import com.simibubi.create.foundation.data.AssetLookup;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.util.entry.ItemEntry;
@@ -17,6 +18,12 @@ public class CCItems {
     public static final ItemEntry<VerticalParallelGearboxItem> VERTICAL_PARALLEL_GEARBOX =
             REGISTRATE.item("vertical_parallel_gearbox", VerticalParallelGearboxItem::new)
                     .model(AssetLookup.customBlockItemModel("parallel_gearbox", "item_vertical"))
+                    .register();
+
+    public static final ItemEntry<VerticalSixWayGearboxItem> VERTICAL_SIX_WAY_GEARBOX =
+            REGISTRATE.item("vertical_six_way_gearbox", VerticalSixWayGearboxItem::new)
+                    .model(AssetLookup.customBlockItemModel("six_way_gearbox", "item_vertical"))
+                    .lang("Vertical 6-way Gearbox")
                     .register();
 
     public static final ItemEntry<VerticalBrassGearboxItem> VERTICAL_BRASS_GEARBOX =

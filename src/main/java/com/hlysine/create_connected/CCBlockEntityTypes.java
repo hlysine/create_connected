@@ -12,6 +12,9 @@ import com.hlysine.create_connected.content.parallelgearbox.ParallelGearboxBlock
 import com.hlysine.create_connected.content.parallelgearbox.ParallelGearboxInstance;
 import com.hlysine.create_connected.content.parallelgearbox.ParallelGearboxRenderer;
 import com.hlysine.create_connected.content.shearpin.ShearPinBlockEntity;
+import com.hlysine.create_connected.content.sixwaygearbox.SixWayGearboxBlockEntity;
+import com.hlysine.create_connected.content.sixwaygearbox.SixWayGearboxInstance;
+import com.hlysine.create_connected.content.sixwaygearbox.SixWayGearboxRenderer;
 import com.simibubi.create.content.kinetics.simpleRelays.BracketedKineticBlockEntityInstance;
 import com.simibubi.create.content.kinetics.simpleRelays.BracketedKineticBlockEntityRenderer;
 import com.simibubi.create.content.kinetics.transmission.SplitShaftInstance;
@@ -27,6 +30,13 @@ public class CCBlockEntityTypes {
             .instance(() -> ParallelGearboxInstance::new, false)
             .validBlocks(CCBlocks.PARALLEL_GEARBOX)
             .renderer(() -> ParallelGearboxRenderer::new)
+            .register();
+
+    public static final BlockEntityEntry<SixWayGearboxBlockEntity> SIX_WAY_GEARBOX = REGISTRATE
+            .blockEntity("six_way_gearbox", SixWayGearboxBlockEntity::new)
+            .instance(() -> SixWayGearboxInstance::new, false)
+            .validBlocks(CCBlocks.SIX_WAY_GEARBOX)
+            .renderer(() -> SixWayGearboxRenderer::new)
             .register();
 
 

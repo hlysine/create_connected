@@ -10,6 +10,7 @@ import com.hlysine.create_connected.content.invertedgearshift.InvertedGearshiftB
 import com.hlysine.create_connected.content.overstressclutch.OverstressClutchBlock;
 import com.hlysine.create_connected.content.parallelgearbox.ParallelGearboxBlock;
 import com.hlysine.create_connected.content.shearpin.ShearPinBlock;
+import com.hlysine.create_connected.content.sixwaygearbox.SixWayGearboxBlock;
 import com.hlysine.create_connected.datagen.CCBlockStateGen;
 import com.simibubi.create.AllSpriteShifts;
 import com.simibubi.create.AllTags;
@@ -48,6 +49,18 @@ public class CCBlocks {
             .onRegister(CreateRegistrate.connectedTextures(() -> new EncasedCTBehaviour(AllSpriteShifts.ANDESITE_CASING)))
             .onRegister(CreateRegistrate.casingConnectivity((block, cc) -> cc.make(block, AllSpriteShifts.ANDESITE_CASING,
                     (s, f) -> f.getAxis() == s.getValue(ParallelGearboxBlock.AXIS))))
+            .blockstate((c, p) -> axisBlock(c, p, $ -> partialBaseModel(c, p), false))
+            .item()
+            .transform(customItemModel())
+            .register();
+
+    public static final BlockEntry<SixWayGearboxBlock> SIX_WAY_GEARBOX = REGISTRATE.block("six_way_gearbox", SixWayGearboxBlock::new)
+            .initialProperties(SharedProperties::stone)
+            .properties(p -> p.noOcclusion().mapColor(MapColor.PODZOL))
+            .addLayer(() -> RenderType::cutoutMipped)
+            .transform(BlockStressDefaults.setNoImpact())
+            .transform(axeOrPickaxe())
+            .lang("6-way Gearbox")
             .blockstate((c, p) -> axisBlock(c, p, $ -> partialBaseModel(c, p), false))
             .item()
             .transform(customItemModel())

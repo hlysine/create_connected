@@ -24,6 +24,7 @@
   "block.create_connected.overstress_clutch": "Overstress Clutch",
   "block.create_connected.parallel_gearbox": "Parallel Gearbox",
   "block.create_connected.shear_pin": "Shear Pin",
+  "block.create_connected.six_way_gearbox": "6-way Gearbox",
   "create.item_attributes.id_contains": "has the word \"%1$s\" in ID",
   "create.item_attributes.id_contains.inverted": "does not have the word \"%1$s\" in ID",
   "create_connected.centrifugal_clutch.speed_threshold": "Speed Threshold",
@@ -32,5 +33,6 @@
   "create_connected.overstress_clutch.uncouple_delay": "Uncouple Delay",
   "item.create_connected.vertical_brass_gearbox": "Vertical Brass Gearbox",
   "item.create_connected.vertical_parallel_gearbox": "Vertical Parallel Gearbox",
+  "item.create_connected.vertical_six_way_gearbox": "Vertical 6-way Gearbox",
   "itemGroup.create_connected.main": "Create: Connected"
 }

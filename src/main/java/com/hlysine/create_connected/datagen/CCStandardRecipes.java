@@ -45,14 +45,6 @@ public class CCStandardRecipes extends CreateRecipeProvider {
     GeneratedRecipe INVERTED_GEARSHIFT_CYCLE =
             conversionCycle(ImmutableList.of(AllBlocks.GEARSHIFT, CCBlocks.INVERTED_GEARSHIFT));
 
-    GeneratedRecipe OVERSTRESS_CLUTCH = create(CCBlocks.OVERSTRESS_CLUTCH).unlockedBy(AllItems.ELECTRON_TUBE::get)
-            .viaShapeless(b -> b
-                    .requires(AllBlocks.SHAFT)
-                    .requires(AllBlocks.ANDESITE_CASING)
-                    .requires(AllItems.ELECTRON_TUBE)
-                    .requires(AllItems.IRON_SHEET)
-            );
-
     GeneratedRecipe PARALLEL_GEARBOX = create(CCBlocks.PARALLEL_GEARBOX).unlockedBy(AllBlocks.LARGE_COGWHEEL::get)
             .viaShapeless(b -> b
                     .requires(AllBlocks.LARGE_COGWHEEL)
@@ -62,13 +54,31 @@ public class CCStandardRecipes extends CreateRecipeProvider {
     GeneratedRecipe PARALLEL_GEARBOX_CYCLE =
             conversionCycle(ImmutableList.of(CCBlocks.PARALLEL_GEARBOX, CCItems.VERTICAL_PARALLEL_GEARBOX));
 
-    GeneratedRecipe CENTRIFUGAL_CLUTCH = create(CCBlocks.CENTRIFUGAL_CLUTCH).unlockedBy(AllBlocks.SPEEDOMETER::get)
-            .viaShapeless(b -> b
-                    .requires(AllBlocks.SHAFT)
-                    .requires(AllBlocks.ANDESITE_CASING)
-                    .requires(AllBlocks.SPEEDOMETER)
-                    .requires(AllItems.IRON_SHEET)
+    GeneratedRecipe SIX_WAY_GEARBOX = create(CCBlocks.SIX_WAY_GEARBOX).unlockedBy(AllBlocks.LARGE_COGWHEEL::get)
+            .viaShaped(b -> b
+                    .define('c', AllBlocks.COGWHEEL)
+                    .define('l', AllBlocks.LARGE_COGWHEEL)
+                    .define('s', AllBlocks.ANDESITE_CASING)
+                    .pattern("lc ")
+                    .pattern("csc")
+                    .pattern(" cl")
             );
+
+    GeneratedRecipe SIX_WAY_GEARBOX_FROM_GEARBOX = create(CCBlocks.SIX_WAY_GEARBOX).withSuffix("_from_gearbox").unlockedBy(AllBlocks.GEARBOX::get)
+            .viaShapeless(b -> b
+                    .requires(AllBlocks.GEARBOX)
+                    .requires(AllBlocks.LARGE_COGWHEEL)
+                    .requires(AllBlocks.LARGE_COGWHEEL)
+            );
+
+    GeneratedRecipe SIX_WAY_GEARBOX_FROM_PARALLEL = create(CCBlocks.SIX_WAY_GEARBOX).withSuffix("_from_parallel").unlockedBy(CCBlocks.PARALLEL_GEARBOX::get)
+            .viaShapeless(b -> b
+                    .requires(CCBlocks.PARALLEL_GEARBOX)
+                    .requires(AllBlocks.LARGE_COGWHEEL)
+            );
+
+    GeneratedRecipe SIX_WAY_GEARBOX_CYCLE =
+            conversionCycle(ImmutableList.of(CCBlocks.SIX_WAY_GEARBOX, CCItems.VERTICAL_SIX_WAY_GEARBOX));
 
     GeneratedRecipe BRASS_GEARBOX = create(CCBlocks.BRASS_GEARBOX).unlockedBy(AllBlocks.ROTATION_SPEED_CONTROLLER::get)
             .viaShaped(b -> b
@@ -77,6 +87,22 @@ public class CCStandardRecipes extends CreateRecipeProvider {
                     .pattern(" c ")
                     .pattern("csc")
                     .pattern(" c ")
+            );
+
+    GeneratedRecipe OVERSTRESS_CLUTCH = create(CCBlocks.OVERSTRESS_CLUTCH).unlockedBy(AllItems.ELECTRON_TUBE::get)
+            .viaShapeless(b -> b
+                    .requires(AllBlocks.SHAFT)
+                    .requires(AllBlocks.ANDESITE_CASING)
+                    .requires(AllItems.ELECTRON_TUBE)
+                    .requires(AllItems.IRON_SHEET)
+            );
+
+    GeneratedRecipe CENTRIFUGAL_CLUTCH = create(CCBlocks.CENTRIFUGAL_CLUTCH).unlockedBy(AllBlocks.SPEEDOMETER::get)
+            .viaShapeless(b -> b
+                    .requires(AllBlocks.SHAFT)
+                    .requires(AllBlocks.ANDESITE_CASING)
+                    .requires(AllBlocks.SPEEDOMETER)
+                    .requires(AllItems.IRON_SHEET)
             );
 
     GeneratedRecipe BRAKE = create(CCBlocks.BRAKE).unlockedBy(Blocks.OBSIDIAN::asItem)
