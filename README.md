@@ -10,6 +10,8 @@
 
 A Create mod add-on adding quality-of-life blocks that you wish existed in Create.
 
+**Currently unstable. Use at your own risk!**
+
 ## Features
 
 - Item Attributes
@@ -47,8 +49,8 @@ A Create mod add-on adding quality-of-life blocks that you wish existed in Creat
 This mod is super early in development and THINGS WILL BREAK. Do NOT use this mod in your main worlds/servers at the
 moment.
 
-Find this mod on [**Modrinth**](https://modrinth.com/mod/create-connected) or [**CurseForge
-**](https://legacy.curseforge.com/minecraft/mc-mods/create-connected).
+Find this mod on [**Modrinth**](https://modrinth.com/mod/create-connected) or
+[**CurseForge**](https://legacy.curseforge.com/minecraft/mc-mods/create-connected).
 
 ## Usage
 
