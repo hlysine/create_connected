@@ -1,4 +1,4 @@
-package com.hlysine.create_connected.datagen;
+package com.hlysine.create_connected.datagen.recipes;
 
 import com.hlysine.create_connected.CreateConnected;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;

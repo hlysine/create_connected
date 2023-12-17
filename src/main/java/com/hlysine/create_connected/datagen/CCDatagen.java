@@ -3,6 +3,8 @@ package com.hlysine.create_connected.datagen;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.hlysine.create_connected.CreateConnected;
+import com.hlysine.create_connected.datagen.recipes.CCStandardRecipes;
+import com.hlysine.create_connected.datagen.recipes.ProcessingRecipeGen;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.foundation.utility.FilesHelper;
 import com.tterrag.registrate.providers.ProviderType;

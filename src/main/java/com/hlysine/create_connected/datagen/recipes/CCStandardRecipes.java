@@ -1,4 +1,4 @@
-package com.hlysine.create_connected.datagen;
+package com.hlysine.create_connected.datagen.recipes;
 
 import com.google.common.base.Supplier;
 import com.google.common.collect.ImmutableList;

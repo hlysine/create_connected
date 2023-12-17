@@ -1,4 +1,4 @@
-package com.hlysine.create_connected.datagen;
+package com.hlysine.create_connected.datagen.recipes;
 
 import com.hlysine.create_connected.CCBlocks;
 import com.simibubi.create.AllBlocks;
