@@ -52,6 +52,12 @@ moment.
 Find this mod on [**Modrinth**](https://modrinth.com/mod/create-connected) or
 [**CurseForge**](https://legacy.curseforge.com/minecraft/mc-mods/create-connected).
 
+**Supported Create versions:**
+
+| Create | Create: Connected |
+|--------|-------------------|
+| 0.5.1e | 0.0.2             |
+
 ## Usage
 
 **In modpacks:**
