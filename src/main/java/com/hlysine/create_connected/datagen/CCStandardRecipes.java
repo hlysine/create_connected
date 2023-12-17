@@ -115,11 +115,11 @@ public class CCStandardRecipes extends CreateRecipeProvider {
 
     GeneratedRecipe EMPTY_FAN_CATALYST = create(CCBlocks.EMPTY_FAN_CATALYST).unlockedBy(AllBlocks.BRASS_BLOCK::get)
             .viaShaped(b -> b
-                    .define('b', AllBlocks.BRASS_BLOCK)
+                    .define('b', AllItems.BRASS_INGOT)
                     .define('i', Blocks.IRON_BARS)
-                    .pattern(" i ")
-                    .pattern("ibi")
-                    .pattern(" i ")
+                    .pattern("bib")
+                    .pattern("i i")
+                    .pattern("bib")
             );
 
     GeneratedRecipe EMPTY_CATALYST_FROM_BLASTING = clearFanCatalyst("blasting", CCBlocks.FAN_BLASTING_CATALYST);
