@@ -3,6 +3,8 @@ package com.hlysine.create_connected;
 import com.hlysine.create_connected.config.CCConfigs;
 import com.hlysine.create_connected.content.attributefilter.ItemIdAttribute;
 import com.hlysine.create_connected.datagen.CCDatagen;
+import com.hlysine.create_connected.datagen.advancements.CCAdvancements;
+import com.hlysine.create_connected.datagen.advancements.CCTriggers;
 import com.mojang.logging.LogUtils;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.foundation.item.ItemDescription;
@@ -63,6 +65,10 @@ public class CreateConnected {
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
+        event.enqueueWork(() -> {
+            CCAdvancements.register();
+            CCTriggers.register();
+        });
     }
 
     public static CreateRegistrate getRegistrate() {
