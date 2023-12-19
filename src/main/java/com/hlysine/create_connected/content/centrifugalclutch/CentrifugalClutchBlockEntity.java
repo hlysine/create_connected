@@ -1,16 +1,13 @@
 package com.hlysine.create_connected.content.centrifugalclutch;
 
 import com.hlysine.create_connected.Lang;
+import com.hlysine.create_connected.content.ClutchValueBox;
 import com.hlysine.create_connected.content.RotationScrollValueBehaviour;
-import com.jozufozu.flywheel.util.transform.TransformStack;
-import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.content.kinetics.KineticNetwork;
 import com.simibubi.create.content.kinetics.RotationPropagator;
 import com.simibubi.create.content.kinetics.transmission.SplitShaftBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
-import com.simibubi.create.foundation.blockEntity.behaviour.CenteredSideValueBoxTransform;
 import com.simibubi.create.foundation.blockEntity.behaviour.scrollValue.ScrollValueBehaviour;
-import com.simibubi.create.foundation.utility.AngleHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
@@ -41,26 +38,7 @@ public class CentrifugalClutchBlockEntity extends SplitShaftBlockEntity {
         speedThreshold = new RotationScrollValueBehaviour(
                 Lang.translateDirect("centrifugal_clutch.speed_threshold"),
                 this,
-                new CenteredSideValueBoxTransform((state, d) -> {
-                    Direction.Axis axis = d.getAxis();
-                    Direction.Axis bearingAxis = state.getValue(FACING).getAxis();
-                    return bearingAxis != axis;
-                }) {
-                    @Override
-                    public void rotate(BlockState state, PoseStack ms) {
-                        Direction facing = getSide();
-                        float xRot = facing == Direction.UP ? 90 : facing == Direction.DOWN ? 270 : 0;
-                        float yRot = AngleHelper.horizontalAngle(facing) + 180;
-
-                        if (facing.getAxis() == Direction.Axis.Y)
-                            TransformStack.cast(ms)
-                                    .rotateY(180 + AngleHelper.horizontalAngle(state.getValue(FACING)));
-
-                        TransformStack.cast(ms)
-                                .rotateY(yRot)
-                                .rotateX(xRot);
-                    }
-                }
+                new ClutchValueBox()
         );
         speedThreshold.between(0, MAX_SPEED);
         speedThreshold.value = DEFAULT_SPEED;

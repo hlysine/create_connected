@@ -1,6 +1,7 @@
 package com.hlysine.create_connected.content.centrifugalclutch;
 
 import com.hlysine.create_connected.CCBlockEntityTypes;
+import com.hlysine.create_connected.content.CCBlockStateProperties;
 import com.simibubi.create.content.kinetics.base.DirectionalKineticBlock;
 import com.simibubi.create.foundation.block.IBE;
 import net.minecraft.core.BlockPos;
@@ -14,7 +15,7 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 
 public class CentrifugalClutchBlock extends DirectionalKineticBlock implements IBE<CentrifugalClutchBlockEntity> {
 
-    public static final BooleanProperty UNCOUPLED = BooleanProperty.create("uncoupled");
+    public static final BooleanProperty UNCOUPLED = CCBlockStateProperties.UNCOUPLED;
 
     public CentrifugalClutchBlock(Properties properties) {
         super(properties);
