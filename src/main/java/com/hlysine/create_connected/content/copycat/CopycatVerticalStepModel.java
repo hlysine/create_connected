@@ -79,9 +79,9 @@ public class CopycatVerticalStepModel extends CopycatModel {
                     BakedQuad quad = templateQuads.get(i);
                     Direction direction = quad.getDirection();
 
-                    if (rowShiftNormal.equals(direction.getNormal()))
+                    if (direction.getAxis() == Axis.X && row == (direction.getAxisDirection() == Direction.AxisDirection.NEGATIVE))
                         continue;
-                    if (columnShiftNormal.equals(direction.getNormal()))
+                    if (direction.getAxis() == Axis.Z && column == (direction.getAxisDirection() == Direction.AxisDirection.NEGATIVE))
                         continue;
 
                     quads.add(BakedQuadHelper.cloneWithCustomGeometry(quad,
