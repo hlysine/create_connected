@@ -1,12 +1,8 @@
 package com.hlysine.create_connected.datagen.advancements;
 
-import java.util.*;
-
-import com.simibubi.create.foundation.advancement.CreateAdvancement;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BehaviourType;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
@@ -18,12 +14,14 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.util.FakePlayer;
 
+import java.util.*;
+
 public class AdvancementBehaviour extends BlockEntityBehaviour {
 
     public static final BehaviourType<AdvancementBehaviour> TYPE = new BehaviourType<>();
 
     private UUID playerId;
-    private Set<Awardable> advancements;
+    private final Set<Awardable> advancements;
 
     public AdvancementBehaviour(SmartBlockEntity be, Awardable... advancements) {
         super(be);

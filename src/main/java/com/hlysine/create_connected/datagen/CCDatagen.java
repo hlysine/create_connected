@@ -6,7 +6,6 @@ import com.hlysine.create_connected.CreateConnected;
 import com.hlysine.create_connected.datagen.advancements.CCAdvancements;
 import com.hlysine.create_connected.datagen.recipes.CCStandardRecipes;
 import com.hlysine.create_connected.datagen.recipes.ProcessingRecipeGen;
-import com.simibubi.create.foundation.advancement.AllAdvancements;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.foundation.utility.FilesHelper;
 import com.tterrag.registrate.providers.ProviderType;

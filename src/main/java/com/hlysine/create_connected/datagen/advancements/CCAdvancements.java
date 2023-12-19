@@ -2,13 +2,13 @@ package com.hlysine.create_connected.datagen.advancements;
 
 import com.google.common.collect.Sets;
 import com.hlysine.create_connected.CCBlocks;
-import com.simibubi.create.AllItems;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.PackOutput.PathProvider;
 import net.minecraft.resources.ResourceLocation;
+import org.jetbrains.annotations.NotNull;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -19,7 +19,8 @@ import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.UnaryOperator;
 
-import static com.hlysine.create_connected.datagen.advancements.CCAdvancement.TaskType.*;
+import static com.hlysine.create_connected.datagen.advancements.CCAdvancement.TaskType.SECRET;
+import static com.hlysine.create_connected.datagen.advancements.CCAdvancement.TaskType.SILENT;
 
 @SuppressWarnings("unused")
 public class CCAdvancements implements DataProvider {
@@ -60,7 +61,7 @@ public class CCAdvancements implements DataProvider {
     }
 
     @Override
-    public CompletableFuture<?> run(CachedOutput cache) {
+    public @NotNull CompletableFuture<?> run(@NotNull CachedOutput cache) {
         PathProvider pathProvider = output.createPathProvider(PackOutput.Target.DATA_PACK, "advancements");
         List<CompletableFuture<?>> futures = new ArrayList<>();
 
@@ -81,7 +82,7 @@ public class CCAdvancements implements DataProvider {
     }
 
     @Override
-    public String getName() {
+    public @NotNull String getName() {
         return "Advancements for Create: Connected";
     }
 

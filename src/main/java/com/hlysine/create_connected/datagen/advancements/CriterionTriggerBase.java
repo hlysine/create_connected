@@ -1,19 +1,7 @@
 package com.hlysine.create_connected.datagen.advancements;
 
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.function.Supplier;
-
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-
 import com.google.common.collect.Maps;
 import com.hlysine.create_connected.CreateConnected;
-import com.simibubi.create.Create;
-
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.advancements.CriterionTrigger;
 import net.minecraft.advancements.critereon.AbstractCriterionTriggerInstance;
@@ -21,6 +9,11 @@ import net.minecraft.advancements.critereon.ContextAwarePredicate;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.PlayerAdvancements;
 import net.minecraft.server.level.ServerPlayer;
+
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.*;
+import java.util.function.Supplier;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
