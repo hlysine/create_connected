@@ -10,6 +10,7 @@
     "create_connected:brake",
     "create_connected:copycat_slab",
     "create_connected:copycat_block",
-    "create_connected:copycat_beam"
+    "create_connected:copycat_beam",
+    "create_connected:copycat_vertical_step"
   ]
 }

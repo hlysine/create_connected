@@ -1,6 +1,6 @@
 {
   "advancement.create_connected.overpowered_brake": "pǝɹǝʍodɹǝʌO",
-  "advancement.create_connected.overpowered_brake.desc": ")ʇuǝɯǝɔuɐʌpⱯ uǝppıH(ㄥ§\n˙pǝɥɔɐʇʇɐ ǝʞɐɹq pǝɹǝʍod ɐ ɥʇıʍ pǝǝds ʇɐ buıuunɹ ʞɹoʍʇǝu ɐ dǝǝʞ",
+  "advancement.create_connected.overpowered_brake.desc": ")ʇuǝɯǝɔuɐʌpⱯ uǝppıH(ㄥ§\npǝɥɔɐʇʇɐ ǝʞɐɹq pǝɹǝʍod ɐ ɥʇıʍ pǝǝds ʇɐ buıuunɹ ʞɹoʍʇǝu ɐ dǝǝʞ",
   "advancement.create_connected.root": "pǝʇɔǝuuoƆ :ǝʇɐǝɹƆ oʇ ǝɯoɔןǝM",
   "advancement.create_connected.root.desc": "suoıʇɐnʇıs ןןɐ ɹoɟ sʇǝbpɐ⅁",
   "block.create_connected.brake": "ǝʞɐɹᗺ",
@@ -18,6 +18,7 @@
   "block.create_connected.copycat_slab.tooltip.behaviour1": "˙ןɐıɹǝʇɐɯ ǝɥʇ ‾ʇǝsǝɹ‾ oʇ ‾ɥɔuǝɹM‾ ɐ ǝs∩ ˙ǝʇɐʇs ‾pǝɹǝʍod‾ ɹo ‾uoıʇɐʇuǝıɹo‾ ǝןɔʎɔ oʇ ‾uıɐbɐ ʞɔıןƆ‾ ˙ǝןqıssod ɟı ‾ןɐıɹǝʇɐɯ‾ sʇı sɐ ‾ɯǝʇı pןǝɥ‾ sǝıןddⱯ",
   "block.create_connected.copycat_slab.tooltip.condition1": "pǝʞɔıןƆ-ᴚ uǝɥM",
   "block.create_connected.copycat_slab.tooltip.summary": "˙‾ʎןןɐɔıʇɹǝʌ‾ pǝɔɐןd ǝq uɐƆ ˙qɐןs ǝʌıʇɐɹoɔǝp ɐ oʇuı ‾ʞɔoןq ןןnɟ‾ ʎuɐ ‾sʇɹǝʌuoƆ‾",
+  "block.create_connected.copycat_vertical_step": "dǝʇS ןɐɔıʇɹǝΛ ʇɐɔʎdoƆ",
   "block.create_connected.empty_fan_catalyst": "ʇsʎןɐʇɐƆ uɐℲ ʎʇdɯƎ",
   "block.create_connected.fan_blasting_catalyst": "ʇsʎןɐʇɐƆ buıʇsɐןᗺ uɐℲ",
   "block.create_connected.fan_haunting_catalyst": "ʇsʎןɐʇɐƆ buıʇunɐH uɐℲ",

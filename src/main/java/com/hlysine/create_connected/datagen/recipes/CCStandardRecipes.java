@@ -156,7 +156,7 @@ public class CCStandardRecipes extends CreateRecipeProvider {
             );
 
     GeneratedRecipe COPYCAT_BEAM_STEP_CYCLE =
-            conversionCycle(ImmutableList.of(CCBlocks.COPYCAT_BEAM, AllBlocks.COPYCAT_STEP));
+            conversionCycle(ImmutableList.of(CCBlocks.COPYCAT_BEAM, AllBlocks.COPYCAT_STEP, CCBlocks.COPYCAT_VERTICAL_STEP));
 
     String currentFolder = "";
 

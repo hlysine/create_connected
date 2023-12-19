@@ -3,10 +3,10 @@
   "category": "misc",
   "ingredients": [
     {
-      "item": "create_connected:copycat_vertical_step"
+      "item": "create:copycat_step"
     }
   ],
   "result": {
-    "item": "create_connected:copycat_beam"
+    "item": "create_connected:copycat_vertical_step"
   }
 }

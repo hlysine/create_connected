@@ -6,7 +6,7 @@
         "items": [
           {
             "items": [
-              "create_connected:copycat_vertical_step"
+              "create:copycat_step"
             ]
           }
         ]
@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "create_connected:crafting/palettes/copycat_beam_from_conversion"
+        "recipe": "create_connected:crafting/palettes/copycat_vertical_step_from_conversion"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "create_connected:crafting/palettes/copycat_beam_from_conversion"
+      "create_connected:crafting/palettes/copycat_vertical_step_from_conversion"
     ]
   },
   "sends_telemetry_event": false

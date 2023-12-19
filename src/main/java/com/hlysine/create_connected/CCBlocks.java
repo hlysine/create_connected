@@ -269,6 +269,16 @@ public class CCBlocks {
                     .transform(customItemModel("copycat_base", "beam"))
                     .register();
 
+    public static final BlockEntry<CopycatVerticalStepBlock> COPYCAT_VERTICAL_STEP =
+            REGISTRATE.block("copycat_vertical_step", CopycatVerticalStepBlock::new)
+                    .transform(BuilderTransformers.copycat())
+                    .onRegister(CreateRegistrate.blockModel(() -> CopycatVerticalStepModel::new))
+                    .item()
+                    .recipe((c, p) -> p.stonecutting(DataIngredient.tag(AllTags.forgeItemTag("ingots/zinc")),
+                            RecipeCategory.BUILDING_BLOCKS, c, 4))
+                    .transform(customItemModel("copycat_base", "vertical_step"))
+                    .register();
+
     public static void register() {
     }
 

@@ -36,6 +36,7 @@ public class CCCreativeTabs {
                 output.accept(CCBlocks.COPYCAT_BLOCK.asStack());
                 output.accept(CCBlocks.COPYCAT_SLAB.asStack());
                 output.accept(CCBlocks.COPYCAT_BEAM.asStack());
+                output.accept(CCBlocks.COPYCAT_VERTICAL_STEP.asStack());
             })
             .build());
 
