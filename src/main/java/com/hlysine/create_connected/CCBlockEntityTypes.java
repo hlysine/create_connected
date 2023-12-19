@@ -5,6 +5,7 @@ import com.hlysine.create_connected.content.brassgearbox.BrassGearboxBlockEntity
 import com.hlysine.create_connected.content.brassgearbox.BrassGearboxInstance;
 import com.hlysine.create_connected.content.brassgearbox.BrassGearboxRenderer;
 import com.hlysine.create_connected.content.centrifugalclutch.CentrifugalClutchBlockEntity;
+import com.hlysine.create_connected.content.freewheelclutch.FreewheelClutchBlockEntity;
 import com.hlysine.create_connected.content.invertedclutch.InvertedClutchBlockEntity;
 import com.hlysine.create_connected.content.invertedgearshift.InvertedGearshiftBlockEntity;
 import com.hlysine.create_connected.content.overstressclutch.OverstressClutchBlockEntity;
@@ -73,6 +74,13 @@ public class CCBlockEntityTypes {
             .blockEntity("centrifugal_clutch", CentrifugalClutchBlockEntity::new)
             .instance(() -> SplitShaftInstance::new, false)
             .validBlocks(CCBlocks.CENTRIFUGAL_CLUTCH)
+            .renderer(() -> SplitShaftRenderer::new)
+            .register();
+
+    public static final BlockEntityEntry<FreewheelClutchBlockEntity> FREEWHEEL_CLUTCH = REGISTRATE
+            .blockEntity("freewheel_clutch", FreewheelClutchBlockEntity::new)
+            .instance(() -> SplitShaftInstance::new, false)
+            .validBlocks(CCBlocks.FREEWHEEL_CLUTCH)
             .renderer(() -> SplitShaftRenderer::new)
             .register();
 

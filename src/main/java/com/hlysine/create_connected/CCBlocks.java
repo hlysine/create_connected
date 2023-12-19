@@ -5,6 +5,7 @@ import com.hlysine.create_connected.content.brake.BrakeBlock;
 import com.hlysine.create_connected.content.brassgearbox.BrassGearboxBlock;
 import com.hlysine.create_connected.content.centrifugalclutch.CentrifugalClutchBlock;
 import com.hlysine.create_connected.content.copycat.*;
+import com.hlysine.create_connected.content.freewheelclutch.FreewheelClutchBlock;
 import com.hlysine.create_connected.content.invertedclutch.InvertedClutchBlock;
 import com.hlysine.create_connected.content.invertedgearshift.InvertedGearshiftBlock;
 import com.hlysine.create_connected.content.overstressclutch.OverstressClutchBlock;
@@ -121,6 +122,18 @@ public class CCBlocks {
             .transform(BlockStressDefaults.setNoImpact())
             .transform(axeOrPickaxe())
             .blockstate((c, p) -> p.directionalBlock(c.get(), forBoolean(c, state -> state.getValue(CentrifugalClutchBlock.UNCOUPLED), "uncoupled", p)))
+            .item()
+            .transform(customItemModel())
+            .register();
+
+
+    public static final BlockEntry<FreewheelClutchBlock> FREEWHEEL_CLUTCH = REGISTRATE.block("freewheel_clutch", FreewheelClutchBlock::new)
+            .initialProperties(SharedProperties::stone)
+            .properties(p -> p.noOcclusion().mapColor(MapColor.PODZOL))
+            .addLayer(() -> RenderType::cutoutMipped)
+            .transform(BlockStressDefaults.setNoImpact())
+            .transform(axeOrPickaxe())
+            .blockstate((c, p) -> p.directionalBlock(c.get(), forBoolean(c, state -> state.getValue(FreewheelClutchBlock.UNCOUPLED), "uncoupled", p)))
             .item()
             .transform(customItemModel())
             .register();

@@ -1,0 +1,7 @@
+{
+	"parent": "create_connected:block/freewheel_clutch/block",
+    "textures": {
+      "0": "create_connected:block/freewheel_clutch_on",
+      "particle": "create_connected:block/freewheel_clutch_on"
+    }
+}

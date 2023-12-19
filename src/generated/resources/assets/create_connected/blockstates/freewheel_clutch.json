@@ -1,0 +1,56 @@
+{
+  "variants": {
+    "facing=down,uncoupled=false": {
+      "model": "create_connected:block/freewheel_clutch/block",
+      "x": 180
+    },
+    "facing=down,uncoupled=true": {
+      "model": "create_connected:block/freewheel_clutch/block_uncoupled",
+      "x": 180
+    },
+    "facing=east,uncoupled=false": {
+      "model": "create_connected:block/freewheel_clutch/block",
+      "x": 90,
+      "y": 90
+    },
+    "facing=east,uncoupled=true": {
+      "model": "create_connected:block/freewheel_clutch/block_uncoupled",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north,uncoupled=false": {
+      "model": "create_connected:block/freewheel_clutch/block",
+      "x": 90
+    },
+    "facing=north,uncoupled=true": {
+      "model": "create_connected:block/freewheel_clutch/block_uncoupled",
+      "x": 90
+    },
+    "facing=south,uncoupled=false": {
+      "model": "create_connected:block/freewheel_clutch/block",
+      "x": 90,
+      "y": 180
+    },
+    "facing=south,uncoupled=true": {
+      "model": "create_connected:block/freewheel_clutch/block_uncoupled",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up,uncoupled=false": {
+      "model": "create_connected:block/freewheel_clutch/block"
+    },
+    "facing=up,uncoupled=true": {
+      "model": "create_connected:block/freewheel_clutch/block_uncoupled"
+    },
+    "facing=west,uncoupled=false": {
+      "model": "create_connected:block/freewheel_clutch/block",
+      "x": 90,
+      "y": 270
+    },
+    "facing=west,uncoupled=true": {
+      "model": "create_connected:block/freewheel_clutch/block_uncoupled",
+      "x": 90,
+      "y": 270
+    }
+  }
+}
