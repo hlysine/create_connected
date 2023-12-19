@@ -24,6 +24,8 @@ public class SequencerInstructionsMixin {
 
     @Unique
     private static final SequencerInstructions TURN_AWAIT = create_connected$addMember("TURN_AWAIT", "", AllGuiTextures.SEQUENCER_INSTRUCTION, false, true, -1, -1, -1);
+    @Unique
+    private static final SequencerInstructions TURN_TIME = create_connected$addMember("TURN_TIME", "duration", AllGuiTextures.SEQUENCER_INSTRUCTION, true, true, 600, 20, 10);
 
     /**
      * Constructor
@@ -66,6 +68,19 @@ public class SequencerInstructionsMixin {
     private void needsPropagation(CallbackInfoReturnable<Boolean> cir) {
         if ((Object) this == TURN_AWAIT) {
             cir.setReturnValue(true);
+        } else if ((Object) this == TURN_TIME) {
+            cir.setReturnValue(true);
+        }
+    }
+
+    @Inject(method = "formatValue(I)Ljava/lang/String;", at = @At("HEAD"), cancellable = true)
+    private void formatValue(int value, CallbackInfoReturnable<String> cir) {
+        if ((Object) this == TURN_TIME) {
+            if (value >= 20) {
+                cir.setReturnValue((value / 20) + "s");
+                return;
+            }
+            cir.setReturnValue(value + "t");
         }
     }
 }

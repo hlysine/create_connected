@@ -18,11 +18,16 @@ public class InstructionMixin {
     SequencerInstructions instruction;
     @Shadow
     InstructionSpeedModifiers speedModifier;
+    @Shadow
+    int value;
 
     @Inject(method = "getDuration(FF)I", at = @At("HEAD"), cancellable = true)
     public void getDurationForTurnAwait(float currentProgress, float speed, CallbackInfoReturnable<Integer> cir) {
         if (instruction == CCSequencerInstructions.TURN_AWAIT) {
             cir.setReturnValue(-1);
+        } else if (instruction == CCSequencerInstructions.TURN_TIME) {
+            double target = value - currentProgress;
+            cir.setReturnValue((int) target);
         }
     }
 
@@ -30,6 +35,8 @@ public class InstructionMixin {
     public void getSpeedModifierForTurnAwait(CallbackInfoReturnable<Integer> cir) {
         if (instruction == CCSequencerInstructions.TURN_AWAIT) {
             cir.setReturnValue(((InstructionSpeedModifiersAccessor) (Object) speedModifier).getValue());
+        } else if (instruction == CCSequencerInstructions.TURN_TIME) {
+            cir.setReturnValue(1);
         }
     }
 

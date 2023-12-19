@@ -9,11 +9,13 @@
     "CopycatModelInvoker",
     "KineticBlockAdvancementMixin",
     "ManualApplicationRecipeMixin",
+    "sequencedgearshift.InstructionAccessor",
     "sequencedgearshift.InstructionMixin",
     "sequencedgearshift.InstructionSpeedModifiersAccessor",
     "sequencedgearshift.SequencerInstructionsMixin"
   ],
   "client": [
+    "sequencedgearshift.SequencedGearshiftScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1
