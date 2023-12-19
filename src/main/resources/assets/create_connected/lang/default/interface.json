@@ -1,4 +1,6 @@
 {
+  "create.gui.sequenced_gearshift.instruction.turn_await": "Sustain",
+  "create.gui.sequenced_gearshift.instruction.turn_await.descriptive": "Turn until new Redstone Pulse",
   "create.item_attributes.id_contains": "has the word \"%1$s\" in ID",
   "create.item_attributes.id_contains.inverted": "does not have the word \"%1$s\" in ID",
   "create_connected.centrifugal_clutch.speed_threshold": "Speed Threshold",

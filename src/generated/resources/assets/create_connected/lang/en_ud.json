@@ -34,6 +34,8 @@
   "block.create_connected.parallel_gearbox": "xoqɹɐǝ⅁ ןǝןןɐɹɐԀ",
   "block.create_connected.shear_pin": "uıԀ ɹɐǝɥS",
   "block.create_connected.six_way_gearbox": "xoqɹɐǝ⅁ ʎɐʍ-9",
+  "create.gui.sequenced_gearshift.instruction.turn_await": "uıɐʇsnS",
+  "create.gui.sequenced_gearshift.instruction.turn_await.descriptive": "ǝsןnԀ ǝuoʇspǝᴚ ʍǝu ןıʇun uɹn⟘",
   "create.item_attributes.id_contains": "ᗡI uı \"%1$s\" pɹoʍ ǝɥʇ sɐɥ",
   "create.item_attributes.id_contains.inverted": "ᗡI uı \"%1$s\" pɹoʍ ǝɥʇ ǝʌɐɥ ʇou sǝop",
   "create_connected.centrifugal_clutch.speed_threshold": "pןoɥsǝɹɥ⟘ pǝǝdS",
