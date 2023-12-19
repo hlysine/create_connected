@@ -68,6 +68,12 @@ public class CentrifugalClutchBlockEntity extends SplitShaftBlockEntity {
         behaviours.add(speedThreshold);
     }
 
+    @Override
+    public void initialize() {
+        updateThreshold();
+        super.initialize();
+    }
+
     private void updateThreshold() {
         KineticNetwork network = getOrCreateNetwork();
         updateFromNetwork(capacity, stress, network == null ? 0 : network.getSize());
