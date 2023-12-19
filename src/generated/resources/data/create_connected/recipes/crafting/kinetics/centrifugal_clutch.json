@@ -3,16 +3,16 @@
   "category": "misc",
   "ingredients": [
     {
-      "item": "create:shaft"
-    },
-    {
       "item": "create:andesite_casing"
     },
     {
-      "item": "create:speedometer"
+      "item": "create:shaft"
     },
     {
       "item": "create:iron_sheet"
+    },
+    {
+      "item": "create:speedometer"
     }
   ],
   "result": {

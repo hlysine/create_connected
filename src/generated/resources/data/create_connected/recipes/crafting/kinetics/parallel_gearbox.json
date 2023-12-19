@@ -3,10 +3,10 @@
   "category": "misc",
   "ingredients": [
     {
-      "item": "create:large_cogwheel"
+      "item": "create:gearbox"
     },
     {
-      "item": "create:gearbox"
+      "item": "create:large_cogwheel"
     }
   ],
   "result": {

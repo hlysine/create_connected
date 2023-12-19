@@ -47,8 +47,8 @@ public class CCStandardRecipes extends CreateRecipeProvider {
 
     GeneratedRecipe PARALLEL_GEARBOX = create(CCBlocks.PARALLEL_GEARBOX).unlockedBy(AllBlocks.LARGE_COGWHEEL::get)
             .viaShapeless(b -> b
-                    .requires(AllBlocks.LARGE_COGWHEEL)
                     .requires(AllBlocks.GEARBOX)
+                    .requires(AllBlocks.LARGE_COGWHEEL)
             );
 
     GeneratedRecipe PARALLEL_GEARBOX_CYCLE =
@@ -89,26 +89,37 @@ public class CCStandardRecipes extends CreateRecipeProvider {
                     .pattern(" c ")
             );
 
+    GeneratedRecipe BRASS_GEARBOX_CYCLE =
+            conversionCycle(ImmutableList.of(CCBlocks.BRASS_GEARBOX, CCItems.VERTICAL_BRASS_GEARBOX));
+
     GeneratedRecipe OVERSTRESS_CLUTCH = create(CCBlocks.OVERSTRESS_CLUTCH).unlockedBy(AllItems.ELECTRON_TUBE::get)
             .viaShapeless(b -> b
-                    .requires(AllBlocks.SHAFT)
                     .requires(AllBlocks.ANDESITE_CASING)
-                    .requires(AllItems.ELECTRON_TUBE)
+                    .requires(AllBlocks.SHAFT)
                     .requires(AllItems.IRON_SHEET)
+                    .requires(AllItems.ELECTRON_TUBE)
             );
 
     GeneratedRecipe CENTRIFUGAL_CLUTCH = create(CCBlocks.CENTRIFUGAL_CLUTCH).unlockedBy(AllBlocks.SPEEDOMETER::get)
             .viaShapeless(b -> b
-                    .requires(AllBlocks.SHAFT)
                     .requires(AllBlocks.ANDESITE_CASING)
-                    .requires(AllBlocks.SPEEDOMETER)
+                    .requires(AllBlocks.SHAFT)
                     .requires(AllItems.IRON_SHEET)
+                    .requires(AllBlocks.SPEEDOMETER)
+            );
+
+    GeneratedRecipe FREEWHEEL_CLUTCH = create(CCBlocks.FREEWHEEL_CLUTCH).unlockedBy(AllBlocks.COGWHEEL::get)
+            .viaShapeless(b -> b
+                    .requires(AllBlocks.ANDESITE_CASING)
+                    .requires(AllBlocks.SHAFT)
+                    .requires(AllItems.IRON_SHEET)
+                    .requires(AllBlocks.COGWHEEL)
             );
 
     GeneratedRecipe BRAKE = create(CCBlocks.BRAKE).unlockedBy(Blocks.OBSIDIAN::asItem)
             .viaShapeless(b -> b
-                    .requires(AllBlocks.SHAFT)
                     .requires(AllBlocks.ANDESITE_CASING)
+                    .requires(AllBlocks.SHAFT)
                     .requires(Blocks.REDSTONE_WIRE)
                     .requires(Blocks.OBSIDIAN)
             );

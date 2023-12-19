@@ -9,13 +9,13 @@
       "item": "create:shaft"
     },
     {
-      "item": "minecraft:redstone"
+      "item": "create:iron_sheet"
     },
     {
-      "item": "minecraft:obsidian"
+      "item": "create:cogwheel"
     }
   ],
   "result": {
-    "item": "create_connected:brake"
+    "item": "create_connected:freewheel_clutch"
   }
 }
