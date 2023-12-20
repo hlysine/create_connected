@@ -15,7 +15,7 @@ public class ManualApplicationRecipeMixin {
     @Inject(
             method = "manualApplicationRecipesApplyInWorld(Lnet/minecraftforge/event/entity/player/PlayerInteractEvent$RightClickBlock;)V",
             at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;shrink(I)V"),
-            remap = false
+            remap = true
     )
     private static void craftingRemainingItemOnApplication(PlayerInteractEvent.RightClickBlock event, CallbackInfo info) {
         ItemStack heldItem = event.getItemStack();
