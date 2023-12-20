@@ -16,7 +16,6 @@ import com.hlysine.create_connected.content.shearpin.ShearPinBlockEntity;
 import com.hlysine.create_connected.content.sixwaygearbox.SixWayGearboxBlockEntity;
 import com.hlysine.create_connected.content.sixwaygearbox.SixWayGearboxInstance;
 import com.hlysine.create_connected.content.sixwaygearbox.SixWayGearboxRenderer;
-import com.simibubi.create.AllBlocks;
 import com.simibubi.create.content.kinetics.simpleRelays.BracketedKineticBlockEntityInstance;
 import com.simibubi.create.content.kinetics.simpleRelays.BracketedKineticBlockEntityRenderer;
 import com.simibubi.create.content.kinetics.simpleRelays.SimpleKineticBlockEntity;
@@ -26,8 +25,6 @@ import com.simibubi.create.content.kinetics.transmission.SplitShaftInstance;
 import com.simibubi.create.content.kinetics.transmission.SplitShaftRenderer;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
-
-import static com.simibubi.create.Create.REGISTRATE;
 
 public class CCBlockEntityTypes {
     private static final CreateRegistrate REGISTRATE = CreateConnected.getRegistrate();

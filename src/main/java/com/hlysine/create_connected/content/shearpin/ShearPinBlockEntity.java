@@ -1,13 +1,18 @@
 package com.hlysine.create_connected.content.shearpin;
 
 import com.hlysine.create_connected.CCBlocks;
+import com.hlysine.create_connected.datagen.advancements.AdvancementBehaviour;
+import com.hlysine.create_connected.datagen.advancements.CCAdvancements;
 import com.simibubi.create.content.kinetics.KineticNetwork;
 import com.simibubi.create.content.kinetics.base.IRotate;
 import com.simibubi.create.content.kinetics.simpleRelays.BracketedKineticBlockEntity;
+import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.ticks.TickPriority;
+
+import java.util.List;
 
 public class ShearPinBlockEntity extends BracketedKineticBlockEntity {
 
@@ -35,6 +40,12 @@ public class ShearPinBlockEntity extends BracketedKineticBlockEntity {
         super.onSpeedChanged(prevSpeed);
         KineticNetwork network = getOrCreateNetwork();
         updateFromNetwork(capacity, stress, network == null ? 0 : network.getSize());
+    }
+
+    @Override
+    public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
+        super.addBehaviours(behaviours);
+        AdvancementBehaviour.registerAwardables(this, behaviours, CCAdvancements.SHEAR_PIN);
     }
 }
 

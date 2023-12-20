@@ -1,6 +1,8 @@
 package com.hlysine.create_connected.content.overstressclutch;
 
 import com.hlysine.create_connected.CCBlockEntityTypes;
+import com.hlysine.create_connected.datagen.advancements.AdvancementBehaviour;
+import com.hlysine.create_connected.datagen.advancements.CCAdvancements;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.content.kinetics.RotationPropagator;
 import com.simibubi.create.content.kinetics.base.AbstractEncasedShaftBlock;
@@ -70,6 +72,7 @@ public class OverstressClutchBlock extends AbstractEncasedShaftBlock implements 
                 pLevel.setBlockAndUpdate(pPos, pState.setValue(STATE, ClutchState.UNCOUPLED));
                 RotationPropagator.handleRemoved(pLevel, pPos, kte);
                 RotationPropagator.handleAdded(pLevel, pPos, kte);
+                AdvancementBehaviour.tryAward(kte, CCAdvancements.OVERSTRESS_CLUTCH);
                 return;
             }
         }

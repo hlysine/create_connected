@@ -39,7 +39,23 @@ public class CCAdvancements implements DataProvider {
             .awardedForFree()
             .special(SILENT)),
 
-    OVERPOWERED_BRAKE = create("overpowered_brake", b -> b.icon(CCBlocks.BRAKE)
+    SHEAR_PIN = create("shear_pin", b -> b.icon(CCBlocks.SHEAR_PIN)
+            .title("Snap!")
+            .description("Blow a Shear Pin")
+            .after(ROOT)),
+
+    OVERSTRESS_CLUTCH = create("overstress_clutch", b -> b.icon(CCBlocks.OVERSTRESS_CLUTCH)
+            .title("Circuit Breaker")
+            .description("Trigger an Overstress Clutch")
+            .after(SHEAR_PIN)),
+
+    BRASS_GEARBOX = create("brass_gearbox", b -> b.icon(CCBlocks.BRASS_GEARBOX)
+            .title("Serious Organization")
+            .description("Place down a Brass Gearbox")
+            .whenBlockPlaced(CCBlocks.BRASS_GEARBOX.get())
+            .after(ROOT)),
+
+    OVERPOWERED_BRAKE = create("overpowered_brake_0", b -> b.icon(CCBlocks.BRAKE)
             .title("Overpowered")
             .description("Keep a network running at speed with a powered brake attached")
             .after(ROOT)

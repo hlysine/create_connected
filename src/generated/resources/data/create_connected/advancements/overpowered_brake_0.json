@@ -3,14 +3,14 @@
   "criteria": {
     "0": {
       "conditions": {},
-      "trigger": "create_connected:overpowered_brake_builtin"
+      "trigger": "create_connected:overpowered_brake_0_builtin"
     }
   },
   "display": {
     "announce_to_chat": true,
     "description": {
       "color": "#DBA213",
-      "translate": "advancement.create_connected.overpowered_brake.desc"
+      "translate": "advancement.create_connected.overpowered_brake_0.desc"
     },
     "frame": "goal",
     "hidden": true,
@@ -19,7 +19,7 @@
     },
     "show_toast": true,
     "title": {
-      "translate": "advancement.create_connected.overpowered_brake"
+      "translate": "advancement.create_connected.overpowered_brake_0"
     }
   },
   "requirements": [

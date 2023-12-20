@@ -3,6 +3,8 @@ package com.hlysine.create_connected.content.overstressclutch;
 import com.hlysine.create_connected.CCBlocks;
 import com.hlysine.create_connected.Lang;
 import com.hlysine.create_connected.content.overstressclutch.OverstressClutchBlock.ClutchState;
+import com.hlysine.create_connected.datagen.advancements.AdvancementBehaviour;
+import com.hlysine.create_connected.datagen.advancements.CCAdvancements;
 import com.simibubi.create.content.kinetics.KineticNetwork;
 import com.simibubi.create.content.kinetics.RotationPropagator;
 import com.simibubi.create.content.kinetics.base.IRotate;
@@ -42,6 +44,7 @@ public class OverstressClutchBlockEntity extends SplitShaftBlockEntity {
 
     @Override
     public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
+        AdvancementBehaviour.registerAwardables(this, behaviours, CCAdvancements.OVERSTRESS_CLUTCH);
         maxDelay = new TimeDelayScrollValueBehaviour(Components.translatable("create_connected.overstress_clutch.uncouple_delay"), this,
                 new CenteredSideValueBoxTransform((state, d) -> {
                     Direction.Axis axis = d.getAxis();
