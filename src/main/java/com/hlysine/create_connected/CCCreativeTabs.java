@@ -16,6 +16,7 @@ public class CCCreativeTabs {
             .withTabsBefore(AllCreativeModeTabs.PALETTES_CREATIVE_TAB.getKey())
             .icon(CCBlocks.PARALLEL_GEARBOX::asStack)
             .displayItems((params, output) -> {
+                output.accept(CCBlocks.ENCASED_CHAIN_COGWHEEL.asStack());
                 output.accept(CCBlocks.INVERTED_CLUTCH.asStack());
                 output.accept(CCBlocks.INVERTED_GEARSHIFT.asStack());
                 output.accept(CCBlocks.PARALLEL_GEARBOX.asStack());

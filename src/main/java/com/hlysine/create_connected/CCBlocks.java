@@ -4,6 +4,7 @@ import com.hlysine.create_connected.content.WrenchableBlock;
 import com.hlysine.create_connected.content.brake.BrakeBlock;
 import com.hlysine.create_connected.content.brassgearbox.BrassGearboxBlock;
 import com.hlysine.create_connected.content.centrifugalclutch.CentrifugalClutchBlock;
+import com.hlysine.create_connected.content.chaincogwheel.ChainCogwheelBlock;
 import com.hlysine.create_connected.content.copycat.*;
 import com.hlysine.create_connected.content.freewheelclutch.FreewheelClutchBlock;
 import com.hlysine.create_connected.content.invertedclutch.InvertedClutchBlock;
@@ -17,6 +18,8 @@ import com.simibubi.create.AllSpriteShifts;
 import com.simibubi.create.AllTags;
 import com.simibubi.create.content.decoration.encasing.EncasedCTBehaviour;
 import com.simibubi.create.content.kinetics.BlockStressDefaults;
+import com.simibubi.create.content.kinetics.chainDrive.ChainDriveBlock;
+import com.simibubi.create.content.kinetics.chainDrive.ChainDriveGenerator;
 import com.simibubi.create.content.kinetics.simpleRelays.BracketedKineticBlockModel;
 import com.simibubi.create.foundation.data.*;
 import com.tterrag.registrate.providers.DataGenContext;
@@ -32,6 +35,7 @@ import net.minecraftforge.client.model.generators.ModelFile;
 
 import java.util.function.Function;
 
+import static com.simibubi.create.Create.REGISTRATE;
 import static com.simibubi.create.foundation.data.AssetLookup.partialBaseModel;
 import static com.simibubi.create.foundation.data.BlockStateGen.axisBlock;
 import static com.simibubi.create.foundation.data.ModelGen.customItemModel;
@@ -41,6 +45,19 @@ import static com.simibubi.create.foundation.data.TagGen.pickaxeOnly;
 @SuppressWarnings("removal")
 public class CCBlocks {
     private static final CreateRegistrate REGISTRATE = CreateConnected.getRegistrate();
+
+    public static final BlockEntry<ChainCogwheelBlock> ENCASED_CHAIN_COGWHEEL =
+            REGISTRATE.block("encased_chain_cogwheel", ChainCogwheelBlock::new)
+                    .initialProperties(SharedProperties::stone)
+                    .properties(p -> p.noOcclusion().mapColor(MapColor.PODZOL))
+                    .addLayer(() -> RenderType::cutoutMipped)
+                    .transform(BlockStressDefaults.setNoImpact())
+                    .transform(axeOrPickaxe())
+                    .blockstate((c, p) -> new ChainDriveGenerator((state, suffix) -> p.models()
+                            .getExistingFile(p.modLoc("block/" + c.getName() + "/" + suffix))).generate(c, p))
+                    .item()
+                    .transform(customItemModel())
+                    .register();
 
     public static final BlockEntry<ParallelGearboxBlock> PARALLEL_GEARBOX = REGISTRATE.block("parallel_gearbox", ParallelGearboxBlock::new)
             .initialProperties(SharedProperties::stone)

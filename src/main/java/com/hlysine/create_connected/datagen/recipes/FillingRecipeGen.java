@@ -5,6 +5,7 @@ import com.simibubi.create.AllRecipeTypes;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.material.Fluids;
 
+@SuppressWarnings("unused")
 public class FillingRecipeGen extends ProcessingRecipeGen {
 
     GeneratedRecipe FAN_BLASTING_CATALYST = create("fan_blasting_catalyst", b -> b.require(Fluids.LAVA, 1000)

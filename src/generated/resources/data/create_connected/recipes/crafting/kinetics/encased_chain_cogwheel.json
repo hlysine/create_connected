@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "create:encased_chain_drive"
+    },
+    {
+      "item": "create:cogwheel"
+    }
+  ],
+  "result": {
+    "item": "create_connected:encased_chain_cogwheel"
+  }
+}

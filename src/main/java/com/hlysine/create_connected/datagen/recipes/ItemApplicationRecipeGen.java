@@ -8,6 +8,7 @@ import net.minecraft.world.level.ItemLike;
 
 import java.util.function.Supplier;
 
+@SuppressWarnings("unused")
 public class ItemApplicationRecipeGen extends ProcessingRecipeGen {
 
     GeneratedRecipe BLASTING_CATALYST = fanCatalystFromEmpty(

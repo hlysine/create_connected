@@ -39,6 +39,12 @@ import java.util.function.UnaryOperator;
 public class CCStandardRecipes extends CreateRecipeProvider {
     private final Marker KINETICS = enterFolder("kinetics");
 
+    GeneratedRecipe ENCASED_CHAIN_COGWHEEL = create(CCBlocks.ENCASED_CHAIN_COGWHEEL).unlockedBy(AllBlocks.ENCASED_CHAIN_DRIVE::get)
+            .viaShapeless(b -> b
+                    .requires(AllBlocks.ENCASED_CHAIN_DRIVE)
+                    .requires(AllBlocks.COGWHEEL)
+            );
+
     GeneratedRecipe INVERTED_CLUTCH_CYCLE =
             conversionCycle(ImmutableList.of(AllBlocks.CLUTCH, CCBlocks.INVERTED_CLUTCH));
 
