@@ -14,8 +14,13 @@ A Create mod add-on adding quality-of-life blocks that you wish existed in Creat
 
 ## Features
 
-- Item Attributes
-    - New attributes for the Attribute Filter designed for easy item sorting
+- New Item Attributes
+    - Item ID contains *word*
+    - Item has X max durability
+    - Item stacks to X
+- New Sequenced Gearshift Instructions
+    - Turn until new redstone pulse
+    - Turn for time
 - Inverted Clutch
     - A clutch that is uncoupled unless powered
 - Inverted Gearshift
@@ -27,22 +32,24 @@ A Create mod add-on adding quality-of-life blocks that you wish existed in Creat
       and bottom spins at half speed
 - Brass Gearbox
     - A gearbox where the rotation direction of all 4 sides are independently configurable
+- Shear Pin
+    - An early-game, single-use connector that breaks when the network is overstressed
+- Overstress Clutch
+    - A clutch that uncouples after a set delay when the network is overstressed. Can be reset with a wrench
 - Centrifugal Clutch
     - A clutch that is only coupled if the input RPM is faster than a configurable threshold
+- Freewheel Clutch
+    - A clutch that is only coupled if the input spins in the correct direction as configured
+- Brake
+    - A device that produces immense stress when powered, halting the network by overstressing it
+- Fan Blasting/Smoking/Washing/Haunting Catalysts
+    - A series of blocks that trap liquid/fire for safe and dedicated bulk processing
 - Copycat Slab
     - Slab-shaped copycat that has double slab variants and can also be placed vertically
 - Copycat Block
     - Clones a block while ignoring its placement rules (such as placing coral blocks above water)
 - Copycat Beam
     - A centered Copycat Step that can be oriented in all 3 axes with assisted placement like shafts
-- Overstress Clutch
-    - A clutch that uncouples after a set delay when the network is overstressed. Can be reset with a wrench
-- Shear Pin
-    - An early-game, single-use connector that breaks when the network is overstressed
-- Brake
-    - A device that produces immense stress when powered, halting the network by overstressing it
-- Fan Catalysts
-    - A series of blocks that trap liquid/fire for safe and dedicated bulk processing
 
 ## Download
 
