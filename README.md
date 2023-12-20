@@ -21,6 +21,8 @@ A Create mod add-on adding quality-of-life blocks that you wish existed in Creat
 - New Sequenced Gearshift Instructions
     - Turn until new redstone pulse
     - Turn for time
+- Encased Chain Cogwheel
+    - An encased chain drive with an additional cogwheel for connectivity
 - Inverted Clutch
     - A clutch that is uncoupled unless powered
 - Inverted Gearshift

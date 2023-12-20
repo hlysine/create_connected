@@ -28,6 +28,7 @@
   "block.create_connected.empty_fan_catalyst": "Empty Fan Catalyst",
   "block.create_connected.empty_fan_catalyst.tooltip.summary": "_Insert_ material to catalyze _fan processing_.",
   "block.create_connected.encased_chain_cogwheel": "Encased Chain Cogwheel",
+  "block.create_connected.encased_chain_cogwheel.tooltip.summary": "An _encased chain drive_ with an additional _cogwheel_ for connectivity.",
   "block.create_connected.fan_blasting_catalyst": "Fan Blasting Catalyst",
   "block.create_connected.fan_blasting_catalyst.tooltip.summary": "Dedicated _bulk blasting_ device. Content of the catalyst does not interact with the environment.",
   "block.create_connected.fan_haunting_catalyst": "Fan Haunting Catalyst",

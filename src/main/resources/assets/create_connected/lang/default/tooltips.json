@@ -1,4 +1,5 @@
 {
+  "block.create_connected.encased_chain_cogwheel.tooltip.summary": "An _encased chain drive_ with an additional _cogwheel_ for connectivity.",
   "block.create_connected.inverted_clutch.tooltip.summary": "A _clutch_ that is _uncoupled_ unless powered.",
   "block.create_connected.inverted_gearshift.tooltip.summary": "A _gearshift_ that changes rotation direction unless powered.",
   "block.create_connected.parallel_gearbox.tooltip.summary": "A gearbox with all 4 sides spinning in the _same direction_.",
