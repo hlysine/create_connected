@@ -55,8 +55,8 @@ A Create mod add-on adding quality-of-life blocks that you wish existed in Creat
 
 ## Download
 
-This mod is super early in development and THINGS WILL BREAK. Do NOT use this mod in your main worlds/servers at the
-moment.
+This mod is super early in development and THINGS WILL BREAK. You should NOT use this mod in your long-term 
+worlds/servers at the moment.
 
 Find this mod on [**Modrinth**](https://modrinth.com/mod/create-connected) or
 [**CurseForge**](https://legacy.curseforge.com/minecraft/mc-mods/create-connected).
@@ -66,6 +66,7 @@ Find this mod on [**Modrinth**](https://modrinth.com/mod/create-connected) or
 | Create | Create: Connected |
 |--------|-------------------|
 | 0.5.1e | 0.0.2             |
+| 0.5.1f | 0.0.3             |
 
 ## Usage
 
