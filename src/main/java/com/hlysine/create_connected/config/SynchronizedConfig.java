@@ -9,10 +9,8 @@ import net.minecraftforge.network.NetworkEvent;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.simple.SimpleChannel;
 
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 import java.util.function.Supplier;
 
 public record SynchronizedConfig(List<Pair<ResourceLocation, Boolean>> map) {

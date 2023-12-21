@@ -1,10 +1,8 @@
 package com.hlysine.create_connected.config;
 
-import com.hlysine.create_connected.mixin.CreativeModeTabsAccessor;
 import com.simibubi.create.foundation.config.ConfigBase;
 import com.simibubi.create.foundation.utility.Pair;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraftforge.common.ForgeConfigSpec;
 
 import java.util.HashMap;
@@ -23,9 +21,7 @@ public class CFeatures extends ConfigBase implements IsSynchronized {
 
     @Override
     public void registerAll(ForgeConfigSpec.Builder builder) {
-        FeatureToggle.TOGGLEABLE_FEATURES.forEach((r) -> {
-            getToggles().put(r, builder.define(r.getPath(), true));
-        });
+        FeatureToggle.TOGGLEABLE_FEATURES.forEach((r) -> getToggles().put(r, builder.define(r.getPath(), true)));
     }
 
     public boolean isEnabled(ResourceLocation key) {
@@ -42,19 +38,13 @@ public class CFeatures extends ConfigBase implements IsSynchronized {
     @Override
     public void onLoad() {
         super.onLoad();
-        refreshCreativeModeTab();
+        FeatureToggle.refreshItemVisibility();
     }
 
     @Override
     public void onReload() {
         super.onReload();
-        refreshCreativeModeTab();
-    }
-
-    private static void refreshCreativeModeTab() {
-        CreativeModeTab.ItemDisplayParameters cachedParameters = CreativeModeTabsAccessor.getCACHED_PARAMETERS();
-        if (cachedParameters != null)
-            CreativeModeTabsAccessor.callBuildAllTabContents(cachedParameters);
+        FeatureToggle.refreshItemVisibility();
     }
 
     public boolean hasToggle(ResourceLocation key) {
@@ -73,6 +63,6 @@ public class CFeatures extends ConfigBase implements IsSynchronized {
         for (Pair<ResourceLocation, Boolean> pair : map) {
             synchronizedToggles.put(pair.getFirst(), pair.getSecond());
         }
-        refreshCreativeModeTab();
+        FeatureToggle.refreshItemVisibility();
     }
 }

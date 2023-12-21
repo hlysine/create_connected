@@ -1,14 +1,22 @@
 package com.hlysine.create_connected.config;
 
+import com.hlysine.create_connected.CCCreativeTabs;
+import com.hlysine.create_connected.compat.CreateConnectedJEI;
+import com.hlysine.create_connected.compat.Mods;
+import com.hlysine.create_connected.mixin.CreativeModeTabsAccessor;
 import com.tterrag.registrate.builders.Builder;
 import com.tterrag.registrate.util.entry.BlockEntry;
+import com.tterrag.registrate.util.entry.ItemProviderEntry;
 import com.tterrag.registrate.util.nullness.NonNullUnaryOperator;
+import mezz.jei.api.constants.VanillaTypes;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.CreativeModeTab;
 
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class FeatureToggle {
     public static final Set<ResourceLocation> TOGGLEABLE_FEATURES = new HashSet<>();
@@ -55,5 +63,29 @@ public class FeatureToggle {
             if (dependency != null) return isEnabled(dependency);
         }
         return true;
+    }
+
+    static void refreshItemVisibility() {
+        CreativeModeTab.ItemDisplayParameters cachedParameters = CreativeModeTabsAccessor.getCACHED_PARAMETERS();
+        if (cachedParameters != null) {
+            CreativeModeTabsAccessor.callBuildAllTabContents(cachedParameters);
+        }
+        Mods.JEI.executeIfInstalled(() -> () -> {
+            if (CreateConnectedJEI.MANAGER != null) {
+                CreateConnectedJEI.MANAGER.removeIngredientsAtRuntime(
+                        VanillaTypes.ITEM_STACK,
+                        CCCreativeTabs.ITEMS.stream()
+                                .map(ItemProviderEntry::asStack)
+                                .collect(Collectors.toList())
+                );
+                CreateConnectedJEI.MANAGER.addIngredientsAtRuntime(
+                        VanillaTypes.ITEM_STACK,
+                        CCCreativeTabs.ITEMS.stream()
+                                .filter(x -> isEnabled(x.getId()))
+                                .map(ItemProviderEntry::asStack)
+                                .collect(Collectors.toList())
+                );
+            }
+        });
     }
 }
