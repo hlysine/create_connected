@@ -1,21 +1,35 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "category": "misc",
-  "ingredients": [
+  "type": "forge:conditional",
+  "recipes": [
     {
-      "item": "create:andesite_casing"
-    },
-    {
-      "item": "create:shaft"
-    },
-    {
-      "item": "create:iron_sheet"
-    },
-    {
-      "item": "create:electron_tube"
+      "conditions": [
+        {
+          "type": "create_connected:feature_enabled",
+          "feature": "create_connected:overstress_clutch",
+          "invert": false
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shapeless",
+        "category": "misc",
+        "ingredients": [
+          {
+            "item": "create:andesite_casing"
+          },
+          {
+            "item": "create:shaft"
+          },
+          {
+            "item": "create:iron_sheet"
+          },
+          {
+            "item": "create:electron_tube"
+          }
+        ],
+        "result": {
+          "item": "create_connected:overstress_clutch"
+        }
+      }
     }
-  ],
-  "result": {
-    "item": "create_connected:overstress_clutch"
-  }
+  ]
 }

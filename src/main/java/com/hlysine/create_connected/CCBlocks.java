@@ -1,5 +1,6 @@
 package com.hlysine.create_connected;
 
+import com.hlysine.create_connected.config.FeatureToggle;
 import com.hlysine.create_connected.content.WrenchableBlock;
 import com.hlysine.create_connected.content.brake.BrakeBlock;
 import com.hlysine.create_connected.content.brassgearbox.BrassGearboxBlock;
@@ -50,6 +51,7 @@ public class CCBlocks {
                     .properties(p -> p.noOcclusion().mapColor(MapColor.PODZOL))
                     .addLayer(() -> RenderType::cutoutMipped)
                     .transform(BlockStressDefaults.setNoImpact())
+                    .transform(FeatureToggle.register())
                     .transform(axeOrPickaxe())
                     .blockstate((c, p) -> new ChainDriveGenerator((state, suffix) -> p.models()
                             .getExistingFile(p.modLoc("block/" + c.getName() + "/" + suffix))).generate(c, p))
@@ -61,6 +63,7 @@ public class CCBlocks {
             .initialProperties(SharedProperties::stone)
             .properties(p -> p.noOcclusion().mapColor(MapColor.PODZOL))
             .transform(BlockStressDefaults.setNoImpact())
+            .transform(FeatureToggle.register())
             .transform(axeOrPickaxe())
             .onRegister(CreateRegistrate.connectedTextures(() -> new EncasedCTBehaviour(AllSpriteShifts.ANDESITE_CASING)))
             .onRegister(CreateRegistrate.casingConnectivity((block, cc) -> cc.make(block, AllSpriteShifts.ANDESITE_CASING,
@@ -75,6 +78,7 @@ public class CCBlocks {
             .properties(p -> p.noOcclusion().mapColor(MapColor.PODZOL))
             .addLayer(() -> RenderType::cutoutMipped)
             .transform(BlockStressDefaults.setNoImpact())
+            .transform(FeatureToggle.register())
             .transform(axeOrPickaxe())
             .lang("6-way Gearbox")
             .blockstate((c, p) -> axisBlock(c, p, $ -> partialBaseModel(c, p), false))
@@ -88,6 +92,7 @@ public class CCBlocks {
             .properties(p -> p.noOcclusion().mapColor(MapColor.PODZOL))
             .addLayer(() -> RenderType::cutoutMipped)
             .transform(BlockStressDefaults.setNoImpact())
+            .transform(FeatureToggle.register())
             .transform(axeOrPickaxe())
             .blockstate((c, p) -> BlockStateGen.axisBlock(c, p,
                     forBoolean(c, state -> state.getValue(OverstressClutchBlock.STATE) == OverstressClutchBlock.ClutchState.UNCOUPLED, "uncoupled", p)
@@ -101,6 +106,7 @@ public class CCBlocks {
             .initialProperties(SharedProperties::stone)
             .properties(p -> p.mapColor(MapColor.METAL).forceSolidOn())
             .transform(BlockStressDefaults.setNoImpact())
+            .transform(FeatureToggle.register())
             .transform(pickaxeOnly())
             .blockstate(BlockStateGen.axisBlockProvider(false))
             .onRegister(CreateRegistrate.blockModel(() -> BracketedKineticBlockModel::new))
@@ -112,6 +118,7 @@ public class CCBlocks {
             .properties(p -> p.noOcclusion().mapColor(MapColor.PODZOL))
             .addLayer(() -> RenderType::cutoutMipped)
             .transform(BlockStressDefaults.setNoImpact())
+            .transform(FeatureToggle.register())
             .transform(axeOrPickaxe())
             .blockstate((c, p) -> BlockStateGen.axisBlock(c, p, AssetLookup.forPowered(c, p)))
             .item()
@@ -123,6 +130,7 @@ public class CCBlocks {
             .properties(p -> p.noOcclusion().mapColor(MapColor.PODZOL))
             .addLayer(() -> RenderType::cutoutMipped)
             .transform(BlockStressDefaults.setNoImpact())
+            .transform(FeatureToggle.register())
             .transform(axeOrPickaxe())
             .blockstate((c, p) -> BlockStateGen.axisBlock(c, p, AssetLookup.forPowered(c, p)))
             .item()
@@ -135,6 +143,7 @@ public class CCBlocks {
             .properties(p -> p.noOcclusion().mapColor(MapColor.PODZOL))
             .addLayer(() -> RenderType::cutoutMipped)
             .transform(BlockStressDefaults.setNoImpact())
+            .transform(FeatureToggle.register())
             .transform(axeOrPickaxe())
             .blockstate((c, p) -> p.directionalBlock(c.get(), forBoolean(c, state -> state.getValue(CentrifugalClutchBlock.UNCOUPLED), "uncoupled", p)))
             .item()
@@ -147,6 +156,7 @@ public class CCBlocks {
             .properties(p -> p.noOcclusion().mapColor(MapColor.PODZOL))
             .addLayer(() -> RenderType::cutoutMipped)
             .transform(BlockStressDefaults.setNoImpact())
+            .transform(FeatureToggle.register())
             .transform(axeOrPickaxe())
             .blockstate((c, p) -> p.directionalBlock(c.get(), forBoolean(c, state -> state.getValue(FreewheelClutchBlock.UNCOUPLED), "uncoupled", p)))
             .item()
@@ -157,6 +167,7 @@ public class CCBlocks {
             .initialProperties(SharedProperties::stone)
             .properties(p -> p.noOcclusion().mapColor(MapColor.PODZOL))
             .transform(BlockStressDefaults.setNoImpact())
+            .transform(FeatureToggle.register())
             .transform(axeOrPickaxe())
             .onRegister(CreateRegistrate.connectedTextures(() -> new EncasedCTBehaviour(AllSpriteShifts.BRASS_CASING)))
             .onRegister(CreateRegistrate.casingConnectivity((block, cc) -> cc.make(block, AllSpriteShifts.BRASS_CASING,
@@ -171,6 +182,7 @@ public class CCBlocks {
             .properties(p -> p.noOcclusion().mapColor(MapColor.PODZOL))
             .addLayer(() -> RenderType::cutoutMipped)
             .transform(BlockStressDefaults.setImpact(16384))
+            .transform(FeatureToggle.register())
             .transform(axeOrPickaxe())
             .blockstate((c, p) -> BlockStateGen.axisBlock(c, p, AssetLookup.forPowered(c, p)))
             .item()
@@ -187,6 +199,7 @@ public class CCBlocks {
             )
             .addLayer(() -> RenderType::cutoutMipped)
             .transform(pickaxeOnly())
+            .transform(FeatureToggle.register())
             .blockstate((c, p) -> p.simpleBlock(c.getEntry(), AssetLookup.partialBaseModel(c, p)))
             .tag(AllTags.AllBlockTags.FAN_TRANSPARENT.tag)
             .item()
@@ -204,6 +217,7 @@ public class CCBlocks {
             )
             .addLayer(() -> RenderType::cutoutMipped)
             .transform(pickaxeOnly())
+            .transform(FeatureToggle.registerDependent(CCBlocks.EMPTY_FAN_CATALYST))
             .blockstate((c, p) -> p.simpleBlock(c.getEntry(), AssetLookup.partialBaseModel(c, p)))
             .tag(AllTags.AllBlockTags.FAN_TRANSPARENT.tag)
             .tag(AllTags.AllBlockTags.FAN_PROCESSING_CATALYSTS_BLASTING.tag)
@@ -222,6 +236,7 @@ public class CCBlocks {
             )
             .addLayer(() -> RenderType::cutoutMipped)
             .transform(pickaxeOnly())
+            .transform(FeatureToggle.registerDependent(CCBlocks.EMPTY_FAN_CATALYST))
             .blockstate((c, p) -> p.simpleBlock(c.getEntry(), AssetLookup.partialBaseModel(c, p)))
             .tag(AllTags.AllBlockTags.FAN_TRANSPARENT.tag)
             .tag(AllTags.AllBlockTags.FAN_PROCESSING_CATALYSTS_SMOKING.tag)
@@ -239,6 +254,7 @@ public class CCBlocks {
             )
             .addLayer(() -> RenderType::translucent)
             .transform(pickaxeOnly())
+            .transform(FeatureToggle.registerDependent(CCBlocks.EMPTY_FAN_CATALYST))
             .blockstate((c, p) -> p.simpleBlock(c.getEntry(), AssetLookup.partialBaseModel(c, p)))
             .color(() -> CCColorHandlers::waterBlockTint)
             .lang("Fan Washing Catalyst")
@@ -260,6 +276,7 @@ public class CCBlocks {
             )
             .addLayer(() -> RenderType::cutoutMipped)
             .transform(pickaxeOnly())
+            .transform(FeatureToggle.registerDependent(CCBlocks.EMPTY_FAN_CATALYST))
             .blockstate((c, p) -> p.simpleBlock(c.getEntry(), AssetLookup.partialBaseModel(c, p)))
             .tag(AllTags.AllBlockTags.FAN_TRANSPARENT.tag)
             .tag(AllTags.AllBlockTags.FAN_PROCESSING_CATALYSTS_HAUNTING.tag)
@@ -270,6 +287,7 @@ public class CCBlocks {
     public static final BlockEntry<CopycatSlabBlock> COPYCAT_SLAB =
             REGISTRATE.block("copycat_slab", CopycatSlabBlock::new)
                     .transform(BuilderTransformers.copycat())
+                    .transform(FeatureToggle.register())
                     .onRegister(CreateRegistrate.blockModel(() -> CopycatSlabModel::new))
                     .item()
                     .recipe((c, p) -> p.stonecutting(DataIngredient.tag(AllTags.forgeItemTag("ingots/zinc")),
@@ -280,6 +298,7 @@ public class CCBlocks {
     public static final BlockEntry<CopycatBlockBlock> COPYCAT_BLOCK =
             REGISTRATE.block("copycat_block", CopycatBlockBlock::new)
                     .transform(BuilderTransformers.copycat())
+                    .transform(FeatureToggle.register())
                     .onRegister(CreateRegistrate.blockModel(() -> CopycatBlockModel::new))
                     .item()
                     .recipe((c, p) -> p.stonecutting(DataIngredient.tag(AllTags.forgeItemTag("ingots/zinc")),
@@ -290,6 +309,7 @@ public class CCBlocks {
     public static final BlockEntry<CopycatBeamBlock> COPYCAT_BEAM =
             REGISTRATE.block("copycat_beam", CopycatBeamBlock::new)
                     .transform(BuilderTransformers.copycat())
+                    .transform(FeatureToggle.register())
                     .onRegister(CreateRegistrate.blockModel(() -> CopycatBeamModel::new))
                     .item()
                     .recipe((c, p) -> p.stonecutting(DataIngredient.tag(AllTags.forgeItemTag("ingots/zinc")),
@@ -300,6 +320,7 @@ public class CCBlocks {
     public static final BlockEntry<CopycatVerticalStepBlock> COPYCAT_VERTICAL_STEP =
             REGISTRATE.block("copycat_vertical_step", CopycatVerticalStepBlock::new)
                     .transform(BuilderTransformers.copycat())
+                    .transform(FeatureToggle.register())
                     .onRegister(CreateRegistrate.blockModel(() -> CopycatVerticalStepModel::new))
                     .item()
                     .recipe((c, p) -> p.stonecutting(DataIngredient.tag(AllTags.forgeItemTag("ingots/zinc")),

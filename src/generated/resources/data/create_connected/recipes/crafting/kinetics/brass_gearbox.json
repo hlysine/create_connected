@@ -1,21 +1,35 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "key": {
-    "c": {
-      "item": "create:cogwheel"
-    },
-    "s": {
-      "item": "create:rotation_speed_controller"
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "create_connected:feature_enabled",
+          "feature": "create_connected:brass_gearbox",
+          "invert": false
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "category": "misc",
+        "key": {
+          "c": {
+            "item": "create:cogwheel"
+          },
+          "s": {
+            "item": "create:rotation_speed_controller"
+          }
+        },
+        "pattern": [
+          " c ",
+          "csc",
+          " c "
+        ],
+        "result": {
+          "item": "create_connected:brass_gearbox"
+        },
+        "show_notification": true
+      }
     }
-  },
-  "pattern": [
-    " c ",
-    "csc",
-    " c "
-  ],
-  "result": {
-    "item": "create_connected:brass_gearbox"
-  },
-  "show_notification": true
+  ]
 }

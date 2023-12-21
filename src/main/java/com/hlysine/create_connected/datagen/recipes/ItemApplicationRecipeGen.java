@@ -23,6 +23,7 @@ public class ItemApplicationRecipeGen extends ProcessingRecipeGen {
     protected GeneratedRecipe fanCatalystFromEmpty(String type, Supplier<ItemLike> ingredient, Supplier<ItemLike> output) {
         return create(type + "_from_empty", b -> b.require(CCBlocks.EMPTY_FAN_CATALYST)
                 .require(ingredient.get())
+                .withCondition(new FeatureEnabledCondition(CCBlocks.EMPTY_FAN_CATALYST.getId()))
                 .output(output.get()));
     }
 

@@ -1,12 +1,31 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "category": "misc",
-  "ingredients": [
+  "type": "forge:conditional",
+  "recipes": [
     {
-      "item": "create_connected:brass_gearbox"
+      "conditions": [
+        {
+          "type": "create_connected:feature_enabled",
+          "feature": "create_connected:brass_gearbox",
+          "invert": false
+        },
+        {
+          "type": "create_connected:feature_enabled",
+          "feature": "create_connected:vertical_brass_gearbox",
+          "invert": false
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shapeless",
+        "category": "misc",
+        "ingredients": [
+          {
+            "item": "create_connected:brass_gearbox"
+          }
+        ],
+        "result": {
+          "item": "create_connected:vertical_brass_gearbox"
+        }
+      }
     }
-  ],
-  "result": {
-    "item": "create_connected:vertical_brass_gearbox"
-  }
+  ]
 }

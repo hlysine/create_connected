@@ -1,5 +1,12 @@
 {
   "type": "create:cutting",
+  "conditions": [
+    {
+      "type": "create_connected:feature_enabled",
+      "feature": "create_connected:shear_pin",
+      "invert": false
+    }
+  ],
   "ingredients": [
     {
       "item": "create:shaft"

@@ -9,6 +9,7 @@ import net.minecraft.data.PackOutput;
 public class CuttingRecipeGen extends ProcessingRecipeGen {
 
     GeneratedRecipe SHEAR_PIN = create(AllBlocks.SHAFT::get, b -> b.duration(200)
+            .withCondition(new FeatureEnabledCondition(CCBlocks.SHEAR_PIN.getId()))
             .output(CCBlocks.SHEAR_PIN.get()));
 
     public CuttingRecipeGen(PackOutput output) {

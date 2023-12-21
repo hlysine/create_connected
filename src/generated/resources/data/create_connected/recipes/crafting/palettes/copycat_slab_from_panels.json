@@ -1,17 +1,31 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "key": {
-    "p": {
-      "item": "create:copycat_panel"
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "create_connected:feature_enabled",
+          "feature": "create_connected:copycat_slab",
+          "invert": false
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "category": "misc",
+        "key": {
+          "p": {
+            "item": "create:copycat_panel"
+          }
+        },
+        "pattern": [
+          "p",
+          "p"
+        ],
+        "result": {
+          "item": "create_connected:copycat_slab"
+        },
+        "show_notification": true
+      }
     }
-  },
-  "pattern": [
-    "p",
-    "p"
-  ],
-  "result": {
-    "item": "create_connected:copycat_slab"
-  },
-  "show_notification": true
+  ]
 }

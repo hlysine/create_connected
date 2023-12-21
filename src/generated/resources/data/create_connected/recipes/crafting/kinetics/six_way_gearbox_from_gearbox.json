@@ -1,18 +1,32 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "category": "misc",
-  "ingredients": [
+  "type": "forge:conditional",
+  "recipes": [
     {
-      "item": "create:gearbox"
-    },
-    {
-      "item": "create:large_cogwheel"
-    },
-    {
-      "item": "create:large_cogwheel"
+      "conditions": [
+        {
+          "type": "create_connected:feature_enabled",
+          "feature": "create_connected:six_way_gearbox",
+          "invert": false
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shapeless",
+        "category": "misc",
+        "ingredients": [
+          {
+            "item": "create:gearbox"
+          },
+          {
+            "item": "create:large_cogwheel"
+          },
+          {
+            "item": "create:large_cogwheel"
+          }
+        ],
+        "result": {
+          "item": "create_connected:six_way_gearbox"
+        }
+      }
     }
-  ],
-  "result": {
-    "item": "create_connected:six_way_gearbox"
-  }
+  ]
 }

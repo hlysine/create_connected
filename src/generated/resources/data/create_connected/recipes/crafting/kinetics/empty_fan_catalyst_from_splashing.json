@@ -1,12 +1,26 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "category": "misc",
-  "ingredients": [
+  "type": "forge:conditional",
+  "recipes": [
     {
-      "item": "create_connected:fan_splashing_catalyst"
+      "conditions": [
+        {
+          "type": "create_connected:feature_enabled",
+          "feature": "create_connected:empty_fan_catalyst",
+          "invert": false
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shapeless",
+        "category": "misc",
+        "ingredients": [
+          {
+            "item": "create_connected:fan_splashing_catalyst"
+          }
+        ],
+        "result": {
+          "item": "create_connected:empty_fan_catalyst"
+        }
+      }
     }
-  ],
-  "result": {
-    "item": "create_connected:empty_fan_catalyst"
-  }
+  ]
 }

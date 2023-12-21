@@ -7,6 +7,7 @@
   "plugin": "com.hlysine.create_connected.mixin.MixinPlugin",
   "mixins": [
     "CopycatModelInvoker",
+    "CreativeModeTabsAccessor",
     "KineticBlockAdvancementMixin",
     "ManualApplicationRecipeMixin",
     "sequencedgearshift.InstructionAccessor",
