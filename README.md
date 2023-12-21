@@ -50,6 +50,8 @@ A Create mod add-on adding quality-of-life blocks that you wish existed in Creat
     - Slab-shaped copycat that has double slab variants and can also be placed vertically
 - Copycat Block
     - Clones a block while ignoring its placement rules (such as placing coral blocks above water)
+- Copycat Vertical Step
+    - A vertical Copycat Step with assisted placement like shafts
 - Copycat Beam
     - A centered Copycat Step that can be oriented in all 3 axes with assisted placement like shafts
 
@@ -66,7 +68,7 @@ Find this mod on [**Modrinth**](https://modrinth.com/mod/create-connected) or
 | Create | Create: Connected |
 |--------|-------------------|
 | 0.5.1e | 0.0.2             |
-| 0.5.1f | 0.0.3             |
+| 0.5.1f | 0.0.3, 0.0.4      |
 
 ## Usage
 
