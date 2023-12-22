@@ -12,6 +12,10 @@ A Create mod add-on adding quality-of-life blocks that you wish existed in Creat
 
 **Currently unstable. Use at your own risk!**
 
+## What's new in 0.0.5
+
+...
+
 ## Features
 
 - New Item Attributes
@@ -68,7 +72,7 @@ Find this mod on [**Modrinth**](https://modrinth.com/mod/create-connected) or
 | Create | Create: Connected |
 |--------|-------------------|
 | 0.5.1e | 0.0.2             |
-| 0.5.1f | 0.0.3, 0.0.4      |
+| 0.5.1f | 0.0.3 - 0.0.5     |
 
 ## Usage
 
