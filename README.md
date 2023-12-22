@@ -98,3 +98,11 @@ Find this mod on [**Modrinth**](https://modrinth.com/mod/create-connected) or
 
 This mod is open to suggestions, so if you have made any modification to the mod, please leave an issue/PR so I can
 consider adding your use case to the mod.
+
+## Credits
+
+**Translation**
+- [lollolcheese123](https://github.com/lollolcheese123) for Dutch translation
+
+**Inspiration**
+- The Create mod Discord server and subreddit
