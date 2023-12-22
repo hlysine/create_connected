@@ -14,7 +14,16 @@ A Create mod add-on adding quality-of-life blocks that you wish existed in Creat
 
 ## What's new in 0.0.5
 
-...
+A feature toggle system is added, allowing you to selectively disable blocks added by this mod without needing
+datapacks/CraftTweaker/KubeJS. When you disable a feature:
+
+- all related recipes are disabled, making the block unobtainable in survival (requires server reload to take effect)
+- the item is hidden in creative inventory and JEI (takes effect instantly)
+- existing blocks in the world are not affected, so existing machines won't break
+- a config sync system is in place so that the server's config overrides all clients.
+- datapacks are still respected, and will override the feature toggle unless the `feature_enabled` condition is included.
+
+![Feature Toggle System](https://cdn.modrinth.com/data/Vg5TIO6d/images/d74a9a1a353caee83b0d5dc69c60305a14699d3a.png)
 
 ## Features
 
@@ -61,7 +70,7 @@ A Create mod add-on adding quality-of-life blocks that you wish existed in Creat
 
 ## Download
 
-This mod is super early in development and THINGS WILL BREAK. You should NOT use this mod in your long-term 
+This mod is super early in development and THINGS WILL BREAK. You should NOT use this mod in your long-term
 worlds/servers at the moment.
 
 Find this mod on [**Modrinth**](https://modrinth.com/mod/create-connected) or
