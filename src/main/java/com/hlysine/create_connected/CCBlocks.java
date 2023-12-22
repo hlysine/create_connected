@@ -252,7 +252,6 @@ public class CCBlocks {
                     .noOcclusion()
                     .isRedstoneConductor((state, level, pos) -> false)
             )
-            .addLayer(() -> RenderType::translucent)
             .addLayer(() -> RenderType::cutoutMipped)
             .transform(pickaxeOnly())
             .transform(FeatureToggle.registerDependent(CCBlocks.EMPTY_FAN_CATALYST))
