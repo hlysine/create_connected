@@ -5,9 +5,10 @@ import com.simibubi.create.foundation.config.ConfigBase;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.PlayerEvent;
-import net.minecraftforge.network.NetworkDirection;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.network.NetworkEvent.Context;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.PacketDistributor;
@@ -130,14 +131,10 @@ public abstract class SyncConfigBase extends ConfigBase {
 
         void handle(Supplier<Context> context) {
             Context ctx = context.get();
-            ctx.enqueueWork(() -> {
-                if (ctx.getDirection() == NetworkDirection.PLAY_TO_CLIENT) {
-                    configInstance().setSyncConfig(nbt);
-                    CreateConnected.LOGGER.debug("Sync Config: Received and applied server config " + nbt.toString());
-                } else {
-                    CreateConnected.LOGGER.debug("Sync Config: Received server config of " + ctx.getDirection() + " " + nbt.toString());
-                }
-            });
+            ctx.enqueueWork(() -> DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
+                configInstance().setSyncConfig(nbt);
+                CreateConnected.LOGGER.debug("Sync Config: Received and applied server config " + nbt.toString());
+            }));
             ctx.setPacketHandled(true);
         }
     }

@@ -11,6 +11,10 @@ import com.tterrag.registrate.util.nullness.NonNullUnaryOperator;
 import mezz.jei.api.constants.VanillaTypes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.common.util.LogicalSidedProvider;
+import net.minecraftforge.fml.DistExecutor;
+import net.minecraftforge.fml.LogicalSide;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -66,26 +70,30 @@ public class FeatureToggle {
     }
 
     static void refreshItemVisibility() {
-        CreativeModeTab.ItemDisplayParameters cachedParameters = CreativeModeTabsAccessor.getCACHED_PARAMETERS();
-        if (cachedParameters != null) {
-            CreativeModeTabsAccessor.callBuildAllTabContents(cachedParameters);
-        }
-        Mods.JEI.executeIfInstalled(() -> () -> {
-            if (CreateConnectedJEI.MANAGER != null) {
-                CreateConnectedJEI.MANAGER.removeIngredientsAtRuntime(
-                        VanillaTypes.ITEM_STACK,
-                        CCCreativeTabs.ITEMS.stream()
-                                .map(ItemProviderEntry::asStack)
-                                .collect(Collectors.toList())
-                );
-                CreateConnectedJEI.MANAGER.addIngredientsAtRuntime(
-                        VanillaTypes.ITEM_STACK,
-                        CCCreativeTabs.ITEMS.stream()
-                                .filter(x -> isEnabled(x.getId()))
-                                .map(ItemProviderEntry::asStack)
-                                .collect(Collectors.toList())
-                );
-            }
-        });
+        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () ->
+                LogicalSidedProvider.WORKQUEUE.get(LogicalSide.CLIENT).submit(() -> {
+                    CreativeModeTab.ItemDisplayParameters cachedParameters = CreativeModeTabsAccessor.getCACHED_PARAMETERS();
+                    if (cachedParameters != null) {
+                        CreativeModeTabsAccessor.callBuildAllTabContents(cachedParameters);
+                    }
+                    Mods.JEI.executeIfInstalled(() -> () -> {
+                        if (CreateConnectedJEI.MANAGER != null) {
+                            CreateConnectedJEI.MANAGER.removeIngredientsAtRuntime(
+                                    VanillaTypes.ITEM_STACK,
+                                    CCCreativeTabs.ITEMS.stream()
+                                            .map(ItemProviderEntry::asStack)
+                                            .collect(Collectors.toList())
+                            );
+                            CreateConnectedJEI.MANAGER.addIngredientsAtRuntime(
+                                    VanillaTypes.ITEM_STACK,
+                                    CCCreativeTabs.ITEMS.stream()
+                                            .filter(x -> isEnabled(x.getId()))
+                                            .map(ItemProviderEntry::asStack)
+                                            .collect(Collectors.toList())
+                            );
+                        }
+                    });
+                })
+        );
     }
 }
