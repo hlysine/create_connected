@@ -1,27 +1,30 @@
 package com.hlysine.create_connected.config;
 
-import com.simibubi.create.foundation.config.ConfigBase;
-import com.simibubi.create.foundation.utility.Pair;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.ForgeConfigSpec;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-public class CFeatures extends ConfigBase implements IsSynchronized {
+public class CFeatures extends SyncConfigBase {
+
+    @Override
+    public String getName() {
+        return "features";
+    }
 
     final Map<ResourceLocation, ForgeConfigSpec.ConfigValue<Boolean>> toggles = new HashMap<>();
 
     Map<ResourceLocation, Boolean> synchronizedToggles;
 
-    public Map<ResourceLocation, ForgeConfigSpec.ConfigValue<Boolean>> getToggles() {
-        return toggles;
-    }
-
     @Override
     public void registerAll(ForgeConfigSpec.Builder builder) {
-        FeatureToggle.TOGGLEABLE_FEATURES.forEach((r) -> getToggles().put(r, builder.define(r.getPath(), true)));
+        FeatureToggle.TOGGLEABLE_FEATURES.forEach((r) -> toggles.put(r, builder.define(r.getPath(), true)));
+    }
+
+    public boolean hasToggle(ResourceLocation key) {
+        return (synchronizedToggles != null && synchronizedToggles.containsKey(key)) || toggles.containsKey(key);
     }
 
     public boolean isEnabled(ResourceLocation key) {
@@ -29,7 +32,7 @@ public class CFeatures extends ConfigBase implements IsSynchronized {
             Boolean synced = synchronizedToggles.get(key);
             if (synced != null) return synced;
         }
-        ForgeConfigSpec.ConfigValue<Boolean> value = getToggles().get(key);
+        ForgeConfigSpec.ConfigValue<Boolean> value = toggles.get(key);
         if (value != null)
             return value.get();
         return true;
@@ -47,22 +50,18 @@ public class CFeatures extends ConfigBase implements IsSynchronized {
         FeatureToggle.refreshItemVisibility();
     }
 
-    public boolean hasToggle(ResourceLocation key) {
-        return getToggles().containsKey(key);
-    }
-
     @Override
-    public String getName() {
-        return "features";
-    }
-
-    @Override
-    public void onReceiveConfig(SynchronizedConfig config) {
-        List<Pair<ResourceLocation, Boolean>> map = config.map();
+    protected void readSyncConfig(CompoundTag nbt) {
         synchronizedToggles = new HashMap<>();
-        for (Pair<ResourceLocation, Boolean> pair : map) {
-            synchronizedToggles.put(pair.getFirst(), pair.getSecond());
+        for (String key : nbt.getAllKeys()) {
+            ResourceLocation location = new ResourceLocation(key);
+            synchronizedToggles.put(location, nbt.getBoolean(key));
         }
         FeatureToggle.refreshItemVisibility();
+    }
+
+    @Override
+    protected void writeSyncConfig(CompoundTag nbt) {
+        toggles.forEach((key, value) -> nbt.putBoolean(key.toString(), value.get()));
     }
 }

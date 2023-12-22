@@ -1,8 +1,6 @@
 package com.hlysine.create_connected;
 
 import com.hlysine.create_connected.config.CCConfigs;
-import com.hlysine.create_connected.config.CCommon;
-import com.hlysine.create_connected.config.SynchronizedConfig;
 import com.hlysine.create_connected.datagen.CCDatagen;
 import com.hlysine.create_connected.datagen.advancements.CCAdvancements;
 import com.hlysine.create_connected.datagen.advancements.CCTriggers;
@@ -22,8 +20,6 @@ import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegisterEvent;
 import org.slf4j.Logger;
 
 // The value here should match an entry in the META-INF/mods.toml file
@@ -61,8 +57,7 @@ public class CreateConnected {
         CCCreativeTabs.register(modEventBus);
 
         CCConfigs.register(ModLoadingContext.get());
-        SynchronizedConfig.Network.register();
-        MinecraftForge.EVENT_BUS.addListener(CCommon::syncConfig);
+        CCConfigs.common().register();
 
         CCItemAttributes.register();
 

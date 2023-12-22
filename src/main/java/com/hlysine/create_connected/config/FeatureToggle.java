@@ -22,7 +22,7 @@ public class FeatureToggle {
     public static final Set<ResourceLocation> TOGGLEABLE_FEATURES = new HashSet<>();
     public static final Map<ResourceLocation, ResourceLocation> DEPENDENT_FEATURES = new HashMap<>();
 
-    public static void registerFeature(ResourceLocation key) {
+    public static void register(ResourceLocation key) {
         TOGGLEABLE_FEATURES.add(key);
     }
 
@@ -32,7 +32,7 @@ public class FeatureToggle {
 
     public static <R, T extends R, P, S extends Builder<R, T, P, S>> NonNullUnaryOperator<S> register() {
         return b -> {
-            registerFeature(new ResourceLocation(b.getOwner().getModid(), b.getName()));
+            register(new ResourceLocation(b.getOwner().getModid(), b.getName()));
             return b;
         };
     }
