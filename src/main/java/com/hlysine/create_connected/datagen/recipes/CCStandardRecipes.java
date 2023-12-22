@@ -9,8 +9,10 @@ import com.hlysine.create_connected.CCItems;
 import com.hlysine.create_connected.CreateConnected;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllItems;
+import com.simibubi.create.AllTags;
 import com.simibubi.create.foundation.data.recipe.CreateRecipeProvider;
 import com.simibubi.create.foundation.utility.RegisteredObjects;
+import com.tterrag.registrate.util.DataIngredient;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import com.tterrag.registrate.util.entry.ItemProviderEntry;
 import net.minecraft.advancements.critereon.ItemPredicate;
@@ -25,7 +27,6 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.SimpleCraftingRecipeSerializer;
 import net.minecraft.world.level.ItemLike;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.crafting.ConditionalRecipe;
 import net.minecraftforge.common.crafting.CraftingHelper;
@@ -162,6 +163,8 @@ public class CCStandardRecipes extends CreateRecipeProvider {
 
     private final Marker PALETTES = enterFolder("palettes");
 
+    GeneratedRecipe COPYCAT_SLAB = copycat(CCBlocks.COPYCAT_SLAB, 2);
+
     GeneratedRecipe COPYCAT_SLAB_FROM_PANELS = create(CCBlocks.COPYCAT_SLAB).withSuffix("_from_panels").unlockedBy(AllBlocks.COPYCAT_PANEL::get)
             .requiresResultFeature()
             .viaShaped(b -> b
@@ -185,6 +188,8 @@ public class CCStandardRecipes extends CreateRecipeProvider {
                     .pattern("ss")
             );
 
+    GeneratedRecipe COPYCAT_BLOCK = copycat(CCBlocks.COPYCAT_BLOCK, 1);
+
     GeneratedRecipe COPYCAT_BLOCK_FROM_SLABS = create(CCBlocks.COPYCAT_BLOCK).withSuffix("_from_slabs").unlockedBy(CCBlocks.COPYCAT_SLAB::get)
             .requiresResultFeature()
             .requiresFeature(CCBlocks.COPYCAT_SLAB)
@@ -194,8 +199,12 @@ public class CCStandardRecipes extends CreateRecipeProvider {
                     .pattern("s")
             );
 
+    GeneratedRecipe COPYCAT_BEAM = copycat(CCBlocks.COPYCAT_BEAM, 4);
+
     GeneratedRecipe COPYCAT_STEP_CYCLE =
             conversionCycle(ImmutableList.of(AllBlocks.COPYCAT_STEP, CCBlocks.COPYCAT_VERTICAL_STEP));
+
+    GeneratedRecipe COPYCAT_VERTICAL_STEP = copycat(CCBlocks.COPYCAT_VERTICAL_STEP, 4);
 
     String currentFolder = "";
 
@@ -247,6 +256,13 @@ public class CCStandardRecipes extends CreateRecipeProvider {
                 .viaShapeless(b -> b
                         .requires(from)
                 );
+    }
+
+    GeneratedRecipe copycat(ItemProviderEntry<? extends ItemLike> result, int resultCount) {
+        return create(result)
+                .unlockedBy(AllItems.ZINC_INGOT::get)
+                .requiresResultFeature()
+                .viaStonecutting(DataIngredient.tag(AllTags.forgeItemTag("ingots/zinc")), resultCount);
     }
 
     protected static class Marker {
@@ -356,6 +372,19 @@ public class CCStandardRecipes extends CreateRecipeProvider {
                     b.unlockedBy("has_item", inventoryTrigger(unlockedBy.get()));
                 b.save(consumer, createLocation("crafting"));
             });
+        }
+
+        GeneratedRecipe viaStonecutting(Ingredient ingredient, int resultCount) {
+            return handleConditions(consumer -> {
+                SingleItemRecipeBuilder b = SingleItemRecipeBuilder.stonecutting(ingredient, RecipeCategory.BUILDING_BLOCKS, result.get(), resultCount);
+                if (unlockedBy != null)
+                    b.unlockedBy("has_item", inventoryTrigger(unlockedBy.get()));
+                b.save(consumer, createLocation("crafting"));
+            });
+        }
+
+        GeneratedRecipe viaStonecutting(Ingredient ingredient) {
+            return viaStonecutting(ingredient, 1);
         }
 
         GeneratedRecipe viaNetheriteSmithing(Supplier<? extends Item> base, Supplier<Ingredient> upgradeMaterial) {

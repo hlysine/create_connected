@@ -24,10 +24,8 @@ import com.simibubi.create.content.kinetics.simpleRelays.BracketedKineticBlockMo
 import com.simibubi.create.foundation.data.*;
 import com.tterrag.registrate.providers.DataGenContext;
 import com.tterrag.registrate.providers.RegistrateBlockstateProvider;
-import com.tterrag.registrate.util.DataIngredient;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.MapColor;
@@ -290,8 +288,6 @@ public class CCBlocks {
                     .transform(FeatureToggle.register())
                     .onRegister(CreateRegistrate.blockModel(() -> CopycatSlabModel::new))
                     .item()
-                    .recipe((c, p) -> p.stonecutting(DataIngredient.tag(AllTags.forgeItemTag("ingots/zinc")),
-                            RecipeCategory.BUILDING_BLOCKS, c, 2))
                     .transform(customItemModel("copycat_base", "slab"))
                     .register();
 
@@ -301,8 +297,6 @@ public class CCBlocks {
                     .transform(FeatureToggle.register())
                     .onRegister(CreateRegistrate.blockModel(() -> CopycatBlockModel::new))
                     .item()
-                    .recipe((c, p) -> p.stonecutting(DataIngredient.tag(AllTags.forgeItemTag("ingots/zinc")),
-                            RecipeCategory.BUILDING_BLOCKS, c, 1))
                     .transform(customItemModel("copycat_base", "block"))
                     .register();
 
@@ -312,8 +306,6 @@ public class CCBlocks {
                     .transform(FeatureToggle.register())
                     .onRegister(CreateRegistrate.blockModel(() -> CopycatBeamModel::new))
                     .item()
-                    .recipe((c, p) -> p.stonecutting(DataIngredient.tag(AllTags.forgeItemTag("ingots/zinc")),
-                            RecipeCategory.BUILDING_BLOCKS, c, 4))
                     .transform(customItemModel("copycat_base", "beam"))
                     .register();
 
@@ -323,8 +315,6 @@ public class CCBlocks {
                     .transform(FeatureToggle.register())
                     .onRegister(CreateRegistrate.blockModel(() -> CopycatVerticalStepModel::new))
                     .item()
-                    .recipe((c, p) -> p.stonecutting(DataIngredient.tag(AllTags.forgeItemTag("ingots/zinc")),
-                            RecipeCategory.BUILDING_BLOCKS, c, 4))
                     .transform(customItemModel("copycat_base", "vertical_step"))
                     .register();
 
