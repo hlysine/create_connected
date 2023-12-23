@@ -28,7 +28,7 @@ import com.tterrag.registrate.util.entry.BlockEntry;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.client.model.generators.ModelFile;
 
 import java.util.function.Function;
@@ -46,7 +46,7 @@ public class CCBlocks {
     public static final BlockEntry<ChainCogwheelBlock> ENCASED_CHAIN_COGWHEEL =
             REGISTRATE.block("encased_chain_cogwheel", ChainCogwheelBlock::new)
                     .initialProperties(SharedProperties::stone)
-                    .properties(p -> p.noOcclusion().mapColor(MapColor.PODZOL))
+                    .properties(p -> p.noOcclusion().color(MaterialColor.PODZOL))
                     .addLayer(() -> RenderType::cutoutMipped)
                     .transform(BlockStressDefaults.setNoImpact())
                     .transform(FeatureToggle.register())
@@ -59,7 +59,7 @@ public class CCBlocks {
 
     public static final BlockEntry<ParallelGearboxBlock> PARALLEL_GEARBOX = REGISTRATE.block("parallel_gearbox", ParallelGearboxBlock::new)
             .initialProperties(SharedProperties::stone)
-            .properties(p -> p.noOcclusion().mapColor(MapColor.PODZOL))
+            .properties(p -> p.noOcclusion().color(MaterialColor.PODZOL))
             .transform(BlockStressDefaults.setNoImpact())
             .transform(FeatureToggle.register())
             .transform(axeOrPickaxe())
@@ -73,7 +73,7 @@ public class CCBlocks {
 
     public static final BlockEntry<SixWayGearboxBlock> SIX_WAY_GEARBOX = REGISTRATE.block("six_way_gearbox", SixWayGearboxBlock::new)
             .initialProperties(SharedProperties::stone)
-            .properties(p -> p.noOcclusion().mapColor(MapColor.PODZOL))
+            .properties(p -> p.noOcclusion().color(MaterialColor.PODZOL))
             .addLayer(() -> RenderType::cutoutMipped)
             .transform(BlockStressDefaults.setNoImpact())
             .transform(FeatureToggle.register())
@@ -87,7 +87,7 @@ public class CCBlocks {
 
     public static final BlockEntry<OverstressClutchBlock> OVERSTRESS_CLUTCH = REGISTRATE.block("overstress_clutch", OverstressClutchBlock::new)
             .initialProperties(SharedProperties::stone)
-            .properties(p -> p.noOcclusion().mapColor(MapColor.PODZOL))
+            .properties(p -> p.noOcclusion().color(MaterialColor.PODZOL))
             .addLayer(() -> RenderType::cutoutMipped)
             .transform(BlockStressDefaults.setNoImpact())
             .transform(FeatureToggle.register())
@@ -102,7 +102,7 @@ public class CCBlocks {
 
     public static final BlockEntry<ShearPinBlock> SHEAR_PIN = REGISTRATE.block("shear_pin", ShearPinBlock::new)
             .initialProperties(SharedProperties::stone)
-            .properties(p -> p.mapColor(MapColor.METAL).forceSolidOn())
+            .properties(p -> p.color(MaterialColor.METAL).forceSolidOn())
             .transform(BlockStressDefaults.setNoImpact())
             .transform(FeatureToggle.register())
             .transform(pickaxeOnly())
@@ -113,7 +113,7 @@ public class CCBlocks {
 
     public static final BlockEntry<InvertedClutchBlock> INVERTED_CLUTCH = REGISTRATE.block("inverted_clutch", InvertedClutchBlock::new)
             .initialProperties(SharedProperties::stone)
-            .properties(p -> p.noOcclusion().mapColor(MapColor.PODZOL))
+            .properties(p -> p.noOcclusion().color(MaterialColor.PODZOL))
             .addLayer(() -> RenderType::cutoutMipped)
             .transform(BlockStressDefaults.setNoImpact())
             .transform(FeatureToggle.register())
@@ -125,7 +125,7 @@ public class CCBlocks {
 
     public static final BlockEntry<InvertedGearshiftBlock> INVERTED_GEARSHIFT = REGISTRATE.block("inverted_gearshift", InvertedGearshiftBlock::new)
             .initialProperties(SharedProperties::stone)
-            .properties(p -> p.noOcclusion().mapColor(MapColor.PODZOL))
+            .properties(p -> p.noOcclusion().color(MaterialColor.PODZOL))
             .addLayer(() -> RenderType::cutoutMipped)
             .transform(BlockStressDefaults.setNoImpact())
             .transform(FeatureToggle.register())
@@ -138,7 +138,7 @@ public class CCBlocks {
 
     public static final BlockEntry<CentrifugalClutchBlock> CENTRIFUGAL_CLUTCH = REGISTRATE.block("centrifugal_clutch", CentrifugalClutchBlock::new)
             .initialProperties(SharedProperties::stone)
-            .properties(p -> p.noOcclusion().mapColor(MapColor.PODZOL))
+            .properties(p -> p.noOcclusion().color(MaterialColor.PODZOL))
             .addLayer(() -> RenderType::cutoutMipped)
             .transform(BlockStressDefaults.setNoImpact())
             .transform(FeatureToggle.register())
@@ -151,7 +151,7 @@ public class CCBlocks {
 
     public static final BlockEntry<FreewheelClutchBlock> FREEWHEEL_CLUTCH = REGISTRATE.block("freewheel_clutch", FreewheelClutchBlock::new)
             .initialProperties(SharedProperties::stone)
-            .properties(p -> p.noOcclusion().mapColor(MapColor.PODZOL))
+            .properties(p -> p.noOcclusion().color(MaterialColor.PODZOL))
             .addLayer(() -> RenderType::cutoutMipped)
             .transform(BlockStressDefaults.setNoImpact())
             .transform(FeatureToggle.register())
@@ -163,7 +163,7 @@ public class CCBlocks {
 
     public static final BlockEntry<BrassGearboxBlock> BRASS_GEARBOX = REGISTRATE.block("brass_gearbox", BrassGearboxBlock::new)
             .initialProperties(SharedProperties::stone)
-            .properties(p -> p.noOcclusion().mapColor(MapColor.PODZOL))
+            .properties(p -> p.noOcclusion().color(MaterialColor.PODZOL))
             .transform(BlockStressDefaults.setNoImpact())
             .transform(FeatureToggle.register())
             .transform(axeOrPickaxe())
@@ -177,7 +177,7 @@ public class CCBlocks {
 
     public static final BlockEntry<BrakeBlock> BRAKE = REGISTRATE.block("brake", BrakeBlock::new)
             .initialProperties(SharedProperties::stone)
-            .properties(p -> p.noOcclusion().mapColor(MapColor.PODZOL))
+            .properties(p -> p.noOcclusion().color(MaterialColor.PODZOL))
             .addLayer(() -> RenderType::cutoutMipped)
             .transform(BlockStressDefaults.setImpact(16384))
             .transform(FeatureToggle.register())
@@ -190,7 +190,7 @@ public class CCBlocks {
     public static final BlockEntry<WrenchableBlock> EMPTY_FAN_CATALYST = REGISTRATE.block("empty_fan_catalyst", WrenchableBlock::new)
             .initialProperties(() -> Blocks.IRON_BLOCK)
             .properties(p -> p
-                    .mapColor(MapColor.TERRACOTTA_YELLOW)
+                    .color(MaterialColor.TERRACOTTA_YELLOW)
                     .requiresCorrectToolForDrops()
                     .noOcclusion()
                     .isRedstoneConductor((state, level, pos) -> false)
@@ -207,7 +207,7 @@ public class CCBlocks {
     public static final BlockEntry<WrenchableBlock> FAN_BLASTING_CATALYST = REGISTRATE.block("fan_blasting_catalyst", WrenchableBlock::new)
             .initialProperties(() -> Blocks.IRON_BLOCK)
             .properties(p -> p
-                    .mapColor(MapColor.TERRACOTTA_YELLOW)
+                    .color(MaterialColor.TERRACOTTA_YELLOW)
                     .requiresCorrectToolForDrops()
                     .noOcclusion()
                     .lightLevel(s -> 10)
@@ -226,7 +226,7 @@ public class CCBlocks {
     public static final BlockEntry<WrenchableBlock> FAN_SMOKING_CATALYST = REGISTRATE.block("fan_smoking_catalyst", WrenchableBlock::new)
             .initialProperties(() -> Blocks.IRON_BLOCK)
             .properties(p -> p
-                    .mapColor(MapColor.TERRACOTTA_YELLOW)
+                    .color(MaterialColor.TERRACOTTA_YELLOW)
                     .requiresCorrectToolForDrops()
                     .noOcclusion()
                     .lightLevel(s -> 10)
@@ -245,7 +245,7 @@ public class CCBlocks {
     public static final BlockEntry<WrenchableBlock> FAN_SPLASHING_CATALYST = REGISTRATE.block("fan_splashing_catalyst", WrenchableBlock::new)
             .initialProperties(() -> Blocks.IRON_BLOCK)
             .properties(p -> p
-                    .mapColor(MapColor.TERRACOTTA_YELLOW)
+                    .color(MaterialColor.TERRACOTTA_YELLOW)
                     .requiresCorrectToolForDrops()
                     .noOcclusion()
                     .isRedstoneConductor((state, level, pos) -> false)
@@ -266,7 +266,7 @@ public class CCBlocks {
     public static final BlockEntry<WrenchableBlock> FAN_HAUNTING_CATALYST = REGISTRATE.block("fan_haunting_catalyst", WrenchableBlock::new)
             .initialProperties(() -> Blocks.IRON_BLOCK)
             .properties(p -> p
-                    .mapColor(MapColor.TERRACOTTA_YELLOW)
+                    .color(MaterialColor.TERRACOTTA_YELLOW)
                     .requiresCorrectToolForDrops()
                     .noOcclusion()
                     .lightLevel(s -> 5)
