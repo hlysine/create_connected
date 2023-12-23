@@ -1,10 +1,28 @@
 {
   "advancements": [
     {
+      "conditions": [
+        {
+          "feature": "create_connected:parallel_gearbox",
+          "invert": false,
+          "type": "create_connected:feature_enabled"
+        },
+        {
+          "feature": "create_connected:vertical_parallel_gearbox",
+          "invert": false,
+          "type": "create_connected:feature_enabled"
+        }
+      ],
       "advancement": {
         "parent": "minecraft:recipes/root",
+        "rewards": {
+          "recipes": [
+            "create_connected:crafting/kinetics/vertical_parallel_gearbox_from_conversion"
+          ]
+        },
         "criteria": {
           "has_item": {
+            "trigger": "minecraft:inventory_changed",
             "conditions": {
               "items": [
                 {
@@ -13,14 +31,13 @@
                   ]
                 }
               ]
-            },
-            "trigger": "minecraft:inventory_changed"
+            }
           },
           "has_the_recipe": {
+            "trigger": "minecraft:recipe_unlocked",
             "conditions": {
               "recipe": "create_connected:crafting/kinetics/vertical_parallel_gearbox_from_conversion"
-            },
-            "trigger": "minecraft:recipe_unlocked"
+            }
           }
         },
         "requirements": [
@@ -28,25 +45,8 @@
             "has_item",
             "has_the_recipe"
           ]
-        ],
-        "rewards": {
-          "recipes": [
-            "create_connected:crafting/kinetics/vertical_parallel_gearbox_from_conversion"
-          ]
-        }
-      },
-      "conditions": [
-        {
-          "type": "create_connected:feature_enabled",
-          "feature": "create_connected:parallel_gearbox",
-          "invert": false
-        },
-        {
-          "type": "create_connected:feature_enabled",
-          "feature": "create_connected:vertical_parallel_gearbox",
-          "invert": false
-        }
-      ]
+        ]
+      }
     }
   ]
 }

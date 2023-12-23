@@ -4,13 +4,18 @@
     {
       "conditions": [
         {
-          "type": "create_connected:feature_enabled",
           "feature": "create_connected:six_way_gearbox",
-          "invert": false
+          "invert": false,
+          "type": "create_connected:feature_enabled"
         }
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "lc ",
+          "csc",
+          " cl"
+        ],
         "key": {
           "c": {
             "item": "create:cogwheel"
@@ -22,11 +27,6 @@
             "item": "create:andesite_casing"
           }
         },
-        "pattern": [
-          "lc ",
-          "csc",
-          " cl"
-        ],
         "result": {
           "item": "create_connected:six_way_gearbox"
         }

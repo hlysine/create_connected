@@ -1,25 +1,25 @@
 {
   "parent": "create_connected:shear_pin",
-  "criteria": {
-    "0": {
-      "conditions": {},
-      "trigger": "create_connected:overstress_clutch_builtin"
-    }
-  },
   "display": {
-    "announce_to_chat": false,
+    "icon": {
+      "item": "create_connected:overstress_clutch"
+    },
+    "title": {
+      "translate": "advancement.create_connected.overstress_clutch"
+    },
     "description": {
       "color": "#DBA213",
       "translate": "advancement.create_connected.overstress_clutch.desc"
     },
     "frame": "task",
-    "hidden": false,
-    "icon": {
-      "item": "create_connected:overstress_clutch"
-    },
     "show_toast": true,
-    "title": {
-      "translate": "advancement.create_connected.overstress_clutch"
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "criteria": {
+    "0": {
+      "trigger": "create_connected:overstress_clutch_builtin",
+      "conditions": {}
     }
   },
   "requirements": [

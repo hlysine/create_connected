@@ -4,13 +4,18 @@
     {
       "conditions": [
         {
-          "type": "create_connected:feature_enabled",
           "feature": "create_connected:empty_fan_catalyst",
-          "invert": false
+          "invert": false,
+          "type": "create_connected:feature_enabled"
         }
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "bib",
+          "i i",
+          "bib"
+        ],
         "key": {
           "b": {
             "item": "create:brass_ingot"
@@ -19,11 +24,6 @@
             "item": "minecraft:iron_bars"
           }
         },
-        "pattern": [
-          "bib",
-          "i i",
-          "bib"
-        ],
         "result": {
           "item": "create_connected:empty_fan_catalyst"
         }

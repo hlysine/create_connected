@@ -1,4 +1,5 @@
 {
+  "replace": false,
   "values": [
     "create_connected:empty_fan_catalyst",
     "create_connected:fan_blasting_catalyst",

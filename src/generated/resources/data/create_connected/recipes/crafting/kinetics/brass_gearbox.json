@@ -4,13 +4,18 @@
     {
       "conditions": [
         {
-          "type": "create_connected:feature_enabled",
           "feature": "create_connected:brass_gearbox",
-          "invert": false
+          "invert": false,
+          "type": "create_connected:feature_enabled"
         }
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
+        "pattern": [
+          " c ",
+          "csc",
+          " c "
+        ],
         "key": {
           "c": {
             "item": "create:cogwheel"
@@ -19,11 +24,6 @@
             "item": "create:rotation_speed_controller"
           }
         },
-        "pattern": [
-          " c ",
-          "csc",
-          " c "
-        ],
         "result": {
           "item": "create_connected:brass_gearbox"
         }

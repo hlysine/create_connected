@@ -4,18 +4,18 @@
     {
       "conditions": [
         {
-          "type": "create_connected:feature_enabled",
           "feature": "create_connected:copycat_beam",
-          "invert": false
+          "invert": false,
+          "type": "create_connected:feature_enabled"
         }
       ],
       "recipe": {
         "type": "minecraft:stonecutting",
-        "count": 4,
         "ingredient": {
           "tag": "forge:ingots/zinc"
         },
-        "result": "create_connected:copycat_beam"
+        "result": "create_connected:copycat_beam",
+        "count": 4
       }
     }
   ]

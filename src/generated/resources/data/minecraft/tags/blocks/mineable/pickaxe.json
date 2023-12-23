@@ -1,4 +1,5 @@
 {
+  "replace": false,
   "values": [
     "create_connected:encased_chain_cogwheel",
     "create_connected:parallel_gearbox",

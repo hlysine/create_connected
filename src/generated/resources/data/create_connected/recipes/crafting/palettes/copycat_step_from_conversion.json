@@ -4,14 +4,14 @@
     {
       "conditions": [
         {
-          "type": "create_connected:feature_enabled",
           "feature": "create_connected:copycat_vertical_step",
-          "invert": false
+          "invert": false,
+          "type": "create_connected:feature_enabled"
         },
         {
-          "type": "create_connected:feature_enabled",
           "feature": "create:copycat_step",
-          "invert": false
+          "invert": false,
+          "type": "create_connected:feature_enabled"
         }
       ],
       "recipe": {
