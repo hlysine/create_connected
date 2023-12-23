@@ -5,14 +5,17 @@ import com.simibubi.create.content.kinetics.base.IRotate;
 import com.simibubi.create.foundation.utility.Iterate;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.NonNullList;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 
@@ -25,6 +28,10 @@ public class VerticalParallelGearboxItem extends BlockItem {
     @Override
     public String getDescriptionId() {
         return "item.create_connected.vertical_parallel_gearbox";
+    }
+
+    @Override
+    public void fillItemCategory(@NotNull CreativeModeTab pTab, @NotNull NonNullList<ItemStack> pStack) {
     }
 
     @Override

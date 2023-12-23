@@ -7,7 +7,9 @@ import com.simibubi.create.foundation.block.IBE;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Axis;
+import net.minecraft.core.NonNullList;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
@@ -25,6 +27,12 @@ public class SixWayGearboxBlock extends RotatedPillarKineticBlock implements IBE
 
     public SixWayGearboxBlock(Properties properties) {
         super(properties);
+    }
+
+    @Override
+    public void fillItemCategory(@NotNull CreativeModeTab group, @NotNull NonNullList<ItemStack> items) {
+        super.fillItemCategory(group, items);
+        items.add(CCItems.VERTICAL_SIX_WAY_GEARBOX.asStack());
     }
 
     @Override

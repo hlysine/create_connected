@@ -9,9 +9,11 @@ import com.simibubi.create.foundation.block.IBE;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Axis;
+import net.minecraft.core.NonNullList;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
@@ -55,6 +57,12 @@ public class BrassGearboxBlock extends RotatedPillarKineticBlock implements IBE<
         builder.add(FACE_2_FLIPPED);
         builder.add(FACE_3_FLIPPED);
         builder.add(FACE_4_FLIPPED);
+    }
+
+    @Override
+    public void fillItemCategory(@NotNull CreativeModeTab group, @NotNull NonNullList<ItemStack> items) {
+        super.fillItemCategory(group, items);
+        items.add(CCItems.VERTICAL_BRASS_GEARBOX.asStack());
     }
 
     @Override
