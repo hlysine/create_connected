@@ -83,7 +83,7 @@ Find this mod on [**Modrinth**](https://modrinth.com/mod/create-connected) or
 | Create | Create: Connected |
 |--------|-------------------|
 | 0.5.1e | 0.0.2             |
-| 0.5.1f | 0.0.3 - 0.0.5     |
+| 0.5.1f | 0.0.3 - latest    |
 
 ## Usage
 
