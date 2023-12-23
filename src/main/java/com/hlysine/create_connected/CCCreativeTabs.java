@@ -1,14 +1,16 @@
 package com.hlysine.create_connected;
 
+import com.hlysine.create_connected.config.FeatureToggle;
 import com.tterrag.registrate.util.entry.ItemProviderEntry;
 import net.minecraft.core.NonNullList;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
 public class CCCreativeTabs {
-    public static final CreativeModeTab MAIN  = new MainCreativeModeTab();
+    public static final CreativeModeTab MAIN = new MainCreativeModeTab();
 
     public static final List<ItemProviderEntry<?>> ITEMS = List.of(
             CCBlocks.ENCASED_CHAIN_COGWHEEL,
@@ -51,9 +53,10 @@ public class CCCreativeTabs {
         }
 
         @Override
-        public void fillItemList(NonNullList<ItemStack> pItems) {
+        public void fillItemList(@NotNull NonNullList<ItemStack> pItems) {
             for (ItemProviderEntry<?> item : ITEMS) {
-                item.get().asItem().fillItemCategory(this, pItems);
+                if (FeatureToggle.isEnabled(item.getId()))
+                    item.get().asItem().fillItemCategory(this, pItems);
             }
         }
     }
