@@ -3,8 +3,8 @@ package com.hlysine.create_connected.compat;
 import com.hlysine.create_connected.CreateConnected;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
-import mezz.jei.api.registration.IAdvancedRegistration;
 import mezz.jei.api.runtime.IIngredientManager;
+import mezz.jei.api.runtime.IJeiRuntime;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 
@@ -21,7 +21,7 @@ public class CreateConnectedJEI implements IModPlugin {
     }
 
     @Override
-    public void registerAdvanced(IAdvancedRegistration registration) {
-        MANAGER = registration.getJeiHelpers().getIngredientManager();
+    public void onRuntimeAvailable(IJeiRuntime jeiRuntime) {
+        MANAGER = jeiRuntime.getIngredientManager();
     }
 }
