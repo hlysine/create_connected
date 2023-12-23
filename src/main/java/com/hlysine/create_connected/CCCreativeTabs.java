@@ -44,7 +44,7 @@ public class CCCreativeTabs {
     public static class MainCreativeModeTab extends CreativeModeTab {
 
         public MainCreativeModeTab() {
-            super(CreateConnected.asResource("main").toString());
+            super(CreateConnected.MODID + ".main");
         }
 
         @Override
