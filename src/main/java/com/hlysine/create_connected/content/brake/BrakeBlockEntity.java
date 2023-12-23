@@ -7,6 +7,7 @@ import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.util.Mth;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
@@ -42,8 +43,9 @@ public class BrakeBlockEntity extends SplitShaftBlockEntity {
         super.tick();
 
         boolean powered = getBlockState().getValue(POWERED);
+        float absSpeed = Mth.abs(getSpeed());
         if (level.isClientSide()) {
-            if (powered && getSpeed() > 0) {
+            if (powered && absSpeed > 0) {
                 if (particleTimer-- < 0) {
                     particleTimer = PARTICLE_INTERVAL;
                     Vec3 loc = Vec3.atBottomCenterOf(getBlockPos());
@@ -51,7 +53,7 @@ public class BrakeBlockEntity extends SplitShaftBlockEntity {
                 }
             }
         } else {
-            if (powered && getSpeed() > MIN_ADVANCEMENT_SPEED && !advancementAwarded) {
+            if (powered && absSpeed > MIN_ADVANCEMENT_SPEED && !advancementAwarded) {
                 advancementAwarded = true;
                 AdvancementBehaviour.tryAward(this, CCAdvancements.OVERPOWERED_BRAKE);
             } else if (!powered) {

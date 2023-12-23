@@ -1,5 +1,6 @@
 package com.hlysine.create_connected.content.freewheelclutch;
 
+import com.hlysine.create_connected.CCBlocks;
 import com.hlysine.create_connected.content.ClutchValueBox;
 import com.simibubi.create.content.kinetics.KineticNetwork;
 import com.simibubi.create.content.kinetics.RotationPropagator;
@@ -12,6 +13,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.ticks.TickPriority;
 
 import java.util.List;
 
@@ -23,7 +25,7 @@ public class FreewheelClutchBlockEntity extends SplitShaftBlockEntity {
 
     protected ScrollOptionBehaviour<RotationDirection> movementDirection;
 
-    private boolean reattachNextTick = false;
+    public boolean reattachNextTick = false;
 
     public FreewheelClutchBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
@@ -60,7 +62,7 @@ public class FreewheelClutchBlockEntity extends SplitShaftBlockEntity {
         if (coupled != correctDirection) {
             if (level != null) {
                 level.setBlockAndUpdate(getBlockPos(), getBlockState().cycle(UNCOUPLED));
-                RotationPropagator.handleRemoved(level, getBlockPos(), this);
+                level.scheduleTick(getBlockPos(), CCBlocks.FREEWHEEL_CLUTCH.get(), 0, TickPriority.EXTREMELY_HIGH);
                 reattachNextTick = true;
             }
         }

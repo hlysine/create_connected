@@ -169,7 +169,7 @@ public class OverstressClutchBlockEntity extends SplitShaftBlockEntity {
         @Override
         public ValueSettingsBoard createBoard(Player player, BlockHitResult hitResult) {
             return new ValueSettingsBoard(label, 60, 10,
-                    Lang.translatedOptions("generic.unit", "ticks", "seconds", "minutes"),
+                    com.simibubi.create.foundation.utility.Lang.translatedOptions("generic.unit", "ticks", "seconds", "minutes"),
                     new ValueSettingsFormatter(this::formatSettings));
         }
 

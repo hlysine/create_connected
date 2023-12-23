@@ -92,7 +92,7 @@ public abstract class SyncConfigBase extends ConfigBase {
         syncToAllPlayers();
     }
 
-    private void syncToAllPlayers() {
+    public void syncToAllPlayers() {
         if (this.syncChannel == null) {
             return; // not sync root
         }

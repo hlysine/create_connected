@@ -1,5 +1,6 @@
 package com.hlysine.create_connected.content.centrifugalclutch;
 
+import com.hlysine.create_connected.CCBlocks;
 import com.hlysine.create_connected.Lang;
 import com.hlysine.create_connected.content.ClutchValueBox;
 import com.hlysine.create_connected.content.RotationScrollValueBehaviour;
@@ -13,6 +14,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.ticks.TickPriority;
 
 import java.util.List;
 
@@ -26,7 +28,7 @@ public class CentrifugalClutchBlockEntity extends SplitShaftBlockEntity {
 
     public ScrollValueBehaviour speedThreshold;
 
-    private boolean reattachNextTick = false;
+    public boolean reattachNextTick = false;
 
     public CentrifugalClutchBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
@@ -66,7 +68,7 @@ public class CentrifugalClutchBlockEntity extends SplitShaftBlockEntity {
         if (coupled != thresholdReached) {
             if (level != null) {
                 level.setBlockAndUpdate(getBlockPos(), getBlockState().cycle(UNCOUPLED));
-                RotationPropagator.handleRemoved(level, getBlockPos(), this);
+                level.scheduleTick(getBlockPos(), CCBlocks.CENTRIFUGAL_CLUTCH.get(), 0, TickPriority.EXTREMELY_HIGH);
                 reattachNextTick = true;
             }
         }
