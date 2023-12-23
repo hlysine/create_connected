@@ -2,19 +2,20 @@ package com.hlysine.create_connected.datagen.advancements;
 
 import com.google.common.collect.Sets;
 import com.hlysine.create_connected.CCBlocks;
+import com.mojang.logging.LogUtils;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.data.CachedOutput;
+import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
-import net.minecraft.data.PackOutput;
-import net.minecraft.data.PackOutput.PathProvider;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
+import org.slf4j.Logger;
 
+import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.CompletableFuture;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.UnaryOperator;
@@ -70,31 +71,41 @@ public class CCAdvancements implements DataProvider {
 
     // Datagen
 
-    private final PackOutput output;
+    private static final Logger LOGGER = LogUtils.getLogger();
+    private final DataGenerator generator;
 
-    public CCAdvancements(PackOutput output) {
-        this.output = output;
+    public CCAdvancements(DataGenerator generatorIn) {
+        this.generator = generatorIn;
     }
 
     @Override
-    public @NotNull CompletableFuture<?> run(@NotNull CachedOutput cache) {
-        PathProvider pathProvider = output.createPathProvider(PackOutput.Target.DATA_PACK, "advancements");
-        List<CompletableFuture<?>> futures = new ArrayList<>();
-
+    public void run(@NotNull CachedOutput cache) throws IOException {
+        Path path = this.generator.getOutputFolder();
         Set<ResourceLocation> set = Sets.newHashSet();
-        Consumer<Advancement> consumer = (advancement) -> {
-            ResourceLocation id = advancement.getId();
-            if (!set.add(id))
-                throw new IllegalStateException("Duplicate advancement " + id);
-            Path path = pathProvider.json(id);
-            futures.add(DataProvider.saveStable(cache, advancement.deconstruct()
-                    .serializeToJson(), path));
+        Consumer<Advancement> consumer = (p_204017_3_) -> {
+            if (!set.add(p_204017_3_.getId()))
+                throw new IllegalStateException("Duplicate advancement " + p_204017_3_.getId());
+
+            Path path1 = getPath(path, p_204017_3_);
+
+            try {
+                DataProvider.saveStable(cache, p_204017_3_.deconstruct()
+                        .serializeToJson(), path1);
+            } catch (IOException ioexception) {
+                LOGGER.error("Couldn't save advancement {}", path1, ioexception);
+            }
         };
 
         for (CCAdvancement advancement : ENTRIES)
             advancement.save(consumer);
+    }
 
-        return CompletableFuture.allOf(futures.toArray(CompletableFuture[]::new));
+    private static Path getPath(Path pathIn, Advancement advancementIn) {
+        return pathIn.resolve("data/" + advancementIn.getId()
+                .getNamespace() + "/advancements/"
+                + advancementIn.getId()
+                .getPath()
+                + ".json");
     }
 
     @Override
