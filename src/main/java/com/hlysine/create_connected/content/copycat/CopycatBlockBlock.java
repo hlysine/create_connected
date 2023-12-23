@@ -1,6 +1,5 @@
 package com.hlysine.create_connected.content.copycat;
 
-import com.simibubi.create.content.decoration.copycat.CopycatBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.BlockAndTintGetter;
@@ -11,7 +10,7 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 
-public class CopycatBlockBlock extends CopycatBlock {
+public class CopycatBlockBlock extends ShimCopycatBlock {
 
     public CopycatBlockBlock(Properties properties) {
         super(properties);

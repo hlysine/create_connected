@@ -2,7 +2,6 @@ package com.hlysine.create_connected.content.copycat;
 
 import com.hlysine.create_connected.CCBlocks;
 import com.hlysine.create_connected.CCShapes;
-import com.simibubi.create.content.decoration.copycat.WaterloggedCopycatBlock;
 import com.simibubi.create.foundation.placement.IPlacementHelper;
 import com.simibubi.create.foundation.placement.PlacementHelpers;
 import com.simibubi.create.foundation.placement.PoleHelper;
@@ -36,7 +35,7 @@ import java.util.function.Predicate;
 import static com.hlysine.create_connected.content.MathHelper.DirectionFromDelta;
 import static net.minecraft.core.Direction.Axis;
 
-public class CopycatBeamBlock extends WaterloggedCopycatBlock {
+public class CopycatBeamBlock extends ShimWaterloggedCopycatBlock {
 
     public static final EnumProperty<Axis> AXIS = BlockStateProperties.AXIS;
 
