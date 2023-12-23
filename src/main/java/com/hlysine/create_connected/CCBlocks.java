@@ -102,7 +102,7 @@ public class CCBlocks {
 
     public static final BlockEntry<ShearPinBlock> SHEAR_PIN = REGISTRATE.block("shear_pin", ShearPinBlock::new)
             .initialProperties(SharedProperties::stone)
-            .properties(p -> p.color(MaterialColor.METAL).forceSolidOn())
+            .properties(p -> p.color(MaterialColor.METAL))
             .transform(BlockStressDefaults.setNoImpact())
             .transform(FeatureToggle.register())
             .transform(pickaxeOnly())
