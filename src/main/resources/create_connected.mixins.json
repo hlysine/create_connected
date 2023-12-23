@@ -16,6 +16,7 @@
     "sequencedgearshift.SequencerInstructionsMixin"
   ],
   "client": [
+    "SubMenuConfigScreenMixin",
     "sequencedgearshift.SequencedGearshiftScreenMixin"
   ],
   "injectors": {
