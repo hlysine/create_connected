@@ -13,7 +13,7 @@ public class CCItems {
     private static final CreateRegistrate REGISTRATE = CreateConnected.getRegistrate();
 
     static {
-        REGISTRATE.setCreativeTab(CCCreativeTabs.MAIN);
+        REGISTRATE.creativeModeTab(() -> CCCreativeTabs.MAIN);
     }
 
     public static final ItemEntry<VerticalParallelGearboxItem> VERTICAL_PARALLEL_GEARBOX =
