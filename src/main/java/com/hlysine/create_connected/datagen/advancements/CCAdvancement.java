@@ -1,23 +1,13 @@
 package com.hlysine.create_connected.datagen.advancements;
 
-import java.util.function.BiConsumer;
-import java.util.function.Consumer;
-import java.util.function.UnaryOperator;
-
 import com.hlysine.create_connected.CreateConnected;
 import com.simibubi.create.Create;
 import com.simibubi.create.foundation.utility.Components;
 import com.tterrag.registrate.util.entry.ItemProviderEntry;
-
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.CriterionTriggerInstance;
 import net.minecraft.advancements.FrameType;
-import net.minecraft.advancements.critereon.EnchantmentPredicate;
-import net.minecraft.advancements.critereon.InventoryChangeTrigger;
-import net.minecraft.advancements.critereon.ItemPredicate;
-import net.minecraft.advancements.critereon.ItemUsedOnLocationTrigger;
-import net.minecraft.advancements.critereon.MinMaxBounds;
-import net.minecraft.advancements.critereon.NbtPredicate;
+import net.minecraft.advancements.critereon.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.TagKey;
@@ -26,6 +16,10 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
+
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
+import java.util.function.UnaryOperator;
 
 public class CCAdvancement implements Awardable {
 
@@ -171,7 +165,7 @@ public class CCAdvancement implements Awardable {
         }
 
         CCAdvancement.Builder whenBlockPlaced(Block block) {
-            return externalTrigger(ItemUsedOnLocationTrigger.TriggerInstance.placedBlock(block));
+            return externalTrigger(PlacedBlockTrigger.TriggerInstance.placedBlock(block));
         }
 
         CCAdvancement.Builder whenIconCollected() {

@@ -1,18 +1,16 @@
 package com.hlysine.create_connected.datagen.advancements;
 
-import java.util.List;
-import java.util.function.Supplier;
+import com.google.gson.JsonObject;
+import net.minecraft.MethodsReturnNonnullByDefault;
+import net.minecraft.advancements.critereon.DeserializationContext;
+import net.minecraft.advancements.critereon.EntityPredicate;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
-
-import com.google.gson.JsonObject;
-
-import net.minecraft.MethodsReturnNonnullByDefault;
-import net.minecraft.advancements.critereon.ContextAwarePredicate;
-import net.minecraft.advancements.critereon.DeserializationContext;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerPlayer;
+import java.util.List;
+import java.util.function.Supplier;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
@@ -38,7 +36,7 @@ public class SimpleCCTrigger extends CriterionTriggerBase<SimpleCCTrigger.Instan
     public static class Instance extends CriterionTriggerBase.Instance {
 
         public Instance(ResourceLocation idIn) {
-            super(idIn, ContextAwarePredicate.ANY);
+            super(idIn, EntityPredicate.Composite.ANY);
         }
 
         @Override
