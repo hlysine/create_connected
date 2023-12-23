@@ -5,6 +5,26 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.1.0 - 2023-12-23
+
+### Added
+
+- **Support for Minecraft 1.19.2 and 1.18.2**
+- Dutch translation (thanks @lollolcheese123)
+
+### Changed
+
+- Freewheel/Centrifugal Clutch no longer uncouple when the network is overstressed
+
+### Fixed
+
+- Copycat stonecutting recipes not being disabled by feature toggle
+- Feature toggles not applied instantly when changed via Create's config GUI
+- Brake not emitting smoke if spinning in the opposite direction
+- Missing translations in the value panel of Overstress Clutch
+- Crash due to concurrent modification when an Overstress Clutch and a Freewheel/Centrifugal Clutch are on the same
+  network
+
 ## 0.0.5 - 2023-12-22
 
 ### Added
@@ -30,11 +50,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - New instructions for Sequenced Gearshift
-  - Turn until new redstone pulse
-  - Turn for time
+    - Turn until new redstone pulse
+    - Turn for time
 - New item attributes for attribute filter
-  - Max durability
-  - Max stack size
+    - Max durability
+    - Max stack size
 - Encased chain cogwheel
 - Freewheel Clutch
 - Copycat Vertical Step
