@@ -9,14 +9,11 @@ import com.hlysine.create_connected.datagen.recipes.ProcessingRecipeGen;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.foundation.utility.FilesHelper;
 import com.tterrag.registrate.providers.ProviderType;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.PackOutput;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.data.event.GatherDataEvent;
 
 import java.util.Map.Entry;
-import java.util.concurrent.CompletableFuture;
 import java.util.function.BiConsumer;
 
 public class CCDatagen {
@@ -27,14 +24,12 @@ public class CCDatagen {
         addExtraRegistrateData();
 
         DataGenerator generator = event.getGenerator();
-        PackOutput output = generator.getPackOutput();
-        CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
         ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
 
         if (event.includeServer()) {
-            generator.addProvider(true, new CCAdvancements(output));
-            generator.addProvider(true, new CCStandardRecipes(output));
-            ProcessingRecipeGen.registerAll(generator, output);
+            generator.addProvider(true, new CCAdvancements(generator));
+            generator.addProvider(true, new CCStandardRecipes(generator));
+            ProcessingRecipeGen.registerAll(generator);
         }
     }
 
