@@ -33,8 +33,7 @@
           "recipes": [
             "create_connected:crafting/kinetics/empty_fan_catalyst_from_haunting"
           ]
-        },
-        "sends_telemetry_event": false
+        }
       },
       "conditions": [
         {

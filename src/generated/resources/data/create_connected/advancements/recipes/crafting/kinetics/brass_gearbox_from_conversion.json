@@ -33,8 +33,7 @@
           "recipes": [
             "create_connected:crafting/kinetics/brass_gearbox_from_conversion"
           ]
-        },
-        "sends_telemetry_event": false
+        }
       },
       "conditions": [
         {

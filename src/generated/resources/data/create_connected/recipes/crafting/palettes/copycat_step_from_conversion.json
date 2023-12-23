@@ -16,7 +16,6 @@
       ],
       "recipe": {
         "type": "minecraft:crafting_shapeless",
-        "category": "misc",
         "ingredients": [
           {
             "item": "create_connected:copycat_vertical_step"
