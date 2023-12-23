@@ -89,10 +89,16 @@ public class CopycatBeamBlock extends WaterloggedCopycatBlock {
         if (diff.equals(Vec3i.ZERO)) {
             return true;
         }
-        Direction face = Direction.fromDelta(diff.getX(), diff.getY(), diff.getZ());
-        if (face == null) {
+
+        Vec3i normal = new Vec3i(diff.getX(), diff.getY(), diff.getZ());
+        int count = 0;
+        if (normal.getX() != 0) count++;
+        if (normal.getY() != 0) count++;
+        if (normal.getZ() != 0) count++;
+        if (count != 1) {
             return false;
         }
+        Direction face = Direction.getNearest(diff.getX(), diff.getY(), diff.getZ());
 
         if (toState.is(this)) {
             return toState.getValue(AXIS) == axis && face.getAxis() == axis;
