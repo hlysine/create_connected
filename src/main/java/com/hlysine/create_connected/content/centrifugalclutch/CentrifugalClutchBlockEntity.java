@@ -65,7 +65,7 @@ public class CentrifugalClutchBlockEntity extends SplitShaftBlockEntity {
 
         boolean coupled = !getBlockState().getValue(UNCOUPLED);
         boolean thresholdReached = Mth.abs(getSpeed()) >= Mth.abs(speedThreshold.getValue()) && Mth.abs(getSpeed()) > 0;
-        if (coupled != thresholdReached) {
+        if (coupled != thresholdReached && !isOverStressed()) {
             if (level != null) {
                 level.setBlockAndUpdate(getBlockPos(), getBlockState().cycle(UNCOUPLED));
                 level.scheduleTick(getBlockPos(), CCBlocks.CENTRIFUGAL_CLUTCH.get(), 0, TickPriority.EXTREMELY_HIGH);
