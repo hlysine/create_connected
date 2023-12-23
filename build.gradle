@@ -272,7 +272,7 @@ wrapper {
 
 publishMods {
     changelog = "Check out the detailed changelog at https://github.com/hlysine/create_connected/blob/main/CHANGELOG.md"
-    type = ALPHA
+    type = BETA
     file = jar.archiveFile
     modLoaders.add("forge")
 
@@ -285,7 +285,7 @@ publishMods {
     modrinth {
         accessToken = secrets.MODRINTH_TOKEN
         projectId = "Vg5TIO6d"
-        minecraftVersions.add("1.20.1")
+        minecraftVersions.add(minecraft_version)
 
         requires {
             id = "LNytGWDc"
@@ -298,6 +298,6 @@ publishMods {
     curseforge {
         accessToken = secrets.CURSEFORGE_TOKEN
         projectId = "947914"
-        minecraftVersions.add("1.20.1")
+        minecraftVersions.add(minecraft_version)
     }
 }
