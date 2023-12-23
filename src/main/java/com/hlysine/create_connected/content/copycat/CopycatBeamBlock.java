@@ -33,6 +33,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Predicate;
 
+import static com.hlysine.create_connected.content.MathHelper.DirectionFromDelta;
 import static net.minecraft.core.Direction.Axis;
 
 public class CopycatBeamBlock extends WaterloggedCopycatBlock {
@@ -90,15 +91,10 @@ public class CopycatBeamBlock extends WaterloggedCopycatBlock {
             return true;
         }
 
-        Vec3i normal = new Vec3i(diff.getX(), diff.getY(), diff.getZ());
-        int count = 0;
-        if (normal.getX() != 0) count++;
-        if (normal.getY() != 0) count++;
-        if (normal.getZ() != 0) count++;
-        if (count != 1) {
+        Direction face = DirectionFromDelta(diff.getX(), diff.getY(), diff.getZ());
+        if (face == null) {
             return false;
         }
-        Direction face = Direction.getNearest(diff.getX(), diff.getY(), diff.getZ());
 
         if (toState.is(this)) {
             return toState.getValue(AXIS) == axis && face.getAxis() == axis;
