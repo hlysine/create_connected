@@ -10,16 +10,15 @@ import com.simibubi.create.foundation.utility.RegisteredObjects;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
-import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.fluids.FluidType;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
 import java.util.function.Supplier;
 import java.util.function.UnaryOperator;
 
@@ -30,10 +29,10 @@ public abstract class ProcessingRecipeGen extends CreateRecipeProvider {
     protected static final int BUCKET = FluidType.BUCKET_VOLUME;
     protected static final int BOTTLE = 250;
 
-    public static void registerAll(DataGenerator gen, PackOutput output) {
-        GENERATORS.add(new CuttingRecipeGen(output));
-        GENERATORS.add(new ItemApplicationRecipeGen(output));
-        GENERATORS.add(new FillingRecipeGen(output));
+    public static void registerAll(DataGenerator gen) {
+        GENERATORS.add(new CuttingRecipeGen(gen));
+        GENERATORS.add(new ItemApplicationRecipeGen(gen));
+        GENERATORS.add(new FillingRecipeGen(gen));
 
         gen.addProvider(true, new DataProvider() {
 
@@ -43,15 +42,19 @@ public abstract class ProcessingRecipeGen extends CreateRecipeProvider {
             }
 
             @Override
-            public @NotNull CompletableFuture<?> run(@NotNull CachedOutput dc) {
-                return CompletableFuture.allOf(GENERATORS.stream()
-                        .map(gen -> gen.run(dc))
-                        .toArray(CompletableFuture[]::new));
+            public void run(@NotNull CachedOutput dc) throws IOException {
+                GENERATORS.forEach(g -> {
+                    try {
+                        g.run(dc);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                });
             }
         });
     }
 
-    public ProcessingRecipeGen(PackOutput generator) {
+    public ProcessingRecipeGen(DataGenerator generator) {
         super(generator);
     }
 
