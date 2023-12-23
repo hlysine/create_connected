@@ -1,12 +1,14 @@
 package com.hlysine.create_connected.datagen.advancements;
 
 import com.google.common.collect.Sets;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.hlysine.create_connected.CCBlocks;
 import com.mojang.logging.LogUtils;
 import net.minecraft.advancements.Advancement;
-import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
+import net.minecraft.data.HashCache;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
@@ -72,6 +74,8 @@ public class CCAdvancements implements DataProvider {
     // Datagen
 
     private static final Logger LOGGER = LogUtils.getLogger();
+    private static final Gson GSON = new GsonBuilder().setPrettyPrinting()
+            .create();
     private final DataGenerator generator;
 
     public CCAdvancements(DataGenerator generatorIn) {
@@ -79,7 +83,7 @@ public class CCAdvancements implements DataProvider {
     }
 
     @Override
-    public void run(@NotNull CachedOutput cache) throws IOException {
+    public void run(@NotNull HashCache cache) throws IOException {
         Path path = this.generator.getOutputFolder();
         Set<ResourceLocation> set = Sets.newHashSet();
         Consumer<Advancement> consumer = (p_204017_3_) -> {
@@ -89,7 +93,7 @@ public class CCAdvancements implements DataProvider {
             Path path1 = getPath(path, p_204017_3_);
 
             try {
-                DataProvider.saveStable(cache, p_204017_3_.deconstruct()
+                DataProvider.save(GSON, cache, p_204017_3_.deconstruct()
                         .serializeToJson(), path1);
             } catch (IOException ioexception) {
                 LOGGER.error("Couldn't save advancement {}", path1, ioexception);

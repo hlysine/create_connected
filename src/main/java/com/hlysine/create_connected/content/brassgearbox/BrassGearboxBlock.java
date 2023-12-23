@@ -31,6 +31,7 @@ import net.minecraft.world.phys.HitResult;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class BrassGearboxBlock extends RotatedPillarKineticBlock implements IBE<BrassGearboxBlockEntity> {
@@ -138,7 +139,7 @@ public class BrassGearboxBlock extends RotatedPillarKineticBlock implements IBE<
         return CCBlockEntityTypes.BRASS_GEARBOX.get();
     }
 
-    private static final List<Direction> DIRECTIONS = Direction.stream().toList();
+    private static final List<Direction> DIRECTIONS = Arrays.stream(Direction.values()).toList();
 
     public static int getFaceId(Direction face, Axis blockAxis) {
         List<Direction> directions = new ArrayList<>(DIRECTIONS);

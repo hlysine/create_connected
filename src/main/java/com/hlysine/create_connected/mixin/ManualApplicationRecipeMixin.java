@@ -2,6 +2,7 @@ package com.hlysine.create_connected.mixin;
 
 import com.simibubi.create.content.kinetics.deployer.ManualApplicationRecipe;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -19,9 +20,11 @@ public class ManualApplicationRecipeMixin {
     )
     private static void craftingRemainingItemOnApplication(PlayerInteractEvent.RightClickBlock event, CallbackInfo info) {
         ItemStack heldItem = event.getItemStack();
-        Player player = event.getEntity();
+        Entity entity = event.getEntity();
+        if (!(entity instanceof Player player))
+            return;
         InteractionHand hand = event.getHand();
-        ItemStack leftover = heldItem.hasCraftingRemainingItem() ? heldItem.getCraftingRemainingItem() : ItemStack.EMPTY;
+        ItemStack leftover = heldItem.hasContainerItem() ? heldItem.getContainerItem() : ItemStack.EMPTY;
 
         heldItem.shrink(1);
 

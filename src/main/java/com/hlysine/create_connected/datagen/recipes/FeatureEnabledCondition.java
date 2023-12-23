@@ -27,8 +27,9 @@ public class FeatureEnabledCondition implements ICondition {
         return NAME;
     }
 
+    @SuppressWarnings("removal")
     @Override
-    public boolean test(IContext context) {
+    public boolean test() {
         return FeatureToggle.isEnabled(feature) != invert;
     }
 

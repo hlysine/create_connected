@@ -13,6 +13,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.util.LogicalSidedProvider;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.LogicalSide;
+import net.minecraftforge.registries.IForgeRegistryEntry;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -32,21 +33,21 @@ public class FeatureToggle {
         DEPENDENT_FEATURES.put(key, dependency);
     }
 
-    public static <R, T extends R, P, S extends Builder<R, T, P, S>> NonNullUnaryOperator<S> register() {
+    public static <R extends IForgeRegistryEntry<R>, T extends R, P, S extends Builder<R, T, P, S>> NonNullUnaryOperator<S> register() {
         return b -> {
             register(new ResourceLocation(b.getOwner().getModid(), b.getName()));
             return b;
         };
     }
 
-    public static <R, T extends R, P, S extends Builder<R, T, P, S>> NonNullUnaryOperator<S> registerDependent(ResourceLocation dependency) {
+    public static <R extends IForgeRegistryEntry<R>, T extends R, P, S extends Builder<R, T, P, S>> NonNullUnaryOperator<S> registerDependent(ResourceLocation dependency) {
         return b -> {
             registerDependent(new ResourceLocation(b.getOwner().getModid(), b.getName()), dependency);
             return b;
         };
     }
 
-    public static <R, T extends R, P, S extends Builder<R, T, P, S>> NonNullUnaryOperator<S> registerDependent(BlockEntry<?> dependency) {
+    public static <R extends IForgeRegistryEntry<R>, T extends R, P, S extends Builder<R, T, P, S>> NonNullUnaryOperator<S> registerDependent(BlockEntry<?> dependency) {
         return b -> {
             registerDependent(new ResourceLocation(b.getOwner().getModid(), b.getName()), dependency.getId());
             return b;

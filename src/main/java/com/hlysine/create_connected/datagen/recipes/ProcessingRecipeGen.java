@@ -7,13 +7,13 @@ import com.simibubi.create.content.processing.recipe.ProcessingRecipeSerializer;
 import com.simibubi.create.foundation.data.recipe.CreateRecipeProvider;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 import com.simibubi.create.foundation.utility.RegisteredObjects;
-import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
+import net.minecraft.data.HashCache;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
-import net.minecraftforge.fluids.FluidType;
+import net.minecraftforge.fluids.FluidAttributes;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -26,7 +26,7 @@ import java.util.function.UnaryOperator;
 public abstract class ProcessingRecipeGen extends CreateRecipeProvider {
 
     protected static final List<ProcessingRecipeGen> GENERATORS = new ArrayList<>();
-    protected static final int BUCKET = FluidType.BUCKET_VOLUME;
+    protected static final int BUCKET = FluidAttributes.BUCKET_VOLUME;
     protected static final int BOTTLE = 250;
 
     public static void registerAll(DataGenerator gen) {
@@ -34,7 +34,7 @@ public abstract class ProcessingRecipeGen extends CreateRecipeProvider {
         GENERATORS.add(new ItemApplicationRecipeGen(gen));
         GENERATORS.add(new FillingRecipeGen(gen));
 
-        gen.addProvider(true, new DataProvider() {
+        gen.addProvider(new DataProvider() {
 
             @Override
             public @NotNull String getName() {
@@ -42,7 +42,7 @@ public abstract class ProcessingRecipeGen extends CreateRecipeProvider {
             }
 
             @Override
-            public void run(@NotNull CachedOutput dc) throws IOException {
+            public void run(@NotNull HashCache dc) throws IOException {
                 GENERATORS.forEach(g -> {
                     try {
                         g.run(dc);

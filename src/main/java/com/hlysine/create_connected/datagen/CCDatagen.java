@@ -11,7 +11,7 @@ import com.simibubi.create.foundation.utility.FilesHelper;
 import com.tterrag.registrate.providers.ProviderType;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.data.event.GatherDataEvent;
+import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
 
 import java.util.Map.Entry;
 import java.util.function.BiConsumer;
@@ -27,8 +27,8 @@ public class CCDatagen {
         ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
 
         if (event.includeServer()) {
-            generator.addProvider(true, new CCAdvancements(generator));
-            generator.addProvider(true, new CCStandardRecipes(generator));
+            generator.addProvider(new CCAdvancements(generator));
+            generator.addProvider(new CCStandardRecipes(generator));
             ProcessingRecipeGen.registerAll(generator);
         }
     }

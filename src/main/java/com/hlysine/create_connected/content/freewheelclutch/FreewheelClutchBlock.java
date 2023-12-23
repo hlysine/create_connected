@@ -9,7 +9,6 @@ import com.simibubi.create.foundation.block.IBE;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -18,6 +17,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Random;
 
 public class FreewheelClutchBlock extends DirectionalKineticBlock implements IBE<FreewheelClutchBlockEntity> {
 
@@ -56,7 +57,7 @@ public class FreewheelClutchBlock extends DirectionalKineticBlock implements IBE
 
     @SuppressWarnings("deprecation")
     @Override
-    public void tick(@NotNull BlockState pState, @NotNull ServerLevel pLevel, @NotNull BlockPos pPos, @NotNull RandomSource pRandom) {
+    public void tick(@NotNull BlockState pState, @NotNull ServerLevel pLevel, @NotNull BlockPos pPos, @NotNull Random pRandom) {
         BlockEntity be = pLevel.getBlockEntity(pPos);
         if (!(be instanceof FreewheelClutchBlockEntity kte))
             return;
