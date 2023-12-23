@@ -59,7 +59,7 @@ public class FreewheelClutchBlockEntity extends SplitShaftBlockEntity {
 
         boolean coupled = !getBlockState().getValue(UNCOUPLED);
         boolean correctDirection = Mth.sign(getSpeed()) == (movementDirection.getValue() * 2 - 1);
-        if (coupled != correctDirection) {
+        if (coupled != correctDirection && !isOverStressed()) {
             if (level != null) {
                 level.setBlockAndUpdate(getBlockPos(), getBlockState().cycle(UNCOUPLED));
                 level.scheduleTick(getBlockPos(), CCBlocks.FREEWHEEL_CLUTCH.get(), 0, TickPriority.EXTREMELY_HIGH);
