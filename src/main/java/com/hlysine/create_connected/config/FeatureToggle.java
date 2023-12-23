@@ -3,14 +3,12 @@ package com.hlysine.create_connected.config;
 import com.hlysine.create_connected.CCCreativeTabs;
 import com.hlysine.create_connected.compat.CreateConnectedJEI;
 import com.hlysine.create_connected.compat.Mods;
-import com.hlysine.create_connected.mixin.CreativeModeTabsAccessor;
 import com.tterrag.registrate.builders.Builder;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import com.tterrag.registrate.util.entry.ItemProviderEntry;
 import com.tterrag.registrate.util.nullness.NonNullUnaryOperator;
 import mezz.jei.api.constants.VanillaTypes;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.util.LogicalSidedProvider;
 import net.minecraftforge.fml.DistExecutor;
@@ -72,10 +70,6 @@ public class FeatureToggle {
     static void refreshItemVisibility() {
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () ->
                 LogicalSidedProvider.WORKQUEUE.get(LogicalSide.CLIENT).submit(() -> {
-                    CreativeModeTab.ItemDisplayParameters cachedParameters = CreativeModeTabsAccessor.getCACHED_PARAMETERS();
-                    if (cachedParameters != null) {
-                        CreativeModeTabsAccessor.callBuildAllTabContents(cachedParameters);
-                    }
                     Mods.JEI.executeIfInstalled(() -> () -> {
                         if (CreateConnectedJEI.MANAGER != null) {
                             CreateConnectedJEI.MANAGER.removeIngredientsAtRuntime(
