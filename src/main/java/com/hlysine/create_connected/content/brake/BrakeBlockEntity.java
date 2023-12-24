@@ -1,5 +1,6 @@
 package com.hlysine.create_connected.content.brake;
 
+import com.hlysine.create_connected.config.CCConfigs;
 import com.hlysine.create_connected.datagen.advancements.AdvancementBehaviour;
 import com.hlysine.create_connected.datagen.advancements.CCAdvancements;
 import com.simibubi.create.content.kinetics.transmission.SplitShaftBlockEntity;
@@ -35,7 +36,13 @@ public class BrakeBlockEntity extends SplitShaftBlockEntity {
 
     @Override
     public float calculateStressApplied() {
-        return getBlockState().getValue(POWERED) ? super.calculateStressApplied() : 0;
+        if (!getBlockState().getValue(POWERED)) {
+            return super.calculateStressApplied();
+        } else {
+            float impact = CCConfigs.server().brakeActiveStress.getF();
+            this.lastStressApplied = impact;
+            return impact;
+        }
     }
 
     @Override
