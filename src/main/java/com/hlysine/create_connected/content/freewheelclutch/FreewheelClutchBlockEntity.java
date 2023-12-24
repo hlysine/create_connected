@@ -2,7 +2,6 @@ package com.hlysine.create_connected.content.freewheelclutch;
 
 import com.hlysine.create_connected.CCBlocks;
 import com.hlysine.create_connected.content.ClutchValueBox;
-import com.simibubi.create.content.kinetics.KineticNetwork;
 import com.simibubi.create.content.kinetics.RotationPropagator;
 import com.simibubi.create.content.kinetics.transmission.SplitShaftBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
@@ -38,25 +37,17 @@ public class FreewheelClutchBlockEntity extends SplitShaftBlockEntity {
                 Lang.translateDirect("contraptions.windmill.rotation_direction"),
                 this,
                 new ClutchValueBox());
-        movementDirection.withCallback(i -> this.onDirectionChanged());
+        movementDirection.withCallback(i -> this.onKineticUpdate());
         behaviours.add(movementDirection);
     }
 
     @Override
     public void initialize() {
-        onDirectionChanged();
+        onKineticUpdate();
         super.initialize();
     }
 
-    private void onDirectionChanged() {
-        KineticNetwork network = getOrCreateNetwork();
-        updateFromNetwork(capacity, stress, network == null ? 0 : network.getSize());
-    }
-
-    @Override
-    public void updateFromNetwork(float maxStress, float currentStress, int networkSize) {
-        super.updateFromNetwork(maxStress, currentStress, networkSize);
-
+    private void onKineticUpdate() {
         boolean coupled = !getBlockState().getValue(UNCOUPLED);
         boolean correctDirection = Mth.sign(getSpeed()) == (movementDirection.getValue() * 2 - 1);
         if (coupled != correctDirection && !isOverStressed()) {
@@ -69,10 +60,9 @@ public class FreewheelClutchBlockEntity extends SplitShaftBlockEntity {
     }
 
     @Override
-    public void onSpeedChanged(float prevSpeed) {
-        super.onSpeedChanged(prevSpeed);
-        KineticNetwork network = getOrCreateNetwork();
-        updateFromNetwork(capacity, stress, network == null ? 0 : network.getSize());
+    public void updateFromNetwork(float maxStress, float currentStress, int networkSize) {
+        super.updateFromNetwork(maxStress, currentStress, networkSize);
+        onKineticUpdate();
     }
 
     @Override

@@ -44,25 +44,17 @@ public class CentrifugalClutchBlockEntity extends SplitShaftBlockEntity {
         );
         speedThreshold.between(0, MAX_SPEED);
         speedThreshold.value = DEFAULT_SPEED;
-        speedThreshold.withCallback(i -> this.updateThreshold());
+        speedThreshold.withCallback(i -> this.onKineticUpdate());
         behaviours.add(speedThreshold);
     }
 
     @Override
     public void initialize() {
-        updateThreshold();
+        onKineticUpdate();
         super.initialize();
     }
 
-    private void updateThreshold() {
-        KineticNetwork network = getOrCreateNetwork();
-        updateFromNetwork(capacity, stress, network == null ? 0 : network.getSize());
-    }
-
-    @Override
-    public void updateFromNetwork(float maxStress, float currentStress, int networkSize) {
-        super.updateFromNetwork(maxStress, currentStress, networkSize);
-
+    private void onKineticUpdate() {
         boolean coupled = !getBlockState().getValue(UNCOUPLED);
         boolean thresholdReached = Mth.abs(getSpeed()) >= Mth.abs(speedThreshold.getValue()) && Mth.abs(getSpeed()) > 0;
         if (coupled != thresholdReached && !isOverStressed()) {
@@ -75,10 +67,9 @@ public class CentrifugalClutchBlockEntity extends SplitShaftBlockEntity {
     }
 
     @Override
-    public void onSpeedChanged(float prevSpeed) {
-        super.onSpeedChanged(prevSpeed);
-        KineticNetwork network = getOrCreateNetwork();
-        updateFromNetwork(capacity, stress, network == null ? 0 : network.getSize());
+    public void updateFromNetwork(float maxStress, float currentStress, int networkSize) {
+        super.updateFromNetwork(maxStress, currentStress, networkSize);
+        onKineticUpdate();
     }
 
     @Override
