@@ -1,8 +1,10 @@
 package com.hlysine.create_connected.content.brake;
 
+import com.hlysine.create_connected.CCBlocks;
 import com.hlysine.create_connected.config.CCConfigs;
 import com.hlysine.create_connected.datagen.advancements.AdvancementBehaviour;
 import com.hlysine.create_connected.datagen.advancements.CCAdvancements;
+import com.simibubi.create.content.kinetics.BlockStressValues;
 import com.simibubi.create.content.kinetics.transmission.SplitShaftBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import net.minecraft.core.BlockPos;
@@ -19,9 +21,9 @@ import static com.hlysine.create_connected.content.brake.BrakeBlock.POWERED;
 
 public class BrakeBlockEntity extends SplitShaftBlockEntity {
 
-    private static final int PARTICLE_INTERVAL = 2;
+    private static final int TICK_INTERVAL = 3;
     private static final float MIN_ADVANCEMENT_SPEED = 8;
-    private int particleTimer = 0;
+    private int tickTimer = 0;
     private boolean advancementAwarded = false;
 
 
@@ -49,22 +51,28 @@ public class BrakeBlockEntity extends SplitShaftBlockEntity {
     public void tick() {
         super.tick();
 
-        boolean powered = getBlockState().getValue(POWERED);
-        float absSpeed = Mth.abs(getSpeed());
-        if (level.isClientSide()) {
-            if (powered && absSpeed > 0) {
-                if (particleTimer-- < 0) {
-                    particleTimer = PARTICLE_INTERVAL;
+        if (tickTimer-- < 0) {
+            tickTimer = TICK_INTERVAL;
+
+            double unpoweredStress = BlockStressValues.getImpact(CCBlocks.BRAKE.get());
+            double poweredStress = CCConfigs.server().brakeActiveStress.get();
+            boolean isBraking = getBlockState().getValue(POWERED) == (poweredStress >= unpoweredStress);
+            if (unpoweredStress == poweredStress) {
+                isBraking = unpoweredStress > 0;
+            }
+            float absSpeed = Mth.abs(getSpeed());
+            if (level.isClientSide()) {
+                if (isBraking && absSpeed > 0) {
                     Vec3 loc = Vec3.atBottomCenterOf(getBlockPos());
                     level.addParticle(ParticleTypes.LARGE_SMOKE, false, loc.x, loc.y + 0.5, loc.z, 0, 0.05, 0);
                 }
-            }
-        } else {
-            if (powered && absSpeed > MIN_ADVANCEMENT_SPEED && !advancementAwarded) {
-                advancementAwarded = true;
-                AdvancementBehaviour.tryAward(this, CCAdvancements.OVERPOWERED_BRAKE);
-            } else if (!powered) {
-                advancementAwarded = false;
+            } else {
+                if (isBraking && absSpeed > MIN_ADVANCEMENT_SPEED && !advancementAwarded) {
+                    advancementAwarded = true;
+                    AdvancementBehaviour.tryAward(this, CCAdvancements.OVERPOWERED_BRAKE);
+                } else if (!isBraking) {
+                    advancementAwarded = false;
+                }
             }
         }
     }
