@@ -7,13 +7,10 @@ import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.content.logistics.vault.ItemVaultBlock;
 import com.simibubi.create.foundation.block.IBE;
 import com.simibubi.create.foundation.item.ItemHelper;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;

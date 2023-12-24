@@ -24,15 +24,11 @@ import com.simibubi.create.content.decoration.encasing.EncasedCTBehaviour;
 import com.simibubi.create.content.kinetics.BlockStressDefaults;
 import com.simibubi.create.content.kinetics.chainDrive.ChainDriveGenerator;
 import com.simibubi.create.content.kinetics.simpleRelays.BracketedKineticBlockModel;
-import com.simibubi.create.content.logistics.vault.ItemVaultBlock;
-import com.simibubi.create.content.logistics.vault.ItemVaultCTBehaviour;
-import com.simibubi.create.content.logistics.vault.ItemVaultItem;
 import com.simibubi.create.foundation.data.*;
 import com.tterrag.registrate.providers.DataGenContext;
 import com.tterrag.registrate.providers.RegistrateBlockstateProvider;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -42,7 +38,6 @@ import net.minecraftforge.client.model.generators.ModelFile;
 
 import java.util.function.Function;
 
-import static com.simibubi.create.Create.REGISTRATE;
 import static com.simibubi.create.foundation.data.AssetLookup.partialBaseModel;
 import static com.simibubi.create.foundation.data.BlockStateGen.axisBlock;
 import static com.simibubi.create.foundation.data.CreateRegistrate.connectedTextures;
