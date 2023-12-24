@@ -10,7 +10,7 @@ import java.util.List;
 public class ItemDamageAttribute implements ItemAttribute {
 
     public static void register() {
-        ItemAttribute.register(new ItemDamageAttribute(ItemStack.EMPTY.getMaxDamage()));
+        ItemAttribute.register(new ItemDamageAttribute(0));
     }
 
     int maxDamage;
