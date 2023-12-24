@@ -10,7 +10,7 @@
 
 A Create mod add-on adding quality-of-life blocks that you wish existed in Create.
 
-**Currently unstable. Use at your own risk!**
+**Pre-release version. Make regular backups!**
 
 ## What's new in BETA
 
@@ -21,7 +21,8 @@ datapacks/CraftTweaker/KubeJS. When you disable a feature:
 - the item is hidden in creative inventory and JEI
 - existing blocks in the world are not affected, so existing machines won't break
 - a config sync system is in place so that the server's config overrides all clients.
-- datapacks are still respected, and will override the feature toggle unless the `feature_enabled` condition is included.
+- datapacks are still respected, and will override the feature toggle unless the `feature_enabled` condition is
+  included.
 
 **Remember to RESTART after you enable/disable features**
 
@@ -72,8 +73,8 @@ datapacks/CraftTweaker/KubeJS. When you disable a feature:
 
 ## Download
 
-This mod is super early in development and THINGS WILL BREAK. You should NOT use this mod in your long-term
-worlds/servers at the moment.
+This is a pre-release version of the mod. World corruption is not expected, but do expect bugs and rare crashes. Make
+regular backups if you decide to play this mod in your long-term worlds.
 
 Find this mod on [**Modrinth**](https://modrinth.com/mod/create-connected) or
 [**CurseForge**](https://legacy.curseforge.com/minecraft/mc-mods/create-connected).
@@ -104,7 +105,9 @@ consider adding your use case to the mod.
 ## Credits
 
 **Translation**
+
 - [lollolcheese123](https://github.com/lollolcheese123) for Dutch translation
 
 **Inspiration**
+
 - The Create mod Discord server and subreddit
