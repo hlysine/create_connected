@@ -1,5 +1,7 @@
 package com.hlysine.create_connected.config;
 
+import com.simibubi.create.content.kinetics.BlockStressDefaults;
+import com.simibubi.create.content.kinetics.BlockStressValues;
 import com.simibubi.create.foundation.config.ConfigBase;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -20,9 +22,14 @@ public class CCConfigs {
     private static final Map<ModConfig.Type, ConfigBase> CONFIGS = new EnumMap<>(ModConfig.Type.class);
 
     private static CCommon common;
+    private static CServer server;
 
     public static CCommon common() {
         return common;
+    }
+
+    public static CServer server() {
+        return server;
     }
 
     public static ConfigBase byType(ModConfig.Type type) {
@@ -44,9 +51,12 @@ public class CCConfigs {
 
     public static void register(ModLoadingContext context) {
         common = register(CCommon::new, ModConfig.Type.COMMON);
+        server = register(CServer::new, ModConfig.Type.SERVER);
 
         for (Map.Entry<ModConfig.Type, ConfigBase> pair : CONFIGS.entrySet())
             context.registerConfig(pair.getKey(), pair.getValue().specification);
+
+        BlockStressValues.registerProvider(context.getActiveNamespace(), server().stressValues);
     }
 
     @SubscribeEvent

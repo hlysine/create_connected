@@ -179,7 +179,7 @@ public class CCBlocks {
             .initialProperties(SharedProperties::stone)
             .properties(p -> p.noOcclusion().color(MaterialColor.PODZOL))
             .addLayer(() -> RenderType::cutoutMipped)
-            .transform(BlockStressDefaults.setImpact(16384))
+            .transform(BlockStressDefaults.setNoImpact()) // active stress is a separate config
             .transform(FeatureToggle.register())
             .transform(axeOrPickaxe())
             .blockstate((c, p) -> BlockStateGen.axisBlock(c, p, AssetLookup.forPowered(c, p)))
