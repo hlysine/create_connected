@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "large=false": {
+      "model": "create_connected:block/item_silo"
+    },
+    "large=true": {
+      "model": "create_connected:block/item_silo"
+    }
+  }
+}

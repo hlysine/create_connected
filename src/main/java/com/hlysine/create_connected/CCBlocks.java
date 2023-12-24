@@ -10,6 +10,9 @@ import com.hlysine.create_connected.content.copycat.*;
 import com.hlysine.create_connected.content.freewheelclutch.FreewheelClutchBlock;
 import com.hlysine.create_connected.content.invertedclutch.InvertedClutchBlock;
 import com.hlysine.create_connected.content.invertedgearshift.InvertedGearshiftBlock;
+import com.hlysine.create_connected.content.itemsilo.ItemSiloBlock;
+import com.hlysine.create_connected.content.itemsilo.ItemSiloCTBehaviour;
+import com.hlysine.create_connected.content.itemsilo.ItemSiloItem;
 import com.hlysine.create_connected.content.overstressclutch.OverstressClutchBlock;
 import com.hlysine.create_connected.content.parallelgearbox.ParallelGearboxBlock;
 import com.hlysine.create_connected.content.shearpin.ShearPinBlock;
@@ -21,20 +24,28 @@ import com.simibubi.create.content.decoration.encasing.EncasedCTBehaviour;
 import com.simibubi.create.content.kinetics.BlockStressDefaults;
 import com.simibubi.create.content.kinetics.chainDrive.ChainDriveGenerator;
 import com.simibubi.create.content.kinetics.simpleRelays.BracketedKineticBlockModel;
+import com.simibubi.create.content.logistics.vault.ItemVaultBlock;
+import com.simibubi.create.content.logistics.vault.ItemVaultCTBehaviour;
+import com.simibubi.create.content.logistics.vault.ItemVaultItem;
 import com.simibubi.create.foundation.data.*;
 import com.tterrag.registrate.providers.DataGenContext;
 import com.tterrag.registrate.providers.RegistrateBlockstateProvider;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.MapColor;
+import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
 
 import java.util.function.Function;
 
+import static com.simibubi.create.Create.REGISTRATE;
 import static com.simibubi.create.foundation.data.AssetLookup.partialBaseModel;
 import static com.simibubi.create.foundation.data.BlockStateGen.axisBlock;
+import static com.simibubi.create.foundation.data.CreateRegistrate.connectedTextures;
 import static com.simibubi.create.foundation.data.ModelGen.customItemModel;
 import static com.simibubi.create.foundation.data.TagGen.axeOrPickaxe;
 import static com.simibubi.create.foundation.data.TagGen.pickaxeOnly;
@@ -280,6 +291,21 @@ public class CCBlocks {
             .tag(AllTags.AllBlockTags.FAN_PROCESSING_CATALYSTS_HAUNTING.tag)
             .item()
             .transform(customItemModel())
+            .register();
+
+    public static final BlockEntry<ItemSiloBlock> ITEM_SILO = REGISTRATE.block("item_silo", ItemSiloBlock::new)
+            .initialProperties(SharedProperties::softMetal)
+            .properties(p -> p.mapColor(MapColor.TERRACOTTA_BLUE).sound(SoundType.NETHERITE_BLOCK)
+                    .explosionResistance(1200))
+            .transform(pickaxeOnly())
+            .transform(FeatureToggle.register())
+            .blockstate((c, p) -> p.getVariantBuilder(c.get())
+                    .forAllStates(s -> ConfiguredModel.builder()
+                            .modelFile(AssetLookup.standardModel(c, p))
+                            .build()))
+            .onRegister(connectedTextures(ItemSiloCTBehaviour::new))
+            .item(ItemSiloItem::new)
+            .build()
             .register();
 
     public static final BlockEntry<CopycatSlabBlock> COPYCAT_SLAB =

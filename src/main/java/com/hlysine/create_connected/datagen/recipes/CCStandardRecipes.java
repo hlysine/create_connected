@@ -28,6 +28,7 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.SimpleCraftingRecipeSerializer;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.crafting.ConditionalRecipe;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.crafting.conditions.ICondition;
@@ -145,6 +146,17 @@ public class CCStandardRecipes extends CreateRecipeProvider {
                     .requires(Blocks.REDSTONE_WIRE)
                     .requires(Blocks.OBSIDIAN)
             );
+
+    GeneratedRecipe ITEM_SILO = create(CCBlocks.ITEM_SILO).unlockedByTag(() -> Tags.Items.BARRELS_WOODEN)
+            .requiresResultFeature()
+            .viaShaped(b -> b
+                    .define('B', AllItems.IRON_SHEET)
+                    .define('C', Tags.Items.BARRELS_WOODEN)
+                    .pattern("BCB")
+            );
+
+    GeneratedRecipe ITEM_SILO_CYCLE =
+            conversionCycle(ImmutableList.of(CCBlocks.ITEM_SILO, AllBlocks.ITEM_VAULT));
 
     GeneratedRecipe EMPTY_FAN_CATALYST = create(CCBlocks.EMPTY_FAN_CATALYST).unlockedBy(AllBlocks.BRASS_BLOCK::get)
             .requiresResultFeature()
