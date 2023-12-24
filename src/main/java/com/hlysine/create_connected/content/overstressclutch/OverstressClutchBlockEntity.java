@@ -75,9 +75,12 @@ public class OverstressClutchBlockEntity extends SplitShaftBlockEntity {
     }
 
     @Override
-    public void updateFromNetwork(float maxStress, float currentStress, int networkSize) {
-        super.updateFromNetwork(maxStress, currentStress, networkSize);
+    public void initialize() {
+        onKineticUpdate();
+        super.initialize();
+    }
 
+    private void onKineticUpdate() {
         if (IRotate.StressImpact.isEnabled()) {
             if (isOverStressed() && getBlockState().getValue(STATE) == ClutchState.COUPLED) {
                 if (level != null) {
@@ -95,10 +98,9 @@ public class OverstressClutchBlockEntity extends SplitShaftBlockEntity {
     }
 
     @Override
-    public void onSpeedChanged(float prevSpeed) {
-        super.onSpeedChanged(prevSpeed);
-        KineticNetwork network = getOrCreateNetwork();
-        updateFromNetwork(capacity, stress, network == null ? 0 : network.getSize());
+    public void updateFromNetwork(float maxStress, float currentStress, int networkSize) {
+        super.updateFromNetwork(maxStress, currentStress, networkSize);
+        onKineticUpdate();
     }
 
     @Override
@@ -131,7 +133,7 @@ public class OverstressClutchBlockEntity extends SplitShaftBlockEntity {
     }
 
     public void resetClutch() {
-        if (getBlockState().getValue(STATE) == ClutchState.UNCOUPLED) {
+        if (getBlockState().getValue(STATE) == ClutchState.UNCOUPLED && !isOverStressed()) {
             assert level != null;
             level.setBlock(getBlockPos(), getBlockState().setValue(STATE, ClutchState.COUPLED), 2);
             RotationPropagator.handleRemoved(level, getBlockPos(), this);
