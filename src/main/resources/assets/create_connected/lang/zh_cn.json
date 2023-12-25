@@ -5,7 +5,7 @@
   "advancement.create_connected.overpowered_brake_0.desc": "使用被红石激活的制动器时仍然保持动力网络高速运行\n\u00A77（隐藏进度）",
   "advancement.create_connected.overstress_clutch": "断路器",
   "advancement.create_connected.overstress_clutch.desc": "触发过应力离合器",
-  "advancement.create_connected.root": "欢迎来到Create: Connected",
+  "advancement.create_connected.root": "欢迎来到机械动力：创意传动",
   "advancement.create_connected.root.desc": "适用于所有情况的小玩意儿",
   "advancement.create_connected.shear_pin": "折断！",
   "advancement.create_connected.shear_pin.desc": "折断一个剪切销",
@@ -80,5 +80,5 @@
   "item.create_connected.vertical_parallel_gearbox.tooltip.summary": "所有4个面均朝_相同方向_旋转的齿轮箱。",
   "item.create_connected.vertical_six_way_gearbox": "竖直六向齿轮箱",
   "item.create_connected.vertical_six_way_gearbox.tooltip.summary": "_6个面_都有轴的齿轮箱。 顶部和底部以_半速_旋转。",
-  "itemGroup.create_connected.main": "Create: Connected"
+  "itemGroup.create_connected.main": "机械动力：创意传动"
 }
