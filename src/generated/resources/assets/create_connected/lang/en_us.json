@@ -49,6 +49,8 @@
   "block.create_connected.inverted_clutch.tooltip.summary": "A _clutch_ that is _uncoupled_ unless powered.",
   "block.create_connected.inverted_gearshift": "Inverted Gearshift",
   "block.create_connected.inverted_gearshift.tooltip.summary": "A _gearshift_ that changes rotation direction unless powered.",
+  "block.create_connected.item_silo": "Item Silo",
+  "block.create_connected.item_silo.tooltip.summary": "A _vertical_ item vault.",
   "block.create_connected.overstress_clutch": "Overstress Clutch",
   "block.create_connected.overstress_clutch.tooltip.behaviour1": "_Reset_ to coupled state.",
   "block.create_connected.overstress_clutch.tooltip.condition1": "When R-Clicked with Wrench",

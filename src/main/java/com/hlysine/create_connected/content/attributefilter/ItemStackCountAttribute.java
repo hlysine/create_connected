@@ -10,7 +10,7 @@ import java.util.List;
 public class ItemStackCountAttribute implements ItemAttribute {
 
     public static void register() {
-        ItemAttribute.register(new ItemStackCountAttribute(ItemStack.EMPTY.getMaxStackSize()));
+        ItemAttribute.register(new ItemStackCountAttribute(64));
     }
 
     int stackSize;

@@ -27,6 +27,7 @@ public class CCCreativeTabs {
             CCBlocks.CENTRIFUGAL_CLUTCH,
             CCBlocks.FREEWHEEL_CLUTCH,
             CCBlocks.BRAKE,
+            CCBlocks.ITEM_SILO,
             CCBlocks.EMPTY_FAN_CATALYST,
             CCBlocks.FAN_BLASTING_CATALYST,
             CCBlocks.FAN_SMOKING_CATALYST,

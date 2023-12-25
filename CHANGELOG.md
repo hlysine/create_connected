@@ -5,12 +5,28 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.2.0 - 2023-12-25
+
+Merry Christmas!
+
+### Added
+
+- **Stress value config for all kinetic components** (#4) - a server config system similar to base Create
+- Separate stress value config for powered/unpowered brakes
+- Item Silo
+- Simplified Chinese translation (thanks @xiewuzhiying) (#6)
+
+### Fixed
+
+- Clutch variants incorrectly suppressing kinetic network updates
+- Mod incompatibility due to item attributes being accessed too early in initialization (#5)
+
 ## 0.1.0 - 2023-12-23
 
 ### Added
 
-- **Support for Minecraft 1.19.2 and 1.18.2**
-- Dutch translation (thanks @lollolcheese123)
+- **Support for Minecraft 1.19.2 and 1.18.2** (#1)
+- Dutch translation (thanks @lollolcheese123) (#3)
 
 ### Changed
 
@@ -29,7 +45,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Feature toggle system - enable/disable blocks individually via mod common config
+- **Feature toggle system** - enable/disable blocks individually via mod common config
 
 ### Fixed
 
@@ -43,7 +59,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- Crash due to inject not being remapped
+- Crash due to inject not being remapped (#2)
 
 ## 0.0.3 - 2023-12-20
 
@@ -65,7 +81,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Target Create version to 0.5.1f
+- **Target Create version to 0.5.1f**
 - The recipe for Empty Fan Catalyst to use less brass
 - Advancement ID for Brake
 - Texture for Brake
