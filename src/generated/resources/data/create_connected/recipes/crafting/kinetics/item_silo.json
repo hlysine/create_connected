@@ -4,13 +4,16 @@
     {
       "conditions": [
         {
-          "type": "create_connected:feature_enabled",
           "feature": "create_connected:item_silo",
-          "invert": false
+          "invert": false,
+          "type": "create_connected:feature_enabled"
         }
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "BCB"
+        ],
         "key": {
           "B": {
             "item": "create:iron_sheet"
@@ -19,9 +22,6 @@
             "tag": "forge:barrels/wooden"
           }
         },
-        "pattern": [
-          "BCB"
-        ],
         "result": {
           "item": "create_connected:item_silo"
         }

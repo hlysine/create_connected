@@ -49,6 +49,8 @@
   "block.create_connected.inverted_clutch.tooltip.summary": "\u02D9p\u01DD\u0279\u01DD\u028Dod ss\u01DD\u05DFun \u203Ep\u01DD\u05DFdno\u0254un\u203E s\u0131 \u0287\u0250\u0265\u0287 \u203E\u0265\u0254\u0287n\u05DF\u0254\u203E \u2C6F",
   "block.create_connected.inverted_gearshift": "\u0287\u025F\u0131\u0265s\u0279\u0250\u01DD\u2141 p\u01DD\u0287\u0279\u01DD\u028CuI",
   "block.create_connected.inverted_gearshift.tooltip.summary": "\u02D9p\u01DD\u0279\u01DD\u028Dod ss\u01DD\u05DFun uo\u0131\u0287\u0254\u01DD\u0279\u0131p uo\u0131\u0287\u0250\u0287o\u0279 s\u01DDbu\u0250\u0265\u0254 \u0287\u0250\u0265\u0287 \u203E\u0287\u025F\u0131\u0265s\u0279\u0250\u01DDb\u203E \u2C6F",
+  "block.create_connected.item_silo": "o\u05DF\u0131S \u026F\u01DD\u0287I",
+  "block.create_connected.item_silo.tooltip.summary": "\u02D9\u0287\u05DFn\u0250\u028C \u026F\u01DD\u0287\u0131 \u203E\u05DF\u0250\u0254\u0131\u0287\u0279\u01DD\u028C\u203E \u2C6F",
   "block.create_connected.overstress_clutch": "\u0265\u0254\u0287n\u05DF\u0186 ss\u01DD\u0279\u0287s\u0279\u01DD\u028CO",
   "block.create_connected.overstress_clutch.tooltip.behaviour1": "\u02D9\u01DD\u0287\u0250\u0287s p\u01DD\u05DFdno\u0254 o\u0287 \u203E\u0287\u01DDs\u01DD\u1D1A\u203E",
   "block.create_connected.overstress_clutch.tooltip.condition1": "\u0265\u0254u\u01DD\u0279M \u0265\u0287\u0131\u028D p\u01DD\u029E\u0254\u0131\u05DF\u0186-\u1D1A u\u01DD\u0265M",
