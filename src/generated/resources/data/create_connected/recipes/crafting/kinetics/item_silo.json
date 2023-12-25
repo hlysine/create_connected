@@ -11,7 +11,6 @@
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
-        "category": "misc",
         "key": {
           "B": {
             "item": "create:iron_sheet"
@@ -25,8 +24,7 @@
         ],
         "result": {
           "item": "create_connected:item_silo"
-        },
-        "show_notification": true
+        }
       }
     }
   ]

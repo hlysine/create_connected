@@ -31,8 +31,7 @@
           "recipes": [
             "create_connected:crafting/kinetics/item_silo"
           ]
-        },
-        "sends_telemetry_event": false
+        }
       },
       "conditions": [
         {
