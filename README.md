@@ -112,6 +112,7 @@ at [the contributing guide](https://github.com/hlysine/create_connected/blob/mai
 **Translation**
 
 - [lollolcheese123](https://github.com/lollolcheese123) for Dutch translation
+- [xiewuzhiying](https://github.com/xiewuzhiying) for Simplified Chinese translation
 
 **Inspiration**
 
