@@ -60,6 +60,8 @@ datapacks/CraftTweaker/KubeJS. When you disable a feature:
     - A clutch that is only coupled if the input spins in the correct direction as configured
 - Brake
     - A device that produces immense stress when powered, halting the network by overstressing it
+- Item Silo
+    - A vertical item vault
 - Fan Blasting/Smoking/Washing/Haunting Catalysts
     - A series of blocks that trap liquid/fire for safe and dedicated bulk processing
 - Copycat Slab
