@@ -98,7 +98,7 @@ public class ItemSiloItem extends BlockItem {
                 BlockState blockState = world.getBlockState(offsetPos);
                 if (ItemSiloBlock.isVault(blockState))
                     continue;
-                if (!blockState.canBeReplaced())
+                if (!blockState.getMaterial().isReplaceable())
                     return;
                 tanksToPlace++;
             }

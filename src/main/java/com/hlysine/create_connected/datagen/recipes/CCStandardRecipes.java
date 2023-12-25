@@ -151,7 +151,7 @@ public class CCStandardRecipes extends CreateRecipeProvider {
     GeneratedRecipe ITEM_SILO = create(CCBlocks.ITEM_SILO).unlockedByTag(() -> Tags.Items.BARRELS_WOODEN)
             .requiresResultFeature()
             .viaShaped(b -> b
-                    .define('B', AllItems.IRON_SHEET)
+                    .define('B', AllItems.IRON_SHEET.get())
                     .define('C', Tags.Items.BARRELS_WOODEN)
                     .pattern("BCB")
             );
