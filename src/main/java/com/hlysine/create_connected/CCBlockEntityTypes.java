@@ -8,6 +8,7 @@ import com.hlysine.create_connected.content.centrifugalclutch.CentrifugalClutchB
 import com.hlysine.create_connected.content.freewheelclutch.FreewheelClutchBlockEntity;
 import com.hlysine.create_connected.content.invertedclutch.InvertedClutchBlockEntity;
 import com.hlysine.create_connected.content.invertedgearshift.InvertedGearshiftBlockEntity;
+import com.hlysine.create_connected.content.itemsilo.ItemSiloBlockEntity;
 import com.hlysine.create_connected.content.overstressclutch.OverstressClutchBlockEntity;
 import com.hlysine.create_connected.content.parallelgearbox.ParallelGearboxBlockEntity;
 import com.hlysine.create_connected.content.parallelgearbox.ParallelGearboxInstance;
@@ -106,6 +107,11 @@ public class CCBlockEntityTypes {
             .instance(() -> SplitShaftInstance::new, false)
             .validBlocks(CCBlocks.BRAKE)
             .renderer(() -> SplitShaftRenderer::new)
+            .register();
+
+    public static final BlockEntityEntry<ItemSiloBlockEntity> ITEM_SILO = REGISTRATE
+            .blockEntity("item_silo", ItemSiloBlockEntity::new)
+            .validBlocks(CCBlocks.ITEM_SILO)
             .register();
 
 
