@@ -1,6 +1,4 @@
 {
-  "block.create_connected.parallel_gearbox.tooltip.summary": "A gearbox with all 4 sides spinning in the _same direction_.",
-  "item.create_connected.vertical_parallel_gearbox.tooltip.summary": "A gearbox with all 4 sides spinning in the _same direction_.",
   "block.create_connected.six_way_gearbox.tooltip.summary": "A gearbox with shafts on _all 6 sides_. Top and bottom spin at _half speed_.",
   "item.create_connected.vertical_six_way_gearbox.tooltip.summary": "A gearbox with shafts on _all 6 sides_. Top and bottom spin at _half speed_.",
   "block.create_connected.brass_gearbox.tooltip.summary": "A gearbox where the rotation direction of all 4 sides are _independently configurable_.",
