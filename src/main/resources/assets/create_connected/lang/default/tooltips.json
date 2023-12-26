@@ -1,5 +1,4 @@
 {
-  "block.create_connected.inverted_gearshift.tooltip.summary": "A _gearshift_ that changes rotation direction unless powered.",
   "block.create_connected.parallel_gearbox.tooltip.summary": "A gearbox with all 4 sides spinning in the _same direction_.",
   "item.create_connected.vertical_parallel_gearbox.tooltip.summary": "A gearbox with all 4 sides spinning in the _same direction_.",
   "block.create_connected.six_way_gearbox.tooltip.summary": "A gearbox with shafts on _all 6 sides_. Top and bottom spin at _half speed_.",
