@@ -2,11 +2,13 @@ package com.hlysine.create_connected.datagen;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.hlysine.create_connected.CCPonders;
 import com.hlysine.create_connected.CreateConnected;
 import com.hlysine.create_connected.datagen.advancements.CCAdvancements;
 import com.hlysine.create_connected.datagen.recipes.CCStandardRecipes;
 import com.hlysine.create_connected.datagen.recipes.ProcessingRecipeGen;
 import com.simibubi.create.foundation.data.CreateRegistrate;
+import com.simibubi.create.foundation.ponder.PonderLocalization;
 import com.simibubi.create.foundation.utility.FilesHelper;
 import com.tterrag.registrate.providers.ProviderType;
 import net.minecraft.core.HolderLookup;
@@ -45,6 +47,7 @@ public class CCDatagen {
             provideDefaultLang("interface", langConsumer);
             provideDefaultLang("tooltips", langConsumer);
             CCAdvancements.provideLang(langConsumer);
+            providePonderLang(langConsumer);
         });
     }
 
@@ -60,6 +63,15 @@ public class CCDatagen {
             String value = entry.getValue().getAsString();
             consumer.accept(key, value);
         }
+    }
+
+    private static void providePonderLang(BiConsumer<String, String> consumer) {
+        // Register these since FMLClientSetupEvent does not run during datagen
+        CCPonders.register();
+
+        PonderLocalization.generateSceneLang();
+
+        PonderLocalization.provideLang(CreateConnected.MODID, consumer);
     }
 }
 
