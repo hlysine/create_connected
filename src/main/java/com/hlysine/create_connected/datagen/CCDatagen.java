@@ -7,6 +7,7 @@ import com.hlysine.create_connected.CreateConnected;
 import com.hlysine.create_connected.datagen.advancements.CCAdvancements;
 import com.hlysine.create_connected.datagen.recipes.CCStandardRecipes;
 import com.hlysine.create_connected.datagen.recipes.ProcessingRecipeGen;
+import com.hlysine.create_connected.datagen.recipes.SequencedAssemblyGen;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.foundation.ponder.PonderLocalization;
 import com.simibubi.create.foundation.utility.FilesHelper;
@@ -36,6 +37,7 @@ public class CCDatagen {
         if (event.includeServer()) {
             generator.addProvider(true, new CCAdvancements(output));
             generator.addProvider(true, new CCStandardRecipes(output));
+            generator.addProvider(true, new SequencedAssemblyGen(output));
             ProcessingRecipeGen.registerAll(generator, output);
         }
     }

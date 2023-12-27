@@ -89,6 +89,8 @@
   "create_connected.ponder.parallel_gearbox.text_2": "A parallel gearbox encapsulates this into a block",
   "create_connected.ponder.parallel_gearbox.text_3": "Shafts around corners rotate in the same direction",
   "create_connected.ponder.parallel_gearbox.text_4": "Straight connections will be reversed",
+  "item.create_connected.control_chip": "Control Chip",
+  "item.create_connected.incomplete_control_chip": "Incomplete Control Chip",
   "item.create_connected.vertical_brass_gearbox": "Vertical Brass Gearbox",
   "item.create_connected.vertical_brass_gearbox.tooltip.summary": "A gearbox where the rotation direction of all 4 sides are _independently configurable_.",
   "item.create_connected.vertical_parallel_gearbox": "Vertical Parallel Gearbox",
