@@ -5,6 +5,7 @@ import com.hlysine.create_connected.datagen.CCDatagen;
 import com.hlysine.create_connected.datagen.advancements.CCAdvancements;
 import com.hlysine.create_connected.datagen.advancements.CCTriggers;
 import com.mojang.logging.LogUtils;
+import com.simibubi.create.AllPackets;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.foundation.item.ItemDescription;
 import com.simibubi.create.foundation.item.KineticStats;
@@ -55,6 +56,7 @@ public class CreateConnected {
         CCItems.register();
         CCBlockEntityTypes.register();
         CCCreativeTabs.register(modEventBus);
+        CCPackets.registerPackets();
 
         CCConfigs.register(ModLoadingContext.get());
         CCConfigs.common().register();

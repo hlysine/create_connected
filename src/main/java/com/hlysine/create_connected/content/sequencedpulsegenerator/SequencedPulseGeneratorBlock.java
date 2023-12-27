@@ -6,8 +6,13 @@ import com.simibubi.create.content.redstone.diodes.BrassDiodeBlock;
 import com.simibubi.create.foundation.block.IBE;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.SignalGetter;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -32,8 +37,18 @@ public class SequencedPulseGeneratorBlock extends AbstractDiodeBlock implements 
     }
 
     @Override
+    public void tick(BlockState state, ServerLevel worldIn, BlockPos pos, RandomSource r) {
+        super.tick(state, worldIn, pos, r);
+        boolean isPowered = this.shouldTurnOn(worldIn, pos, state);
+        withBlockEntityDo(worldIn, pos, spg -> spg.onRedstoneUpdate(isPowered));
+    }
+
+    @Override
     protected int getOutputSignal(@NotNull BlockGetter worldIn, @NotNull BlockPos pos, @NotNull BlockState state) {
-        return state.getValue(POWERING) ? 15 : 0;
+        BlockEntity be = worldIn.getBlockEntity(pos);
+        if (!(be instanceof SequencedPulseGeneratorBlockEntity spg))
+            return state.getValue(POWERING) ? 15 : 0;
+        return spg.getCurrentSignal();
     }
 
     @Override
@@ -50,8 +65,7 @@ public class SequencedPulseGeneratorBlock extends AbstractDiodeBlock implements 
     public boolean canConnectRedstone(BlockState state, BlockGetter world, BlockPos pos, Direction side) {
         if (side == null)
             return false;
-        return side.getAxis() == state.getValue(FACING)
-                .getAxis();
+        return side.getAxis() == state.getValue(FACING).getAxis();
     }
 
     @Override
