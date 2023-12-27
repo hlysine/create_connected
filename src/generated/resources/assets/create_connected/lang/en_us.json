@@ -53,6 +53,7 @@
   "block.create_connected.overstress_clutch.tooltip.condition1": "When R-Clicked with Wrench",
   "block.create_connected.overstress_clutch.tooltip.summary": "A clutch that _uncouples_ after a set delay when the network is _overstressed_.",
   "block.create_connected.parallel_gearbox": "Parallel Gearbox",
+  "block.create_connected.sequenced_pulse_generator": "Sequenced Pulse Generator",
   "block.create_connected.shear_pin": "Shear Pin",
   "block.create_connected.shear_pin.tooltip.summary": "A single-use connector that _breaks_ when the network is _overstressed_.",
   "block.create_connected.six_way_gearbox": "6-way Gearbox",

@@ -15,6 +15,7 @@ import com.hlysine.create_connected.content.itemsilo.ItemSiloCTBehaviour;
 import com.hlysine.create_connected.content.itemsilo.ItemSiloItem;
 import com.hlysine.create_connected.content.overstressclutch.OverstressClutchBlock;
 import com.hlysine.create_connected.content.parallelgearbox.ParallelGearboxBlock;
+import com.hlysine.create_connected.content.sequencedpulsegenerator.SequencedPulseGeneratorBlock;
 import com.hlysine.create_connected.content.shearpin.ShearPinBlock;
 import com.hlysine.create_connected.content.sixwaygearbox.SixWayGearboxBlock;
 import com.hlysine.create_connected.datagen.CCBlockStateGen;
@@ -24,6 +25,9 @@ import com.simibubi.create.content.decoration.encasing.EncasedCTBehaviour;
 import com.simibubi.create.content.kinetics.BlockStressDefaults;
 import com.simibubi.create.content.kinetics.chainDrive.ChainDriveGenerator;
 import com.simibubi.create.content.kinetics.simpleRelays.BracketedKineticBlockModel;
+import com.simibubi.create.content.redstone.diodes.AbstractDiodeGenerator;
+import com.simibubi.create.content.redstone.diodes.BrassDiodeBlock;
+import com.simibubi.create.content.redstone.diodes.BrassDiodeGenerator;
 import com.simibubi.create.foundation.data.*;
 import com.tterrag.registrate.providers.DataGenContext;
 import com.tterrag.registrate.providers.RegistrateBlockstateProvider;
@@ -38,6 +42,7 @@ import net.minecraftforge.client.model.generators.ModelFile;
 
 import java.util.function.Function;
 
+import static com.simibubi.create.Create.REGISTRATE;
 import static com.simibubi.create.foundation.data.AssetLookup.partialBaseModel;
 import static com.simibubi.create.foundation.data.BlockStateGen.axisBlock;
 import static com.simibubi.create.foundation.data.CreateRegistrate.connectedTextures;
@@ -192,6 +197,15 @@ public class CCBlocks {
             .item()
             .transform(customItemModel())
             .register();
+
+    public static final BlockEntry<SequencedPulseGeneratorBlock> SEQUENCED_PULSE_GENERATOR =
+            REGISTRATE.block("sequenced_pulse_generator", SequencedPulseGeneratorBlock::new)
+                    .initialProperties(() -> Blocks.REPEATER)
+                    .tag(AllTags.AllBlockTags.SAFE_NBT.tag)
+                    .blockstate(CCBlockStateGen.sequencedPulseGenerator())
+                    .addLayer(() -> RenderType::cutoutMipped)
+                    .simpleItem()
+                    .register();
 
     public static final BlockEntry<WrenchableBlock> EMPTY_FAN_CATALYST = REGISTRATE.block("empty_fan_catalyst", WrenchableBlock::new)
             .initialProperties(() -> Blocks.IRON_BLOCK)

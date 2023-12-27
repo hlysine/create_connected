@@ -1,0 +1,64 @@
+{
+  "variants": {
+    "facing=east,powered=false,powering=false": {
+      "model": "create_connected:block/sequenced_pulse_generator",
+      "y": 90
+    },
+    "facing=east,powered=false,powering=true": {
+      "model": "create_connected:block/sequenced_pulse_generator_powering",
+      "y": 90
+    },
+    "facing=east,powered=true,powering=false": {
+      "model": "create_connected:block/sequenced_pulse_generator_powered",
+      "y": 90
+    },
+    "facing=east,powered=true,powering=true": {
+      "model": "create_connected:block/sequenced_pulse_generator_powered_powering",
+      "y": 90
+    },
+    "facing=north,powered=false,powering=false": {
+      "model": "create_connected:block/sequenced_pulse_generator"
+    },
+    "facing=north,powered=false,powering=true": {
+      "model": "create_connected:block/sequenced_pulse_generator_powering"
+    },
+    "facing=north,powered=true,powering=false": {
+      "model": "create_connected:block/sequenced_pulse_generator_powered"
+    },
+    "facing=north,powered=true,powering=true": {
+      "model": "create_connected:block/sequenced_pulse_generator_powered_powering"
+    },
+    "facing=south,powered=false,powering=false": {
+      "model": "create_connected:block/sequenced_pulse_generator",
+      "y": 180
+    },
+    "facing=south,powered=false,powering=true": {
+      "model": "create_connected:block/sequenced_pulse_generator_powering",
+      "y": 180
+    },
+    "facing=south,powered=true,powering=false": {
+      "model": "create_connected:block/sequenced_pulse_generator_powered",
+      "y": 180
+    },
+    "facing=south,powered=true,powering=true": {
+      "model": "create_connected:block/sequenced_pulse_generator_powered_powering",
+      "y": 180
+    },
+    "facing=west,powered=false,powering=false": {
+      "model": "create_connected:block/sequenced_pulse_generator",
+      "y": 270
+    },
+    "facing=west,powered=false,powering=true": {
+      "model": "create_connected:block/sequenced_pulse_generator_powering",
+      "y": 270
+    },
+    "facing=west,powered=true,powering=false": {
+      "model": "create_connected:block/sequenced_pulse_generator_powered",
+      "y": 270
+    },
+    "facing=west,powered=true,powering=true": {
+      "model": "create_connected:block/sequenced_pulse_generator_powered_powering",
+      "y": 270
+    }
+  }
+}

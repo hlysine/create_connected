@@ -1,7 +1,9 @@
 package com.hlysine.create_connected.datagen;
 
 import com.hlysine.create_connected.content.brassgearbox.BrassGearboxBlock;
+import com.hlysine.create_connected.content.sequencedpulsegenerator.SequencedPulseGeneratorBlock;
 import com.mojang.datafixers.util.Function4;
+import com.simibubi.create.foundation.data.BlockStateGen;
 import com.simibubi.create.foundation.utility.Iterate;
 import com.tterrag.registrate.providers.DataGenContext;
 import com.tterrag.registrate.providers.RegistrateBlockstateProvider;
@@ -15,9 +17,38 @@ import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
 
 import java.util.Vector;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
 public class CCBlockStateGen {
+    public static <B extends SequencedPulseGeneratorBlock> NonNullBiConsumer<DataGenContext<Block, B>, RegistrateBlockstateProvider> sequencedPulseGenerator() {
+        return (c, p) -> {
+            ResourceLocation baseOff = p.modLoc("block/" + c.getName() + "_off");
+            ResourceLocation baseOn = p.modLoc("block/" + c.getName() + "_on");
+            ResourceLocation torchOff = new ResourceLocation("block/redstone_torch_off");
+            ResourceLocation torchOn = new ResourceLocation("block/redstone_torch");
+
+            Vector<ModelFile> models = new Vector<>(4);
+            for (boolean isPowered : Iterate.falseAndTrue)
+                for (boolean isPowering : Iterate.falseAndTrue)
+                    models.add(p.models()
+                            .withExistingParent(
+                                    c.getName()
+                                            + (isPowered ? "_powered" : "")
+                                            + (isPowering ? "_powering" : ""),
+                                    p.modLoc("block/" + c.getName())
+                            )
+                            .texture("1_top", isPowered ? baseOn : baseOff)
+                            .texture("torch", isPowering ? torchOn : torchOff)
+                    );
+            BiFunction<Boolean, Boolean, ModelFile> modelFunc = (f1, f2) -> models.get((f1 ? 2 : 0) + (f2 ? 1 : 0));
+
+            p.horizontalBlock(c.get(), state -> modelFunc.apply(
+                    state.getValue(SequencedPulseGeneratorBlock.POWERED),
+                    state.getValue(SequencedPulseGeneratorBlock.POWERING)
+            ));
+        };
+    }
 
     public static <B extends BrassGearboxBlock> NonNullBiConsumer<DataGenContext<Block, B>, RegistrateBlockstateProvider> brassGearbox() {
         return (c, p) -> {
