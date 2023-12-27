@@ -10,8 +10,6 @@ import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import net.minecraft.world.item.Item;
 
-import static com.simibubi.create.Create.REGISTRATE;
-
 public class CCItems {
 
     private static final CreateRegistrate REGISTRATE = CreateConnected.getRegistrate();

@@ -2,9 +2,7 @@ package com.hlysine.create_connected.datagen.recipes;
 
 import com.hlysine.create_connected.CCItems;
 import com.hlysine.create_connected.CreateConnected;
-import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllItems;
-import com.simibubi.create.Create;
 import com.simibubi.create.content.kinetics.deployer.DeployerApplicationRecipe;
 import com.simibubi.create.content.kinetics.press.PressingRecipe;
 import com.simibubi.create.content.processing.sequenced.SequencedAssemblyRecipeBuilder;
