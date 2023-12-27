@@ -1,5 +1,6 @@
 package com.hlysine.create_connected.content.sequencedpulsegenerator.instructions;
 
+import com.hlysine.create_connected.CCGuiTextures;
 import com.hlysine.create_connected.content.sequencedpulsegenerator.SequencedPulseGeneratorBlockEntity;
 import net.minecraft.nbt.CompoundTag;
 
@@ -9,8 +10,16 @@ public class TimeInstruction extends Instruction {
     public TimeInstruction(int duration, int signal) {
         super(
                 "time",
-                new ParameterConfig("duration", 1, 600, 20, 10),
-                true
+                CCGuiTextures.SEQUENCER_INSTRUCTION,
+                new ParameterConfig("duration",
+                        1,
+                        600,
+                        ParameterConfig.timeStep,
+                        20,
+                        10,
+                        ParameterConfig.timeFormat),
+                true,
+                false
         );
         setValue(duration);
         setSignal(signal);
@@ -19,7 +28,7 @@ public class TimeInstruction extends Instruction {
     @Override
     public InstructionResult tick(SequencedPulseGeneratorBlockEntity be) {
         if (progress >= getValue()) {
-            return InstructionResult.next();
+            return InstructionResult.next(false);
         }
         progress++;
         return InstructionResult.incomplete();

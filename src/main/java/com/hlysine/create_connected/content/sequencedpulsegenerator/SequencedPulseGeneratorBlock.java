@@ -1,20 +1,32 @@
 package com.hlysine.create_connected.content.sequencedpulsegenerator;
 
 import com.hlysine.create_connected.CCBlockEntityTypes;
+import com.simibubi.create.AllItems;
 import com.simibubi.create.content.redstone.diodes.AbstractDiodeBlock;
 import com.simibubi.create.content.redstone.diodes.BrassDiodeBlock;
 import com.simibubi.create.foundation.block.IBE;
+import com.simibubi.create.foundation.gui.ScreenOpener;
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.fml.DistExecutor;
 import org.jetbrains.annotations.NotNull;
 
 public class SequencedPulseGeneratorBlock extends AbstractDiodeBlock implements IBE<SequencedPulseGeneratorBlockEntity> {
@@ -64,6 +76,29 @@ public class SequencedPulseGeneratorBlock extends AbstractDiodeBlock implements 
         if (side == null)
             return false;
         return side.getAxis() == state.getValue(FACING).getAxis();
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    public @NotNull InteractionResult use(@NotNull BlockState state,
+                                          @NotNull Level worldIn,
+                                          @NotNull BlockPos pos,
+                                          Player player,
+                                          @NotNull InteractionHand handIn,
+                                          @NotNull BlockHitResult hit) {
+        ItemStack held = player.getMainHandItem();
+        if (AllItems.WRENCH.isIn(held))
+            return InteractionResult.PASS;
+
+        DistExecutor.unsafeRunWhenOn(Dist.CLIENT,
+                () -> () -> withBlockEntityDo(worldIn, pos, be -> this.displayScreen(be, player)));
+        return InteractionResult.SUCCESS;
+    }
+
+    @OnlyIn(value = Dist.CLIENT)
+    protected void displayScreen(SequencedPulseGeneratorBlockEntity be, Player player) {
+        if (player instanceof LocalPlayer)
+            ScreenOpener.open(new SequencedPulseGeneratorScreen(be));
     }
 
     @Override

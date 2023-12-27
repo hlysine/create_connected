@@ -2,17 +2,24 @@ package com.hlysine.create_connected.content.sequencedpulsegenerator.instruction
 
 public abstract class InstructionResult {
 
-    public InstructionResult() {
+    private final boolean immediateExecution;
+
+    public InstructionResult(boolean immediateExecution) {
+        this.immediateExecution = immediateExecution;
+    }
+
+    public boolean isImmediate() {
+        return immediateExecution;
     }
 
     public abstract int getNextInstruction(int currentInstruction);
 
     public static InstructionResult incomplete() {
-        return new ContinueCurrent();
+        return new ContinueCurrent(false);
     }
 
-    public static InstructionResult next() {
-        return new NextInstruction();
+    public static InstructionResult next(boolean immediate) {
+        return new NextInstruction(immediate);
     }
 
     public static InstructionResult terminate() {
@@ -20,6 +27,10 @@ public abstract class InstructionResult {
     }
 
     public static class ContinueCurrent extends InstructionResult {
+        public ContinueCurrent(boolean immediateExecution) {
+            super(immediateExecution);
+        }
+
         @Override
         public int getNextInstruction(int currentInstruction) {
             return currentInstruction;
@@ -27,6 +38,10 @@ public abstract class InstructionResult {
     }
 
     public static class NextInstruction extends InstructionResult {
+        public NextInstruction(boolean immediateExecution) {
+            super(immediateExecution);
+        }
+
         @Override
         public int getNextInstruction(int currentInstruction) {
             return currentInstruction + 1;
@@ -34,6 +49,10 @@ public abstract class InstructionResult {
     }
 
     public static class EndSequence extends InstructionResult {
+        public EndSequence() {
+            super(false);
+        }
+
         @Override
         public int getNextInstruction(int currentInstruction) {
             return -1;

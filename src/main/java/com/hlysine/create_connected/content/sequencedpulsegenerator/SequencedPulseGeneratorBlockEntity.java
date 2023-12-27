@@ -4,27 +4,26 @@ import com.hlysine.create_connected.content.sequencedpulsegenerator.instructions
 import com.hlysine.create_connected.content.sequencedpulsegenerator.instructions.Instruction;
 import com.hlysine.create_connected.content.sequencedpulsegenerator.instructions.InstructionResult;
 import com.hlysine.create_connected.content.sequencedpulsegenerator.instructions.TimeInstruction;
-import com.simibubi.create.content.equipment.clipboard.ClipboardCloneable;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.List;
 import java.util.Vector;
+import java.util.function.Function;
 
 import static com.hlysine.create_connected.content.sequencedpulsegenerator.SequencedPulseGeneratorBlock.POWERING;
 import static net.minecraft.world.level.block.DiodeBlock.POWERED;
 
-public class SequencedPulseGeneratorBlockEntity extends SmartBlockEntity implements ClipboardCloneable {
+public class SequencedPulseGeneratorBlockEntity extends SmartBlockEntity {
 
-    public static final int INSTRUCTION_CAPACITY = 5;
+    public static final int INSTRUCTION_CAPACITY = 7;
+    private static final int MAX_RECURSION_DEPTH = 10;
 
     static {
         Instruction.register(new TimeInstruction(10, 15));
@@ -35,6 +34,7 @@ public class SequencedPulseGeneratorBlockEntity extends SmartBlockEntity impleme
     int currentInstruction;
     int currentSignal;
     boolean poweredPreviously;
+    boolean isPowered;
 
     public SequencedPulseGeneratorBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
@@ -42,6 +42,10 @@ public class SequencedPulseGeneratorBlockEntity extends SmartBlockEntity impleme
         currentInstruction = -1;
         currentSignal = 0;
         poweredPreviously = false;
+    }
+
+    @Override
+    public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
     }
 
     public boolean isIdle() {
@@ -52,18 +56,49 @@ public class SequencedPulseGeneratorBlockEntity extends SmartBlockEntity impleme
         return currentSignal;
     }
 
+    public boolean isPoweredPreviously() {
+        return poweredPreviously;
+    }
+
+    /**
+     * More reliable than checking block state because that may not be updated yet
+     */
+    public boolean isPowered() {
+        return isPowered;
+    }
+
     public Instruction getCurrentInstruction() {
-        return currentInstruction >= 0 && currentInstruction < instructions.size() ? instructions.get(currentInstruction)
+        return currentInstruction >= 0 && currentInstruction < instructions.size()
+                ? instructions.get(currentInstruction)
                 : null;
     }
 
-    private void handleResult(Instruction instruction, InstructionResult result) {
+    private void executeInstruction(Function<Instruction, Function<SequencedPulseGeneratorBlockEntity, InstructionResult>> instructionEvent) {
+        executeInstruction(instructionEvent, 0);
+    }
+
+    private void executeInstruction(Function<Instruction, Function<SequencedPulseGeneratorBlockEntity, InstructionResult>> instructionEvent, int recursionDepth) {
+        Instruction instruction = getCurrentInstruction();
+        if (instruction == null) {
+            currentInstruction = -1;
+            return;
+        }
+        InstructionResult result = instructionEvent.apply(instruction).apply(this);
         int prevSignal = currentSignal;
         currentSignal = instruction.getSignal();
         if (prevSignal != currentSignal) {
-            level.setBlockAndUpdate(getBlockPos(), getBlockState().setValue(POWERING, currentSignal > 0));
+            if (getBlockState().getValue(POWERING) == (currentSignal > 0)) {
+                level.markAndNotifyBlock(getBlockPos(), level.getChunkAt(getBlockPos()), getBlockState(), getBlockState(), 3, 512);
+            } else {
+                level.setBlockAndUpdate(getBlockPos(), getBlockState().setValue(POWERING, currentSignal > 0));
+            }
         }
         currentInstruction = result.getNextInstruction(currentInstruction);
+        if (result.isImmediate() && recursionDepth < MAX_RECURSION_DEPTH)
+            executeInstruction(instructionEvent, recursionDepth + 1);
+        if (recursionDepth == 0) {
+            notifyUpdate();
+        }
     }
 
     @Override
@@ -74,21 +109,18 @@ public class SequencedPulseGeneratorBlockEntity extends SmartBlockEntity impleme
             return;
         if (level.isClientSide)
             return;
-        Instruction instruction = getCurrentInstruction();
-        if (instruction == null) {
-            currentInstruction = -1;
-            return;
-        }
-        InstructionResult result = instruction.tick(this);
-        handleResult(instruction, result);
+
+        isPowered = getBlockState().getValue(POWERED);
+        executeInstruction(i -> i::tick);
     }
 
     public void onRedstoneUpdate(boolean isPowered) {
+        this.isPowered = isPowered;
         if (isPowered == poweredPreviously) return;
         if (!poweredPreviously && isPowered && !isIdle())
-            risingEdge();
+            executeInstruction(i -> i::onRisingEdge);
         if (poweredPreviously && !isPowered && !isIdle())
-            fallingEdge();
+            executeInstruction(i -> i::onFallingEdge);
         poweredPreviously = isPowered;
         if (!isIdle() || !isPowered)
             return;
@@ -97,31 +129,13 @@ public class SequencedPulseGeneratorBlockEntity extends SmartBlockEntity impleme
             return;
         }
         currentInstruction = 0;
+
         // copy instructions to reset states
         Vector<Instruction> newInstructions = new Vector<>(instructions.capacity());
         instructions.forEach(i -> newInstructions.add(i.copy()));
         instructions = newInstructions;
-        risingEdge();
-    }
 
-    public void risingEdge() {
-        Instruction instruction = getCurrentInstruction();
-        if (instruction == null) {
-            currentInstruction = -1;
-            return;
-        }
-        InstructionResult result = instruction.onRisingEdge(this);
-        handleResult(instruction, result);
-    }
-
-    public void fallingEdge() {
-        Instruction instruction = getCurrentInstruction();
-        if (instruction == null) {
-            currentInstruction = -1;
-            return;
-        }
-        InstructionResult result = instruction.onFallingEdge(this);
-        handleResult(instruction, result);
+        executeInstruction(i -> i::onRisingEdge);
     }
 
     @Override
@@ -129,15 +143,7 @@ public class SequencedPulseGeneratorBlockEntity extends SmartBlockEntity impleme
         nbt.putInt("InstructionIndex", currentInstruction);
         nbt.putBoolean("PrevPowered", poweredPreviously);
         nbt.putInt("CurrentSignal", currentSignal);
-        Instruction instruction = getCurrentInstruction();
-        if (instruction != null) {
-            CompoundTag state = new CompoundTag();
-            instruction.writeState(state);
-            nbt.put("InstructionState", state);
-        }
-        ListTag list = new ListTag();
-        instructions.forEach(i -> list.add(i.serializeParams()));
-        nbt.put("Instructions", list);
+        nbt.put("Instructions", Instruction.serializeAll(instructions));
         super.write(nbt, clientPacket);
     }
 
@@ -148,30 +154,6 @@ public class SequencedPulseGeneratorBlockEntity extends SmartBlockEntity impleme
         currentSignal = nbt.getInt("CurrentSignal");
         ListTag list = nbt.getList("Instructions", Tag.TAG_COMPOUND);
         instructions = Instruction.deserializeAll(list);
-        Instruction current = getCurrentInstruction();
-        if (current != null) {
-            current.readState(nbt.getCompound("InstructionState"));
-        }
         super.read(nbt, clientPacket);
-    }
-
-    @Override
-    public String getClipboardKey() {
-        return "Block";
-    }
-
-    @Override
-    public boolean writeToClipboard(CompoundTag tag, Direction side) {
-        return true;  // TODO
-    }
-
-    @Override
-    public boolean readFromClipboard(CompoundTag tag, Player player, Direction side, boolean simulate) {
-        return true; // TODO
-    }
-
-    @Override
-    public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
-
     }
 }

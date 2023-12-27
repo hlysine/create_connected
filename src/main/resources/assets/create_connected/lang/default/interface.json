@@ -13,6 +13,14 @@
   "create_connected.centrifugal_clutch.speed_threshold": "Speed Threshold",
   "create_connected.gui.overstress_clutch.uncoupled": "Uncoupled",
   "create_connected.gui.overstress_clutch.uncoupled_explanation": "This clutch is _uncoupled_ due to stress. Fix the network before _resetting_ this clutch with a _wrench_.",
+  "create_connected.gui.sequenced_pulse_generator.instruction": "Instruction",
+  "create_connected.gui.sequenced_pulse_generator.instruction.end": "End",
+  "create_connected.gui.sequenced_pulse_generator.instruction.end.descriptive": "End",
+  "create_connected.gui.sequenced_pulse_generator.instruction.time": "Time",
+  "create_connected.gui.sequenced_pulse_generator.instruction.time.descriptive": "Output for time",
+  "create_connected.gui.sequenced_pulse_generator.instruction.time.duration": "Duration",
+  "create_connected.gui.sequenced_pulse_generator.signal": "Signal Strength",
+  "create_connected.gui.sequenced_pulse_generator.title": "Sequenced Pulse Generator",
   "create_connected.overstress_clutch.uncouple_delay": "Uncouple Delay",
   "itemGroup.create_connected.main": "Create: Connected"
 }

@@ -1,11 +1,12 @@
 package com.hlysine.create_connected.content.sequencedpulsegenerator.instructions;
 
+import com.hlysine.create_connected.CCGuiTextures;
 import com.hlysine.create_connected.content.sequencedpulsegenerator.SequencedPulseGeneratorBlockEntity;
 import net.minecraft.nbt.CompoundTag;
 
 public class EndInstruction extends Instruction {
     public EndInstruction() {
-        super("end", null, false);
+        super("end", CCGuiTextures.SEQUENCER_END, null, false, true);
     }
 
     @Override
