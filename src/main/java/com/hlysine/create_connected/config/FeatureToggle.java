@@ -76,23 +76,7 @@ public class FeatureToggle {
                     if (cachedParameters != null) {
                         CreativeModeTabsAccessor.callBuildAllTabContents(cachedParameters);
                     }
-                    Mods.JEI.executeIfInstalled(() -> () -> {
-                        if (CreateConnectedJEI.MANAGER != null) {
-                            CreateConnectedJEI.MANAGER.removeIngredientsAtRuntime(
-                                    VanillaTypes.ITEM_STACK,
-                                    CCCreativeTabs.ITEMS.stream()
-                                            .map(ItemProviderEntry::asStack)
-                                            .collect(Collectors.toList())
-                            );
-                            CreateConnectedJEI.MANAGER.addIngredientsAtRuntime(
-                                    VanillaTypes.ITEM_STACK,
-                                    CCCreativeTabs.ITEMS.stream()
-                                            .filter(x -> isEnabled(x.getId()))
-                                            .map(ItemProviderEntry::asStack)
-                                            .collect(Collectors.toList())
-                            );
-                        }
-                    });
+                    Mods.JEI.executeIfInstalled(() -> CreateConnectedJEI::refreshItemList);
                 })
         );
     }
