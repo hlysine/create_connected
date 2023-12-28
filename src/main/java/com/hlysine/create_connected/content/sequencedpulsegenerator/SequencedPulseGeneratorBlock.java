@@ -87,6 +87,18 @@ public class SequencedPulseGeneratorBlock extends AbstractDiodeBlock implements 
 
     @SuppressWarnings("deprecation")
     @Override
+    public boolean hasAnalogOutputSignal(@NotNull BlockState state) {
+        return true;
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    public int getAnalogOutputSignal(@NotNull BlockState state, @NotNull Level world, @NotNull BlockPos pos) {
+        return getBlockEntityOptional(world, pos).map(be -> be.currentInstruction + 1).orElse(0);
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
     public @NotNull InteractionResult use(@NotNull BlockState state,
                                           @NotNull Level worldIn,
                                           @NotNull BlockPos pos,
