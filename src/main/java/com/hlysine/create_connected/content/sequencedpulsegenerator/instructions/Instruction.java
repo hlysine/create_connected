@@ -97,7 +97,7 @@ public abstract class Instruction {
 
     public static Vector<Instruction> createDefault() {
         Vector<Instruction> instructions = new Vector<>(INSTRUCTION_CAPACITY);
-        instructions.add(new TimeInstruction(10, 15));
+        instructions.add(new OutputInstruction(10, 15));
         instructions.add(new EndInstruction());
         return instructions;
     }

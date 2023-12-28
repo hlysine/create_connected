@@ -29,10 +29,11 @@ public class SequencedPulseGeneratorBlockEntity extends SmartBlockEntity {
     private static final float PARTICLE_DENSITY = 0.2f;
 
     static {
-        Instruction.register(new TimeInstruction(10, 15));
-        Instruction.register(new AwaitInstruction(1, 0));
-        Instruction.register(new LoopInstruction(3));
-        Instruction.register(new JumpIfInstruction(1));
+        Instruction.register(new OutputInstruction(10, 15));
+        Instruction.register(new WaitForInstruction(1, 0));
+        Instruction.register(new LoopForInstruction(3));
+        Instruction.register(new LoopIfInstruction(1));
+        Instruction.register(new LoopInstruction());
         Instruction.register(new EndInstruction());
     }
 

@@ -4,12 +4,12 @@ import com.hlysine.create_connected.CCGuiTextures;
 import com.hlysine.create_connected.content.sequencedpulsegenerator.SequencedPulseGeneratorBlockEntity;
 import net.minecraft.nbt.CompoundTag;
 
-public class AwaitInstruction extends Instruction {
+public class LoopIfInstruction extends Instruction {
 
-    public AwaitInstruction(int target, int signal) {
+    public LoopIfInstruction(int target) {
         super(
-                "await",
-                CCGuiTextures.SEQUENCER_INSTRUCTION,
+                "loop_if",
+                CCGuiTextures.SEQUENCER_DELAY,
                 new ParameterConfig("target",
                         0,
                         1,
@@ -17,23 +17,18 @@ public class AwaitInstruction extends Instruction {
                         1,
                         1,
                         ParameterConfig.booleanFormat),
-                true,
+                false,
                 false
         );
         setValue(target);
-        setSignal(signal);
     }
 
     @Override
-    public InstructionResult onRisingEdge(SequencedPulseGeneratorBlockEntity be) {
-        if (getValue() == 1) return InstructionResult.next(true);
-        return InstructionResult.incomplete();
-    }
-
-    @Override
-    public InstructionResult onFallingEdge(SequencedPulseGeneratorBlockEntity be) {
-        if (getValue() == 0) return InstructionResult.next(true);
-        return InstructionResult.incomplete();
+    public InstructionResult tick(SequencedPulseGeneratorBlockEntity be) {
+        if (be.isPowered() == (getValue() == 1)) {
+            return InstructionResult.backToTop(true);
+        }
+        return InstructionResult.next(true);
     }
 
     @Override
@@ -46,6 +41,6 @@ public class AwaitInstruction extends Instruction {
 
     @Override
     public Instruction copy() {
-        return new AwaitInstruction(getValue(), getSignal());
+        return new LoopIfInstruction(getValue());
     }
 }

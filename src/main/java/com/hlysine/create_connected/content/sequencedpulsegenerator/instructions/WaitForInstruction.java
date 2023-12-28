@@ -4,12 +4,12 @@ import com.hlysine.create_connected.CCGuiTextures;
 import com.hlysine.create_connected.content.sequencedpulsegenerator.SequencedPulseGeneratorBlockEntity;
 import net.minecraft.nbt.CompoundTag;
 
-public class JumpIfInstruction extends Instruction {
+public class WaitForInstruction extends Instruction {
 
-    public JumpIfInstruction(int target) {
+    public WaitForInstruction(int target, int signal) {
         super(
-                "jump_if",
-                CCGuiTextures.SEQUENCER_DELAY,
+                "wait_for",
+                CCGuiTextures.SEQUENCER_INSTRUCTION,
                 new ParameterConfig("target",
                         0,
                         1,
@@ -17,18 +17,23 @@ public class JumpIfInstruction extends Instruction {
                         1,
                         1,
                         ParameterConfig.booleanFormat),
-                false,
+                true,
                 false
         );
         setValue(target);
+        setSignal(signal);
     }
 
     @Override
-    public InstructionResult tick(SequencedPulseGeneratorBlockEntity be) {
-        if (be.isPowered() == (getValue() == 1)) {
-            return InstructionResult.backToTop(true);
-        }
-        return InstructionResult.next(true);
+    public InstructionResult onRisingEdge(SequencedPulseGeneratorBlockEntity be) {
+        if (getValue() == 1) return InstructionResult.next(true);
+        return InstructionResult.incomplete();
+    }
+
+    @Override
+    public InstructionResult onFallingEdge(SequencedPulseGeneratorBlockEntity be) {
+        if (getValue() == 0) return InstructionResult.next(true);
+        return InstructionResult.incomplete();
     }
 
     @Override
@@ -41,6 +46,6 @@ public class JumpIfInstruction extends Instruction {
 
     @Override
     public Instruction copy() {
-        return new JumpIfInstruction(getValue());
+        return new WaitForInstruction(getValue(), getSignal());
     }
 }

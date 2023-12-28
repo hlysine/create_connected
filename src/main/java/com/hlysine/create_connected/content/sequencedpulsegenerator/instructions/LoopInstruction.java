@@ -5,47 +5,27 @@ import com.hlysine.create_connected.content.sequencedpulsegenerator.SequencedPul
 import net.minecraft.nbt.CompoundTag;
 
 public class LoopInstruction extends Instruction {
-    private int progress = 0;
-
-    public LoopInstruction(int target) {
-        super(
-                "loop",
-                CCGuiTextures.SEQUENCER_DELAY,
-                new ParameterConfig("repeat",
-                        1,
-                        100,
-                        null,
-                        10,
-                        3,
-                        null),
-                false,
-                false
-        );
-        setValue(target);
+    public LoopInstruction() {
+        super("loop", CCGuiTextures.SEQUENCER_END, null, false, true);
     }
 
     @Override
     public InstructionResult tick(SequencedPulseGeneratorBlockEntity be) {
-        progress++;
-        if (progress >= getValue()) {
-            progress = 0;
-            return InstructionResult.next(true);
-        }
         return InstructionResult.backToTop(true);
     }
 
     @Override
     public void writeState(CompoundTag nbt) {
-        nbt.putInt("Progress", progress);
+
     }
 
     @Override
     public void readState(CompoundTag nbt) {
-        progress = nbt.getInt("Progress");
+
     }
 
     @Override
     public Instruction copy() {
-        return new LoopInstruction(getValue());
+        return new LoopInstruction();
     }
 }
