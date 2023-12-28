@@ -3,7 +3,6 @@ package com.hlysine.create_connected.datagen;
 import com.hlysine.create_connected.content.brassgearbox.BrassGearboxBlock;
 import com.hlysine.create_connected.content.sequencedpulsegenerator.SequencedPulseGeneratorBlock;
 import com.mojang.datafixers.util.Function4;
-import com.simibubi.create.foundation.data.BlockStateGen;
 import com.simibubi.create.foundation.utility.Iterate;
 import com.tterrag.registrate.providers.DataGenContext;
 import com.tterrag.registrate.providers.RegistrateBlockstateProvider;
@@ -20,7 +19,6 @@ import org.apache.commons.lang3.function.TriFunction;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
-import java.util.function.BiFunction;
 import java.util.function.Function;
 
 public class CCBlockStateGen {
