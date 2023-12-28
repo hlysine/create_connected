@@ -28,6 +28,7 @@ public class LoopInstruction extends Instruction {
     public InstructionResult tick(SequencedPulseGeneratorBlockEntity be) {
         progress++;
         if (progress >= getValue()) {
+            progress = 0;
             return InstructionResult.next(true);
         }
         return InstructionResult.backToTop(true);
