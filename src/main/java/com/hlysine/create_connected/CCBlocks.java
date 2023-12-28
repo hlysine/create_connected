@@ -203,6 +203,7 @@ public class CCBlocks {
                     .initialProperties(() -> Blocks.REPEATER)
                     .tag(AllTags.AllBlockTags.SAFE_NBT.tag)
                     .blockstate(CCBlockStateGen.sequencedPulseGenerator())
+                    .transform(FeatureToggle.register())
                     .addLayer(() -> RenderType::cutoutMipped)
                     .simpleItem()
                     .register();

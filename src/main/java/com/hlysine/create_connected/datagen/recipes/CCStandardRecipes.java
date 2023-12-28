@@ -147,6 +147,19 @@ public class CCStandardRecipes extends CreateRecipeProvider {
                     .requires(Blocks.OBSIDIAN)
             );
 
+    GeneratedRecipe SEQUENCED_PULSE_GENERATOR = create(CCBlocks.SEQUENCED_PULSE_GENERATOR).unlockedBy(CCItems.CONTROL_CHIP::get)
+            .requiresResultFeature()
+            .viaShaped(b -> b
+                    .define('E', AllItems.ELECTRON_TUBE)
+                    .define('B', AllItems.BRASS_SHEET)
+                    .define('C', CCItems.CONTROL_CHIP)
+                    .define('T', Blocks.REDSTONE_TORCH)
+                    .define('S', Tags.Items.STONE)
+                    .pattern("EC ")
+                    .pattern("EBT")
+                    .pattern("SSS")
+            );
+
     GeneratedRecipe ITEM_SILO = create(CCBlocks.ITEM_SILO).unlockedByTag(() -> Tags.Items.BARRELS_WOODEN)
             .requiresResultFeature()
             .viaShaped(b -> b

@@ -1,14 +1,19 @@
 package com.hlysine.create_connected.content.sequencedpulsegenerator;
 
 import com.hlysine.create_connected.content.sequencedpulsegenerator.instructions.*;
+import com.hlysine.create_connected.datagen.advancements.AdvancementBehaviour;
+import com.hlysine.create_connected.datagen.advancements.CCAdvancements;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
 import java.util.Vector;
@@ -21,6 +26,7 @@ public class SequencedPulseGeneratorBlockEntity extends SmartBlockEntity {
 
     public static final int INSTRUCTION_CAPACITY = 7;
     private static final int MAX_RECURSION_DEPTH = 10;
+    private static final float PARTICLE_DENSITY = 0.2f;
 
     static {
         Instruction.register(new TimeInstruction(10, 15));
@@ -35,6 +41,7 @@ public class SequencedPulseGeneratorBlockEntity extends SmartBlockEntity {
     int currentSignal;
     boolean poweredPreviously;
     boolean isPowered;
+    int infiniteLoopCounter;
 
     public SequencedPulseGeneratorBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
@@ -42,10 +49,12 @@ public class SequencedPulseGeneratorBlockEntity extends SmartBlockEntity {
         currentInstruction = -1;
         currentSignal = 0;
         poweredPreviously = false;
+        infiniteLoopCounter = 0;
     }
 
     @Override
     public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
+        AdvancementBehaviour.registerAwardables(this, behaviours, CCAdvancements.PULSE_GEN_INFINITE_LOOP);
     }
 
     public boolean isIdle() {
@@ -94,8 +103,23 @@ public class SequencedPulseGeneratorBlockEntity extends SmartBlockEntity {
             }
         }
         currentInstruction = result.getNextInstruction(currentInstruction);
-        if (result.isImmediate() && recursionDepth < MAX_RECURSION_DEPTH)
-            executeInstruction(instructionEvent, recursionDepth + 1);
+        if (result.isImmediate()) {
+            if (recursionDepth < MAX_RECURSION_DEPTH) {
+                executeInstruction(instructionEvent, recursionDepth + 1);
+            } else {
+                infiniteLoopCounter++;
+                if (level.getRandom().nextFloat() < PARTICLE_DENSITY) {
+                    Vec3 loc = Vec3.atBottomCenterOf(getBlockPos());
+                    ((ServerLevel) level).sendParticles(ParticleTypes.SMOKE, loc.x, loc.y, loc.z, 2, 0.1, 0, 0.1, 0.01);
+                }
+                if (!level.isClientSide() && infiniteLoopCounter > 101) {
+                    infiniteLoopCounter = 0;
+                    AdvancementBehaviour.tryAward(this, CCAdvancements.PULSE_GEN_INFINITE_LOOP);
+                }
+            }
+        } else {
+            infiniteLoopCounter = 0;
+        }
         if (recursionDepth == 0) {
             notifyUpdate();
         }

@@ -1,6 +1,7 @@
 package com.hlysine.create_connected.content.sequencedpulsegenerator;
 
 import com.hlysine.create_connected.CCBlockEntityTypes;
+import com.hlysine.create_connected.datagen.advancements.AdvancementBehaviour;
 import com.simibubi.create.AllItems;
 import com.simibubi.create.content.redstone.diodes.AbstractDiodeBlock;
 import com.simibubi.create.content.redstone.diodes.BrassDiodeBlock;
@@ -13,6 +14,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
@@ -44,6 +46,11 @@ public class SequencedPulseGeneratorBlock extends AbstractDiodeBlock implements 
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(POWERED, POWERING, FACING);
         super.createBlockStateDefinition(builder);
+    }
+
+    @Override
+    public void setPlacedBy(@NotNull Level worldIn, @NotNull BlockPos pos, @NotNull BlockState state, @NotNull LivingEntity placer, @NotNull ItemStack stack) {
+        AdvancementBehaviour.trackOwner(worldIn, pos, placer);
     }
 
     @Override
