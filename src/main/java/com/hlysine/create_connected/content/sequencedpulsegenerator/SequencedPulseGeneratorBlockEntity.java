@@ -136,6 +136,7 @@ public class SequencedPulseGeneratorBlockEntity extends SmartBlockEntity {
         instructions = newInstructions;
 
         executeInstruction(i -> i::onRisingEdge);
+        executeInstruction(i -> i::tick);
     }
 
     @Override

@@ -27,10 +27,10 @@ public class TimeInstruction extends Instruction {
 
     @Override
     public InstructionResult tick(SequencedPulseGeneratorBlockEntity be) {
-        if (progress >= getValue()) {
-            return InstructionResult.next(false);
-        }
         progress++;
+        if (progress >= getValue()) {
+            return InstructionResult.next(getValue() <= 0);
+        }
         return InstructionResult.incomplete();
     }
 

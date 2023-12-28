@@ -68,7 +68,7 @@ public class SequencedPulseGeneratorBlock extends AbstractDiodeBlock implements 
 
     @Override
     protected int getDelay(@NotNull BlockState state) {
-        return 0;
+        return 2;
     }
 
     @Override
