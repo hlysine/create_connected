@@ -82,11 +82,11 @@ public class SequencedPulseGeneratorBlockEntity extends SmartBlockEntity {
                 : null;
     }
 
-    private void executeInstruction(Function<Instruction, Function<SequencedPulseGeneratorBlockEntity, InstructionResult>> instructionEvent) {
-        executeInstruction(instructionEvent, 0);
+    private void executeInstruction(Function<Instruction, Function<SequencedPulseGeneratorBlockEntity, InstructionResult>> instructionEvent, boolean allowImmediate) {
+        executeInstruction(instructionEvent, allowImmediate, 0);
     }
 
-    private void executeInstruction(Function<Instruction, Function<SequencedPulseGeneratorBlockEntity, InstructionResult>> instructionEvent, int recursionDepth) {
+    private void executeInstruction(Function<Instruction, Function<SequencedPulseGeneratorBlockEntity, InstructionResult>> instructionEvent, boolean allowImmediate, int recursionDepth) {
         Instruction instruction = getCurrentInstruction();
         if (instruction == null) {
             currentInstruction = -1;
@@ -103,9 +103,9 @@ public class SequencedPulseGeneratorBlockEntity extends SmartBlockEntity {
             }
         }
         currentInstruction = result.getNextInstruction(currentInstruction);
-        if (result.isImmediate()) {
+        if (result.isImmediate() && allowImmediate) {
             if (recursionDepth < MAX_RECURSION_DEPTH) {
-                executeInstruction(instructionEvent, recursionDepth + 1);
+                executeInstruction(instructionEvent, true, recursionDepth + 1);
             } else {
                 infiniteLoopCounter++;
                 if (level.getRandom().nextFloat() < PARTICLE_DENSITY) {
@@ -135,16 +135,16 @@ public class SequencedPulseGeneratorBlockEntity extends SmartBlockEntity {
             return;
 
         isPowered = getBlockState().getValue(POWERED);
-        executeInstruction(i -> i::tick);
+        executeInstruction(i -> i::tick, true);
     }
 
     public void onRedstoneUpdate(boolean isPowered) {
         this.isPowered = isPowered;
         if (isPowered == poweredPreviously) return;
         if (!poweredPreviously && isPowered && !isIdle())
-            executeInstruction(i -> i::onRisingEdge);
+            executeInstruction(i -> i::onRisingEdge, false);
         if (poweredPreviously && !isPowered && !isIdle())
-            executeInstruction(i -> i::onFallingEdge);
+            executeInstruction(i -> i::onFallingEdge, false);
         poweredPreviously = isPowered;
         if (!isIdle() || !isPowered)
             return;
@@ -159,8 +159,7 @@ public class SequencedPulseGeneratorBlockEntity extends SmartBlockEntity {
         instructions.forEach(i -> newInstructions.add(i.copy()));
         instructions = newInstructions;
 
-        executeInstruction(i -> i::onRisingEdge);
-        executeInstruction(i -> i::tick);
+        executeInstruction(i -> i::tick, true);
     }
 
     @Override
