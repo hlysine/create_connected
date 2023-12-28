@@ -146,6 +146,12 @@ public class SequencedPulseGeneratorBlockEntity extends SmartBlockEntity {
         executeInstruction(i -> i::tick, true);
     }
 
+    private void resetAllInstructions() {
+        Vector<Instruction> newInstructions = new Vector<>(instructions.capacity());
+        instructions.forEach(i -> newInstructions.add(i.copy()));
+        instructions = newInstructions;
+    }
+
     public void onRedstoneUpdate(boolean isPowered) {
         this.isPowered = isPowered;
         if (isPowered == poweredPreviously) return;
@@ -162,12 +168,18 @@ public class SequencedPulseGeneratorBlockEntity extends SmartBlockEntity {
         }
         currentInstruction = 0;
 
-        // copy instructions to reset states
-        Vector<Instruction> newInstructions = new Vector<>(instructions.capacity());
-        instructions.forEach(i -> newInstructions.add(i.copy()));
-        instructions = newInstructions;
+        resetAllInstructions();
 
         executeInstruction(i -> i::tick, true);
+    }
+
+    public void reset() {
+        resetAllInstructions();
+        currentInstruction = -1;
+        infiniteLoopCounter = 0;
+        currentSignal = 0;
+        applySignal();
+        notifyUpdate();
     }
 
     @Override

@@ -15,7 +15,10 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
+import org.apache.commons.lang3.function.TriFunction;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Vector;
 import java.util.function.BiFunction;
 import java.util.function.Function;
@@ -23,29 +26,36 @@ import java.util.function.Function;
 public class CCBlockStateGen {
     public static <B extends SequencedPulseGeneratorBlock> NonNullBiConsumer<DataGenContext<Block, B>, RegistrateBlockstateProvider> sequencedPulseGenerator() {
         return (c, p) -> {
-            ResourceLocation baseOff = p.modLoc("block/" + c.getName() + "_off");
-            ResourceLocation baseOn = p.modLoc("block/" + c.getName() + "_on");
+            Map<Boolean, ResourceLocation> baseOff = new HashMap<>();
+            baseOff.put(false, p.modLoc("block/" + c.getName() + "_off"));
+            baseOff.put(true, p.modLoc("block/" + c.getName() + "_off_reset"));
+            Map<Boolean, ResourceLocation> baseOn = new HashMap<>();
+            baseOn.put(false, p.modLoc("block/" + c.getName() + "_on"));
+            baseOn.put(true, p.modLoc("block/" + c.getName() + "_on_reset"));
             ResourceLocation torchOff = new ResourceLocation("block/redstone_torch_off");
             ResourceLocation torchOn = new ResourceLocation("block/redstone_torch");
 
             Vector<ModelFile> models = new Vector<>(4);
             for (boolean isPowered : Iterate.falseAndTrue)
                 for (boolean isPowering : Iterate.falseAndTrue)
-                    models.add(p.models()
-                            .withExistingParent(
-                                    c.getName()
-                                            + (isPowered ? "_powered" : "")
-                                            + (isPowering ? "_powering" : ""),
-                                    p.modLoc("block/" + c.getName())
-                            )
-                            .texture("1_top", isPowered ? baseOn : baseOff)
-                            .texture("torch", isPowering ? torchOn : torchOff)
-                    );
-            BiFunction<Boolean, Boolean, ModelFile> modelFunc = (f1, f2) -> models.get((f1 ? 2 : 0) + (f2 ? 1 : 0));
+                    for (boolean isSidePowered : Iterate.falseAndTrue)
+                        models.add(p.models()
+                                .withExistingParent(
+                                        c.getName()
+                                                + (isPowered ? "_powered" : "")
+                                                + (isPowering ? "_powering" : "")
+                                                + (isSidePowered ? "_reset" : ""),
+                                        p.modLoc("block/" + c.getName())
+                                )
+                                .texture("1_top", isPowered ? baseOn.get(isSidePowered) : baseOff.get(isSidePowered))
+                                .texture("torch", isPowering ? torchOn : torchOff)
+                        );
+            TriFunction<Boolean, Boolean, Boolean, ModelFile> modelFunc = (f1, f2, f3) -> models.get((f1 ? 4 : 0) + (f2 ? 2 : 0) + (f3 ? 1 : 0));
 
             p.horizontalBlock(c.get(), state -> modelFunc.apply(
                     state.getValue(SequencedPulseGeneratorBlock.POWERED),
-                    state.getValue(SequencedPulseGeneratorBlock.POWERING)
+                    state.getValue(SequencedPulseGeneratorBlock.POWERING),
+                    state.getValue(SequencedPulseGeneratorBlock.POWERED_SIDE)
             ));
         };
     }
