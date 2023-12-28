@@ -1,6 +1,7 @@
 package com.hlysine.create_connected.content.sequencedpulsegenerator;
 
 import java.util.Vector;
+import java.util.function.Function;
 
 import com.hlysine.create_connected.CCBlocks;
 import com.hlysine.create_connected.CCGuiTextures;
@@ -150,7 +151,8 @@ public class SequencedPulseGeneratorScreen extends AbstractSimiScreen {
 
             label(graphics, 36, yOffset - 1, Lang.translateDirect(instruction.getLangKey()));
             if (instruction.parameter != null) {
-                String text = instruction.parameter.formatter().apply(instruction.getValue());
+                Function<Integer, String> formatter = instruction.parameter.formatter();
+                String text = formatter == null ? String.valueOf(instruction.getValue()) : formatter.apply(instruction.getValue());
                 int stringWidth = font.width(text);
                 label(graphics, 90 + (12 - stringWidth / 2), yOffset - 1, Components.literal(text));
             }

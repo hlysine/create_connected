@@ -22,6 +22,10 @@ public abstract class InstructionResult {
         return new NextInstruction(immediate);
     }
 
+    public static InstructionResult backToTop(boolean immediate) {
+        return new BackToTop(immediate);
+    }
+
     public static InstructionResult terminate() {
         return new EndSequence();
     }
@@ -45,6 +49,17 @@ public abstract class InstructionResult {
         @Override
         public int getNextInstruction(int currentInstruction) {
             return currentInstruction + 1;
+        }
+    }
+
+    public static class BackToTop extends InstructionResult {
+        public BackToTop(boolean immediateExecution) {
+            super(immediateExecution);
+        }
+
+        @Override
+        public int getNextInstruction(int currentInstruction) {
+            return 0;
         }
     }
 

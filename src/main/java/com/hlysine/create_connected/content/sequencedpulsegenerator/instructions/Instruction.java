@@ -185,7 +185,7 @@ public abstract class Instruction {
                                   @Nullable Function<ScrollValueBehaviour.StepContext, Integer> stepFunction,
                                   int shiftStepValue,
                                   int defaultValue,
-                                  Function<Integer, String> formatter) {
+                                  @Nullable Function<Integer, String> formatter) {
         public static final Function<ScrollValueBehaviour.StepContext, Integer> timeStep = context -> {
             int v = context.currentValue;
             if (!context.forward)
@@ -198,5 +198,6 @@ public abstract class Instruction {
             if (value >= 20) return (value / 20) + "s";
             return value + "t";
         };
+        public static final Function<Integer, String> booleanFormat = value -> value == 1 ? "On" : "Off";
     }
 }

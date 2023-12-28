@@ -1,9 +1,6 @@
 package com.hlysine.create_connected.content.sequencedpulsegenerator;
 
-import com.hlysine.create_connected.content.sequencedpulsegenerator.instructions.EndInstruction;
-import com.hlysine.create_connected.content.sequencedpulsegenerator.instructions.Instruction;
-import com.hlysine.create_connected.content.sequencedpulsegenerator.instructions.InstructionResult;
-import com.hlysine.create_connected.content.sequencedpulsegenerator.instructions.TimeInstruction;
+import com.hlysine.create_connected.content.sequencedpulsegenerator.instructions.*;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import net.minecraft.core.BlockPos;
@@ -27,6 +24,9 @@ public class SequencedPulseGeneratorBlockEntity extends SmartBlockEntity {
 
     static {
         Instruction.register(new TimeInstruction(10, 15));
+        Instruction.register(new AwaitInstruction(1, 0));
+        Instruction.register(new LoopInstruction(3));
+        Instruction.register(new JumpIfInstruction(1));
         Instruction.register(new EndInstruction());
     }
 
