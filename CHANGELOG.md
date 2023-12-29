@@ -18,7 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Parallel Gearbox
   - Sequenced Pulse Generator
 
-## Fixed
+### Fixed
 
 - Z-fighting on the model of Encased Chain Cogwheel
 - Crash when JEI is not installed (#7)
