@@ -3,12 +3,7 @@
   "criteria": {
     "0": {
       "conditions": {
-        "location": [
-          {
-            "block": "create_connected:sequenced_pulse_generator",
-            "condition": "minecraft:block_state_property"
-          }
-        ]
+        "block": "create_connected:sequenced_pulse_generator"
       },
       "trigger": "minecraft:placed_block"
     }
@@ -33,6 +28,5 @@
     [
       "0"
     ]
-  ],
-  "sends_telemetry_event": true
+  ]
 }
