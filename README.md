@@ -37,7 +37,7 @@ Visit [the GitHub wiki](https://github.com/hlysine/create_connected/wiki/Feature
 Selectively enable/disable features in this mod as you see fit. Disabled features are unobtainable in survival and
 hidden in creative/JEI.
 
-![Feature Toggle System](https://cdn.modrinth.com/data/Vg5TIO6d/images/d74a9a1a353caee83b0d5dc69c60305a14699d3a.png)
+[![Feature Toggle System](https://cdn.modrinth.com/data/Vg5TIO6d/images/d74a9a1a353caee83b0d5dc69c60305a14699d3a.png)](https://github.com/hlysine/create_connected/wiki/Configs)
 
 ### Enhancements to Create
 
