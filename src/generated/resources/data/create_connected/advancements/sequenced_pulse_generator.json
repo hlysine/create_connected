@@ -1,27 +1,27 @@
 {
   "parent": "create_connected:control_chip",
-  "criteria": {
-    "0": {
-      "conditions": {
-        "block": "create_connected:sequenced_pulse_generator"
-      },
-      "trigger": "minecraft:placed_block"
-    }
-  },
   "display": {
-    "announce_to_chat": false,
+    "icon": {
+      "item": "create_connected:sequenced_pulse_generator"
+    },
+    "title": {
+      "translate": "advancement.create_connected.sequenced_pulse_generator"
+    },
     "description": {
       "color": "#DBA213",
       "translate": "advancement.create_connected.sequenced_pulse_generator.desc"
     },
     "frame": "task",
-    "hidden": false,
-    "icon": {
-      "item": "create_connected:sequenced_pulse_generator"
-    },
     "show_toast": true,
-    "title": {
-      "translate": "advancement.create_connected.sequenced_pulse_generator"
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "criteria": {
+    "0": {
+      "trigger": "minecraft:placed_block",
+      "conditions": {
+        "block": "create_connected:sequenced_pulse_generator"
+      }
     }
   },
   "requirements": [

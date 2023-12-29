@@ -4,35 +4,35 @@
     {
       "conditions": [
         {
-          "type": "create_connected:feature_enabled",
           "feature": "create_connected:sequenced_pulse_generator",
-          "invert": false
+          "invert": false,
+          "type": "create_connected:feature_enabled"
         }
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "EC ",
+          "EBT",
+          "SSS"
+        ],
         "key": {
+          "E": {
+            "item": "create:electron_tube"
+          },
           "B": {
             "item": "create:brass_sheet"
           },
           "C": {
             "item": "create_connected:control_chip"
           },
-          "E": {
-            "item": "create:electron_tube"
+          "T": {
+            "item": "minecraft:redstone_torch"
           },
           "S": {
             "tag": "forge:stone"
-          },
-          "T": {
-            "item": "minecraft:redstone_torch"
           }
         },
-        "pattern": [
-          "EC ",
-          "EBT",
-          "SSS"
-        ],
         "result": {
           "item": "create_connected:sequenced_pulse_generator"
         }

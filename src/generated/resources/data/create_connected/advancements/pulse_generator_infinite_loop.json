@@ -1,25 +1,25 @@
 {
   "parent": "create_connected:sequenced_pulse_generator",
-  "criteria": {
-    "0": {
-      "conditions": {},
-      "trigger": "create_connected:pulse_generator_infinite_loop_builtin"
-    }
-  },
   "display": {
-    "announce_to_chat": true,
+    "icon": {
+      "item": "create_connected:incomplete_control_chip"
+    },
+    "title": {
+      "translate": "advancement.create_connected.pulse_generator_infinite_loop"
+    },
     "description": {
       "color": "#DBA213",
       "translate": "advancement.create_connected.pulse_generator_infinite_loop.desc"
     },
     "frame": "goal",
-    "hidden": true,
-    "icon": {
-      "item": "create_connected:incomplete_control_chip"
-    },
     "show_toast": true,
-    "title": {
-      "translate": "advancement.create_connected.pulse_generator_infinite_loop"
+    "announce_to_chat": true,
+    "hidden": true
+  },
+  "criteria": {
+    "0": {
+      "trigger": "create_connected:pulse_generator_infinite_loop_builtin",
+      "conditions": {}
     }
   },
   "requirements": [
