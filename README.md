@@ -10,8 +10,6 @@
 
 A Create mod add-on adding quality-of-life blocks that you wish existed in Create.
 
-**Pre-release version. Make regular backups!**
-
 ## What's new in BETA
 
 A feature toggle system is added, allowing you to selectively disable blocks added by this mod without needing
@@ -60,6 +58,8 @@ datapacks/CraftTweaker/KubeJS. When you disable a feature:
     - A clutch that is only coupled if the input spins in the correct direction as configured
 - Brake
     - A device that produces immense stress when powered, halting the network by overstressing it
+- Sequenced Pulse Generator
+    - A flexible diode that can output precisely-timed redstone pulses according to a configured sequence
 - Item Silo
     - A vertical item vault
 - Fan Blasting/Smoking/Washing/Haunting Catalysts
