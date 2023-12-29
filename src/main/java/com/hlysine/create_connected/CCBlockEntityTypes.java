@@ -13,10 +13,12 @@ import com.hlysine.create_connected.content.overstressclutch.OverstressClutchBlo
 import com.hlysine.create_connected.content.parallelgearbox.ParallelGearboxBlockEntity;
 import com.hlysine.create_connected.content.parallelgearbox.ParallelGearboxInstance;
 import com.hlysine.create_connected.content.parallelgearbox.ParallelGearboxRenderer;
+import com.hlysine.create_connected.content.sequencedpulsegenerator.SequencedPulseGeneratorBlockEntity;
 import com.hlysine.create_connected.content.shearpin.ShearPinBlockEntity;
 import com.hlysine.create_connected.content.sixwaygearbox.SixWayGearboxBlockEntity;
 import com.hlysine.create_connected.content.sixwaygearbox.SixWayGearboxInstance;
 import com.hlysine.create_connected.content.sixwaygearbox.SixWayGearboxRenderer;
+import com.simibubi.create.AllBlocks;
 import com.simibubi.create.content.kinetics.simpleRelays.BracketedKineticBlockEntityInstance;
 import com.simibubi.create.content.kinetics.simpleRelays.BracketedKineticBlockEntityRenderer;
 import com.simibubi.create.content.kinetics.simpleRelays.SimpleKineticBlockEntity;
@@ -24,8 +26,13 @@ import com.simibubi.create.content.kinetics.simpleRelays.encased.EncasedCogInsta
 import com.simibubi.create.content.kinetics.simpleRelays.encased.EncasedCogRenderer;
 import com.simibubi.create.content.kinetics.transmission.SplitShaftInstance;
 import com.simibubi.create.content.kinetics.transmission.SplitShaftRenderer;
+import com.simibubi.create.content.redstone.diodes.BrassDiodeInstance;
+import com.simibubi.create.content.redstone.diodes.BrassDiodeRenderer;
+import com.simibubi.create.content.redstone.diodes.PulseRepeaterBlockEntity;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
+
+import static com.simibubi.create.Create.REGISTRATE;
 
 public class CCBlockEntityTypes {
     private static final CreateRegistrate REGISTRATE = CreateConnected.getRegistrate();
@@ -112,6 +119,11 @@ public class CCBlockEntityTypes {
     public static final BlockEntityEntry<ItemSiloBlockEntity> ITEM_SILO = REGISTRATE
             .blockEntity("item_silo", ItemSiloBlockEntity::new)
             .validBlocks(CCBlocks.ITEM_SILO)
+            .register();
+
+    public static final BlockEntityEntry<SequencedPulseGeneratorBlockEntity> SEQUENCED_PULSE_GENERATOR = REGISTRATE
+            .blockEntity("sequenced_pulse_generator", SequencedPulseGeneratorBlockEntity::new)
+            .validBlocks(CCBlocks.SEQUENCED_PULSE_GENERATOR)
             .register();
 
 

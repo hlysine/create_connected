@@ -71,23 +71,7 @@ public class FeatureToggle {
     static void refreshItemVisibility() {
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () ->
                 LogicalSidedProvider.WORKQUEUE.get(LogicalSide.CLIENT).submit(() -> {
-                    Mods.JEI.executeIfInstalled(() -> () -> {
-                        if (CreateConnectedJEI.MANAGER != null) {
-                            CreateConnectedJEI.MANAGER.removeIngredientsAtRuntime(
-                                    VanillaTypes.ITEM_STACK,
-                                    CCCreativeTabs.ITEMS.stream()
-                                            .map(ItemProviderEntry::asStack)
-                                            .collect(Collectors.toList())
-                            );
-                            CreateConnectedJEI.MANAGER.addIngredientsAtRuntime(
-                                    VanillaTypes.ITEM_STACK,
-                                    CCCreativeTabs.ITEMS.stream()
-                                            .filter(x -> isEnabled(x.getId()))
-                                            .map(ItemProviderEntry::asStack)
-                                            .collect(Collectors.toList())
-                            );
-                        }
-                    });
+                    Mods.JEI.executeIfInstalled(() -> CreateConnectedJEI::refreshItemList);
                 })
         );
     }

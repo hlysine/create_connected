@@ -55,6 +55,7 @@ public class CreateConnected {
         CCItems.register();
         CCBlockEntityTypes.register();
         CCCreativeTabs.register();
+        CCPackets.registerPackets();
 
         CCConfigs.register(ModLoadingContext.get());
         CCConfigs.common().register();

@@ -1,0 +1,7 @@
+{
+  "parent": "create_connected:block/sequenced_pulse_generator",
+  "textures": {
+    "1_top": "create_connected:block/sequenced_pulse_generator_off_reset",
+    "torch": "minecraft:block/redstone_torch_off"
+  }
+}
