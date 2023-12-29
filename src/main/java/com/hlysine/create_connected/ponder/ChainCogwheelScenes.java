@@ -39,17 +39,17 @@ public class ChainCogwheelScenes {
         scene.world.setKineticSpeed(gauge, 64);
         scene.effects.indicateSuccess(gaugePos);
         scene.idle(20);
-        scene.overlay.showText(60)
+        scene.overlay.showText(70)
                 .text("Chain Cogwheels are Chain Drives with an extra cogwheel")
                 .attachKeyFrame()
                 .placeNearTarget()
                 .pointAt(util.vector.blockSurface(util.grid.at(3, 1, 3), Direction.WEST));
-        scene.idle(60);
-        scene.overlay.showText(60)
+        scene.idle(80);
+        scene.overlay.showText(70)
                 .text("They connect to other chained components in a row")
                 .placeNearTarget()
                 .pointAt(util.vector.blockSurface(util.grid.at(3, 1, 3), Direction.WEST));
-        scene.idle(60);
+        scene.idle(80);
 
         Selection shafts = util.select.fromTo(2, 1, 0, 2, 1, 1);
         BlockPos rotatedECD = util.grid.at(3, 1, 0);
@@ -62,23 +62,23 @@ public class ChainCogwheelScenes {
         scene.effects.rotationDirectionIndicator(util.grid.at(2, 1, 0));
         scene.effects.rotationDirectionIndicator(util.grid.at(2, 1, 1));
         scene.idle(20);
-        scene.overlay.showText(60)
+        scene.overlay.showText(80)
                 .text("All shafts connected like this will rotate in the same direction")
                 .attachKeyFrame()
                 .placeNearTarget()
                 .pointAt(util.vector.blockSurface(util.grid.at(2, 1, 1), Direction.WEST));
-        scene.idle(50);
+        scene.idle(80);
         scene.world.hideSection(shafts, Direction.WEST);
         scene.idle(25);
 
         scene.world.showSection(extraLargeCog, Direction.DOWN);
         scene.idle(10);
-        scene.overlay.showText(60)
+        scene.overlay.showText(70)
                 .text("Cogwheels can connect to Chain Cogwheels anywhere in the row")
                 .attachKeyFrame()
                 .placeNearTarget()
                 .pointAt(extraLargeCog.getCenter());
-        scene.idle(60);
+        scene.idle(90);
 
         scene.addKeyframe();
         scene.overlay.showControls(new InputWindowElement(util.vector.topOf(rotatedECD), Pointing.DOWN).rightClick()
@@ -93,10 +93,11 @@ public class ChainCogwheelScenes {
 
         scene.effects.rotationDirectionIndicator(util.grid.at(3, 3, 0));
         scene.idle(10);
-        scene.overlay.showText(60)
+        scene.overlay.showText(70)
                 .text("Any part of the row can be rotated by 90 degrees")
                 .placeNearTarget()
                 .pointAt(util.vector.centerOf(3, 2, 0));
+        scene.idle(80);
 
         scene.markAsFinished();
     }
