@@ -93,6 +93,7 @@ public class ParallelGearboxScenes {
                 .pointAt(util.vector.centerOf(3, 2, 5))
                 .placeNearTarget()
                 .text("Straight connections will be reversed");
-
+        scene.idle(80);
+        scene.markAsFinished();
     }
 }
