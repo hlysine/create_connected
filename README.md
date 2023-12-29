@@ -12,8 +12,8 @@ A Create mod add-on adding quality-of-life blocks that you wish existed in Creat
 
 ## What's new in 0.3.0
 
-![SPG](https://github.com/hlysine/create_connected/assets/25472513/0fcfe97c-b17b-4536-85a1-1c808f335f60) [**Sequenced
-Pulse Generator**](https://github.com/hlysine/create_connected/wiki/Features#-sequenced-pulse-generator)
+![SPG](https://github.com/hlysine/create_connected/assets/25472513/0fcfe97c-b17b-4536-85a1-1c808f335f60) **Sequenced
+Pulse Generator**
 
 A highly-flexible programmable redstone diode. With a configuration GUI like the Sequenced Gearshift, it can be used to
 mimic many other diodes or even execute simple logic! Make sure you have good farms and factories though, because this
