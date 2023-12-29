@@ -10,7 +10,7 @@
 
 A Create mod add-on adding quality-of-life blocks that you wish existed in Create.
 
-## What's new in 0.3.0
+## What's new in 0.3
 
 ![SPG](https://github.com/hlysine/create_connected/assets/25472513/0fcfe97c-b17b-4536-85a1-1c808f335f60) **Sequenced
 Pulse Generator**
