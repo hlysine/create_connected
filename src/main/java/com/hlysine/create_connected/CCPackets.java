@@ -82,7 +82,7 @@ public enum CCPackets {
             getChannel().messageBuilder(type, index++, direction)
                     .encoder(encoder)
                     .decoder(decoder)
-                    .consumerNetworkThread(handler)
+                    .consumer(handler)
                     .add();
         }
     }
