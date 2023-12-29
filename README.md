@@ -10,68 +10,40 @@
 
 A Create mod add-on adding quality-of-life blocks that you wish existed in Create.
 
-## What's new in BETA
+## What's new in 0.3.0
 
-A feature toggle system is added, allowing you to selectively disable blocks added by this mod without needing
-datapacks/CraftTweaker/KubeJS. When you disable a feature:
+![SPG](https://github.com/hlysine/create_connected/assets/25472513/0fcfe97c-b17b-4536-85a1-1c808f335f60) [**Sequenced
+Pulse Generator**](https://github.com/hlysine/create_connected/wiki/Features#-sequenced-pulse-generator)
 
-- all related recipes are disabled, making the block unobtainable in survival
-- the item is hidden in creative inventory and JEI
-- existing blocks in the world are not affected, so existing machines won't break
-- a config sync system is in place so that the server's config overrides all clients.
-- datapacks are still respected, and will override the feature toggle unless the `feature_enabled` condition is
-  included.
+A highly-flexible programmable redstone diode. With a configuration GUI like the Sequenced Gearshift, it can be used to
+mimic many other diodes or even execute simple logic! Make sure you have good farms and factories though, because this
+thing is *not cheap*.
 
-**Remember to RESTART after you enable/disable features**
+**Ponders**
 
-![Feature Toggle System](https://cdn.modrinth.com/data/Vg5TIO6d/images/d74a9a1a353caee83b0d5dc69c60305a14699d3a.png)
+Ponders are added for some of the components. This is still an on-going effort. Items that don't have ponders yet will
+get a short summary instead.
 
 ## Features
 
-- New Item Attributes
-    - Item ID contains *word*
-    - Item has X max durability
-    - Item stacks to X
-- New Sequenced Gearshift Instructions
-    - Turn until new redstone pulse
-    - Turn for time
-- Encased Chain Cogwheel
-    - An encased chain drive with an additional cogwheel for connectivity
-- Inverted Clutch
-    - A clutch that is uncoupled unless powered
-- Inverted Gearshift
-    - A gearshift that changes rotation direction unless powered
-- Parallel Gearbox
-    - A gearbox with all 4 sides spinning in the same direction
-- 6-way Gearbox
-    - A gearbox with shafts on all 6 sides. Conceptually uses the same internal mechanism as Parallel Gearbox, so top
-      and bottom spins at half speed
-- Brass Gearbox
-    - A gearbox where the rotation direction of all 4 sides are independently configurable
-- Shear Pin
-    - An early-game, single-use connector that breaks when the network is overstressed
-- Overstress Clutch
-    - A clutch that uncouples after a set delay when the network is overstressed. Can be reset with a wrench
-- Centrifugal Clutch
-    - A clutch that is only coupled if the input RPM is faster than a configurable threshold
-- Freewheel Clutch
-    - A clutch that is only coupled if the input spins in the correct direction as configured
-- Brake
-    - A device that produces immense stress when powered, halting the network by overstressing it
-- Sequenced Pulse Generator
-    - A flexible diode that can output precisely-timed redstone pulses according to a configured sequence
-- Item Silo
-    - A vertical item vault
-- Fan Blasting/Smoking/Washing/Haunting Catalysts
-    - A series of blocks that trap liquid/fire for safe and dedicated bulk processing
-- Copycat Slab
-    - Slab-shaped copycat that has double slab variants and can also be placed vertically
-- Copycat Block
-    - Clones a block while ignoring its placement rules (such as placing coral blocks above water)
-- Copycat Vertical Step
-    - A vertical Copycat Step with assisted placement like shafts
-- Copycat Beam
-    - A centered Copycat Step that can be oriented in all 3 axes with assisted placement like shafts
+### New Blocks and Items
+
+Visit [the GitHub wiki](https://github.com/hlysine/create_connected/wiki/Features) for a complete list!
+
+[![All features](https://cdn.modrinth.com/data/Vg5TIO6d/images/b202a4eed4d157f279c7cfb8595085b51cb21134.png)](https://github.com/hlysine/create_connected/wiki/Features)
+
+### Feature toggle
+
+Selectively enable/disable features in this mod as you see fit. Disabled features are unobtainable in survival and
+hidden in creative/JEI.
+
+![Feature Toggle System](https://cdn.modrinth.com/data/Vg5TIO6d/images/d74a9a1a353caee83b0d5dc69c60305a14699d3a.png)
+
+### Enhancements to Create
+
+Small QoL enhancement to Create's features.
+
+[![Sequenced gearshift](https://cdn.modrinth.com/data/Vg5TIO6d/images/fe15c37ac605a24b49a60972e7668206d178c32a.webp)](https://github.com/hlysine/create_connected/wiki/Features)
 
 ## Download
 
