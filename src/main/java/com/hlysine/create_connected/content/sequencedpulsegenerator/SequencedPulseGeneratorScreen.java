@@ -9,6 +9,7 @@ import com.hlysine.create_connected.CCPackets;
 import com.hlysine.create_connected.Lang;
 import com.hlysine.create_connected.content.sequencedpulsegenerator.instructions.EndInstruction;
 import com.hlysine.create_connected.content.sequencedpulsegenerator.instructions.Instruction;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.foundation.gui.AbstractSimiScreen;
 import com.simibubi.create.foundation.gui.AllIcons;
 import com.simibubi.create.foundation.gui.element.GuiGameElement;
@@ -17,7 +18,6 @@ import com.simibubi.create.foundation.gui.widget.ScrollInput;
 import com.simibubi.create.foundation.gui.widget.SelectionScrollInput;
 import com.simibubi.create.foundation.utility.Components;
 
-import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
@@ -125,55 +125,55 @@ public class SequencedPulseGeneratorScreen extends AbstractSimiScreen {
     }
 
     @Override
-    protected void renderWindow(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks) {
+    protected void renderWindow(PoseStack ms, int mouseX, int mouseY, float partialTicks) {
         int x = guiLeft;
         int y = guiTop;
 
-        background.render(graphics, x, y);
+        background.render(ms, x, y);
 
         for (int row = 0; row < INSTRUCTION_CAPACITY; row++) {
             CCGuiTextures toDraw = CCGuiTextures.SEQUENCER_EMPTY;
             int yOffset = toDraw.height * row;
 
-            toDraw.render(graphics, x, y + 16 + yOffset);
+            toDraw.render(ms, x, y + 16 + yOffset);
         }
 
         for (int row = 0; row < INSTRUCTION_CAPACITY; row++) {
             CCGuiTextures toDraw = CCGuiTextures.SEQUENCER_EMPTY;
             int yOffset = toDraw.height * row;
             if (row >= instructions.size()) {
-                toDraw.render(graphics, x, y + 16 + yOffset);
+                toDraw.render(ms, x, y + 16 + yOffset);
                 continue;
             }
 
             Instruction instruction = instructions.get(row);
-            instruction.getBackground().render(graphics, x, y + 16 + yOffset);
+            instruction.getBackground().render(ms, x, y + 16 + yOffset);
 
-            label(graphics, 36, yOffset - 1, Lang.translateDirect(instruction.getLangKey()));
+            label(ms, 36, yOffset - 1, Lang.translateDirect(instruction.getLangKey()));
             if (instruction.parameter != null) {
                 Function<Integer, String> formatter = instruction.parameter.formatter();
                 String text = formatter == null ? String.valueOf(instruction.getValue()) : formatter.apply(instruction.getValue());
                 int stringWidth = font.width(text);
-                label(graphics, 90 + (12 - stringWidth / 2), yOffset - 1, Components.literal(text));
+                label(ms, 90 + (12 - stringWidth / 2), yOffset - 1, Components.literal(text));
             }
             if (instruction.hasSignal)
-                label(graphics, 127, yOffset - 1, Components.literal(String.valueOf(instruction.getSignal())));
+                label(ms, 127, yOffset - 1, Components.literal(String.valueOf(instruction.getSignal())));
         }
 
-        graphics.drawString(font, title, x + (background.width - 8) / 2 - font.width(title) / 2, y + 4, 0x592424, false);
-        renderAdditional(graphics, mouseX, mouseY, partialTicks, x, y, background);
+        font.draw(ms, title, x + (background.width - 8) / 2f - font.width(title) / 2f, y + 4, 0x592424);
+        renderAdditional(ms, mouseX, mouseY, partialTicks, x, y, background);
     }
 
-    private void renderAdditional(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks, int guiLeft, int guiTop,
+    private void renderAdditional(PoseStack ms, int mouseX, int mouseY, float partialTicks, int guiLeft, int guiTop,
                                   CCGuiTextures background) {
         GuiGameElement.of(renderedItem).<GuiGameElement
                         .GuiRenderBuilder>at(guiLeft + background.width + 6, guiTop + background.height - 56, 100)
                 .scale(5)
-                .render(graphics);
+                .render(ms);
     }
 
-    private void label(GuiGraphics graphics, int x, int y, Component text) {
-        graphics.drawString(font, text, guiLeft + x, guiTop + 26 + y, 0xFFFFEE);
+    private void label(PoseStack ms, int x, int y, Component text) {
+        font.drawShadow(ms, text, guiLeft + x, guiTop + 26 + y, 0xFFFFEE);
     }
 
     public void sendPacket() {

@@ -7,13 +7,13 @@ import com.simibubi.create.content.kinetics.deployer.DeployerApplicationRecipe;
 import com.simibubi.create.content.kinetics.press.PressingRecipe;
 import com.simibubi.create.content.processing.sequenced.SequencedAssemblyRecipeBuilder;
 import com.simibubi.create.foundation.data.recipe.CreateRecipeProvider;
-import net.minecraft.data.PackOutput;
+import net.minecraft.data.DataGenerator;
 import net.minecraft.world.item.Items;
 
 import java.util.function.UnaryOperator;
 
 public class SequencedAssemblyGen extends CreateRecipeProvider {
-    GeneratedRecipe CONTROL_CHIP = create("control_chip", b -> b.require(AllItems.GOLDEN_SHEET)
+    GeneratedRecipe CONTROL_CHIP = create("control_chip", b -> b.require(AllItems.GOLDEN_SHEET.get())
             .transitionTo(CCItems.INCOMPLETE_CONTROL_CHIP.get())
             .addOutput(CCItems.CONTROL_CHIP.get(), 120)
             .addOutput(Items.REDSTONE, 8)
@@ -25,11 +25,11 @@ public class SequencedAssemblyGen extends CreateRecipeProvider {
             .addOutput(Items.QUARTZ, 1)
             .addOutput(Items.COMPASS, 1)
             .loops(3)
-            .addStep(DeployerApplicationRecipe::new, rb -> rb.require(AllItems.ELECTRON_TUBE))
+            .addStep(DeployerApplicationRecipe::new, rb -> rb.require(AllItems.ELECTRON_TUBE.get()))
             .addStep(DeployerApplicationRecipe::new, rb -> rb.require(Items.REDSTONE))
             .addStep(PressingRecipe::new, rb -> rb));
 
-    public SequencedAssemblyGen(PackOutput packOutput) {
+    public SequencedAssemblyGen(DataGenerator packOutput) {
         super(packOutput);
     }
 

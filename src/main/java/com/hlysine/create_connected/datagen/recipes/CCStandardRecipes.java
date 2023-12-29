@@ -151,9 +151,9 @@ public class CCStandardRecipes extends CreateRecipeProvider {
     GeneratedRecipe SEQUENCED_PULSE_GENERATOR = create(CCBlocks.SEQUENCED_PULSE_GENERATOR).unlockedBy(CCItems.CONTROL_CHIP::get)
             .requiresResultFeature()
             .viaShaped(b -> b
-                    .define('E', AllItems.ELECTRON_TUBE)
-                    .define('B', AllItems.BRASS_SHEET)
-                    .define('C', CCItems.CONTROL_CHIP)
+                    .define('E', AllItems.ELECTRON_TUBE.get())
+                    .define('B', AllItems.BRASS_SHEET.get())
+                    .define('C', CCItems.CONTROL_CHIP.get())
                     .define('T', Blocks.REDSTONE_TORCH)
                     .define('S', Tags.Items.STONE)
                     .pattern("EC ")

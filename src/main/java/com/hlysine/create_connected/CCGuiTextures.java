@@ -1,10 +1,11 @@
 package com.hlysine.create_connected;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.foundation.gui.UIRenderHelper;
 import com.simibubi.create.foundation.gui.element.ScreenElement;
 import com.simibubi.create.foundation.utility.Color;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -53,14 +54,22 @@ public enum CCGuiTextures implements ScreenElement {
     }
 
     @OnlyIn(Dist.CLIENT)
-    public void render(GuiGraphics graphics, int x, int y) {
-        graphics.blit(location, x, y, startX, startY, width, height);
+    @Override
+    public void render(PoseStack ms, int x, int y) {
+        bind();
+        GuiComponent.blit(ms, x, y, 0, startX, startY, width, height, 256, 256);
     }
 
     @OnlyIn(Dist.CLIENT)
-    public void render(GuiGraphics graphics, int x, int y, Color c) {
+    public void render(PoseStack ms, int x, int y, GuiComponent component) {
         bind();
-        UIRenderHelper.drawColoredTexture(graphics, c, x, y, startX, startY, width, height);
+        component.blit(ms, x, y, startX, startY, width, height);
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public void render(PoseStack ms, int x, int y, Color c) {
+        bind();
+        UIRenderHelper.drawColoredTexture(ms, c, x, y, startX, startY, width, height);
     }
 
 }
