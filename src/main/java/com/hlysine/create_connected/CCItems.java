@@ -4,9 +4,11 @@ import com.hlysine.create_connected.config.FeatureToggle;
 import com.hlysine.create_connected.content.brassgearbox.VerticalBrassGearboxItem;
 import com.hlysine.create_connected.content.parallelgearbox.VerticalParallelGearboxItem;
 import com.hlysine.create_connected.content.sixwaygearbox.VerticalSixWayGearboxItem;
+import com.simibubi.create.content.processing.sequenced.SequencedAssemblyItem;
 import com.simibubi.create.foundation.data.AssetLookup;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.util.entry.ItemEntry;
+import net.minecraft.world.item.Item;
 
 public class CCItems {
 
@@ -15,6 +17,14 @@ public class CCItems {
     static {
         REGISTRATE.creativeModeTab(() -> CCCreativeTabs.MAIN);
     }
+
+    public static final ItemEntry<Item> CONTROL_CHIP =
+            REGISTRATE.item("control_chip", Item::new)
+                    .register();
+
+    public static final ItemEntry<SequencedAssemblyItem> INCOMPLETE_CONTROL_CHIP =
+            REGISTRATE.item("incomplete_control_chip", SequencedAssemblyItem::new)
+                    .register();
 
     public static final ItemEntry<VerticalParallelGearboxItem> VERTICAL_PARALLEL_GEARBOX =
             REGISTRATE.item("vertical_parallel_gearbox", VerticalParallelGearboxItem::new)

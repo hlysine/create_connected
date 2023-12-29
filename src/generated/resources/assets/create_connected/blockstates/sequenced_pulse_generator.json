@@ -1,0 +1,124 @@
+{
+  "variants": {
+    "facing=east,powered=false,powered_side=false,powering=false": {
+      "model": "create_connected:block/sequenced_pulse_generator",
+      "y": 90
+    },
+    "facing=east,powered=false,powered_side=false,powering=true": {
+      "model": "create_connected:block/sequenced_pulse_generator_powering",
+      "y": 90
+    },
+    "facing=east,powered=false,powered_side=true,powering=false": {
+      "model": "create_connected:block/sequenced_pulse_generator_reset",
+      "y": 90
+    },
+    "facing=east,powered=false,powered_side=true,powering=true": {
+      "model": "create_connected:block/sequenced_pulse_generator_powering_reset",
+      "y": 90
+    },
+    "facing=east,powered=true,powered_side=false,powering=false": {
+      "model": "create_connected:block/sequenced_pulse_generator_powered",
+      "y": 90
+    },
+    "facing=east,powered=true,powered_side=false,powering=true": {
+      "model": "create_connected:block/sequenced_pulse_generator_powered_powering",
+      "y": 90
+    },
+    "facing=east,powered=true,powered_side=true,powering=false": {
+      "model": "create_connected:block/sequenced_pulse_generator_powered_reset",
+      "y": 90
+    },
+    "facing=east,powered=true,powered_side=true,powering=true": {
+      "model": "create_connected:block/sequenced_pulse_generator_powered_powering_reset",
+      "y": 90
+    },
+    "facing=north,powered=false,powered_side=false,powering=false": {
+      "model": "create_connected:block/sequenced_pulse_generator"
+    },
+    "facing=north,powered=false,powered_side=false,powering=true": {
+      "model": "create_connected:block/sequenced_pulse_generator_powering"
+    },
+    "facing=north,powered=false,powered_side=true,powering=false": {
+      "model": "create_connected:block/sequenced_pulse_generator_reset"
+    },
+    "facing=north,powered=false,powered_side=true,powering=true": {
+      "model": "create_connected:block/sequenced_pulse_generator_powering_reset"
+    },
+    "facing=north,powered=true,powered_side=false,powering=false": {
+      "model": "create_connected:block/sequenced_pulse_generator_powered"
+    },
+    "facing=north,powered=true,powered_side=false,powering=true": {
+      "model": "create_connected:block/sequenced_pulse_generator_powered_powering"
+    },
+    "facing=north,powered=true,powered_side=true,powering=false": {
+      "model": "create_connected:block/sequenced_pulse_generator_powered_reset"
+    },
+    "facing=north,powered=true,powered_side=true,powering=true": {
+      "model": "create_connected:block/sequenced_pulse_generator_powered_powering_reset"
+    },
+    "facing=south,powered=false,powered_side=false,powering=false": {
+      "model": "create_connected:block/sequenced_pulse_generator",
+      "y": 180
+    },
+    "facing=south,powered=false,powered_side=false,powering=true": {
+      "model": "create_connected:block/sequenced_pulse_generator_powering",
+      "y": 180
+    },
+    "facing=south,powered=false,powered_side=true,powering=false": {
+      "model": "create_connected:block/sequenced_pulse_generator_reset",
+      "y": 180
+    },
+    "facing=south,powered=false,powered_side=true,powering=true": {
+      "model": "create_connected:block/sequenced_pulse_generator_powering_reset",
+      "y": 180
+    },
+    "facing=south,powered=true,powered_side=false,powering=false": {
+      "model": "create_connected:block/sequenced_pulse_generator_powered",
+      "y": 180
+    },
+    "facing=south,powered=true,powered_side=false,powering=true": {
+      "model": "create_connected:block/sequenced_pulse_generator_powered_powering",
+      "y": 180
+    },
+    "facing=south,powered=true,powered_side=true,powering=false": {
+      "model": "create_connected:block/sequenced_pulse_generator_powered_reset",
+      "y": 180
+    },
+    "facing=south,powered=true,powered_side=true,powering=true": {
+      "model": "create_connected:block/sequenced_pulse_generator_powered_powering_reset",
+      "y": 180
+    },
+    "facing=west,powered=false,powered_side=false,powering=false": {
+      "model": "create_connected:block/sequenced_pulse_generator",
+      "y": 270
+    },
+    "facing=west,powered=false,powered_side=false,powering=true": {
+      "model": "create_connected:block/sequenced_pulse_generator_powering",
+      "y": 270
+    },
+    "facing=west,powered=false,powered_side=true,powering=false": {
+      "model": "create_connected:block/sequenced_pulse_generator_reset",
+      "y": 270
+    },
+    "facing=west,powered=false,powered_side=true,powering=true": {
+      "model": "create_connected:block/sequenced_pulse_generator_powering_reset",
+      "y": 270
+    },
+    "facing=west,powered=true,powered_side=false,powering=false": {
+      "model": "create_connected:block/sequenced_pulse_generator_powered",
+      "y": 270
+    },
+    "facing=west,powered=true,powered_side=false,powering=true": {
+      "model": "create_connected:block/sequenced_pulse_generator_powered_powering",
+      "y": 270
+    },
+    "facing=west,powered=true,powered_side=true,powering=false": {
+      "model": "create_connected:block/sequenced_pulse_generator_powered_reset",
+      "y": 270
+    },
+    "facing=west,powered=true,powered_side=true,powering=true": {
+      "model": "create_connected:block/sequenced_pulse_generator_powered_powering_reset",
+      "y": 270
+    }
+  }
+}

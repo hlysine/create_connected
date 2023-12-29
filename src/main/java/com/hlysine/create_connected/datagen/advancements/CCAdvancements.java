@@ -3,6 +3,7 @@ package com.hlysine.create_connected.datagen.advancements;
 import com.google.common.collect.Sets;
 import com.hlysine.create_connected.CCBlocks;
 import com.mojang.logging.LogUtils;
+import com.hlysine.create_connected.CCItems;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataGenerator;
@@ -20,8 +21,7 @@ import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.UnaryOperator;
 
-import static com.hlysine.create_connected.datagen.advancements.CCAdvancement.TaskType.SECRET;
-import static com.hlysine.create_connected.datagen.advancements.CCAdvancement.TaskType.SILENT;
+import static com.hlysine.create_connected.datagen.advancements.CCAdvancement.TaskType.*;
 
 @SuppressWarnings("unused")
 public class CCAdvancements implements DataProvider {
@@ -60,6 +60,25 @@ public class CCAdvancements implements DataProvider {
             .title("Overpowered")
             .description("Keep a network running at speed with a powered brake attached")
             .after(ROOT)
+            .special(SECRET)),
+
+    CONTROL_CHIP = create("control_chip", b -> b.icon(CCItems.CONTROL_CHIP)
+            .title("Precise Fabrication")
+            .description("Assemble a Control Chip")
+            .whenIconCollected()
+            .after(ROOT)
+            .special(NOISY)),
+
+    SEQUENCED_PULSE_GENERATOR = create("sequenced_pulse_generator", b -> b.icon(CCBlocks.SEQUENCED_PULSE_GENERATOR)
+            .title("Computational Supremacy")
+            .description("Place down a Sequenced Pulse Generator")
+            .whenBlockPlaced(CCBlocks.SEQUENCED_PULSE_GENERATOR.get())
+            .after(CONTROL_CHIP)),
+
+    PULSE_GEN_INFINITE_LOOP = create("pulse_generator_infinite_loop", b -> b.icon(CCItems.INCOMPLETE_CONTROL_CHIP)
+            .title("Infinite Loop")
+            .description("Overload a Sequenced Pulse Generator with a buggy program")
+            .after(SEQUENCED_PULSE_GENERATOR)
             .special(SECRET)),
 
     //

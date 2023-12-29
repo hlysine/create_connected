@@ -14,5 +14,6 @@ public class CreateConnectedClient {
     }
 
     public static void init(final FMLClientSetupEvent event) {
+        CCPonders.register();
     }
 }
