@@ -25,7 +25,7 @@ public class InvertedGearshiftScenes {
 
         BlockPos gearshift = util.grid.at(3, 1, 2);
         scene.idle(10);
-        scene.overlay.showText(50)
+        scene.overlay.showText(60)
                 .placeNearTarget()
                 .text("Inverted Gearshifts will reverse rotation in a straight line")
                 .pointAt(util.vector.topOf(gearshift));
@@ -38,7 +38,7 @@ public class InvertedGearshiftScenes {
         scene.effects.rotationDirectionIndicator(gearshift.west(2));
         scene.idle(30);
 
-        scene.overlay.showText(50)
+        scene.overlay.showText(80)
                 .colored(PonderPalette.RED)
                 .placeNearTarget()
                 .text("When powered by Redstone, it relays rotation with its direction unchanged")
