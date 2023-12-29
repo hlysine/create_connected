@@ -73,6 +73,12 @@ public class CentrifugalClutchBlockEntity extends SplitShaftBlockEntity {
     }
 
     @Override
+    public void onSpeedChanged(float previousSpeed) {
+        onKineticUpdate();
+        super.onSpeedChanged(previousSpeed);
+    }
+
+    @Override
     public void tick() {
         super.tick();
         if (reattachNextTick && level != null) {
