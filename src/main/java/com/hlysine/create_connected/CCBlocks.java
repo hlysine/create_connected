@@ -14,6 +14,7 @@ import com.hlysine.create_connected.content.itemsilo.ItemSiloBlock;
 import com.hlysine.create_connected.content.itemsilo.ItemSiloCTBehaviour;
 import com.hlysine.create_connected.content.itemsilo.ItemSiloItem;
 import com.hlysine.create_connected.content.linkedmodule.LinkedButtonBlock;
+import com.hlysine.create_connected.content.linkedmodule.LinkedLeverBlock;
 import com.hlysine.create_connected.content.linkedmodule.LinkedModuleItem;
 import com.hlysine.create_connected.content.overstressclutch.OverstressClutchBlock;
 import com.hlysine.create_connected.content.parallelgearbox.ParallelGearboxBlock;
@@ -33,10 +34,7 @@ import com.tterrag.registrate.providers.RegistrateBlockstateProvider;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.ButtonBlock;
-import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.material.MapColor;
@@ -232,6 +230,15 @@ public class CCBlocks {
                     .register());
         });
     }
+
+    public static final BlockEntry<LinkedLeverBlock> LINKED_LEVER = REGISTRATE.block("linked_lever", properties -> new LinkedLeverBlock(properties, (LeverBlock) Blocks.LEVER))
+            .initialProperties(() -> Blocks.LEVER)
+            .transform(LinkedModuleItem.register())
+            .blockstate(CCBlockStateGen.linkedLever(
+                    new ResourceLocation("block/lever"),
+                    new ResourceLocation("block/lever_on")
+            ))
+            .register();
 
     public static final BlockEntry<WrenchableBlock> EMPTY_FAN_CATALYST = REGISTRATE.block("empty_fan_catalyst", WrenchableBlock::new)
             .initialProperties(() -> Blocks.IRON_BLOCK)

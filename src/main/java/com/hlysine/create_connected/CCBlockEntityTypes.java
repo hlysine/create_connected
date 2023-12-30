@@ -128,6 +128,7 @@ public class CCBlockEntityTypes {
                 CCBlocks.LINKED_BUTTONS.values().forEach(b::validBlock);
                 return b;
             })
+            .validBlocks(CCBlocks.LINKED_LEVER)
             .renderer(() -> SmartBlockEntityRenderer::new)
             .register();
 

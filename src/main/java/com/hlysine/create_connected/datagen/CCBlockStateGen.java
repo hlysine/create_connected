@@ -1,14 +1,14 @@
 package com.hlysine.create_connected.datagen;
 
 import com.hlysine.create_connected.content.brassgearbox.BrassGearboxBlock;
-import com.hlysine.create_connected.content.linkedmodule.LinkedButtonBlock;
+import com.hlysine.create_connected.content.linkedmodule.LinkedModuleBlock;
 import com.hlysine.create_connected.content.sequencedpulsegenerator.SequencedPulseGeneratorBlock;
 import com.mojang.datafixers.util.Function4;
-import com.simibubi.create.Create;
 import com.simibubi.create.foundation.utility.Iterate;
 import com.tterrag.registrate.providers.DataGenContext;
 import com.tterrag.registrate.providers.RegistrateBlockstateProvider;
 import com.tterrag.registrate.util.nullness.NonNullBiConsumer;
+import com.tterrag.registrate.util.nullness.NonNullFunction;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
@@ -18,7 +18,7 @@ import net.minecraft.world.level.block.state.properties.AttachFace;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
-import net.minecraftforge.client.model.generators.loaders.CompositeModelBuilder;
+import net.minecraftforge.client.model.generators.MultiPartBlockStateBuilder;
 import org.apache.commons.lang3.function.TriFunction;
 
 import java.util.HashMap;
@@ -27,20 +27,66 @@ import java.util.Vector;
 import java.util.function.Function;
 
 public class CCBlockStateGen {
-    public static <B extends LinkedButtonBlock> NonNullBiConsumer<DataGenContext<Block, B>, RegistrateBlockstateProvider> linkedButton(ResourceLocation buttonOff, ResourceLocation buttonOn) {
-        return (c, p) -> {
-            ModelFile modelOff = p.models().withExistingParent(c.getName(), new ResourceLocation("block/block")).customLoader(CompositeModelBuilder::begin)
-                    .child("button", p.models().nested().parent(p.models().getExistingFile(buttonOff)))
-                    .child("link", p.models().nested().parent(p.models().getExistingFile(p.modLoc("block/linked_module/block"))))
-                    .end()
-                    .texture("particle", new ResourceLocation(Create.ID, "block/redstone_bridge"));
-            ModelFile modelOn = p.models().withExistingParent(c.getName() + "_powered", new ResourceLocation("block/block")).customLoader(CompositeModelBuilder::begin)
-                    .child("button", p.models().nested().parent(p.models().getExistingFile(buttonOn)))
-                    .child("link", p.models().nested().parent(p.models().getExistingFile(p.modLoc("block/linked_module/block_powered"))))
-                    .end()
-                    .texture("particle", new ResourceLocation(Create.ID, "block/redstone_bridge_powered"));
-            buttonBlock(p, c.get(), modelOff, modelOn);
+    public static <B extends Block & LinkedModuleBlock> NonNullBiConsumer<DataGenContext<Block, B>, RegistrateBlockstateProvider> linkedButton(ResourceLocation buttonOff, ResourceLocation buttonOn) {
+        return (DataGenContext<Block, B> c, RegistrateBlockstateProvider p) -> {
+            linkedModule(
+                    p, c.get(),
+                    state -> state.getValue(BlockStateProperties.POWERED)
+                            ? p.models().getExistingFile(buttonOn)
+                            : p.models().getExistingFile(buttonOff),
+                    state -> state.getValue(BlockStateProperties.POWERED)
+                            ? p.models().getExistingFile(p.modLoc("block/linked_module/block_powered" + (state.getValue(BlockStateProperties.ATTACH_FACE) == AttachFace.WALL ? "_vertical" : "")))
+                            : p.models().getExistingFile(p.modLoc("block/linked_module/block" + (state.getValue(BlockStateProperties.ATTACH_FACE) == AttachFace.WALL ? "_vertical" : ""))),
+                    state -> state.getValue(BlockStateProperties.ATTACH_FACE) == AttachFace.WALL
+            );
         };
+    }
+
+    public static <B extends Block & LinkedModuleBlock> NonNullBiConsumer<DataGenContext<Block, B>, RegistrateBlockstateProvider> linkedLever(ResourceLocation leverOff, ResourceLocation leverOn) {
+        return (DataGenContext<Block, B> c, RegistrateBlockstateProvider p) -> {
+            linkedModule(
+                    p, c.get(),
+                    state -> state.getValue(BlockStateProperties.POWERED)
+                            ? p.models().getExistingFile(leverOff)
+                            : p.models().getExistingFile(leverOn),
+                    state -> state.getValue(BlockStateProperties.POWERED)
+                            ? p.models().getExistingFile(p.modLoc("block/linked_module/block_powered" + (state.getValue(BlockStateProperties.ATTACH_FACE) == AttachFace.WALL ? "_vertical" : "")))
+                            : p.models().getExistingFile(p.modLoc("block/linked_module/block" + (state.getValue(BlockStateProperties.ATTACH_FACE) == AttachFace.WALL ? "_vertical" : ""))),
+                    state -> false
+            );
+        };
+    }
+
+    public static void linkedModule(RegistrateBlockstateProvider prov, Block block, NonNullFunction<BlockState, ModelFile> baseModel, NonNullFunction<BlockState, ModelFile> moduleModel, NonNullFunction<BlockState, Boolean> uvLock) {
+        MultiPartBlockStateBuilder builder = prov.getMultipartBuilder(block);
+
+        for (BlockState state : block.getStateDefinition().getPossibleStates()) {
+            Direction facing = state.getValue(BlockStateProperties.HORIZONTAL_FACING);
+            AttachFace face = state.getValue(BlockStateProperties.ATTACH_FACE);
+            boolean powered = state.getValue(ButtonBlock.POWERED);
+            int xRot = face == AttachFace.FLOOR ? 0 : (face == AttachFace.WALL ? 90 : 180);
+            int yRot = (int) (face == AttachFace.CEILING ? facing : facing.getOpposite()).toYRot();
+            builder.part()
+                    .modelFile(baseModel.apply(state))
+                    .rotationX(xRot)
+                    .rotationY(yRot)
+                    .uvLock(uvLock.apply(state))
+                    .addModel()
+                    .condition(BlockStateProperties.HORIZONTAL_FACING, facing)
+                    .condition(BlockStateProperties.ATTACH_FACE, face)
+                    .condition(BlockStateProperties.POWERED, powered)
+                    .end();
+            builder.part()
+                    .modelFile(moduleModel.apply(state))
+                    .rotationX(xRot)
+                    .rotationY(yRot + (face == AttachFace.FLOOR ? 180 : 0))
+                    .uvLock(false)
+                    .addModel()
+                    .condition(BlockStateProperties.HORIZONTAL_FACING, facing)
+                    .condition(BlockStateProperties.ATTACH_FACE, face)
+                    .condition(BlockStateProperties.POWERED, powered)
+                    .end();
+        }
     }
 
     public static <B extends SequencedPulseGeneratorBlock> NonNullBiConsumer<DataGenContext<Block, B>, RegistrateBlockstateProvider> sequencedPulseGenerator() {
@@ -131,20 +177,5 @@ public class CCBlockStateGen {
                             .rotationY(axis == Direction.Axis.X ? 90 : 0)
                             .build();
                 }, BlockStateProperties.WATERLOGGED);
-    }
-
-    public static void buttonBlock(RegistrateBlockstateProvider prov, ButtonBlock block, ModelFile button, ModelFile buttonPressed) {
-        prov.getVariantBuilder(block).forAllStates(state -> {
-            Direction facing = state.getValue(ButtonBlock.FACING);
-            AttachFace face = state.getValue(ButtonBlock.FACE);
-            boolean powered = state.getValue(ButtonBlock.POWERED);
-
-            return ConfiguredModel.builder()
-                    .modelFile(powered ? buttonPressed : button)
-                    .rotationX(face == AttachFace.FLOOR ? 0 : (face == AttachFace.WALL ? -90 : 180))
-                    .rotationY((int) (face == AttachFace.CEILING || face == AttachFace.WALL ? facing : facing.getOpposite()).toYRot())
-                    .uvLock(false)
-                    .build();
-        });
     }
 }

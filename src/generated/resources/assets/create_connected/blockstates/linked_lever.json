@@ -2,7 +2,7 @@
   "multipart": [
     {
       "apply": {
-        "model": "minecraft:block/birch_button_pressed"
+        "model": "minecraft:block/lever"
       },
       "when": {
         "face": "floor",
@@ -23,7 +23,7 @@
     },
     {
       "apply": {
-        "model": "minecraft:block/birch_button"
+        "model": "minecraft:block/lever_on"
       },
       "when": {
         "face": "floor",
@@ -44,7 +44,7 @@
     },
     {
       "apply": {
-        "model": "minecraft:block/birch_button_pressed",
+        "model": "minecraft:block/lever",
         "y": 180
       },
       "when": {
@@ -66,7 +66,7 @@
     },
     {
       "apply": {
-        "model": "minecraft:block/birch_button",
+        "model": "minecraft:block/lever_on",
         "y": 180
       },
       "when": {
@@ -88,7 +88,7 @@
     },
     {
       "apply": {
-        "model": "minecraft:block/birch_button_pressed",
+        "model": "minecraft:block/lever",
         "y": 270
       },
       "when": {
@@ -110,7 +110,7 @@
     },
     {
       "apply": {
-        "model": "minecraft:block/birch_button",
+        "model": "minecraft:block/lever_on",
         "y": 270
       },
       "when": {
@@ -132,7 +132,7 @@
     },
     {
       "apply": {
-        "model": "minecraft:block/birch_button_pressed",
+        "model": "minecraft:block/lever",
         "y": 90
       },
       "when": {
@@ -154,7 +154,7 @@
     },
     {
       "apply": {
-        "model": "minecraft:block/birch_button",
+        "model": "minecraft:block/lever_on",
         "y": 90
       },
       "when": {
@@ -176,8 +176,7 @@
     },
     {
       "apply": {
-        "model": "minecraft:block/birch_button_pressed",
-        "uvlock": true,
+        "model": "minecraft:block/lever",
         "x": 90
       },
       "when": {
@@ -199,8 +198,7 @@
     },
     {
       "apply": {
-        "model": "minecraft:block/birch_button",
-        "uvlock": true,
+        "model": "minecraft:block/lever_on",
         "x": 90
       },
       "when": {
@@ -222,8 +220,7 @@
     },
     {
       "apply": {
-        "model": "minecraft:block/birch_button_pressed",
-        "uvlock": true,
+        "model": "minecraft:block/lever",
         "x": 90,
         "y": 180
       },
@@ -247,8 +244,7 @@
     },
     {
       "apply": {
-        "model": "minecraft:block/birch_button",
-        "uvlock": true,
+        "model": "minecraft:block/lever_on",
         "x": 90,
         "y": 180
       },
@@ -272,8 +268,7 @@
     },
     {
       "apply": {
-        "model": "minecraft:block/birch_button_pressed",
-        "uvlock": true,
+        "model": "minecraft:block/lever",
         "x": 90,
         "y": 270
       },
@@ -297,8 +292,7 @@
     },
     {
       "apply": {
-        "model": "minecraft:block/birch_button",
-        "uvlock": true,
+        "model": "minecraft:block/lever_on",
         "x": 90,
         "y": 270
       },
@@ -322,8 +316,7 @@
     },
     {
       "apply": {
-        "model": "minecraft:block/birch_button_pressed",
-        "uvlock": true,
+        "model": "minecraft:block/lever",
         "x": 90,
         "y": 90
       },
@@ -347,8 +340,7 @@
     },
     {
       "apply": {
-        "model": "minecraft:block/birch_button",
-        "uvlock": true,
+        "model": "minecraft:block/lever_on",
         "x": 90,
         "y": 90
       },
@@ -372,7 +364,7 @@
     },
     {
       "apply": {
-        "model": "minecraft:block/birch_button_pressed",
+        "model": "minecraft:block/lever",
         "x": 180,
         "y": 180
       },
@@ -396,7 +388,7 @@
     },
     {
       "apply": {
-        "model": "minecraft:block/birch_button",
+        "model": "minecraft:block/lever_on",
         "x": 180,
         "y": 180
       },
@@ -420,7 +412,7 @@
     },
     {
       "apply": {
-        "model": "minecraft:block/birch_button_pressed",
+        "model": "minecraft:block/lever",
         "x": 180
       },
       "when": {
@@ -442,7 +434,7 @@
     },
     {
       "apply": {
-        "model": "minecraft:block/birch_button",
+        "model": "minecraft:block/lever_on",
         "x": 180
       },
       "when": {
@@ -464,7 +456,7 @@
     },
     {
       "apply": {
-        "model": "minecraft:block/birch_button_pressed",
+        "model": "minecraft:block/lever",
         "x": 180,
         "y": 90
       },
@@ -488,7 +480,7 @@
     },
     {
       "apply": {
-        "model": "minecraft:block/birch_button",
+        "model": "minecraft:block/lever_on",
         "x": 180,
         "y": 90
       },
@@ -512,7 +504,7 @@
     },
     {
       "apply": {
-        "model": "minecraft:block/birch_button_pressed",
+        "model": "minecraft:block/lever",
         "x": 180,
         "y": 270
       },
@@ -536,7 +528,7 @@
     },
     {
       "apply": {
-        "model": "minecraft:block/birch_button",
+        "model": "minecraft:block/lever_on",
         "x": 180,
         "y": 270
       },

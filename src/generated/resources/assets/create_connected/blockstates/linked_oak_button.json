@@ -1,110 +1,562 @@
 {
-  "variants": {
-    "face=ceiling,facing=east,powered=false": {
-      "model": "create_connected:block/linked_oak_button",
-      "x": 180,
-      "y": 270
+  "multipart": [
+    {
+      "apply": {
+        "model": "minecraft:block/oak_button_pressed"
+      },
+      "when": {
+        "face": "floor",
+        "facing": "north",
+        "powered": "true"
+      }
     },
-    "face=ceiling,facing=east,powered=true": {
-      "model": "create_connected:block/linked_oak_button_powered",
-      "x": 180,
-      "y": 270
+    {
+      "apply": {
+        "model": "create_connected:block/linked_module/block_powered",
+        "y": 180
+      },
+      "when": {
+        "face": "floor",
+        "facing": "north",
+        "powered": "true"
+      }
     },
-    "face=ceiling,facing=north,powered=false": {
-      "model": "create_connected:block/linked_oak_button",
-      "x": 180,
-      "y": 180
+    {
+      "apply": {
+        "model": "minecraft:block/oak_button"
+      },
+      "when": {
+        "face": "floor",
+        "facing": "north",
+        "powered": "false"
+      }
     },
-    "face=ceiling,facing=north,powered=true": {
-      "model": "create_connected:block/linked_oak_button_powered",
-      "x": 180,
-      "y": 180
+    {
+      "apply": {
+        "model": "create_connected:block/linked_module/block",
+        "y": 180
+      },
+      "when": {
+        "face": "floor",
+        "facing": "north",
+        "powered": "false"
+      }
     },
-    "face=ceiling,facing=south,powered=false": {
-      "model": "create_connected:block/linked_oak_button",
-      "x": 180
+    {
+      "apply": {
+        "model": "minecraft:block/oak_button_pressed",
+        "y": 180
+      },
+      "when": {
+        "face": "floor",
+        "facing": "south",
+        "powered": "true"
+      }
     },
-    "face=ceiling,facing=south,powered=true": {
-      "model": "create_connected:block/linked_oak_button_powered",
-      "x": 180
+    {
+      "apply": {
+        "model": "create_connected:block/linked_module/block_powered",
+        "y": 360
+      },
+      "when": {
+        "face": "floor",
+        "facing": "south",
+        "powered": "true"
+      }
     },
-    "face=ceiling,facing=west,powered=false": {
-      "model": "create_connected:block/linked_oak_button",
-      "x": 180,
-      "y": 90
+    {
+      "apply": {
+        "model": "minecraft:block/oak_button",
+        "y": 180
+      },
+      "when": {
+        "face": "floor",
+        "facing": "south",
+        "powered": "false"
+      }
     },
-    "face=ceiling,facing=west,powered=true": {
-      "model": "create_connected:block/linked_oak_button_powered",
-      "x": 180,
-      "y": 90
+    {
+      "apply": {
+        "model": "create_connected:block/linked_module/block",
+        "y": 360
+      },
+      "when": {
+        "face": "floor",
+        "facing": "south",
+        "powered": "false"
+      }
     },
-    "face=floor,facing=east,powered=false": {
-      "model": "create_connected:block/linked_oak_button",
-      "y": 90
+    {
+      "apply": {
+        "model": "minecraft:block/oak_button_pressed",
+        "y": 270
+      },
+      "when": {
+        "face": "floor",
+        "facing": "west",
+        "powered": "true"
+      }
     },
-    "face=floor,facing=east,powered=true": {
-      "model": "create_connected:block/linked_oak_button_powered",
-      "y": 90
+    {
+      "apply": {
+        "model": "create_connected:block/linked_module/block_powered",
+        "y": 450
+      },
+      "when": {
+        "face": "floor",
+        "facing": "west",
+        "powered": "true"
+      }
     },
-    "face=floor,facing=north,powered=false": {
-      "model": "create_connected:block/linked_oak_button"
+    {
+      "apply": {
+        "model": "minecraft:block/oak_button",
+        "y": 270
+      },
+      "when": {
+        "face": "floor",
+        "facing": "west",
+        "powered": "false"
+      }
     },
-    "face=floor,facing=north,powered=true": {
-      "model": "create_connected:block/linked_oak_button_powered"
+    {
+      "apply": {
+        "model": "create_connected:block/linked_module/block",
+        "y": 450
+      },
+      "when": {
+        "face": "floor",
+        "facing": "west",
+        "powered": "false"
+      }
     },
-    "face=floor,facing=south,powered=false": {
-      "model": "create_connected:block/linked_oak_button",
-      "y": 180
+    {
+      "apply": {
+        "model": "minecraft:block/oak_button_pressed",
+        "y": 90
+      },
+      "when": {
+        "face": "floor",
+        "facing": "east",
+        "powered": "true"
+      }
     },
-    "face=floor,facing=south,powered=true": {
-      "model": "create_connected:block/linked_oak_button_powered",
-      "y": 180
+    {
+      "apply": {
+        "model": "create_connected:block/linked_module/block_powered",
+        "y": 270
+      },
+      "when": {
+        "face": "floor",
+        "facing": "east",
+        "powered": "true"
+      }
     },
-    "face=floor,facing=west,powered=false": {
-      "model": "create_connected:block/linked_oak_button",
-      "y": 270
+    {
+      "apply": {
+        "model": "minecraft:block/oak_button",
+        "y": 90
+      },
+      "when": {
+        "face": "floor",
+        "facing": "east",
+        "powered": "false"
+      }
     },
-    "face=floor,facing=west,powered=true": {
-      "model": "create_connected:block/linked_oak_button_powered",
-      "y": 270
+    {
+      "apply": {
+        "model": "create_connected:block/linked_module/block",
+        "y": 270
+      },
+      "when": {
+        "face": "floor",
+        "facing": "east",
+        "powered": "false"
+      }
     },
-    "face=wall,facing=east,powered=false": {
-      "model": "create_connected:block/linked_oak_button",
-      "x": -90,
-      "y": 270
+    {
+      "apply": {
+        "model": "minecraft:block/oak_button_pressed",
+        "uvlock": true,
+        "x": 90
+      },
+      "when": {
+        "face": "wall",
+        "facing": "north",
+        "powered": "true"
+      }
     },
-    "face=wall,facing=east,powered=true": {
-      "model": "create_connected:block/linked_oak_button_powered",
-      "x": -90,
-      "y": 270
+    {
+      "apply": {
+        "model": "create_connected:block/linked_module/block_powered_vertical",
+        "x": 90
+      },
+      "when": {
+        "face": "wall",
+        "facing": "north",
+        "powered": "true"
+      }
     },
-    "face=wall,facing=north,powered=false": {
-      "model": "create_connected:block/linked_oak_button",
-      "x": -90,
-      "y": 180
+    {
+      "apply": {
+        "model": "minecraft:block/oak_button",
+        "uvlock": true,
+        "x": 90
+      },
+      "when": {
+        "face": "wall",
+        "facing": "north",
+        "powered": "false"
+      }
     },
-    "face=wall,facing=north,powered=true": {
-      "model": "create_connected:block/linked_oak_button_powered",
-      "x": -90,
-      "y": 180
+    {
+      "apply": {
+        "model": "create_connected:block/linked_module/block_vertical",
+        "x": 90
+      },
+      "when": {
+        "face": "wall",
+        "facing": "north",
+        "powered": "false"
+      }
     },
-    "face=wall,facing=south,powered=false": {
-      "model": "create_connected:block/linked_oak_button",
-      "x": -90
+    {
+      "apply": {
+        "model": "minecraft:block/oak_button_pressed",
+        "uvlock": true,
+        "x": 90,
+        "y": 180
+      },
+      "when": {
+        "face": "wall",
+        "facing": "south",
+        "powered": "true"
+      }
     },
-    "face=wall,facing=south,powered=true": {
-      "model": "create_connected:block/linked_oak_button_powered",
-      "x": -90
+    {
+      "apply": {
+        "model": "create_connected:block/linked_module/block_powered_vertical",
+        "x": 90,
+        "y": 180
+      },
+      "when": {
+        "face": "wall",
+        "facing": "south",
+        "powered": "true"
+      }
     },
-    "face=wall,facing=west,powered=false": {
-      "model": "create_connected:block/linked_oak_button",
-      "x": -90,
-      "y": 90
+    {
+      "apply": {
+        "model": "minecraft:block/oak_button",
+        "uvlock": true,
+        "x": 90,
+        "y": 180
+      },
+      "when": {
+        "face": "wall",
+        "facing": "south",
+        "powered": "false"
+      }
     },
-    "face=wall,facing=west,powered=true": {
-      "model": "create_connected:block/linked_oak_button_powered",
-      "x": -90,
-      "y": 90
+    {
+      "apply": {
+        "model": "create_connected:block/linked_module/block_vertical",
+        "x": 90,
+        "y": 180
+      },
+      "when": {
+        "face": "wall",
+        "facing": "south",
+        "powered": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "minecraft:block/oak_button_pressed",
+        "uvlock": true,
+        "x": 90,
+        "y": 270
+      },
+      "when": {
+        "face": "wall",
+        "facing": "west",
+        "powered": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_module/block_powered_vertical",
+        "x": 90,
+        "y": 270
+      },
+      "when": {
+        "face": "wall",
+        "facing": "west",
+        "powered": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "minecraft:block/oak_button",
+        "uvlock": true,
+        "x": 90,
+        "y": 270
+      },
+      "when": {
+        "face": "wall",
+        "facing": "west",
+        "powered": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_module/block_vertical",
+        "x": 90,
+        "y": 270
+      },
+      "when": {
+        "face": "wall",
+        "facing": "west",
+        "powered": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "minecraft:block/oak_button_pressed",
+        "uvlock": true,
+        "x": 90,
+        "y": 90
+      },
+      "when": {
+        "face": "wall",
+        "facing": "east",
+        "powered": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_module/block_powered_vertical",
+        "x": 90,
+        "y": 90
+      },
+      "when": {
+        "face": "wall",
+        "facing": "east",
+        "powered": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "minecraft:block/oak_button",
+        "uvlock": true,
+        "x": 90,
+        "y": 90
+      },
+      "when": {
+        "face": "wall",
+        "facing": "east",
+        "powered": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_module/block_vertical",
+        "x": 90,
+        "y": 90
+      },
+      "when": {
+        "face": "wall",
+        "facing": "east",
+        "powered": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "minecraft:block/oak_button_pressed",
+        "x": 180,
+        "y": 180
+      },
+      "when": {
+        "face": "ceiling",
+        "facing": "north",
+        "powered": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_module/block_powered",
+        "x": 180,
+        "y": 180
+      },
+      "when": {
+        "face": "ceiling",
+        "facing": "north",
+        "powered": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "minecraft:block/oak_button",
+        "x": 180,
+        "y": 180
+      },
+      "when": {
+        "face": "ceiling",
+        "facing": "north",
+        "powered": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_module/block",
+        "x": 180,
+        "y": 180
+      },
+      "when": {
+        "face": "ceiling",
+        "facing": "north",
+        "powered": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "minecraft:block/oak_button_pressed",
+        "x": 180
+      },
+      "when": {
+        "face": "ceiling",
+        "facing": "south",
+        "powered": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_module/block_powered",
+        "x": 180
+      },
+      "when": {
+        "face": "ceiling",
+        "facing": "south",
+        "powered": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "minecraft:block/oak_button",
+        "x": 180
+      },
+      "when": {
+        "face": "ceiling",
+        "facing": "south",
+        "powered": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_module/block",
+        "x": 180
+      },
+      "when": {
+        "face": "ceiling",
+        "facing": "south",
+        "powered": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "minecraft:block/oak_button_pressed",
+        "x": 180,
+        "y": 90
+      },
+      "when": {
+        "face": "ceiling",
+        "facing": "west",
+        "powered": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_module/block_powered",
+        "x": 180,
+        "y": 90
+      },
+      "when": {
+        "face": "ceiling",
+        "facing": "west",
+        "powered": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "minecraft:block/oak_button",
+        "x": 180,
+        "y": 90
+      },
+      "when": {
+        "face": "ceiling",
+        "facing": "west",
+        "powered": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_module/block",
+        "x": 180,
+        "y": 90
+      },
+      "when": {
+        "face": "ceiling",
+        "facing": "west",
+        "powered": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "minecraft:block/oak_button_pressed",
+        "x": 180,
+        "y": 270
+      },
+      "when": {
+        "face": "ceiling",
+        "facing": "east",
+        "powered": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_module/block_powered",
+        "x": 180,
+        "y": 270
+      },
+      "when": {
+        "face": "ceiling",
+        "facing": "east",
+        "powered": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "minecraft:block/oak_button",
+        "x": 180,
+        "y": 270
+      },
+      "when": {
+        "face": "ceiling",
+        "facing": "east",
+        "powered": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_module/block",
+        "x": 180,
+        "y": 270
+      },
+      "when": {
+        "face": "ceiling",
+        "facing": "east",
+        "powered": "false"
+      }
     }
-  }
+  ]
 }

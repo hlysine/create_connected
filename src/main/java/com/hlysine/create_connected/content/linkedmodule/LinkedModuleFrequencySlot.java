@@ -23,13 +23,13 @@ public class LinkedModuleFrequencySlot extends ValueBoxTransform.Dual {
         AttachFace face = state.getValue(LinkedButtonBlock.FACE);
 
         Vec3 location = switch (face) {
-            case FLOOR -> VecHelper.voxelSpace(10.5f, 1.1f, 2f);
-            case WALL -> VecHelper.voxelSpace(5.5f, 2f, 1.1f);
-            case CEILING -> VecHelper.voxelSpace(5.5f, 14.9f, 2f);
+            case FLOOR ->
+                    VecHelper.voxelSpace(2.5f, 1.1f, 10.5f).add(isFirst() ? Vec3.ZERO : VecHelper.voxelSpace(0, 0, -5));
+            case WALL ->
+                    VecHelper.voxelSpace(13.5f, 10.5f, 1.1f).add(isFirst() ? Vec3.ZERO : VecHelper.voxelSpace(0, -5, 0));
+            case CEILING ->
+                    VecHelper.voxelSpace(2.5f, 14.9f, 5.5f).add(isFirst() ? Vec3.ZERO : VecHelper.voxelSpace(0, 0, 5));
         };
-        if (!isFirst()) {
-            location = location.add(5 / 16f * (face != AttachFace.FLOOR ? 1 : -1), 0, 0);
-        }
         location = VecHelper.rotateCentered(location, AngleHelper.horizontalAngle(facing), Axis.Y);
         return location;
     }
@@ -38,7 +38,7 @@ public class LinkedModuleFrequencySlot extends ValueBoxTransform.Dual {
     public void rotate(BlockState state, PoseStack ms) {
         Direction facing = state.getValue(LinkedButtonBlock.FACING);
         AttachFace face = state.getValue(LinkedButtonBlock.FACE);
-        float yRot = AngleHelper.horizontalAngle(facing) + 180;
+        float yRot = AngleHelper.horizontalAngle(facing) + (face != AttachFace.WALL ? 0 : 180);
         float xRot = face == AttachFace.FLOOR ? 90 : face == AttachFace.CEILING ? 270 : 0;
         TransformStack.cast(ms)
                 .rotateY(yRot)

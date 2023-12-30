@@ -22,29 +22,29 @@
 		},
 		{
 			"name": "AntennaTop",
-			"from": [1.01, 4.99, 14.01],
-			"to": [1.99, 5.99, 14.99],
+			"from": [1.01, 0.01, 18.99],
+			"to": [1.99, 0.99, 19.99],
 			"faces": {
-				"up": {"uv": [1, 1, 2, 2], "texture": "#redstone_antenna"}
+				"south": {"uv": [1, 1, 2, 2], "texture": "#redstone_antenna"}
 			}
 		},
 		{
 			"name": "AntennaZ",
-			"from": [1.01, -0.01, 13.01],
-			"to": [1.99, 6.99, 15.99],
+			"from": [1.01, -0.99, 13.99],
+			"to": [1.99, 1.99, 20.99],
 			"faces": {
-				"east": {"uv": [0, 0, 3, 7], "texture": "#redstone_antenna"},
-				"west": {"uv": [0, 0, 3, 7], "texture": "#redstone_antenna"}
+				"east": {"uv": [0, 0, 3, 7], "rotation": 270, "texture": "#redstone_antenna"},
+				"west": {"uv": [0, 0, 3, 7], "rotation": 90, "texture": "#redstone_antenna"}
 			}
 		},
 		{
 			"name": "AntennaX",
-			"from": [0.01, -0.01, 14.01],
-			"to": [2.99, 6.99, 14.99],
+			"from": [0.01, 0.01, 13.99],
+			"to": [2.99, 0.99, 20.99],
 			"faces": {
-				"north": {"uv": [0, 0, 3, 7], "texture": "#redstone_antenna"},
-				"south": {"uv": [0, 0, 3, 7], "texture": "#redstone_antenna"},
-				"down": {"uv": [0, 9, 3, 10], "texture": "#redstone_antenna"}
+				"north": {"uv": [0, 9, 3, 10], "rotation": 180, "texture": "#redstone_antenna"},
+				"up": {"uv": [0, 0, 3, 7], "rotation": 180, "texture": "#redstone_antenna"},
+				"down": {"uv": [0, 0, 3, 7], "texture": "#redstone_antenna"}
 			}
 		},
 		{
