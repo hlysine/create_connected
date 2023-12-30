@@ -1,0 +1,19 @@
+{
+  "parent": "minecraft:block/block",
+  "children": {
+    "button": {
+      "parent": "minecraft:block/acacia_button"
+    },
+    "link": {
+      "parent": "create_connected:block/linked_module/block"
+    }
+  },
+  "item_render_order": [
+    "button",
+    "link"
+  ],
+  "loader": "forge:composite",
+  "textures": {
+    "particle": "create:block/redstone_bridge"
+  }
+}

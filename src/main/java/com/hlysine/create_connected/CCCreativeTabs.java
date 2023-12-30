@@ -39,6 +39,7 @@ public class CCCreativeTabs {
             CCBlocks.BRAKE,
             CCBlocks.ITEM_SILO,
             CCBlocks.SEQUENCED_PULSE_GENERATOR,
+            CCItems.LINKED_MODULE,
             CCBlocks.EMPTY_FAN_CATALYST,
             CCBlocks.FAN_BLASTING_CATALYST,
             CCBlocks.FAN_SMOKING_CATALYST,

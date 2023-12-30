@@ -13,6 +13,8 @@ import com.hlysine.create_connected.content.invertedgearshift.InvertedGearshiftB
 import com.hlysine.create_connected.content.itemsilo.ItemSiloBlock;
 import com.hlysine.create_connected.content.itemsilo.ItemSiloCTBehaviour;
 import com.hlysine.create_connected.content.itemsilo.ItemSiloItem;
+import com.hlysine.create_connected.content.linkedmodule.LinkedButtonBlock;
+import com.hlysine.create_connected.content.linkedmodule.LinkedModuleItem;
 import com.hlysine.create_connected.content.overstressclutch.OverstressClutchBlock;
 import com.hlysine.create_connected.content.parallelgearbox.ParallelGearboxBlock;
 import com.hlysine.create_connected.content.sequencedpulsegenerator.SequencedPulseGeneratorBlock;
@@ -30,13 +32,20 @@ import com.tterrag.registrate.providers.DataGenContext;
 import com.tterrag.registrate.providers.RegistrateBlockstateProvider;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.ButtonBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
+import net.minecraftforge.registries.ForgeRegistries;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Function;
 
 import static com.simibubi.create.foundation.data.AssetLookup.partialBaseModel;
@@ -203,6 +212,26 @@ public class CCBlocks {
                     .addLayer(() -> RenderType::cutoutMipped)
                     .simpleItem()
                     .register();
+
+    public static final Map<BlockSetType, BlockEntry<LinkedButtonBlock>> LINKED_BUTTONS = new HashMap<>();
+
+    static {
+        BlockSetType.values().forEach(type -> {
+            Block button = ForgeRegistries.BLOCKS.getValue(new ResourceLocation(type.name() + "_button"));
+            if (button == null) return;
+            if (!(button instanceof ButtonBlock buttonBlock))
+                return;
+            LINKED_BUTTONS.put(type, REGISTRATE
+                    .block("linked_" + type.name() + "_button", properties -> new LinkedButtonBlock(properties, buttonBlock))
+                    .initialProperties(() -> buttonBlock)
+                    .transform(LinkedModuleItem.register())
+                    .blockstate(CCBlockStateGen.linkedButton(
+                            new ResourceLocation("block/" + type.name() + "_button"),
+                            new ResourceLocation("block/" + type.name() + "_button_pressed")
+                    ))
+                    .register());
+        });
+    }
 
     public static final BlockEntry<WrenchableBlock> EMPTY_FAN_CATALYST = REGISTRATE.block("empty_fan_catalyst", WrenchableBlock::new)
             .initialProperties(() -> Blocks.IRON_BLOCK)

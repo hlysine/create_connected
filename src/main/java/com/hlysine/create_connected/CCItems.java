@@ -2,6 +2,7 @@ package com.hlysine.create_connected;
 
 import com.hlysine.create_connected.config.FeatureToggle;
 import com.hlysine.create_connected.content.brassgearbox.VerticalBrassGearboxItem;
+import com.hlysine.create_connected.content.linkedmodule.LinkedModuleItem;
 import com.hlysine.create_connected.content.parallelgearbox.VerticalParallelGearboxItem;
 import com.hlysine.create_connected.content.sixwaygearbox.VerticalSixWayGearboxItem;
 import com.simibubi.create.content.processing.sequenced.SequencedAssemblyItem;
@@ -43,6 +44,12 @@ public class CCItems {
             REGISTRATE.item("vertical_brass_gearbox", VerticalBrassGearboxItem::new)
                     .model(AssetLookup.customBlockItemModel("brass_gearbox", "item_vertical"))
                     .transform(FeatureToggle.registerDependent(CCBlocks.BRASS_GEARBOX))
+                    .register();
+
+    public static final ItemEntry<LinkedModuleItem> LINKED_MODULE =
+            REGISTRATE.item("linked_module", LinkedModuleItem::new)
+                    .model(AssetLookup.customGenericItemModel("linked_module", "item"))
+                    .transform(FeatureToggle.register())
                     .register();
 
     public static void register() {

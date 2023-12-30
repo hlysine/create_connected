@@ -1,8 +1,10 @@
 package com.hlysine.create_connected.datagen;
 
 import com.hlysine.create_connected.content.brassgearbox.BrassGearboxBlock;
+import com.hlysine.create_connected.content.linkedmodule.LinkedButtonBlock;
 import com.hlysine.create_connected.content.sequencedpulsegenerator.SequencedPulseGeneratorBlock;
 import com.mojang.datafixers.util.Function4;
+import com.simibubi.create.Create;
 import com.simibubi.create.foundation.utility.Iterate;
 import com.tterrag.registrate.providers.DataGenContext;
 import com.tterrag.registrate.providers.RegistrateBlockstateProvider;
@@ -10,10 +12,13 @@ import com.tterrag.registrate.util.nullness.NonNullBiConsumer;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.ButtonBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.AttachFace;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
+import net.minecraftforge.client.model.generators.loaders.CompositeModelBuilder;
 import org.apache.commons.lang3.function.TriFunction;
 
 import java.util.HashMap;
@@ -22,6 +27,22 @@ import java.util.Vector;
 import java.util.function.Function;
 
 public class CCBlockStateGen {
+    public static <B extends LinkedButtonBlock> NonNullBiConsumer<DataGenContext<Block, B>, RegistrateBlockstateProvider> linkedButton(ResourceLocation buttonOff, ResourceLocation buttonOn) {
+        return (c, p) -> {
+            ModelFile modelOff = p.models().withExistingParent(c.getName(), new ResourceLocation("block/block")).customLoader(CompositeModelBuilder::begin)
+                    .child("button", p.models().nested().parent(p.models().getExistingFile(buttonOff)))
+                    .child("link", p.models().nested().parent(p.models().getExistingFile(p.modLoc("block/linked_module/block"))))
+                    .end()
+                    .texture("particle", new ResourceLocation(Create.ID, "block/redstone_bridge"));
+            ModelFile modelOn = p.models().withExistingParent(c.getName() + "_powered", new ResourceLocation("block/block")).customLoader(CompositeModelBuilder::begin)
+                    .child("button", p.models().nested().parent(p.models().getExistingFile(buttonOn)))
+                    .child("link", p.models().nested().parent(p.models().getExistingFile(p.modLoc("block/linked_module/block_powered"))))
+                    .end()
+                    .texture("particle", new ResourceLocation(Create.ID, "block/redstone_bridge_powered"));
+            buttonBlock(p, c.get(), modelOff, modelOn);
+        };
+    }
+
     public static <B extends SequencedPulseGeneratorBlock> NonNullBiConsumer<DataGenContext<Block, B>, RegistrateBlockstateProvider> sequencedPulseGenerator() {
         return (c, p) -> {
             Map<Boolean, ResourceLocation> baseOff = new HashMap<>();
@@ -110,5 +131,20 @@ public class CCBlockStateGen {
                             .rotationY(axis == Direction.Axis.X ? 90 : 0)
                             .build();
                 }, BlockStateProperties.WATERLOGGED);
+    }
+
+    public static void buttonBlock(RegistrateBlockstateProvider prov, ButtonBlock block, ModelFile button, ModelFile buttonPressed) {
+        prov.getVariantBuilder(block).forAllStates(state -> {
+            Direction facing = state.getValue(ButtonBlock.FACING);
+            AttachFace face = state.getValue(ButtonBlock.FACE);
+            boolean powered = state.getValue(ButtonBlock.POWERED);
+
+            return ConfiguredModel.builder()
+                    .modelFile(powered ? buttonPressed : button)
+                    .rotationX(face == AttachFace.FLOOR ? 0 : (face == AttachFace.WALL ? -90 : 180))
+                    .rotationY((int) (face == AttachFace.CEILING || face == AttachFace.WALL ? facing : facing.getOpposite()).toYRot())
+                    .uvLock(false)
+                    .build();
+        });
     }
 }
