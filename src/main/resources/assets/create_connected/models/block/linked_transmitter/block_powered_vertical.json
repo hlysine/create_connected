@@ -1,5 +1,5 @@
 {
-	"parent": "create_connected:block/linked_module/block_vertical",
+	"parent": "create_connected:block/linked_transmitter/block_vertical",
 	"textures": {
 		"redstone_antenna": "create:block/redstone_antenna_powered",
 		"redstone_bridge": "create:block/redstone_bridge_powered"

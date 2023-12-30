@@ -1,4 +1,4 @@
-package com.hlysine.create_connected.content.linkedmodule;
+package com.hlysine.create_connected.content.linkedtransmitter;
 
 import com.hlysine.create_connected.CCBlockEntityTypes;
 import com.hlysine.create_connected.CCItems;
@@ -33,7 +33,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LinkedButtonBlock extends ButtonBlock implements IBE<LinkedModuleBlockEntity>, ISpecialBlockItemRequirement, IWrenchable, LinkedModuleBlock {
+public class LinkedButtonBlock extends ButtonBlock implements IBE<LinkedTransmitterBlockEntity>, ISpecialBlockItemRequirement, IWrenchable, LinkedTransmitterBlock {
 
     private final ButtonBlock base;
 
@@ -59,9 +59,9 @@ public class LinkedButtonBlock extends ButtonBlock implements IBE<LinkedModuleBl
                                         @NotNull CollisionContext context) {
         Direction facing = state.getValue(ButtonBlock.FACING);
         return Shapes.or(switch (state.getValue(ButtonBlock.FACE)) {
-            case FLOOR -> CCShapes.FLOOR_LINKED_MODULE.get(facing);
-            case WALL -> CCShapes.WALL_LINKED_MODULE.get(facing);
-            case CEILING -> CCShapes.CEILING_LINKED_MODULE.get(facing);
+            case FLOOR -> CCShapes.FLOOR_LINKED_TRANSMITTER.get(facing);
+            case WALL -> CCShapes.WALL_LINKED_TRANSMITTER.get(facing);
+            case CEILING -> CCShapes.CEILING_LINKED_TRANSMITTER.get(facing);
         }, super.getShape(state, level, pos, context));
     }
 
@@ -86,7 +86,7 @@ public class LinkedButtonBlock extends ButtonBlock implements IBE<LinkedModuleBl
     @Override
     public void onRemove(@NotNull BlockState state, @NotNull Level world, @NotNull BlockPos pos, @NotNull BlockState newState, boolean isMoving) {
         if (!state.is(newState.getBlock()) && !isMoving && getBlockEntityOptional(world, pos).map(be -> be.containsBase).orElse(false))
-            Block.popResource(world, pos, new ItemStack(CCItems.LINKED_MODULE));
+            Block.popResource(world, pos, new ItemStack(CCItems.LINKED_TRANSMITTER));
         base.onRemove(state, world, pos, newState, isMoving);
     }
 
@@ -100,7 +100,7 @@ public class LinkedButtonBlock extends ButtonBlock implements IBE<LinkedModuleBl
     public InteractionResult onWrenched(BlockState state, UseOnContext context) {
         Player player = context.getPlayer();
         if (!player.isCreative()) {
-            player.getInventory().placeItemBackInInventory(new ItemStack(CCItems.LINKED_MODULE));
+            player.getInventory().placeItemBackInInventory(new ItemStack(CCItems.LINKED_TRANSMITTER));
         }
         withBlockEntityDo(context.getLevel(), context.getClickedPos(), be -> be.containsBase = false);
         replaceWithBase(state, context.getLevel(), context.getClickedPos());
@@ -158,17 +158,17 @@ public class LinkedButtonBlock extends ButtonBlock implements IBE<LinkedModuleBl
     public ItemRequirement getRequiredItems(BlockState state, BlockEntity be) {
         ArrayList<ItemStack> requiredItems = new ArrayList<>();
         requiredItems.add(new ItemStack(base));
-        requiredItems.add(new ItemStack(CCItems.LINKED_MODULE.get()));
+        requiredItems.add(new ItemStack(CCItems.LINKED_TRANSMITTER.get()));
         return new ItemRequirement(ItemRequirement.ItemUseType.CONSUME, requiredItems);
     }
 
     @Override
-    public Class<LinkedModuleBlockEntity> getBlockEntityClass() {
-        return LinkedModuleBlockEntity.class;
+    public Class<LinkedTransmitterBlockEntity> getBlockEntityClass() {
+        return LinkedTransmitterBlockEntity.class;
     }
 
     @Override
-    public BlockEntityType<? extends LinkedModuleBlockEntity> getBlockEntityType() {
-        return CCBlockEntityTypes.LINKED_MODULE.get();
+    public BlockEntityType<? extends LinkedTransmitterBlockEntity> getBlockEntityType() {
+        return CCBlockEntityTypes.LINKED_TRANSMITTER.get();
     }
 }

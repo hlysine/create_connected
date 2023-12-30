@@ -13,9 +13,9 @@ import com.hlysine.create_connected.content.invertedgearshift.InvertedGearshiftB
 import com.hlysine.create_connected.content.itemsilo.ItemSiloBlock;
 import com.hlysine.create_connected.content.itemsilo.ItemSiloCTBehaviour;
 import com.hlysine.create_connected.content.itemsilo.ItemSiloItem;
-import com.hlysine.create_connected.content.linkedmodule.LinkedButtonBlock;
-import com.hlysine.create_connected.content.linkedmodule.LinkedLeverBlock;
-import com.hlysine.create_connected.content.linkedmodule.LinkedModuleItem;
+import com.hlysine.create_connected.content.linkedtransmitter.LinkedButtonBlock;
+import com.hlysine.create_connected.content.linkedtransmitter.LinkedLeverBlock;
+import com.hlysine.create_connected.content.linkedtransmitter.LinkedTransmitterItem;
 import com.hlysine.create_connected.content.overstressclutch.OverstressClutchBlock;
 import com.hlysine.create_connected.content.parallelgearbox.ParallelGearboxBlock;
 import com.hlysine.create_connected.content.sequencedpulsegenerator.SequencedPulseGeneratorBlock;
@@ -222,7 +222,7 @@ public class CCBlocks {
             LINKED_BUTTONS.put(type, REGISTRATE
                     .block("linked_" + type.name() + "_button", properties -> new LinkedButtonBlock(properties, buttonBlock))
                     .initialProperties(() -> buttonBlock)
-                    .transform(LinkedModuleItem.register())
+                    .transform(LinkedTransmitterItem.register())
                     .blockstate(CCBlockStateGen.linkedButton(
                             new ResourceLocation("block/" + type.name() + "_button"),
                             new ResourceLocation("block/" + type.name() + "_button_pressed")
@@ -233,7 +233,7 @@ public class CCBlocks {
 
     public static final BlockEntry<LinkedLeverBlock> LINKED_LEVER = REGISTRATE.block("linked_lever", properties -> new LinkedLeverBlock(properties, (LeverBlock) Blocks.LEVER))
             .initialProperties(() -> Blocks.LEVER)
-            .transform(LinkedModuleItem.register())
+            .transform(LinkedTransmitterItem.register())
             .blockstate(CCBlockStateGen.linkedLever(
                     new ResourceLocation("block/lever"),
                     new ResourceLocation("block/lever_on")

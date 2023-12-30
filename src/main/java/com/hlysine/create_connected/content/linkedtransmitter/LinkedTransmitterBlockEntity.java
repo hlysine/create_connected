@@ -1,4 +1,4 @@
-package com.hlysine.create_connected.content.linkedmodule;
+package com.hlysine.create_connected.content.linkedtransmitter;
 
 import com.simibubi.create.content.redstone.link.LinkBehaviour;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
@@ -12,7 +12,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.List;
 
-public class LinkedModuleBlockEntity extends SmartBlockEntity {
+public class LinkedTransmitterBlockEntity extends SmartBlockEntity {
 
     private int transmittedSignal;
     /**
@@ -21,7 +21,7 @@ public class LinkedModuleBlockEntity extends SmartBlockEntity {
     public boolean containsBase = true;
     private LinkBehaviour link;
 
-    public LinkedModuleBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
+    public LinkedTransmitterBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
     }
 
@@ -33,7 +33,7 @@ public class LinkedModuleBlockEntity extends SmartBlockEntity {
 
     protected void createLink() {
         Pair<ValueBoxTransform, ValueBoxTransform> slots =
-                ValueBoxTransform.Dual.makeSlots(LinkedModuleFrequencySlot::new);
+                ValueBoxTransform.Dual.makeSlots(LinkedTransmitterFrequencySlot::new);
         link = LinkBehaviour.transmitter(this, slots, this::getSignal);
     }
 

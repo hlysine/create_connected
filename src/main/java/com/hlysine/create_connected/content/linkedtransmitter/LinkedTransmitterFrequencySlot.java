@@ -1,4 +1,4 @@
-package com.hlysine.create_connected.content.linkedmodule;
+package com.hlysine.create_connected.content.linkedtransmitter;
 
 import com.jozufozu.flywheel.util.transform.TransformStack;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -11,9 +11,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.AttachFace;
 import net.minecraft.world.phys.Vec3;
 
-public class LinkedModuleFrequencySlot extends ValueBoxTransform.Dual {
+public class LinkedTransmitterFrequencySlot extends ValueBoxTransform.Dual {
 
-    public LinkedModuleFrequencySlot(boolean first) {
+    public LinkedTransmitterFrequencySlot(boolean first) {
         super(first);
     }
 

@@ -1,7 +1,7 @@
 package com.hlysine.create_connected.datagen;
 
 import com.hlysine.create_connected.content.brassgearbox.BrassGearboxBlock;
-import com.hlysine.create_connected.content.linkedmodule.LinkedModuleBlock;
+import com.hlysine.create_connected.content.linkedtransmitter.LinkedTransmitterBlock;
 import com.hlysine.create_connected.content.sequencedpulsegenerator.SequencedPulseGeneratorBlock;
 import com.mojang.datafixers.util.Function4;
 import com.simibubi.create.foundation.utility.Iterate;
@@ -27,37 +27,37 @@ import java.util.Vector;
 import java.util.function.Function;
 
 public class CCBlockStateGen {
-    public static <B extends Block & LinkedModuleBlock> NonNullBiConsumer<DataGenContext<Block, B>, RegistrateBlockstateProvider> linkedButton(ResourceLocation buttonOff, ResourceLocation buttonOn) {
+    public static <B extends Block & LinkedTransmitterBlock> NonNullBiConsumer<DataGenContext<Block, B>, RegistrateBlockstateProvider> linkedButton(ResourceLocation buttonOff, ResourceLocation buttonOn) {
         return (DataGenContext<Block, B> c, RegistrateBlockstateProvider p) -> {
-            linkedModule(
+            linkedTransmitter(
                     p, c.get(),
                     state -> state.getValue(BlockStateProperties.POWERED)
                             ? p.models().getExistingFile(buttonOn)
                             : p.models().getExistingFile(buttonOff),
                     state -> state.getValue(BlockStateProperties.POWERED)
-                            ? p.models().getExistingFile(p.modLoc("block/linked_module/block_powered" + (state.getValue(BlockStateProperties.ATTACH_FACE) == AttachFace.WALL ? "_vertical" : "")))
-                            : p.models().getExistingFile(p.modLoc("block/linked_module/block" + (state.getValue(BlockStateProperties.ATTACH_FACE) == AttachFace.WALL ? "_vertical" : ""))),
+                            ? p.models().getExistingFile(p.modLoc("block/linked_transmitter/block_powered" + (state.getValue(BlockStateProperties.ATTACH_FACE) == AttachFace.WALL ? "_vertical" : "")))
+                            : p.models().getExistingFile(p.modLoc("block/linked_transmitter/block" + (state.getValue(BlockStateProperties.ATTACH_FACE) == AttachFace.WALL ? "_vertical" : ""))),
                     state -> state.getValue(BlockStateProperties.ATTACH_FACE) == AttachFace.WALL
             );
         };
     }
 
-    public static <B extends Block & LinkedModuleBlock> NonNullBiConsumer<DataGenContext<Block, B>, RegistrateBlockstateProvider> linkedLever(ResourceLocation leverOff, ResourceLocation leverOn) {
+    public static <B extends Block & LinkedTransmitterBlock> NonNullBiConsumer<DataGenContext<Block, B>, RegistrateBlockstateProvider> linkedLever(ResourceLocation leverOff, ResourceLocation leverOn) {
         return (DataGenContext<Block, B> c, RegistrateBlockstateProvider p) -> {
-            linkedModule(
+            linkedTransmitter(
                     p, c.get(),
                     state -> state.getValue(BlockStateProperties.POWERED)
                             ? p.models().getExistingFile(leverOff)
                             : p.models().getExistingFile(leverOn),
                     state -> state.getValue(BlockStateProperties.POWERED)
-                            ? p.models().getExistingFile(p.modLoc("block/linked_module/block_powered" + (state.getValue(BlockStateProperties.ATTACH_FACE) == AttachFace.WALL ? "_vertical" : "")))
-                            : p.models().getExistingFile(p.modLoc("block/linked_module/block" + (state.getValue(BlockStateProperties.ATTACH_FACE) == AttachFace.WALL ? "_vertical" : ""))),
+                            ? p.models().getExistingFile(p.modLoc("block/linked_transmitter/block_powered" + (state.getValue(BlockStateProperties.ATTACH_FACE) == AttachFace.WALL ? "_vertical" : "")))
+                            : p.models().getExistingFile(p.modLoc("block/linked_transmitter/block" + (state.getValue(BlockStateProperties.ATTACH_FACE) == AttachFace.WALL ? "_vertical" : ""))),
                     state -> false
             );
         };
     }
 
-    public static void linkedModule(RegistrateBlockstateProvider prov, Block block, NonNullFunction<BlockState, ModelFile> baseModel, NonNullFunction<BlockState, ModelFile> moduleModel, NonNullFunction<BlockState, Boolean> uvLock) {
+    public static void linkedTransmitter(RegistrateBlockstateProvider prov, Block block, NonNullFunction<BlockState, ModelFile> baseModel, NonNullFunction<BlockState, ModelFile> moduleModel, NonNullFunction<BlockState, Boolean> uvLock) {
         MultiPartBlockStateBuilder builder = prov.getMultipartBuilder(block);
 
         for (BlockState state : block.getStateDefinition().getPossibleStates()) {

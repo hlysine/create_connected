@@ -160,6 +160,8 @@ public class CCStandardRecipes extends CreateRecipeProvider {
                     .pattern("SSS")
             );
 
+    GeneratedRecipe LINKED_TRANSMITTER_CYCLE = conversionCycle(ImmutableList.of(CCItems.LINKED_TRANSMITTER, AllBlocks.REDSTONE_LINK));
+
     GeneratedRecipe ITEM_SILO = create(CCBlocks.ITEM_SILO).unlockedByTag(() -> Tags.Items.BARRELS_WOODEN)
             .requiresResultFeature()
             .viaShaped(b -> b

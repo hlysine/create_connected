@@ -9,7 +9,7 @@ import com.hlysine.create_connected.content.freewheelclutch.FreewheelClutchBlock
 import com.hlysine.create_connected.content.invertedclutch.InvertedClutchBlockEntity;
 import com.hlysine.create_connected.content.invertedgearshift.InvertedGearshiftBlockEntity;
 import com.hlysine.create_connected.content.itemsilo.ItemSiloBlockEntity;
-import com.hlysine.create_connected.content.linkedmodule.LinkedModuleBlockEntity;
+import com.hlysine.create_connected.content.linkedtransmitter.LinkedTransmitterBlockEntity;
 import com.hlysine.create_connected.content.overstressclutch.OverstressClutchBlockEntity;
 import com.hlysine.create_connected.content.parallelgearbox.ParallelGearboxBlockEntity;
 import com.hlysine.create_connected.content.parallelgearbox.ParallelGearboxInstance;
@@ -122,8 +122,8 @@ public class CCBlockEntityTypes {
             .validBlocks(CCBlocks.SEQUENCED_PULSE_GENERATOR)
             .register();
 
-    public static final BlockEntityEntry<LinkedModuleBlockEntity> LINKED_MODULE = REGISTRATE
-            .blockEntity("linked_module", LinkedModuleBlockEntity::new)
+    public static final BlockEntityEntry<LinkedTransmitterBlockEntity> LINKED_TRANSMITTER = REGISTRATE
+            .blockEntity("linked_transmitter", LinkedTransmitterBlockEntity::new)
             .transform(b -> {
                 CCBlocks.LINKED_BUTTONS.values().forEach(b::validBlock);
                 return b;
