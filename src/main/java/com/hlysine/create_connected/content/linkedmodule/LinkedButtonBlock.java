@@ -78,7 +78,7 @@ public class LinkedButtonBlock extends ButtonBlock implements IBE<LinkedModuleBl
                                           @NotNull Player player,
                                           @NotNull InteractionHand hand,
                                           @NotNull BlockHitResult hit) {
-        if (super.getShape(state, level, pos, CollisionContext.empty()).bounds().inflate(0.1 / 16).move(pos).contains(hit.getLocation()))
+        if (super.getShape(state, level, pos, CollisionContext.empty()).bounds().inflate(0.01 / 16).move(pos).contains(hit.getLocation()))
             return super.use(state, level, pos, player, hand, hit);
         return InteractionResult.PASS;
     }
@@ -115,6 +115,7 @@ public class LinkedButtonBlock extends ButtonBlock implements IBE<LinkedModuleBl
                 .setValue(POWERED, baseState.getValue(POWERED))
         );
         AllSoundEvents.CONTROLLER_PUT.playOnServer(world, pos);
+        checkPressed(world.getBlockState(pos), world, pos);
     }
 
     public void replaceWithBase(BlockState state, Level world, BlockPos pos) {
@@ -123,6 +124,7 @@ public class LinkedButtonBlock extends ButtonBlock implements IBE<LinkedModuleBl
                 .setValue(FACING, state.getValue(FACING))
                 .setValue(FACE, state.getValue(FACE))
                 .setValue(POWERED, state.getValue(POWERED)));
+        super.checkPressed(world.getBlockState(pos), world, pos);
     }
 
     @Override

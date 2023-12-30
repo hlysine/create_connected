@@ -78,7 +78,7 @@ public class LinkedLeverBlock extends LeverBlock implements IBE<LinkedModuleBloc
                                           @NotNull Player player,
                                           @NotNull InteractionHand hand,
                                           @NotNull BlockHitResult hit) {
-        if (super.getShape(state, level, pos, CollisionContext.empty()).bounds().inflate(0.1 / 16).move(pos).contains(hit.getLocation()))
+        if (super.getShape(state, level, pos, CollisionContext.empty()).bounds().inflate(0.01 / 16).move(pos).contains(hit.getLocation()))
             return super.use(state, level, pos, player, hand, hit);
         return InteractionResult.PASS;
     }
