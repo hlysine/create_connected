@@ -25,9 +25,6 @@ import com.simibubi.create.content.decoration.encasing.EncasedCTBehaviour;
 import com.simibubi.create.content.kinetics.BlockStressDefaults;
 import com.simibubi.create.content.kinetics.chainDrive.ChainDriveGenerator;
 import com.simibubi.create.content.kinetics.simpleRelays.BracketedKineticBlockModel;
-import com.simibubi.create.content.redstone.diodes.AbstractDiodeGenerator;
-import com.simibubi.create.content.redstone.diodes.BrassDiodeBlock;
-import com.simibubi.create.content.redstone.diodes.BrassDiodeGenerator;
 import com.simibubi.create.foundation.data.*;
 import com.tterrag.registrate.providers.DataGenContext;
 import com.tterrag.registrate.providers.RegistrateBlockstateProvider;
@@ -42,7 +39,6 @@ import net.minecraftforge.client.model.generators.ModelFile;
 
 import java.util.function.Function;
 
-import static com.simibubi.create.Create.REGISTRATE;
 import static com.simibubi.create.foundation.data.AssetLookup.partialBaseModel;
 import static com.simibubi.create.foundation.data.BlockStateGen.axisBlock;
 import static com.simibubi.create.foundation.data.CreateRegistrate.connectedTextures;
@@ -271,7 +267,6 @@ public class CCBlocks {
                     .noOcclusion()
                     .isRedstoneConductor((state, level, pos) -> false)
             )
-            .addLayer(() -> RenderType::cutoutMipped)
             .transform(pickaxeOnly())
             .transform(FeatureToggle.registerDependent(CCBlocks.EMPTY_FAN_CATALYST))
             .blockstate((c, p) -> p.simpleBlock(c.getEntry(), AssetLookup.partialBaseModel(c, p)))
