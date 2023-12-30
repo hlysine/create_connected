@@ -9,6 +9,8 @@ import com.hlysine.create_connected.content.freewheelclutch.FreewheelClutchBlock
 import com.hlysine.create_connected.content.invertedclutch.InvertedClutchBlockEntity;
 import com.hlysine.create_connected.content.invertedgearshift.InvertedGearshiftBlockEntity;
 import com.hlysine.create_connected.content.itemsilo.ItemSiloBlockEntity;
+import com.hlysine.create_connected.content.linkedtransmitter.LinkedAnalogLeverBlockEntity;
+import com.hlysine.create_connected.content.linkedtransmitter.LinkedAnalogLeverRenderer;
 import com.hlysine.create_connected.content.linkedtransmitter.LinkedTransmitterBlockEntity;
 import com.hlysine.create_connected.content.overstressclutch.OverstressClutchBlockEntity;
 import com.hlysine.create_connected.content.parallelgearbox.ParallelGearboxBlockEntity;
@@ -26,6 +28,7 @@ import com.simibubi.create.content.kinetics.simpleRelays.encased.EncasedCogInsta
 import com.simibubi.create.content.kinetics.simpleRelays.encased.EncasedCogRenderer;
 import com.simibubi.create.content.kinetics.transmission.SplitShaftInstance;
 import com.simibubi.create.content.kinetics.transmission.SplitShaftRenderer;
+import com.simibubi.create.content.redstone.analogLever.AnalogLeverInstance;
 import com.simibubi.create.foundation.blockEntity.renderer.SmartBlockEntityRenderer;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
@@ -130,6 +133,13 @@ public class CCBlockEntityTypes {
             })
             .validBlocks(CCBlocks.LINKED_LEVER)
             .renderer(() -> SmartBlockEntityRenderer::new)
+            .register();
+
+    public static final BlockEntityEntry<LinkedAnalogLeverBlockEntity> LINKED_ANALOG_LEVER = REGISTRATE
+            .blockEntity("linked_analog_lever", LinkedAnalogLeverBlockEntity::new)
+            .instance(() -> AnalogLeverInstance::new)
+            .validBlocks(CCBlocks.LINKED_ANALOG_LEVER)
+            .renderer(() -> LinkedAnalogLeverRenderer::new)
             .register();
 
 

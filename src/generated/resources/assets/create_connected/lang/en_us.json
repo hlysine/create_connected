@@ -55,6 +55,7 @@
   "block.create_connected.item_silo": "Item Silo",
   "block.create_connected.item_silo.tooltip.summary": "A _vertical_ item vault.",
   "block.create_connected.linked_acacia_button": "Linked Acacia Button",
+  "block.create_connected.linked_analog_lever": "Linked Analog Lever",
   "block.create_connected.linked_bamboo_button": "Linked Bamboo Button",
   "block.create_connected.linked_birch_button": "Linked Birch Button",
   "block.create_connected.linked_cherry_button": "Linked Cherry Button",

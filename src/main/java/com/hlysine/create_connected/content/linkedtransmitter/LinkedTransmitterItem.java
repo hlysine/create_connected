@@ -50,6 +50,12 @@ public class LinkedTransmitterItem extends Item {
             }
         }
 
+        for (LinkedTransmitterBlock moduleBlock : MODULE_BLOCKS) {
+            if (hitState.is(moduleBlock.getBlock())) {
+                return InteractionResult.PASS;
+            }
+        }
+
         return use(world, player, ctx.getHand()).getResult();
     }
 }

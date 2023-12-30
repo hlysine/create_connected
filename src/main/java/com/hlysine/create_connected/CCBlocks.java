@@ -13,6 +13,7 @@ import com.hlysine.create_connected.content.invertedgearshift.InvertedGearshiftB
 import com.hlysine.create_connected.content.itemsilo.ItemSiloBlock;
 import com.hlysine.create_connected.content.itemsilo.ItemSiloCTBehaviour;
 import com.hlysine.create_connected.content.itemsilo.ItemSiloItem;
+import com.hlysine.create_connected.content.linkedtransmitter.LinkedAnalogLeverBlock;
 import com.hlysine.create_connected.content.linkedtransmitter.LinkedButtonBlock;
 import com.hlysine.create_connected.content.linkedtransmitter.LinkedLeverBlock;
 import com.hlysine.create_connected.content.linkedtransmitter.LinkedTransmitterItem;
@@ -22,8 +23,10 @@ import com.hlysine.create_connected.content.sequencedpulsegenerator.SequencedPul
 import com.hlysine.create_connected.content.shearpin.ShearPinBlock;
 import com.hlysine.create_connected.content.sixwaygearbox.SixWayGearboxBlock;
 import com.hlysine.create_connected.datagen.CCBlockStateGen;
+import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllSpriteShifts;
 import com.simibubi.create.AllTags;
+import com.simibubi.create.Create;
 import com.simibubi.create.content.decoration.encasing.EncasedCTBehaviour;
 import com.simibubi.create.content.kinetics.BlockStressDefaults;
 import com.simibubi.create.content.kinetics.chainDrive.ChainDriveGenerator;
@@ -231,12 +234,23 @@ public class CCBlocks {
         });
     }
 
-    public static final BlockEntry<LinkedLeverBlock> LINKED_LEVER = REGISTRATE.block("linked_lever", properties -> new LinkedLeverBlock(properties, (LeverBlock) Blocks.LEVER))
+    public static final BlockEntry<LinkedLeverBlock> LINKED_LEVER = REGISTRATE
+            .block("linked_lever", properties -> new LinkedLeverBlock(properties, (LeverBlock) Blocks.LEVER))
             .initialProperties(() -> Blocks.LEVER)
             .transform(LinkedTransmitterItem.register())
             .blockstate(CCBlockStateGen.linkedLever(
                     new ResourceLocation("block/lever"),
                     new ResourceLocation("block/lever_on")
+            ))
+            .register();
+
+    public static final BlockEntry<LinkedAnalogLeverBlock> LINKED_ANALOG_LEVER = REGISTRATE
+            .block("linked_analog_lever", properties -> new LinkedAnalogLeverBlock(properties, AllBlocks.ANALOG_LEVER.get()))
+            .initialProperties(AllBlocks.ANALOG_LEVER)
+            .transform(LinkedTransmitterItem.register())
+            .blockstate(CCBlockStateGen.linkedLever(
+                    Create.asResource("block/analog_lever/block"),
+                    Create.asResource("block/analog_lever/block")
             ))
             .register();
 
