@@ -27,6 +27,8 @@ public class CCPonders {
                 .addStoryBoard("parallel_gearbox", ParallelGearboxScenes::parallelGearbox, AllPonderTags.KINETIC_RELAYS);
         HELPER.forComponents(CCBlocks.SEQUENCED_PULSE_GENERATOR)
                 .addStoryBoard("sequenced_pulse_generator", SequencedPulseGeneratorScenes::pulseGenerator, AllPonderTags.REDSTONE);
+        HELPER.forComponents(CCItems.LINKED_TRANSMITTER)
+                .addStoryBoard("linked_transmitter", LinkedTransmitterScenes::linkedTransmitter, AllPonderTags.REDSTONE);
 
         PonderRegistry.TAGS.forTag(AllPonderTags.KINETIC_RELAYS)
                 .add(CCBlocks.ENCASED_CHAIN_COGWHEEL)
@@ -34,6 +36,7 @@ public class CCPonders {
                 .add(CCBlocks.INVERTED_GEARSHIFT)
                 .add(CCBlocks.PARALLEL_GEARBOX);
         PonderRegistry.TAGS.forTag(AllPonderTags.REDSTONE)
-                .add(CCBlocks.SEQUENCED_PULSE_GENERATOR);
+                .add(CCBlocks.SEQUENCED_PULSE_GENERATOR)
+                .add(CCItems.LINKED_TRANSMITTER);
     }
 }
