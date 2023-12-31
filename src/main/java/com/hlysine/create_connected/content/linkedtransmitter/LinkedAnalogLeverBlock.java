@@ -6,10 +6,8 @@ import com.hlysine.create_connected.CCShapes;
 import com.simibubi.create.AllSoundEvents;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.content.redstone.analogLever.AnalogLeverBlock;
-import com.simibubi.create.content.redstone.analogLever.AnalogLeverBlockEntity;
 import com.simibubi.create.content.schematics.requirement.ISpecialBlockItemRequirement;
 import com.simibubi.create.content.schematics.requirement.ItemRequirement;
-import com.simibubi.create.foundation.block.IBE;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
@@ -20,8 +18,6 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.ButtonBlock;
-import net.minecraft.world.level.block.LeverBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -85,6 +81,10 @@ public class LinkedAnalogLeverBlock extends AnalogLeverBlock implements ISpecial
         return base.getDrops(state, builder);
     }
 
+    private boolean isHittingBase(BlockState state, BlockGetter level, BlockPos pos, HitResult hit) {
+        return super.getShape(state, level, pos, CollisionContext.empty()).bounds().inflate(0.01 / 16).move(pos).contains(hit.getLocation());
+    }
+
     @Override
     public @NotNull InteractionResult use(@NotNull BlockState state,
                                           @NotNull Level level,
@@ -92,7 +92,7 @@ public class LinkedAnalogLeverBlock extends AnalogLeverBlock implements ISpecial
                                           @NotNull Player player,
                                           @NotNull InteractionHand hand,
                                           @NotNull BlockHitResult hit) {
-        if (super.getShape(state, level, pos, CollisionContext.empty()).bounds().inflate(0.01 / 16).move(pos).contains(hit.getLocation()))
+        if (isHittingBase(state, level, pos, hit))
             return super.use(state, level, pos, player, hand, hit);
         return InteractionResult.PASS;
     }
@@ -139,7 +139,9 @@ public class LinkedAnalogLeverBlock extends AnalogLeverBlock implements ISpecial
 
     @Override
     public ItemStack getCloneItemStack(BlockState state, HitResult target, BlockGetter world, BlockPos pos, Player player) {
-        return base.getCloneItemStack(state, target, world, pos, player);
+        if (isHittingBase(state, world, pos, target))
+            return base.getCloneItemStack(state, target, world, pos, player);
+        return new ItemStack(CCItems.LINKED_TRANSMITTER.get());
     }
 
     @Override

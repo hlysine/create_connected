@@ -71,6 +71,10 @@ public class LinkedLeverBlock extends LeverBlock implements IBE<LinkedTransmitte
         return base.getDrops(state, builder);
     }
 
+    private boolean isHittingBase(BlockState state, BlockGetter level, BlockPos pos, HitResult hit) {
+        return super.getShape(state, level, pos, CollisionContext.empty()).bounds().inflate(0.01 / 16).move(pos).contains(hit.getLocation());
+    }
+
     @Override
     public @NotNull InteractionResult use(@NotNull BlockState state,
                                           @NotNull Level level,
@@ -78,7 +82,7 @@ public class LinkedLeverBlock extends LeverBlock implements IBE<LinkedTransmitte
                                           @NotNull Player player,
                                           @NotNull InteractionHand hand,
                                           @NotNull BlockHitResult hit) {
-        if (super.getShape(state, level, pos, CollisionContext.empty()).bounds().inflate(0.01 / 16).move(pos).contains(hit.getLocation()))
+        if (isHittingBase(state, level, pos, hit))
             return super.use(state, level, pos, player, hand, hit);
         return InteractionResult.PASS;
     }
@@ -144,7 +148,9 @@ public class LinkedLeverBlock extends LeverBlock implements IBE<LinkedTransmitte
 
     @Override
     public ItemStack getCloneItemStack(BlockState state, HitResult target, BlockGetter world, BlockPos pos, Player player) {
-        return base.getCloneItemStack(state, target, world, pos, player);
+        if (isHittingBase(state, world, pos, target))
+            return base.getCloneItemStack(state, target, world, pos, player);
+        return new ItemStack(CCItems.LINKED_TRANSMITTER.get());
     }
 
     @Override
