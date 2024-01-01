@@ -11,7 +11,8 @@
 
 A Create mod add-on adding quality-of-life blocks that you wish existed in Create.
 
-> **Want reliable, immersive chunk-loading for your Create machines? Check out [Create: Power Loader](https://modrinth.com/mod/create-power-loader)**
+> **Want reliable, immersive chunk-loading for your Create machines? Check
+out [Create: Power Loader](https://modrinth.com/mod/create-power-loader)**
 
 ## What's new in 0.3
 
@@ -62,6 +63,11 @@ Find this mod on [**Modrinth**](https://modrinth.com/mod/create-connected) or
 |--------|-------------------|
 | 0.5.1e | 0.0.2             |
 | 0.5.1f | 0.0.3 - latest    |
+
+## Compatibility
+
+**Incompatible with Create: Extended Cogwheels**: functionality is not affected, but there will be confusing visual
+glitches due to Extended Cogwheels treating Connected components as cogwheels.
 
 ## Usage
 
