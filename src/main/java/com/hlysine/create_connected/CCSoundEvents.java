@@ -35,7 +35,7 @@ public class CCSoundEvents {
 
     public static final SoundEntry ELEVATOR_MUSIC = create("elevator_music").noSubtitle()
             .category(SoundSource.RECORDS)
-            .attenuationDistance(3)
+            .attenuationDistance(7)
             .build();
 
     private static SoundEntryBuilder create(String name) {

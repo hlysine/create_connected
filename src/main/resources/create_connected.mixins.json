@@ -8,6 +8,7 @@
   "mixins": [
     "AnalogLeverBlockEntityAccessor",
     "AnalogLeverBlockMixin",
+    "ContraptionMixin",
     "CopycatModelInvoker",
     "CreativeModeTabsAccessor",
     "KineticBlockAdvancementMixin",
@@ -18,6 +19,7 @@
     "sequencedgearshift.SequencerInstructionsMixin"
   ],
   "client": [
+    "LevelRendererMixin",
     "SubMenuConfigScreenMixin",
     "sequencedgearshift.SequencedGearshiftScreenMixin"
   ],

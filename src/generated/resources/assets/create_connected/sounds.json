@@ -3,7 +3,7 @@
     "sounds": [
       {
         "type": "file",
-        "attenuation_distance": 3,
+        "attenuation_distance": 7,
         "name": "create_connected:elevator_music"
       }
     ]
