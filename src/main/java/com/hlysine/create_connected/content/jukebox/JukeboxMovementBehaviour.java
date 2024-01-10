@@ -1,34 +1,59 @@
 package com.hlysine.create_connected.content.jukebox;
 
-import com.simibubi.create.content.contraptions.behaviour.MovementBehaviour;
+import com.hlysine.create_connected.content.AutoPlayMovementBehaviour;
+import com.simibubi.create.content.contraptions.ContraptionWorld;
 import com.simibubi.create.content.contraptions.behaviour.MovementContext;
 import com.simibubi.create.content.contraptions.behaviour.MovingInteractionBehaviour;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.resources.sounds.SoundInstance;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.JukeboxBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec3;
 
-public class JukeboxMovementBehaviour implements MovementBehaviour {
+import java.util.HashMap;
+import java.util.Map;
+
+public class JukeboxMovementBehaviour extends AutoPlayMovementBehaviour {
+    public static final Map<Integer, Map<BlockPos, BlockPos>> JUKEBOX_MAP = new HashMap<>();
+
     @Override
     public void stopMoving(MovementContext context) {
+        updateMapPos(context);
         MovingInteractionBehaviour interactor = context.contraption.getInteractors().get(context.localPos);
         if (!(interactor instanceof JukeboxInteractionBehaviour jukeboxInteraction)) return;
         BlockState currentState = context.contraption.getBlocks().get(context.localPos).state();
         jukeboxInteraction.withTempBlockEntity(context.contraption, context.localPos, currentState, JukeboxBlockEntity::stopPlaying);
-    }
 
-    @Override
-    public boolean mustTickWhileDisabled() {
-        return true;
+        Map<BlockPos, BlockPos> contraptionMap = JUKEBOX_MAP.computeIfAbsent(context.contraption.entity.getId(), $ -> new HashMap<>());
+        contraptionMap.remove(context.localPos);
+        if (contraptionMap.isEmpty())
+            JUKEBOX_MAP.remove(context.contraption.entity.getId());
     }
 
     @Override
     public void tick(MovementContext context) {
+        super.tick(context);
         if (!context.world.isClientSide()) return;
-        ContraptionJukeboxLevelRenderer levelRenderer = (ContraptionJukeboxLevelRenderer) Minecraft.getInstance().levelRenderer;
-        SoundInstance soundInstance = levelRenderer.getPlayingContraptionRecords().get(context.localPos);
-        if (!(soundInstance instanceof ContraptionRecordSoundInstance instance)) return;
-        instance.contraptionEntity = context.contraption.entity;
-        instance.contraptionPos = context.localPos;
+
+        updateMapPos(context);
+    }
+
+    private void updateMapPos(MovementContext context) {
+        BlockPos realPos = BlockPos.containing(context.contraption.entity.toGlobalVector(Vec3.atCenterOf(context.localPos), 1));
+        JUKEBOX_MAP.computeIfAbsent(context.contraption.entity.getId(), $ -> new HashMap<>()).put(context.localPos, realPos);
+    }
+
+    @Override
+    protected void update(MovementContext context, BlockState state, ContraptionWorld contraptionWorld, BlockPos contraptionPos, Level realWorld, BlockPos realPos, boolean wasActive, boolean isActive) {
+        if (context.world.isClientSide()) return;
+        MovingInteractionBehaviour interactor = context.contraption.getInteractors().get(context.localPos);
+        if (!(interactor instanceof JukeboxInteractionBehaviour jukeboxInteraction)) return;
+        jukeboxInteraction.withTempBlockEntity(context.contraption, context.localPos, state, be -> {
+            if (!isActive) {
+                if (!be.isRecordPlaying()) be.startPlaying();
+            } else {
+                be.stopPlaying();
+            }
+        });
     }
 }

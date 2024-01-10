@@ -23,6 +23,7 @@ import java.util.function.Consumer;
 import static net.minecraft.world.level.block.state.properties.BlockStateProperties.HAS_RECORD;
 
 public class JukeboxInteractionBehaviour extends MovingInteractionBehaviour {
+
     @Override
     public boolean handlePlayerInteraction(Player player, InteractionHand activeHand, BlockPos contraptionPos,
                                            AbstractContraptionEntity contraptionEntity) {
@@ -74,7 +75,7 @@ public class JukeboxInteractionBehaviour extends MovingInteractionBehaviour {
 
             @Override
             public void levelEvent(@Nullable Player player, int type, BlockPos pos, int data) {
-                contraptionEntity.level().levelEvent(player, ~type, contraptionPos, data);
+                contraptionEntity.level().levelEvent(player, ~type, pos, data);
             }
         });
         action.accept(be);

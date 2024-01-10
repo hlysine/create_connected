@@ -6,5 +6,5 @@ import net.minecraft.core.BlockPos;
 import java.util.Map;
 
 public interface ContraptionJukeboxLevelRenderer {
-    Map<BlockPos, SoundInstance> getPlayingContraptionRecords();
+    Map<Integer, Map<BlockPos, SoundInstance>> getPlayingContraptionRecords();
 }

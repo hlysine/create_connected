@@ -9,13 +9,11 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.phys.Vec3;
 
-import static net.minecraft.world.level.block.state.properties.BlockStateProperties.HAS_RECORD;
+import java.lang.ref.WeakReference;
 
 public class ContraptionRecordSoundInstance extends AbstractTickableSoundInstance {
-    public AbstractContraptionEntity contraptionEntity;
+    public WeakReference<AbstractContraptionEntity> contraptionEntity;
     public BlockPos contraptionPos;
-    private float targetVolume;
-    private int recordCheck = 0;
 
     public ContraptionRecordSoundInstance(SoundEvent pSoundEvent,
                                           SoundSource pSource,
@@ -24,14 +22,17 @@ public class ContraptionRecordSoundInstance extends AbstractTickableSoundInstanc
                                           RandomSource pRandom,
                                           boolean pLooping,
                                           int pDelay,
-                                          SoundInstance.Attenuation pAttenuation) {
+                                          SoundInstance.Attenuation pAttenuation,
+                                          AbstractContraptionEntity contraptionEntity,
+                                          BlockPos contraptionPos) {
         super(pSoundEvent, pSource, pRandom);
-        this.targetVolume = pVolume;
-        this.volume = 0;
+        this.volume = pVolume;
         this.pitch = pPitch;
         this.looping = pLooping;
         this.delay = pDelay;
         this.attenuation = pAttenuation;
+        this.contraptionEntity = new WeakReference<>(contraptionEntity);
+        this.contraptionPos = contraptionPos;
     }
 
     @Override
@@ -41,19 +42,14 @@ public class ContraptionRecordSoundInstance extends AbstractTickableSoundInstanc
 
     @Override
     public void tick() {
-        if (contraptionEntity == null) {
-            this.volume = 0;
+        AbstractContraptionEntity entity = contraptionEntity.get();
+        if (entity == null) {
+            stop();
             return;
         }
-        this.volume = targetVolume;
-        Vec3 vec = contraptionEntity.toGlobalVector(Vec3.atCenterOf(contraptionPos), 1);
+        Vec3 vec = entity.toGlobalVector(Vec3.atCenterOf(contraptionPos), 1);
         this.x = vec.x;
         this.y = vec.y;
         this.z = vec.z;
-        if (recordCheck-- < 0) {
-            recordCheck = 10;
-            if (!contraptionEntity.getContraption().getBlocks().get(contraptionPos).state().getValue(HAS_RECORD))
-                stop();
-        }
     }
 }
