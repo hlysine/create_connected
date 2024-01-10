@@ -100,3 +100,9 @@ at [the contributing guide](https://github.com/hlysine/create_connected/blob/mai
 **Inspiration**
 
 - The Create mod Discord server and subreddit
+
+**Assets**
+
+- Casa Bossa Nova Kevin MacLeod (incompetech.com)<br>
+  Licensed under Creative Commons: By Attribution 3.0 License<br>
+  http://creativecommons.org/licenses/by/3.0/

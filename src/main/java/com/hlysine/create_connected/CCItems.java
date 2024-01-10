@@ -56,7 +56,7 @@ public class CCItems {
                     .register();
 
     public static final ItemEntry<RecordItem> MUSIC_DISC_ELEVATOR =
-            REGISTRATE.item("music_disc_elevator", properties -> new RecordItem(15, CCSoundEvents.ELEVATOR_MUSIC::getMainEvent, properties, 5100))
+            REGISTRATE.item("music_disc_elevator", properties -> new RecordItem(15, CCSoundEvents.ELEVATOR_MUSIC::getMainEvent, properties, 4820))
                     .transform(FeatureToggle.register())
                     .properties(p -> p.stacksTo(1).rarity(Rarity.RARE))
                     .tag(ItemTags.MUSIC_DISCS)
