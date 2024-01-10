@@ -1,4 +1,4 @@
-package com.hlysine.create_connected.content.noteblock;
+package com.hlysine.create_connected.content.contraption.noteblock;
 
 import com.simibubi.create.content.contraptions.AbstractContraptionEntity;
 import com.simibubi.create.content.contraptions.Contraption;

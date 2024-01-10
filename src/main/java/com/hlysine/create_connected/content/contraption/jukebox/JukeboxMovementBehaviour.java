@@ -1,6 +1,6 @@
-package com.hlysine.create_connected.content.jukebox;
+package com.hlysine.create_connected.content.contraption.jukebox;
 
-import com.hlysine.create_connected.content.AutoPlayMovementBehaviour;
+import com.hlysine.create_connected.content.contraption.AutoPlayMovementBehaviour;
 import com.simibubi.create.content.contraptions.ContraptionWorld;
 import com.simibubi.create.content.contraptions.behaviour.MovementContext;
 import com.simibubi.create.content.contraptions.behaviour.MovingInteractionBehaviour;

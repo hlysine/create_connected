@@ -1,7 +1,7 @@
 package com.hlysine.create_connected;
 
-import com.hlysine.create_connected.content.jukebox.JukeboxMovementBehaviour;
-import com.hlysine.create_connected.content.noteblock.NoteBlockMovementBehaviour;
+import com.hlysine.create_connected.content.contraption.jukebox.JukeboxMovementBehaviour;
+import com.hlysine.create_connected.content.contraption.noteblock.NoteBlockMovementBehaviour;
 import com.simibubi.create.AllMovementBehaviours;
 import net.minecraft.world.level.block.Blocks;
 

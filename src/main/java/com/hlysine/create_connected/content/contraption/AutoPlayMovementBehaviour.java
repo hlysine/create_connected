@@ -1,4 +1,4 @@
-package com.hlysine.create_connected.content;
+package com.hlysine.create_connected.content.contraption;
 
 import com.simibubi.create.content.contraptions.Contraption;
 import com.simibubi.create.content.contraptions.ContraptionWorld;

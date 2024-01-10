@@ -1,4 +1,4 @@
-package com.hlysine.create_connected.content.jukebox;
+package com.hlysine.create_connected.content.contraption.jukebox;
 
 import com.simibubi.create.content.contraptions.AbstractContraptionEntity;
 import com.simibubi.create.content.contraptions.Contraption;

@@ -1,6 +1,6 @@
-package com.hlysine.create_connected.content.noteblock;
+package com.hlysine.create_connected.content.contraption.noteblock;
 
-import com.hlysine.create_connected.content.AutoPlayMovementBehaviour;
+import com.hlysine.create_connected.content.contraption.AutoPlayMovementBehaviour;
 import com.simibubi.create.content.contraptions.ContraptionWorld;
 import com.simibubi.create.content.contraptions.behaviour.MovementContext;
 import net.minecraft.core.BlockPos;

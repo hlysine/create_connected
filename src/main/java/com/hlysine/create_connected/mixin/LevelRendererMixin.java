@@ -1,8 +1,7 @@
 package com.hlysine.create_connected.mixin;
 
 import com.google.common.collect.Maps;
-import com.hlysine.create_connected.content.jukebox.ContraptionJukeboxLevelRenderer;
-import com.hlysine.create_connected.content.jukebox.ContraptionRecordSoundInstance;
+import com.hlysine.create_connected.content.contraption.jukebox.ContraptionRecordSoundInstance;
 import com.simibubi.create.content.contraptions.AbstractContraptionEntity;
 import com.simibubi.create.foundation.utility.Pair;
 import net.minecraft.client.Minecraft;
@@ -28,18 +27,12 @@ import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.hlysine.create_connected.content.jukebox.JukeboxMovementBehaviour.JUKEBOX_MAP;
+import static com.hlysine.create_connected.content.contraption.jukebox.JukeboxMovementBehaviour.JUKEBOX_MAP;
 
 @Mixin(LevelRenderer.class)
-public abstract class LevelRendererMixin implements ContraptionJukeboxLevelRenderer {
+public abstract class LevelRendererMixin {
     @Unique
     private final Map<Integer, Map<BlockPos, SoundInstance>> playingContraptionRecords = Maps.newHashMap();
-
-    @Override
-    @Unique
-    public Map<Integer, Map<BlockPos, SoundInstance>> getPlayingContraptionRecords() {
-        return playingContraptionRecords;
-    }
 
     @Nullable
     @Shadow
