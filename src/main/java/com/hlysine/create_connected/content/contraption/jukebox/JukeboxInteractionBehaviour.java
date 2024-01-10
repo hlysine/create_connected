@@ -44,7 +44,8 @@ public class JukeboxInteractionBehaviour extends MovingInteractionBehaviour {
                 withTempBlockEntity(contraption, contraptionPos, currentState, be -> {
                     be.setFirstItem(item.copy());
                     be.getLevel().gameEvent(GameEvent.BLOCK_CHANGE, be.getBlockPos(), GameEvent.Context.of(player, currentState));
-                    item.shrink(1);
+                    if (!player.isCreative())
+                        item.shrink(1);
                     player.awardStat(Stats.PLAY_RECORD);
                 });
             }
