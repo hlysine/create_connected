@@ -62,6 +62,7 @@ public class CreateConnected {
         CCConfigs.common().register();
 
         CCItemAttributes.register();
+        CCInteractionBehaviours.register();
 
         modEventBus.addListener(EventPriority.LOWEST, CCDatagen::gatherData);
         modEventBus.addListener(CCSoundEvents::register);
