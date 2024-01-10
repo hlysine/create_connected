@@ -22,6 +22,7 @@ public class JukeboxMovementBehaviour extends AutoPlayMovementBehaviour {
     @Override
     protected void update(MovementContext context, BlockState state, ContraptionWorld contraptionWorld, BlockPos contraptionPos, Level realWorld, BlockPos realPos, boolean wasActive, boolean isActive) {
         if (context.world.isClientSide()) return;
+        if (context.disabled) return;
         MovingInteractionBehaviour interactor = context.contraption.getInteractors().get(context.localPos);
         if (!(interactor instanceof JukeboxInteractionBehaviour jukeboxInteraction)) return;
         jukeboxInteraction.withTempBlockEntity(context.contraption, context.localPos, state, be -> {

@@ -15,6 +15,7 @@ public class NoteBlockMovementBehaviour extends AutoPlayMovementBehaviour {
     @Override
     protected void update(MovementContext context, BlockState state, ContraptionWorld contraptionWorld, BlockPos contraptionPos, Level realWorld, BlockPos realPos, boolean wasActive, boolean isActive) {
         if (!isActive) return;
+        if (context.disabled) return;
         if (state.getValue(INSTRUMENT).worksAboveNoteBlock() || contraptionWorld.getBlockState(contraptionPos.above()).isAir()) {
             state.triggerEvent(realWorld, realPos, 0, 0);
             realWorld.gameEvent(context.contraption.entity, GameEvent.NOTE_BLOCK_PLAY, realPos);
