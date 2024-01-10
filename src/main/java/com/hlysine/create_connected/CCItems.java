@@ -9,7 +9,10 @@ import com.simibubi.create.content.processing.sequenced.SequencedAssemblyItem;
 import com.simibubi.create.foundation.data.AssetLookup;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.util.entry.ItemEntry;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Rarity;
+import net.minecraft.world.item.RecordItem;
 
 public class CCItems {
 
@@ -50,6 +53,14 @@ public class CCItems {
             REGISTRATE.item("linked_transmitter", LinkedTransmitterItem::new)
                     .model(AssetLookup.customGenericItemModel("linked_transmitter", "item"))
                     .transform(FeatureToggle.register())
+                    .register();
+
+    public static final ItemEntry<RecordItem> MUSIC_DISC_ELEVATOR =
+            REGISTRATE.item("music_disc_elevator", properties -> new RecordItem(15, CCSoundEvents.ELEVATOR_MUSIC::getMainEvent, properties, 5100))
+                    .transform(FeatureToggle.register())
+                    .properties(p -> p.stacksTo(1).rarity(Rarity.RARE))
+                    .tag(ItemTags.MUSIC_DISCS)
+                    .lang("Music Disc")
                     .register();
 
     public static void register() {

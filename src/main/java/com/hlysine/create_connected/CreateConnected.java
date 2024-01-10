@@ -51,6 +51,7 @@ public class CreateConnected {
         MinecraftForge.EVENT_BUS.register(this);
 
         REGISTRATE.setCreativeTab(CCCreativeTabs.MAIN);
+        CCSoundEvents.prepare();
         CCBlocks.register();
         CCItems.register();
         CCBlockEntityTypes.register();
@@ -63,6 +64,7 @@ public class CreateConnected {
         CCItemAttributes.register();
 
         modEventBus.addListener(EventPriority.LOWEST, CCDatagen::gatherData);
+        modEventBus.addListener(CCSoundEvents::register);
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> CreateConnectedClient.onCtorClient(modEventBus, forgeEventBus));
     }
 

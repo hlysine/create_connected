@@ -49,7 +49,8 @@ public class CCCreativeTabs {
             CCBlocks.COPYCAT_SLAB,
             CCBlocks.COPYCAT_BEAM,
             CCBlocks.COPYCAT_VERTICAL_STEP,
-            CCItems.CONTROL_CHIP
+            CCItems.CONTROL_CHIP,
+            CCItems.MUSIC_DISC_ELEVATOR
     );
 
     public static final RegistryObject<CreativeModeTab> MAIN = CREATIVE_MODE_TABS.register("main", () -> CreativeModeTab.builder()

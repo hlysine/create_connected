@@ -26,6 +26,7 @@
   "block.create_connected.overstress_clutch.tooltip.summary": "A clutch that _uncouples_ after a set delay when the network is _overstressed_.",
   "block.create_connected.shear_pin.tooltip.summary": "A single-use connector that _breaks_ when the network is _overstressed_.",
   "block.create_connected.six_way_gearbox.tooltip.summary": "A gearbox with shafts on _all 6 sides_. Top and bottom spin at _half speed_.",
+  "item.create_connected.music_disc_elevator.desc": "Benjamin Tissot - The Elevator Bossa Nova",
   "item.create_connected.vertical_brass_gearbox.tooltip.summary": "A gearbox where the rotation direction of all 4 sides are _independently configurable_.",
   "item.create_connected.vertical_six_way_gearbox.tooltip.summary": "A gearbox with shafts on _all 6 sides_. Top and bottom spin at _half speed_."
 }
