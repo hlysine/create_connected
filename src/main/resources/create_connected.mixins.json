@@ -19,7 +19,6 @@
     "sequencedgearshift.SequencerInstructionsMixin"
   ],
   "client": [
-    "LevelRendererMixin",
     "SubMenuConfigScreenMixin",
     "sequencedgearshift.SequencedGearshiftScreenMixin"
   ],

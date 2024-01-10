@@ -1,5 +1,6 @@
 package com.hlysine.create_connected.content.contraption.jukebox;
 
+import com.hlysine.create_connected.CCPackets;
 import com.simibubi.create.content.contraptions.AbstractContraptionEntity;
 import com.simibubi.create.content.contraptions.Contraption;
 import com.simibubi.create.content.contraptions.behaviour.MovingInteractionBehaviour;
@@ -15,6 +16,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.network.PacketDistributor;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.atomic.AtomicReference;
@@ -75,7 +77,17 @@ public class JukeboxInteractionBehaviour extends MovingInteractionBehaviour {
 
             @Override
             public void levelEvent(@Nullable Player player, int type, BlockPos pos, int data) {
-                contraptionEntity.level().levelEvent(player, ~type, pos, data);
+                if (type == 1010 || type == 1011)
+                    CCPackets.getChannel().send(
+                            PacketDistributor.DIMENSION.with(this::dimension),
+                            new PlayContraptionJukeboxPacket(dimension().location(),
+                                    contraptionEntity.getId(),
+                                    contraptionPos,
+                                    pos,
+                                    data,
+                                    type == 1010
+                            )
+                    );
             }
         });
         action.accept(be);

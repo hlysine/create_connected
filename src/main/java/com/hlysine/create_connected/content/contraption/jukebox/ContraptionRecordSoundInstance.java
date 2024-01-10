@@ -33,6 +33,7 @@ public class ContraptionRecordSoundInstance extends AbstractTickableSoundInstanc
         this.attenuation = pAttenuation;
         this.contraptionEntity = new WeakReference<>(contraptionEntity);
         this.contraptionPos = contraptionPos;
+        tick();
     }
 
     @Override
