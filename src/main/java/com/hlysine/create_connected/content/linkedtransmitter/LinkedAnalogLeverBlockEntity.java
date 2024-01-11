@@ -33,6 +33,12 @@ public class LinkedAnalogLeverBlockEntity extends AnalogLeverBlockEntity {
         behaviours.add(link);
     }
 
+    @Override
+    public void initialize() {
+        super.initialize();
+        transmit(getState());
+    }
+
     protected void createLink() {
         Pair<ValueBoxTransform, ValueBoxTransform> slots =
                 ValueBoxTransform.Dual.makeSlots(LinkedTransmitterFrequencySlot::new);

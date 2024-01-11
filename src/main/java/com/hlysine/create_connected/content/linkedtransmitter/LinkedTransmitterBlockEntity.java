@@ -6,6 +6,7 @@ import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour
 import com.simibubi.create.foundation.blockEntity.behaviour.ValueBoxTransform;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import org.apache.commons.lang3.tuple.Pair;
@@ -35,6 +36,12 @@ public class LinkedTransmitterBlockEntity extends SmartBlockEntity {
         Pair<ValueBoxTransform, ValueBoxTransform> slots =
                 ValueBoxTransform.Dual.makeSlots(LinkedTransmitterFrequencySlot::new);
         link = LinkBehaviour.transmitter(this, slots, this::getSignal);
+    }
+
+    @Override
+    public void initialize() {
+        super.initialize();
+        transmit(getBlockState().getSignal(getLevel(), getBlockPos(), getBlockState().getValue(HorizontalDirectionalBlock.FACING)));
     }
 
     public int getSignal() {
