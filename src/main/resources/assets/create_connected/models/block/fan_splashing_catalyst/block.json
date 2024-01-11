@@ -4,7 +4,7 @@
 	"textures": {
 		"particle": "create:block/funnel/brass_funnel_frame"
 	},
-	"children": {
+	"parts": {
 		"frame": {
 			"render_type": "minecraft:cutout_mipped",
 			"credit": "Made with Blockbench",

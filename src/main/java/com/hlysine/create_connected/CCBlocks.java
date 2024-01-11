@@ -337,6 +337,8 @@ public class CCBlocks {
                     .noOcclusion()
                     .isRedstoneConductor((state, level, pos) -> false)
             )
+            .addLayer(() -> RenderType::cutoutMipped)
+            .addLayer(() -> RenderType::translucent)
             .transform(pickaxeOnly())
             .transform(FeatureToggle.registerDependent(CCBlocks.EMPTY_FAN_CATALYST))
             .blockstate((c, p) -> p.simpleBlock(c.getEntry(), AssetLookup.partialBaseModel(c, p)))
