@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(ManualApplicationRecipe.class)
+@Mixin(value = ManualApplicationRecipe.class, remap = false)
 public class ManualApplicationRecipeMixin {
     @Inject(
             method = "manualApplicationRecipesApplyInWorld(Lnet/minecraftforge/event/entity/player/PlayerInteractEvent$RightClickBlock;)V",
