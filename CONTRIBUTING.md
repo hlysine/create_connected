@@ -9,8 +9,8 @@ This is not a set of hard rules, so feel free to reach out if you have additiona
 - [Issues](#issues)
     * [Reporting bugs](#reporting-bugs)
     * [Feature suggestions](#feature-suggestions)
+- [Translations](#translations)
 - [Pull requests](#pull-requests)
-    * [Translations](#translations)
     * [Ponders](#ponders)
     * [Fabric port](#fabric-port)
     * [New features](#new-features)
@@ -35,13 +35,17 @@ New ideas are always welcome, but here's a general rule on things that I probabl
   higher-tier item
 - Features that are too far away from base Create, such as electrical networks
 
+## Translations
+
+Translations are very welcomed! To simplify the whole
+process, [a Crowdin project](https://crowdin.com/project/create-connected-mod) has been set up for all translations. You
+can find some guides on how to use Crowdin here:
+
+https://support.crowdin.com/joining-translation-project/
+
+https://support.crowdin.com/online-editor/
+
 ## Pull requests
-
-### Translations
-
-Translations are very welcomed! Similar to
-Create, [the English text is located in `src/generated`](https://github.com/hlysine/create_connected/tree/main/src/generated/resources/assets/create_connected/lang)
-while [other languages are located in `src/main`](https://github.com/hlysine/create_connected/tree/main/src/main/resources/assets/create_connected/lang).
 
 ### Ponders
 

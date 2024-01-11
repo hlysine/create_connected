@@ -1,5 +1,6 @@
 package com.hlysine.create_connected;
 
+import com.hlysine.create_connected.content.contraption.jukebox.PlayContraptionJukeboxPacket;
 import com.hlysine.create_connected.content.sequencedpulsegenerator.ConfigureSequencedPulseGeneratorPacket;
 import com.simibubi.create.foundation.networking.SimplePacketBase;
 import net.minecraft.core.BlockPos;
@@ -17,11 +18,14 @@ import java.util.function.BiConsumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
+import static net.minecraftforge.network.NetworkDirection.PLAY_TO_CLIENT;
 import static net.minecraftforge.network.NetworkDirection.PLAY_TO_SERVER;
 
 public enum CCPackets {
     CONFIGURE_SEQUENCER(ConfigureSequencedPulseGeneratorPacket.class, ConfigureSequencedPulseGeneratorPacket::new,
-            PLAY_TO_SERVER);
+            PLAY_TO_SERVER),
+    PLAY_CONTRAPTION_JUKEBOX(PlayContraptionJukeboxPacket.class, PlayContraptionJukeboxPacket::new,
+            PLAY_TO_CLIENT);
 
     public static final ResourceLocation CHANNEL_NAME = CreateConnected.asResource("main");
     public static final int NETWORK_VERSION = 1;
