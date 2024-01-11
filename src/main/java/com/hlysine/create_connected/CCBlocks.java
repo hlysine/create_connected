@@ -367,6 +367,7 @@ public class CCBlocks {
             REGISTRATE.block("copycat_slab", CopycatSlabBlock::new)
                     .transform(BuilderTransformers.copycat())
                     .transform(FeatureToggle.register())
+                    .loot((lt, block) -> lt.add(block, lt.createSlabItemTable(block)))
                     .onRegister(CreateRegistrate.blockModel(() -> CopycatSlabModel::new))
                     .item()
                     .transform(customItemModel("copycat_base", "slab"))
