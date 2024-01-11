@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(value = AnalogLeverBlock.class, remap = false)
+@Mixin(AnalogLeverBlock.class)
 public class AnalogLeverBlockMixin {
     @Inject(
             cancellable = true,

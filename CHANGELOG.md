@@ -5,31 +5,38 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.4.1 - 2024-01-11
+
+### Fixed
+
+- Crash due to incorrect remapping
+
 ## 0.4.0 - 2024-01-11
 
 ### Added
 
 - Linked Transmitter
-  - For all button variants
-  - For Lever
-  - For Linked Lever
+    - For all button variants
+    - For Lever
+    - For Linked Lever
 - Contraption support for vanilla blocks
-  - Note Block
-    - Can be tuned on contraptions
-    - Plays automatically when on trains/elevators
-    - Supports contraption controls
-  - Jukebox
-    - Can swap discs on contraptions
-    - Plays/stops automatically when on trains/elevators
-    - Supports contraption controls
-  - Crafting Table
-  - Stonecutter
-  - Grindstone
-  - Smithing Table
-  - Loom
-  - Cartography Table
+    - Note Block
+        - Can be tuned on contraptions
+        - Plays automatically when on trains/elevators
+        - Supports contraption controls
+    - Jukebox
+        - Can swap discs on contraptions
+        - Plays/stops automatically when on trains/elevators
+        - Supports contraption controls
+    - Crafting Table
+    - Stonecutter
+    - Grindstone
+    - Smithing Table
+    - Loom
+    - Cartography Table
 - 2 music discs for iconic elevator music
-- Translations for Dutch, Japanese, Chinese Simplified, French, German (thanks [Crowdin contributors](https://crowdin.com/project/create-connected-mod/members)!)
+- Translations for Dutch, Japanese, Chinese Simplified, French, German (
+  thanks [Crowdin contributors](https://crowdin.com/project/create-connected-mod/members)!)
 
 ### Fixed
 
@@ -49,11 +56,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Sequenced Pulse Generator**
 - Control Chip - a crafting ingredient for the Sequenced Pulse Generator
 - Ponders for
-  - Encased Chain Cogwheel
-  - Inverted Clutch
-  - Inverted Gearshift
-  - Parallel Gearbox
-  - Sequenced Pulse Generator
+    - Encased Chain Cogwheel
+    - Inverted Clutch
+    - Inverted Gearshift
+    - Parallel Gearbox
+    - Sequenced Pulse Generator
 
 ### Fixed
 
