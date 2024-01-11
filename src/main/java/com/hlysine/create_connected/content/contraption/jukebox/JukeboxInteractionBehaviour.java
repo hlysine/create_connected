@@ -6,15 +6,21 @@ import com.simibubi.create.content.contraptions.Contraption;
 import com.simibubi.create.content.contraptions.behaviour.MovingInteractionBehaviour;
 import com.simibubi.create.foundation.utility.worldWrappers.WrappedWorld;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.stats.Stats;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.RecordItem;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.JukeboxBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.JukeboxBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.network.PacketDistributor;
 import org.jetbrains.annotations.Nullable;
@@ -38,13 +44,22 @@ public class JukeboxInteractionBehaviour extends MovingInteractionBehaviour {
         BlockState currentState = info.state;
 
         if (currentState.getValue(HAS_RECORD)) {
-            withTempBlockEntity(contraption, contraptionPos, currentState, JukeboxBlockEntity::popOutRecord, false);
+            withTempBlockEntity(contraption, contraptionPos, currentState, be -> {
+                JukeboxBlock block = (JukeboxBlock) Blocks.JUKEBOX;
+                block.use(be.getBlockState(),
+                        be.getLevel(),
+                        be.getBlockPos(),
+                        player,
+                        activeHand,
+                        new BlockHitResult(Vec3.atBottomCenterOf(be.getBlockPos().above()), Direction.UP, be.getBlockPos(), false));
+            }, false);
         } else {
             ItemStack item = player.getItemInHand(activeHand);
             if (item.is(ItemTags.MUSIC_DISCS)) {
                 withTempBlockEntity(contraption, contraptionPos, currentState, be -> {
-                    be.setFirstItem(item.copy());
-                    be.getLevel().gameEvent(GameEvent.BLOCK_CHANGE, be.getBlockPos(), GameEvent.Context.of(player, currentState));
+                    JukeboxBlock block = (JukeboxBlock) Blocks.JUKEBOX;
+                    block.setRecord(player, be.getLevel(), be.getBlockPos(), be.getBlockState(), item);
+                    be.getLevel().levelEvent(1010, be.getBlockPos(), Item.getId(item.getItem()));
                     if (!player.isCreative())
                         item.shrink(1);
                     player.awardStat(Stats.PLAY_RECORD);
@@ -61,6 +76,13 @@ public class JukeboxInteractionBehaviour extends MovingInteractionBehaviour {
         JukeboxBlockEntity be = new JukeboxBlockEntity(realPos, currentState);
         be.load(contraption.getBlocks().get(contraptionPos).nbt);
         be.setLevel(new WrappedWorld(contraptionEntity.level) {
+            @Nullable
+            @Override
+            public BlockEntity getBlockEntity(BlockPos pos) {
+                if (pos.equals(realPos)) return be;
+                return super.getBlockEntity(pos);
+            }
+
             @Override
             public boolean setBlock(BlockPos pos, BlockState newState, int flags) {
                 if (pos.equals(realPos)) {
@@ -79,7 +101,7 @@ public class JukeboxInteractionBehaviour extends MovingInteractionBehaviour {
 
             @Override
             public void levelEvent(@Nullable Player player, int type, BlockPos pos, int data) {
-                if (type == 1010 || type == 1011)
+                if (type == 1010)
                     CCPackets.getChannel().send(
                             PacketDistributor.DIMENSION.with(this::dimension),
                             new PlayContraptionJukeboxPacket(dimension().location(),
@@ -87,7 +109,7 @@ public class JukeboxInteractionBehaviour extends MovingInteractionBehaviour {
                                     contraptionPos,
                                     pos,
                                     data,
-                                    type == 1010,
+                                    Item.byId(data) instanceof RecordItem,
                                     silent
                             )
                     );
