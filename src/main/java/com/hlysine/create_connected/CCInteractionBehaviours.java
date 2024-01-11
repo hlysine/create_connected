@@ -11,5 +11,10 @@ public class CCInteractionBehaviours {
         AllInteractionBehaviours.registerBehaviour(Blocks.NOTE_BLOCK, new NoteBlockInteractionBehaviour());
         AllInteractionBehaviours.registerBehaviour(Blocks.JUKEBOX, new JukeboxInteractionBehaviour());
         AllInteractionBehaviours.registerBehaviour(Blocks.CRAFTING_TABLE, new MenuBlockInteractionBehaviour());
+        AllInteractionBehaviours.registerBehaviour(Blocks.STONECUTTER, new MenuBlockInteractionBehaviour());
+        AllInteractionBehaviours.registerBehaviour(Blocks.GRINDSTONE, new MenuBlockInteractionBehaviour());
+        AllInteractionBehaviours.registerBehaviour(Blocks.SMITHING_TABLE, new MenuBlockInteractionBehaviour());
+        AllInteractionBehaviours.registerBehaviour(Blocks.LOOM, new MenuBlockInteractionBehaviour());
+        AllInteractionBehaviours.registerBehaviour(Blocks.CARTOGRAPHY_TABLE, new MenuBlockInteractionBehaviour());
     }
 }

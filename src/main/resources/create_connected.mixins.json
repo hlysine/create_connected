@@ -13,6 +13,7 @@
     "ContraptionMixin",
     "CopycatModelInvoker",
     "CreativeModeTabsAccessor",
+    "ItemCombinerMenuMixin",
     "KineticBlockAdvancementMixin",
     "ManualApplicationRecipeMixin",
     "sequencedgearshift.InstructionAccessor",
