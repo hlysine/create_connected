@@ -13,36 +13,42 @@ import com.hlysine.create_connected.content.invertedgearshift.InvertedGearshiftB
 import com.hlysine.create_connected.content.itemsilo.ItemSiloBlock;
 import com.hlysine.create_connected.content.itemsilo.ItemSiloCTBehaviour;
 import com.hlysine.create_connected.content.itemsilo.ItemSiloItem;
+import com.hlysine.create_connected.content.linkedtransmitter.LinkedAnalogLeverBlock;
+import com.hlysine.create_connected.content.linkedtransmitter.LinkedButtonBlock;
+import com.hlysine.create_connected.content.linkedtransmitter.LinkedLeverBlock;
+import com.hlysine.create_connected.content.linkedtransmitter.LinkedTransmitterItem;
 import com.hlysine.create_connected.content.overstressclutch.OverstressClutchBlock;
 import com.hlysine.create_connected.content.parallelgearbox.ParallelGearboxBlock;
 import com.hlysine.create_connected.content.sequencedpulsegenerator.SequencedPulseGeneratorBlock;
 import com.hlysine.create_connected.content.shearpin.ShearPinBlock;
 import com.hlysine.create_connected.content.sixwaygearbox.SixWayGearboxBlock;
 import com.hlysine.create_connected.datagen.CCBlockStateGen;
+import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllSpriteShifts;
 import com.simibubi.create.AllTags;
+import com.simibubi.create.Create;
 import com.simibubi.create.content.decoration.encasing.EncasedCTBehaviour;
 import com.simibubi.create.content.kinetics.BlockStressDefaults;
 import com.simibubi.create.content.kinetics.chainDrive.ChainDriveGenerator;
 import com.simibubi.create.content.kinetics.simpleRelays.BracketedKineticBlockModel;
-import com.simibubi.create.content.redstone.diodes.AbstractDiodeGenerator;
-import com.simibubi.create.content.redstone.diodes.BrassDiodeBlock;
-import com.simibubi.create.content.redstone.diodes.BrassDiodeGenerator;
 import com.simibubi.create.foundation.data.*;
 import com.tterrag.registrate.providers.DataGenContext;
 import com.tterrag.registrate.providers.RegistrateBlockstateProvider;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.SoundType;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
+import net.minecraftforge.registries.ForgeRegistries;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Function;
 
-import static com.simibubi.create.Create.REGISTRATE;
 import static com.simibubi.create.foundation.data.AssetLookup.partialBaseModel;
 import static com.simibubi.create.foundation.data.BlockStateGen.axisBlock;
 import static com.simibubi.create.foundation.data.CreateRegistrate.connectedTextures;
@@ -208,6 +214,46 @@ public class CCBlocks {
                     .simpleItem()
                     .register();
 
+    public static final Map<BlockSetType, BlockEntry<LinkedButtonBlock>> LINKED_BUTTONS = new HashMap<>();
+
+    static {
+        BlockSetType.values().forEach(type -> {
+            Block button = ForgeRegistries.BLOCKS.getValue(new ResourceLocation(type.name() + "_button"));
+            if (button == null) return;
+            if (!(button instanceof ButtonBlock buttonBlock))
+                return;
+            LINKED_BUTTONS.put(type, REGISTRATE
+                    .block("linked_" + type.name() + "_button", properties -> new LinkedButtonBlock(properties, buttonBlock))
+                    .initialProperties(() -> buttonBlock)
+                    .transform(LinkedTransmitterItem.register())
+                    .blockstate(CCBlockStateGen.linkedButton(
+                            new ResourceLocation("block/" + type.name() + "_button"),
+                            new ResourceLocation("block/" + type.name() + "_button_pressed")
+                    ))
+                    .register());
+        });
+    }
+
+    public static final BlockEntry<LinkedLeverBlock> LINKED_LEVER = REGISTRATE
+            .block("linked_lever", properties -> new LinkedLeverBlock(properties, (LeverBlock) Blocks.LEVER))
+            .initialProperties(() -> Blocks.LEVER)
+            .transform(LinkedTransmitterItem.register())
+            .blockstate(CCBlockStateGen.linkedLever(
+                    new ResourceLocation("block/lever"),
+                    new ResourceLocation("block/lever_on")
+            ))
+            .register();
+
+    public static final BlockEntry<LinkedAnalogLeverBlock> LINKED_ANALOG_LEVER = REGISTRATE
+            .block("linked_analog_lever", properties -> new LinkedAnalogLeverBlock(properties, AllBlocks.ANALOG_LEVER.get()))
+            .initialProperties(AllBlocks.ANALOG_LEVER)
+            .transform(LinkedTransmitterItem.register())
+            .blockstate(CCBlockStateGen.linkedLever(
+                    Create.asResource("block/analog_lever/block"),
+                    Create.asResource("block/analog_lever/block")
+            ))
+            .register();
+
     public static final BlockEntry<WrenchableBlock> EMPTY_FAN_CATALYST = REGISTRATE.block("empty_fan_catalyst", WrenchableBlock::new)
             .initialProperties(() -> Blocks.IRON_BLOCK)
             .properties(p -> p
@@ -271,7 +317,6 @@ public class CCBlocks {
                     .noOcclusion()
                     .isRedstoneConductor((state, level, pos) -> false)
             )
-            .addLayer(() -> RenderType::cutoutMipped)
             .transform(pickaxeOnly())
             .transform(FeatureToggle.registerDependent(CCBlocks.EMPTY_FAN_CATALYST))
             .blockstate((c, p) -> p.simpleBlock(c.getEntry(), AssetLookup.partialBaseModel(c, p)))
@@ -322,6 +367,7 @@ public class CCBlocks {
             REGISTRATE.block("copycat_slab", CopycatSlabBlock::new)
                     .transform(BuilderTransformers.copycat())
                     .transform(FeatureToggle.register())
+                    .loot((lt, block) -> lt.add(block, lt.createSlabItemTable(block)))
                     .onRegister(CreateRegistrate.blockModel(() -> CopycatSlabModel::new))
                     .item()
                     .transform(customItemModel("copycat_base", "slab"))

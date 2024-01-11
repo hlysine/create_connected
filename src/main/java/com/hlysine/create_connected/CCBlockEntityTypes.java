@@ -9,6 +9,9 @@ import com.hlysine.create_connected.content.freewheelclutch.FreewheelClutchBlock
 import com.hlysine.create_connected.content.invertedclutch.InvertedClutchBlockEntity;
 import com.hlysine.create_connected.content.invertedgearshift.InvertedGearshiftBlockEntity;
 import com.hlysine.create_connected.content.itemsilo.ItemSiloBlockEntity;
+import com.hlysine.create_connected.content.linkedtransmitter.LinkedAnalogLeverBlockEntity;
+import com.hlysine.create_connected.content.linkedtransmitter.LinkedAnalogLeverRenderer;
+import com.hlysine.create_connected.content.linkedtransmitter.LinkedTransmitterBlockEntity;
 import com.hlysine.create_connected.content.overstressclutch.OverstressClutchBlockEntity;
 import com.hlysine.create_connected.content.parallelgearbox.ParallelGearboxBlockEntity;
 import com.hlysine.create_connected.content.parallelgearbox.ParallelGearboxInstance;
@@ -18,7 +21,6 @@ import com.hlysine.create_connected.content.shearpin.ShearPinBlockEntity;
 import com.hlysine.create_connected.content.sixwaygearbox.SixWayGearboxBlockEntity;
 import com.hlysine.create_connected.content.sixwaygearbox.SixWayGearboxInstance;
 import com.hlysine.create_connected.content.sixwaygearbox.SixWayGearboxRenderer;
-import com.simibubi.create.AllBlocks;
 import com.simibubi.create.content.kinetics.simpleRelays.BracketedKineticBlockEntityInstance;
 import com.simibubi.create.content.kinetics.simpleRelays.BracketedKineticBlockEntityRenderer;
 import com.simibubi.create.content.kinetics.simpleRelays.SimpleKineticBlockEntity;
@@ -26,13 +28,10 @@ import com.simibubi.create.content.kinetics.simpleRelays.encased.EncasedCogInsta
 import com.simibubi.create.content.kinetics.simpleRelays.encased.EncasedCogRenderer;
 import com.simibubi.create.content.kinetics.transmission.SplitShaftInstance;
 import com.simibubi.create.content.kinetics.transmission.SplitShaftRenderer;
-import com.simibubi.create.content.redstone.diodes.BrassDiodeInstance;
-import com.simibubi.create.content.redstone.diodes.BrassDiodeRenderer;
-import com.simibubi.create.content.redstone.diodes.PulseRepeaterBlockEntity;
+import com.simibubi.create.content.redstone.analogLever.AnalogLeverInstance;
+import com.simibubi.create.foundation.blockEntity.renderer.SmartBlockEntityRenderer;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
-
-import static com.simibubi.create.Create.REGISTRATE;
 
 public class CCBlockEntityTypes {
     private static final CreateRegistrate REGISTRATE = CreateConnected.getRegistrate();
@@ -124,6 +123,23 @@ public class CCBlockEntityTypes {
     public static final BlockEntityEntry<SequencedPulseGeneratorBlockEntity> SEQUENCED_PULSE_GENERATOR = REGISTRATE
             .blockEntity("sequenced_pulse_generator", SequencedPulseGeneratorBlockEntity::new)
             .validBlocks(CCBlocks.SEQUENCED_PULSE_GENERATOR)
+            .register();
+
+    public static final BlockEntityEntry<LinkedTransmitterBlockEntity> LINKED_TRANSMITTER = REGISTRATE
+            .blockEntity("linked_transmitter", LinkedTransmitterBlockEntity::new)
+            .transform(b -> {
+                CCBlocks.LINKED_BUTTONS.values().forEach(b::validBlock);
+                return b;
+            })
+            .validBlocks(CCBlocks.LINKED_LEVER)
+            .renderer(() -> SmartBlockEntityRenderer::new)
+            .register();
+
+    public static final BlockEntityEntry<LinkedAnalogLeverBlockEntity> LINKED_ANALOG_LEVER = REGISTRATE
+            .blockEntity("linked_analog_lever", LinkedAnalogLeverBlockEntity::new)
+            .instance(() -> AnalogLeverInstance::new)
+            .validBlocks(CCBlocks.LINKED_ANALOG_LEVER)
+            .renderer(() -> LinkedAnalogLeverRenderer::new)
             .register();
 
 

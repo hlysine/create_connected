@@ -1,0 +1,554 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "minecraft:block/lever"
+      },
+      "when": {
+        "face": "floor",
+        "facing": "north",
+        "powered": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block_powered",
+        "y": 180
+      },
+      "when": {
+        "face": "floor",
+        "facing": "north",
+        "powered": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "minecraft:block/lever_on"
+      },
+      "when": {
+        "face": "floor",
+        "facing": "north",
+        "powered": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block",
+        "y": 180
+      },
+      "when": {
+        "face": "floor",
+        "facing": "north",
+        "powered": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "minecraft:block/lever",
+        "y": 180
+      },
+      "when": {
+        "face": "floor",
+        "facing": "south",
+        "powered": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block_powered",
+        "y": 360
+      },
+      "when": {
+        "face": "floor",
+        "facing": "south",
+        "powered": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "minecraft:block/lever_on",
+        "y": 180
+      },
+      "when": {
+        "face": "floor",
+        "facing": "south",
+        "powered": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block",
+        "y": 360
+      },
+      "when": {
+        "face": "floor",
+        "facing": "south",
+        "powered": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "minecraft:block/lever",
+        "y": 270
+      },
+      "when": {
+        "face": "floor",
+        "facing": "west",
+        "powered": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block_powered",
+        "y": 450
+      },
+      "when": {
+        "face": "floor",
+        "facing": "west",
+        "powered": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "minecraft:block/lever_on",
+        "y": 270
+      },
+      "when": {
+        "face": "floor",
+        "facing": "west",
+        "powered": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block",
+        "y": 450
+      },
+      "when": {
+        "face": "floor",
+        "facing": "west",
+        "powered": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "minecraft:block/lever",
+        "y": 90
+      },
+      "when": {
+        "face": "floor",
+        "facing": "east",
+        "powered": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block_powered",
+        "y": 270
+      },
+      "when": {
+        "face": "floor",
+        "facing": "east",
+        "powered": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "minecraft:block/lever_on",
+        "y": 90
+      },
+      "when": {
+        "face": "floor",
+        "facing": "east",
+        "powered": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block",
+        "y": 270
+      },
+      "when": {
+        "face": "floor",
+        "facing": "east",
+        "powered": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "minecraft:block/lever",
+        "x": 90
+      },
+      "when": {
+        "face": "wall",
+        "facing": "north",
+        "powered": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block_powered_vertical",
+        "x": 90
+      },
+      "when": {
+        "face": "wall",
+        "facing": "north",
+        "powered": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "minecraft:block/lever_on",
+        "x": 90
+      },
+      "when": {
+        "face": "wall",
+        "facing": "north",
+        "powered": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block_vertical",
+        "x": 90
+      },
+      "when": {
+        "face": "wall",
+        "facing": "north",
+        "powered": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "minecraft:block/lever",
+        "x": 90,
+        "y": 180
+      },
+      "when": {
+        "face": "wall",
+        "facing": "south",
+        "powered": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block_powered_vertical",
+        "x": 90,
+        "y": 180
+      },
+      "when": {
+        "face": "wall",
+        "facing": "south",
+        "powered": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "minecraft:block/lever_on",
+        "x": 90,
+        "y": 180
+      },
+      "when": {
+        "face": "wall",
+        "facing": "south",
+        "powered": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block_vertical",
+        "x": 90,
+        "y": 180
+      },
+      "when": {
+        "face": "wall",
+        "facing": "south",
+        "powered": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "minecraft:block/lever",
+        "x": 90,
+        "y": 270
+      },
+      "when": {
+        "face": "wall",
+        "facing": "west",
+        "powered": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block_powered_vertical",
+        "x": 90,
+        "y": 270
+      },
+      "when": {
+        "face": "wall",
+        "facing": "west",
+        "powered": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "minecraft:block/lever_on",
+        "x": 90,
+        "y": 270
+      },
+      "when": {
+        "face": "wall",
+        "facing": "west",
+        "powered": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block_vertical",
+        "x": 90,
+        "y": 270
+      },
+      "when": {
+        "face": "wall",
+        "facing": "west",
+        "powered": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "minecraft:block/lever",
+        "x": 90,
+        "y": 90
+      },
+      "when": {
+        "face": "wall",
+        "facing": "east",
+        "powered": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block_powered_vertical",
+        "x": 90,
+        "y": 90
+      },
+      "when": {
+        "face": "wall",
+        "facing": "east",
+        "powered": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "minecraft:block/lever_on",
+        "x": 90,
+        "y": 90
+      },
+      "when": {
+        "face": "wall",
+        "facing": "east",
+        "powered": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block_vertical",
+        "x": 90,
+        "y": 90
+      },
+      "when": {
+        "face": "wall",
+        "facing": "east",
+        "powered": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "minecraft:block/lever",
+        "x": 180,
+        "y": 180
+      },
+      "when": {
+        "face": "ceiling",
+        "facing": "north",
+        "powered": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block_powered",
+        "x": 180,
+        "y": 180
+      },
+      "when": {
+        "face": "ceiling",
+        "facing": "north",
+        "powered": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "minecraft:block/lever_on",
+        "x": 180,
+        "y": 180
+      },
+      "when": {
+        "face": "ceiling",
+        "facing": "north",
+        "powered": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block",
+        "x": 180,
+        "y": 180
+      },
+      "when": {
+        "face": "ceiling",
+        "facing": "north",
+        "powered": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "minecraft:block/lever",
+        "x": 180
+      },
+      "when": {
+        "face": "ceiling",
+        "facing": "south",
+        "powered": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block_powered",
+        "x": 180
+      },
+      "when": {
+        "face": "ceiling",
+        "facing": "south",
+        "powered": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "minecraft:block/lever_on",
+        "x": 180
+      },
+      "when": {
+        "face": "ceiling",
+        "facing": "south",
+        "powered": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block",
+        "x": 180
+      },
+      "when": {
+        "face": "ceiling",
+        "facing": "south",
+        "powered": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "minecraft:block/lever",
+        "x": 180,
+        "y": 90
+      },
+      "when": {
+        "face": "ceiling",
+        "facing": "west",
+        "powered": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block_powered",
+        "x": 180,
+        "y": 90
+      },
+      "when": {
+        "face": "ceiling",
+        "facing": "west",
+        "powered": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "minecraft:block/lever_on",
+        "x": 180,
+        "y": 90
+      },
+      "when": {
+        "face": "ceiling",
+        "facing": "west",
+        "powered": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block",
+        "x": 180,
+        "y": 90
+      },
+      "when": {
+        "face": "ceiling",
+        "facing": "west",
+        "powered": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "minecraft:block/lever",
+        "x": 180,
+        "y": 270
+      },
+      "when": {
+        "face": "ceiling",
+        "facing": "east",
+        "powered": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block_powered",
+        "x": 180,
+        "y": 270
+      },
+      "when": {
+        "face": "ceiling",
+        "facing": "east",
+        "powered": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "minecraft:block/lever_on",
+        "x": 180,
+        "y": 270
+      },
+      "when": {
+        "face": "ceiling",
+        "facing": "east",
+        "powered": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block",
+        "x": 180,
+        "y": 270
+      },
+      "when": {
+        "face": "ceiling",
+        "facing": "east",
+        "powered": "false"
+      }
+    }
+  ]
+}

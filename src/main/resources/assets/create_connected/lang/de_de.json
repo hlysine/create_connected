@@ -1,0 +1,16 @@
+{
+  "advancement.create_connected.brass_gearbox": "Ernste Organisation",
+  "advancement.create_connected.brass_gearbox.desc": "Stelle ein Messing Getriebe ab",
+  "advancement.create_connected.overpowered_brake_0": "Übermächtig",
+  "advancement.create_connected.overpowered_brake_0.desc": "Halt ein Netzwerk ein mit Geschwindigkeit mit einer aktivierten Bremse angefügt\n§7(Hidden Advancement)",
+  "advancement.create_connected.overstress_clutch": "Stromkreisunterbrecher",
+  "advancement.create_connected.overstress_clutch.desc": "Löse einer Überlassungskupplung aus",
+  "advancement.create_connected.root": "Wilkommen zu Create: Connected",
+  "advancement.create_connected.root.desc": "Gadgets für alle Situationen",
+  "advancement.create_connected.shear_pin": "Schnapp!",
+  "advancement.create_connected.shear_pin.desc": "Breche einen Splint",
+  "block.create_connected.brake": "Bremse",
+  "block.create_connected.brake.tooltip.summary": "Ein Gerät das _immense Belastung_ erzeugt wann aktiviert, das Netzwerk Anhalt durch _Überbelastung_.",
+  "block.create_connected.brass_gearbox": "Messing Getriebe",
+  "block.create_connected.overstress_clutch": "Überlassungskupplung"
+}

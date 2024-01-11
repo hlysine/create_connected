@@ -3,34 +3,44 @@
 <h1 align="center">Create: Connected</h1>
 
 <p align="center">
-<a href="https://www.curseforge.com/minecraft/mc-mods/create-connected/files"><img src="https://cf.way2muchnoise.eu/versions/947914_all.svg"></a>
-<a href="https://modrinth.com/mod/create-connected/"><img src="https://img.shields.io/modrinth/dt/Vg5TIO6d?style=flat&label=Modrinth"></a>
-<a href="https://www.curseforge.com/minecraft/mc-mods/create-connected"><img src="https://img.shields.io/curseforge/dt/947914?style=flat&label=CurseForge"></a>
+<a title="Supported versions" target="_blank" href="https://modrinth.com/mod/create-connected/"><img src="https://cf.way2muchnoise.eu/versions/947914_all.svg"></a>
+<a title="Modrinth" target="_blank" href="https://modrinth.com/mod/create-connected/"><img src="https://img.shields.io/modrinth/dt/Vg5TIO6d?style=flat&label=Modrinth"></a>
+<a title="CurseForge" target="_blank" href="https://www.curseforge.com/minecraft/mc-mods/create-connected"><img src="https://img.shields.io/curseforge/dt/947914?style=flat&label=CurseForge"></a>
+<a title="Crowdin" target="_blank" href="https://crowdin.com/project/create-connected-mod"><img src="https://badges.crowdin.net/create-connected-mod/localized.svg"></a>
 </p>
 
 A Create mod add-on adding quality-of-life blocks that you wish existed in Create.
 
-## What's new in 0.3
+> **Want reliable, immersive chunk-loading for your Create machines? Check
+out [Create: Power Loader](https://modrinth.com/mod/create-power-loader)**
 
-![SPG](https://github.com/hlysine/create_connected/assets/25472513/0fcfe97c-b17b-4536-85a1-1c808f335f60) **Sequenced
-Pulse Generator**
+## What's new in 0.4
 
-A highly-flexible programmable redstone diode. With a configuration GUI like the Sequenced Gearshift, it can be used to
-mimic many other diodes or even execute simple logic! Make sure you have good farms and factories though, because this
-thing is *not cheap*.
+![Linked Transmitter](https://github.com/hlysine/create_connected/assets/25472513/edb1593f-e815-4a36-b0bb-91ae0eb318bf) **Linked Transmitter**
 
-**Ponders**
+A compact Redstone Link that can be attached to buttons, levers, and linked levers. Adds wireless redstone capabilities
+without using extra block space!
 
-Ponders are added for some of the components. This is still an on-going effort. Items that don't have ponders yet will
-get a short summary instead.
+![image](https://github.com/hlysine/create_connected/assets/25472513/703bc032-259e-4db8-927c-b6503bbca744)
+
+![jukebox](https://github.com/hlysine/create_connected/assets/25472513/60240f67-f66d-4eb4-a444-3eb7bf4614a0) **Functional blocks on contraptions**
+
+The following blocks now function properly on contraptions! Enjoy some music on your elevator ride or build a mobile workshop.
+
+- Jukebox, Note Block, Crafting Table, Stonecutter, Grindstone, Smithing Table, Loom, Cartography Table
+
+**Translations**
+
+Relatively complete translations are now available for Dutch and Japanese. This is an on-going effort thanks to the
+wonderful [Crowdin contributors](https://crowdin.com/project/create-connected-mod/members).
 
 ## Features
 
 ### New Blocks and Items
 
-Visit [the GitHub wiki](https://github.com/hlysine/create_connected/wiki/Features) for a complete list!
+Visit [the GitHub wiki](https://github.com/hlysine/create_connected/wiki/New-Features) for a complete list!
 
-[![All features](https://cdn.modrinth.com/data/Vg5TIO6d/images/b202a4eed4d157f279c7cfb8595085b51cb21134.png)](https://github.com/hlysine/create_connected/wiki/Features)
+[![All features](https://cdn.modrinth.com/data/Vg5TIO6d/images/b202a4eed4d157f279c7cfb8595085b51cb21134.png)](https://github.com/hlysine/create_connected/wiki/New-Features)
 
 ### Feature toggle
 
@@ -43,7 +53,7 @@ hidden in creative/JEI.
 
 Small QoL enhancement to Create's features.
 
-[![Sequenced gearshift](https://cdn.modrinth.com/data/Vg5TIO6d/images/fe15c37ac605a24b49a60972e7668206d178c32a.webp)](https://github.com/hlysine/create_connected/wiki/Features)
+[![Vanilla blocks on trains](https://github.com/hlysine/create_connected/assets/25472513/31d7c32e-0cc1-4238-a220-315d8269810f)](https://github.com/hlysine/create_connected/wiki/Create-Enhancements)
 
 ## Download
 
@@ -59,6 +69,11 @@ Find this mod on [**Modrinth**](https://modrinth.com/mod/create-connected) or
 |--------|-------------------|
 | 0.5.1e | 0.0.2             |
 | 0.5.1f | 0.0.3 - latest    |
+
+## Compatibility
+
+**Incompatible with Create: Extended Cogwheels**: functionality is not affected, but there will be confusing visual
+glitches due to Extended Cogwheels treating Connected components as cogwheels.
 
 ## Usage
 
@@ -85,9 +100,17 @@ at [the contributing guide](https://github.com/hlysine/create_connected/blob/mai
 
 **Translation**
 
-- [lollolcheese123](https://github.com/lollolcheese123) for Dutch translation
-- [xiewuzhiying](https://github.com/xiewuzhiying) for Simplified Chinese translation
+- Thanks [Crowdin contributors](https://crowdin.com/project/create-connected-mod/members) for their effort in localization
 
 **Inspiration**
 
 - The Create mod Discord server and subreddit
+
+**Assets**
+
+- Casa Bossa Nova Kevin MacLeod (incompetech.com)<br>
+  Licensed under Creative Commons: By Attribution 3.0 License<br>
+  http://creativecommons.org/licenses/by/3.0/
+- Local Forecast - Elevator Kevin MacLeod (incompetech.com)<br>
+  Licensed under Creative Commons: By Attribution 3.0 License<br>
+  http://creativecommons.org/licenses/by/3.0/

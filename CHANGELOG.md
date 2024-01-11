@@ -5,6 +5,37 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.4.0 - 2024-01-11
+
+### Added
+
+- Linked Transmitter
+  - For all button variants
+  - For Lever
+  - For Linked Lever
+- Contraption support for vanilla blocks
+  - Note Block
+    - Can be tuned on contraptions
+    - Plays automatically when on trains/elevators
+    - Supports contraption controls
+  - Jukebox
+    - Can swap discs on contraptions
+    - Plays/stops automatically when on trains/elevators
+    - Supports contraption controls
+  - Crafting Table
+  - Stonecutter
+  - Grindstone
+  - Smithing Table
+  - Loom
+  - Cartography Table
+- 2 music discs for iconic elevator music
+- Translations for Dutch, Japanese, Chinese Simplified, French, German (thanks [Crowdin contributors](https://crowdin.com/project/create-connected-mod/members)!)
+
+### Fixed
+
+- Water in Fan Washing Catalyst not transparent
+- Copycat Slabs not dropping 2 items when a double variant is broken
+
 ## 0.3.1 - 2023-12-29
 
 ### Fixed
