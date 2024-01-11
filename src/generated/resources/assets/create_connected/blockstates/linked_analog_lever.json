@@ -1,553 +1,553 @@
 {
   "multipart": [
     {
+      "when": {
+        "facing": "north",
+        "face": "floor",
+        "powered": "true"
+      },
       "apply": {
         "model": "create:block/analog_lever/block"
-      },
-      "when": {
-        "face": "floor",
-        "facing": "north",
-        "powered": "true"
       }
     },
     {
+      "when": {
+        "facing": "north",
+        "face": "floor",
+        "powered": "true"
+      },
       "apply": {
         "model": "create_connected:block/linked_transmitter/block_powered",
         "y": 180
-      },
-      "when": {
-        "face": "floor",
-        "facing": "north",
-        "powered": "true"
       }
     },
     {
+      "when": {
+        "facing": "north",
+        "face": "floor",
+        "powered": "false"
+      },
       "apply": {
         "model": "create:block/analog_lever/block"
-      },
-      "when": {
-        "face": "floor",
-        "facing": "north",
-        "powered": "false"
       }
     },
     {
+      "when": {
+        "facing": "north",
+        "face": "floor",
+        "powered": "false"
+      },
       "apply": {
         "model": "create_connected:block/linked_transmitter/block",
         "y": 180
-      },
-      "when": {
-        "face": "floor",
-        "facing": "north",
-        "powered": "false"
       }
     },
     {
+      "when": {
+        "facing": "south",
+        "face": "floor",
+        "powered": "true"
+      },
       "apply": {
         "model": "create:block/analog_lever/block",
         "y": 180
-      },
-      "when": {
-        "face": "floor",
-        "facing": "south",
-        "powered": "true"
       }
     },
     {
+      "when": {
+        "facing": "south",
+        "face": "floor",
+        "powered": "true"
+      },
       "apply": {
         "model": "create_connected:block/linked_transmitter/block_powered",
         "y": 360
-      },
-      "when": {
-        "face": "floor",
-        "facing": "south",
-        "powered": "true"
       }
     },
     {
+      "when": {
+        "facing": "south",
+        "face": "floor",
+        "powered": "false"
+      },
       "apply": {
         "model": "create:block/analog_lever/block",
         "y": 180
-      },
-      "when": {
-        "face": "floor",
-        "facing": "south",
-        "powered": "false"
       }
     },
     {
+      "when": {
+        "facing": "south",
+        "face": "floor",
+        "powered": "false"
+      },
       "apply": {
         "model": "create_connected:block/linked_transmitter/block",
         "y": 360
-      },
-      "when": {
-        "face": "floor",
-        "facing": "south",
-        "powered": "false"
       }
     },
     {
+      "when": {
+        "facing": "west",
+        "face": "floor",
+        "powered": "true"
+      },
       "apply": {
         "model": "create:block/analog_lever/block",
         "y": 270
-      },
-      "when": {
-        "face": "floor",
-        "facing": "west",
-        "powered": "true"
       }
     },
     {
+      "when": {
+        "facing": "west",
+        "face": "floor",
+        "powered": "true"
+      },
       "apply": {
         "model": "create_connected:block/linked_transmitter/block_powered",
         "y": 450
-      },
-      "when": {
-        "face": "floor",
-        "facing": "west",
-        "powered": "true"
       }
     },
     {
+      "when": {
+        "facing": "west",
+        "face": "floor",
+        "powered": "false"
+      },
       "apply": {
         "model": "create:block/analog_lever/block",
         "y": 270
-      },
-      "when": {
-        "face": "floor",
-        "facing": "west",
-        "powered": "false"
       }
     },
     {
+      "when": {
+        "facing": "west",
+        "face": "floor",
+        "powered": "false"
+      },
       "apply": {
         "model": "create_connected:block/linked_transmitter/block",
         "y": 450
-      },
-      "when": {
-        "face": "floor",
-        "facing": "west",
-        "powered": "false"
       }
     },
     {
+      "when": {
+        "facing": "east",
+        "face": "floor",
+        "powered": "true"
+      },
       "apply": {
         "model": "create:block/analog_lever/block",
         "y": 90
-      },
-      "when": {
-        "face": "floor",
-        "facing": "east",
-        "powered": "true"
       }
     },
     {
+      "when": {
+        "facing": "east",
+        "face": "floor",
+        "powered": "true"
+      },
       "apply": {
         "model": "create_connected:block/linked_transmitter/block_powered",
         "y": 270
-      },
-      "when": {
-        "face": "floor",
-        "facing": "east",
-        "powered": "true"
       }
     },
     {
+      "when": {
+        "facing": "east",
+        "face": "floor",
+        "powered": "false"
+      },
       "apply": {
         "model": "create:block/analog_lever/block",
         "y": 90
-      },
-      "when": {
-        "face": "floor",
-        "facing": "east",
-        "powered": "false"
       }
     },
     {
+      "when": {
+        "facing": "east",
+        "face": "floor",
+        "powered": "false"
+      },
       "apply": {
         "model": "create_connected:block/linked_transmitter/block",
         "y": 270
-      },
-      "when": {
-        "face": "floor",
-        "facing": "east",
-        "powered": "false"
       }
     },
     {
+      "when": {
+        "facing": "north",
+        "face": "wall",
+        "powered": "true"
+      },
       "apply": {
         "model": "create:block/analog_lever/block",
         "x": 90
-      },
-      "when": {
-        "face": "wall",
-        "facing": "north",
-        "powered": "true"
       }
     },
     {
+      "when": {
+        "facing": "north",
+        "face": "wall",
+        "powered": "true"
+      },
       "apply": {
         "model": "create_connected:block/linked_transmitter/block_powered_vertical",
         "x": 90
-      },
-      "when": {
-        "face": "wall",
-        "facing": "north",
-        "powered": "true"
       }
     },
     {
+      "when": {
+        "facing": "north",
+        "face": "wall",
+        "powered": "false"
+      },
       "apply": {
         "model": "create:block/analog_lever/block",
         "x": 90
-      },
-      "when": {
-        "face": "wall",
-        "facing": "north",
-        "powered": "false"
       }
     },
     {
+      "when": {
+        "facing": "north",
+        "face": "wall",
+        "powered": "false"
+      },
       "apply": {
         "model": "create_connected:block/linked_transmitter/block_vertical",
         "x": 90
-      },
-      "when": {
-        "face": "wall",
-        "facing": "north",
-        "powered": "false"
       }
     },
     {
+      "when": {
+        "facing": "south",
+        "face": "wall",
+        "powered": "true"
+      },
       "apply": {
         "model": "create:block/analog_lever/block",
         "x": 90,
         "y": 180
-      },
-      "when": {
-        "face": "wall",
-        "facing": "south",
-        "powered": "true"
       }
     },
     {
+      "when": {
+        "facing": "south",
+        "face": "wall",
+        "powered": "true"
+      },
       "apply": {
         "model": "create_connected:block/linked_transmitter/block_powered_vertical",
         "x": 90,
         "y": 180
-      },
-      "when": {
-        "face": "wall",
-        "facing": "south",
-        "powered": "true"
       }
     },
     {
+      "when": {
+        "facing": "south",
+        "face": "wall",
+        "powered": "false"
+      },
       "apply": {
         "model": "create:block/analog_lever/block",
         "x": 90,
         "y": 180
-      },
-      "when": {
-        "face": "wall",
-        "facing": "south",
-        "powered": "false"
       }
     },
     {
+      "when": {
+        "facing": "south",
+        "face": "wall",
+        "powered": "false"
+      },
       "apply": {
         "model": "create_connected:block/linked_transmitter/block_vertical",
         "x": 90,
         "y": 180
-      },
-      "when": {
-        "face": "wall",
-        "facing": "south",
-        "powered": "false"
       }
     },
     {
+      "when": {
+        "facing": "west",
+        "face": "wall",
+        "powered": "true"
+      },
       "apply": {
         "model": "create:block/analog_lever/block",
         "x": 90,
         "y": 270
-      },
-      "when": {
-        "face": "wall",
-        "facing": "west",
-        "powered": "true"
       }
     },
     {
+      "when": {
+        "facing": "west",
+        "face": "wall",
+        "powered": "true"
+      },
       "apply": {
         "model": "create_connected:block/linked_transmitter/block_powered_vertical",
         "x": 90,
         "y": 270
-      },
-      "when": {
-        "face": "wall",
-        "facing": "west",
-        "powered": "true"
       }
     },
     {
+      "when": {
+        "facing": "west",
+        "face": "wall",
+        "powered": "false"
+      },
       "apply": {
         "model": "create:block/analog_lever/block",
         "x": 90,
         "y": 270
-      },
-      "when": {
-        "face": "wall",
-        "facing": "west",
-        "powered": "false"
       }
     },
     {
+      "when": {
+        "facing": "west",
+        "face": "wall",
+        "powered": "false"
+      },
       "apply": {
         "model": "create_connected:block/linked_transmitter/block_vertical",
         "x": 90,
         "y": 270
-      },
-      "when": {
-        "face": "wall",
-        "facing": "west",
-        "powered": "false"
       }
     },
     {
+      "when": {
+        "facing": "east",
+        "face": "wall",
+        "powered": "true"
+      },
       "apply": {
         "model": "create:block/analog_lever/block",
         "x": 90,
         "y": 90
-      },
-      "when": {
-        "face": "wall",
-        "facing": "east",
-        "powered": "true"
       }
     },
     {
+      "when": {
+        "facing": "east",
+        "face": "wall",
+        "powered": "true"
+      },
       "apply": {
         "model": "create_connected:block/linked_transmitter/block_powered_vertical",
         "x": 90,
         "y": 90
-      },
-      "when": {
-        "face": "wall",
-        "facing": "east",
-        "powered": "true"
       }
     },
     {
+      "when": {
+        "facing": "east",
+        "face": "wall",
+        "powered": "false"
+      },
       "apply": {
         "model": "create:block/analog_lever/block",
         "x": 90,
         "y": 90
-      },
-      "when": {
-        "face": "wall",
-        "facing": "east",
-        "powered": "false"
       }
     },
     {
+      "when": {
+        "facing": "east",
+        "face": "wall",
+        "powered": "false"
+      },
       "apply": {
         "model": "create_connected:block/linked_transmitter/block_vertical",
         "x": 90,
         "y": 90
-      },
-      "when": {
-        "face": "wall",
-        "facing": "east",
-        "powered": "false"
       }
     },
     {
+      "when": {
+        "facing": "north",
+        "face": "ceiling",
+        "powered": "true"
+      },
       "apply": {
         "model": "create:block/analog_lever/block",
         "x": 180,
         "y": 180
-      },
-      "when": {
-        "face": "ceiling",
-        "facing": "north",
-        "powered": "true"
       }
     },
     {
+      "when": {
+        "facing": "north",
+        "face": "ceiling",
+        "powered": "true"
+      },
       "apply": {
         "model": "create_connected:block/linked_transmitter/block_powered",
         "x": 180,
         "y": 180
-      },
-      "when": {
-        "face": "ceiling",
-        "facing": "north",
-        "powered": "true"
       }
     },
     {
+      "when": {
+        "facing": "north",
+        "face": "ceiling",
+        "powered": "false"
+      },
       "apply": {
         "model": "create:block/analog_lever/block",
         "x": 180,
         "y": 180
-      },
-      "when": {
-        "face": "ceiling",
-        "facing": "north",
-        "powered": "false"
       }
     },
     {
+      "when": {
+        "facing": "north",
+        "face": "ceiling",
+        "powered": "false"
+      },
       "apply": {
         "model": "create_connected:block/linked_transmitter/block",
         "x": 180,
         "y": 180
-      },
-      "when": {
-        "face": "ceiling",
-        "facing": "north",
-        "powered": "false"
       }
     },
     {
+      "when": {
+        "facing": "south",
+        "face": "ceiling",
+        "powered": "true"
+      },
       "apply": {
         "model": "create:block/analog_lever/block",
         "x": 180
-      },
-      "when": {
-        "face": "ceiling",
-        "facing": "south",
-        "powered": "true"
       }
     },
     {
+      "when": {
+        "facing": "south",
+        "face": "ceiling",
+        "powered": "true"
+      },
       "apply": {
         "model": "create_connected:block/linked_transmitter/block_powered",
         "x": 180
-      },
-      "when": {
-        "face": "ceiling",
-        "facing": "south",
-        "powered": "true"
       }
     },
     {
+      "when": {
+        "facing": "south",
+        "face": "ceiling",
+        "powered": "false"
+      },
       "apply": {
         "model": "create:block/analog_lever/block",
         "x": 180
-      },
-      "when": {
-        "face": "ceiling",
-        "facing": "south",
-        "powered": "false"
       }
     },
     {
+      "when": {
+        "facing": "south",
+        "face": "ceiling",
+        "powered": "false"
+      },
       "apply": {
         "model": "create_connected:block/linked_transmitter/block",
         "x": 180
-      },
-      "when": {
-        "face": "ceiling",
-        "facing": "south",
-        "powered": "false"
       }
     },
     {
+      "when": {
+        "facing": "west",
+        "face": "ceiling",
+        "powered": "true"
+      },
       "apply": {
         "model": "create:block/analog_lever/block",
         "x": 180,
         "y": 90
-      },
-      "when": {
-        "face": "ceiling",
-        "facing": "west",
-        "powered": "true"
       }
     },
     {
+      "when": {
+        "facing": "west",
+        "face": "ceiling",
+        "powered": "true"
+      },
       "apply": {
         "model": "create_connected:block/linked_transmitter/block_powered",
         "x": 180,
         "y": 90
-      },
-      "when": {
-        "face": "ceiling",
-        "facing": "west",
-        "powered": "true"
       }
     },
     {
+      "when": {
+        "facing": "west",
+        "face": "ceiling",
+        "powered": "false"
+      },
       "apply": {
         "model": "create:block/analog_lever/block",
         "x": 180,
         "y": 90
-      },
-      "when": {
-        "face": "ceiling",
-        "facing": "west",
-        "powered": "false"
       }
     },
     {
+      "when": {
+        "facing": "west",
+        "face": "ceiling",
+        "powered": "false"
+      },
       "apply": {
         "model": "create_connected:block/linked_transmitter/block",
         "x": 180,
         "y": 90
-      },
-      "when": {
-        "face": "ceiling",
-        "facing": "west",
-        "powered": "false"
       }
     },
     {
+      "when": {
+        "facing": "east",
+        "face": "ceiling",
+        "powered": "true"
+      },
       "apply": {
         "model": "create:block/analog_lever/block",
         "x": 180,
         "y": 270
-      },
-      "when": {
-        "face": "ceiling",
-        "facing": "east",
-        "powered": "true"
       }
     },
     {
+      "when": {
+        "facing": "east",
+        "face": "ceiling",
+        "powered": "true"
+      },
       "apply": {
         "model": "create_connected:block/linked_transmitter/block_powered",
         "x": 180,
         "y": 270
-      },
-      "when": {
-        "face": "ceiling",
-        "facing": "east",
-        "powered": "true"
       }
     },
     {
+      "when": {
+        "facing": "east",
+        "face": "ceiling",
+        "powered": "false"
+      },
       "apply": {
         "model": "create:block/analog_lever/block",
         "x": 180,
         "y": 270
-      },
-      "when": {
-        "face": "ceiling",
-        "facing": "east",
-        "powered": "false"
       }
     },
     {
+      "when": {
+        "facing": "east",
+        "face": "ceiling",
+        "powered": "false"
+      },
       "apply": {
         "model": "create_connected:block/linked_transmitter/block",
         "x": 180,
         "y": 270
-      },
-      "when": {
-        "face": "ceiling",
-        "facing": "east",
-        "powered": "false"
       }
     }
   ]

@@ -2,18 +2,18 @@
   "elevator_music": {
     "sounds": [
       {
+        "name": "create_connected:elevator_music",
         "type": "file",
-        "attenuation_distance": 7,
-        "name": "create_connected:elevator_music"
+        "attenuation_distance": 7
       }
     ]
   },
   "interlude_music": {
     "sounds": [
       {
+        "name": "create_connected:interlude_music",
         "type": "file",
-        "attenuation_distance": 7,
-        "name": "create_connected:interlude_music"
+        "attenuation_distance": 7
       }
     ]
   }
