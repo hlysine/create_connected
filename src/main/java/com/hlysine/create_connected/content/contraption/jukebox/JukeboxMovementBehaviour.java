@@ -11,12 +11,23 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class JukeboxMovementBehaviour extends AutoPlayMovementBehaviour {
 
-    @Override
-    public void stopMoving(MovementContext context) {
+    private void stopPlaying(MovementContext context) {
+        if (context.world.isClientSide()) return;
         MovingInteractionBehaviour interactor = context.contraption.getInteractors().get(context.localPos);
         if (!(interactor instanceof JukeboxInteractionBehaviour jukeboxInteraction)) return;
         BlockState currentState = context.contraption.getBlocks().get(context.localPos).state();
         jukeboxInteraction.withTempBlockEntity(context.contraption, context.localPos, currentState, JukeboxBlockEntity::stopPlaying, true);
+    }
+
+    @Override
+    public void onDisabledByControls(MovementContext context) {
+        super.onDisabledByControls(context);
+        stopPlaying(context);
+    }
+
+    @Override
+    public void stopMoving(MovementContext context) {
+        stopPlaying(context);
     }
 
     @Override
