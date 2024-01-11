@@ -10,6 +10,8 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Optional;
 import java.util.function.BiFunction;
 
+import static com.hlysine.create_connected.content.MathHelper.blockPosContaining;
+
 public class TrackingContainerLevelAccess implements ContainerLevelAccess {
     private final Level level;
     private final AbstractContraptionEntity entity;
@@ -23,7 +25,7 @@ public class TrackingContainerLevelAccess implements ContainerLevelAccess {
 
     @Override
     public <T> @NotNull Optional<T> evaluate(BiFunction<Level, BlockPos, T> provideLevelPos) {
-        BlockPos realPos = BlockPos.containing(entity.toGlobalVector(Vec3.atCenterOf(localPos), 1));
+        BlockPos realPos = blockPosContaining(entity.toGlobalVector(Vec3.atCenterOf(localPos), 1));
         return Optional.of(provideLevelPos.apply(level, realPos));
     }
 }

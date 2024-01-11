@@ -22,6 +22,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Consumer;
 
+import static com.hlysine.create_connected.content.MathHelper.blockPosContaining;
 import static net.minecraft.world.level.block.state.properties.BlockStateProperties.HAS_RECORD;
 
 public class JukeboxInteractionBehaviour extends MovingInteractionBehaviour {
@@ -29,12 +30,12 @@ public class JukeboxInteractionBehaviour extends MovingInteractionBehaviour {
     @Override
     public boolean handlePlayerInteraction(Player player, InteractionHand activeHand, BlockPos contraptionPos,
                                            AbstractContraptionEntity contraptionEntity) {
-        if (player.level().isClientSide()) {
+        if (player.level.isClientSide()) {
             return true;
         }
         Contraption contraption = contraptionEntity.getContraption();
         StructureTemplate.StructureBlockInfo info = contraption.getBlocks().get(contraptionPos);
-        BlockState currentState = info.state();
+        BlockState currentState = info.state;
 
         if (currentState.getValue(HAS_RECORD)) {
             withTempBlockEntity(contraption, contraptionPos, currentState, JukeboxBlockEntity::popOutRecord, false);
@@ -56,10 +57,10 @@ public class JukeboxInteractionBehaviour extends MovingInteractionBehaviour {
     public void withTempBlockEntity(Contraption contraption, BlockPos contraptionPos, BlockState currentState, Consumer<JukeboxBlockEntity> action, boolean silent) {
         AtomicReference<BlockState> state = new AtomicReference<>(currentState);
         AbstractContraptionEntity contraptionEntity = contraption.entity;
-        BlockPos realPos = BlockPos.containing(contraptionEntity.toGlobalVector(Vec3.atCenterOf(contraptionPos), 1));
+        BlockPos realPos = blockPosContaining(contraptionEntity.toGlobalVector(Vec3.atCenterOf(contraptionPos), 1));
         JukeboxBlockEntity be = new JukeboxBlockEntity(realPos, currentState);
-        be.load(contraption.getBlocks().get(contraptionPos).nbt());
-        be.setLevel(new WrappedWorld(contraptionEntity.level()) {
+        be.load(contraption.getBlocks().get(contraptionPos).nbt);
+        be.setLevel(new WrappedWorld(contraptionEntity.level) {
             @Override
             public boolean setBlock(BlockPos pos, BlockState newState, int flags) {
                 if (pos.equals(realPos)) {

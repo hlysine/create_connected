@@ -15,12 +15,12 @@ public class MenuBlockInteractionBehaviour extends MovingInteractionBehaviour {
     @Override
     public boolean handlePlayerInteraction(Player player, InteractionHand activeHand, BlockPos localPos,
                                            AbstractContraptionEntity contraptionEntity) {
-        if (player.level().isClientSide())
+        if (player.level.isClientSide())
             return true;
 
         Contraption contraption = contraptionEntity.getContraption();
         StructureTemplate.StructureBlockInfo info = contraption.getBlocks().get(localPos);
-        info.state().use(new TrackingContraptionWorld(player.level(), contraption, localPos),
+        info.state.use(new TrackingContraptionWorld(player.level, contraption, localPos),
                 player,
                 activeHand,
                 new BlockHitResult(Vec3.atBottomCenterOf(localPos.above()), Direction.UP, localPos, false)

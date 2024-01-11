@@ -15,6 +15,8 @@ import net.minecraft.world.phys.Vec3;
 
 import java.util.Objects;
 
+import static com.hlysine.create_connected.content.MathHelper.blockPosContaining;
+
 public abstract class AutoPlayMovementBehaviour extends SlidingDoorMovementBehaviour {
 
     @Override
@@ -33,11 +35,11 @@ public abstract class AutoPlayMovementBehaviour extends SlidingDoorMovementBehav
         boolean wasActive = Objects.equals(context.temporaryData, true);
         boolean isActive = shouldOpen(context);
 
-        BlockState state = structureBlockInfo.state();
+        BlockState state = structureBlockInfo.state;
         ContraptionWorld contraptionWorld = contraption.getContraptionWorld();
         BlockPos contraptionPos = context.localPos;
-        Level realWorld = contraption.entity.level();
-        BlockPos realPos = BlockPos.containing(contraption.entity.toGlobalVector(Vec3.atCenterOf(contraptionPos), 1));
+        Level realWorld = contraption.entity.level;
+        BlockPos realPos = blockPosContaining(contraption.entity.toGlobalVector(Vec3.atCenterOf(contraptionPos), 1));
 
         if (wasActive != isActive) {
             update(context, state, contraptionWorld, contraptionPos, realWorld, realPos, wasActive, isActive);

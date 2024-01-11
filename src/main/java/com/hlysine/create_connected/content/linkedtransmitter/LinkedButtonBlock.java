@@ -10,6 +10,7 @@ import com.simibubi.create.content.schematics.requirement.ItemRequirement;
 import com.simibubi.create.foundation.block.IBE;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -22,7 +23,7 @@ import net.minecraft.world.level.block.ButtonBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.storage.loot.LootParams;
+import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -38,7 +39,7 @@ public class LinkedButtonBlock extends ButtonBlock implements IBE<LinkedTransmit
     private final ButtonBlock base;
 
     public LinkedButtonBlock(Properties pProperties, ButtonBlock base) {
-        super(pProperties, base.type, base.ticksToStayPressed, base.arrowsCanPress);
+        super(base.sensitive, pProperties);
         this.base = base;
     }
 
@@ -67,7 +68,7 @@ public class LinkedButtonBlock extends ButtonBlock implements IBE<LinkedTransmit
 
     @SuppressWarnings("deprecation")
     @Override
-    public @NotNull List<ItemStack> getDrops(@NotNull BlockState state, LootParams.@NotNull Builder builder) {
+    public @NotNull List<ItemStack> getDrops(@NotNull BlockState state, LootContext.@NotNull Builder builder) {
         return base.getDrops(state, builder);
     }
 
@@ -90,7 +91,7 @@ public class LinkedButtonBlock extends ButtonBlock implements IBE<LinkedTransmit
     @Override
     public void onRemove(@NotNull BlockState state, @NotNull Level world, @NotNull BlockPos pos, @NotNull BlockState newState, boolean isMoving) {
         if (!state.is(newState.getBlock()) && !isMoving && getBlockEntityOptional(world, pos).map(be -> be.containsBase).orElse(false))
-            Block.popResource(world, pos, new ItemStack(CCItems.LINKED_TRANSMITTER));
+            Block.popResource(world, pos, new ItemStack(CCItems.LINKED_TRANSMITTER.get()));
         base.onRemove(state, world, pos, newState, isMoving);
     }
 
@@ -104,7 +105,7 @@ public class LinkedButtonBlock extends ButtonBlock implements IBE<LinkedTransmit
     public InteractionResult onWrenched(BlockState state, UseOnContext context) {
         Player player = context.getPlayer();
         if (!player.isCreative()) {
-            player.getInventory().placeItemBackInInventory(new ItemStack(CCItems.LINKED_TRANSMITTER));
+            player.getInventory().placeItemBackInInventory(new ItemStack(CCItems.LINKED_TRANSMITTER.get()));
         }
         withBlockEntityDo(context.getLevel(), context.getClickedPos(), be -> be.containsBase = false);
         replaceWithBase(state, context.getLevel(), context.getClickedPos());
@@ -141,6 +142,11 @@ public class LinkedButtonBlock extends ButtonBlock implements IBE<LinkedTransmit
     public void press(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos) {
         super.press(state, level, pos);
         updateTransmittedSignal(level, pos);
+    }
+
+    @Override
+    public SoundEvent getSound(boolean pIsOn) {
+        return base.getSound(pIsOn);
     }
 
     public void updateTransmittedSignal(Level worldIn, BlockPos pos) {

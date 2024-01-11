@@ -3,12 +3,11 @@ package com.hlysine.create_connected;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import net.minecraft.core.Holder;
+import net.minecraft.core.Registry;
 import net.minecraft.core.Vec3i;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
-import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
@@ -20,12 +19,12 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegisterEvent;
 import net.minecraftforge.registries.RegistryObject;
 
+import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.CompletableFuture;
 import java.util.function.BiConsumer;
 import java.util.function.Supplier;
 
@@ -57,7 +56,7 @@ public class CCSoundEvents {
     }
 
     public static void register(RegisterEvent event) {
-        event.register(Registries.SOUND_EVENT, helper -> {
+        event.register(Registry.SOUND_EVENT_REGISTRY,helper -> {
             for (SoundEntry entry : ALL.values())
                 entry.register(helper);
         });
@@ -85,15 +84,15 @@ public class CCSoundEvents {
 
     public static class SoundEntryProvider implements DataProvider {
 
-        private PackOutput output;
+        private DataGenerator generator;
 
         public SoundEntryProvider(DataGenerator generator) {
-            output = generator.getPackOutput();
+            this.generator = generator;
         }
 
         @Override
-        public CompletableFuture<?> run(CachedOutput cache) {
-            return generate(output.getOutputFolder(), cache);
+        public void run(CachedOutput cache) throws IOException {
+            generate(generator.getOutputFolder(), cache);
         }
 
         @Override
@@ -101,7 +100,7 @@ public class CCSoundEvents {
             return "Create Connected's Custom Sounds";
         }
 
-        public CompletableFuture<?> generate(Path path, CachedOutput cache) {
+        public void generate(Path path, CachedOutput cache) throws IOException {
             path = path.resolve("assets/create_connected");
             JsonObject json = new JsonObject();
             ALL.entrySet()
@@ -111,7 +110,7 @@ public class CCSoundEvents {
                         entry.getValue()
                                 .write(json);
                     });
-            return DataProvider.saveStable(cache, json, path.resolve("sounds.json"));
+            DataProvider.saveStable(cache, json, path.resolve("sounds.json"));
         }
 
     }
@@ -246,7 +245,7 @@ public class CCSoundEvents {
 
         public void playFrom(Entity entity, float volume, float pitch) {
             if (!entity.isSilent())
-                play(entity.level(), null, entity.blockPosition(), volume, pitch);
+                play(entity.level, null, entity.blockPosition(), volume, pitch);
         }
 
         public void play(Level world, Player entity, Vec3i pos, float volume, float pitch) {
@@ -297,7 +296,7 @@ public class CCSoundEvents {
         public void register(RegisterEvent.RegisterHelper<SoundEvent> helper) {
             for (WrappedSoundEntry.CompiledSoundEvent compiledEvent : compiledEvents) {
                 ResourceLocation location = compiledEvent.event().getId();
-                helper.register(location, SoundEvent.createVariableRangeEvent(location));
+                helper.register(location, new SoundEvent(location));
             }
         }
 
@@ -373,7 +372,7 @@ public class CCSoundEvents {
         @Override
         public void register(RegisterEvent.RegisterHelper<SoundEvent> helper) {
             ResourceLocation location = event.getId();
-            helper.register(location, SoundEvent.createVariableRangeEvent(location));
+            helper.register(location, new SoundEvent(location));
         }
 
         @Override

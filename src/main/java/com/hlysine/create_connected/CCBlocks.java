@@ -40,7 +40,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.MaterialColor;
-import net.minecraft.world.level.block.state.properties.BlockSetType;
+import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -214,10 +214,10 @@ public class CCBlocks {
                     .simpleItem()
                     .register();
 
-    public static final Map<BlockSetType, BlockEntry<LinkedButtonBlock>> LINKED_BUTTONS = new HashMap<>();
+    public static final Map<WoodType, BlockEntry<LinkedButtonBlock>> LINKED_BUTTONS = new HashMap<>();
 
     static {
-        BlockSetType.values().forEach(type -> {
+        WoodType.values().forEach(type -> {
             Block button = ForgeRegistries.BLOCKS.getValue(new ResourceLocation(type.name() + "_button"));
             if (button == null) return;
             if (!(button instanceof ButtonBlock buttonBlock))
@@ -233,6 +233,26 @@ public class CCBlocks {
                     .register());
         });
     }
+
+    public static final BlockEntry<LinkedButtonBlock> LINKED_STONE_BUTTON = REGISTRATE
+            .block("linked_stone_button", properties -> new LinkedButtonBlock(properties, (ButtonBlock) Blocks.STONE_BUTTON))
+            .initialProperties(() -> Blocks.STONE_BUTTON)
+            .transform(LinkedTransmitterItem.register())
+            .blockstate(CCBlockStateGen.linkedButton(
+                    new ResourceLocation("block/stone_button"),
+                    new ResourceLocation("block/stone_button_pressed")
+            ))
+            .register();
+
+    public static final BlockEntry<LinkedButtonBlock> LINKED_POLISHED_BLACKSTONE_BUTTON = REGISTRATE
+            .block("linked_polished_blackstone_button", properties -> new LinkedButtonBlock(properties, (ButtonBlock) Blocks.POLISHED_BLACKSTONE_BUTTON))
+            .initialProperties(() -> Blocks.POLISHED_BLACKSTONE_BUTTON)
+            .transform(LinkedTransmitterItem.register())
+            .blockstate(CCBlockStateGen.linkedButton(
+                    new ResourceLocation("block/polished_blackstone_button"),
+                    new ResourceLocation("block/polished_blackstone_button_pressed")
+            ))
+            .register();
 
     public static final BlockEntry<LinkedLeverBlock> LINKED_LEVER = REGISTRATE
             .block("linked_lever", properties -> new LinkedLeverBlock(properties, (LeverBlock) Blocks.LEVER))

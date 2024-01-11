@@ -24,7 +24,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.storage.loot.LootParams;
+import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -77,7 +77,7 @@ public class LinkedAnalogLeverBlock extends AnalogLeverBlock implements ISpecial
 
     @SuppressWarnings("deprecation")
     @Override
-    public @NotNull List<ItemStack> getDrops(@NotNull BlockState state, LootParams.@NotNull Builder builder) {
+    public @NotNull List<ItemStack> getDrops(@NotNull BlockState state, LootContext.@NotNull Builder builder) {
         return base.getDrops(state, builder);
     }
 
@@ -100,7 +100,7 @@ public class LinkedAnalogLeverBlock extends AnalogLeverBlock implements ISpecial
     @Override
     public void onRemove(@NotNull BlockState state, @NotNull Level world, @NotNull BlockPos pos, @NotNull BlockState newState, boolean isMoving) {
         if (!state.is(newState.getBlock()) && !isMoving && getBlockEntityOptional(world, pos).map(be -> ((LinkedAnalogLeverBlockEntity) be).containsBase).orElse(false))
-            Block.popResource(world, pos, new ItemStack(CCItems.LINKED_TRANSMITTER));
+            Block.popResource(world, pos, new ItemStack(CCItems.LINKED_TRANSMITTER.get()));
         base.onRemove(state, world, pos, newState, isMoving);
     }
 
@@ -114,7 +114,7 @@ public class LinkedAnalogLeverBlock extends AnalogLeverBlock implements ISpecial
     public InteractionResult onWrenched(BlockState state, UseOnContext context) {
         Player player = context.getPlayer();
         if (!player.isCreative()) {
-            player.getInventory().placeItemBackInInventory(new ItemStack(CCItems.LINKED_TRANSMITTER));
+            player.getInventory().placeItemBackInInventory(new ItemStack(CCItems.LINKED_TRANSMITTER.get()));
         }
         withBlockEntityDo(context.getLevel(), context.getClickedPos(), be -> ((LinkedAnalogLeverBlockEntity) be).containsBase = false);
         replaceWithBase(state, context.getLevel(), context.getClickedPos());

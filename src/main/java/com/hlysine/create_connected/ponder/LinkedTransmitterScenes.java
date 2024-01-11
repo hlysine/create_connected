@@ -17,7 +17,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.phys.Vec3;
 
 import static net.minecraft.world.level.block.state.properties.BlockStateProperties.*;
@@ -59,7 +58,7 @@ public class LinkedTransmitterScenes {
 
         scene.overlay.showControls(new InputWindowElement(transmitVec, Pointing.UP)
                         .rightClick()
-                        .withItem(new ItemStack(CCItems.LINKED_TRANSMITTER))
+                        .withItem(new ItemStack(CCItems.LINKED_TRANSMITTER.get()))
                 , 40);
         scene.idle(10);
         scene.world.modifyBlock(lever, s -> CCBlocks.LINKED_LEVER.getDefaultState()
@@ -182,12 +181,12 @@ public class LinkedTransmitterScenes {
         scene.idle(20);
         scene.overlay.showControls(new InputWindowElement(util.vector.blockSurface(analogLever, Direction.DOWN).add(0, 4 / 16.0, 0), Pointing.UP)
                         .rightClick()
-                        .withItem(new ItemStack(CCItems.LINKED_TRANSMITTER))
+                        .withItem(new ItemStack(CCItems.LINKED_TRANSMITTER.get()))
                 , 40);
         scene.idle(5);
         scene.overlay.showControls(new InputWindowElement(util.vector.blockSurface(button, Direction.DOWN).add(0, 2 / 16.0, 0), Pointing.DOWN)
                         .rightClick()
-                        .withItem(new ItemStack(CCItems.LINKED_TRANSMITTER))
+                        .withItem(new ItemStack(CCItems.LINKED_TRANSMITTER.get()))
                 , 40);
         scene.idle(20);
         scene.world.modifyBlock(analogLever, s -> CCBlocks.LINKED_ANALOG_LEVER.getDefaultState()
@@ -195,7 +194,7 @@ public class LinkedTransmitterScenes {
                         .setValue(HORIZONTAL_FACING, s.getValue(HORIZONTAL_FACING))
                 , true);
         scene.idle(5);
-        scene.world.modifyBlock(button, s -> CCBlocks.LINKED_BUTTONS.get(BlockSetType.STONE).getDefaultState()
+        scene.world.modifyBlock(button, s -> CCBlocks.LINKED_STONE_BUTTON.getDefaultState()
                         .setValue(ATTACH_FACE, s.getValue(ATTACH_FACE))
                         .setValue(HORIZONTAL_FACING, s.getValue(HORIZONTAL_FACING))
                         .setValue(POWERED, s.getValue(POWERED))
@@ -214,7 +213,7 @@ public class LinkedTransmitterScenes {
 
         scene.overlay.showControls(new InputWindowElement(transmitVec, Pointing.DOWN)
                         .rightClick()
-                        .withItem(new ItemStack(AllItems.WRENCH))
+                        .withItem(new ItemStack(AllItems.WRENCH.get()))
                 , 40);
         scene.idle(20);
         scene.world.modifyBlock(lever, s -> Blocks.LEVER.defaultBlockState()

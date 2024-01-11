@@ -1,11 +1,18 @@
 package com.hlysine.create_connected.content;
 
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Position;
+import net.minecraft.util.Mth;
 
 /**
  * Feature parity for functions that only exist in 1.20+
  */
 public class MathHelper {
+    public static BlockPos blockPosContaining(Position pos) {
+        return new BlockPos(Mth.floor(pos.x()), Mth.floor(pos.y()), Mth.floor(pos.z()));
+    }
+
     public static Direction DirectionFromDelta(int pX, int pY, int pZ) {
         if (pX == 0) {
             if (pY == 0) {
