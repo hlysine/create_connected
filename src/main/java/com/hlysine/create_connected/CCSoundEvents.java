@@ -38,6 +38,11 @@ public class CCSoundEvents {
             .attenuationDistance(7)
             .build();
 
+    public static final SoundEntry INTERLUDE_MUSIC = create("interlude_music").noSubtitle()
+            .category(SoundSource.RECORDS)
+            .attenuationDistance(7)
+            .build();
+
     private static SoundEntryBuilder create(String name) {
         return create(CreateConnected.asResource(name));
     }
