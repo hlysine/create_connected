@@ -1,13 +1,14 @@
 package com.hlysine.create_connected;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import net.minecraft.core.Holder;
-import net.minecraft.core.Registry;
 import net.minecraft.core.Vec3i;
-import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
+import net.minecraft.data.HashCache;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
@@ -15,8 +16,9 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegisterEvent;
+import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.RegistryObject;
 
 import java.io.IOException;
@@ -55,11 +57,10 @@ public class CCSoundEvents {
             entry.prepare();
     }
 
-    public static void register(RegisterEvent event) {
-        event.register(Registry.SOUND_EVENT_REGISTRY,helper -> {
-            for (SoundEntry entry : ALL.values())
-                entry.register(helper);
-        });
+    public static void register(RegistryEvent.Register<SoundEvent> event) {
+        IForgeRegistry<SoundEvent> registry = event.getRegistry();
+        for (CCSoundEvents.SoundEntry entry : ALL.values())
+            entry.register(registry);
     }
 
     public static void provideLang(BiConsumer<String, String> consumer) {
@@ -91,7 +92,7 @@ public class CCSoundEvents {
         }
 
         @Override
-        public void run(CachedOutput cache) throws IOException {
+        public void run(HashCache cache) throws IOException {
             generate(generator.getOutputFolder(), cache);
         }
 
@@ -100,7 +101,10 @@ public class CCSoundEvents {
             return "Create Connected's Custom Sounds";
         }
 
-        public void generate(Path path, CachedOutput cache) throws IOException {
+        public void generate(Path path, HashCache cache) throws IOException {
+            Gson GSON = (new GsonBuilder()).setPrettyPrinting()
+                    .disableHtmlEscaping()
+                    .create();
             path = path.resolve("assets/create_connected");
             JsonObject json = new JsonObject();
             ALL.entrySet()
@@ -110,7 +114,7 @@ public class CCSoundEvents {
                         entry.getValue()
                                 .write(json);
                     });
-            DataProvider.saveStable(cache, json, path.resolve("sounds.json"));
+            DataProvider.save(GSON, cache, json, path.resolve("sounds.json"));
         }
 
     }
@@ -176,7 +180,7 @@ public class CCSoundEvents {
         }
 
         public SoundEntryBuilder playExisting(Holder<SoundEvent> event) {
-            return playExisting(event::get, 1, 1);
+            return playExisting(event::value, 1, 1);
         }
 
         public SoundEntry build() {
@@ -205,7 +209,7 @@ public class CCSoundEvents {
 
         public abstract void prepare();
 
-        public abstract void register(RegisterEvent.RegisterHelper<SoundEvent> registry);
+        public abstract void register(IForgeRegistry<SoundEvent> registry);
 
         public abstract void write(JsonObject json);
 
@@ -293,10 +297,10 @@ public class CCSoundEvents {
         }
 
         @Override
-        public void register(RegisterEvent.RegisterHelper<SoundEvent> helper) {
-            for (WrappedSoundEntry.CompiledSoundEvent compiledEvent : compiledEvents) {
+        public void register(IForgeRegistry<SoundEvent> registry) {
+            for (CCSoundEvents.WrappedSoundEntry.CompiledSoundEvent compiledEvent : compiledEvents) {
                 ResourceLocation location = compiledEvent.event().getId();
-                helper.register(location, new SoundEvent(location));
+                registry.register(new SoundEvent(location).setRegistryName(location));
             }
         }
 
@@ -370,9 +374,9 @@ public class CCSoundEvents {
         }
 
         @Override
-        public void register(RegisterEvent.RegisterHelper<SoundEvent> helper) {
+        public void register(IForgeRegistry<SoundEvent> registry) {
             ResourceLocation location = event.getId();
-            helper.register(location, new SoundEvent(location));
+            registry.register(new SoundEvent(location).setRegistryName(location));
         }
 
         @Override

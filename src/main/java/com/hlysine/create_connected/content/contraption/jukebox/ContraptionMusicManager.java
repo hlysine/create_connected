@@ -39,7 +39,6 @@ public class ContraptionMusicManager {
                     SoundSource.RECORDS,
                     4.0F,
                     1.0F,
-                    SoundInstance.createUnseededRandom(),
                     false,
                     0,
                     SoundInstance.Attenuation.LINEAR,

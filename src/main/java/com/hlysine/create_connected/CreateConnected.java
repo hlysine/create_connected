@@ -11,6 +11,7 @@ import com.simibubi.create.foundation.item.KineticStats;
 import com.simibubi.create.foundation.item.TooltipHelper;
 import com.simibubi.create.foundation.item.TooltipModifier;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.EventPriority;
@@ -66,7 +67,7 @@ public class CreateConnected {
         CCMovementBehaviours.register();
 
         modEventBus.addListener(EventPriority.LOWEST, CCDatagen::gatherData);
-        modEventBus.addListener(CCSoundEvents::register);
+        modEventBus.addGenericListener(SoundEvent.class, CCSoundEvents::register);
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> CreateConnectedClient.onCtorClient(modEventBus, forgeEventBus));
     }
 

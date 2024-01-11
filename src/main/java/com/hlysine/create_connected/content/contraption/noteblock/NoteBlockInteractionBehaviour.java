@@ -8,7 +8,6 @@ import net.minecraft.stats.Stats;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.Vec3;
 
 import static com.hlysine.create_connected.content.MathHelper.blockPosContaining;
@@ -33,7 +32,6 @@ public class NoteBlockInteractionBehaviour extends SimpleBlockMovingInteraction 
 
         if (contraptionWorld.getBlockState(contraptionPos.above()).isAir()) {
             currentState.triggerEvent(realWorld, realPos, 0, 0);
-            realWorld.gameEvent(player, GameEvent.NOTE_BLOCK_PLAY, realPos);
         }
 
         player.awardStat(Stats.TUNE_NOTEBLOCK);

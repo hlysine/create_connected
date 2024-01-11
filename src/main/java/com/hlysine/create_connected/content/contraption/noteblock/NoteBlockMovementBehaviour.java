@@ -6,7 +6,6 @@ import com.simibubi.create.content.contraptions.behaviour.MovementContext;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.gameevent.GameEvent;
 
 public class NoteBlockMovementBehaviour extends AutoPlayMovementBehaviour {
 
@@ -16,7 +15,6 @@ public class NoteBlockMovementBehaviour extends AutoPlayMovementBehaviour {
         if (context.disabled) return;
         if (contraptionWorld.getBlockState(contraptionPos.above()).isAir()) {
             state.triggerEvent(realWorld, realPos, 0, 0);
-            realWorld.gameEvent(context.contraption.entity, GameEvent.NOTE_BLOCK_PLAY, realPos);
         }
     }
 }

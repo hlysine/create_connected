@@ -6,7 +6,6 @@ import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.phys.Vec3;
 
 import java.lang.ref.WeakReference;
@@ -19,13 +18,12 @@ public class ContraptionRecordSoundInstance extends AbstractTickableSoundInstanc
                                           SoundSource pSource,
                                           float pVolume,
                                           float pPitch,
-                                          RandomSource pRandom,
                                           boolean pLooping,
                                           int pDelay,
                                           SoundInstance.Attenuation pAttenuation,
                                           AbstractContraptionEntity contraptionEntity,
                                           BlockPos contraptionPos) {
-        super(pSoundEvent, pSource, pRandom);
+        super(pSoundEvent, pSource);
         this.volume = pVolume;
         this.pitch = pPitch;
         this.looping = pLooping;

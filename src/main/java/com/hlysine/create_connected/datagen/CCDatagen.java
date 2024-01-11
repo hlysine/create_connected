@@ -31,7 +31,7 @@ public class CCDatagen {
         ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
 
         if (event.includeClient()) {
-            generator.addProvider(true, CCSoundEvents.provider(generator));
+            generator.addProvider(CCSoundEvents.provider(generator));
         }
 
         if (event.includeServer()) {

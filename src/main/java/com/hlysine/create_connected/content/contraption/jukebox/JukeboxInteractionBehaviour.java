@@ -58,7 +58,7 @@ public class JukeboxInteractionBehaviour extends MovingInteractionBehaviour {
             if (item.is(ItemTags.MUSIC_DISCS)) {
                 withTempBlockEntity(contraption, contraptionPos, currentState, be -> {
                     JukeboxBlock block = (JukeboxBlock) Blocks.JUKEBOX;
-                    block.setRecord(player, be.getLevel(), be.getBlockPos(), be.getBlockState(), item);
+                    block.setRecord(be.getLevel(), be.getBlockPos(), be.getBlockState(), item);
                     be.getLevel().levelEvent(1010, be.getBlockPos(), Item.getId(item.getItem()));
                     if (!player.isCreative())
                         item.shrink(1);
