@@ -14,12 +14,13 @@ import net.minecraftforge.network.NetworkEvent;
 
 public class PlayContraptionJukeboxPacket extends SimplePacketBase {
 
+    protected ResourceLocation level;
     protected int contraptionId;
     protected BlockPos contraptionPos;
     protected BlockPos worldPos;
     protected int recordId;
     protected boolean play;
-    protected ResourceLocation level;
+    protected boolean silent;
 
     public PlayContraptionJukeboxPacket(FriendlyByteBuf buffer) {
         level = buffer.readResourceLocation();
@@ -28,15 +29,17 @@ public class PlayContraptionJukeboxPacket extends SimplePacketBase {
         worldPos = buffer.readBlockPos();
         recordId = buffer.readInt();
         play = buffer.readBoolean();
+        silent = buffer.readBoolean();
     }
 
-    public PlayContraptionJukeboxPacket(ResourceLocation level, int contraptionId, BlockPos contraptionPos, BlockPos worldPos, int recordId, boolean play) {
+    public PlayContraptionJukeboxPacket(ResourceLocation level, int contraptionId, BlockPos contraptionPos, BlockPos worldPos, int recordId, boolean play, boolean silent) {
         this.level = level;
         this.contraptionId = contraptionId;
         this.contraptionPos = contraptionPos;
         this.worldPos = worldPos;
         this.recordId = recordId;
         this.play = play;
+        this.silent = silent;
     }
 
     @Override
@@ -47,6 +50,7 @@ public class PlayContraptionJukeboxPacket extends SimplePacketBase {
         buffer.writeBlockPos(worldPos);
         buffer.writeInt(recordId);
         buffer.writeBoolean(play);
+        buffer.writeBoolean(silent);
     }
 
     @SuppressWarnings("unchecked")
@@ -70,7 +74,8 @@ public class PlayContraptionJukeboxPacket extends SimplePacketBase {
                         contraptionEntity,
                         contraptionPos,
                         worldPos,
-                        recordItem
+                        recordItem,
+                        silent
                 );
             } else {
                 ContraptionMusicManager.playContraptionMusic(
@@ -78,7 +83,8 @@ public class PlayContraptionJukeboxPacket extends SimplePacketBase {
                         contraptionEntity,
                         contraptionPos,
                         worldPos,
-                        null
+                        null,
+                        silent
                 );
             }
         });

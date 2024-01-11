@@ -16,7 +16,7 @@ public class JukeboxMovementBehaviour extends AutoPlayMovementBehaviour {
         MovingInteractionBehaviour interactor = context.contraption.getInteractors().get(context.localPos);
         if (!(interactor instanceof JukeboxInteractionBehaviour jukeboxInteraction)) return;
         BlockState currentState = context.contraption.getBlocks().get(context.localPos).state();
-        jukeboxInteraction.withTempBlockEntity(context.contraption, context.localPos, currentState, JukeboxBlockEntity::stopPlaying);
+        jukeboxInteraction.withTempBlockEntity(context.contraption, context.localPos, currentState, JukeboxBlockEntity::stopPlaying, true);
     }
 
     @Override
@@ -31,6 +31,6 @@ public class JukeboxMovementBehaviour extends AutoPlayMovementBehaviour {
             } else {
                 be.stopPlaying();
             }
-        });
+        }, true);
     }
 }

@@ -20,7 +20,8 @@ public class ContraptionMusicManager {
                                             AbstractContraptionEntity entity,
                                             BlockPos localPos,
                                             BlockPos worldPos,
-                                            @Nullable RecordItem recordItem) {
+                                            @Nullable RecordItem recordItem,
+                                            boolean silent) {
         Pair<Integer, BlockPos> contraption = Pair.of(entity.getId(), localPos);
         SoundInstance soundInstance = playingContraptionRecords.get(contraption);
         if (soundInstance != null) {
@@ -29,7 +30,7 @@ public class ContraptionMusicManager {
         }
 
         if (soundEvent != null) {
-            if (recordItem != null) {
+            if (recordItem != null && !silent) {
                 Minecraft.getInstance().gui.setNowPlaying(recordItem.getDisplayName());
             }
 

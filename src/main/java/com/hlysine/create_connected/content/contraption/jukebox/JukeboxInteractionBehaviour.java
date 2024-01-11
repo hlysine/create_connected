@@ -37,7 +37,7 @@ public class JukeboxInteractionBehaviour extends MovingInteractionBehaviour {
         BlockState currentState = info.state();
 
         if (currentState.getValue(HAS_RECORD)) {
-            withTempBlockEntity(contraption, contraptionPos, currentState, JukeboxBlockEntity::popOutRecord);
+            withTempBlockEntity(contraption, contraptionPos, currentState, JukeboxBlockEntity::popOutRecord, false);
         } else {
             ItemStack item = player.getItemInHand(activeHand);
             if (item.is(ItemTags.MUSIC_DISCS)) {
@@ -47,13 +47,13 @@ public class JukeboxInteractionBehaviour extends MovingInteractionBehaviour {
                     if (!player.isCreative())
                         item.shrink(1);
                     player.awardStat(Stats.PLAY_RECORD);
-                });
+                }, false);
             }
         }
         return true;
     }
 
-    public void withTempBlockEntity(Contraption contraption, BlockPos contraptionPos, BlockState currentState, Consumer<JukeboxBlockEntity> action) {
+    public void withTempBlockEntity(Contraption contraption, BlockPos contraptionPos, BlockState currentState, Consumer<JukeboxBlockEntity> action, boolean silent) {
         AtomicReference<BlockState> state = new AtomicReference<>(currentState);
         AbstractContraptionEntity contraptionEntity = contraption.entity;
         BlockPos realPos = BlockPos.containing(contraptionEntity.toGlobalVector(Vec3.atCenterOf(contraptionPos), 1));
@@ -86,7 +86,8 @@ public class JukeboxInteractionBehaviour extends MovingInteractionBehaviour {
                                     contraptionPos,
                                     pos,
                                     data,
-                                    type == 1010
+                                    type == 1010,
+                                    silent
                             )
                     );
             }
