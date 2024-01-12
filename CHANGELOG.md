@@ -48,7 +48,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Water in Fan Washing Catalyst not transparent
-- Copycat Slabs not dropping 2 items when a double variant is broken
+- Copycat Slabs not dropping 2 items when a double variant is broken (#14)
 
 ## 0.3.1 - 2023-12-29
 
