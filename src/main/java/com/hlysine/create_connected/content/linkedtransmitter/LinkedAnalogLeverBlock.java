@@ -8,6 +8,7 @@ import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.content.redstone.analogLever.AnalogLeverBlock;
 import com.simibubi.create.content.schematics.requirement.ISpecialBlockItemRequirement;
 import com.simibubi.create.content.schematics.requirement.ItemRequirement;
+import com.tterrag.registrate.util.nullness.NonNullSupplier;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
@@ -38,12 +39,12 @@ import java.util.List;
 public class LinkedAnalogLeverBlock extends AnalogLeverBlock implements ISpecialBlockItemRequirement, IWrenchable, LinkedTransmitterBlock {
 
     public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
-    private final AnalogLeverBlock base;
+    private final NonNullSupplier<AnalogLeverBlock> baseSupplier;
 
-    public LinkedAnalogLeverBlock(Properties pProperties, AnalogLeverBlock base) {
+    public LinkedAnalogLeverBlock(Properties pProperties, NonNullSupplier<AnalogLeverBlock> baseSupplier) {
         super(pProperties);
         registerDefaultState(defaultBlockState().setValue(POWERED, false));
-        this.base = base;
+        this.baseSupplier = baseSupplier;
     }
 
     @Override
@@ -59,7 +60,7 @@ public class LinkedAnalogLeverBlock extends AnalogLeverBlock implements ISpecial
 
     @Override
     public Block getBase() {
-        return base;
+        return baseSupplier.get();
     }
 
     @Override
@@ -78,7 +79,7 @@ public class LinkedAnalogLeverBlock extends AnalogLeverBlock implements ISpecial
     @SuppressWarnings("deprecation")
     @Override
     public @NotNull List<ItemStack> getDrops(@NotNull BlockState state, LootContext.@NotNull Builder builder) {
-        return base.getDrops(state, builder);
+        return getBase().getDrops(state, builder);
     }
 
     private boolean isHittingBase(BlockState state, BlockGetter level, BlockPos pos, HitResult hit) {
@@ -101,7 +102,7 @@ public class LinkedAnalogLeverBlock extends AnalogLeverBlock implements ISpecial
     public void onRemove(@NotNull BlockState state, @NotNull Level world, @NotNull BlockPos pos, @NotNull BlockState newState, boolean isMoving) {
         if (!state.is(newState.getBlock()) && !isMoving && getBlockEntityOptional(world, pos).map(be -> ((LinkedAnalogLeverBlockEntity) be).containsBase).orElse(false))
             Block.popResource(world, pos, new ItemStack(CCItems.LINKED_TRANSMITTER.get()));
-        base.onRemove(state, world, pos, newState, isMoving);
+        getBase().onRemove(state, world, pos, newState, isMoving);
     }
 
     @Override
@@ -132,7 +133,7 @@ public class LinkedAnalogLeverBlock extends AnalogLeverBlock implements ISpecial
 
     public void replaceWithBase(BlockState state, Level world, BlockPos pos) {
         AllSoundEvents.CONTROLLER_TAKE.playOnServer(world, pos);
-        world.setBlockAndUpdate(pos, base.defaultBlockState()
+        world.setBlockAndUpdate(pos, getBase().defaultBlockState()
                 .setValue(FACING, state.getValue(FACING))
                 .setValue(FACE, state.getValue(FACE)));
     }
@@ -140,14 +141,14 @@ public class LinkedAnalogLeverBlock extends AnalogLeverBlock implements ISpecial
     @Override
     public ItemStack getCloneItemStack(BlockState state, HitResult target, BlockGetter world, BlockPos pos, Player player) {
         if (isHittingBase(state, world, pos, target))
-            return base.getCloneItemStack(state, target, world, pos, player);
+            return getBase().getCloneItemStack(state, target, world, pos, player);
         return new ItemStack(CCItems.LINKED_TRANSMITTER.get());
     }
 
     @Override
     public ItemRequirement getRequiredItems(BlockState state, BlockEntity be) {
         ArrayList<ItemStack> requiredItems = new ArrayList<>();
-        requiredItems.add(new ItemStack(base));
+        requiredItems.add(new ItemStack(getBase()));
         requiredItems.add(new ItemStack(CCItems.LINKED_TRANSMITTER.get()));
         return new ItemRequirement(ItemRequirement.ItemUseType.CONSUME, requiredItems);
     }

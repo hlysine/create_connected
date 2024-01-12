@@ -42,7 +42,7 @@ public class ContraptionRecordSoundInstance extends AbstractTickableSoundInstanc
     @Override
     public void tick() {
         AbstractContraptionEntity entity = contraptionEntity.get();
-        if (entity == null) {
+        if (entity == null || entity.isRemoved()) {
             stop();
             return;
         }

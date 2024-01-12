@@ -265,8 +265,8 @@ public class CCBlocks {
             .register();
 
     public static final BlockEntry<LinkedAnalogLeverBlock> LINKED_ANALOG_LEVER = REGISTRATE
-            .block("linked_analog_lever", properties -> new LinkedAnalogLeverBlock(properties, AllBlocks.ANALOG_LEVER.get()))
-            .initialProperties(AllBlocks.ANALOG_LEVER)
+            .block("linked_analog_lever", properties -> new LinkedAnalogLeverBlock(properties, AllBlocks.ANALOG_LEVER))
+            .initialProperties(() -> Blocks.LEVER)
             .transform(LinkedTransmitterItem.register())
             .blockstate(CCBlockStateGen.linkedLever(
                     Create.asResource("block/analog_lever/block"),
