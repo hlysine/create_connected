@@ -19,7 +19,7 @@ out [Create: Power Loader](https://modrinth.com/mod/create-power-loader)**
 ![Linked Transmitter](https://github.com/hlysine/create_connected/assets/25472513/edb1593f-e815-4a36-b0bb-91ae0eb318bf) **Linked Transmitter**
 
 A compact Redstone Link that can be attached to buttons, levers, and linked levers. Adds wireless redstone capabilities
-without using extra block space!
+without using extra block space! (Support for other modded redstone inputs will only be added upon request)
 
 ![image](https://github.com/hlysine/create_connected/assets/25472513/703bc032-259e-4db8-927c-b6503bbca744)
 
