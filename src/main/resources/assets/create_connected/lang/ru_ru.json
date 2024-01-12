@@ -1,3 +1,7 @@
 {
-  "advancement.create_connected.brass_gearbox": "Серьезная организация"
+  "advancement.create_connected.brass_gearbox": "Серьезная организация",
+  "advancement.create_connected.pulse_generator_infinite_loop": "Бесконечный цикл",
+  "advancement.create_connected.root": "Добро пожаловать в Create: Connected",
+  "advancement.create_connected.root.desc": "Прибамбасы на любой случай",
+  "advancement.create_connected.sequenced_pulse_generator": "Вычислительное превосходство"
 }
