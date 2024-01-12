@@ -225,6 +225,7 @@ public class CCBlocks {
             LINKED_BUTTONS.put(type, REGISTRATE
                     .block("linked_" + type.name() + "_button", properties -> new LinkedButtonBlock(properties, buttonBlock))
                     .initialProperties(() -> buttonBlock)
+                    .addLayer(() -> RenderType::cutoutMipped)
                     .transform(LinkedTransmitterItem.register())
                     .blockstate(CCBlockStateGen.linkedButton(
                             new ResourceLocation("block/" + type.name() + "_button"),
@@ -237,6 +238,7 @@ public class CCBlocks {
     public static final BlockEntry<LinkedButtonBlock> LINKED_STONE_BUTTON = REGISTRATE
             .block("linked_stone_button", properties -> new LinkedButtonBlock(properties, (ButtonBlock) Blocks.STONE_BUTTON))
             .initialProperties(() -> Blocks.STONE_BUTTON)
+            .addLayer(() -> RenderType::cutoutMipped)
             .transform(LinkedTransmitterItem.register())
             .blockstate(CCBlockStateGen.linkedButton(
                     new ResourceLocation("block/stone_button"),
@@ -247,6 +249,7 @@ public class CCBlocks {
     public static final BlockEntry<LinkedButtonBlock> LINKED_POLISHED_BLACKSTONE_BUTTON = REGISTRATE
             .block("linked_polished_blackstone_button", properties -> new LinkedButtonBlock(properties, (ButtonBlock) Blocks.POLISHED_BLACKSTONE_BUTTON))
             .initialProperties(() -> Blocks.POLISHED_BLACKSTONE_BUTTON)
+            .addLayer(() -> RenderType::cutoutMipped)
             .transform(LinkedTransmitterItem.register())
             .blockstate(CCBlockStateGen.linkedButton(
                     new ResourceLocation("block/polished_blackstone_button"),
@@ -257,6 +260,7 @@ public class CCBlocks {
     public static final BlockEntry<LinkedLeverBlock> LINKED_LEVER = REGISTRATE
             .block("linked_lever", properties -> new LinkedLeverBlock(properties, (LeverBlock) Blocks.LEVER))
             .initialProperties(() -> Blocks.LEVER)
+            .addLayer(() -> RenderType::cutoutMipped)
             .transform(LinkedTransmitterItem.register())
             .blockstate(CCBlockStateGen.linkedLever(
                     new ResourceLocation("block/lever"),
@@ -267,6 +271,7 @@ public class CCBlocks {
     public static final BlockEntry<LinkedAnalogLeverBlock> LINKED_ANALOG_LEVER = REGISTRATE
             .block("linked_analog_lever", properties -> new LinkedAnalogLeverBlock(properties, AllBlocks.ANALOG_LEVER))
             .initialProperties(() -> Blocks.LEVER)
+            .addLayer(() -> RenderType::cutoutMipped)
             .transform(LinkedTransmitterItem.register())
             .blockstate(CCBlockStateGen.linkedLever(
                     Create.asResource("block/analog_lever/block"),
