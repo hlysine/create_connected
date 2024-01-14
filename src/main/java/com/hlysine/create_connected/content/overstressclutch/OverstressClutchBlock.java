@@ -14,6 +14,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -50,6 +51,18 @@ public class OverstressClutchBlock extends AbstractEncasedShaftBlock implements 
     public InteractionResult onWrenched(BlockState state, UseOnContext context) {
         withBlockEntityDo(context.getLevel(), context.getClickedPos(), OverstressClutchBlockEntity::resetClutch);
         return InteractionResult.SUCCESS;
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    public boolean hasAnalogOutputSignal(@NotNull BlockState state) {
+        return true;
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    public int getAnalogOutputSignal(@NotNull BlockState pState, @NotNull Level pLevel, @NotNull BlockPos pPos) {
+        return pState.getValue(STATE) == ClutchState.UNCOUPLED ? 0 : 15;
     }
 
     @SuppressWarnings("deprecation")

@@ -5,7 +5,6 @@ import com.hlysine.create_connected.Lang;
 import com.hlysine.create_connected.content.overstressclutch.OverstressClutchBlock.ClutchState;
 import com.hlysine.create_connected.datagen.advancements.AdvancementBehaviour;
 import com.hlysine.create_connected.datagen.advancements.CCAdvancements;
-import com.simibubi.create.content.kinetics.KineticNetwork;
 import com.simibubi.create.content.kinetics.RotationPropagator;
 import com.simibubi.create.content.kinetics.base.IRotate;
 import com.simibubi.create.content.kinetics.transmission.SplitShaftBlockEntity;
@@ -135,7 +134,7 @@ public class OverstressClutchBlockEntity extends SplitShaftBlockEntity {
     public void resetClutch() {
         if (getBlockState().getValue(STATE) == ClutchState.UNCOUPLED && !isOverStressed()) {
             assert level != null;
-            level.setBlock(getBlockPos(), getBlockState().setValue(STATE, ClutchState.COUPLED), 2);
+            level.setBlock(getBlockPos(), getBlockState().setValue(STATE, ClutchState.COUPLED), 3);
             RotationPropagator.handleRemoved(level, getBlockPos(), this);
             RotationPropagator.handleAdded(level, getBlockPos(), this);
         }
