@@ -94,7 +94,6 @@
   "create.item_attributes.stack_size.inverted": "не стакается до %1$s",
   "create_connected.centrifugal_clutch.speed_threshold": "Порог скорости",
   "create_connected.gui.overstress_clutch.uncoupled": "Разорвано",
-  "create_connected.gui.overstress_clutch.uncoupled_explanation": "Это сцепление _разорвало_ соединение из-за перегрузки. Исправьте сеть перед тем, как _сбросить_ его _ключом_.",
   "create_connected.gui.sequenced_pulse_generator.instruction": "Инструкция",
   "create_connected.gui.sequenced_pulse_generator.instruction.end": "Конец",
   "create_connected.gui.sequenced_pulse_generator.instruction.end.descriptive": "Конец",
