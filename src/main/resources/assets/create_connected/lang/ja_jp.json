@@ -92,7 +92,6 @@
   "create.item_attributes.stack_size.inverted": "スタック上限が%1$sでないか",
   "create_connected.centrifugal_clutch.speed_threshold": "速度しきい値",
   "create_connected.gui.overstress_clutch.uncoupled": "未結合",
-  "create_connected.gui.overstress_clutch.uncoupled_explanation": "このクラッチは応力により_結合されていません_。_レンチ_を使って_リセット_する前にネットワークを修正してください。",
   "create_connected.gui.sequenced_pulse_generator.instruction": "命令",
   "create_connected.gui.sequenced_pulse_generator.instruction.end": "終了",
   "create_connected.gui.sequenced_pulse_generator.instruction.end.descriptive": "終了",
