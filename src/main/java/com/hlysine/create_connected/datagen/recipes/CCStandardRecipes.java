@@ -233,6 +233,8 @@ public class CCStandardRecipes extends CreateRecipeProvider {
 
     GeneratedRecipe COPYCAT_VERTICAL_STEP = copycat(CCBlocks.COPYCAT_VERTICAL_STEP, 4);
 
+    GeneratedRecipe CHERRY_WINDOW = window(() -> Items.CHERRY_PLANKS, CCBlocks.CHERRY_WINDOW);
+
     String currentFolder = "";
 
     Marker enterFolder(String folder) {
@@ -292,6 +294,20 @@ public class CCStandardRecipes extends CreateRecipeProvider {
                 .viaStonecutting(DataIngredient.tag(AllTags.forgeItemTag("ingots/zinc")), resultCount);
     }
 
+    GeneratedRecipe window(Supplier<? extends ItemLike> ingredient, ItemProviderEntry<? extends ItemLike> result) {
+        return create(result)
+                .unlockedBy(ingredient)
+                .inCategory(RecipeCategory.BUILDING_BLOCKS)
+                .requiresResultFeature()
+                .returns(2)
+                .viaShaped(b -> b
+                        .pattern(" # ")
+                        .pattern("#X#")
+                        .define('#', ingredient.get())
+                        .define('X', DataIngredient.tag(Tags.Items.GLASS_COLORLESS))
+                );
+    }
+
     protected static class Marker {
     }
 
@@ -301,6 +317,7 @@ public class CCStandardRecipes extends CreateRecipeProvider {
         private final String path;
         private String suffix;
         private Supplier<? extends ItemLike> result;
+        private RecipeCategory category = null;
         private ResourceLocation compatDatagenOutput;
         List<ICondition> recipeConditions;
 
@@ -340,6 +357,11 @@ public class CCStandardRecipes extends CreateRecipeProvider {
             this.unlockedBy = () -> ItemPredicate.Builder.item()
                     .of(tag.get())
                     .build();
+            return this;
+        }
+
+        GeneratedRecipeBuilder inCategory(RecipeCategory category) {
+            this.category = category;
             return this;
         }
 
@@ -385,7 +407,7 @@ public class CCStandardRecipes extends CreateRecipeProvider {
         // FIXME 5.1 refactor - recipe categories as markers instead of sections?
         GeneratedRecipe viaShaped(UnaryOperator<ShapedRecipeBuilder> builder) {
             return handleConditions(consumer -> {
-                ShapedRecipeBuilder b = builder.apply(ShapedRecipeBuilder.shaped(RecipeCategory.MISC, result.get(), amount));
+                ShapedRecipeBuilder b = builder.apply(ShapedRecipeBuilder.shaped(category == null ? RecipeCategory.MISC : category, result.get(), amount));
                 if (unlockedBy != null)
                     b.unlockedBy("has_item", inventoryTrigger(unlockedBy.get()));
                 b.save(consumer, createLocation("crafting"));
@@ -394,7 +416,7 @@ public class CCStandardRecipes extends CreateRecipeProvider {
 
         GeneratedRecipe viaShapeless(UnaryOperator<ShapelessRecipeBuilder> builder) {
             return handleConditions(consumer -> {
-                ShapelessRecipeBuilder b = builder.apply(ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, result.get(), amount));
+                ShapelessRecipeBuilder b = builder.apply(ShapelessRecipeBuilder.shapeless(category == null ? RecipeCategory.MISC : category, result.get(), amount));
                 if (unlockedBy != null)
                     b.unlockedBy("has_item", inventoryTrigger(unlockedBy.get()));
                 b.save(consumer, createLocation("crafting"));
@@ -403,7 +425,7 @@ public class CCStandardRecipes extends CreateRecipeProvider {
 
         GeneratedRecipe viaStonecutting(Ingredient ingredient, int resultCount) {
             return handleConditions(consumer -> {
-                SingleItemRecipeBuilder b = SingleItemRecipeBuilder.stonecutting(ingredient, RecipeCategory.BUILDING_BLOCKS, result.get(), resultCount);
+                SingleItemRecipeBuilder b = SingleItemRecipeBuilder.stonecutting(ingredient, category == null ? RecipeCategory.BUILDING_BLOCKS : category, result.get(), resultCount);
                 if (unlockedBy != null)
                     b.unlockedBy("has_item", inventoryTrigger(unlockedBy.get()));
                 b.save(consumer, createLocation("crafting"));
@@ -418,7 +440,7 @@ public class CCStandardRecipes extends CreateRecipeProvider {
             return handleConditions(consumer -> {
                 SmithingTransformRecipeBuilder b =
                         SmithingTransformRecipeBuilder.smithing(Ingredient.of(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE),
-                                Ingredient.of(base.get()), upgradeMaterial.get(), RecipeCategory.COMBAT, result.get()
+                                Ingredient.of(base.get()), upgradeMaterial.get(), category == null ? RecipeCategory.COMBAT : category, result.get()
                                         .asItem());
                 b.unlocks("has_item", inventoryTrigger(ItemPredicate.Builder.item()
                         .of(base.get())

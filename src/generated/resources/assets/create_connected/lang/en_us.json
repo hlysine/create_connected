@@ -21,6 +21,7 @@
   "block.create_connected.brass_gearbox.tooltip.summary": "A gearbox where the rotation direction of all 4 sides are _independently configurable_.",
   "block.create_connected.centrifugal_clutch": "Centrifugal Clutch",
   "block.create_connected.centrifugal_clutch.tooltip.summary": "A clutch that is only _coupled_ if the input RPM is _faster_ than a configurable threshold.",
+  "block.create_connected.cherry_window": "Cherry Window",
   "block.create_connected.copycat_beam": "Copycat Beam",
   "block.create_connected.copycat_beam.tooltip.behaviour1": "Applies _held item_ as its _material_ if possible. _Click again_ to cycle _orientation_ or _powered_ state. Use a _Wrench_ to _reset_ the material.",
   "block.create_connected.copycat_beam.tooltip.condition1": "When R-Clicked",
