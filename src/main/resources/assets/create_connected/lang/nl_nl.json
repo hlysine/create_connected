@@ -145,7 +145,7 @@
   "create_connected.ponder.sequenced_pulse_generator.text_2": "Rechtsklik erop om het Configuratiescherm te openen",
   "create_connected.ponder.sequenced_pulse_generator.text_3": "Zodra het een signaal via de achterkant ontvangt...",
   "create_connected.ponder.sequenced_pulse_generator.text_4": "...zal het de geconfigureerde sequentie doorlopen",
-  "create_connected.ponder.sequenced_pulse_generator.text_5": "Zodra hij klaar is, zal hij wachten op het volgende signaal, en begint opnieuw",
+  "create_connected.ponder.sequenced_pulse_generator.text_5": "Zodra hij klaar is, zal hij wachten op het volgende signaal, en begint hij opnieuw",
   "create_connected.ponder.sequenced_pulse_generator.text_6": "Een Redstonevergelijker kan gebruikt worden om de huidige voortgang af te lezen",
   "create_connected.ponder.sequenced_pulse_generator.text_7": "Zodra het een signaal via de zijkant ontvangt...",
   "create_connected.ponder.sequenced_pulse_generator.text_8": "...herstelt en stopt de sequentie onmiddellijk",
