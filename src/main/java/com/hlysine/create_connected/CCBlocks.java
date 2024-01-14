@@ -113,9 +113,22 @@ public class CCBlocks {
             .transform(BlockStressDefaults.setNoImpact())
             .transform(FeatureToggle.register())
             .transform(axeOrPickaxe())
-            .blockstate((c, p) -> BlockStateGen.axisBlock(c, p,
-                    forBoolean(c, state -> state.getValue(OverstressClutchBlock.STATE) == OverstressClutchBlock.ClutchState.UNCOUPLED, "uncoupled", p)
-            ))
+            .blockstate((c, p) -> BlockStateGen.axisBlock(c, p, state -> {
+                        if (state.getValue(OverstressClutchBlock.STATE) == OverstressClutchBlock.ClutchState.UNCOUPLED) {
+                            if (state.getValue(OverstressClutchBlock.POWERED)) {
+                                return partialBaseModel(c, p, "uncoupled", "powered");
+                            } else {
+                                return partialBaseModel(c, p, "uncoupled");
+                            }
+                        } else {
+                            if (state.getValue(OverstressClutchBlock.POWERED)) {
+                                return partialBaseModel(c, p, "powered");
+                            } else {
+                                return partialBaseModel(c, p);
+                            }
+                        }
+                    })
+            )
             .item()
             .transform(customItemModel())
             .register();

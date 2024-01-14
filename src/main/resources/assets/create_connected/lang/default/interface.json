@@ -12,7 +12,7 @@
   "create.item_attributes.stack_size.inverted": "does not stack to %1$s",
   "create_connected.centrifugal_clutch.speed_threshold": "Speed Threshold",
   "create_connected.gui.overstress_clutch.uncoupled": "Uncoupled",
-  "create_connected.gui.overstress_clutch.uncoupled_explanation": "This clutch is _uncoupled_ due to stress. Fix the network before _resetting_ this clutch with a _wrench_.",
+  "create_connected.gui.overstress_clutch.uncoupled_explanation": "This clutch is _uncoupled_ due to stress. Fix the network before _resetting_ this clutch with a _wrench_ or a _redstone pulse_.",
   "create_connected.gui.sequenced_pulse_generator.instruction": "Instruction",
   "create_connected.gui.sequenced_pulse_generator.instruction.end": "End",
   "create_connected.gui.sequenced_pulse_generator.instruction.end.descriptive": "End",

@@ -29,6 +29,7 @@ import net.minecraft.world.ticks.TickPriority;
 
 import java.util.List;
 
+import static com.hlysine.create_connected.content.overstressclutch.OverstressClutchBlock.POWERED;
 import static com.hlysine.create_connected.content.overstressclutch.OverstressClutchBlock.STATE;
 import static net.minecraft.ChatFormatting.GOLD;
 
@@ -79,13 +80,18 @@ public class OverstressClutchBlockEntity extends SplitShaftBlockEntity {
         super.initialize();
     }
 
-    private void onKineticUpdate() {
-        if (IRotate.StressImpact.isEnabled()) {
+    public void onKineticUpdate() {
+        if (getBlockState().getValue(STATE) == ClutchState.UNCOUPLED && getBlockState().getValue(POWERED)) {
+            resetClutch();
+            return;
+        }
+        if (IRotate.StressImpact.isEnabled() && !getBlockState().getValue(POWERED)) {
             if (isOverStressed() && getBlockState().getValue(STATE) == ClutchState.COUPLED) {
                 if (level != null) {
                     level.setBlock(getBlockPos(), getBlockState().setValue(STATE, ClutchState.UNCOUPLING), 2 | 16);
                     delay = maxDelay.getValue() - 1;
                     sendData();
+                    return;
                 }
             }
         }
