@@ -94,7 +94,6 @@
   "create.item_attributes.stack_size.inverted": "stapelt niet tot %1$s",
   "create_connected.centrifugal_clutch.speed_threshold": "Snelheidsdrempel",
   "create_connected.gui.overstress_clutch.uncoupled": "Ontkoppelt",
-  "create_connected.gui.overstress_clutch.uncoupled_explanation": "Deze koppeling is _ontkoppelt_ vanwege overbelasting. Repareer het netwerk voor je deze koppeling _herstelt_ met een _moersleutel_.",
   "create_connected.gui.sequenced_pulse_generator.instruction": "Instructie",
   "create_connected.gui.sequenced_pulse_generator.instruction.end": "Einde",
   "create_connected.gui.sequenced_pulse_generator.instruction.end.descriptive": "Einde",
