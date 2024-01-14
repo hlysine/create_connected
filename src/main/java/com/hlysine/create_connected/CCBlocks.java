@@ -226,13 +226,14 @@ public class CCBlocks {
             if (button == null) return;
             if (!(button instanceof ButtonBlock buttonBlock))
                 return;
+            String namePath = type.name().contains(":") ? type.name().split(":")[1] : type.name();
             LINKED_BUTTONS.put(type, REGISTRATE
-                    .block("linked_" + type.name() + "_button", properties -> new LinkedButtonBlock(properties, buttonBlock))
+                    .block("linked_" + namePath + "_button", properties -> new LinkedButtonBlock(properties, buttonBlock))
                     .initialProperties(() -> buttonBlock)
                     .transform(LinkedTransmitterItem.register())
                     .blockstate(CCBlockStateGen.linkedButton(
-                            new ResourceLocation("block/" + type.name() + "_button"),
-                            new ResourceLocation("block/" + type.name() + "_button_pressed")
+                            new ResourceLocation("block/" + namePath + "_button"),
+                            new ResourceLocation("block/" + namePath + "_button_pressed")
                     ))
                     .register());
         });
