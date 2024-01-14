@@ -15,6 +15,8 @@
   "advancement.create_connected.sequenced_pulse_generator.desc": "Place down a Sequenced Pulse Generator",
   "advancement.create_connected.shear_pin": "Snap!",
   "advancement.create_connected.shear_pin.desc": "Blow a Shear Pin",
+  "block.create_connected.bamboo_window": "Bamboo Window",
+  "block.create_connected.bamboo_window_pane": "Bamboo Window Pane",
   "block.create_connected.brake": "Brake",
   "block.create_connected.brake.tooltip.summary": "A device that produces _immense stress_ when powered, halting the network by _overstressing_ it.",
   "block.create_connected.brass_gearbox": "Brass Gearbox",

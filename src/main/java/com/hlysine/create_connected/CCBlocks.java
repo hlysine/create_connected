@@ -419,7 +419,10 @@ public class CCBlocks {
                     .register();
 
     public static final BlockEntry<WindowBlock> CHERRY_WINDOW = CCWindowGen.woodenWindowBlock(WoodType.CHERRY, Blocks.CHERRY_PLANKS, () -> RenderType::translucent, true);
+    public static final BlockEntry<WindowBlock> BAMBOO_WINDOW = CCWindowGen.woodenWindowBlock(WoodType.BAMBOO, Blocks.BAMBOO_PLANKS, () -> RenderType::cutoutMipped, false);
     public static final BlockEntry<ConnectedGlassPaneBlock> CHERRY_WINDOW_PANE = CCWindowGen.woodenWindowPane(WoodType.CHERRY, CHERRY_WINDOW, () -> RenderType::translucent);
+
+    public static final BlockEntry<ConnectedGlassPaneBlock> BAMBOO_WINDOW_PANE = CCWindowGen.woodenWindowPane(WoodType.BAMBOO, BAMBOO_WINDOW, () -> RenderType::cutoutMipped);
 
     public static void register() {
     }

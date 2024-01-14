@@ -15,7 +15,7 @@ public class CCSpriteShifts {
     public static final Map<WoodType, CTSpriteShiftEntry> WOODEN_WINDOWS = new IdentityHashMap<>();
 
     static {
-        WoodType[] supportedWoodTypes = new WoodType[]{WoodType.CHERRY};
+        WoodType[] supportedWoodTypes = new WoodType[]{WoodType.CHERRY, WoodType.BAMBOO};
         Arrays.stream(supportedWoodTypes)
                 .forEach(woodType -> WOODEN_WINDOWS.put(woodType, getCT(AllCTTypes.VERTICAL, woodType.name() + "_window", woodType.name() + "_window")));
     }

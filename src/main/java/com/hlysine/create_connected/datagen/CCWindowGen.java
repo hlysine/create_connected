@@ -1,6 +1,5 @@
 package com.hlysine.create_connected.datagen;
 
-import com.hlysine.create_connected.CCBlocks;
 import com.hlysine.create_connected.CCSpriteShifts;
 import com.hlysine.create_connected.CreateConnected;
 import com.hlysine.create_connected.config.FeatureToggle;
@@ -81,7 +80,7 @@ public class CCWindowGen {
     }
 
     public static BlockEntry<ConnectedGlassPaneBlock> woodenWindowPane(WoodType woodType,
-                                                                       Supplier<? extends Block> parent,
+                                                                       BlockEntry<? extends Block> parent,
                                                                        Supplier<Supplier<RenderType>> renderType) {
         String woodName = woodType.name();
         String name = woodName + "_window";
@@ -92,7 +91,7 @@ public class CCWindowGen {
     }
 
     private static BlockEntry<ConnectedGlassPaneBlock> connectedGlassPane(String name,
-                                                                          Supplier<? extends Block> parent,
+                                                                          BlockEntry<? extends Block> parent,
                                                                           Supplier<CTSpriteShiftEntry> ctshift,
                                                                           ResourceLocation sideTexture,
                                                                           ResourceLocation itemSideTexture,
@@ -119,7 +118,7 @@ public class CCWindowGen {
     }
 
     private static <G extends GlassPaneBlock> BlockEntry<G> glassPane(String name,
-                                                                      Supplier<? extends Block> parent,
+                                                                      BlockEntry<? extends Block> parent,
                                                                       ResourceLocation sideTexture,
                                                                       ResourceLocation topTexture,
                                                                       NonNullFunction<BlockBehaviour.Properties, G> factory,
@@ -135,7 +134,7 @@ public class CCWindowGen {
                 .properties(p -> p.mapColor(parent.get()
                         .defaultMapColor()))
                 .blockstate(stateProvider)
-                .transform(FeatureToggle.registerDependent(CCBlocks.CHERRY_WINDOW))
+                .transform(FeatureToggle.registerDependent(parent))
                 .tag(Tags.Blocks.GLASS_PANES)
                 .loot(RegistrateBlockLootTables::dropWhenSilkTouch)
                 .item()

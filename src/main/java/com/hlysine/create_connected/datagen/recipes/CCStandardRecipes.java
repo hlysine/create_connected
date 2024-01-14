@@ -234,7 +234,9 @@ public class CCStandardRecipes extends CreateRecipeProvider {
     GeneratedRecipe COPYCAT_VERTICAL_STEP = copycat(CCBlocks.COPYCAT_VERTICAL_STEP, 4);
 
     GeneratedRecipe CHERRY_WINDOW = window(() -> Items.CHERRY_PLANKS, CCBlocks.CHERRY_WINDOW);
+    GeneratedRecipe BAMBOO_WINDOW = window(() -> Items.BAMBOO_PLANKS, CCBlocks.BAMBOO_WINDOW);
     GeneratedRecipe CHERRY_WINDOW_PANE = windowPane(() -> CCBlocks.CHERRY_WINDOW, CCBlocks.CHERRY_WINDOW_PANE);
+    GeneratedRecipe BAMBOO_WINDOW_PANE = windowPane(() -> CCBlocks.BAMBOO_WINDOW, CCBlocks.BAMBOO_WINDOW_PANE);
 
     String currentFolder = "";
 
