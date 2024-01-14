@@ -13,6 +13,8 @@
   "advancement.create_connected.sequenced_pulse_generator.desc": "放置一个测序脉冲生成器",
   "advancement.create_connected.shear_pin": "折断！",
   "advancement.create_connected.shear_pin.desc": "折断一个剪切销",
+  "block.create_connected.bamboo_window": "竹窗户",
+  "block.create_connected.bamboo_window_pane": "竹窗户板",
   "block.create_connected.brake": "制动器",
   "block.create_connected.brake.tooltip.summary": "一种在被红石充能时会产生_巨大压力_的设备，通过对其施加_过大的压力_来停止动力网络。",
   "block.create_connected.brass_gearbox": "黄铜十字齿轮箱",
