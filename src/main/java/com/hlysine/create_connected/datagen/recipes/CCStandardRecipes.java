@@ -234,6 +234,7 @@ public class CCStandardRecipes extends CreateRecipeProvider {
     GeneratedRecipe COPYCAT_VERTICAL_STEP = copycat(CCBlocks.COPYCAT_VERTICAL_STEP, 4);
 
     GeneratedRecipe CHERRY_WINDOW = window(() -> Items.CHERRY_PLANKS, CCBlocks.CHERRY_WINDOW);
+    GeneratedRecipe CHERRY_WINDOW_PANE = windowPane(() -> CCBlocks.CHERRY_WINDOW, CCBlocks.CHERRY_WINDOW_PANE);
 
     String currentFolder = "";
 
@@ -305,6 +306,19 @@ public class CCStandardRecipes extends CreateRecipeProvider {
                         .pattern("#X#")
                         .define('#', ingredient.get())
                         .define('X', DataIngredient.tag(Tags.Items.GLASS_COLORLESS))
+                );
+    }
+
+    GeneratedRecipe windowPane(Supplier<? extends ItemLike> ingredient, ItemProviderEntry<? extends ItemLike> result) {
+        return create(result)
+                .unlockedBy(ingredient)
+                .inCategory(RecipeCategory.BUILDING_BLOCKS)
+                .requiresResultFeature()
+                .returns(16)
+                .viaShaped(b -> b
+                        .pattern("###")
+                        .pattern("###")
+                        .define('#', ingredient.get())
                 );
     }
 

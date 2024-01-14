@@ -1,38 +1,21 @@
 package com.hlysine.create_connected.datagen;
 
-import com.hlysine.create_connected.CCSpriteShifts;
-import com.hlysine.create_connected.CreateConnected;
-import com.hlysine.create_connected.config.FeatureToggle;
 import com.hlysine.create_connected.content.brassgearbox.BrassGearboxBlock;
 import com.hlysine.create_connected.content.linkedtransmitter.LinkedTransmitterBlock;
 import com.hlysine.create_connected.content.sequencedpulsegenerator.SequencedPulseGeneratorBlock;
 import com.mojang.datafixers.util.Function4;
-import com.simibubi.create.content.decoration.palettes.WindowBlock;
-import com.simibubi.create.foundation.block.connected.CTSpriteShiftEntry;
-import com.simibubi.create.foundation.block.connected.HorizontalCTBehaviour;
 import com.simibubi.create.foundation.utility.Iterate;
 import com.tterrag.registrate.providers.DataGenContext;
 import com.tterrag.registrate.providers.RegistrateBlockstateProvider;
-import com.tterrag.registrate.providers.loot.RegistrateBlockLootTables;
-import com.tterrag.registrate.util.entry.BlockEntry;
 import com.tterrag.registrate.util.nullness.NonNullBiConsumer;
 import com.tterrag.registrate.util.nullness.NonNullFunction;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ButtonBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.AttachFace;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.WoodType;
-import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.client.model.generators.MultiPartBlockStateBuilder;
@@ -42,43 +25,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
 import java.util.function.Function;
-import java.util.function.Supplier;
-
-import static com.simibubi.create.foundation.data.CreateRegistrate.connectedTextures;
 
 public class CCBlockStateGen {
-    public static BlockEntry<WindowBlock> woodenWindowBlock(WoodType woodType, Block planksBlock,
-                                                            Supplier<Supplier<RenderType>> renderType, boolean translucent) {
-        String woodName = woodType.name();
-        String name = woodName + "_window";
-        NonNullFunction<String, ResourceLocation> end_texture =
-                $ -> new ResourceLocation("block/" + woodName + "_planks");
-        NonNullFunction<String, ResourceLocation> side_texture = n -> CreateConnected.asResource("block/" + n);
-        return windowBlock(name, () -> planksBlock, () -> CCSpriteShifts.WOODEN_WINDOWS.get(woodType), renderType,
-                translucent, end_texture, side_texture, planksBlock::defaultMapColor);
-    }
-
-    public static BlockEntry<WindowBlock> windowBlock(String name, Supplier<? extends ItemLike> ingredient,
-                                                      Supplier<CTSpriteShiftEntry> ct, Supplier<Supplier<RenderType>> renderType, boolean translucent,
-                                                      NonNullFunction<String, ResourceLocation> endTexture, NonNullFunction<String, ResourceLocation> sideTexture,
-                                                      Supplier<MapColor> color) {
-        return CreateConnected.getRegistrate().block(name, p -> new WindowBlock(p, translucent))
-                .onRegister(connectedTextures(() -> new HorizontalCTBehaviour(ct.get())))
-                .addLayer(renderType)
-                .initialProperties(() -> Blocks.GLASS)
-                .properties(p -> p.isValidSpawn(CCBlockStateGen::never)
-                        .isRedstoneConductor(CCBlockStateGen::never)
-                        .isSuffocating(CCBlockStateGen::never)
-                        .isViewBlocking(CCBlockStateGen::never)
-                        .mapColor(color.get()))
-                .loot(RegistrateBlockLootTables::dropWhenSilkTouch)
-                .transform(FeatureToggle.register())
-                .blockstate((c, p) -> p.simpleBlock(c.get(), p.models()
-                        .cubeColumn(c.getName(), sideTexture.apply(c.getName()), endTexture.apply(c.getName()))))
-                .tag(BlockTags.IMPERMEABLE)
-                .simpleItem()
-                .register();
-    }
 
     public static <B extends Block & LinkedTransmitterBlock> NonNullBiConsumer<DataGenContext<Block, B>, RegistrateBlockstateProvider> linkedButton(ResourceLocation buttonOff, ResourceLocation buttonOn) {
         return (DataGenContext<Block, B> c, RegistrateBlockstateProvider p) -> {
@@ -230,14 +178,5 @@ public class CCBlockStateGen {
                             .rotationY(axis == Direction.Axis.X ? 90 : 0)
                             .build();
                 }, BlockStateProperties.WATERLOGGED);
-    }
-
-    private static boolean never(BlockState p_235436_0_, BlockGetter p_235436_1_, BlockPos p_235436_2_) {
-        return false;
-    }
-
-    private static Boolean never(BlockState p_235427_0_, BlockGetter p_235427_1_, BlockPos p_235427_2_,
-                                 EntityType<?> p_235427_3_) {
-        return false;
     }
 }

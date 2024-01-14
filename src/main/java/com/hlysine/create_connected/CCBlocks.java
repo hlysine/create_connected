@@ -23,11 +23,13 @@ import com.hlysine.create_connected.content.sequencedpulsegenerator.SequencedPul
 import com.hlysine.create_connected.content.shearpin.ShearPinBlock;
 import com.hlysine.create_connected.content.sixwaygearbox.SixWayGearboxBlock;
 import com.hlysine.create_connected.datagen.CCBlockStateGen;
+import com.hlysine.create_connected.datagen.CCWindowGen;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllSpriteShifts;
 import com.simibubi.create.AllTags;
 import com.simibubi.create.Create;
 import com.simibubi.create.content.decoration.encasing.EncasedCTBehaviour;
+import com.simibubi.create.content.decoration.palettes.ConnectedGlassPaneBlock;
 import com.simibubi.create.content.decoration.palettes.WindowBlock;
 import com.simibubi.create.content.kinetics.BlockStressDefaults;
 import com.simibubi.create.content.kinetics.chainDrive.ChainDriveGenerator;
@@ -402,15 +404,16 @@ public class CCBlocks {
                     .transform(customItemModel("copycat_base", "vertical_step"))
                     .register();
 
-    public static final BlockEntry<WindowBlock> CHERRY_WINDOW = CCBlockStateGen.woodenWindowBlock(WoodType.CHERRY, Blocks.CHERRY_PLANKS, () -> RenderType::translucent, true);
+    public static final BlockEntry<WindowBlock> CHERRY_WINDOW = CCWindowGen.woodenWindowBlock(WoodType.CHERRY, Blocks.CHERRY_PLANKS, () -> RenderType::translucent, true);
+    public static final BlockEntry<ConnectedGlassPaneBlock> CHERRY_WINDOW_PANE = CCWindowGen.woodenWindowPane(WoodType.CHERRY, CHERRY_WINDOW, () -> RenderType::translucent);
 
     public static void register() {
     }
 
-    public static Function<BlockState, ModelFile> forBoolean(DataGenContext<?, ?> ctx,
-                                                             Function<BlockState, Boolean> condition,
-                                                             String key,
-                                                             RegistrateBlockstateProvider prov) {
+    private static Function<BlockState, ModelFile> forBoolean(DataGenContext<?, ?> ctx,
+                                                              Function<BlockState, Boolean> condition,
+                                                              String key,
+                                                              RegistrateBlockstateProvider prov) {
         return state -> condition.apply(state) ? partialBaseModel(ctx, prov, key)
                 : partialBaseModel(ctx, prov);
     }
