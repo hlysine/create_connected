@@ -21,6 +21,8 @@
   "block.create_connected.brass_gearbox.tooltip.summary": "Коробка передач с _независимо настраиваемыми_ направлениями каждого выхода.",
   "block.create_connected.centrifugal_clutch": "Центробежное сцепление",
   "block.create_connected.centrifugal_clutch.tooltip.summary": "Сцепление, _срабатывающее_, если скорость входящего вращения _ниже_ настраиваемого порога.",
+  "block.create_connected.cherry_window": "Вишнёвое окно",
+  "block.create_connected.cherry_window_pane": "Вишнёвая оконная панель",
   "block.create_connected.copycat_beam": "Заполняемая балка",
   "block.create_connected.copycat_beam.tooltip.behaviour1": "Применяет _предмет в руке_ как его _материал_, если это возможно. _Кликните снова_, чтобы изменить _ориентацию_ или _состояние_. Используйте _ключ_, чтобы сбросить материал.",
   "block.create_connected.copycat_beam.tooltip.condition1": "ПКМ с блоком в руке",
