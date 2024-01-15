@@ -239,7 +239,7 @@ public class CCBlocks {
             if (button == null) return;
             if (!(button instanceof ButtonBlock buttonBlock))
                 return;
-            String namePath = type.name().contains(":") ? type.name().split(":")[1] : type.name();
+            String namePath = type.name().contains(":") ? type.name().replace(':', '_') : type.name();
             LINKED_BUTTONS.put(type, REGISTRATE
                     .block("linked_" + namePath + "_button", properties -> new LinkedButtonBlock(properties, buttonBlock))
                     .initialProperties(() -> buttonBlock)
