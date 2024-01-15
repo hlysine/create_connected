@@ -2,9 +2,8 @@ package com.hlysine.create_connected.mixin;
 
 import com.hlysine.create_connected.CreateConnected;
 import com.hlysine.create_connected.config.CCConfigs;
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.sugar.Local;
-import com.llamalad7.mixinextras.sugar.ref.LocalLongRef;
-import com.llamalad7.mixinextras.sugar.ref.LocalRef;
 import com.simibubi.create.content.schematics.ServerSchematicLoader;
 import com.simibubi.create.foundation.utility.FilesHelper;
 import net.minecraft.core.BlockPos;
@@ -13,6 +12,7 @@ import org.spongepowered.asm.mixin.Debug;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.Slice;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.io.IOException;
@@ -44,35 +44,29 @@ public class ServerSchematicLoaderMixin {
         }
     }
 
-    @Inject(
-            at = @At(value = "FIELD", target = "Lcom/simibubi/create/infrastructure/config/CSchematics;maxSchematics:Lcom/simibubi/create/foundation/config/ConfigBase$ConfigInt;"),
+    @ModifyExpressionValue(
+            at = @At(value = "INVOKE", target = "Ljava/util/stream/Stream;count()J"),
             method = "handleNewUpload(Lnet/minecraft/server/level/ServerPlayer;Ljava/lang/String;JLnet/minecraft/core/BlockPos;)V"
     )
-    private void countNestedFiles(ServerPlayer player,
-                                  String schematic,
-                                  long size,
-                                  BlockPos pos,
-                                  CallbackInfo ci,
-                                  @Local(ordinal = 1) String playerPath,
-                                  @Local(ordinal = 1) LocalLongRef count) throws IOException {
+    private long countNestedFiles(long original,
+                                  @Local(ordinal = 1) String playerPath) throws IOException {
         try (Stream<Path> list = Files.walk(Paths.get(playerPath))) {
-            count.set(list.filter(x -> !Files.isDirectory(x)).count());
+            return list.filter(x -> !Files.isDirectory(x)).count();
         }
     }
 
-    @Inject(
-            at = @At(value = "INVOKE", target = "Ljava/util/stream/Stream;filter(Ljava/util/function/Predicate;)Ljava/util/stream/Stream;"),
+    @ModifyExpressionValue(
+            at = @At(value = "INVOKE", target = "Ljava/nio/file/Files;list(Ljava/nio/file/Path;)Ljava/util/stream/Stream;"),
+            slice = @Slice(
+                    from = @At(value = "FIELD", target = "Lcom/simibubi/create/infrastructure/config/CSchematics;maxSchematics:Lcom/simibubi/create/foundation/config/ConfigBase$ConfigInt;"),
+                    to = @At(value = "INVOKE", target = "Ljava/util/stream/Stream;filter(Ljava/util/function/Predicate;)Ljava/util/stream/Stream;")
+            ),
             method = "handleNewUpload(Lnet/minecraft/server/level/ServerPlayer;Ljava/lang/String;JLnet/minecraft/core/BlockPos;)V"
     )
-    private void deleteNestedFiles(ServerPlayer player,
-                                   String schematic,
-                                   long size,
-                                   BlockPos pos,
-                                   CallbackInfo ci,
-                                   @Local(ordinal = 1) String playerPath,
-                                   @Local(ordinal = 0) LocalRef<Stream<Path>> list2) throws IOException {
-        list2.get().close();
-        list2.set(Files.walk(Paths.get(playerPath)));
+    private Stream<Path> deleteNestedFiles(Stream<Path> original,
+                                           @Local(ordinal = 1) String playerPath) throws IOException {
+        original.close();
+        return Files.walk(Path.of(playerPath));
     }
 
     @Inject(
@@ -89,13 +83,14 @@ public class ServerSchematicLoaderMixin {
                                     @Local(ordinal = 0) Optional<Path> lastFilePath) throws IOException {
         Path root = Path.of(playerPath);
         if (lastFilePath.isPresent()) {
-            while (!lastFilePath.get().equals(root)) {
+            lastFilePath = Optional.of(lastFilePath.get().getParent());
+            while (!lastFilePath.get().equals(root) && lastFilePath.get().toString().contains("schematics")) {
                 try (Stream<Path> paths = Files.list(lastFilePath.get())) {
                     if (paths.findAny().isEmpty())
                         Files.delete(lastFilePath.get());
                     else break;
-                    lastFilePath = Optional.of(lastFilePath.get().getParent());
                 }
+                lastFilePath = Optional.of(lastFilePath.get().getParent());
             }
         }
     }
