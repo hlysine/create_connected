@@ -162,6 +162,11 @@ repositories {
 }
 
 dependencies {
+    compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.3.3"))
+    implementation(jarJar("io.github.llamalad7:mixinextras-forge:0.3.3")) {
+        jarJar.ranged(it, "[0.3.3,)")
+    }
+
     // Specify the version of Minecraft to use.
     // Any artifact can be supplied so long as it has a "userdev" classifier artifact and is a compatible patcher artifact.
     // The "userdev" classifier will be requested and setup by ForgeGradle.

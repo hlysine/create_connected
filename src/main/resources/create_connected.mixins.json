@@ -16,12 +16,14 @@
     "ItemCombinerMenuMixin",
     "KineticBlockAdvancementMixin",
     "ManualApplicationRecipeMixin",
+    "ServerSchematicLoaderMixin",
     "sequencedgearshift.InstructionAccessor",
     "sequencedgearshift.InstructionMixin",
     "sequencedgearshift.InstructionSpeedModifiersAccessor",
     "sequencedgearshift.SequencerInstructionsMixin"
   ],
   "client": [
+    "ClientSchematicLoaderMixin",
     "SubMenuConfigScreenMixin",
     "sequencedgearshift.SequencedGearshiftScreenMixin"
   ],
