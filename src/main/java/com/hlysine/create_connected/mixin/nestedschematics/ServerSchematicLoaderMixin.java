@@ -58,7 +58,7 @@ public abstract class ServerSchematicLoaderMixin {
                                  CallbackInfo ci,
                                  @Local(ordinal = 2) String playerSchematicId) {
         Path schematicPath = Path.of(schematic);
-        if (schematicPath.getNameCount() - 1 > CCConfigs.server().getSchematicsNestingDepth()) {
+        if (schematicPath.getNameCount() - 1 > CCConfigs.server().schematicsNestingDepth()) {
             CreateConnected.LOGGER.warn("Attempted Schematic Upload with too many nested folders: " + playerSchematicId);
             ci.cancel();
         }
@@ -141,7 +141,7 @@ public abstract class ServerSchematicLoaderMixin {
                                  CallbackInfo ci,
                                  @Local(ordinal = 3) String playerSchematicId) {
         Path schematicPath = Path.of(schematic);
-        if (schematicPath.getNameCount() - 1 > CCConfigs.server().getSchematicsNestingDepth()) {
+        if (schematicPath.getNameCount() - 1 > CCConfigs.server().schematicsNestingDepth()) {
             CreateConnected.LOGGER.warn("Attempted Instant Schematic with too many nested folders: " + playerSchematicId);
             ci.cancel();
         }

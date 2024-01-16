@@ -25,7 +25,7 @@ public class CCommon extends SyncConfigBase {
     }
 
     private static class Comments {
-        static String toggle = "Enable/disable features. Values on server override clients.";
+        static String toggle = "Enable/disable features. Values on server override clients";
     }
 
     private class SyncConfig extends SyncConfigBase.SyncConfig {

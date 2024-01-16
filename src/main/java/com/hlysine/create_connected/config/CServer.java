@@ -8,11 +8,21 @@ public class CServer extends ConfigBase {
 
     private final ConfigInt schematicsNestingDepth = i(5, 0, 20, "schematicsNestingDepth", Comments.schematicsNestingDepth);
 
-    public int getSchematicsNestingDepth() {
+    public int schematicsNestingDepth() {
         try {
             return schematicsNestingDepth.get();
         } catch (IllegalStateException $) {
             return 0;
+        }
+    }
+
+    private final ConfigBool applicationRemainingItemFix = b(true, "applicationRemainingItemFix", Comments.applicationRemainingItemFix);
+
+    public boolean applicationRemainingItemFix() {
+        try {
+            return applicationRemainingItemFix.get();
+        } catch (IllegalStateException $) {
+            return true;
         }
     }
 
@@ -24,6 +34,7 @@ public class CServer extends ConfigBase {
     private static class Comments {
         static String stress = "Fine tune the kinetic stats of individual components";
         static String brakeActiveStress = "Stress impact of a powered brake [in Stress Units]";
-        static String schematicsNestingDepth = "Number of sub-folders allowed for schematics. Value on server overrides clients.";
+        static String schematicsNestingDepth = "Number of sub-folders allowed for schematics";
+        static String applicationRemainingItemFix = "Enable the fix that gives remaining items after manual application";
     }
 }

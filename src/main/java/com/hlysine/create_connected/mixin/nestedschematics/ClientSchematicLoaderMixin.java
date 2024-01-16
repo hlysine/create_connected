@@ -33,7 +33,7 @@ public class ClientSchematicLoaderMixin {
     @Unique
     private void cc$searchInSubfolder(String folder, int depth) {
         try {
-            boolean canRecurse = depth < CCConfigs.server().getSchematicsNestingDepth();
+            boolean canRecurse = depth < CCConfigs.server().schematicsNestingDepth();
             Path base = Path.of("schematics/");
             Files.list(Path.of(folder))
                     .forEach(path -> {

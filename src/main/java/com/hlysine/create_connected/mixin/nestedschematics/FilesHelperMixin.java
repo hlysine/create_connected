@@ -16,7 +16,7 @@ public class FilesHelperMixin {
             cancellable = true
     )
     private static void slug(String name, CallbackInfoReturnable<String> cir) {
-        if (CCConfigs.server().getSchematicsNestingDepth() > 0) {
+        if (CCConfigs.server().schematicsNestingDepth() > 0) {
             cir.setReturnValue(Lang.asId(name)
                     .replaceAll("[^\\w/\\\\]+", "_")
                     .replaceAll("[/\\\\]+", "/"));
