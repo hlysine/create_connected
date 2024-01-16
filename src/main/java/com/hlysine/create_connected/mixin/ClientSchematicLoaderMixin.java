@@ -33,7 +33,7 @@ public class ClientSchematicLoaderMixin {
     @Unique
     private void cc$searchInSubfolder(String folder, int depth) {
         try {
-            boolean canRecurse = depth < CCConfigs.common().getSchematicsNestingDepth();
+            boolean canRecurse = depth < CCConfigs.server().getSchematicsNestingDepth();
             Path base = Path.of("schematics/");
             Files.list(Path.of(folder))
                     .forEach(path -> {
@@ -41,7 +41,7 @@ public class ClientSchematicLoaderMixin {
                             if (canRecurse && (depth != 0 || !path.getFileName().toString().equals("uploaded")))
                                 cc$searchInSubfolder(path.toString(), depth + 1);
                         } else if (depth != 0 && path.getFileName().toString().endsWith(".nbt")) {
-                            availableSchematics.add(Components.literal(base.relativize(path).toString()));
+                            availableSchematics.add(Components.literal(base.relativize(path).toString().replace('\\', '/')));
                         }
                     });
         } catch (NoSuchFileException e) {
