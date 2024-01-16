@@ -1,4 +1,4 @@
-package com.hlysine.create_connected.mixin;
+package com.hlysine.create_connected.mixin.nestedschematics;
 
 import com.hlysine.create_connected.CreateConnected;
 import com.hlysine.create_connected.config.CCConfigs;

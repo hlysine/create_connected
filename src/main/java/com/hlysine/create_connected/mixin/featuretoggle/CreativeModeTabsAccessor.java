@@ -1,4 +1,4 @@
-package com.hlysine.create_connected.mixin;
+package com.hlysine.create_connected.mixin.featuretoggle;
 
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;

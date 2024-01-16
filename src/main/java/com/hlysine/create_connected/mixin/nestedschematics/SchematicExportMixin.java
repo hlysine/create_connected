@@ -1,4 +1,4 @@
-package com.hlysine.create_connected.mixin;
+package com.hlysine.create_connected.mixin.nestedschematics;
 
 import com.llamalad7.mixinextras.sugar.Local;
 import com.simibubi.create.content.schematics.SchematicExport;

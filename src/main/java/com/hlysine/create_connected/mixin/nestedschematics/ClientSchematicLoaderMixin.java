@@ -1,4 +1,4 @@
-package com.hlysine.create_connected.mixin;
+package com.hlysine.create_connected.mixin.nestedschematics;
 
 import com.hlysine.create_connected.config.CCConfigs;
 import com.simibubi.create.content.schematics.client.ClientSchematicLoader;
