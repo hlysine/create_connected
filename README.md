@@ -1,4 +1,4 @@
-<p align="center"><img src="https://raw.githubusercontent.com/hlysine/create_connected/main/src/main/resources/create_connected_icon.png" alt="Logo" width="200"></p>
+<p align="center"><img src="https://raw.githubusercontent.com/hlysine/create_connected/main/src/main/resources/create_connected_icon.png" alt="Logo" width="128"></p>
 
 <h1 align="center">Create: Connected</h1>
 
@@ -10,6 +10,8 @@
 </p>
 
 A Create mod add-on adding quality-of-life blocks that you wish existed in Create.
+
+[![BisectHosting](https://www.bisecthosting.com/partners/custom-banners/cd02548b-be01-4a01-b707-ffcb913f5299.webp)](https://bisecthosting.com/lysine)
 
 > **Want reliable, immersive chunk-loading for your Create machines? Check
 out [Create: Power Loader](https://modrinth.com/mod/create-power-loader)**
