@@ -22,9 +22,13 @@ out [Create: Power Loader](https://modrinth.com/mod/create-power-loader)**
 
 You can now organize schematics into sub-folders! Schematic Tables will display them properly and servers will accept schematics with a folder path by default.
 
+![Schematics in sub-folders](https://github.com/hlysine/create_connected/assets/25472513/4a9bdc35-d5e9-446d-b0a6-f78f53475ca3)
+
 ![bamboo_window](https://github.com/hlysine/create_connected/assets/25472513/ed33647d-1326-4fb6-b211-7d415e1b1414) ![cherry_window](https://github.com/hlysine/create_connected/assets/25472513/d76c954d-966b-4477-b20a-99e9390a2349) **Bamboo/Cherry Window and Window Pane**
 
 New wood types coming to Create's window collection.
+
+![image](https://github.com/hlysine/create_connected/assets/25472513/44ad968b-89d9-4046-a78d-76006ff28c39)
 
 ![sequenced_gearshift](https://github.com/hlysine/create_connected/assets/25472513/4cada935-442c-44ac-908f-15e5d54f8b31) **Loop Instruction for Sequenced Gearshift**
 
