@@ -3,8 +3,8 @@ package com.hlysine.create_connected.mixin.sequencedgearshift;
 import com.hlysine.create_connected.CCSequencerInstructions;
 import com.simibubi.create.content.kinetics.transmission.sequencer.Instruction;
 import com.simibubi.create.content.kinetics.transmission.sequencer.SequencedGearshiftScreen;
+import com.simibubi.create.content.kinetics.transmission.sequencer.SequencerInstructions;
 import com.simibubi.create.foundation.gui.widget.ScrollInput;
-import org.spongepowered.asm.mixin.Debug;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -14,7 +14,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.Vector;
 
 @Mixin(value = SequencedGearshiftScreen.class, remap = false)
-@Debug(export = true)
 public class SequencedGearshiftScreenMixin {
     @Shadow
     private Vector<Instruction> instructions;
@@ -42,6 +41,24 @@ public class SequencedGearshiftScreenMixin {
                     return context.shift ? 20 : 1;
                 return context.shift ? 100 : 20;
             });
+        }
+    }
+
+    @Inject(
+            at = @At(value = "INVOKE", target = "Lcom/simibubi/create/content/kinetics/transmission/sequencer/SequencedGearshiftScreen;updateParamsOfRow(I)V", shift = At.Shift.AFTER),
+            method = "instructionUpdated(II)V",
+            cancellable = true
+    )
+    private void handleLoop(int index, int state, CallbackInfo ci) {
+        SequencerInstructions newValue = SequencerInstructions.values()[state];
+        if (newValue == CCSequencerInstructions.LOOP) {
+            for (int i = instructions.size() - 1; i > index; i--) {
+                instructions.remove(i);
+                Vector<ScrollInput> rowInputs = inputs.get(i);
+                ((AbstractSimiScreenAccessor) this).callRemoveWidgets(rowInputs);
+                rowInputs.clear();
+            }
+            ci.cancel();
         }
     }
 }

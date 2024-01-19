@@ -8,6 +8,8 @@ public class CCSequencerInstructions {
     public static SequencerInstructions TURN_AWAIT;
     @NotNull
     public static SequencerInstructions TURN_TIME;
+    @NotNull
+    public static SequencerInstructions LOOP;
 
     static {
         for (SequencerInstructions value : SequencerInstructions.values()) {
@@ -15,6 +17,8 @@ public class CCSequencerInstructions {
                 TURN_AWAIT = value;
             } else if (value.name().equals("TURN_TIME")) {
                 TURN_TIME = value;
+            } else if (value.name().equals("LOOP")) {
+                LOOP = value;
             }
         }
     }

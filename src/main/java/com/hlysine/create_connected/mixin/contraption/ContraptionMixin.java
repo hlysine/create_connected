@@ -1,4 +1,4 @@
-package com.hlysine.create_connected.mixin;
+package com.hlysine.create_connected.mixin.contraption;
 
 import com.simibubi.create.content.contraptions.Contraption;
 import net.minecraft.core.BlockPos;

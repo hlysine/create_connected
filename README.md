@@ -1,4 +1,4 @@
-<p align="center"><img src="https://raw.githubusercontent.com/hlysine/create_connected/main/src/main/resources/create_connected_icon.png" alt="Logo" width="200"></p>
+<p align="center"><img src="https://raw.githubusercontent.com/hlysine/create_connected/main/src/main/resources/create_connected_icon.png" alt="Logo" width="128"></p>
 
 <h1 align="center">Create: Connected</h1>
 
@@ -11,34 +11,43 @@
 
 A Create mod add-on adding quality-of-life blocks that you wish existed in Create.
 
+[![BisectHosting](https://www.bisecthosting.com/partners/custom-banners/cd02548b-be01-4a01-b707-ffcb913f5299.webp)](https://bisecthosting.com/lysine)
+
 > **Want reliable, immersive chunk-loading for your Create machines? Check
 out [Create: Power Loader](https://modrinth.com/mod/create-power-loader)**
 
-## What's new in 0.4
+## What's new in 0.5
 
-![Linked Transmitter](https://github.com/hlysine/create_connected/assets/25472513/edb1593f-e815-4a36-b0bb-91ae0eb318bf) **Linked Transmitter**
+![schematic_and_quill](https://github.com/hlysine/create_connected/assets/25472513/246192bd-9a13-4d72-ab35-5913a2334aec) **Schematics in sub-folders**
 
-A compact Redstone Link that can be attached to buttons, levers, and linked levers. Adds wireless redstone capabilities
-without using extra block space!
+You can now organize schematics into sub-folders! Schematic Tables will display them properly and servers will accept schematics with a folder path by default.
 
-![image](https://github.com/hlysine/create_connected/assets/25472513/703bc032-259e-4db8-927c-b6503bbca744)
+![Schematics in sub-folders](https://github.com/hlysine/create_connected/assets/25472513/4a9bdc35-d5e9-446d-b0a6-f78f53475ca3)
 
-![jukebox](https://github.com/hlysine/create_connected/assets/25472513/60240f67-f66d-4eb4-a444-3eb7bf4614a0) **Functional blocks on contraptions**
+![bamboo_window](https://github.com/hlysine/create_connected/assets/25472513/ed33647d-1326-4fb6-b211-7d415e1b1414) ![cherry_window](https://github.com/hlysine/create_connected/assets/25472513/d76c954d-966b-4477-b20a-99e9390a2349) **Bamboo/Cherry Window and Window Pane**
 
-The following blocks now function properly on contraptions! Enjoy some music on your elevator ride or build a mobile workshop.
+New wood types coming to Create's window collection.
 
-- Jukebox, Note Block, Crafting Table, Stonecutter, Grindstone, Smithing Table, Loom, Cartography Table
+![image](https://github.com/hlysine/create_connected/assets/25472513/44ad968b-89d9-4046-a78d-76006ff28c39)
+
+![sequenced_gearshift](https://github.com/hlysine/create_connected/assets/25472513/4cada935-442c-44ac-908f-15e5d54f8b31) **Loop Instruction for Sequenced Gearshift**
+
+Restarts the whole sequence from the beginning, allowing Sequenced Gearshifts to run indefinitely.
+
+![overstress_clutch](https://github.com/hlysine/create_connected/assets/25472513/17531cf9-e4f2-4343-8f03-6c0abfc22d69) **Redstone Integration for Clutches**
+
+The clutch variants now give comparator outputs, and the Overstress Clutch can now be reset with redstone.
 
 **Translations**
 
-Relatively complete translations are now available for Dutch and Japanese. This is an on-going effort thanks to the
+Relatively complete translations are now available for Russian. This is an on-going effort thanks to the
 wonderful [Crowdin contributors](https://crowdin.com/project/create-connected-mod/members).
 
 ## Features
 
 ### New Blocks and Items
 
-Visit [the GitHub wiki](https://github.com/hlysine/create_connected/wiki/New-Features) for a complete list!
+New kinetic components, copycats, redstone components and more! Visit [the GitHub wiki](https://github.com/hlysine/create_connected/wiki/New-Features) for a complete list!
 
 [![All features](https://cdn.modrinth.com/data/Vg5TIO6d/images/b202a4eed4d157f279c7cfb8595085b51cb21134.png)](https://github.com/hlysine/create_connected/wiki/New-Features)
 
@@ -51,13 +60,14 @@ hidden in creative/JEI.
 
 ### Enhancements to Create
 
-Small QoL enhancement to Create's features.
+Enhanced Sequenced Gearshift and Attribute Filter, functional blocks on contraptions, schematics in sub-folders...
+Small and simple QoL enhancement to Create's features.
 
 [![Vanilla blocks on trains](https://github.com/hlysine/create_connected/assets/25472513/31d7c32e-0cc1-4238-a220-315d8269810f)](https://github.com/hlysine/create_connected/wiki/Create-Enhancements)
 
 ## Download
 
-This is a pre-release version of the mod. World corruption is not expected, but do expect bugs and rare crashes. Make
+This is a pre-release version of the mod. World corruption is not expected, but do expect small bugs and rare crashes. Make
 regular backups if you decide to play this mod in your long-term worlds.
 
 Find this mod on [**Modrinth**](https://modrinth.com/mod/create-connected) or

@@ -27,6 +27,7 @@ import java.util.Vector;
 import java.util.function.Function;
 
 public class CCBlockStateGen {
+
     public static <B extends Block & LinkedTransmitterBlock> NonNullBiConsumer<DataGenContext<Block, B>, RegistrateBlockstateProvider> linkedButton(ResourceLocation buttonOff, ResourceLocation buttonOn) {
         return (DataGenContext<Block, B> c, RegistrateBlockstateProvider p) -> {
             linkedTransmitter(

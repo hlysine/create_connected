@@ -1,4 +1,4 @@
-package com.hlysine.create_connected.mixin;
+package com.hlysine.create_connected.mixin.linkedtransmitter;
 
 import com.hlysine.create_connected.CCBlocks;
 import com.hlysine.create_connected.CCItems;

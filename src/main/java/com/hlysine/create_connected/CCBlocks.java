@@ -39,8 +39,8 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.MaterialColor;
 import net.minecraft.world.level.block.state.properties.WoodType;
+import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -109,9 +109,22 @@ public class CCBlocks {
             .transform(BlockStressDefaults.setNoImpact())
             .transform(FeatureToggle.register())
             .transform(axeOrPickaxe())
-            .blockstate((c, p) -> BlockStateGen.axisBlock(c, p,
-                    forBoolean(c, state -> state.getValue(OverstressClutchBlock.STATE) == OverstressClutchBlock.ClutchState.UNCOUPLED, "uncoupled", p)
-            ))
+            .blockstate((c, p) -> BlockStateGen.axisBlock(c, p, state -> {
+                        if (state.getValue(OverstressClutchBlock.STATE) == OverstressClutchBlock.ClutchState.UNCOUPLED) {
+                            if (state.getValue(OverstressClutchBlock.POWERED)) {
+                                return partialBaseModel(c, p, "uncoupled", "powered");
+                            } else {
+                                return partialBaseModel(c, p, "uncoupled");
+                            }
+                        } else {
+                            if (state.getValue(OverstressClutchBlock.POWERED)) {
+                                return partialBaseModel(c, p, "powered");
+                            } else {
+                                return partialBaseModel(c, p);
+                            }
+                        }
+                    })
+            )
             .item()
             .transform(customItemModel())
             .register();
@@ -222,14 +235,15 @@ public class CCBlocks {
             if (button == null) return;
             if (!(button instanceof ButtonBlock buttonBlock))
                 return;
+            String namePath = type.name().contains(":") ? type.name().replace(':', '_') : type.name();
             LINKED_BUTTONS.put(type, REGISTRATE
-                    .block("linked_" + type.name() + "_button", properties -> new LinkedButtonBlock(properties, buttonBlock))
+                    .block("linked_" + namePath + "_button", properties -> new LinkedButtonBlock(properties, buttonBlock))
                     .initialProperties(() -> buttonBlock)
                     .addLayer(() -> RenderType::cutoutMipped)
                     .transform(LinkedTransmitterItem.register())
                     .blockstate(CCBlockStateGen.linkedButton(
-                            new ResourceLocation("block/" + type.name() + "_button"),
-                            new ResourceLocation("block/" + type.name() + "_button_pressed")
+                            new ResourceLocation("block/" + namePath + "_button"),
+                            new ResourceLocation("block/" + namePath + "_button_pressed")
                     ))
                     .register());
         });
@@ -430,10 +444,10 @@ public class CCBlocks {
     public static void register() {
     }
 
-    public static Function<BlockState, ModelFile> forBoolean(DataGenContext<?, ?> ctx,
-                                                             Function<BlockState, Boolean> condition,
-                                                             String key,
-                                                             RegistrateBlockstateProvider prov) {
+    private static Function<BlockState, ModelFile> forBoolean(DataGenContext<?, ?> ctx,
+                                                              Function<BlockState, Boolean> condition,
+                                                              String key,
+                                                              RegistrateBlockstateProvider prov) {
         return state -> condition.apply(state) ? partialBaseModel(ctx, prov, key)
                 : partialBaseModel(ctx, prov);
     }

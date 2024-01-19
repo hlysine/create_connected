@@ -13,11 +13,14 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import org.jetbrains.annotations.NotNull;
 
@@ -25,16 +28,36 @@ import java.util.Random;
 
 public class OverstressClutchBlock extends AbstractEncasedShaftBlock implements IWrenchable, IBE<OverstressClutchBlockEntity> {
     public static final EnumProperty<ClutchState> STATE = EnumProperty.create("state", ClutchState.class);
+    public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
 
     public OverstressClutchBlock(Properties properties) {
         super(properties);
-        registerDefaultState(defaultBlockState().setValue(STATE, ClutchState.COUPLED));
+        registerDefaultState(defaultBlockState()
+                .setValue(STATE, ClutchState.COUPLED)
+                .setValue(POWERED, false));
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(STATE);
+        builder.add(STATE, POWERED);
         super.createBlockStateDefinition(builder);
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    public void neighborChanged(@NotNull BlockState pState,
+                                @NotNull Level pLevel,
+                                @NotNull BlockPos pPos,
+                                @NotNull Block pBlock,
+                                @NotNull BlockPos pFromPos,
+                                boolean pIsMoving) {
+        super.neighborChanged(pState, pLevel, pPos, pBlock, pFromPos, pIsMoving);
+        boolean flag = pState.getValue(POWERED);
+        boolean flag1 = pLevel.getBestNeighborSignal(pPos) > 0;
+        if (flag != flag1) {
+            pLevel.setBlockAndUpdate(pPos, pState.cycle(POWERED));
+            withBlockEntityDo(pLevel, pPos, OverstressClutchBlockEntity::onKineticUpdate);
+        }
     }
 
     @Override
@@ -55,6 +78,18 @@ public class OverstressClutchBlock extends AbstractEncasedShaftBlock implements 
 
     @SuppressWarnings("deprecation")
     @Override
+    public boolean hasAnalogOutputSignal(@NotNull BlockState state) {
+        return true;
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    public int getAnalogOutputSignal(@NotNull BlockState pState, @NotNull Level pLevel, @NotNull BlockPos pPos) {
+        return pState.getValue(STATE) == ClutchState.UNCOUPLED ? 0 : 15;
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
     public void tick(@NotNull BlockState pState, ServerLevel pLevel, @NotNull BlockPos pPos, @NotNull Random pRandom) {
         BlockEntity be = pLevel.getBlockEntity(pPos);
         if (!(be instanceof OverstressClutchBlockEntity kte))
@@ -62,10 +97,13 @@ public class OverstressClutchBlock extends AbstractEncasedShaftBlock implements 
 
         ClutchState state = pState.getValue(STATE);
 
+        if (pState.getValue(POWERED)) {
+            pLevel.setBlockAndUpdate(pPos, pState.setValue(STATE, ClutchState.COUPLED));
+            kte.delay = 0;
+            return;
+        }
         if (state == ClutchState.COUPLED || state == ClutchState.UNCOUPLED) {
-            if (kte.delay != 0) {
-                kte.delay = 0;
-            }
+            kte.delay = 0;
             return;
         }
         if (kte.delay <= 0) {

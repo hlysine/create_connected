@@ -293,6 +293,31 @@ public class CCStandardRecipes extends CreateRecipeProvider {
                 .viaStonecutting(DataIngredient.tag(AllTags.forgeItemTag("ingots/zinc")), resultCount);
     }
 
+    GeneratedRecipe window(Supplier<? extends ItemLike> ingredient, ItemProviderEntry<? extends ItemLike> result) {
+        return create(result)
+                .unlockedBy(ingredient)
+                .requiresResultFeature()
+                .returns(2)
+                .viaShaped(b -> b
+                        .pattern(" # ")
+                        .pattern("#X#")
+                        .define('#', ingredient.get())
+                        .define('X', DataIngredient.tag(Tags.Items.GLASS_COLORLESS))
+                );
+    }
+
+    GeneratedRecipe windowPane(Supplier<? extends ItemLike> ingredient, ItemProviderEntry<? extends ItemLike> result) {
+        return create(result)
+                .unlockedBy(ingredient)
+                .requiresResultFeature()
+                .returns(16)
+                .viaShaped(b -> b
+                        .pattern("###")
+                        .pattern("###")
+                        .define('#', ingredient.get())
+                );
+    }
+
     protected static class Marker {
     }
 

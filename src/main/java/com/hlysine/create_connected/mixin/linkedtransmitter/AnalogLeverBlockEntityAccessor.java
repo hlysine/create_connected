@@ -1,4 +1,4 @@
-package com.hlysine.create_connected.mixin;
+package com.hlysine.create_connected.mixin.linkedtransmitter;
 
 import com.simibubi.create.content.redstone.analogLever.AnalogLeverBlockEntity;
 import org.spongepowered.asm.mixin.Mixin;
