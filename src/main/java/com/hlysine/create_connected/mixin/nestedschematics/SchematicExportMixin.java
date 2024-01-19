@@ -1,6 +1,5 @@
 package com.hlysine.create_connected.mixin.nestedschematics;
 
-import com.hlysine.create_connected.CreateConnected;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.simibubi.create.content.schematics.SchematicExport;
 import com.simibubi.create.foundation.utility.FilesHelper;
@@ -18,8 +17,7 @@ public class SchematicExportMixin {
 
     @Inject(
             at = @At(value = "INVOKE", target = "Ljava/nio/file/Files;createDirectories(Ljava/nio/file/Path;[Ljava/nio/file/attribute/FileAttribute;)Ljava/nio/file/Path;"),
-            method = "saveSchematic(Ljava/nio/file/Path;Ljava/lang/String;ZLnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/core/BlockPos;)Lcom/simibubi/create/content/schematics/SchematicExport$SchematicExportResult;",
-            cancellable = true
+            method = "saveSchematic(Ljava/nio/file/Path;Ljava/lang/String;ZLnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/core/BlockPos;)Lcom/simibubi/create/content/schematics/SchematicExport$SchematicExportResult;"
     )
     private static void createNestedFolders(Path dir,
                                             String fileName,
@@ -29,11 +27,6 @@ public class SchematicExportMixin {
                                             BlockPos second,
                                             CallbackInfoReturnable<SchematicExport.SchematicExportResult> cir,
                                             @Local(ordinal = 1) Path file) {
-        if (!file.startsWith(dir)) {
-            CreateConnected.LOGGER.warn("Blocked schematic saving with directory escape: {}", file);
-            cir.setReturnValue(null);
-            return;
-        }
         FilesHelper.createFolderIfMissing(file.getParent().toString());
     }
 }
