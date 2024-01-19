@@ -93,6 +93,7 @@
   "create.item_attributes.stack_size.inverted": "最大堆叠数不为 %1$s",
   "create_connected.centrifugal_clutch.speed_threshold": "速度阈值",
   "create_connected.gui.overstress_clutch.uncoupled": "未耦合",
+  "create_connected.gui.overstress_clutch.uncoupled_explanation": "该离合器由于压力而“脱开”。 请在用扳手_重置_该离合器之前先修复网络。",
   "create_connected.gui.sequenced_pulse_generator.instruction": "操作说明",
   "create_connected.gui.sequenced_pulse_generator.instruction.end": "结束",
   "create_connected.gui.sequenced_pulse_generator.instruction.end.descriptive": "结束",
