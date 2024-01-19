@@ -3,9 +3,6 @@ package com.hlysine.create_connected.config;
 import com.simibubi.create.foundation.config.ConfigBase;
 
 public class CServer extends ConfigBase {
-    public final CStress stressValues = nested(0, CStress::new, Comments.stress);
-    public final ConfigFloat brakeActiveStress = f(16384, Float.NEGATIVE_INFINITY, Float.POSITIVE_INFINITY, "brakeActiveStress", Comments.brakeActiveStress);
-
     private final ConfigInt schematicsNestingDepth = i(5, 0, 20, "schematicsNestingDepth", Comments.schematicsNestingDepth);
 
     public int schematicsNestingDepth() {
@@ -25,6 +22,10 @@ public class CServer extends ConfigBase {
             return true;
         }
     }
+
+    public final CStress stressValues = nested(0, CStress::new, Comments.stress);
+    public final ConfigFloat brakeActiveStress = f(16384, Float.NEGATIVE_INFINITY, Float.POSITIVE_INFINITY, "brakeActiveStress", Comments.brakeActiveStress);
+
 
     @Override
     public String getName() {
