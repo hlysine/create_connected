@@ -2,6 +2,7 @@ package com.hlysine.create_connected.mixin.sequencedgearshift;
 
 import com.hlysine.create_connected.CCSequencerInstructions;
 import com.simibubi.create.content.kinetics.transmission.sequencer.Instruction;
+import com.simibubi.create.content.kinetics.transmission.sequencer.SequencedGearshiftBlock;
 import com.simibubi.create.content.kinetics.transmission.sequencer.SequencedGearshiftBlockEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -17,10 +18,15 @@ public class SequencedGearshiftBlockEntityMixin {
             cancellable = true
     )
     private void runLoop(int instructionIndex, CallbackInfo ci) {
-        Instruction instruction = ((SequencedGearshiftBlockEntity) (Object) this).getInstruction(instructionIndex);
+        SequencedGearshiftBlockEntity self = (SequencedGearshiftBlockEntity) (Object) this;
+        Instruction instruction = self.getInstruction(instructionIndex);
         if (instruction == null) return;
         if (((InstructionAccessor) instruction).getInstruction() == CCSequencerInstructions.LOOP) {
-            ((SequencedGearshiftBlockEntity) (Object) this).run(instructionIndex == 0 ? -1 : 0); // prevent stack overflow
+            // force a block state change
+            if (instructionIndex == 1)
+                self.getLevel().setBlock(self.getBlockPos(), self.getBlockState().setValue(SequencedGearshiftBlock.STATE, instructionIndex + 1), 3);
+            // prevent stack overflow
+            self.run(instructionIndex == 0 ? -1 : 0);
             ci.cancel();
         }
     }
