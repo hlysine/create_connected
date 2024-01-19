@@ -1,4 +1,6 @@
 {
+  "create.gui.sequenced_gearshift.instruction.loop": "Loop",
+  "create.gui.sequenced_gearshift.instruction.loop.descriptive": "Restart whole sequence",
   "create.gui.sequenced_gearshift.instruction.turn_await": "Sustain",
   "create.gui.sequenced_gearshift.instruction.turn_await.descriptive": "Turn until new Redstone Pulse",
   "create.gui.sequenced_gearshift.instruction.turn_time": "Time",

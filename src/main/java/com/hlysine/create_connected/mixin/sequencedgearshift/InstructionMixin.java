@@ -28,6 +28,8 @@ public class InstructionMixin {
         } else if (instruction == CCSequencerInstructions.TURN_TIME) {
             double target = value - currentProgress;
             cir.setReturnValue((int) target);
+        } else if (instruction == CCSequencerInstructions.LOOP) {
+            cir.setReturnValue(0);
         }
     }
 
@@ -37,6 +39,8 @@ public class InstructionMixin {
             cir.setReturnValue(((InstructionSpeedModifiersAccessor) (Object) speedModifier).getValue());
         } else if (instruction == CCSequencerInstructions.TURN_TIME) {
             cir.setReturnValue(1);
+        } else if (instruction == CCSequencerInstructions.LOOP) {
+            cir.setReturnValue(0);
         }
     }
 

@@ -26,6 +26,8 @@ public class SequencerInstructionsMixin {
     private static final SequencerInstructions TURN_AWAIT = create_connected$addMember("TURN_AWAIT", "", AllGuiTextures.SEQUENCER_INSTRUCTION, false, true, -1, -1, -1);
     @Unique
     private static final SequencerInstructions TURN_TIME = create_connected$addMember("TURN_TIME", "duration", AllGuiTextures.SEQUENCER_INSTRUCTION, true, true, 600, 20, 10);
+    @Unique
+    private static final SequencerInstructions LOOP = create_connected$addMember("LOOP", "", AllGuiTextures.SEQUENCER_END, false, false, -1, -1, -1);
 
     /**
      * Constructor
@@ -70,6 +72,8 @@ public class SequencerInstructionsMixin {
             cir.setReturnValue(true);
         } else if ((Object) this == TURN_TIME) {
             cir.setReturnValue(true);
+        } else if ((Object) this == LOOP) {
+            cir.setReturnValue(false);
         }
     }
 

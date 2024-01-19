@@ -83,6 +83,8 @@
   "block.create_connected.shear_pin.tooltip.summary": "˙‾pǝssǝɹʇsɹǝʌo‾ sı ʞɹoʍʇǝu ǝɥʇ uǝɥʍ ‾sʞɐǝɹq‾ ʇɐɥʇ ɹoʇɔǝuuoɔ ǝsn-ǝןbuıs Ɐ",
   "block.create_connected.six_way_gearbox": "xoqɹɐǝ⅁ ʎɐʍ-9",
   "block.create_connected.six_way_gearbox.tooltip.summary": "˙‾pǝǝds ɟןɐɥ‾ ʇɐ uıds ɯoʇʇoq puɐ do⟘ ˙‾sǝpıs 9 ןןɐ‾ uo sʇɟɐɥs ɥʇıʍ xoqɹɐǝb Ɐ",
+  "create.gui.sequenced_gearshift.instruction.loop": "dooꞀ",
+  "create.gui.sequenced_gearshift.instruction.loop.descriptive": "ǝɔuǝnbǝs ǝןoɥʍ ʇɹɐʇsǝᴚ",
   "create.gui.sequenced_gearshift.instruction.turn_await": "uıɐʇsnS",
   "create.gui.sequenced_gearshift.instruction.turn_await.descriptive": "ǝsןnԀ ǝuoʇspǝᴚ ʍǝu ןıʇun uɹn⟘",
   "create.gui.sequenced_gearshift.instruction.turn_time": "ǝɯı⟘",
