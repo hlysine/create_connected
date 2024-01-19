@@ -5,11 +5,24 @@
       "x": 90,
       "y": 90
     },
-    "axis=y,state=coupled": {
+    "axis=y,powered=false,state=coupled": {
       "model": "create_connected:block/overstress_clutch/block"
     },
-    "axis=z,state=coupled": {
+    "axis=z,powered=false,state=coupled": {
       "model": "create_connected:block/overstress_clutch/block",
+      "x": 90,
+      "y": 180
+    },
+    "axis=x,powered=true,state=coupled": {
+      "model": "create_connected:block/overstress_clutch/block_powered",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y,powered=true,state=coupled": {
+      "model": "create_connected:block/overstress_clutch/block_powered"
+    },
+    "axis=z,powered=true,state=coupled": {
+      "model": "create_connected:block/overstress_clutch/block_powered",
       "x": 90,
       "y": 180
     },
@@ -18,39 +31,50 @@
       "x": 90,
       "y": 90
     },
-    "axis=y,state=uncoupling": {
+    "axis=y,powered=false,state=uncoupling": {
       "model": "create_connected:block/overstress_clutch/block"
     },
-    "axis=z,state=uncoupling": {
+    "axis=z,powered=false,state=uncoupling": {
       "model": "create_connected:block/overstress_clutch/block",
       "x": 90,
       "y": 180
     },
-    "axis=x,state=uncoupled": {
+    "axis=x,powered=true,state=uncoupling": {
+      "model": "create_connected:block/overstress_clutch/block_powered",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y,powered=true,state=uncoupling": {
+      "model": "create_connected:block/overstress_clutch/block_powered"
+    },
+    "axis=z,powered=true,state=uncoupling": {
+      "model": "create_connected:block/overstress_clutch/block_powered",
+      "x": 90,
+      "y": 180
+    },
+    "axis=x,powered=false,state=uncoupled": {
       "model": "create_connected:block/overstress_clutch/block_uncoupled",
       "x": 90,
       "y": 90
     },
-    "axis=y,state=uncoupled": {
+    "axis=y,powered=false,state=uncoupled": {
       "model": "create_connected:block/overstress_clutch/block_uncoupled"
     },
-    "axis=z,state=uncoupled": {
+    "axis=z,powered=false,state=uncoupled": {
       "model": "create_connected:block/overstress_clutch/block_uncoupled",
       "x": 90,
       "y": 180
     },
-    "axis=z,powered=true,state=coupled": {
-      "model": "create_connected:block/overstress_clutch/block_powered",
+    "axis=x,powered=true,state=uncoupled": {
+      "model": "create_connected:block/overstress_clutch/block_uncoupled_powered",
       "x": 90,
-      "y": 180
+      "y": 90
+    },
+    "axis=y,powered=true,state=uncoupled": {
+      "model": "create_connected:block/overstress_clutch/block_uncoupled_powered"
     },
     "axis=z,powered=true,state=uncoupled": {
       "model": "create_connected:block/overstress_clutch/block_uncoupled_powered",
-      "x": 90,
-      "y": 180
-    },
-    "axis=z,powered=true,state=uncoupling": {
-      "model": "create_connected:block/overstress_clutch/block_powered",
       "x": 90,
       "y": 180
     }
