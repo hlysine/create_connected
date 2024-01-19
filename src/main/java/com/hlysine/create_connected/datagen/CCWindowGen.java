@@ -29,7 +29,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.WoodType;
-import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.Tags;
 
@@ -50,7 +50,7 @@ public class CCWindowGen {
                 $ -> new ResourceLocation("block/" + woodName + "_planks");
         NonNullFunction<String, ResourceLocation> side_texture = n -> CreateConnected.asResource("block/" + n);
         return windowBlock(name, () -> planksBlock, () -> CCSpriteShifts.WOODEN_WINDOWS.get(woodType), renderType,
-                translucent, end_texture, side_texture, planksBlock::defaultMapColor);
+                translucent, end_texture, side_texture, planksBlock::defaultMaterialColor);
     }
 
     private static BlockEntry<WindowBlock> windowBlock(String name,
@@ -60,7 +60,7 @@ public class CCWindowGen {
                                                        boolean translucent,
                                                        NonNullFunction<String, ResourceLocation> endTexture,
                                                        NonNullFunction<String, ResourceLocation> sideTexture,
-                                                       Supplier<MapColor> color) {
+                                                       Supplier<MaterialColor> color) {
         return CreateConnected.getRegistrate().block(name, p -> new WindowBlock(p, translucent))
                 .onRegister(connectedTextures(() -> new HorizontalCTBehaviour(ct.get())))
                 .addLayer(renderType)
@@ -69,7 +69,7 @@ public class CCWindowGen {
                         .isRedstoneConductor(CCWindowGen::never)
                         .isSuffocating(CCWindowGen::never)
                         .isViewBlocking(CCWindowGen::never)
-                        .mapColor(color.get()))
+                        .color(color.get()))
                 .loot(RegistrateBlockLootTables::dropWhenSilkTouch)
                 .transform(FeatureToggle.register())
                 .blockstate((c, p) -> p.simpleBlock(c.get(), p.models()
@@ -131,8 +131,8 @@ public class CCWindowGen {
                 .onRegister(connectedTextures)
                 .addLayer(renderType)
                 .initialProperties(() -> Blocks.GLASS_PANE)
-                .properties(p -> p.mapColor(parent.get()
-                        .defaultMapColor()))
+                .properties(p -> p.color(parent.get()
+                        .defaultMaterialColor()))
                 .blockstate(stateProvider)
                 .transform(FeatureToggle.registerDependent(parent))
                 .tag(Tags.Blocks.GLASS_PANES)
