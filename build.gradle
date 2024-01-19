@@ -20,6 +20,8 @@ base {
     archivesName = mod_id
 }
 
+jarJar.enable()
+
 mixin {
     add sourceSets.main, "create_connected.refmap.json"
     config 'create_connected.mixins.json'
@@ -247,38 +249,51 @@ tasks.named('jar', Jar).configure {
     finalizedBy 'reobfJar'
 }
 
+tasks.jarJar.configure {
+    manifest {
+        attributes([
+                'Specification-Title'     : mod_id,
+                'Specification-Vendor'    : mod_authors,
+                'Specification-Version'   : '1', // We are version 1 of ourselves
+                'Implementation-Title'    : project.name,
+                'Implementation-Version'  : project.jar.archiveVersion,
+                'Implementation-Vendor'   : mod_authors,
+                'Implementation-Timestamp': new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
+                "MixinConfigs"            : "create_connected.mixins.json"
+        ])
+    }
+
+    // This is the preferred method to reobfuscate your jar file
+    finalizedBy 'reobfJarJar'
+}
+
 // However if you are in a multi-project build, dev time needs unobfed jar files, so you can delay the obfuscation until publishing by doing:
 // tasks.named('publish').configure {
 //     dependsOn 'reobfJar'
 // }
 
 // Example configuration to allow publishing using the maven-publish plugin
-publishing {
-    publications {
-        register('mavenJava', MavenPublication) {
-            artifact jar
-        }
-    }
-    repositories {
-        maven {
-            url "file://${project.projectDir}/mcmodsrepo"
-        }
-    }
-}
+//publishing {
+//    publications {
+//        register('mavenJava', MavenPublication) {
+//            artifact jar
+//        }
+//    }
+//    repositories {
+//        maven {
+//            url "file://${project.projectDir}/mcmodsrepo"
+//        }
+//    }
+//}
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
 }
 
-wrapper {
-    gradleVersion = '8.1.1'
-    distributionType = Wrapper.DistributionType.BIN
-}
-
 publishMods {
     changelog = "Check out the detailed changelog at https://github.com/hlysine/create_connected/blob/main/CHANGELOG.md"
     type = BETA
-    file = jar.archiveFile
+    file = tasks.jarJar.archiveFile
     modLoaders.add("forge")
 
     github {
@@ -305,4 +320,9 @@ publishMods {
         projectId = "947914"
         minecraftVersions.add(minecraft_version)
     }
+}
+
+wrapper {
+    gradleVersion = '8.1.1'
+    distributionType = Wrapper.DistributionType.BIN
 }
