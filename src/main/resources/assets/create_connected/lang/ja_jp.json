@@ -83,6 +83,8 @@
   "block.create_connected.shear_pin.tooltip.summary": "ネットワークが_応力超過_になると_壊れる_使い捨てのコネクタ。",
   "block.create_connected.six_way_gearbox": "6方向ギアボックス",
   "block.create_connected.six_way_gearbox.tooltip.summary": "_6面すべて_にシャフトが付いたギアボックス。上部と下部のシャフトは_半分の速度_で回転する。",
+  "create.gui.sequenced_gearshift.instruction.loop": "ループ",
+  "create.gui.sequenced_gearshift.instruction.loop.descriptive": "プログラムを再起動する",
   "create.gui.sequenced_gearshift.instruction.turn_await": "維持",
   "create.gui.sequenced_gearshift.instruction.turn_await.descriptive": "新しいレッドストーンパルスまで回す",
   "create.gui.sequenced_gearshift.instruction.turn_time": "時間",
