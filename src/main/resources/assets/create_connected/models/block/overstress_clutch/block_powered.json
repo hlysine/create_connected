@@ -1,0 +1,7 @@
+{
+  "parent": "create_connected:block/overstress_clutch/block",
+  "textures": {
+    "0": "create_connected:block/overstress_clutch_off_powered",
+    "particle": "create_connected:block/overstress_clutch_off_powered"
+  }
+}

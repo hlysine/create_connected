@@ -23,11 +23,14 @@ import com.hlysine.create_connected.content.sequencedpulsegenerator.SequencedPul
 import com.hlysine.create_connected.content.shearpin.ShearPinBlock;
 import com.hlysine.create_connected.content.sixwaygearbox.SixWayGearboxBlock;
 import com.hlysine.create_connected.datagen.CCBlockStateGen;
+import com.hlysine.create_connected.datagen.CCWindowGen;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllSpriteShifts;
 import com.simibubi.create.AllTags;
 import com.simibubi.create.Create;
 import com.simibubi.create.content.decoration.encasing.EncasedCTBehaviour;
+import com.simibubi.create.content.decoration.palettes.ConnectedGlassPaneBlock;
+import com.simibubi.create.content.decoration.palettes.WindowBlock;
 import com.simibubi.create.content.kinetics.BlockStressDefaults;
 import com.simibubi.create.content.kinetics.chainDrive.ChainDriveGenerator;
 import com.simibubi.create.content.kinetics.simpleRelays.BracketedKineticBlockModel;
@@ -109,9 +112,22 @@ public class CCBlocks {
             .transform(BlockStressDefaults.setNoImpact())
             .transform(FeatureToggle.register())
             .transform(axeOrPickaxe())
-            .blockstate((c, p) -> BlockStateGen.axisBlock(c, p,
-                    forBoolean(c, state -> state.getValue(OverstressClutchBlock.STATE) == OverstressClutchBlock.ClutchState.UNCOUPLED, "uncoupled", p)
-            ))
+            .blockstate((c, p) -> BlockStateGen.axisBlock(c, p, state -> {
+                        if (state.getValue(OverstressClutchBlock.STATE) == OverstressClutchBlock.ClutchState.UNCOUPLED) {
+                            if (state.getValue(OverstressClutchBlock.POWERED)) {
+                                return partialBaseModel(c, p, "uncoupled", "powered");
+                            } else {
+                                return partialBaseModel(c, p, "uncoupled");
+                            }
+                        } else {
+                            if (state.getValue(OverstressClutchBlock.POWERED)) {
+                                return partialBaseModel(c, p, "powered");
+                            } else {
+                                return partialBaseModel(c, p);
+                            }
+                        }
+                    })
+            )
             .item()
             .transform(customItemModel())
             .register();
@@ -222,13 +238,14 @@ public class CCBlocks {
             if (button == null) return;
             if (!(button instanceof ButtonBlock buttonBlock))
                 return;
+            String namePath = type.name().contains(":") ? type.name().replace(':', '_') : type.name();
             LINKED_BUTTONS.put(type, REGISTRATE
-                    .block("linked_" + type.name() + "_button", properties -> new LinkedButtonBlock(properties, buttonBlock))
+                    .block("linked_" + namePath + "_button", properties -> new LinkedButtonBlock(properties, buttonBlock))
                     .initialProperties(() -> buttonBlock)
                     .transform(LinkedTransmitterItem.register())
                     .blockstate(CCBlockStateGen.linkedButton(
-                            new ResourceLocation("block/" + type.name() + "_button"),
-                            new ResourceLocation("block/" + type.name() + "_button_pressed")
+                            new ResourceLocation("block/" + namePath + "_button"),
+                            new ResourceLocation("block/" + namePath + "_button_pressed")
                     ))
                     .register());
         });
@@ -420,13 +437,19 @@ public class CCBlocks {
                     .transform(customItemModel("copycat_base", "vertical_step"))
                     .register();
 
+    public static final BlockEntry<WindowBlock> CHERRY_WINDOW = CCWindowGen.woodenWindowBlock(WoodType.CHERRY, Blocks.CHERRY_PLANKS, () -> RenderType::translucent, true);
+    public static final BlockEntry<WindowBlock> BAMBOO_WINDOW = CCWindowGen.woodenWindowBlock(WoodType.BAMBOO, Blocks.BAMBOO_PLANKS, () -> RenderType::cutoutMipped, false);
+    public static final BlockEntry<ConnectedGlassPaneBlock> CHERRY_WINDOW_PANE = CCWindowGen.woodenWindowPane(WoodType.CHERRY, CHERRY_WINDOW, () -> RenderType::translucent);
+
+    public static final BlockEntry<ConnectedGlassPaneBlock> BAMBOO_WINDOW_PANE = CCWindowGen.woodenWindowPane(WoodType.BAMBOO, BAMBOO_WINDOW, () -> RenderType::cutoutMipped);
+
     public static void register() {
     }
 
-    public static Function<BlockState, ModelFile> forBoolean(DataGenContext<?, ?> ctx,
-                                                             Function<BlockState, Boolean> condition,
-                                                             String key,
-                                                             RegistrateBlockstateProvider prov) {
+    private static Function<BlockState, ModelFile> forBoolean(DataGenContext<?, ?> ctx,
+                                                              Function<BlockState, Boolean> condition,
+                                                              String key,
+                                                              RegistrateBlockstateProvider prov) {
         return state -> condition.apply(state) ? partialBaseModel(ctx, prov, key)
                 : partialBaseModel(ctx, prov);
     }

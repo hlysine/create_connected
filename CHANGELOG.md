@@ -5,6 +5,37 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.5.0 - 2024-01-19
+
+### Added
+
+- **Support for schematics in sub-folders**
+  - The Schematic Table now searches for schematics in sub-folders
+  - Schematics maintain their folder structure when uploaded to servers
+  - The Schematic and Quill now saves schematics in sub-folders if their names contain `/` or ` \ `
+- **Redstone support for smart clutches**
+  - The Overstress Clutch, Centrifugal Clutch and Freewheel Clutch now give comparator signal outputs when they are coupled
+  - The Overstress Clutch can now be reset with a redstone pulse
+- **Cherry window and window pane** (#18)
+- **Bamboo window and window pane** (#18)
+- **New "Loop" instruction for Sequenced Gearshift**
+  - Restart the whole sequence from the beginning, allowing the Sequenced Gearshift to run indefinitely
+- A new toggle to disable "crafting remaining item" fix for manual application recipes
+- Translations for Russian, Japanese, Dutch, Chinese Simplified, Romanian
+  (thanks [Crowdin contributors](https://crowdin.com/project/create-connected-mod/members)!)
+
+### Changed
+
+- The block ID of modded linked buttons now include mod ID
+
+### Fixed
+
+- Incompatibility with mods that register new `BlockSetType`s with their mod IDs (#19)
+- Vertical brass gearbox returning incorrect drops (#21)
+- Connected textures on Copycat Slabs not considering diagonal connections (#20)
+- Connected textures on Copycat Slabs break connection on one side if there is a height difference on the other side
+- Speed modifiers not working for the "turn for time" instruction in Sequenced Gearshift
+
 ## 0.4.2 - 2024-01-12
 
 ### Fixed
@@ -22,11 +53,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Linked Transmitter
+- **Linked Transmitter**
     - For all button variants
     - For Lever
     - For Linked Lever
-- Contraption support for vanilla blocks
+- **Contraption support for vanilla blocks**
     - Note Block
         - Can be tuned on contraptions
         - Plays automatically when on trains/elevators
@@ -42,13 +73,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - Loom
     - Cartography Table
 - 2 music discs for iconic elevator music
-- Translations for Dutch, Japanese, Chinese Simplified, French, German (
-  thanks [Crowdin contributors](https://crowdin.com/project/create-connected-mod/members)!)
+- Translations for Dutch, Japanese, Chinese Simplified, French, German
+  (thanks [Crowdin contributors](https://crowdin.com/project/create-connected-mod/members)!)
 
 ### Fixed
 
 - Water in Fan Washing Catalyst not transparent
-- Copycat Slabs not dropping 2 items when a double variant is broken
+- Copycat Slabs not dropping 2 items when a double variant is broken (#14)
 
 ## 0.3.1 - 2023-12-29
 

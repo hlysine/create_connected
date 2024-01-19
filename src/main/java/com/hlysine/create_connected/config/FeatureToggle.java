@@ -1,13 +1,10 @@
 package com.hlysine.create_connected.config;
 
-import com.hlysine.create_connected.CCCreativeTabs;
 import com.hlysine.create_connected.compat.CreateConnectedJEI;
 import com.hlysine.create_connected.compat.Mods;
 import com.tterrag.registrate.builders.Builder;
 import com.tterrag.registrate.util.entry.BlockEntry;
-import com.tterrag.registrate.util.entry.ItemProviderEntry;
 import com.tterrag.registrate.util.nullness.NonNullUnaryOperator;
-import mezz.jei.api.constants.VanillaTypes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.util.LogicalSidedProvider;
@@ -18,7 +15,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class FeatureToggle {
     public static final Set<ResourceLocation> TOGGLEABLE_FEATURES = new HashSet<>();

@@ -1,4 +1,4 @@
-package com.hlysine.create_connected.mixin;
+package com.hlysine.create_connected.mixin.contraption;
 
 import com.hlysine.create_connected.content.contraption.menu.TrackingContainerLevelAccess;
 import com.hlysine.create_connected.content.contraption.menu.TrackingContraptionWorld;

@@ -101,11 +101,16 @@ public class CopycatSlabBlock extends WaterloggedCopycatBlock {
         }
         Direction face = DirectionFromDelta(diff.getX(), diff.getY(), diff.getZ());
         if (face == null) {
-            return false;
+            boolean correctAxis = switch (axis) {
+                case X -> diff.getX() == 0;
+                case Y -> diff.getY() == 0;
+                case Z -> diff.getZ() == 0;
+            };
+            return correctAxis && diff.distManhattan(Vec3i.ZERO) <= 2;
         }
 
         if (toState.is(this)) {
-            return getFaceShape(state, face) == getFaceShape(toState, face.getOpposite());
+            return FaceShape.canConnect(getFaceShape(state, face), getFaceShape(toState, face.getOpposite()));
         } else {
             return face.getAxis() != axis;
         }
@@ -265,6 +270,10 @@ public class CopycatSlabBlock extends WaterloggedCopycatBlock {
 
         public static FaceShape fullOrNone(boolean value) {
             return value ? FULL : NONE;
+        }
+
+        public static boolean canConnect(FaceShape shape1, FaceShape shape2) {
+            return shape1 == FaceShape.FULL || shape2 == FaceShape.FULL || shape1 == shape2;
         }
 
         public boolean hasContact() {
