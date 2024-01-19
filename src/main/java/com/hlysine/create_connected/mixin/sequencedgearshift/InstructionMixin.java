@@ -22,7 +22,7 @@ public class InstructionMixin {
     int value;
 
     @Inject(method = "getDuration(FF)I", at = @At("HEAD"), cancellable = true)
-    public void getDurationForTurnAwait(float currentProgress, float speed, CallbackInfoReturnable<Integer> cir) {
+    private void getCustomDuration(float currentProgress, float speed, CallbackInfoReturnable<Integer> cir) {
         if (instruction == CCSequencerInstructions.TURN_AWAIT) {
             cir.setReturnValue(-1);
         } else if (instruction == CCSequencerInstructions.TURN_TIME) {
@@ -33,21 +33,36 @@ public class InstructionMixin {
         }
     }
 
+    @Inject(method = "getTickProgress(F)F", at = @At("HEAD"), cancellable = true)
+    private void getCustomTickProgress(float speed, CallbackInfoReturnable<Float> cir) {
+        if (instruction == CCSequencerInstructions.TURN_AWAIT) {
+            cir.setReturnValue(0f);
+        } else if (instruction == CCSequencerInstructions.TURN_TIME) {
+            cir.setReturnValue(1f);
+        } else if (instruction == CCSequencerInstructions.LOOP) {
+            cir.setReturnValue(0f);
+        }
+    }
+
     @Inject(method = "getSpeedModifier()I", at = @At("HEAD"), cancellable = true)
-    public void getSpeedModifierForTurnAwait(CallbackInfoReturnable<Integer> cir) {
+    private void getCustomSpeedModifier(CallbackInfoReturnable<Integer> cir) {
         if (instruction == CCSequencerInstructions.TURN_AWAIT) {
             cir.setReturnValue(((InstructionSpeedModifiersAccessor) (Object) speedModifier).getValue());
         } else if (instruction == CCSequencerInstructions.TURN_TIME) {
-            cir.setReturnValue(1);
+            cir.setReturnValue(((InstructionSpeedModifiersAccessor) (Object) speedModifier).getValue());
         } else if (instruction == CCSequencerInstructions.LOOP) {
             cir.setReturnValue(0);
         }
     }
 
     @Inject(method = "onRedstonePulse()Lcom/simibubi/create/content/kinetics/transmission/sequencer/OnIsPoweredResult;", at = @At("HEAD"), cancellable = true)
-    public void onRedstonePulse(CallbackInfoReturnable<OnIsPoweredResult> cir) {
+    private void onCustomRedstonePulse(CallbackInfoReturnable<OnIsPoweredResult> cir) {
         if (instruction == CCSequencerInstructions.TURN_AWAIT) {
             cir.setReturnValue(OnIsPoweredResult.CONTINUE);
+        } else if (instruction == CCSequencerInstructions.TURN_TIME) {
+            cir.setReturnValue(OnIsPoweredResult.NOTHING);
+        } else if (instruction == CCSequencerInstructions.LOOP) {
+            cir.setReturnValue(OnIsPoweredResult.NOTHING);
         }
     }
 }
