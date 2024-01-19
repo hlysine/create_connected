@@ -42,26 +42,24 @@ public class CCWindowGen {
 
     public static BlockEntry<WindowBlock> woodenWindowBlock(WoodType woodType,
                                                             Block planksBlock,
-                                                            Supplier<Supplier<RenderType>> renderType,
-                                                            boolean translucent) {
+                                                            Supplier<Supplier<RenderType>> renderType) {
         String woodName = woodType.name();
         String name = woodName + "_window";
         NonNullFunction<String, ResourceLocation> end_texture =
                 $ -> new ResourceLocation("block/" + woodName + "_planks");
         NonNullFunction<String, ResourceLocation> side_texture = n -> CreateConnected.asResource("block/" + n);
         return windowBlock(name, () -> planksBlock, () -> CCSpriteShifts.WOODEN_WINDOWS.get(woodType), renderType,
-                translucent, end_texture, side_texture, planksBlock::defaultMaterialColor);
+                end_texture, side_texture, planksBlock::defaultMaterialColor);
     }
 
     private static BlockEntry<WindowBlock> windowBlock(String name,
                                                        Supplier<? extends ItemLike> ingredient,
                                                        Supplier<CTSpriteShiftEntry> ct,
                                                        Supplier<Supplier<RenderType>> renderType,
-                                                       boolean translucent,
                                                        NonNullFunction<String, ResourceLocation> endTexture,
                                                        NonNullFunction<String, ResourceLocation> sideTexture,
                                                        Supplier<MaterialColor> color) {
-        return CreateConnected.getRegistrate().block(name, p -> new WindowBlock(p, translucent))
+        return CreateConnected.getRegistrate().block(name, WindowBlock::new)
                 .onRegister(connectedTextures(() -> new HorizontalCTBehaviour(ct.get())))
                 .addLayer(renderType)
                 .initialProperties(() -> Blocks.GLASS)
