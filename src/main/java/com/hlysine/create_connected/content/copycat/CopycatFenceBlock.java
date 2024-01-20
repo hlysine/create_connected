@@ -142,7 +142,8 @@ public class CopycatFenceBlock extends WaterloggedCopycatBlock {
                                      Direction dir) {
         if (neighborState.getBlock() instanceof FenceBlock || neighborState.getBlock() instanceof CopycatFenceBlock) {
             if (getMaterial(level, pos).skipRendering(getMaterial(level, pos.relative(dir)), dir.getOpposite()))
-                return state.getValue(byDirection(dir)) && neighborState.getValue(byDirection(dir.getOpposite()));
+                if (dir.getAxis().isHorizontal())
+                    return state.getValue(byDirection(dir)) && neighborState.getValue(byDirection(dir.getOpposite()));
         }
 
         return false;
