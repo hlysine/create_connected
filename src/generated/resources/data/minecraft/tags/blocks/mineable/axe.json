@@ -15,6 +15,7 @@
     "create_connected:copycat_beam",
     "create_connected:copycat_vertical_step",
     "create_connected:copycat_stairs",
-    "create_connected:copycat_fence"
+    "create_connected:copycat_fence",
+    "create_connected:copycat_wall"
   ]
 }

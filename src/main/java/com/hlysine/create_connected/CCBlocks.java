@@ -449,6 +449,25 @@ public class CCBlocks {
                     .blockstate((c, p) -> p.simpleBlock(c.getEntry(), p.models().withExistingParent("wrapped_copycat_fence", "block/barrier")))
                     .register();
 
+    public static final BlockEntry<CopycatWallBlock> COPYCAT_WALL =
+            REGISTRATE.block("copycat_wall", CopycatWallBlock::new)
+                    .transform(BuilderTransformers.copycat())
+                    .properties(p -> p.forceSolidOn())
+                    .tag(BlockTags.WALLS)
+                    .transform(FeatureToggle.register())
+                    .onRegister(CreateRegistrate.blockModel(() -> CopycatWallModel::new))
+                    .item()
+                    .transform(customItemModel("copycat_base", "wall"))
+                    .register();
+
+    public static final BlockEntry<WrappedWallBlock> WRAPPED_COPYCAT_WALL =
+            REGISTRATE.block("wrapped_copycat_wall", WrappedWallBlock::new)
+                    .initialProperties(() -> Blocks.COBBLESTONE_WALL)
+                    .onRegister(b -> CopycatWallBlock.wall = b)
+                    .tag(BlockTags.WALLS)
+                    .blockstate((c, p) -> p.simpleBlock(c.getEntry(), p.models().withExistingParent("wrapped_copycat_wall", "block/barrier")))
+                    .register();
+
     public static final BlockEntry<WindowBlock> CHERRY_WINDOW = CCWindowGen.woodenWindowBlock(WoodType.CHERRY, Blocks.CHERRY_PLANKS, () -> RenderType::translucent, true);
     public static final BlockEntry<WindowBlock> BAMBOO_WINDOW = CCWindowGen.woodenWindowBlock(WoodType.BAMBOO, Blocks.BAMBOO_PLANKS, () -> RenderType::cutoutMipped, false);
     public static final BlockEntry<ConnectedGlassPaneBlock> CHERRY_WINDOW_PANE = CCWindowGen.woodenWindowPane(WoodType.CHERRY, CHERRY_WINDOW, () -> RenderType::translucent);
