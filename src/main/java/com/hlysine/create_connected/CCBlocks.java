@@ -443,7 +443,9 @@ public class CCBlocks {
 
     public static final BlockEntry<WrappedFenceBlock> WRAPPED_COPYCAT_FENCE =
             REGISTRATE.block("wrapped_copycat_fence", WrappedFenceBlock::new)
+                    .initialProperties(() -> Blocks.OAK_FENCE)
                     .onRegister(b -> CopycatFenceBlock.fence = b)
+                    .tag(BlockTags.FENCES, Tags.Blocks.FENCES)
                     .blockstate((c, p) -> p.simpleBlock(c.getEntry(), p.models().withExistingParent("wrapped_copycat_fence", "block/barrier")))
                     .register();
 
