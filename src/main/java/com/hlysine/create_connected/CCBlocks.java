@@ -418,6 +418,15 @@ public class CCBlocks {
                     .transform(customItemModel("copycat_base", "vertical_step"))
                     .register();
 
+    public static final BlockEntry<CopycatStairsBlock> COPYCAT_STAIRS =
+            REGISTRATE.block("copycat_stairs", CopycatStairsBlock::new)
+                    .transform(BuilderTransformers.copycat())
+                    .transform(FeatureToggle.register())
+                    .onRegister(CreateRegistrate.blockModel(() -> CopycatStairsModel::new))
+                    .item()
+                    .transform(customItemModel("copycat_base", "stairs"))
+                    .register();
+
     public static final BlockEntry<WindowBlock> CHERRY_WINDOW = CCWindowGen.woodenWindowBlock(WoodType.CHERRY, Blocks.CHERRY_PLANKS, () -> RenderType::translucent, true);
     public static final BlockEntry<WindowBlock> BAMBOO_WINDOW = CCWindowGen.woodenWindowBlock(WoodType.BAMBOO, Blocks.BAMBOO_PLANKS, () -> RenderType::cutoutMipped, false);
     public static final BlockEntry<ConnectedGlassPaneBlock> CHERRY_WINDOW_PANE = CCWindowGen.woodenWindowPane(WoodType.CHERRY, CHERRY_WINDOW, () -> RenderType::translucent);

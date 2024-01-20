@@ -49,6 +49,7 @@ public class CCCreativeTabs {
             CCBlocks.COPYCAT_SLAB,
             CCBlocks.COPYCAT_BEAM,
             CCBlocks.COPYCAT_VERTICAL_STEP,
+            CCBlocks.COPYCAT_STAIRS,
             CCItems.CONTROL_CHIP,
             CCItems.MUSIC_DISC_ELEVATOR,
             CCItems.MUSIC_DISC_INTERLUDE,
