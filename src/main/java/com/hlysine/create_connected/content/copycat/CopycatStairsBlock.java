@@ -179,8 +179,13 @@ public class CopycatStairsBlock extends WaterloggedCopycatBlock {
             if (shape.isFull())
                 connectScore += 2;
             else connectScore += 1;
-            if (toState.is(this) && !getFaceShape(toState, Direction.fromAxisAndDirection(Axis.X, diff.getX() < 0 ? AxisDirection.POSITIVE : AxisDirection.NEGATIVE)).canConnect())
-                return false;
+            if (toState.is(this)) {
+                FaceShape toShape = getFaceShape(toState, Direction.fromAxisAndDirection(Axis.X, diff.getX() < 0 ? AxisDirection.POSITIVE : AxisDirection.NEGATIVE));
+                if (!toShape.canConnect())
+                    return false;
+                if (diff.getY() == 0 && diff.getZ() == 0 && !toShape.equals(shape))
+                    return false;
+            }
         }
         if (diff.getY() != 0) {
             FaceShape shape = getFaceShape(state, Direction.fromAxisAndDirection(Axis.Y, diff.getY() > 0 ? AxisDirection.POSITIVE : AxisDirection.NEGATIVE));
@@ -189,8 +194,13 @@ public class CopycatStairsBlock extends WaterloggedCopycatBlock {
             if (shape.isFull())
                 connectScore += 2;
             else connectScore += 1;
-            if (toState.is(this) && !getFaceShape(toState, Direction.fromAxisAndDirection(Axis.Y, diff.getY() < 0 ? AxisDirection.POSITIVE : AxisDirection.NEGATIVE)).canConnect())
-                return false;
+            if (toState.is(this)) {
+                FaceShape toShape = getFaceShape(toState, Direction.fromAxisAndDirection(Axis.Y, diff.getY() < 0 ? AxisDirection.POSITIVE : AxisDirection.NEGATIVE));
+                if (!toShape.canConnect())
+                    return false;
+                if (diff.getX() == 0 && diff.getZ() == 0 && !toShape.equals(shape))
+                    return false;
+            }
         }
         if (diff.getZ() != 0) {
             FaceShape shape = getFaceShape(state, Direction.fromAxisAndDirection(Axis.Z, diff.getZ() > 0 ? AxisDirection.POSITIVE : AxisDirection.NEGATIVE));
@@ -199,8 +209,13 @@ public class CopycatStairsBlock extends WaterloggedCopycatBlock {
             if (shape.isFull())
                 connectScore += 2;
             else connectScore += 1;
-            if (toState.is(this) && !getFaceShape(toState, Direction.fromAxisAndDirection(Axis.Z, diff.getZ() < 0 ? AxisDirection.POSITIVE : AxisDirection.NEGATIVE)).canConnect())
-                return false;
+            if (toState.is(this)) {
+                FaceShape toShape = getFaceShape(toState, Direction.fromAxisAndDirection(Axis.Z, diff.getZ() < 0 ? AxisDirection.POSITIVE : AxisDirection.NEGATIVE));
+                if (!toShape.canConnect())
+                    return false;
+                if (diff.getX() == 0 && diff.getY() == 0 && !toShape.equals(shape))
+                    return false;
+            }
         }
         return !toState.is(this) && connectScore >= 2 || toState.is(this);
     }
