@@ -1,5 +1,6 @@
 package com.hlysine.create_connected.content.copycat;
 
+import com.simibubi.create.content.decoration.copycat.CopycatBlock;
 import com.simibubi.create.content.decoration.copycat.WaterloggedCopycatBlock;
 import com.simibubi.create.foundation.utility.Iterate;
 import net.minecraft.core.BlockPos;
@@ -13,10 +14,7 @@ import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Mirror;
-import net.minecraft.world.level.block.Rotation;
-import net.minecraft.world.level.block.WallBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
@@ -27,6 +25,8 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Arrays;
 
 import static net.minecraft.core.Direction.Axis;
 import static net.minecraft.world.level.block.WallBlock.*;
@@ -154,12 +154,20 @@ public class CopycatWallBlock extends WaterloggedCopycatBlock {
 
     @Override
     public boolean canFaceBeOccluded(BlockState state, Direction face) {
+        if (face.getAxis().isHorizontal()) {
+            WallSide side = state.getValue(byDirection(face));
+            return side != WallSide.NONE &&
+                    !state.getValue(UP) &&
+                    side == state.getValue(byDirection(face.getOpposite())) &&
+                    state.getValue(byDirection(face.getClockWise())) == WallSide.NONE &&
+                    state.getValue(byDirection(face.getCounterClockWise())) == WallSide.NONE;
+        }
         return false;
     }
 
     @Override
     public boolean shouldFaceAlwaysRender(BlockState state, Direction face) {
-        return true;
+        return !canFaceBeOccluded(state, face);
     }
 
     @Override
@@ -170,14 +178,31 @@ public class CopycatWallBlock extends WaterloggedCopycatBlock {
     @Override
     public boolean hidesNeighborFace(BlockGetter level, BlockPos pos, BlockState state, BlockState neighborState,
                                      Direction dir) {
-        if (state.is(this) == neighborState.is(this)) {
+        if (neighborState.getBlock() instanceof WallBlock || neighborState.getBlock() instanceof CopycatWallBlock) {
             if (getMaterial(level, pos).skipRendering(getMaterial(level, pos.relative(dir)), dir.getOpposite())) {
-                WallSide side = state.getValue(byDirection(dir));
-                return side != WallSide.NONE && side == neighborState.getValue(byDirection(dir.getOpposite()));
+                if (dir.getAxis().isHorizontal()) {
+                    WallSide side = state.getValue(byDirection(dir));
+                    return side != WallSide.NONE && side == neighborState.getValue(byDirection(dir.getOpposite()));
+                } else {
+                    if (neighborState.getValue(UP) && !state.getValue(UP)) return false;
+                    return Arrays.stream(Iterate.horizontalDirections).allMatch(s -> {
+                        WallSide neighbor = neighborState.getValue(byDirection(s));
+                        WallSide self = state.getValue(byDirection(s));
+                        if (dir == Direction.UP && self == WallSide.LOW) return false;
+                        if (dir == Direction.DOWN && neighbor == WallSide.LOW) return false;
+                        return self == neighbor;
+                    });
+                }
             }
         }
 
         return false;
+    }
+
+    public static BlockState getMaterial(BlockGetter reader, BlockPos targetPos) {
+        BlockState state = CopycatBlock.getMaterial(reader, targetPos);
+        if (state.is(Blocks.AIR)) return reader.getBlockState(targetPos);
+        return state;
     }
 
     public static EnumProperty<WallSide> byDirection(Direction direction) {

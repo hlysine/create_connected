@@ -1,13 +1,9 @@
 package com.hlysine.create_connected.content.copycat;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.simibubi.create.content.decoration.copycat.CopycatModel;
 import com.simibubi.create.foundation.model.BakedModelHelper;
 import com.simibubi.create.foundation.model.BakedQuadHelper;
 import com.simibubi.create.foundation.utility.Iterate;
-
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.resources.model.BakedModel;
@@ -19,6 +15,9 @@ import net.minecraft.world.level.block.state.properties.SlabType;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.client.model.data.ModelData;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CopycatSlabModel extends CopycatModel {
 
@@ -37,23 +36,24 @@ public class CopycatSlabModel extends CopycatModel {
         List<BakedQuad> templateQuads = model.getQuads(material, side, rand, wrappedData, renderType);
 
         List<BakedQuad> quads = new ArrayList<>();
+        boolean isDouble = state.getOptionalValue(CopycatSlabBlock.SLAB_TYPE).orElse(SlabType.BOTTOM) == SlabType.DOUBLE;
 
         // 2 pieces
         for (boolean front : Iterate.trueAndFalse) {
-            assemblePiece(facing, templateQuads, quads, front, false);
+            assemblePiece(facing, templateQuads, quads, front, false, isDouble);
         }
 
         // 2 more pieces for double slabs
-        if (state.getOptionalValue(CopycatSlabBlock.SLAB_TYPE).orElse(SlabType.BOTTOM) == SlabType.DOUBLE) {
+        if (isDouble) {
             for (boolean front : Iterate.trueAndFalse) {
-                assemblePiece(facing, templateQuads, quads, front, true);
+                assemblePiece(facing, templateQuads, quads, front, true, isDouble);
             }
         }
 
         return quads;
     }
 
-    private static void assemblePiece(Direction facing, List<BakedQuad> templateQuads, List<BakedQuad> quads, boolean front, boolean topSlab) {
+    private static void assemblePiece(Direction facing, List<BakedQuad> templateQuads, List<BakedQuad> quads, boolean front, boolean topSlab, boolean isDouble) {
         int size = templateQuads.size();
         Vec3 normal = Vec3.atLowerCornerOf(facing.getNormal());
         Vec3 normalScaled12 = normal.scale(12 / 16f);
@@ -70,6 +70,10 @@ public class CopycatSlabModel extends CopycatModel {
             if (front && direction == facing)
                 continue;
             if (!front && direction == facing.getOpposite())
+                continue;
+            if (isDouble && topSlab && direction == facing)
+                continue;
+            if (isDouble && !topSlab && direction == facing.getOpposite())
                 continue;
 
             quads.add(BakedQuadHelper.cloneWithCustomGeometry(quad,

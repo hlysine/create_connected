@@ -1,5 +1,6 @@
 package com.hlysine.create_connected.content.copycat;
 
+import com.simibubi.create.content.decoration.copycat.CopycatBlock;
 import com.simibubi.create.content.decoration.copycat.WaterloggedCopycatBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -139,12 +140,18 @@ public class CopycatFenceBlock extends WaterloggedCopycatBlock {
     @Override
     public boolean hidesNeighborFace(BlockGetter level, BlockPos pos, BlockState state, BlockState neighborState,
                                      Direction dir) {
-        if (state.is(this) == neighborState.is(this)) {
+        if (neighborState.getBlock() instanceof FenceBlock || neighborState.getBlock() instanceof CopycatFenceBlock) {
             if (getMaterial(level, pos).skipRendering(getMaterial(level, pos.relative(dir)), dir.getOpposite()))
                 return state.getValue(byDirection(dir)) && neighborState.getValue(byDirection(dir.getOpposite()));
         }
 
         return false;
+    }
+
+    public static BlockState getMaterial(BlockGetter reader, BlockPos targetPos) {
+        BlockState state = CopycatBlock.getMaterial(reader, targetPos);
+        if (state.is(Blocks.AIR)) return reader.getBlockState(targetPos);
+        return state;
     }
 
     public static BooleanProperty byDirection(Direction direction) {

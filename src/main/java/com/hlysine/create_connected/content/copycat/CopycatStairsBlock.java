@@ -1,5 +1,6 @@
 package com.hlysine.create_connected.content.copycat;
 
+import com.simibubi.create.content.decoration.copycat.CopycatBlock;
 import com.simibubi.create.content.decoration.copycat.WaterloggedCopycatBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -239,13 +240,19 @@ public class CopycatStairsBlock extends WaterloggedCopycatBlock {
     @Override
     public boolean hidesNeighborFace(BlockGetter level, BlockPos pos, BlockState state, BlockState neighborState,
                                      Direction dir) {
-        if (state.is(this) == neighborState.is(this)) {
+        if (neighborState.getBlock() instanceof StairBlock || neighborState.getBlock() instanceof CopycatStairsBlock) {
             if (getMaterial(level, pos).skipRendering(getMaterial(level, pos.relative(dir)), dir.getOpposite()))
                 return getFaceShape(state, dir).equals(getFaceShape(neighborState, dir.getOpposite()));
         }
 
         return getFaceShape(state, dir).isFull()
                 && getMaterial(level, pos).skipRendering(neighborState, dir.getOpposite());
+    }
+
+    public static BlockState getMaterial(BlockGetter reader, BlockPos targetPos) {
+        BlockState state = CopycatBlock.getMaterial(reader, targetPos);
+        if (state.is(Blocks.AIR)) return reader.getBlockState(targetPos);
+        return state;
     }
 
     /**
