@@ -50,6 +50,7 @@ public class CCCreativeTabs {
             CCBlocks.COPYCAT_BEAM,
             CCBlocks.COPYCAT_VERTICAL_STEP,
             CCBlocks.COPYCAT_STAIRS,
+            CCBlocks.COPYCAT_FENCE,
             CCItems.CONTROL_CHIP,
             CCItems.MUSIC_DISC_ELEVATOR,
             CCItems.MUSIC_DISC_INTERLUDE,

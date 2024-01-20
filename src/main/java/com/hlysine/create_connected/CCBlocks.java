@@ -40,6 +40,7 @@ import com.tterrag.registrate.providers.RegistrateBlockstateProvider;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
@@ -47,6 +48,7 @@ import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.HashMap;
@@ -384,6 +386,7 @@ public class CCBlocks {
     public static final BlockEntry<CopycatSlabBlock> COPYCAT_SLAB =
             REGISTRATE.block("copycat_slab", CopycatSlabBlock::new)
                     .transform(BuilderTransformers.copycat())
+                    .tag(BlockTags.SLABS)
                     .transform(FeatureToggle.register())
                     .loot((lt, block) -> lt.add(block, lt.createSlabItemTable(block)))
                     .onRegister(CreateRegistrate.blockModel(() -> CopycatSlabModel::new))
@@ -421,10 +424,27 @@ public class CCBlocks {
     public static final BlockEntry<CopycatStairsBlock> COPYCAT_STAIRS =
             REGISTRATE.block("copycat_stairs", CopycatStairsBlock::new)
                     .transform(BuilderTransformers.copycat())
+                    .tag(BlockTags.STAIRS)
                     .transform(FeatureToggle.register())
                     .onRegister(CreateRegistrate.blockModel(() -> CopycatStairsModel::new))
                     .item()
                     .transform(customItemModel("copycat_base", "stairs"))
+                    .register();
+
+    public static final BlockEntry<CopycatFenceBlock> COPYCAT_FENCE =
+            REGISTRATE.block("copycat_fence", CopycatFenceBlock::new)
+                    .transform(BuilderTransformers.copycat())
+                    .tag(BlockTags.FENCES, Tags.Blocks.FENCES)
+                    .transform(FeatureToggle.register())
+                    .onRegister(CreateRegistrate.blockModel(() -> CopycatFenceModel::new))
+                    .item()
+                    .transform(customItemModel("copycat_base", "fence"))
+                    .register();
+
+    public static final BlockEntry<WrappedFenceBlock> WRAPPED_COPYCAT_FENCE =
+            REGISTRATE.block("wrapped_copycat_fence", WrappedFenceBlock::new)
+                    .onRegister(b -> CopycatFenceBlock.fence = b)
+                    .blockstate((c, p) -> p.simpleBlock(c.getEntry(), p.models().withExistingParent("wrapped_copycat_fence", "block/barrier")))
                     .register();
 
     public static final BlockEntry<WindowBlock> CHERRY_WINDOW = CCWindowGen.woodenWindowBlock(WoodType.CHERRY, Blocks.CHERRY_PLANKS, () -> RenderType::translucent, true);

@@ -12,6 +12,7 @@
     "contraption.ContainerLevelAccessMixin",
     "contraption.ContraptionMixin",
     "contraption.ItemCombinerMenuMixin",
+    "copycat.FenceBlockMixin",
     "copycat.StairBlockMixin",
     "featuretoggle.CreativeModeTabsAccessor",
     "linkedtransmitter.AnalogLeverBlockEntityAccessor",

@@ -1,0 +1,24 @@
+package com.hlysine.create_connected.mixin.copycat;
+
+import com.hlysine.create_connected.CCBlocks;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.world.level.block.FenceBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+@Mixin(FenceBlock.class)
+public class FenceBlockMixin {
+    @Inject(
+            at = @At("HEAD"),
+            method = "isSameFence(Lnet/minecraft/world/level/block/state/BlockState;)Z",
+            cancellable = true
+    )
+    private void connectToCopycatFence(BlockState pState, CallbackInfoReturnable<Boolean> cir) {
+        if (pState.is(BlockTags.FENCES) &&
+                (((FenceBlock) (Object) this).defaultBlockState().is(CCBlocks.WRAPPED_COPYCAT_FENCE.get()) || pState.is(CCBlocks.COPYCAT_FENCE.get())))
+            cir.setReturnValue(true);
+    }
+}
