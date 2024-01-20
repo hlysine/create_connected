@@ -226,7 +226,7 @@ public class CopycatStairsBlock extends WaterloggedCopycatBlock {
                                      Direction dir) {
         if (state.is(this) == neighborState.is(this)) {
             if (getMaterial(level, pos).skipRendering(getMaterial(level, pos.relative(dir)), dir.getOpposite()))
-                return getFaceShape(state, dir) == getFaceShape(neighborState, dir.getOpposite());
+                return getFaceShape(state, dir).equals(getFaceShape(neighborState, dir.getOpposite()));
         }
 
         return getFaceShape(state, dir).isFull()
