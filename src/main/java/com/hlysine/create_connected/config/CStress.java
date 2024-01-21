@@ -1,21 +1,19 @@
 package com.hlysine.create_connected.config;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.function.Supplier;
-
 import com.hlysine.create_connected.CreateConnected;
-import com.simibubi.create.Create;
 import com.simibubi.create.content.kinetics.BlockStressDefaults;
 import com.simibubi.create.content.kinetics.BlockStressValues.IStressValueProvider;
 import com.simibubi.create.foundation.config.ConfigBase;
 import com.simibubi.create.foundation.utility.Couple;
 import com.simibubi.create.foundation.utility.RegisteredObjects;
-
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.ForgeConfigSpec.Builder;
 import net.minecraftforge.common.ForgeConfigSpec.ConfigValue;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Supplier;
 
 public class CStress extends ConfigBase implements IStressValueProvider {
 
@@ -26,18 +24,22 @@ public class CStress extends ConfigBase implements IStressValueProvider {
     public void registerAll(Builder builder) {
         builder.comment(".", Comments.su, Comments.impact)
                 .push("impact");
-        BlockStressDefaults.DEFAULT_IMPACTS.forEach((r, i) -> {
-            if (r.getNamespace().equals(CreateConnected.MODID))
-                getImpacts().put(r, builder.define(r.getPath(), i));
-        });
+        synchronized (BlockStressDefaults.DEFAULT_IMPACTS) {
+            BlockStressDefaults.DEFAULT_IMPACTS.forEach((r, i) -> {
+                if (r.getNamespace().equals(CreateConnected.MODID))
+                    getImpacts().put(r, builder.define(r.getPath(), i));
+            });
+        }
         builder.pop();
 
         builder.comment(".", Comments.su, Comments.capacity)
                 .push("capacity");
-        BlockStressDefaults.DEFAULT_CAPACITIES.forEach((r, i) -> {
-            if (r.getNamespace().equals(CreateConnected.MODID))
-                getCapacities().put(r, builder.define(r.getPath(), i));
-        });
+        synchronized (BlockStressDefaults.DEFAULT_CAPACITIES) {
+            BlockStressDefaults.DEFAULT_CAPACITIES.forEach((r, i) -> {
+                if (r.getNamespace().equals(CreateConnected.MODID))
+                    getCapacities().put(r, builder.define(r.getPath(), i));
+            });
+        }
         builder.pop();
     }
 
