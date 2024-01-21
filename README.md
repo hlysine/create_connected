@@ -106,6 +106,13 @@ consider adding your use case to the mod.
 If you are interested in helping, please take a look
 at [the contributing guide](https://github.com/hlysine/create_connected/blob/main/CONTRIBUTING.md).
 
+## Support
+
+The best way to support my work is to simply download this mod on [**Modrinth**](https://modrinth.com/mod/create-connected).
+Enjoy a smoother download experience and support open source software with a single click.
+
+If you would like to offer more direct support, you can [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/O4O2TL8YV)
+
 ## Credits
 
 **Translation**
