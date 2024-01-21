@@ -245,6 +245,7 @@ public class CCBlocks {
             LINKED_BUTTONS.put(type, REGISTRATE
                     .block("linked_" + namePath + "_button", properties -> new LinkedButtonBlock(properties, buttonBlock))
                     .initialProperties(() -> buttonBlock)
+                    .tag(AllTags.AllBlockTags.SAFE_NBT.tag)
                     .transform(LinkedTransmitterItem.register())
                     .blockstate(CCBlockStateGen.linkedButton(
                             new ResourceLocation("block/" + namePath + "_button"),
@@ -257,6 +258,7 @@ public class CCBlocks {
     public static final BlockEntry<LinkedLeverBlock> LINKED_LEVER = REGISTRATE
             .block("linked_lever", properties -> new LinkedLeverBlock(properties, (LeverBlock) Blocks.LEVER))
             .initialProperties(() -> Blocks.LEVER)
+            .tag(AllTags.AllBlockTags.SAFE_NBT.tag)
             .transform(LinkedTransmitterItem.register())
             .blockstate(CCBlockStateGen.linkedLever(
                     new ResourceLocation("block/lever"),
@@ -267,7 +269,9 @@ public class CCBlocks {
     public static final BlockEntry<LinkedAnalogLeverBlock> LINKED_ANALOG_LEVER = REGISTRATE
             .block("linked_analog_lever", properties -> new LinkedAnalogLeverBlock(properties, AllBlocks.ANALOG_LEVER))
             .initialProperties(() -> Blocks.LEVER)
+            .tag(AllTags.AllBlockTags.SAFE_NBT.tag)
             .transform(LinkedTransmitterItem.register())
+            .onRegister(PreciseItemUseOverrides::addBlock)
             .blockstate(CCBlockStateGen.linkedLever(
                     Create.asResource("block/analog_lever/block"),
                     Create.asResource("block/analog_lever/block")
