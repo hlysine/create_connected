@@ -10,7 +10,9 @@ import com.simibubi.create.content.schematics.requirement.ItemRequirement;
 import com.simibubi.create.foundation.block.IBE;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -144,8 +146,15 @@ public class LinkedButtonBlock extends ButtonBlock implements IBE<LinkedTransmit
         updateTransmittedSignal(level, pos);
     }
 
+
     @Override
-    public SoundEvent getSound(boolean pIsOn) {
+    public void tick(@NotNull BlockState pState, @NotNull ServerLevel pLevel, @NotNull BlockPos pPos, @NotNull RandomSource pRandom) {
+        super.tick(pState, pLevel, pPos, pRandom);
+        updateTransmittedSignal(pLevel, pPos);
+    }
+
+    @Override
+    public @NotNull SoundEvent getSound(boolean pIsOn) {
         return base.getSound(pIsOn);
     }
 
