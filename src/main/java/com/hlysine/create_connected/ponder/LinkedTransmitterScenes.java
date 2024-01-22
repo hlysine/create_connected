@@ -176,6 +176,27 @@ public class LinkedTransmitterScenes {
             scene.idle(20);
         }
 
+        scene.overlay.showText(40)
+                .text("To avoid misclicks...")
+                .attachKeyFrame()
+                .placeNearTarget()
+                .pointAt(transmitVec);
+        scene.idle(30);
+        scene.overlay.showControls(new InputWindowElement(transmitVec, Pointing.DOWN)
+                        .rightClick()
+                        .whileSneaking()
+                , 40);
+        scene.idle(20);
+        scene.world.modifyBlock(lever, s -> s.cycle(LOCKED)
+                , false);
+        scene.idle(20);
+        scene.overlay.showText(80)
+                .text("...right-click the transmitter while sneaking to lock the frequency slots")
+                .placeNearTarget()
+                .pointAt(transmitVec);
+
+        scene.idle(80);
+
         scene.world.showSection(buttonSelect, Direction.DOWN);
         scene.idle(5);
         scene.world.showSection(analogLeverSelect, Direction.DOWN);
@@ -222,7 +243,6 @@ public class LinkedTransmitterScenes {
                         .setValue(HORIZONTAL_FACING, s.getValue(HORIZONTAL_FACING))
                         .setValue(POWERED, s.getValue(POWERED))
                 , true);
-        scene.world.toggleRedstonePower(leverSelect);
         scene.idle(2);
         scene.world.toggleRedstonePower(util.select.fromTo(1, 2, 2, 1, 2, 3));
         scene.idle(20);
