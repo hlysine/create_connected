@@ -2,6 +2,30 @@
   "multipart": [
     {
       "apply": {
+        "model": "create_connected:block/linked_transmitter/block_powered_locked",
+        "y": 180
+      },
+      "when": {
+        "face": "floor",
+        "facing": "north",
+        "locked": "true",
+        "powered": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block_locked",
+        "y": 180
+      },
+      "when": {
+        "face": "floor",
+        "facing": "north",
+        "locked": "true",
+        "powered": "false"
+      }
+    },
+    {
+      "apply": {
         "model": "minecraft:block/spruce_button_pressed"
       },
       "when": {
@@ -18,6 +42,7 @@
       "when": {
         "face": "floor",
         "facing": "north",
+        "locked": "false",
         "powered": "true"
       }
     },
@@ -39,6 +64,31 @@
       "when": {
         "face": "floor",
         "facing": "north",
+        "locked": "false",
+        "powered": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block_powered_locked",
+        "y": 360
+      },
+      "when": {
+        "face": "floor",
+        "facing": "south",
+        "locked": "true",
+        "powered": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block_locked",
+        "y": 360
+      },
+      "when": {
+        "face": "floor",
+        "facing": "south",
+        "locked": "true",
         "powered": "false"
       }
     },
@@ -61,6 +111,7 @@
       "when": {
         "face": "floor",
         "facing": "south",
+        "locked": "false",
         "powered": "true"
       }
     },
@@ -83,6 +134,31 @@
       "when": {
         "face": "floor",
         "facing": "south",
+        "locked": "false",
+        "powered": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block_powered_locked",
+        "y": 450
+      },
+      "when": {
+        "face": "floor",
+        "facing": "west",
+        "locked": "true",
+        "powered": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block_locked",
+        "y": 450
+      },
+      "when": {
+        "face": "floor",
+        "facing": "west",
+        "locked": "true",
         "powered": "false"
       }
     },
@@ -105,6 +181,7 @@
       "when": {
         "face": "floor",
         "facing": "west",
+        "locked": "false",
         "powered": "true"
       }
     },
@@ -127,6 +204,31 @@
       "when": {
         "face": "floor",
         "facing": "west",
+        "locked": "false",
+        "powered": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block_powered_locked",
+        "y": 270
+      },
+      "when": {
+        "face": "floor",
+        "facing": "east",
+        "locked": "true",
+        "powered": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block_locked",
+        "y": 270
+      },
+      "when": {
+        "face": "floor",
+        "facing": "east",
+        "locked": "true",
         "powered": "false"
       }
     },
@@ -149,6 +251,7 @@
       "when": {
         "face": "floor",
         "facing": "east",
+        "locked": "false",
         "powered": "true"
       }
     },
@@ -171,6 +274,31 @@
       "when": {
         "face": "floor",
         "facing": "east",
+        "locked": "false",
+        "powered": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block_powered_vertical_locked",
+        "x": 90
+      },
+      "when": {
+        "face": "wall",
+        "facing": "north",
+        "locked": "true",
+        "powered": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block_vertical_locked",
+        "x": 90
+      },
+      "when": {
+        "face": "wall",
+        "facing": "north",
+        "locked": "true",
         "powered": "false"
       }
     },
@@ -194,6 +322,7 @@
       "when": {
         "face": "wall",
         "facing": "north",
+        "locked": "false",
         "powered": "true"
       }
     },
@@ -217,6 +346,33 @@
       "when": {
         "face": "wall",
         "facing": "north",
+        "locked": "false",
+        "powered": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block_powered_vertical_locked",
+        "x": 90,
+        "y": 180
+      },
+      "when": {
+        "face": "wall",
+        "facing": "south",
+        "locked": "true",
+        "powered": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block_vertical_locked",
+        "x": 90,
+        "y": 180
+      },
+      "when": {
+        "face": "wall",
+        "facing": "south",
+        "locked": "true",
         "powered": "false"
       }
     },
@@ -242,6 +398,7 @@
       "when": {
         "face": "wall",
         "facing": "south",
+        "locked": "false",
         "powered": "true"
       }
     },
@@ -267,6 +424,33 @@
       "when": {
         "face": "wall",
         "facing": "south",
+        "locked": "false",
+        "powered": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block_powered_vertical_locked",
+        "x": 90,
+        "y": 270
+      },
+      "when": {
+        "face": "wall",
+        "facing": "west",
+        "locked": "true",
+        "powered": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block_vertical_locked",
+        "x": 90,
+        "y": 270
+      },
+      "when": {
+        "face": "wall",
+        "facing": "west",
+        "locked": "true",
         "powered": "false"
       }
     },
@@ -292,6 +476,7 @@
       "when": {
         "face": "wall",
         "facing": "west",
+        "locked": "false",
         "powered": "true"
       }
     },
@@ -317,6 +502,33 @@
       "when": {
         "face": "wall",
         "facing": "west",
+        "locked": "false",
+        "powered": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block_powered_vertical_locked",
+        "x": 90,
+        "y": 90
+      },
+      "when": {
+        "face": "wall",
+        "facing": "east",
+        "locked": "true",
+        "powered": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block_vertical_locked",
+        "x": 90,
+        "y": 90
+      },
+      "when": {
+        "face": "wall",
+        "facing": "east",
+        "locked": "true",
         "powered": "false"
       }
     },
@@ -342,6 +554,7 @@
       "when": {
         "face": "wall",
         "facing": "east",
+        "locked": "false",
         "powered": "true"
       }
     },
@@ -367,6 +580,33 @@
       "when": {
         "face": "wall",
         "facing": "east",
+        "locked": "false",
+        "powered": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block_powered_locked",
+        "x": 180,
+        "y": 180
+      },
+      "when": {
+        "face": "ceiling",
+        "facing": "north",
+        "locked": "true",
+        "powered": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block_locked",
+        "x": 180,
+        "y": 180
+      },
+      "when": {
+        "face": "ceiling",
+        "facing": "north",
+        "locked": "true",
         "powered": "false"
       }
     },
@@ -391,6 +631,7 @@
       "when": {
         "face": "ceiling",
         "facing": "north",
+        "locked": "false",
         "powered": "true"
       }
     },
@@ -415,6 +656,31 @@
       "when": {
         "face": "ceiling",
         "facing": "north",
+        "locked": "false",
+        "powered": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block_powered_locked",
+        "x": 180
+      },
+      "when": {
+        "face": "ceiling",
+        "facing": "south",
+        "locked": "true",
+        "powered": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block_locked",
+        "x": 180
+      },
+      "when": {
+        "face": "ceiling",
+        "facing": "south",
+        "locked": "true",
         "powered": "false"
       }
     },
@@ -437,6 +703,7 @@
       "when": {
         "face": "ceiling",
         "facing": "south",
+        "locked": "false",
         "powered": "true"
       }
     },
@@ -459,6 +726,33 @@
       "when": {
         "face": "ceiling",
         "facing": "south",
+        "locked": "false",
+        "powered": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block_powered_locked",
+        "x": 180,
+        "y": 90
+      },
+      "when": {
+        "face": "ceiling",
+        "facing": "west",
+        "locked": "true",
+        "powered": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block_locked",
+        "x": 180,
+        "y": 90
+      },
+      "when": {
+        "face": "ceiling",
+        "facing": "west",
+        "locked": "true",
         "powered": "false"
       }
     },
@@ -483,6 +777,7 @@
       "when": {
         "face": "ceiling",
         "facing": "west",
+        "locked": "false",
         "powered": "true"
       }
     },
@@ -507,6 +802,33 @@
       "when": {
         "face": "ceiling",
         "facing": "west",
+        "locked": "false",
+        "powered": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block_powered_locked",
+        "x": 180,
+        "y": 270
+      },
+      "when": {
+        "face": "ceiling",
+        "facing": "east",
+        "locked": "true",
+        "powered": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block_locked",
+        "x": 180,
+        "y": 270
+      },
+      "when": {
+        "face": "ceiling",
+        "facing": "east",
+        "locked": "true",
         "powered": "false"
       }
     },
@@ -531,6 +853,7 @@
       "when": {
         "face": "ceiling",
         "facing": "east",
+        "locked": "false",
         "powered": "true"
       }
     },
@@ -555,6 +878,7 @@
       "when": {
         "face": "ceiling",
         "facing": "east",
+        "locked": "false",
         "powered": "false"
       }
     }

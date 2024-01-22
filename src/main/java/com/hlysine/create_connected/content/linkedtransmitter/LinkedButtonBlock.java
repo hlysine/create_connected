@@ -22,6 +22,9 @@ import net.minecraft.world.level.block.ButtonBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
@@ -34,12 +37,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LinkedButtonBlock extends ButtonBlock implements IBE<LinkedTransmitterBlockEntity>, ISpecialBlockItemRequirement, IWrenchable, LinkedTransmitterBlock {
+    public static BooleanProperty LOCKED = BlockStateProperties.LOCKED;
 
     private final ButtonBlock base;
 
     public LinkedButtonBlock(Properties pProperties, ButtonBlock base) {
         super(pProperties, base.type, base.ticksToStayPressed, base.arrowsCanPress);
         this.base = base;
+        registerDefaultState(defaultBlockState().setValue(LOCKED, false));
+    }
+
+    @Override
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
+        super.createBlockStateDefinition(pBuilder.add(LOCKED));
     }
 
     @Override
@@ -82,8 +92,18 @@ public class LinkedButtonBlock extends ButtonBlock implements IBE<LinkedTransmit
                                           @NotNull Player player,
                                           @NotNull InteractionHand hand,
                                           @NotNull BlockHitResult hit) {
-        if (isHittingBase(state, level, pos, hit))
-            return super.use(state, level, pos, player, hand, hit);
+        if (isHittingBase(state, level, pos, hit)) {
+            if (!player.isShiftKeyDown())
+                return super.use(state, level, pos, player, hand, hit);
+            return InteractionResult.CONSUME;
+        }
+        if (player.isShiftKeyDown()) {
+            if (!level.isClientSide())
+                level.setBlockAndUpdate(pos, state.cycle(LOCKED));
+            return InteractionResult.SUCCESS;
+        }
+        if (state.getValue(LOCKED))
+            return InteractionResult.CONSUME;
         return InteractionResult.PASS;
     }
 

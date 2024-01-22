@@ -247,6 +247,7 @@ public class CCBlocks {
                     .initialProperties(() -> buttonBlock)
                     .tag(AllTags.AllBlockTags.SAFE_NBT.tag)
                     .transform(LinkedTransmitterItem.register())
+                    .onRegister(PreciseItemUseOverrides::addBlock)
                     .blockstate(CCBlockStateGen.linkedButton(
                             new ResourceLocation("block/" + namePath + "_button"),
                             new ResourceLocation("block/" + namePath + "_button_pressed")
@@ -260,6 +261,7 @@ public class CCBlocks {
             .initialProperties(() -> Blocks.LEVER)
             .tag(AllTags.AllBlockTags.SAFE_NBT.tag)
             .transform(LinkedTransmitterItem.register())
+            .onRegister(PreciseItemUseOverrides::addBlock)
             .blockstate(CCBlockStateGen.linkedLever(
                     new ResourceLocation("block/lever"),
                     new ResourceLocation("block/lever_on")

@@ -37,20 +37,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LinkedAnalogLeverBlock extends AnalogLeverBlock implements ISpecialBlockItemRequirement, IWrenchable, LinkedTransmitterBlock {
+    public static BooleanProperty LOCKED = BlockStateProperties.LOCKED;
 
     public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
     private final NonNullSupplier<AnalogLeverBlock> baseSupplier;
 
     public LinkedAnalogLeverBlock(Properties pProperties, NonNullSupplier<AnalogLeverBlock> baseSupplier) {
         super(pProperties);
-        registerDefaultState(defaultBlockState().setValue(POWERED, false));
+        registerDefaultState(defaultBlockState().setValue(POWERED, false).setValue(LOCKED, false));
         this.baseSupplier = baseSupplier;
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
-        pBuilder.add(POWERED);
-        super.createBlockStateDefinition(pBuilder);
+        super.createBlockStateDefinition(pBuilder.add(POWERED, LOCKED));
     }
 
     @Override
@@ -93,8 +93,16 @@ public class LinkedAnalogLeverBlock extends AnalogLeverBlock implements ISpecial
                                           @NotNull Player player,
                                           @NotNull InteractionHand hand,
                                           @NotNull BlockHitResult hit) {
-        if (isHittingBase(state, level, pos, hit))
+        if (isHittingBase(state, level, pos, hit)) {
             return super.use(state, level, pos, player, hand, hit);
+        }
+        if (player.isShiftKeyDown()) {
+            if (!level.isClientSide())
+                level.setBlockAndUpdate(pos, state.cycle(LOCKED));
+            return InteractionResult.SUCCESS;
+        }
+        if (state.getValue(LOCKED))
+            return InteractionResult.CONSUME;
         return InteractionResult.PASS;
     }
 
