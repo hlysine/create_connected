@@ -1,7 +1,6 @@
 package com.hlysine.create_connected.config;
 
 import com.hlysine.create_connected.CreateConnected;
-import com.simibubi.create.content.kinetics.BlockStressDefaults;
 import com.simibubi.create.content.kinetics.BlockStressValues.IStressValueProvider;
 import com.simibubi.create.foundation.config.ConfigBase;
 import com.simibubi.create.foundation.utility.Couple;
@@ -10,6 +9,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.ForgeConfigSpec.Builder;
 import net.minecraftforge.common.ForgeConfigSpec.ConfigValue;
+import com.hlysine.create_connected.content.BlockStressDefaults;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,22 +24,18 @@ public class CStress extends ConfigBase implements IStressValueProvider {
     public void registerAll(Builder builder) {
         builder.comment(".", Comments.su, Comments.impact)
                 .push("impact");
-        synchronized (BlockStressDefaults.DEFAULT_IMPACTS) {
-            BlockStressDefaults.DEFAULT_IMPACTS.forEach((r, i) -> {
-                if (r.getNamespace().equals(CreateConnected.MODID))
-                    getImpacts().put(r, builder.define(r.getPath(), i));
-            });
-        }
+        BlockStressDefaults.DEFAULT_IMPACTS.forEach((r, i) -> {
+            if (r.getNamespace().equals(CreateConnected.MODID))
+                getImpacts().put(r, builder.define(r.getPath(), i));
+        });
         builder.pop();
 
         builder.comment(".", Comments.su, Comments.capacity)
                 .push("capacity");
-        synchronized (BlockStressDefaults.DEFAULT_CAPACITIES) {
-            BlockStressDefaults.DEFAULT_CAPACITIES.forEach((r, i) -> {
-                if (r.getNamespace().equals(CreateConnected.MODID))
-                    getCapacities().put(r, builder.define(r.getPath(), i));
-            });
-        }
+        BlockStressDefaults.DEFAULT_CAPACITIES.forEach((r, i) -> {
+            if (r.getNamespace().equals(CreateConnected.MODID))
+                getCapacities().put(r, builder.define(r.getPath(), i));
+        });
         builder.pop();
     }
 
@@ -93,7 +89,7 @@ public class CStress extends ConfigBase implements IStressValueProvider {
 
     @Override
     public String getName() {
-        return "stressValues.v" + BlockStressDefaults.FORCED_UPDATE_VERSION;
+        return "stressValues.v" + com.simibubi.create.content.kinetics.BlockStressDefaults.FORCED_UPDATE_VERSION;
     }
 
     public Map<ResourceLocation, ConfigValue<Double>> getImpacts() {
