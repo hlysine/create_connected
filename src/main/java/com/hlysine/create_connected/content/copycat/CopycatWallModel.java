@@ -144,59 +144,81 @@ public class CopycatWallModel extends CopycatModel implements ISimpleCopycatMode
                 return quads;
             }
 
-            Direction extendSide = sides.entrySet().stream().filter(s -> s.getValue() == WallSide.TALL).findFirst()
-                    .or(() -> sides.entrySet().stream().filter(s -> s.getValue() == WallSide.LOW).findFirst())
-                    .map(Map.Entry::getKey)
-                    .orElse(null);
+            // Assemble the center if needed
+            Direction extendSide = null;
+            long sideCount = sides.values().stream().filter(s -> s != WallSide.NONE).count();
+            if (sideCount == 1) {
+                extendSide = sides.entrySet().stream().filter(s -> s.getValue() != WallSide.NONE).findFirst().map(Map.Entry::getKey).orElse(null);
+            } else if (sideCount != 0) {
+                for (Direction direction : Iterate.horizontalDirections) {
+                    if (tall) {
+                        assemblePiece(templateQuads, quads,
+                                aabb(3, 16, 3).move(0, 0, 0),
+                                vec3(5, 0, 5),
+                                cull(SOUTH | EAST),
+                                (int) direction.toYRot(), false);
+                    } else {
+                        assemblePiece(templateQuads, quads,
+                                aabb(3, 7, 3).move(0, 0, 0),
+                                vec3(5, 0, 5),
+                                cull(SOUTH | EAST),
+                                (int) direction.toYRot(), false);
+                        assemblePiece(templateQuads, quads,
+                                aabb(3, 7, 3).move(0, 9, 0),
+                                vec3(5, 7, 5),
+                                cull(SOUTH | EAST),
+                                (int) direction.toYRot(), false);
+                    }
+                }
+            }
 
             // Assemble the sides
             // One side will extend to the center
-            if (extendSide != null)
-                for (Direction direction : Iterate.horizontalDirections) {
-                    int rot = (int) direction.toYRot();
-                    boolean extend = extendSide == direction;
-                    boolean cullEnd = !extend || (sides.get(direction.getOpposite()) == sides.get(direction));
+            for (Direction direction : Iterate.horizontalDirections) {
+                int rot = (int) direction.toYRot();
+                boolean extend = extendSide == direction;
+                boolean cullEnd = !extend || (sides.get(direction.getOpposite()) == sides.get(direction));
 
-                    switch (sides.get(direction)) {
-                        case NONE -> {
-                            continue;
-                        }
-                        case LOW -> {
-                            assemblePiece(templateQuads, quads,
-                                    aabb(3, 7, extend ? 11 : 5).move(0, 0, extend ? 5 : 11),
-                                    vec3(5, 0, extend ? 5 : 11),
-                                    cull(UP | (cullEnd ? NORTH : 0) | EAST),
-                                    rot, false);
-                            assemblePiece(templateQuads, quads,
-                                    aabb(3, 7, extend ? 11 : 5).move(13, 0, extend ? 5 : 11),
-                                    vec3(8, 0, extend ? 5 : 11),
-                                    cull(UP | (cullEnd ? NORTH : 0) | WEST),
-                                    rot, false);
-                            assemblePiece(templateQuads, quads,
-                                    aabb(3, 7, extend ? 11 : 5).move(0, 9, extend ? 5 : 11),
-                                    vec3(5, 7, extend ? 5 : 11),
-                                    cull(DOWN | (cullEnd ? NORTH : 0) | EAST),
-                                    rot, false);
-                            assemblePiece(templateQuads, quads,
-                                    aabb(3, 7, extend ? 11 : 5).move(13, 9, extend ? 5 : 11),
-                                    vec3(8, 7, extend ? 5 : 11),
-                                    cull(DOWN | (cullEnd ? NORTH : 0) | WEST),
-                                    rot, false);
-                        }
-                        case TALL -> {
-                            assemblePiece(templateQuads, quads,
-                                    aabb(3, 16, extend ? 11 : 5).move(0, 0, extend ? 5 : 11),
-                                    vec3(5, 0, extend ? 5 : 11),
-                                    cull((cullEnd ? NORTH : 0) | EAST),
-                                    rot, false);
-                            assemblePiece(templateQuads, quads,
-                                    aabb(3, 16, extend ? 11 : 5).move(13, 0, extend ? 5 : 11),
-                                    vec3(8, 0, extend ? 5 : 11),
-                                    cull((cullEnd ? NORTH : 0) | WEST),
-                                    rot, false);
-                        }
+                switch (sides.get(direction)) {
+                    case NONE -> {
+                        continue;
+                    }
+                    case LOW -> {
+                        assemblePiece(templateQuads, quads,
+                                aabb(3, 7, extend ? 11 : 5).move(0, 0, 0),
+                                vec3(5, 0, extend ? 5 : 11),
+                                cull(UP | (cullEnd ? NORTH : 0) | EAST),
+                                rot, false);
+                        assemblePiece(templateQuads, quads,
+                                aabb(3, 7, extend ? 11 : 5).move(13, 0, 0),
+                                vec3(8, 0, extend ? 5 : 11),
+                                cull(UP | (cullEnd ? NORTH : 0) | WEST),
+                                rot, false);
+                        assemblePiece(templateQuads, quads,
+                                aabb(3, 7, extend ? 11 : 5).move(0, 9, 0),
+                                vec3(5, 7, extend ? 5 : 11),
+                                cull(DOWN | (cullEnd ? NORTH : 0) | EAST),
+                                rot, false);
+                        assemblePiece(templateQuads, quads,
+                                aabb(3, 7, extend ? 11 : 5).move(13, 9, 0),
+                                vec3(8, 7, extend ? 5 : 11),
+                                cull(DOWN | (cullEnd ? NORTH : 0) | WEST),
+                                rot, false);
+                    }
+                    case TALL -> {
+                        assemblePiece(templateQuads, quads,
+                                aabb(3, 16, extend ? 11 : 5).move(0, 0, 0),
+                                vec3(5, 0, extend ? 5 : 11),
+                                cull((cullEnd ? NORTH : 0) | EAST),
+                                rot, false);
+                        assemblePiece(templateQuads, quads,
+                                aabb(3, 16, extend ? 11 : 5).move(13, 0, 0),
+                                vec3(8, 0, extend ? 5 : 11),
+                                cull((cullEnd ? NORTH : 0) | WEST),
+                                rot, false);
                     }
                 }
+            }
         }
 
         return quads;

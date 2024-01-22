@@ -108,7 +108,16 @@ public class CopycatWallBlock extends WaterloggedCopycatBlock {
     public boolean isIgnoredConnectivitySide(BlockAndTintGetter reader, BlockState state, Direction face,
                                              BlockPos fromPos, BlockPos toPos) {
         BlockState toState = reader.getBlockState(toPos);
-        return !toState.is(this) || !state.is(this);
+        if (!toState.is(this) || !state.is(this)) return true;
+
+        boolean isCross = true;
+        for (Direction direction : Iterate.horizontalDirections) {
+            if (toState.getValue(byDirection(direction)) == WallSide.NONE) {
+                isCross = false;
+                break;
+            }
+        }
+        return isCross;
     }
 
     @Override
