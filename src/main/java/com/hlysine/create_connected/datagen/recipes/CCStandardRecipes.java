@@ -228,16 +228,18 @@ public class CCStandardRecipes extends CreateRecipeProvider {
 
     GeneratedRecipe COPYCAT_BEAM = copycat(CCBlocks.COPYCAT_BEAM, 4);
 
+    GeneratedRecipe COPYCAT_STEP_CYCLE =
+            conversionCycle(ImmutableList.of(AllBlocks.COPYCAT_STEP, CCBlocks.COPYCAT_VERTICAL_STEP));
+
+    GeneratedRecipe COPYCAT_VERTICAL_STEP = copycat(CCBlocks.COPYCAT_VERTICAL_STEP, 4);
+
     GeneratedRecipe COPYCAT_STAIRS = copycat(CCBlocks.COPYCAT_STAIRS, 1);
 
     GeneratedRecipe COPYCAT_FENCE = copycat(CCBlocks.COPYCAT_FENCE, 1);
 
     GeneratedRecipe COPYCAT_WALL = copycat(CCBlocks.COPYCAT_WALL, 1);
 
-    GeneratedRecipe COPYCAT_STEP_CYCLE =
-            conversionCycle(ImmutableList.of(AllBlocks.COPYCAT_STEP, CCBlocks.COPYCAT_VERTICAL_STEP));
-
-    GeneratedRecipe COPYCAT_VERTICAL_STEP = copycat(CCBlocks.COPYCAT_VERTICAL_STEP, 4);
+    GeneratedRecipe COPYCAT_BOARD = copycat(CCBlocks.COPYCAT_BOARD, 8);
 
     GeneratedRecipe CHERRY_WINDOW = window(() -> Items.CHERRY_PLANKS, CCBlocks.CHERRY_WINDOW);
     GeneratedRecipe BAMBOO_WINDOW = window(() -> Items.BAMBOO_PLANKS, CCBlocks.BAMBOO_WINDOW);

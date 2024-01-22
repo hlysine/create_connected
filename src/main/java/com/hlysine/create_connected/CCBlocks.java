@@ -35,10 +35,13 @@ import com.simibubi.create.content.decoration.palettes.WindowBlock;
 import com.simibubi.create.content.kinetics.chainDrive.ChainDriveGenerator;
 import com.simibubi.create.content.kinetics.simpleRelays.BracketedKineticBlockModel;
 import com.simibubi.create.foundation.data.*;
+import com.simibubi.create.foundation.utility.Iterate;
 import com.tterrag.registrate.providers.DataGenContext;
 import com.tterrag.registrate.providers.RegistrateBlockstateProvider;
 import com.tterrag.registrate.util.entry.BlockEntry;
+import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.*;
@@ -46,6 +49,12 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.level.storage.loot.LootPool;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.predicates.ExplosionCondition;
+import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
+import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.Tags;
@@ -472,6 +481,30 @@ public class CCBlocks {
                     .onRegister(b -> CopycatWallBlock.wall = b)
                     .tag(BlockTags.WALLS)
                     .blockstate((c, p) -> p.simpleBlock(c.getEntry(), p.models().withExistingParent("wrapped_copycat_wall", "block/barrier")))
+                    .register();
+
+    public static final BlockEntry<CopycatBoardBlock> COPYCAT_BOARD =
+            REGISTRATE.block("copycat_board", CopycatBoardBlock::new)
+                    .transform(BuilderTransformers.copycat())
+                    .transform(FeatureToggle.register())
+                    .onRegister(CreateRegistrate.blockModel(() -> CopycatBoardModel::new))
+                    .loot((lt, block) -> {
+                        LootTable.Builder builder = LootTable.lootTable();
+                        for (Direction direction : Iterate.directions) {
+                            builder.withPool(
+                                    LootPool.lootPool()
+                                            .setRolls(ConstantValue.exactly(1.0F))
+                                            .when(ExplosionCondition.survivesExplosion())
+                                            .when(LootItemBlockStatePropertyCondition
+                                                    .hasBlockStateProperties(block)
+                                                    .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(CopycatBoardBlock.byDirection(direction), true)))
+                                            .add(LootItem.lootTableItem(block))
+                            );
+                        }
+                        lt.add(block, builder);
+                    })
+                    .item()
+                    .transform(customItemModel("copycat_base", "board"))
                     .register();
 
     public static final BlockEntry<WindowBlock> CHERRY_WINDOW = CCWindowGen.woodenWindowBlock(WoodType.CHERRY, Blocks.CHERRY_PLANKS, () -> RenderType::translucent, true);
