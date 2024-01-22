@@ -151,8 +151,6 @@
   "create_connected.ponder.linked_transmitter.text_3": "受信機は、128ブロック以内の送信機のレッドストーン信号を受信します",
   "create_connected.ponder.linked_transmitter.text_4": "2つのスロットにアイテムを設定すると、周波数を設定できます",
   "create_connected.ponder.linked_transmitter.text_5": "周波数が一致するリンク同士のみが送受信を行います",
-  "create_connected.ponder.linked_transmitter.text_6": "リンク送信機はボタンとアナログレバーにも対応しています",
-  "create_connected.ponder.linked_transmitter.text_7": "レンチを持って右クリックして、送信機を入力装置から取り外すことができます",
   "create_connected.ponder.parallel_gearbox.header": "並列ギアボックスによる回転力の伝達",
   "create_connected.ponder.parallel_gearbox.text_1": "この設定はシンプルですが、現在は不可能です",
   "create_connected.ponder.parallel_gearbox.text_2": "これをブロックにカプセル化したものが並列ギアボックスです",
