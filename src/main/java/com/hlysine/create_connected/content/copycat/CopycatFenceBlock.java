@@ -2,6 +2,7 @@ package com.hlysine.create_connected.content.copycat;
 
 import com.simibubi.create.content.decoration.copycat.CopycatBlock;
 import com.simibubi.create.content.decoration.copycat.WaterloggedCopycatBlock;
+import com.simibubi.create.foundation.utility.Iterate;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
@@ -114,12 +115,27 @@ public class CopycatFenceBlock extends WaterloggedCopycatBlock {
     @Override
     public boolean isIgnoredConnectivitySide(BlockAndTintGetter reader, BlockState state, Direction face,
                                              BlockPos fromPos, BlockPos toPos) {
-        return true;
+        BlockState toState = reader.getBlockState(toPos);
+        if (!toState.is(this)) return true;
+        return !canConnectTexturesToward(reader, toPos, fromPos, toState);
     }
 
     @Override
     public boolean canConnectTexturesToward(BlockAndTintGetter reader, BlockPos fromPos, BlockPos toPos, BlockState state) {
+        if (toPos.getX() == fromPos.getX() && toPos.getZ() == fromPos.getZ()) {
+            BlockState toState = reader.getBlockState(toPos);
+            if (toState.is(this)) {
+                if (isPole(state) && isPole(toState)) return true;
+            }
+        }
         return false;
+    }
+
+    private static boolean isPole(BlockState state) {
+        for (Direction direction : Iterate.horizontalDirections) {
+            if (state.getValue(PipeBlock.PROPERTY_BY_DIRECTION.get(direction))) return false;
+        }
+        return true;
     }
 
     @Override
