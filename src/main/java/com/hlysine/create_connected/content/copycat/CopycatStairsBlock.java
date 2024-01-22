@@ -151,74 +151,55 @@ public class CopycatStairsBlock extends WaterloggedCopycatBlock {
     @Override
     public boolean isIgnoredConnectivitySide(BlockAndTintGetter reader, BlockState state, Direction face,
                                              BlockPos fromPos, BlockPos toPos) {
+        boolean flipped = state.getValue(HALF) == Half.TOP;
+        Direction facing = state.getValue(StairBlock.FACING);
         BlockState toState = reader.getBlockState(toPos);
-
-        if (!toState.is(this)) {
-            return !canConnectTexturesToward(reader, fromPos, toPos, state);
+        BlockPos diff = toPos.subtract(fromPos);
+        if (diff.equals(Vec3i.ZERO)) {
+            return true;
         }
-        return false;
+        Direction side = Direction.fromDelta(diff.getX(), diff.getY(), diff.getZ());
+
+        if (toState.is(this)) {
+            return false;
+        } else {
+            if (diff.getY() == 0) {
+                // if target is level with this block,
+                // only allows it to connect if it's adjacent to a full face of this block
+                int fullCount = 0;
+                if (diff.getX() != 0 && getFaceShape(state, Direction.fromAxisAndDirection(Axis.X, directionOf(diff.getX()))).isFull())
+                    fullCount++;
+                if (diff.getZ() != 0 && getFaceShape(state, Direction.fromAxisAndDirection(Axis.Z, directionOf(diff.getZ()))).isFull())
+                    fullCount++;
+                return fullCount == 0;
+            } else {
+                // if target is not level with this block,
+                // only allow connections below the base of this block
+                return (diff.getY() > 0) != flipped;
+            }
+        }
     }
 
     @Override
     public boolean canConnectTexturesToward(BlockAndTintGetter reader, BlockPos fromPos, BlockPos toPos, BlockState state) {
         BlockState toState = reader.getBlockState(toPos);
-
-        if (!state.is(this) && toState.is(this)) {
-            return canConnectTexturesToward(reader, toPos, fromPos, toState);
-        }
-
         BlockPos diff = toPos.subtract(fromPos);
         if (diff.equals(Vec3i.ZERO)) {
             return true;
         }
+        Direction side = Direction.fromDelta(diff.getX(), diff.getY(), diff.getZ());
 
-        int connectScore = 0;
-        if (diff.getX() != 0) {
-            FaceShape shape = getFaceShape(state, Direction.fromAxisAndDirection(Axis.X, diff.getX() > 0 ? AxisDirection.POSITIVE : AxisDirection.NEGATIVE));
-            if (!shape.canConnect())
-                return false;
-            if (shape.isFull())
-                connectScore += 2;
-            else connectScore += 1;
+        if (side != null) {
+            FaceShape sideShape = getFaceShape(state, side);
+            if (!sideShape.canConnect()) return false;
             if (toState.is(this)) {
-                FaceShape toShape = getFaceShape(toState, Direction.fromAxisAndDirection(Axis.X, diff.getX() < 0 ? AxisDirection.POSITIVE : AxisDirection.NEGATIVE));
-                if (!toShape.canConnect())
-                    return false;
-                if (diff.getY() == 0 && diff.getZ() == 0 && !toShape.equals(shape))
-                    return false;
+                if (!sideShape.equals(getFaceShape(toState, side.getOpposite()))) return false;
+            } else {
+                if (!sideShape.isFull()) return false;
             }
         }
-        if (diff.getY() != 0) {
-            FaceShape shape = getFaceShape(state, Direction.fromAxisAndDirection(Axis.Y, diff.getY() > 0 ? AxisDirection.POSITIVE : AxisDirection.NEGATIVE));
-            if (!shape.canConnect())
-                return false;
-            if (shape.isFull())
-                connectScore += 2;
-            else connectScore += 1;
-            if (toState.is(this)) {
-                FaceShape toShape = getFaceShape(toState, Direction.fromAxisAndDirection(Axis.Y, diff.getY() < 0 ? AxisDirection.POSITIVE : AxisDirection.NEGATIVE));
-                if (!toShape.canConnect())
-                    return false;
-                if (diff.getX() == 0 && diff.getZ() == 0 && !toShape.equals(shape))
-                    return false;
-            }
-        }
-        if (diff.getZ() != 0) {
-            FaceShape shape = getFaceShape(state, Direction.fromAxisAndDirection(Axis.Z, diff.getZ() > 0 ? AxisDirection.POSITIVE : AxisDirection.NEGATIVE));
-            if (!shape.canConnect())
-                return false;
-            if (shape.isFull())
-                connectScore += 2;
-            else connectScore += 1;
-            if (toState.is(this)) {
-                FaceShape toShape = getFaceShape(toState, Direction.fromAxisAndDirection(Axis.Z, diff.getZ() < 0 ? AxisDirection.POSITIVE : AxisDirection.NEGATIVE));
-                if (!toShape.canConnect())
-                    return false;
-                if (diff.getX() == 0 && diff.getY() == 0 && !toShape.equals(shape))
-                    return false;
-            }
-        }
-        return !toState.is(this) && connectScore >= 2 || toState.is(this);
+
+        return true;
     }
 
     @Override
@@ -253,6 +234,10 @@ public class CopycatStairsBlock extends WaterloggedCopycatBlock {
         BlockState state = CopycatBlock.getMaterial(reader, targetPos);
         if (state.is(Blocks.AIR)) return reader.getBlockState(targetPos);
         return state;
+    }
+
+    private static AxisDirection directionOf(int value) {
+        return value >= 0 ? AxisDirection.POSITIVE : AxisDirection.NEGATIVE;
     }
 
     /**
