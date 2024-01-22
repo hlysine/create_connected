@@ -1,4 +1,20 @@
 {
   "advancement.create_connected.brass_gearbox": "Organizație Serioasă",
-  "advancement.create_connected.control_chip": "Fabricație Precisă"
+  "advancement.create_connected.brass_gearbox.desc": "Plasați o cutie de Viteze din Alamă",
+  "advancement.create_connected.control_chip": "Fabricație Precisă",
+  "advancement.create_connected.control_chip.desc": "Asamblează un Cip de Control",
+  "advancement.create_connected.overstress_clutch": "Întrerupător de Circuit",
+  "advancement.create_connected.overstress_clutch.desc": "Declanșează un Ambreiaj Suprasolicitat",
+  "advancement.create_connected.pulse_generator_infinite_loop": "Buclă Infinită",
+  "advancement.create_connected.root": "Bun venit la Creare: Conectat",
+  "advancement.create_connected.root.desc": "Gadget-uri pentru toate situațiile",
+  "advancement.create_connected.sequenced_pulse_generator": "Supremație computațională",
+  "advancement.create_connected.shear_pin": "Fixare!",
+  "block.create_connected.bamboo_window": "Fereastră din Bambus",
+  "block.create_connected.brake": "Frână",
+  "block.create_connected.brake.tooltip.summary": "Un dispozitiv care produce _stres imens_ când este pornit, oprind rețeaua prin _suprasolicitare_ ei.",
+  "block.create_connected.brass_gearbox": "Cutie de Viteze din Alamă",
+  "block.create_connected.brass_gearbox.tooltip.summary": "O cutie de viteze în care direcția de rotație a tuturor celor 4 laturi este _configurabilă independent_.",
+  "block.create_connected.centrifugal_clutch": "Ambreiaj centrifugal",
+  "block.create_connected.centrifugal_clutch.tooltip.summary": "Un ambreiaj care este _cuplat_ numai dacă turația de intrare este _mai rapidă_ decât un prag configurabil."
 }
