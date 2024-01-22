@@ -107,10 +107,12 @@ public class CopycatSlabBlock extends WaterloggedCopycatBlock {
             return correctAxis && diff.distManhattan(Vec3i.ZERO) <= 2;
         }
 
+        if (face.getAxis() == axis) return false;
+
         if (toState.is(this)) {
             return FaceShape.canConnect(getFaceShape(state, face), getFaceShape(toState, face.getOpposite()));
         } else {
-            return face.getAxis() != axis;
+            return true;
         }
     }
 
@@ -277,7 +279,7 @@ public class CopycatSlabBlock extends WaterloggedCopycatBlock {
         }
 
         public static boolean canConnect(FaceShape shape1, FaceShape shape2) {
-            return shape1 == FaceShape.FULL || shape2 == FaceShape.FULL || shape1 == shape2;
+            return shape1 == shape2 || shape1 == FaceShape.FULL && shape2 != FaceShape.NONE || shape2 == FaceShape.FULL && shape1 != FaceShape.NONE;
         }
 
         public boolean hasContact() {
