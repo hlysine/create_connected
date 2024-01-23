@@ -54,11 +54,11 @@ public class CopycatBoardModel extends CopycatModel implements ISimpleCopycatMod
                     if (south == 1) edges.put(Direction.SOUTH, true);
                     if (east == 1) edges.put(Direction.EAST, true);
                     if (west == 1) edges.put(Direction.WEST, true);
-                    assemblePiece(templateQuads, quads,
-                            aabb(14 + east + west, 1, 14 + north + south).move(1 - west, 0, 1 - north),
+                    assemblePiece(templateQuads, quads, 0, direction == Direction.UP,
                             vec3(1 - west, 0, 1 - north),
-                            cull(NORTH * (1 - north) | SOUTH * (1 - south) | EAST * (1 - east) | WEST * (1 - west)),
-                            0, direction == Direction.UP);
+                            aabb(14 + east + west, 1, 14 + north + south).move(1 - west, 0, 1 - north),
+                            cull(NORTH * (1 - north) | SOUTH * (1 - south) | EAST * (1 - east) | WEST * (1 - west))
+                    );
                 } else {
                     int up = !topEdges.get(direction) ? 1 : 0;
                     int down = !bottomEdges.get(direction) ? 1 : 0;
@@ -68,11 +68,11 @@ public class CopycatBoardModel extends CopycatModel implements ISimpleCopycatMod
                     if (down == 1) bottomEdges.put(direction, true);
                     if (left == 1) leftEdges.put(direction, true);
                     if (right == 1) leftEdges.put(direction.getCounterClockWise(), true);
-                    assemblePiece(templateQuads, quads,
-                            aabb(14 + left + right, 14 + up + down, 1).move(1 - right, 1 - down, 0),
+                    assemblePiece(templateQuads, quads, (int) direction.toYRot() + 180, false,
                             vec3(1 - right, 1 - down, 0),
-                            cull(UP * (1 - up) | DOWN * (1 - down) | EAST * (1 - left) | WEST * (1 - right)),
-                            (int) direction.toYRot() + 180, false);
+                            aabb(14 + left + right, 14 + up + down, 1).move(1 - right, 1 - down, 0),
+                            cull(UP * (1 - up) | DOWN * (1 - down) | EAST * (1 - left) | WEST * (1 - right))
+                    );
                 }
         }
 
