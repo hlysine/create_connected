@@ -153,7 +153,9 @@ public class CopycatBoardBlock extends WaterloggedCopycatBlock {
             }
         }
         if (options.size() > 1) {
+            Direction backup = options.get(0);
             options.removeIf(d -> d.getAxis() != context.getClickedFace().getAxis());
+            if (options.size() == 0) options.add(backup);
         }
         if (options.size() == 0) {
             return super.onSneakWrenched(state, context);
