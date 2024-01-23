@@ -30,7 +30,7 @@ public class ItemUseOverridesMixin {
                                                         Operation<InteractionResult> original,
                                                         @Local ResourceLocation id) {
         if (PreciseItemUseOverrides.OVERRIDES.contains(id)) {
-            HitResult hitResult = player.pick(player.getBlockReach(), 1, false);
+            HitResult hitResult = player.pick(player.getReachDistance(), 1, false);
             if (hitResult instanceof BlockHitResult blockHit) {
                 return original.call(instance, level, player, interactionHand, blockHit);
             }

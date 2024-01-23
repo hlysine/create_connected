@@ -483,7 +483,6 @@ public class CCBlocks {
     public static final BlockEntry<CopycatWallBlock> COPYCAT_WALL =
             REGISTRATE.block("copycat_wall", CopycatWallBlock::new)
                     .transform(BuilderTransformers.copycat())
-                    .properties(p -> p.forceSolidOn())
                     .tag(BlockTags.WALLS)
                     .transform(FeatureToggle.register())
                     .onRegister(CreateRegistrate.blockModel(() -> CopycatWallModel::new))

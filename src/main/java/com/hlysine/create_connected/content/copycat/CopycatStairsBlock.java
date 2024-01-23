@@ -24,6 +24,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import static com.hlysine.create_connected.content.MathHelper.DirectionFromDelta;
 import static net.minecraft.core.Direction.*;
 import static net.minecraft.world.level.block.StairBlock.HALF;
 
@@ -158,7 +159,7 @@ public class CopycatStairsBlock extends WaterloggedCopycatBlock {
         if (diff.equals(Vec3i.ZERO)) {
             return true;
         }
-        Direction side = Direction.fromDelta(diff.getX(), diff.getY(), diff.getZ());
+        Direction side = DirectionFromDelta(diff.getX(), diff.getY(), diff.getZ());
 
         if (toState.is(this)) {
             return false;
@@ -187,7 +188,7 @@ public class CopycatStairsBlock extends WaterloggedCopycatBlock {
         if (diff.equals(Vec3i.ZERO)) {
             return true;
         }
-        Direction side = Direction.fromDelta(diff.getX(), diff.getY(), diff.getZ());
+        Direction side = DirectionFromDelta(diff.getX(), diff.getY(), diff.getZ());
 
         if (side != null) {
             FaceShape sideShape = getFaceShape(state, side);
