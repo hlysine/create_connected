@@ -133,6 +133,5 @@
       ],
       "rolls": 1.0
     }
-  ],
-  "random_sequence": "create_connected:blocks/copycat_board"
+  ]
 }
