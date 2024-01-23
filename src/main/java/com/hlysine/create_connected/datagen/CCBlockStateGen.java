@@ -12,7 +12,6 @@ import com.tterrag.registrate.util.nullness.NonNullFunction;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.ButtonBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.AttachFace;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -36,8 +35,12 @@ public class CCBlockStateGen {
                             ? p.models().getExistingFile(buttonOn)
                             : p.models().getExistingFile(buttonOff),
                     state -> state.getValue(BlockStateProperties.POWERED)
-                            ? p.models().getExistingFile(p.modLoc("block/linked_transmitter/block_powered" + (state.getValue(BlockStateProperties.ATTACH_FACE) == AttachFace.WALL ? "_vertical" : "")))
-                            : p.models().getExistingFile(p.modLoc("block/linked_transmitter/block" + (state.getValue(BlockStateProperties.ATTACH_FACE) == AttachFace.WALL ? "_vertical" : ""))),
+                            ? p.models().getExistingFile(p.modLoc("block/linked_transmitter/block_powered" +
+                            (state.getValue(BlockStateProperties.ATTACH_FACE) == AttachFace.WALL ? "_vertical" : "") +
+                            (state.getValue(BlockStateProperties.LOCKED) ? "_locked" : "")))
+                            : p.models().getExistingFile(p.modLoc("block/linked_transmitter/block" +
+                            (state.getValue(BlockStateProperties.ATTACH_FACE) == AttachFace.WALL ? "_vertical" : "") +
+                            (state.getValue(BlockStateProperties.LOCKED) ? "_locked" : ""))),
                     state -> state.getValue(BlockStateProperties.ATTACH_FACE) == AttachFace.WALL
             );
         };
@@ -51,8 +54,12 @@ public class CCBlockStateGen {
                             ? p.models().getExistingFile(leverOff)
                             : p.models().getExistingFile(leverOn),
                     state -> state.getValue(BlockStateProperties.POWERED)
-                            ? p.models().getExistingFile(p.modLoc("block/linked_transmitter/block_powered" + (state.getValue(BlockStateProperties.ATTACH_FACE) == AttachFace.WALL ? "_vertical" : "")))
-                            : p.models().getExistingFile(p.modLoc("block/linked_transmitter/block" + (state.getValue(BlockStateProperties.ATTACH_FACE) == AttachFace.WALL ? "_vertical" : ""))),
+                            ? p.models().getExistingFile(p.modLoc("block/linked_transmitter/block_powered" +
+                            (state.getValue(BlockStateProperties.ATTACH_FACE) == AttachFace.WALL ? "_vertical" : "") +
+                            (state.getValue(BlockStateProperties.LOCKED) ? "_locked" : "")))
+                            : p.models().getExistingFile(p.modLoc("block/linked_transmitter/block" +
+                            (state.getValue(BlockStateProperties.ATTACH_FACE) == AttachFace.WALL ? "_vertical" : "") +
+                            (state.getValue(BlockStateProperties.LOCKED) ? "_locked" : ""))),
                     state -> false
             );
         };
@@ -64,19 +71,21 @@ public class CCBlockStateGen {
         for (BlockState state : block.getStateDefinition().getPossibleStates()) {
             Direction facing = state.getValue(BlockStateProperties.HORIZONTAL_FACING);
             AttachFace face = state.getValue(BlockStateProperties.ATTACH_FACE);
-            boolean powered = state.getValue(ButtonBlock.POWERED);
+            boolean powered = state.getValue(BlockStateProperties.POWERED);
+            boolean locked = state.getValue(BlockStateProperties.LOCKED);
             int xRot = face == AttachFace.FLOOR ? 0 : (face == AttachFace.WALL ? 90 : 180);
             int yRot = (int) (face == AttachFace.CEILING ? facing : facing.getOpposite()).toYRot();
-            builder.part()
-                    .modelFile(baseModel.apply(state))
-                    .rotationX(xRot)
-                    .rotationY(yRot)
-                    .uvLock(uvLock.apply(state))
-                    .addModel()
-                    .condition(BlockStateProperties.HORIZONTAL_FACING, facing)
-                    .condition(BlockStateProperties.ATTACH_FACE, face)
-                    .condition(BlockStateProperties.POWERED, powered)
-                    .end();
+            if (!locked)
+                builder.part()
+                        .modelFile(baseModel.apply(state))
+                        .rotationX(xRot)
+                        .rotationY(yRot)
+                        .uvLock(uvLock.apply(state))
+                        .addModel()
+                        .condition(BlockStateProperties.HORIZONTAL_FACING, facing)
+                        .condition(BlockStateProperties.ATTACH_FACE, face)
+                        .condition(BlockStateProperties.POWERED, powered)
+                        .end();
             builder.part()
                     .modelFile(moduleModel.apply(state))
                     .rotationX(xRot)
@@ -86,6 +95,7 @@ public class CCBlockStateGen {
                     .condition(BlockStateProperties.HORIZONTAL_FACING, facing)
                     .condition(BlockStateProperties.ATTACH_FACE, face)
                     .condition(BlockStateProperties.POWERED, powered)
+                    .condition(BlockStateProperties.LOCKED, locked)
                     .end();
         }
     }

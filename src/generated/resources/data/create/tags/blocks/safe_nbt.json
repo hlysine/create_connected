@@ -1,5 +1,20 @@
 {
   "values": [
-    "create_connected:sequenced_pulse_generator"
+    "create_connected:sequenced_pulse_generator",
+    "create_connected:linked_stone_button",
+    "create_connected:linked_polished_blackstone_button",
+    "create_connected:linked_oak_button",
+    "create_connected:linked_spruce_button",
+    "create_connected:linked_birch_button",
+    "create_connected:linked_acacia_button",
+    "create_connected:linked_cherry_button",
+    "create_connected:linked_jungle_button",
+    "create_connected:linked_dark_oak_button",
+    "create_connected:linked_crimson_button",
+    "create_connected:linked_warped_button",
+    "create_connected:linked_mangrove_button",
+    "create_connected:linked_bamboo_button",
+    "create_connected:linked_lever",
+    "create_connected:linked_analog_lever"
   ]
 }

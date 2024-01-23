@@ -143,6 +143,18 @@ public class CopycatBeamBlock extends WaterloggedCopycatBlock {
         return true;
     }
 
+    @Override
+    public boolean hidesNeighborFace(BlockGetter level, BlockPos pos, BlockState state, BlockState neighborState,
+                                     Direction dir) {
+        if (state.is(this) == neighborState.is(this)) {
+            if (getMaterial(level, pos).skipRendering(getMaterial(level, pos.relative(dir)), dir.getOpposite())) {
+                return state.getValue(AXIS) == dir.getAxis() && neighborState.getValue(AXIS) == dir.getAxis();
+            }
+        }
+
+        return false;
+    }
+
     @SuppressWarnings("deprecation")
     @Override
     public @NotNull BlockState rotate(@NotNull BlockState state, Rotation rot) {

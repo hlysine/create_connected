@@ -7,6 +7,7 @@ import com.hlysine.create_connected.content.brassgearbox.BrassGearboxBlock;
 import com.hlysine.create_connected.content.centrifugalclutch.CentrifugalClutchBlock;
 import com.hlysine.create_connected.content.chaincogwheel.ChainCogwheelBlock;
 import com.hlysine.create_connected.content.copycat.*;
+import com.hlysine.create_connected.content.BlockStressDefaults;
 import com.hlysine.create_connected.content.freewheelclutch.FreewheelClutchBlock;
 import com.hlysine.create_connected.content.invertedclutch.InvertedClutchBlock;
 import com.hlysine.create_connected.content.invertedgearshift.InvertedGearshiftBlock;
@@ -28,21 +29,31 @@ import com.simibubi.create.AllSpriteShifts;
 import com.simibubi.create.AllTags;
 import com.simibubi.create.Create;
 import com.simibubi.create.content.decoration.encasing.EncasedCTBehaviour;
-import com.simibubi.create.content.kinetics.BlockStressDefaults;
 import com.simibubi.create.content.kinetics.chainDrive.ChainDriveGenerator;
 import com.simibubi.create.content.kinetics.simpleRelays.BracketedKineticBlockModel;
 import com.simibubi.create.foundation.data.*;
+import com.simibubi.create.foundation.utility.Iterate;
 import com.tterrag.registrate.providers.DataGenContext;
 import com.tterrag.registrate.providers.RegistrateBlockstateProvider;
 import com.tterrag.registrate.util.entry.BlockEntry;
+import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.storage.loot.LootPool;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.predicates.ExplosionCondition;
+import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
+import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.HashMap;
@@ -239,7 +250,9 @@ public class CCBlocks {
             LINKED_BUTTONS.put(type, REGISTRATE
                     .block("linked_" + namePath + "_button", properties -> new LinkedButtonBlock(properties, buttonBlock))
                     .initialProperties(() -> buttonBlock)
+                    .tag(AllTags.AllBlockTags.SAFE_NBT.tag)
                     .transform(LinkedTransmitterItem.register())
+                    .onRegister(PreciseItemUseOverrides::addBlock)
                     .blockstate(CCBlockStateGen.linkedButton(
                             new ResourceLocation("block/" + namePath + "_button"),
                             new ResourceLocation("block/" + namePath + "_button_pressed")
@@ -271,7 +284,9 @@ public class CCBlocks {
     public static final BlockEntry<LinkedLeverBlock> LINKED_LEVER = REGISTRATE
             .block("linked_lever", properties -> new LinkedLeverBlock(properties, (LeverBlock) Blocks.LEVER))
             .initialProperties(() -> Blocks.LEVER)
+            .tag(AllTags.AllBlockTags.SAFE_NBT.tag)
             .transform(LinkedTransmitterItem.register())
+            .onRegister(PreciseItemUseOverrides::addBlock)
             .blockstate(CCBlockStateGen.linkedLever(
                     new ResourceLocation("block/lever"),
                     new ResourceLocation("block/lever_on")
@@ -281,7 +296,9 @@ public class CCBlocks {
     public static final BlockEntry<LinkedAnalogLeverBlock> LINKED_ANALOG_LEVER = REGISTRATE
             .block("linked_analog_lever", properties -> new LinkedAnalogLeverBlock(properties, AllBlocks.ANALOG_LEVER))
             .initialProperties(() -> Blocks.LEVER)
+            .tag(AllTags.AllBlockTags.SAFE_NBT.tag)
             .transform(LinkedTransmitterItem.register())
+            .onRegister(PreciseItemUseOverrides::addBlock)
             .blockstate(CCBlockStateGen.linkedLever(
                     Create.asResource("block/analog_lever/block"),
                     Create.asResource("block/analog_lever/block")
@@ -400,6 +417,7 @@ public class CCBlocks {
     public static final BlockEntry<CopycatSlabBlock> COPYCAT_SLAB =
             REGISTRATE.block("copycat_slab", CopycatSlabBlock::new)
                     .transform(BuilderTransformers.copycat())
+                    .tag(BlockTags.SLABS)
                     .transform(FeatureToggle.register())
                     .loot((lt, block) -> lt.add(block, lt.createSlabItemTable(block)))
                     .onRegister(CreateRegistrate.blockModel(() -> CopycatSlabModel::new))
@@ -432,6 +450,77 @@ public class CCBlocks {
                     .onRegister(CreateRegistrate.blockModel(() -> CopycatVerticalStepModel::new))
                     .item()
                     .transform(customItemModel("copycat_base", "vertical_step"))
+                    .register();
+
+    public static final BlockEntry<CopycatStairsBlock> COPYCAT_STAIRS =
+            REGISTRATE.block("copycat_stairs", CopycatStairsBlock::new)
+                    .transform(BuilderTransformers.copycat())
+                    .tag(BlockTags.STAIRS)
+                    .transform(FeatureToggle.register())
+                    .onRegister(CreateRegistrate.blockModel(() -> CopycatStairsModel::new))
+                    .item()
+                    .transform(customItemModel("copycat_base", "stairs"))
+                    .register();
+
+    public static final BlockEntry<CopycatFenceBlock> COPYCAT_FENCE =
+            REGISTRATE.block("copycat_fence", CopycatFenceBlock::new)
+                    .transform(BuilderTransformers.copycat())
+                    .tag(BlockTags.FENCES, Tags.Blocks.FENCES)
+                    .transform(FeatureToggle.register())
+                    .onRegister(CreateRegistrate.blockModel(() -> CopycatFenceModel::new))
+                    .item()
+                    .transform(customItemModel("copycat_base", "fence"))
+                    .register();
+
+    public static final BlockEntry<WrappedFenceBlock> WRAPPED_COPYCAT_FENCE =
+            REGISTRATE.block("wrapped_copycat_fence", WrappedFenceBlock::new)
+                    .initialProperties(() -> Blocks.OAK_FENCE)
+                    .onRegister(b -> CopycatFenceBlock.fence = b)
+                    .tag(BlockTags.FENCES, Tags.Blocks.FENCES)
+                    .blockstate((c, p) -> p.simpleBlock(c.getEntry(), p.models().withExistingParent("wrapped_copycat_fence", "block/barrier")))
+                    .register();
+
+    public static final BlockEntry<CopycatWallBlock> COPYCAT_WALL =
+            REGISTRATE.block("copycat_wall", CopycatWallBlock::new)
+                    .transform(BuilderTransformers.copycat())
+                    .properties(p -> p.forceSolidOn())
+                    .tag(BlockTags.WALLS)
+                    .transform(FeatureToggle.register())
+                    .onRegister(CreateRegistrate.blockModel(() -> CopycatWallModel::new))
+                    .item()
+                    .transform(customItemModel("copycat_base", "wall"))
+                    .register();
+
+    public static final BlockEntry<WrappedWallBlock> WRAPPED_COPYCAT_WALL =
+            REGISTRATE.block("wrapped_copycat_wall", WrappedWallBlock::new)
+                    .initialProperties(() -> Blocks.COBBLESTONE_WALL)
+                    .onRegister(b -> CopycatWallBlock.wall = b)
+                    .tag(BlockTags.WALLS)
+                    .blockstate((c, p) -> p.simpleBlock(c.getEntry(), p.models().withExistingParent("wrapped_copycat_wall", "block/barrier")))
+                    .register();
+
+    public static final BlockEntry<CopycatBoardBlock> COPYCAT_BOARD =
+            REGISTRATE.block("copycat_board", CopycatBoardBlock::new)
+                    .transform(BuilderTransformers.copycat())
+                    .transform(FeatureToggle.register())
+                    .onRegister(CreateRegistrate.blockModel(() -> CopycatBoardModel::new))
+                    .loot((lt, block) -> {
+                        LootTable.Builder builder = LootTable.lootTable();
+                        for (Direction direction : Iterate.directions) {
+                            builder.withPool(
+                                    LootPool.lootPool()
+                                            .setRolls(ConstantValue.exactly(1.0F))
+                                            .when(ExplosionCondition.survivesExplosion())
+                                            .when(LootItemBlockStatePropertyCondition
+                                                    .hasBlockStateProperties(block)
+                                                    .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(CopycatBoardBlock.byDirection(direction), true)))
+                                            .add(LootItem.lootTableItem(block))
+                            );
+                        }
+                        lt.add(block, builder);
+                    })
+                    .item()
+                    .transform(customItemModel("copycat_base", "board"))
                     .register();
 
     public static void register() {
