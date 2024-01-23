@@ -6,6 +6,7 @@ import com.simibubi.create.content.decoration.copycat.WaterloggedCopycatBlock;
 import com.simibubi.create.foundation.utility.Iterate;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockAndTintGetter;
@@ -98,7 +99,10 @@ public class CopycatBoardBlock extends WaterloggedCopycatBlock {
         BlockPos blockPos = context.getClickedPos();
         BlockState state = context.getLevel().getBlockState(blockPos);
         if (state.is(this)) {
-            return state.setValue(byDirection(context.getClickedFace().getOpposite()), true);
+            if (!state.getValue(byDirection(context.getClickedFace().getOpposite())))
+                return state.setValue(byDirection(context.getClickedFace().getOpposite()), true);
+            else
+                return state.setValue(byDirection(context.getClickedFace()), true);
         } else {
             return stateForPlacement.setValue(byDirection(context.getClickedFace().getOpposite()), true);
         }
@@ -108,7 +112,25 @@ public class CopycatBoardBlock extends WaterloggedCopycatBlock {
     @Override
     public boolean canBeReplaced(BlockState pState, BlockPlaceContext pUseContext) {
         ItemStack itemstack = pUseContext.getItemInHand();
-        return !pState.getValue(byDirection(pUseContext.getClickedFace().getOpposite())) && itemstack.is(this.asItem());
+        if (!itemstack.is(this.asItem())) return false;
+        if (!pState.getValue(byDirection(pUseContext.getClickedFace().getOpposite()))) return true;
+        if (!pState.getValue(byDirection(pUseContext.getClickedFace()))) {
+            double hitLoc = switch (pUseContext.getClickedFace().getAxis()) {
+                case X -> pUseContext.getClickLocation().x;
+                case Y -> pUseContext.getClickLocation().y;
+                case Z -> pUseContext.getClickLocation().z;
+            };
+            int direction = switch (pUseContext.getClickedFace().getAxis()) {
+                case X -> pUseContext.getClickedFace().getNormal().getX();
+                case Y -> pUseContext.getClickedFace().getNormal().getY();
+                case Z -> pUseContext.getClickedFace().getNormal().getZ();
+            };
+            double offset = hitLoc - Math.round(hitLoc);
+            if (Mth.sign(direction) == Mth.sign(offset) && Math.abs(offset) < 2 / 16f) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
