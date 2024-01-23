@@ -1,5 +1,6 @@
 package com.hlysine.create_connected.content.copycat;
 
+import com.google.common.collect.ImmutableMap;
 import com.hlysine.create_connected.CCShapes;
 import com.simibubi.create.content.decoration.copycat.WaterloggedCopycatBlock;
 import com.simibubi.create.foundation.utility.Iterate;
@@ -10,7 +11,9 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.PipeBlock;
+import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -21,6 +24,8 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
+import java.util.Objects;
+import java.util.function.Function;
 
 public class CopycatBoardBlock extends WaterloggedCopycatBlock {
     public static BooleanProperty UP = BlockStateProperties.UP;
@@ -30,6 +35,7 @@ public class CopycatBoardBlock extends WaterloggedCopycatBlock {
     public static BooleanProperty EAST = BlockStateProperties.EAST;
     public static BooleanProperty WEST = BlockStateProperties.WEST;
     public static final Map<Direction, BooleanProperty> PROPERTY_BY_DIRECTION = PipeBlock.PROPERTY_BY_DIRECTION;
+    private final ImmutableMap<BlockState, VoxelShape> shapesCache;
 
     public CopycatBoardBlock(Properties properties) {
         super(properties);
@@ -41,6 +47,7 @@ public class CopycatBoardBlock extends WaterloggedCopycatBlock {
                 .setValue(EAST, false)
                 .setValue(WEST, false)
         );
+        this.shapesCache = this.getShapeForEachState(CopycatBoardBlock::calculateMultifaceShape);
     }
 
     @Override
@@ -68,9 +75,7 @@ public class CopycatBoardBlock extends WaterloggedCopycatBlock {
         return !canFaceBeOccluded(state, face);
     }
 
-    @SuppressWarnings("deprecation")
-    @Override
-    public @NotNull VoxelShape getShape(@NotNull BlockState pState, @NotNull BlockGetter pLevel, @NotNull BlockPos pPos, @NotNull CollisionContext pContext) {
+    private static VoxelShape calculateMultifaceShape(BlockState pState) {
         VoxelShape shape = Shapes.empty();
         for (Direction direction : Iterate.directions) {
             if (pState.getValue(byDirection(direction))) {
@@ -78,6 +83,12 @@ public class CopycatBoardBlock extends WaterloggedCopycatBlock {
             }
         }
         return shape;
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    public @NotNull VoxelShape getShape(@NotNull BlockState pState, @NotNull BlockGetter pLevel, @NotNull BlockPos pPos, @NotNull CollisionContext pContext) {
+        return Objects.requireNonNull(this.shapesCache.get(pState));
     }
 
     @Override
@@ -110,6 +121,28 @@ public class CopycatBoardBlock extends WaterloggedCopycatBlock {
         }
 
         return getMaterial(level, pos).skipRendering(neighborState, dir.getOpposite());
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    public @NotNull BlockState rotate(@NotNull BlockState pState, Rotation pRotation) {
+        return mapDirections(pState, pRotation::rotate);
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    public @NotNull BlockState mirror(@NotNull BlockState pState, Mirror pMirror) {
+        return mapDirections(pState, pMirror::mirror);
+    }
+
+    private BlockState mapDirections(BlockState pState, Function<Direction, Direction> pDirectionalFunction) {
+        BlockState blockstate = pState;
+
+        for (Direction direction : Iterate.directions) {
+            blockstate = blockstate.setValue(byDirection(pDirectionalFunction.apply(direction)), pState.getValue(byDirection(direction)));
+        }
+
+        return blockstate;
     }
 
     public static BooleanProperty byDirection(Direction direction) {
