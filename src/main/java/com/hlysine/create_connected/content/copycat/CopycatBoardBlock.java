@@ -122,7 +122,15 @@ public class CopycatBoardBlock extends WaterloggedCopycatBlock {
     public boolean canBeReplaced(BlockState pState, BlockPlaceContext pUseContext) {
         ItemStack itemstack = pUseContext.getItemInHand();
         if (!itemstack.is(this.asItem())) return false;
-        if (!pState.getValue(byDirection(pUseContext.getClickedFace().getOpposite()))) return true;
+        if (!pState.getValue(byDirection(pUseContext.getClickedFace().getOpposite()))) {
+            Direction direction = pUseContext.getClickedFace().getOpposite();
+            double pos = getByAxis(pUseContext.getClickedPos(), direction.getAxis());
+            if (getByAxis(direction.getNormal(), direction.getAxis()) > 0) pos += 1;
+            double loc = getByAxis(pUseContext.getClickLocation(), direction.getAxis());
+            if (Math.abs(pos - loc) < 2 / 16.0) {
+                return true;
+            }
+        }
         if (!pState.getValue(byDirection(pUseContext.getClickedFace()))) {
             double hitLoc = getByAxis(pUseContext.getClickLocation(), pUseContext.getClickedFace().getAxis());
             int direction = getByAxis(pUseContext.getClickedFace().getNormal(), pUseContext.getClickedFace().getAxis());
