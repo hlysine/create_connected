@@ -104,7 +104,8 @@ public class CopycatWallModel extends CopycatModel implements ISimpleCopycatMode
             // Special case: A straight panel
             if (sides.get(Direction.SOUTH) == sides.get(Direction.NORTH) &&
                     sides.get(Direction.EAST) == sides.get(Direction.WEST) &&
-                    (sides.get(Direction.NORTH) == WallSide.NONE || sides.get(Direction.EAST) == WallSide.NONE)) {
+                    (sides.get(Direction.NORTH) == WallSide.NONE || sides.get(Direction.EAST) == WallSide.NONE) &&
+                    (sides.get(Direction.NORTH) != WallSide.NONE || sides.get(Direction.EAST) != WallSide.NONE)) {
                 int rot = sides.get(Direction.SOUTH) == WallSide.NONE ? 90 : 0;
 
                 if (!tall) {
@@ -149,24 +150,28 @@ public class CopycatWallModel extends CopycatModel implements ISimpleCopycatMode
             long sideCount = sides.values().stream().filter(s -> s != WallSide.NONE).count();
             if (sideCount == 1) {
                 extendSide = sides.entrySet().stream().filter(s -> s.getValue() != WallSide.NONE).findFirst().map(Map.Entry::getKey).orElse(null);
-            } else if (sideCount != 0) {
+            } else {
                 for (Direction direction : Iterate.horizontalDirections) {
                     if (tall) {
+                        boolean cullCurrent = sides.get(direction.getOpposite()) == WallSide.TALL;
+                        boolean cullAdjacent = sides.get(direction.getClockWise()) == WallSide.TALL;
                         assemblePiece(templateQuads, quads,
                                 aabb(3, 16, 3).move(0, 0, 0),
                                 vec3(5, 0, 5),
-                                cull(SOUTH | EAST),
+                                cull(SOUTH | EAST | (cullCurrent ? NORTH : 0) | (cullAdjacent ? WEST : 0)),
                                 (int) direction.toYRot(), false);
                     } else {
+                        boolean cullCurrent = sides.get(direction.getOpposite()) != WallSide.NONE;
+                        boolean cullAdjacent = sides.get(direction.getClockWise()) != WallSide.NONE;
                         assemblePiece(templateQuads, quads,
                                 aabb(3, 7, 3).move(0, 0, 0),
                                 vec3(5, 0, 5),
-                                cull(SOUTH | EAST),
+                                cull(UP | SOUTH | EAST | (cullCurrent ? NORTH : 0) | (cullAdjacent ? WEST : 0)),
                                 (int) direction.toYRot(), false);
                         assemblePiece(templateQuads, quads,
                                 aabb(3, 7, 3).move(0, 9, 0),
                                 vec3(5, 7, 5),
-                                cull(SOUTH | EAST),
+                                cull(DOWN | SOUTH | EAST | (cullCurrent ? NORTH : 0) | (cullAdjacent ? WEST : 0)),
                                 (int) direction.toYRot(), false);
                     }
                 }
@@ -177,7 +182,7 @@ public class CopycatWallModel extends CopycatModel implements ISimpleCopycatMode
             for (Direction direction : Iterate.horizontalDirections) {
                 int rot = (int) direction.toYRot();
                 boolean extend = extendSide == direction;
-                boolean cullEnd = !extend || (sides.get(direction.getOpposite()) == sides.get(direction));
+                boolean cullEnd = !extend;
 
                 switch (sides.get(direction)) {
                     case NONE -> {

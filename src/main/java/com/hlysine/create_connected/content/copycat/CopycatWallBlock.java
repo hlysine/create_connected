@@ -125,6 +125,13 @@ public class CopycatWallBlock extends WaterloggedCopycatBlock {
         BlockState toState = reader.getBlockState(toPos);
         if (!toState.is(this)) return false;
 
+        long sideCount = Arrays.stream(Iterate.horizontalDirections).filter(s -> state.getValue(byDirection(s)) != WallSide.NONE).count();
+        if (sideCount > 2)
+            return false;
+        if (sideCount == 2 && (state.getValue(NORTH_WALL) != state.getValue(SOUTH_WALL) || state.getValue(EAST_WALL) != state.getValue(WEST_WALL))) {
+            return false;
+        }
+
         BlockPos diff = toPos.subtract(fromPos);
         if (diff.equals(Vec3i.ZERO)) {
             return true;
