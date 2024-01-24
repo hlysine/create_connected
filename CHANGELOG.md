@@ -5,6 +5,30 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.6.0 - 2024-01-24
+
+### Added
+
+- **Copycat Stairs**
+  - Connected textures may not be perfect due to copycat limitations
+- **Copycat Fence**
+- **Copycat Fence Gate**
+- **Copycat Wall**
+- **Copycat Board**
+  - Pre-assembled versions: Copycat Box and Copycat Catwalk
+- Lock mechanism for linked transmitters to avoid misclicks on the frequency slots
+
+### Fixed
+
+- Crash due to bad MixinExtras version (0.3.3) (#24, #26)
+- Crash due to concurrent modification when registering block stress values (#13)
+- Copycat Vertical Step not mirroring properly in schematics
+- Custom copycats not having their block entities registered
+- Linked Analog Lever not responding to sneak-right click when holding item in hand (#25)
+- Missing registrations for Linked Stone Buttons in 1.18/1.19 (#25)
+- Copycat Slabs connecting their textures across a half-block gap (#27)
+- Small error in the ponder scene for the Linked Transmitter
+
 ## 0.5.1 - 2024-01-19
 
 ### Fixed

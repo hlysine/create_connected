@@ -9,12 +9,23 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Axis;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.AttachFace;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.Vec3;
 
 public class LinkedTransmitterFrequencySlot extends ValueBoxTransform.Dual {
 
     public LinkedTransmitterFrequencySlot(boolean first) {
         super(first);
+    }
+
+    @Override
+    public boolean shouldRender(BlockState state) {
+        return !state.getValue(BlockStateProperties.LOCKED) && super.shouldRender(state);
+    }
+
+    @Override
+    public boolean testHit(BlockState state, Vec3 localHit) {
+        return !state.getValue(BlockStateProperties.LOCKED) && super.testHit(state, localHit);
     }
 
     @Override

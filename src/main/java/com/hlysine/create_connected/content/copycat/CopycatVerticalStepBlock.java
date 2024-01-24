@@ -21,6 +21,7 @@ import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -175,10 +176,43 @@ public class CopycatVerticalStepBlock extends ShimWaterloggedCopycatBlock {
         return true;
     }
 
+    @Override
+    public boolean hidesNeighborFace(BlockGetter level, BlockPos pos, BlockState state, BlockState neighborState,
+                                     Direction dir) {
+        if (state.is(this) == neighborState.is(this)) {
+            if (getMaterial(level, pos).skipRendering(getMaterial(level, pos.relative(dir)), dir.getOpposite())) {
+                return dir.getAxis().isVertical() && neighborState.getValue(FACING) == state.getValue(FACING);
+            }
+        }
+
+        return false;
+    }
+
     @SuppressWarnings("deprecation")
     @Override
     public @NotNull BlockState rotate(@NotNull BlockState pState, Rotation pRot) {
         return pState.setValue(FACING, pRot.rotate(pState.getValue(FACING)));
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    public @NotNull BlockState mirror(@NotNull BlockState pState, @NotNull Mirror pMirror) {
+        Axis mirrorAxis = null;
+        for (Axis axis : Iterate.axes) {
+            if (pMirror.rotation().inverts(axis)) {
+                mirrorAxis = axis;
+                break;
+            }
+        }
+        if (mirrorAxis == null || mirrorAxis.isVertical()) {
+            return super.mirror(pState, pMirror);
+        }
+        Direction facing = pState.getValue(FACING);
+        if (facing.getAxis() != mirrorAxis) {
+            return pState.setValue(FACING, facing.getClockWise());
+        } else {
+            return pState.setValue(FACING, facing.getCounterClockWise());
+        }
     }
 
     @MethodsReturnNonnullByDefault

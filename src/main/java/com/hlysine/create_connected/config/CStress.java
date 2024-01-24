@@ -1,21 +1,19 @@
 package com.hlysine.create_connected.config;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.function.Supplier;
-
 import com.hlysine.create_connected.CreateConnected;
-import com.simibubi.create.Create;
-import com.simibubi.create.content.kinetics.BlockStressDefaults;
 import com.simibubi.create.content.kinetics.BlockStressValues.IStressValueProvider;
 import com.simibubi.create.foundation.config.ConfigBase;
 import com.simibubi.create.foundation.utility.Couple;
 import com.simibubi.create.foundation.utility.RegisteredObjects;
-
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.ForgeConfigSpec.Builder;
 import net.minecraftforge.common.ForgeConfigSpec.ConfigValue;
+import com.hlysine.create_connected.content.BlockStressDefaults;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Supplier;
 
 public class CStress extends ConfigBase implements IStressValueProvider {
 
@@ -91,7 +89,7 @@ public class CStress extends ConfigBase implements IStressValueProvider {
 
     @Override
     public String getName() {
-        return "stressValues.v" + BlockStressDefaults.FORCED_UPDATE_VERSION;
+        return "stressValues.v" + com.simibubi.create.content.kinetics.BlockStressDefaults.FORCED_UPDATE_VERSION;
     }
 
     public Map<ResourceLocation, ConfigValue<Double>> getImpacts() {

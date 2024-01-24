@@ -21,6 +21,7 @@ import com.hlysine.create_connected.content.shearpin.ShearPinBlockEntity;
 import com.hlysine.create_connected.content.sixwaygearbox.SixWayGearboxBlockEntity;
 import com.hlysine.create_connected.content.sixwaygearbox.SixWayGearboxInstance;
 import com.hlysine.create_connected.content.sixwaygearbox.SixWayGearboxRenderer;
+import com.simibubi.create.content.decoration.copycat.CopycatBlockEntity;
 import com.simibubi.create.content.kinetics.simpleRelays.BracketedKineticBlockEntityInstance;
 import com.simibubi.create.content.kinetics.simpleRelays.BracketedKineticBlockEntityRenderer;
 import com.simibubi.create.content.kinetics.simpleRelays.SimpleKineticBlockEntity;
@@ -131,7 +132,7 @@ public class CCBlockEntityTypes {
                 CCBlocks.LINKED_BUTTONS.values().forEach(b::validBlock);
                 return b;
             })
-            .validBlocks(CCBlocks.LINKED_LEVER)
+            .validBlocks(CCBlocks.LINKED_STONE_BUTTON, CCBlocks.LINKED_POLISHED_BLACKSTONE_BUTTON, CCBlocks.LINKED_LEVER)
             .renderer(() -> SmartBlockEntityRenderer::new)
             .register();
 
@@ -141,6 +142,21 @@ public class CCBlockEntityTypes {
             .validBlocks(CCBlocks.LINKED_ANALOG_LEVER)
             .renderer(() -> LinkedAnalogLeverRenderer::new)
             .register();
+
+    public static final BlockEntityEntry<CopycatBlockEntity> COPYCAT =
+            REGISTRATE.blockEntity("copycat", CopycatBlockEntity::new)
+                    .validBlocks(
+                            CCBlocks.COPYCAT_BLOCK,
+                            CCBlocks.COPYCAT_SLAB,
+                            CCBlocks.COPYCAT_BEAM,
+                            CCBlocks.COPYCAT_VERTICAL_STEP,
+                            CCBlocks.COPYCAT_STAIRS,
+                            CCBlocks.COPYCAT_FENCE,
+                            CCBlocks.COPYCAT_FENCE_GATE,
+                            CCBlocks.COPYCAT_WALL,
+                            CCBlocks.COPYCAT_BOARD
+                    )
+                    .register();
 
 
     public static void register() {

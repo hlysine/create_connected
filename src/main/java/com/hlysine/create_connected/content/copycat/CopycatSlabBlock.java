@@ -2,6 +2,7 @@ package com.hlysine.create_connected.content.copycat;
 
 import com.hlysine.create_connected.CCBlocks;
 import com.hlysine.create_connected.CCShapes;
+import com.simibubi.create.content.decoration.copycat.CopycatBlock;
 import com.simibubi.create.foundation.placement.IPlacementHelper;
 import com.simibubi.create.foundation.placement.PlacementHelpers;
 import com.simibubi.create.foundation.placement.PlacementOffset;
@@ -18,9 +19,7 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Mirror;
-import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -108,10 +107,12 @@ public class CopycatSlabBlock extends ShimWaterloggedCopycatBlock {
             return correctAxis && diff.distManhattan(Vec3i.ZERO) <= 2;
         }
 
+        if (face.getAxis() == axis) return false;
+
         if (toState.is(this)) {
             return FaceShape.canConnect(getFaceShape(state, face), getFaceShape(toState, face.getOpposite()));
         } else {
-            return face.getAxis() != axis;
+            return true;
         }
     }
 
@@ -199,13 +200,19 @@ public class CopycatSlabBlock extends ShimWaterloggedCopycatBlock {
     @Override
     public boolean hidesNeighborFace(BlockGetter level, BlockPos pos, BlockState state, BlockState neighborState,
                                      Direction dir) {
-        if (state.is(this) == neighborState.is(this)) {
+        if (neighborState.getBlock() instanceof SlabBlock || neighborState.getBlock() instanceof CopycatSlabBlock) {
             if (getMaterial(level, pos).skipRendering(getMaterial(level, pos.relative(dir)), dir.getOpposite()))
                 return getFaceShape(state, dir) == getFaceShape(neighborState, dir.getOpposite());
         }
 
         return getFaceShape(state, dir) == FaceShape.FULL
                 && getMaterial(level, pos).skipRendering(neighborState, dir.getOpposite());
+    }
+
+    public static BlockState getMaterial(BlockGetter reader, BlockPos targetPos) {
+        BlockState state = CopycatBlock.getMaterial(reader, targetPos);
+        if (state.is(Blocks.AIR)) return reader.getBlockState(targetPos);
+        return state;
     }
 
     @SuppressWarnings("deprecation")
@@ -272,7 +279,7 @@ public class CopycatSlabBlock extends ShimWaterloggedCopycatBlock {
         }
 
         public static boolean canConnect(FaceShape shape1, FaceShape shape2) {
-            return shape1 == FaceShape.FULL || shape2 == FaceShape.FULL || shape1 == shape2;
+            return shape1 == shape2 || shape1 == FaceShape.FULL && shape2 != FaceShape.NONE || shape2 == FaceShape.FULL && shape1 != FaceShape.NONE;
         }
 
         public boolean hasContact() {
