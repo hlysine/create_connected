@@ -11,6 +11,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 
@@ -23,16 +24,16 @@ public class CopycatBoxItem extends BlockItem {
     }
 
     @Override
-    public String getDescriptionId() {
+    public @NotNull String getDescriptionId() {
         return "item.create_connected.copycat_box";
     }
 
     @Override
-    public void registerBlocks(Map<Block, Item> p_195946_1_, Item p_195946_2_) {
+    public void registerBlocks(@NotNull Map<Block, Item> map, @NotNull Item self) {
     }
 
     @Override
-    protected boolean updateCustomBlockEntityTag(BlockPos pos, Level world, Player player, ItemStack stack, BlockState state) {
+    protected boolean updateCustomBlockEntityTag(@NotNull BlockPos pos, @NotNull Level world, Player player, @NotNull ItemStack stack, @NotNull BlockState state) {
         for (Direction direction : Iterate.directions) {
             state = state.setValue(byDirection(direction), true);
         }

@@ -29,7 +29,7 @@ public class VerticalSixWayGearboxItem extends BlockItem {
     }
 
     @Override
-    public void registerBlocks(@NotNull Map<Block, Item> p_195946_1_, @NotNull Item p_195946_2_) {
+    public void registerBlocks(@NotNull Map<Block, Item> map, @NotNull Item self) {
     }
 
     @Override
