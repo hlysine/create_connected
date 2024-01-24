@@ -44,7 +44,7 @@ with this new version.
 New kinetic components, copycats, redstone components and more!
 Visit [the GitHub wiki](https://github.com/hlysine/create_connected/wiki/New-Features) for a complete list!
 
-[![All features](https://cdn.modrinth.com/data/Vg5TIO6d/images/b202a4eed4d157f279c7cfb8595085b51cb21134.png)](https://github.com/hlysine/create_connected/wiki/New-Features)
+[![All features](https://cdn.modrinth.com/data/Vg5TIO6d/images/897c4d67eae94a366c49782ddb1654c5a6e383c5.png)](https://github.com/hlysine/create_connected/wiki/New-Features)
 
 ### Feature toggle
 
