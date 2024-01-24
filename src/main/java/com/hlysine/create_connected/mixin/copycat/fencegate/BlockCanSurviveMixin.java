@@ -1,10 +1,11 @@
-package com.hlysine.create_connected.mixin.copycat;
+package com.hlysine.create_connected.mixin.copycat.fencegate;
 
-import com.hlysine.create_connected.content.copycat.CopycatFenceGateBlock;
+import com.hlysine.create_connected.content.copycat.ICopycatWithWrappedBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.DirtPathBlock;
 import net.minecraft.world.level.block.FarmBlock;
+import net.minecraft.world.level.block.FenceGateBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -23,6 +24,7 @@ public class BlockCanSurviveMixin {
     )
     private void canSurviveCopycat(BlockState pState, LevelReader pLevel, BlockPos pPos, CallbackInfoReturnable<Boolean> cir) {
         BlockState blockstate = pLevel.getBlockState(pPos.above());
-        if (blockstate.getBlock() instanceof CopycatFenceGateBlock) cir.setReturnValue(true);
+        if (ICopycatWithWrappedBlock.unwrap(blockstate.getBlock()) instanceof FenceGateBlock)
+            cir.setReturnValue(true);
     }
 }

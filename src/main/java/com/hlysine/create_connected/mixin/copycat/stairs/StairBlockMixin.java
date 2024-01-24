@@ -1,6 +1,6 @@
-package com.hlysine.create_connected.mixin.copycat;
+package com.hlysine.create_connected.mixin.copycat.stairs;
 
-import com.hlysine.create_connected.CCBlocks;
+import com.hlysine.create_connected.content.copycat.ICopycatWithWrappedBlock;
 import net.minecraft.world.level.block.StairBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
@@ -16,6 +16,6 @@ public class StairBlockMixin {
             cancellable = true
     )
     private static void copycatStairs(BlockState pState, CallbackInfoReturnable<Boolean> cir) {
-        if (pState.is(CCBlocks.COPYCAT_STAIRS.get())) cir.setReturnValue(true);
+        if (ICopycatWithWrappedBlock.unwrap(pState.getBlock()) instanceof StairBlock) cir.setReturnValue(true);
     }
 }

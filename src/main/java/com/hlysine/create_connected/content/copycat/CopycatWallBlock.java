@@ -34,7 +34,7 @@ import static net.minecraft.core.Direction.Axis;
 import static net.minecraft.world.level.block.WallBlock.*;
 
 @SuppressWarnings("deprecation")
-public class CopycatWallBlock extends WaterloggedCopycatBlock {
+public class CopycatWallBlock extends WaterloggedCopycatBlock implements ICopycatWithWrappedBlock {
 
     public static WallBlock wall;
 
@@ -47,6 +47,11 @@ public class CopycatWallBlock extends WaterloggedCopycatBlock {
                 .setValue(EAST_WALL, WallSide.NONE)
                 .setValue(WEST_WALL, WallSide.NONE)
         );
+    }
+
+    @Override
+    public Block getWrappedBlock() {
+        return wall;
     }
 
     @Override
