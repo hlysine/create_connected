@@ -175,8 +175,9 @@ public class CopycatBoardBlock extends WaterloggedCopycatBlock implements ISpeci
         if (world instanceof ServerLevel) {
             if (player != null && !player.isCreative()) {
                 List<ItemStack> drops = Block.getDrops(defaultBlockState().setValue(byDirection(options.get(0)), true), (ServerLevel) world, pos, world.getBlockEntity(pos), player, context.getItemInHand());
-                if (drops.size() > 0)
-                    player.getInventory().placeItemBackInInventory(drops.get(0).copyWithCount(1));
+                for (ItemStack drop : drops) {
+                    player.getInventory().placeItemBackInInventory(drop);
+                }
             }
             world.setBlockAndUpdate(pos, state.setValue(byDirection(options.get(0)), false));
             playRemoveSound(world, pos);
