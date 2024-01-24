@@ -1,4 +1,5 @@
 {
+  "replace": false,
   "values": [
     "create_connected:copycat_fence_gate",
     "create_connected:wrapped_copycat_fence_gate"
