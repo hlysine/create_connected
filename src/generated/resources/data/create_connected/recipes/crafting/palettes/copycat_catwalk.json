@@ -1,0 +1,31 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "create_connected:feature_enabled",
+          "feature": "create_connected:copycat_catwalk",
+          "invert": false
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "category": "misc",
+        "key": {
+          "s": {
+            "item": "create_connected:copycat_board"
+          }
+        },
+        "pattern": [
+          "s s",
+          " s "
+        ],
+        "result": {
+          "item": "create_connected:copycat_catwalk"
+        },
+        "show_notification": true
+      }
+    }
+  ]
+}

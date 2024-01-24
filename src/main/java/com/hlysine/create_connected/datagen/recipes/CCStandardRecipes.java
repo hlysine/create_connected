@@ -250,6 +250,14 @@ public class CCStandardRecipes extends CreateRecipeProvider {
                     .pattern(" ss")
             );
 
+    GeneratedRecipe COPYCAT_CATWALK = create(CCItems.COPYCAT_CATWALK).unlockedBy(CCBlocks.COPYCAT_BOARD::get)
+            .requiresResultFeature()
+            .viaShaped(b -> b
+                    .define('s', CCBlocks.COPYCAT_BOARD)
+                    .pattern("s s")
+                    .pattern(" s ")
+            );
+
     GeneratedRecipe CHERRY_WINDOW = window(() -> Items.CHERRY_PLANKS, CCBlocks.CHERRY_WINDOW);
     GeneratedRecipe BAMBOO_WINDOW = window(() -> Items.BAMBOO_PLANKS, CCBlocks.BAMBOO_WINDOW);
     GeneratedRecipe CHERRY_WINDOW_PANE = windowPane(() -> CCBlocks.CHERRY_WINDOW, CCBlocks.CHERRY_WINDOW_PANE);
