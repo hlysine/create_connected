@@ -241,6 +241,15 @@ public class CCStandardRecipes extends CreateRecipeProvider {
 
     GeneratedRecipe COPYCAT_BOARD = copycat(CCBlocks.COPYCAT_BOARD, 8);
 
+    GeneratedRecipe COPYCAT_BOX = create(CCItems.COPYCAT_BOX).unlockedBy(CCBlocks.COPYCAT_BOARD::get)
+            .requiresResultFeature()
+            .viaShaped(b -> b
+                    .define('s', CCBlocks.COPYCAT_BOARD)
+                    .pattern("ss ")
+                    .pattern("s s")
+                    .pattern(" ss")
+            );
+
     GeneratedRecipe CHERRY_WINDOW = window(() -> Items.CHERRY_PLANKS, CCBlocks.CHERRY_WINDOW);
     GeneratedRecipe BAMBOO_WINDOW = window(() -> Items.BAMBOO_PLANKS, CCBlocks.BAMBOO_WINDOW);
     GeneratedRecipe CHERRY_WINDOW_PANE = windowPane(() -> CCBlocks.CHERRY_WINDOW, CCBlocks.CHERRY_WINDOW_PANE);
