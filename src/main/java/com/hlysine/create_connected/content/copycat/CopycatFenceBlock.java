@@ -27,7 +27,7 @@ import org.jetbrains.annotations.Nullable;
 import static net.minecraft.world.level.block.CrossCollisionBlock.*;
 
 @SuppressWarnings("deprecation")
-public class CopycatFenceBlock extends ShimWaterloggedCopycatBlock {
+public class CopycatFenceBlock extends ShimWaterloggedCopycatBlock implements ICopycatWithWrappedBlock {
 
     public static FenceBlock fence;
 
@@ -39,6 +39,11 @@ public class CopycatFenceBlock extends ShimWaterloggedCopycatBlock {
                 .setValue(EAST, false)
                 .setValue(WEST, false)
         );
+    }
+
+    @Override
+    public Block getWrappedBlock() {
+        return fence;
     }
 
     @Override

@@ -29,7 +29,7 @@ import static net.minecraft.core.Direction.*;
 import static net.minecraft.world.level.block.StairBlock.HALF;
 
 @SuppressWarnings("deprecation")
-public class CopycatStairsBlock extends ShimWaterloggedCopycatBlock {
+public class CopycatStairsBlock extends ShimWaterloggedCopycatBlock implements ICopycatWithWrappedBlock {
 
     private final StairBlock stairs;
 
@@ -41,6 +41,11 @@ public class CopycatStairsBlock extends ShimWaterloggedCopycatBlock {
                 .setValue(HALF, Half.BOTTOM)
                 .setValue(StairBlock.SHAPE, StairsShape.STRAIGHT)
         );
+    }
+
+    @Override
+    public Block getWrappedBlock() {
+        return stairs;
     }
 
     @Override

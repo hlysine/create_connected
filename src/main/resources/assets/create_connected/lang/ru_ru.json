@@ -137,6 +137,8 @@
   "create_connected.ponder.linked_transmitter.text_3": "Приёмники улавливают редстоун-сигнал передатчиков в радиусе 128 блоков",
   "create_connected.ponder.linked_transmitter.text_4": "Поместите предметы в два слота, чтобы указать частоту",
   "create_connected.ponder.linked_transmitter.text_5": "Передатчики только одной частоты могут сообщаться",
+  "create_connected.ponder.linked_transmitter.text_6": "Альтернативные передатчики также работают с кнопками и аналоговыми рычагами",
+  "create_connected.ponder.linked_transmitter.text_7": "ПКМ по передатчику ключом, чтобы отвязать его от источника сигнала",
   "create_connected.ponder.parallel_gearbox.header": "Передачей силы вращения с помощью параллельных коробок передач",
   "create_connected.ponder.parallel_gearbox.text_1": "Такая конструкция проста, но на данный момент невозможна",
   "create_connected.ponder.parallel_gearbox.text_2": "Параллельная коробка передач - это компактный эквивалент этой установки",

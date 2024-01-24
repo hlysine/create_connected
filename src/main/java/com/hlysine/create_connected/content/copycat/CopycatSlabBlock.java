@@ -38,7 +38,7 @@ import static com.hlysine.create_connected.content.MathHelper.DirectionFromDelta
 import static net.minecraft.core.Direction.Axis;
 import static net.minecraft.core.Direction.AxisDirection;
 
-public class CopycatSlabBlock extends ShimWaterloggedCopycatBlock {
+public class CopycatSlabBlock extends ShimWaterloggedCopycatBlock implements ICopycatWithWrappedBlock {
 
     public static final EnumProperty<Axis> AXIS = BlockStateProperties.AXIS;
     public static final EnumProperty<SlabType> SLAB_TYPE = BlockStateProperties.SLAB_TYPE;
@@ -50,6 +50,11 @@ public class CopycatSlabBlock extends ShimWaterloggedCopycatBlock {
         registerDefaultState(defaultBlockState()
                 .setValue(AXIS, Axis.Y)
                 .setValue(SLAB_TYPE, SlabType.BOTTOM));
+    }
+
+    @Override
+    public Block getWrappedBlock() {
+        return Blocks.SMOOTH_STONE_SLAB;
     }
 
     @Override
