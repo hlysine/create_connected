@@ -247,7 +247,7 @@ public class CCStandardRecipes extends CreateRecipeProvider {
     GeneratedRecipe COPYCAT_BOX = create(CCItems.COPYCAT_BOX).unlockedBy(CCBlocks.COPYCAT_BOARD::get)
             .requiresResultFeature()
             .viaShaped(b -> b
-                    .define('s', CCBlocks.COPYCAT_BOARD)
+                    .define('s', CCBlocks.COPYCAT_BOARD.get())
                     .pattern("ss ")
                     .pattern("s s")
                     .pattern(" ss")
@@ -256,7 +256,7 @@ public class CCStandardRecipes extends CreateRecipeProvider {
     GeneratedRecipe COPYCAT_CATWALK = create(CCItems.COPYCAT_CATWALK).unlockedBy(CCBlocks.COPYCAT_BOARD::get)
             .requiresResultFeature()
             .viaShaped(b -> b
-                    .define('s', CCBlocks.COPYCAT_BOARD)
+                    .define('s', CCBlocks.COPYCAT_BOARD.get())
                     .pattern("s s")
                     .pattern(" s ")
             );

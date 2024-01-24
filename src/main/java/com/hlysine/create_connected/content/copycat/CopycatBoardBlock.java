@@ -1,19 +1,18 @@
 package com.hlysine.create_connected.content.copycat;
 
 import com.google.common.collect.ImmutableMap;
+import com.hlysine.create_connected.CCItems;
 import com.hlysine.create_connected.CCShapes;
 import com.simibubi.create.content.decoration.copycat.WaterloggedCopycatBlock;
 import com.simibubi.create.content.schematics.requirement.ISpecialBlockItemRequirement;
 import com.simibubi.create.content.schematics.requirement.ItemRequirement;
 import com.simibubi.create.foundation.utility.Iterate;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.core.Position;
-import net.minecraft.core.Vec3i;
+import net.minecraft.core.*;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.context.UseOnContext;
@@ -58,6 +57,13 @@ public class CopycatBoardBlock extends WaterloggedCopycatBlock implements ISpeci
                 .setValue(WEST, false)
         );
         this.shapesCache = this.getShapeForEachState(CopycatBoardBlock::calculateMultifaceShape);
+    }
+
+    @Override
+    public void fillItemCategory(@NotNull CreativeModeTab pTab, @NotNull NonNullList<ItemStack> pItems) {
+        super.fillItemCategory(pTab, pItems);
+        pItems.add(CCItems.COPYCAT_BOX.asStack());
+        pItems.add(CCItems.COPYCAT_CATWALK.asStack());
     }
 
     @Override
@@ -119,7 +125,7 @@ public class CopycatBoardBlock extends WaterloggedCopycatBlock implements ISpeci
 
     @SuppressWarnings("deprecation")
     @Override
-    public boolean canBeReplaced(BlockState pState, BlockPlaceContext pUseContext) {
+    public boolean canBeReplaced(@NotNull BlockState pState, BlockPlaceContext pUseContext) {
         ItemStack itemstack = pUseContext.getItemInHand();
         if (!itemstack.is(this.asItem())) return false;
         if (!pState.getValue(byDirection(pUseContext.getClickedFace().getOpposite()))) {
@@ -175,8 +181,9 @@ public class CopycatBoardBlock extends WaterloggedCopycatBlock implements ISpeci
         if (world instanceof ServerLevel) {
             if (player != null && !player.isCreative()) {
                 List<ItemStack> drops = Block.getDrops(defaultBlockState().setValue(byDirection(options.get(0)), true), (ServerLevel) world, pos, world.getBlockEntity(pos), player, context.getItemInHand());
-                if (drops.size() > 0)
-                    player.getInventory().placeItemBackInInventory(drops.get(0).copyWithCount(1));
+                for (ItemStack drop : drops) {
+                    player.getInventory().placeItemBackInInventory(drop);
+                }
             }
             world.setBlockAndUpdate(pos, state.setValue(byDirection(options.get(0)), false));
             playRemoveSound(world, pos);
