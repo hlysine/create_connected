@@ -5,17 +5,30 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.6.1 - 2024-01-24
+
+### Fixed
+
+- Incorrect item drops with custom loot tables when a Copycat Board is sneak-wrenched
+- Various cases where copycats are not being treated the same as their real counterparts:
+    - Copycat Walls not able to pave tracks
+    - Incorrect placement of Copycat Fences when placed in a filter slot
+    - Incorrect pathfinding around Copycat Fence Gates
+    - Incorrect position when a passenger on a seat is being ejected due to collision with Copycat Slabs
+    - Incorrect transforms when Copycat Stairs are disassembled from a rotated contraption
+- Translation fixes in the ponder scene for Linked Transmitter
+
 ## 0.6.0 - 2024-01-24
 
 ### Added
 
 - **Copycat Stairs**
-  - Connected textures may not be perfect due to copycat limitations
+    - Connected textures may not be perfect due to copycat limitations
 - **Copycat Fence**
 - **Copycat Fence Gate**
 - **Copycat Wall**
 - **Copycat Board**
-  - Pre-assembled versions: Copycat Box and Copycat Catwalk
+    - Pre-assembled versions: Copycat Box and Copycat Catwalk
 - Lock mechanism for linked transmitters to avoid misclicks on the frequency slots
 
 ### Fixed
@@ -40,16 +53,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - **Support for schematics in sub-folders**
-  - The Schematic Table now searches for schematics in sub-folders
-  - Schematics maintain their folder structure when uploaded to servers
-  - The Schematic and Quill now saves schematics in sub-folders if their names contain `/` or ` \ `
+    - The Schematic Table now searches for schematics in sub-folders
+    - Schematics maintain their folder structure when uploaded to servers
+    - The Schematic and Quill now saves schematics in sub-folders if their names contain `/` or ` \ `
 - **Redstone support for smart clutches**
-  - The Overstress Clutch, Centrifugal Clutch and Freewheel Clutch now give comparator signal outputs when they are coupled
-  - The Overstress Clutch can now be reset with a redstone pulse
+    - The Overstress Clutch, Centrifugal Clutch and Freewheel Clutch now give comparator signal outputs when they are
+      coupled
+    - The Overstress Clutch can now be reset with a redstone pulse
 - **Cherry window and window pane** (#18)
 - **Bamboo window and window pane** (#18)
 - **New "Loop" instruction for Sequenced Gearshift**
-  - Restart the whole sequence from the beginning, allowing the Sequenced Gearshift to run indefinitely
+    - Restart the whole sequence from the beginning, allowing the Sequenced Gearshift to run indefinitely
 - A new toggle to disable "crafting remaining item" fix for manual application recipes
 - Translations for Russian, Japanese, Dutch, Chinese Simplified, Romanian
   (thanks [Crowdin contributors](https://crowdin.com/project/create-connected-mod/members)!)
