@@ -1,4 +1,4 @@
-package com.hlysine.create_connected.mixin.copycat;
+package com.hlysine.create_connected.mixin.copycat.stairs;
 
 import com.hlysine.create_connected.content.copycat.ICopycatWithWrappedBlock;
 import net.minecraft.world.level.block.StairBlock;

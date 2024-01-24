@@ -1,4 +1,4 @@
-package com.hlysine.create_connected.mixin.copycat;
+package com.hlysine.create_connected.mixin.copycat.fencegate;
 
 import com.hlysine.create_connected.content.copycat.ICopycatWithWrappedBlock;
 import net.minecraft.core.BlockPos;
