@@ -1,7 +1,6 @@
 package com.hlysine.create_connected.content.copycat;
 
 import com.simibubi.create.content.decoration.copycat.CopycatBlock;
-import com.simibubi.create.content.decoration.copycat.WaterloggedCopycatBlock;
 import com.simibubi.create.foundation.utility.Iterate;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -28,7 +27,7 @@ import org.jetbrains.annotations.Nullable;
 import static net.minecraft.world.level.block.CrossCollisionBlock.*;
 
 @SuppressWarnings("deprecation")
-public class CopycatFenceBlock extends WaterloggedCopycatBlock {
+public class CopycatFenceBlock extends ShimWaterloggedCopycatBlock {
 
     public static FenceBlock fence;
 

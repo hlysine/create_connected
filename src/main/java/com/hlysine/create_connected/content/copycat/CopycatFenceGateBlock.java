@@ -1,7 +1,6 @@
 package com.hlysine.create_connected.content.copycat;
 
 import com.simibubi.create.AllTags;
-import com.simibubi.create.content.decoration.copycat.WaterloggedCopycatBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
@@ -29,7 +28,7 @@ import org.jetbrains.annotations.Nullable;
 import static net.minecraft.world.level.block.FenceGateBlock.*;
 
 @SuppressWarnings("deprecation")
-public class CopycatFenceGateBlock extends WaterloggedCopycatBlock {
+public class CopycatFenceGateBlock extends ShimWaterloggedCopycatBlock {
 
     public static FenceGateBlock fenceGate;
 

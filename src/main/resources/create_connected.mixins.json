@@ -14,6 +14,7 @@
     "contraption.ContraptionMixin",
     "contraption.ItemCombinerMenuMixin",
     "copycat.BlockCanSurviveMixin",
+    "copycat.ConnectedTextureBehaviourMixin",
     "copycat.FenceBlockMixin",
     "copycat.StairBlockMixin",
     "copycat.TrackPaverMixin",
