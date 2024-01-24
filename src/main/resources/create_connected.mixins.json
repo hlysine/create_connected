@@ -15,6 +15,7 @@
     "contraption.ItemCombinerMenuMixin",
     "copycat.FenceBlockMixin",
     "copycat.StairBlockMixin",
+    "copycat.WallBlockMixin",
     "featuretoggle.CreativeModeTabsAccessor",
     "linkedtransmitter.AnalogLeverBlockEntityAccessor",
     "linkedtransmitter.AnalogLeverBlockMixin",
