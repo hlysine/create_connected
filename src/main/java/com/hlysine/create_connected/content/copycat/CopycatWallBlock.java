@@ -8,6 +8,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockAndTintGetter;
@@ -67,6 +68,11 @@ public class CopycatWallBlock extends WaterloggedCopycatBlock {
             return wall.use(pState, pLevel, pPos, pPlayer, pHand, pHit);
         }
         return result;
+    }
+
+    @Override
+    public boolean collisionExtendsVertically(BlockState state, BlockGetter level, BlockPos pos, Entity collidingEntity) {
+        return true;
     }
 
     @Override
