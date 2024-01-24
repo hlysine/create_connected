@@ -1,8 +1,12 @@
 package com.hlysine.create_connected.mixin.copycat;
 
 import com.hlysine.create_connected.CCBlocks;
+import com.hlysine.create_connected.content.copycat.CopycatFenceGateBlock;
+import com.hlysine.create_connected.content.copycat.WrappedFenceGateBlock;
+import net.minecraft.core.Direction;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.FenceBlock;
+import net.minecraft.world.level.block.FenceGateBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -24,6 +28,18 @@ public class FenceBlockMixin {
                         ((FenceBlock) (Object) this).defaultBlockState().is(CCBlocks.WRAPPED_COPYCAT_FENCE.get()) ||
                         pState.is(CCBlocks.COPYCAT_FENCE.get()) ||
                         pState.is(CCBlocks.WRAPPED_COPYCAT_FENCE.get())))
+            cir.setReturnValue(true);
+    }
+
+    @Inject(
+            at = @At("HEAD"),
+            method = "connectsTo(Lnet/minecraft/world/level/block/state/BlockState;ZLnet/minecraft/core/Direction;)Z",
+            cancellable = true
+    )
+    private void connectsToCopycat(BlockState pState, boolean pIsSideSolid, Direction pDirection, CallbackInfoReturnable<Boolean> cir) {
+        if (pState.getBlock() instanceof CopycatFenceGateBlock && FenceGateBlock.connectsToDirection(pState, pDirection))
+            cir.setReturnValue(true);
+        else if (pState.getBlock() instanceof WrappedFenceGateBlock && FenceGateBlock.connectsToDirection(pState, pDirection))
             cir.setReturnValue(true);
     }
 }

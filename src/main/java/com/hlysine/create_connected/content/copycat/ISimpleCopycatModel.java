@@ -11,15 +11,26 @@ import java.util.List;
 
 public interface ISimpleCopycatModel {
 
-    default void assemblePiece(List<BakedQuad> templateQuads, List<BakedQuad> quads, MutableAABB select, MutableVec3 offset, MutableCullFace cull, int angle, boolean flipY) {
+    /**
+     * Assemble the quads of a piece of copycat material.
+     *
+     * @param sourceQuads The source model to copy from.
+     * @param destQuads   The destination model to copy to.
+     * @param angle       Number of degrees to rotate the whole operation for. Only supports multiples of 90.
+     * @param flipY       Whether to flip the whole operation vertically.
+     * @param offset      In voxel space, the final position of the assembled piece.
+     * @param select      In voxel space, the selection on the source model to copy from.
+     * @param cull        Faces to skip rendering in the destination model.
+     */
+    default void assemblePiece(List<BakedQuad> sourceQuads, List<BakedQuad> destQuads, int angle, boolean flipY, MutableVec3 offset, MutableAABB select, MutableCullFace cull) {
         select.rotate(angle).flipY(flipY);
         offset.rotate(angle).flipY(flipY);
         cull.rotate(angle).flipY(flipY);
-        for (BakedQuad quad : templateQuads) {
+        for (BakedQuad quad : sourceQuads) {
             if (cull.isCulled(quad.getDirection())) {
                 continue;
             }
-            quads.add(BakedQuadHelper.cloneWithCustomGeometry(quad,
+            destQuads.add(BakedQuadHelper.cloneWithCustomGeometry(quad,
                     BakedModelHelper.cropAndMove(quad.getVertices(), quad.getSprite(), select.toAABB(), offset.toVec3().subtract(select.minX / 16f, select.minY / 16f, select.minZ / 16f))));
         }
     }

@@ -2,6 +2,8 @@ package com.hlysine.create_connected;
 
 import com.hlysine.create_connected.config.FeatureToggle;
 import com.hlysine.create_connected.content.brassgearbox.VerticalBrassGearboxItem;
+import com.hlysine.create_connected.content.copycat.CopycatBoxItem;
+import com.hlysine.create_connected.content.copycat.CopycatCatwalkItem;
 import com.hlysine.create_connected.content.linkedtransmitter.LinkedTransmitterItem;
 import com.hlysine.create_connected.content.parallelgearbox.VerticalParallelGearboxItem;
 import com.hlysine.create_connected.content.sixwaygearbox.VerticalSixWayGearboxItem;
@@ -53,6 +55,18 @@ public class CCItems {
             REGISTRATE.item("linked_transmitter", LinkedTransmitterItem::new)
                     .model(AssetLookup.customGenericItemModel("linked_transmitter", "item"))
                     .transform(FeatureToggle.register())
+                    .register();
+
+    public static final ItemEntry<CopycatBoxItem> COPYCAT_BOX =
+            REGISTRATE.item("copycat_box", CopycatBoxItem::new)
+                    .model(AssetLookup.customBlockItemModel("copycat_base", "box"))
+                    .transform(FeatureToggle.registerDependent(CCBlocks.COPYCAT_BOARD))
+                    .register();
+
+    public static final ItemEntry<CopycatCatwalkItem> COPYCAT_CATWALK =
+            REGISTRATE.item("copycat_catwalk", CopycatCatwalkItem::new)
+                    .model(AssetLookup.customBlockItemModel("copycat_base", "catwalk"))
+                    .transform(FeatureToggle.registerDependent(CCBlocks.COPYCAT_BOARD))
                     .register();
 
     public static final ItemEntry<RecordItem> MUSIC_DISC_ELEVATOR =

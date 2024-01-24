@@ -8,6 +8,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockAndTintGetter;
@@ -71,6 +72,11 @@ public class CopycatWallBlock extends WaterloggedCopycatBlock {
     }
 
     @Override
+    public boolean collisionExtendsVertically(BlockState state, BlockGetter level, BlockPos pos, Entity collidingEntity) {
+        return true;
+    }
+
+    @Override
     public @NotNull VoxelShape getShape(@NotNull BlockState pState, @NotNull BlockGetter pLevel, @NotNull BlockPos pPos, @NotNull CollisionContext pContext) {
         return wall.getShape(copyState(pState, wall.defaultBlockState(), true), pLevel, pPos, pContext);
     }
@@ -125,6 +131,13 @@ public class CopycatWallBlock extends WaterloggedCopycatBlock {
     public boolean canConnectTexturesToward(BlockAndTintGetter reader, BlockPos fromPos, BlockPos toPos, BlockState state) {
         BlockState toState = reader.getBlockState(toPos);
         if (!toState.is(this)) return false;
+
+        long sideCount = Arrays.stream(Iterate.horizontalDirections).filter(s -> state.getValue(byDirection(s)) != WallSide.NONE).count();
+        if (sideCount > 2)
+            return false;
+        if (sideCount == 2 && (state.getValue(NORTH_WALL) != state.getValue(SOUTH_WALL) || state.getValue(EAST_WALL) != state.getValue(WEST_WALL))) {
+            return false;
+        }
 
         BlockPos diff = toPos.subtract(fromPos);
         if (diff.equals(Vec3i.ZERO)) {
