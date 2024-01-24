@@ -29,7 +29,7 @@ import org.jetbrains.annotations.Nullable;
 import static net.minecraft.world.level.block.FenceGateBlock.*;
 
 @SuppressWarnings("deprecation")
-public class CopycatFenceGateBlock extends WaterloggedCopycatBlock {
+public class CopycatFenceGateBlock extends WaterloggedCopycatBlock implements ICopycatWithWrappedBlock {
 
     public static FenceGateBlock fenceGate;
 
@@ -41,6 +41,11 @@ public class CopycatFenceGateBlock extends WaterloggedCopycatBlock {
                 .setValue(IN_WALL, false)
                 .setValue(FACING, Direction.SOUTH)
         );
+    }
+
+    @Override
+    public Block getWrappedBlock() {
+        return fenceGate;
     }
 
     @Override

@@ -1,8 +1,7 @@
 package com.hlysine.create_connected.mixin.copycat;
 
 import com.hlysine.create_connected.CCBlocks;
-import com.hlysine.create_connected.content.copycat.CopycatFenceGateBlock;
-import com.hlysine.create_connected.content.copycat.WrappedFenceGateBlock;
+import com.hlysine.create_connected.content.copycat.ICopycatWithWrappedBlock;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.FenceBlock;
@@ -37,9 +36,7 @@ public class FenceBlockMixin {
             cancellable = true
     )
     private void connectsToCopycat(BlockState pState, boolean pIsSideSolid, Direction pDirection, CallbackInfoReturnable<Boolean> cir) {
-        if (pState.getBlock() instanceof CopycatFenceGateBlock && FenceGateBlock.connectsToDirection(pState, pDirection))
-            cir.setReturnValue(true);
-        else if (pState.getBlock() instanceof WrappedFenceGateBlock && FenceGateBlock.connectsToDirection(pState, pDirection))
+        if (ICopycatWithWrappedBlock.unwrap(pState.getBlock()) instanceof FenceGateBlock && FenceGateBlock.connectsToDirection(pState, pDirection))
             cir.setReturnValue(true);
     }
 }

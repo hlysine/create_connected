@@ -17,6 +17,7 @@
     "copycat.FenceBlockMixin",
     "copycat.StairBlockMixin",
     "copycat.TrackPaverMixin",
+    "copycat.TrackPlacementMixin",
     "copycat.WallBlockMixin",
     "featuretoggle.CreativeModeTabsAccessor",
     "linkedtransmitter.AnalogLeverBlockEntityAccessor",

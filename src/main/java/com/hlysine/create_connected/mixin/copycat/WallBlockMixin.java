@@ -1,8 +1,6 @@
 package com.hlysine.create_connected.mixin.copycat;
 
-import com.hlysine.create_connected.content.copycat.CopycatFenceGateBlock;
-import com.hlysine.create_connected.content.copycat.CopycatWallBlock;
-import com.hlysine.create_connected.content.copycat.WrappedFenceGateBlock;
+import com.hlysine.create_connected.content.copycat.ICopycatWithWrappedBlock;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.FenceGateBlock;
 import net.minecraft.world.level.block.WallBlock;
@@ -22,9 +20,7 @@ public class WallBlockMixin {
             cancellable = true
     )
     private void connectsToCopycat(BlockState pState, boolean pSideSolid, Direction pDirection, CallbackInfoReturnable<Boolean> cir) {
-        if (pState.getBlock() instanceof CopycatFenceGateBlock && FenceGateBlock.connectsToDirection(pState, pDirection))
-            cir.setReturnValue(true);
-        else if (pState.getBlock() instanceof WrappedFenceGateBlock && FenceGateBlock.connectsToDirection(pState, pDirection))
+        if (ICopycatWithWrappedBlock.unwrap(pState.getBlock()) instanceof FenceGateBlock && FenceGateBlock.connectsToDirection(pState, pDirection))
             cir.setReturnValue(true);
     }
 
@@ -34,7 +30,7 @@ public class WallBlockMixin {
             cancellable = true
     )
     private void raisePostForCopycat(BlockState pState, BlockState pNeighbour, VoxelShape pShape, CallbackInfoReturnable<Boolean> cir) {
-        if (pNeighbour.getBlock() instanceof CopycatWallBlock && pNeighbour.getValue(WallBlock.UP)) {
+        if (ICopycatWithWrappedBlock.unwrap(pNeighbour.getBlock()) instanceof WallBlock && pNeighbour.getValue(WallBlock.UP)) {
             cir.setReturnValue(true);
         }
     }

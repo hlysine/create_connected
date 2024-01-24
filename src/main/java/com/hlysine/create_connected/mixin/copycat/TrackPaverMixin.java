@@ -1,7 +1,8 @@
 package com.hlysine.create_connected.mixin.copycat;
 
-import com.hlysine.create_connected.content.copycat.CopycatWallBlock;
+import com.hlysine.create_connected.content.copycat.ICopycatWithWrappedBlock;
 import com.simibubi.create.content.trains.track.TrackPaver;
+import net.minecraft.world.level.block.WallBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -16,6 +17,7 @@ public class TrackPaverMixin {
             cancellable = true
     )
     private static void copycatIsWallLike(BlockState defaultBlockState, CallbackInfoReturnable<Boolean> cir) {
-        if (defaultBlockState.getBlock() instanceof CopycatWallBlock) cir.setReturnValue(true);
+        if (ICopycatWithWrappedBlock.unwrap(defaultBlockState.getBlock()) instanceof WallBlock)
+            cir.setReturnValue(true);
     }
 }
