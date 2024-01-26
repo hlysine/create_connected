@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(targets = "me.jellysquid.mods.lithium.common.ai.pathing.PathNodeDefaults")
 @Pseudo // Would normally fail if Radium is not installed
-public class PathNodeDefaultsMixin {
+public class COMPATPathNodeDefaultsMixin {
     @WrapOperation(
             at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;getBlock()Lnet/minecraft/world/level/block/Block;"),
             method = "getNodeType(Lnet/minecraft/world/level/block/state/BlockState;)Lnet/minecraft/world/level/pathfinder/BlockPathTypes;"
