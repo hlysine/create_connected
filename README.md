@@ -7,6 +7,7 @@
 <a title="Modrinth" target="_blank" href="https://modrinth.com/mod/create-connected/"><img src="https://img.shields.io/modrinth/dt/Vg5TIO6d?style=flat&label=Modrinth"></a>
 <a title="CurseForge" target="_blank" href="https://www.curseforge.com/minecraft/mc-mods/create-connected"><img src="https://img.shields.io/curseforge/dt/947914?style=flat&label=CurseForge"></a>
 <a title="Crowdin" target="_blank" href="https://crowdin.com/project/create-connected-mod"><img src="https://badges.crowdin.net/create-connected-mod/localized.svg"></a>
+<a title="Discord" target="_blank" href="https://discord.gg/3AvrppcgG3"><img src="https://img.shields.io/badge/Discord-%235865F2.svg?logo=discord&logoColor=white"></a>
 </p>
 
 A Create mod add-on adding quality-of-life blocks that you wish existed in Create.
@@ -15,6 +16,8 @@ A Create mod add-on adding quality-of-life blocks that you wish existed in Creat
 
 > **Want reliable, immersive chunk-loading for your Create machines? Check
 out [Create: Power Loader](https://modrinth.com/mod/create-power-loader)**
+
+> Join us in the [Create: Addon Hub](https://discord.gg/3AvrppcgG3) server for a chat!
 
 ## What's new in 0.6
 
