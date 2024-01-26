@@ -14,6 +14,7 @@
     "contraption.ContraptionMixin",
     "contraption.ItemCombinerMenuMixin",
     "copycat.TrackPlacementMixin",
+    "copycat.fence.COMPATFenceBlockMixin",
     "copycat.fence.FenceBlockMixin",
     "copycat.fence.ValueBoxRendererMixin",
     "copycat.fencegate.BlockCanSurviveMixin",
