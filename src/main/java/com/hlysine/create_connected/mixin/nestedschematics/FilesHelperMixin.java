@@ -1,6 +1,6 @@
 package com.hlysine.create_connected.mixin.nestedschematics;
 
-import com.hlysine.create_connected.config.CCConfigs;
+import com.hlysine.create_connected.config.CServer;
 import com.simibubi.create.foundation.utility.FilesHelper;
 import com.simibubi.create.foundation.utility.Lang;
 import org.spongepowered.asm.mixin.Mixin;
@@ -16,7 +16,7 @@ public class FilesHelperMixin {
             cancellable = true
     )
     private static void slug(String name, CallbackInfoReturnable<String> cir) {
-        if (CCConfigs.server().schematicsNestingDepth() > 0) {
+        if (CServer.SchematicsNestingDepth.get() > 0) {
             cir.setReturnValue(Lang.asId(name)
                     .replaceAll("[^\\w/\\\\]+", "_")
                     .replaceAll("[/\\\\]+", "/"));

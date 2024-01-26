@@ -1,6 +1,6 @@
 package com.hlysine.create_connected.mixin;
 
-import com.hlysine.create_connected.config.CCConfigs;
+import com.hlysine.create_connected.config.CServer;
 import com.simibubi.create.content.kinetics.deployer.ManualApplicationRecipe;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
@@ -19,7 +19,7 @@ public class ManualApplicationRecipeMixin {
             remap = true
     )
     private static void craftingRemainingItemOnApplication(PlayerInteractEvent.RightClickBlock event, CallbackInfo info) {
-        if (!CCConfigs.server().applicationRemainingItemFix()) return;
+        if (!CServer.ApplicationRemainingItemFix.get()) return;
 
         ItemStack heldItem = event.getItemStack();
         Player player = event.getEntity();
