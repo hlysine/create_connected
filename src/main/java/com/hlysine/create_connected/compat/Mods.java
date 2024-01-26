@@ -12,7 +12,8 @@ import java.util.function.Supplier;
  * For compatibility with and without another mod present, we have to define load conditions of the specific code
  */
 public enum Mods {
-    JEI("jei");
+    JEI("jei"),
+    DIAGONAL_FENCES("diagonalfences");
 
     private final String id;
 
