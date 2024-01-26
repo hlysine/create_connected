@@ -91,6 +91,7 @@ minecraft {
 
             property 'mixin.env.remapRefMap', 'true'
             property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+            property 'mixin.debug.countInjections', 'true'
 
             arg '-mixin.config=create_connected.mixins.json'
 
