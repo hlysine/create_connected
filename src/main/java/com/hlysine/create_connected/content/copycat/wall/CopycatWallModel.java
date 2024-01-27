@@ -1,5 +1,6 @@
-package com.hlysine.create_connected.content.copycat;
+package com.hlysine.create_connected.content.copycat.wall;
 
+import com.hlysine.create_connected.content.copycat.ISimpleCopycatModel;
 import com.simibubi.create.content.decoration.copycat.CopycatModel;
 import com.simibubi.create.foundation.utility.Iterate;
 import net.minecraft.client.renderer.block.model.BakedQuad;
@@ -12,7 +13,7 @@ import net.minecraftforge.client.model.data.IModelData;
 
 import java.util.*;
 
-import static com.hlysine.create_connected.content.copycat.CopycatWallBlock.byDirection;
+import static com.hlysine.create_connected.content.copycat.wall.CopycatWallBlock.byDirection;
 import static com.hlysine.create_connected.content.copycat.ISimpleCopycatModel.MutableCullFace.*;
 
 public class CopycatWallModel extends CopycatModel implements ISimpleCopycatModel {

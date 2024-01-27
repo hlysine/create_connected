@@ -1,5 +1,6 @@
-package com.hlysine.create_connected.content.copycat;
+package com.hlysine.create_connected.content.copycat.fence;
 
+import com.hlysine.create_connected.content.copycat.ISimpleCopycatModel;
 import com.simibubi.create.content.decoration.copycat.CopycatModel;
 import com.simibubi.create.foundation.utility.Iterate;
 import net.minecraft.client.renderer.block.model.BakedQuad;
@@ -12,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import static com.hlysine.create_connected.content.copycat.CopycatFenceBlock.byDirection;
+import static com.hlysine.create_connected.content.copycat.fence.CopycatFenceBlock.byDirection;
 import static com.hlysine.create_connected.content.copycat.ISimpleCopycatModel.MutableCullFace.*;
 
 public class CopycatFenceModel extends CopycatModel implements ISimpleCopycatModel {

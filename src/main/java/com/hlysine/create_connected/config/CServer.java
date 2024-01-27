@@ -2,26 +2,14 @@ package com.hlysine.create_connected.config;
 
 import com.simibubi.create.foundation.config.ConfigBase;
 
+import java.util.function.Supplier;
+
 public class CServer extends ConfigBase {
     private final ConfigInt schematicsNestingDepth = i(5, 0, 20, "schematicsNestingDepth", Comments.schematicsNestingDepth);
-
-    public int schematicsNestingDepth() {
-        try {
-            return schematicsNestingDepth.get();
-        } catch (IllegalStateException $) {
-            return 0;
-        }
-    }
+    public static final Supplier<Integer> SchematicsNestingDepth = CCConfigs.safeGetter(() -> CCConfigs.server().schematicsNestingDepth.get(), 0);
 
     private final ConfigBool applicationRemainingItemFix = b(true, "applicationRemainingItemFix", Comments.applicationRemainingItemFix);
-
-    public boolean applicationRemainingItemFix() {
-        try {
-            return applicationRemainingItemFix.get();
-        } catch (IllegalStateException $) {
-            return true;
-        }
-    }
+    public static final Supplier<Boolean> ApplicationRemainingItemFix = CCConfigs.safeGetter(() -> CCConfigs.server().applicationRemainingItemFix.get(), true);
 
     public final CStress stressValues = nested(0, CStress::new, Comments.stress);
     public final ConfigFloat brakeActiveStress = f(16384, Float.NEGATIVE_INFINITY, Float.POSITIVE_INFINITY, "brakeActiveStress", Comments.brakeActiveStress);

@@ -1,4 +1,4 @@
-package com.hlysine.create_connected.content.copycat;
+package com.hlysine.create_connected.content.copycat.slab;
 
 import java.util.ArrayList;
 import java.util.List;
