@@ -1,5 +1,6 @@
-package com.hlysine.create_connected.content.copycat;
+package com.hlysine.create_connected.content.copycat.stairs;
 
+import com.hlysine.create_connected.content.copycat.ICopycatWithWrappedBlock;
 import com.simibubi.create.content.decoration.copycat.CopycatBlock;
 import com.simibubi.create.content.decoration.copycat.WaterloggedCopycatBlock;
 import net.minecraft.core.BlockPos;

@@ -1,4 +1,4 @@
-package com.hlysine.create_connected.content.copycat;
+package com.hlysine.create_connected.content.copycat.fencegate;
 
 import net.minecraft.world.level.block.FenceGateBlock;
 import net.minecraft.world.level.block.state.properties.WoodType;

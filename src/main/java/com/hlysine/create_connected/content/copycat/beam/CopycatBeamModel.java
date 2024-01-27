@@ -1,4 +1,4 @@
-package com.hlysine.create_connected.content.copycat;
+package com.hlysine.create_connected.content.copycat.beam;
 
 import com.simibubi.create.content.decoration.copycat.CopycatModel;
 import com.simibubi.create.foundation.model.BakedModelHelper;
@@ -10,7 +10,6 @@ import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
-import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
@@ -21,22 +20,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static net.minecraft.core.Direction.Axis;
+import static net.minecraft.core.Direction.AxisDirection;
 
-public class CopycatVerticalStepModel extends CopycatModel {
+public class CopycatBeamModel extends CopycatModel {
     protected static final AABB CUBE_AABB = new AABB(BlockPos.ZERO);
 
-    public CopycatVerticalStepModel(BakedModel originalModel) {
+    public CopycatBeamModel(BakedModel originalModel) {
         super(originalModel);
     }
 
     @Override
     protected List<BakedQuad> getCroppedQuads(BlockState state, Direction side, RandomSource rand, BlockState material,
                                               ModelData wrappedData, RenderType renderType) {
-        Direction facing = state.getOptionalValue(CopycatVerticalStepBlock.FACING).orElse(Direction.NORTH);
-        Direction perpendicular = facing.getCounterClockWise();
-
-        int xOffset = (facing.getAxis() == Axis.X ? facing : perpendicular).getAxisDirection().getStep();
-        int zOffset = (facing.getAxis() == Axis.Z ? facing : perpendicular).getAxisDirection().getStep();
+        Axis axis = state.getOptionalValue(CopycatBeamBlock.AXIS).orElse(Axis.Y);
 
         BakedModel model = getModelOf(material);
         List<BakedQuad> templateQuads = model.getQuads(material, side, rand, wrappedData, renderType);
@@ -44,9 +40,10 @@ public class CopycatVerticalStepModel extends CopycatModel {
 
         List<BakedQuad> quads = new ArrayList<>();
 
-        Vec3 rowNormal = new Vec3(1, 0, 0);
-        Vec3 columnNormal = new Vec3(0, 0, 1);
-        AABB bb = CUBE_AABB.contract(12 / 16.0, 0, 12 / 16.0);
+        Vec3 normal = Vec3.atLowerCornerOf(Direction.fromAxisAndDirection(axis, AxisDirection.POSITIVE).getNormal());
+        Vec3 rowNormal = axis.isVertical() ? new Vec3(1, 0, 0) : new Vec3(0, 1, 0);
+        Vec3 columnNormal = axis.isVertical() || axis == Axis.X ? new Vec3(0, 0, 1) : new Vec3(1, 0, 0);
+        AABB bb = CUBE_AABB.contract((1 - normal.x) * 12 / 16, (1 - normal.y) * 12 / 16, (1 - normal.z) * 12 / 16);
 
         // 4 Pieces
         for (boolean row : Iterate.trueAndFalse) {
@@ -59,14 +56,8 @@ public class CopycatVerticalStepModel extends CopycatModel {
                     bb1 = bb1.move(columnNormal.scale(12 / 16.0));
 
                 Vec3 offset = Vec3.ZERO;
-                Vec3 rowShift = rowNormal.scale(row
-                        ? 8 * Mth.clamp(xOffset, -1, 0) / 16.0
-                        : 8 * Mth.clamp(xOffset, 0, 1) / 16.0
-                );
-                Vec3 columnShift = columnNormal.scale(column
-                        ? 8 * Mth.clamp(zOffset, -1, 0) / 16.0
-                        : 8 * Mth.clamp(zOffset, 0, 1) / 16.0
-                );
+                Vec3 rowShift = rowNormal.scale(row ? -4 / 16.0 : 4 / 16.0);
+                Vec3 columnShift = columnNormal.scale(column ? -4 / 16.0 : 4 / 16.0);
                 offset = offset.add(rowShift);
                 offset = offset.add(columnShift);
 
@@ -79,9 +70,9 @@ public class CopycatVerticalStepModel extends CopycatModel {
                     BakedQuad quad = templateQuads.get(i);
                     Direction direction = quad.getDirection();
 
-                    if (direction.getAxis() == Axis.X && row == (direction.getAxisDirection() == Direction.AxisDirection.NEGATIVE))
+                    if (rowShiftNormal.equals(direction.getNormal()))
                         continue;
-                    if (direction.getAxis() == Axis.Z && column == (direction.getAxisDirection() == Direction.AxisDirection.NEGATIVE))
+                    if (columnShiftNormal.equals(direction.getNormal()))
                         continue;
 
                     quads.add(BakedQuadHelper.cloneWithCustomGeometry(quad,

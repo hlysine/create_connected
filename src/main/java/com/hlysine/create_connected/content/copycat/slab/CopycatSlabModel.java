@@ -1,4 +1,4 @@
-package com.hlysine.create_connected.content.copycat;
+package com.hlysine.create_connected.content.copycat.slab;
 
 import com.simibubi.create.content.decoration.copycat.CopycatModel;
 import com.simibubi.create.foundation.model.BakedModelHelper;

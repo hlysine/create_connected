@@ -1,4 +1,4 @@
-package com.hlysine.create_connected.content.copycat;
+package com.hlysine.create_connected.content.copycat.board;
 
 import com.hlysine.create_connected.CCBlocks;
 import com.simibubi.create.foundation.utility.Iterate;
@@ -15,17 +15,17 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 
-import static com.hlysine.create_connected.content.copycat.CopycatBoardBlock.byDirection;
+import static com.hlysine.create_connected.content.copycat.board.CopycatBoardBlock.*;
 
-public class CopycatBoxItem extends BlockItem {
+public class CopycatCatwalkItem extends BlockItem {
 
-    public CopycatBoxItem(Properties builder) {
+    public CopycatCatwalkItem(Properties builder) {
         super(CCBlocks.COPYCAT_BOARD.get(), builder);
     }
 
     @Override
     public @NotNull String getDescriptionId() {
-        return "item.create_connected.copycat_box";
+        return "item.create_connected.copycat_catwalk";
     }
 
     @Override
@@ -34,9 +34,12 @@ public class CopycatBoxItem extends BlockItem {
 
     @Override
     protected boolean updateCustomBlockEntityTag(@NotNull BlockPos pos, @NotNull Level world, Player player, @NotNull ItemStack stack, @NotNull BlockState state) {
-        for (Direction direction : Iterate.directions) {
-            state = state.setValue(byDirection(direction), true);
+        Direction facing = player == null ? Direction.SOUTH : player.getDirection();
+        for (Direction direction : Iterate.horizontalDirections) {
+            state = state.setValue(byDirection(direction), direction.getAxis() != facing.getAxis());
         }
+        state = state.setValue(DOWN, true);
+        state = state.setValue(UP, false);
         world.setBlockAndUpdate(pos, state);
         return super.updateCustomBlockEntityTag(pos, world, player, stack, state);
     }

@@ -1,4 +1,4 @@
-package com.hlysine.create_connected.content.copycat;
+package com.hlysine.create_connected.content.copycat.board;
 
 import com.google.common.collect.ImmutableMap;
 import com.hlysine.create_connected.CCShapes;
