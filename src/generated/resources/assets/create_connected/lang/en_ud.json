@@ -98,6 +98,7 @@
   "block.create_connected.six_way_gearbox.tooltip.summary": "\u02D9\u203Ep\u01DD\u01DDds \u025F\u05DF\u0250\u0265\u203E \u0287\u0250 u\u0131ds \u026Fo\u0287\u0287oq pu\u0250 do\u27D8 \u02D9\u203Es\u01DDp\u0131s 9 \u05DF\u05DF\u0250\u203E uo s\u0287\u025F\u0250\u0265s \u0265\u0287\u0131\u028D xoq\u0279\u0250\u01DDb \u2C6F",
   "block.create_connected.wrapped_copycat_fence": "\u01DD\u0254u\u01DD\u2132 \u0287\u0250\u0254\u028Edo\u0186 p\u01DDdd\u0250\u0279M",
   "block.create_connected.wrapped_copycat_fence_gate": "\u01DD\u0287\u0250\u2141 \u01DD\u0254u\u01DD\u2132 \u0287\u0250\u0254\u028Edo\u0186 p\u01DDdd\u0250\u0279M",
+  "block.create_connected.wrapped_copycat_stairs": "s\u0279\u0131\u0250\u0287S \u0287\u0250\u0254\u028Edo\u0186 p\u01DDdd\u0250\u0279M",
   "block.create_connected.wrapped_copycat_wall": "\u05DF\u05DF\u0250M \u0287\u0250\u0254\u028Edo\u0186 p\u01DDdd\u0250\u0279M",
   "create.gui.sequenced_gearshift.instruction.loop": "doo\uA780",
   "create.gui.sequenced_gearshift.instruction.loop.descriptive": "\u01DD\u0254u\u01DDnb\u01DDs \u01DD\u05DFo\u0265\u028D \u0287\u0279\u0250\u0287s\u01DD\u1D1A",

@@ -3,6 +3,7 @@ package com.hlysine.create_connected.content.copycat.board;
 import com.google.common.collect.ImmutableMap;
 import com.hlysine.create_connected.CCItems;
 import com.hlysine.create_connected.CCShapes;
+import com.hlysine.create_connected.content.copycat.ShimWaterloggedCopycatBlock;
 import com.simibubi.create.content.schematics.requirement.ISpecialBlockItemRequirement;
 import com.simibubi.create.content.schematics.requirement.ItemRequirement;
 import com.simibubi.create.foundation.utility.Iterate;

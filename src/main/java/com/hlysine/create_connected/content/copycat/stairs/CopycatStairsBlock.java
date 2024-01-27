@@ -1,6 +1,7 @@
 package com.hlysine.create_connected.content.copycat.stairs;
 
 import com.hlysine.create_connected.content.copycat.ICopycatWithWrappedBlock;
+import com.hlysine.create_connected.content.copycat.ShimWaterloggedCopycatBlock;
 import com.simibubi.create.content.decoration.copycat.CopycatBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
