@@ -1,15 +1,12 @@
 package com.hlysine.create_connected.content.copycat.stairs;
 
-import com.hlysine.create_connected.content.copycat.ICopycatWithWrappedBlock;
+import com.hlysine.create_connected.content.copycat.WaterloggedCopycatWrappedBlock;
 import com.simibubi.create.content.decoration.copycat.CopycatBlock;
-import com.simibubi.create.content.decoration.copycat.WaterloggedCopycatBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.*;
@@ -19,7 +16,6 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.Half;
 import net.minecraft.world.level.block.state.properties.StairsShape;
 import net.minecraft.world.level.pathfinder.PathComputationType;
-import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
@@ -29,7 +25,7 @@ import static net.minecraft.core.Direction.*;
 import static net.minecraft.world.level.block.StairBlock.HALF;
 
 @SuppressWarnings("deprecation")
-public class CopycatStairsBlock extends WaterloggedCopycatBlock implements ICopycatWithWrappedBlock {
+public class CopycatStairsBlock extends WaterloggedCopycatWrappedBlock {
 
     public static StairBlock stairs;
 
@@ -117,15 +113,6 @@ public class CopycatStairsBlock extends WaterloggedCopycatBlock implements ICopy
     @Override
     public void tick(@NotNull BlockState pState, @NotNull ServerLevel pLevel, @NotNull BlockPos pPos, @NotNull RandomSource pRandom) {
         stairs.tick(pState, pLevel, pPos, pRandom);
-    }
-
-    @Override
-    public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
-        InteractionResult result = super.use(pState, pLevel, pPos, pPlayer, pHand, pHit);
-        if (result == InteractionResult.PASS) {
-            return stairs.use(pState, pLevel, pPos, pPlayer, pHand, pHit);
-        }
-        return result;
     }
 
     @Override
