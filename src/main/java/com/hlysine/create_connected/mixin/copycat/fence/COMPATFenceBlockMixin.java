@@ -1,7 +1,7 @@
 package com.hlysine.create_connected.mixin.copycat.fence;
 
 import com.hlysine.create_connected.content.copycat.ICopycatWithWrappedBlock;
-import com.hlysine.create_connected.content.copycat.WrappedFenceBlock;
+import com.hlysine.create_connected.content.copycat.fence.WrappedFenceBlock;
 import net.minecraft.world.level.block.CrossCollisionBlock;
 import net.minecraft.world.level.block.FenceBlock;
 import org.spongepowered.asm.mixin.Mixin;

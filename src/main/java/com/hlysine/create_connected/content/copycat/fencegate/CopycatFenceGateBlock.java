@@ -1,5 +1,6 @@
-package com.hlysine.create_connected.content.copycat;
+package com.hlysine.create_connected.content.copycat.fencegate;
 
+import com.hlysine.create_connected.content.copycat.ICopycatWithWrappedBlock;
 import com.simibubi.create.AllTags;
 import com.simibubi.create.content.decoration.copycat.WaterloggedCopycatBlock;
 import net.minecraft.core.BlockPos;

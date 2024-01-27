@@ -1,6 +1,6 @@
 package com.hlysine.create_connected.mixin.nestedschematics;
 
-import com.hlysine.create_connected.config.CCConfigs;
+import com.hlysine.create_connected.config.CServer;
 import com.simibubi.create.content.schematics.client.ClientSchematicLoader;
 import com.simibubi.create.foundation.utility.Components;
 import net.minecraft.network.chat.Component;
@@ -33,7 +33,7 @@ public class ClientSchematicLoaderMixin {
     @Unique
     private void cc$searchInSubfolder(String folder, int depth) {
         try {
-            boolean canRecurse = depth < CCConfigs.server().schematicsNestingDepth();
+            boolean canRecurse = depth < CServer.SchematicsNestingDepth.get();
             Path base = Path.of("schematics/");
             Files.list(Path.of(folder))
                     .forEach(path -> {

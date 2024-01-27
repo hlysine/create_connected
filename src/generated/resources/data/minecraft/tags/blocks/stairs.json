@@ -1,5 +1,6 @@
 {
   "values": [
-    "create_connected:copycat_stairs"
+    "create_connected:copycat_stairs",
+    "create_connected:wrapped_copycat_stairs"
   ]
 }

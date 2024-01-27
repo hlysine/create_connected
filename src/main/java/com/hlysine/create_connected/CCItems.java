@@ -2,8 +2,8 @@ package com.hlysine.create_connected;
 
 import com.hlysine.create_connected.config.FeatureToggle;
 import com.hlysine.create_connected.content.brassgearbox.VerticalBrassGearboxItem;
-import com.hlysine.create_connected.content.copycat.CopycatBoxItem;
-import com.hlysine.create_connected.content.copycat.CopycatCatwalkItem;
+import com.hlysine.create_connected.content.copycat.board.CopycatBoxItem;
+import com.hlysine.create_connected.content.copycat.board.CopycatCatwalkItem;
 import com.hlysine.create_connected.content.linkedtransmitter.LinkedTransmitterItem;
 import com.hlysine.create_connected.content.parallelgearbox.VerticalParallelGearboxItem;
 import com.hlysine.create_connected.content.sixwaygearbox.VerticalSixWayGearboxItem;

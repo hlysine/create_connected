@@ -1,5 +1,6 @@
-package com.hlysine.create_connected.content.copycat;
+package com.hlysine.create_connected.content.copycat.fencegate;
 
+import com.hlysine.create_connected.content.copycat.ISimpleCopycatModel;
 import com.simibubi.create.content.decoration.copycat.CopycatModel;
 import com.simibubi.create.foundation.utility.Iterate;
 import net.minecraft.client.renderer.RenderType;

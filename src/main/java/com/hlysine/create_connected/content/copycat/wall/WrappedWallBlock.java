@@ -1,4 +1,4 @@
-package com.hlysine.create_connected.content.copycat;
+package com.hlysine.create_connected.content.copycat.wall;
 
 import net.minecraft.world.level.block.WallBlock;
 

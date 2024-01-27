@@ -6,8 +6,29 @@ import com.hlysine.create_connected.content.brake.BrakeBlock;
 import com.hlysine.create_connected.content.brassgearbox.BrassGearboxBlock;
 import com.hlysine.create_connected.content.centrifugalclutch.CentrifugalClutchBlock;
 import com.hlysine.create_connected.content.chaincogwheel.ChainCogwheelBlock;
-import com.hlysine.create_connected.content.copycat.*;
 import com.hlysine.create_connected.content.BlockStressDefaults;
+import com.hlysine.create_connected.content.copycat.beam.CopycatBeamBlock;
+import com.hlysine.create_connected.content.copycat.beam.CopycatBeamModel;
+import com.hlysine.create_connected.content.copycat.block.CopycatBlockBlock;
+import com.hlysine.create_connected.content.copycat.block.CopycatBlockModel;
+import com.hlysine.create_connected.content.copycat.board.CopycatBoardBlock;
+import com.hlysine.create_connected.content.copycat.board.CopycatBoardModel;
+import com.hlysine.create_connected.content.copycat.fence.CopycatFenceBlock;
+import com.hlysine.create_connected.content.copycat.fence.CopycatFenceModel;
+import com.hlysine.create_connected.content.copycat.fence.WrappedFenceBlock;
+import com.hlysine.create_connected.content.copycat.fencegate.CopycatFenceGateBlock;
+import com.hlysine.create_connected.content.copycat.fencegate.CopycatFenceGateModel;
+import com.hlysine.create_connected.content.copycat.fencegate.WrappedFenceGateBlock;
+import com.hlysine.create_connected.content.copycat.slab.CopycatSlabBlock;
+import com.hlysine.create_connected.content.copycat.slab.CopycatSlabModel;
+import com.hlysine.create_connected.content.copycat.stairs.CopycatStairsBlock;
+import com.hlysine.create_connected.content.copycat.stairs.CopycatStairsModel;
+import com.hlysine.create_connected.content.copycat.stairs.WrappedStairsBlock;
+import com.hlysine.create_connected.content.copycat.verticalstep.CopycatVerticalStepBlock;
+import com.hlysine.create_connected.content.copycat.verticalstep.CopycatVerticalStepModel;
+import com.hlysine.create_connected.content.copycat.wall.CopycatWallBlock;
+import com.hlysine.create_connected.content.copycat.wall.CopycatWallModel;
+import com.hlysine.create_connected.content.copycat.wall.WrappedWallBlock;
 import com.hlysine.create_connected.content.freewheelclutch.FreewheelClutchBlock;
 import com.hlysine.create_connected.content.invertedclutch.InvertedClutchBlock;
 import com.hlysine.create_connected.content.invertedgearshift.InvertedGearshiftBlock;
@@ -460,6 +481,14 @@ public class CCBlocks {
                     .onRegister(CreateRegistrate.blockModel(() -> CopycatStairsModel::new))
                     .item()
                     .transform(customItemModel("copycat_base", "stairs"))
+                    .register();
+
+    public static final BlockEntry<WrappedStairsBlock> WRAPPED_COPYCAT_STAIRS =
+            REGISTRATE.block("wrapped_copycat_stairs", p -> new WrappedStairsBlock(Blocks.STONE::defaultBlockState, p))
+                    .initialProperties(() -> Blocks.STONE_STAIRS)
+                    .onRegister(b -> CopycatStairsBlock.stairs = b)
+                    .tag(BlockTags.STAIRS)
+                    .blockstate((c, p) -> p.simpleBlock(c.getEntry(), p.models().withExistingParent("wrapped_copycat_stairs", "block/barrier")))
                     .register();
 
     public static final BlockEntry<CopycatFenceBlock> COPYCAT_FENCE =

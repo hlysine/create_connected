@@ -1,7 +1,7 @@
 package com.hlysine.create_connected.mixin.nestedschematics;
 
 import com.hlysine.create_connected.CreateConnected;
-import com.hlysine.create_connected.config.CCConfigs;
+import com.hlysine.create_connected.config.CServer;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.simibubi.create.content.schematics.ServerSchematicLoader;
@@ -58,7 +58,7 @@ public abstract class ServerSchematicLoaderMixin {
                                  CallbackInfo ci,
                                  @Local(ordinal = 2) String playerSchematicId) {
         Path schematicPath = Path.of(schematic);
-        if (schematicPath.getNameCount() - 1 > CCConfigs.server().schematicsNestingDepth()) {
+        if (schematicPath.getNameCount() - 1 > CServer.SchematicsNestingDepth.get()) {
             CreateConnected.LOGGER.warn("Attempted Schematic Upload with too many nested folders: " + playerSchematicId);
             ci.cancel();
         }
@@ -111,11 +111,11 @@ public abstract class ServerSchematicLoaderMixin {
             method = "handleNewUpload(Lnet/minecraft/server/level/ServerPlayer;Ljava/lang/String;JLnet/minecraft/core/BlockPos;)V"
     )
     private void createNestedFolders(ServerPlayer player,
-                                  String schematic,
-                                  long size,
-                                  BlockPos pos,
-                                  CallbackInfo ci,
-                                  @Local(ordinal = 1) Path uploadPath) {
+                                     String schematic,
+                                     long size,
+                                     BlockPos pos,
+                                     CallbackInfo ci,
+                                     @Local(ordinal = 1) Path uploadPath) {
         FilesHelper.createFolderIfMissing(uploadPath.getParent().toString());
     }
 
@@ -141,7 +141,7 @@ public abstract class ServerSchematicLoaderMixin {
                                  CallbackInfo ci,
                                  @Local(ordinal = 3) String playerSchematicId) {
         Path schematicPath = Path.of(schematic);
-        if (schematicPath.getNameCount() - 1 > CCConfigs.server().schematicsNestingDepth()) {
+        if (schematicPath.getNameCount() - 1 > CServer.SchematicsNestingDepth.get()) {
             CreateConnected.LOGGER.warn("Attempted Instant Schematic with too many nested folders: " + playerSchematicId);
             ci.cancel();
         }
