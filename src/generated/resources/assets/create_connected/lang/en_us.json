@@ -105,6 +105,7 @@
   "block.create_connected.six_way_gearbox.tooltip.summary": "A gearbox with shafts on _all 6 sides_. Top and bottom spin at _half speed_.",
   "block.create_connected.wrapped_copycat_fence": "Wrapped Copycat Fence",
   "block.create_connected.wrapped_copycat_fence_gate": "Wrapped Copycat Fence Gate",
+  "block.create_connected.wrapped_copycat_stairs": "Wrapped Copycat Stairs",
   "block.create_connected.wrapped_copycat_wall": "Wrapped Copycat Wall",
   "create.gui.sequenced_gearshift.instruction.loop": "Loop",
   "create.gui.sequenced_gearshift.instruction.loop.descriptive": "Restart whole sequence",

@@ -31,11 +31,10 @@ import static net.minecraft.world.level.block.StairBlock.HALF;
 @SuppressWarnings("deprecation")
 public class CopycatStairsBlock extends WaterloggedCopycatBlock implements ICopycatWithWrappedBlock {
 
-    private final StairBlock stairs;
+    public static StairBlock stairs;
 
     public CopycatStairsBlock(Properties properties) {
         super(properties);
-        stairs = (StairBlock) Blocks.STONE_STAIRS;
         registerDefaultState(defaultBlockState()
                 .setValue(StairBlock.FACING, NORTH)
                 .setValue(HALF, Half.BOTTOM)

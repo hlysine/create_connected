@@ -23,6 +23,7 @@ import com.hlysine.create_connected.content.copycat.slab.CopycatSlabBlock;
 import com.hlysine.create_connected.content.copycat.slab.CopycatSlabModel;
 import com.hlysine.create_connected.content.copycat.stairs.CopycatStairsBlock;
 import com.hlysine.create_connected.content.copycat.stairs.CopycatStairsModel;
+import com.hlysine.create_connected.content.copycat.stairs.WrappedStairsBlock;
 import com.hlysine.create_connected.content.copycat.verticalstep.CopycatVerticalStepBlock;
 import com.hlysine.create_connected.content.copycat.verticalstep.CopycatVerticalStepModel;
 import com.hlysine.create_connected.content.copycat.wall.CopycatWallBlock;
@@ -464,6 +465,14 @@ public class CCBlocks {
                     .onRegister(CreateRegistrate.blockModel(() -> CopycatStairsModel::new))
                     .item()
                     .transform(customItemModel("copycat_base", "stairs"))
+                    .register();
+
+    public static final BlockEntry<WrappedStairsBlock> WRAPPED_COPYCAT_STAIRS =
+            REGISTRATE.block("wrapped_copycat_stairs", p -> new WrappedStairsBlock(Blocks.STONE::defaultBlockState, p))
+                    .initialProperties(() -> Blocks.STONE_STAIRS)
+                    .onRegister(b -> CopycatStairsBlock.stairs = b)
+                    .tag(BlockTags.STAIRS)
+                    .blockstate((c, p) -> p.simpleBlock(c.getEntry(), p.models().withExistingParent("wrapped_copycat_stairs", "block/barrier")))
                     .register();
 
     public static final BlockEntry<CopycatFenceBlock> COPYCAT_FENCE =
