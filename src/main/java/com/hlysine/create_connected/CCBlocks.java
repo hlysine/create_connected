@@ -24,6 +24,9 @@ import com.hlysine.create_connected.content.copycat.slab.CopycatSlabModel;
 import com.hlysine.create_connected.content.copycat.stairs.CopycatStairsBlock;
 import com.hlysine.create_connected.content.copycat.stairs.CopycatStairsModel;
 import com.hlysine.create_connected.content.copycat.stairs.WrappedStairsBlock;
+import com.hlysine.create_connected.content.copycat.trapdoor.CopycatTrapdoorBlock;
+import com.hlysine.create_connected.content.copycat.trapdoor.CopycatTrapdoorModel;
+import com.hlysine.create_connected.content.copycat.trapdoor.WrappedTrapdoorBlock;
 import com.hlysine.create_connected.content.copycat.verticalstep.CopycatVerticalStepBlock;
 import com.hlysine.create_connected.content.copycat.verticalstep.CopycatVerticalStepModel;
 import com.hlysine.create_connected.content.copycat.wall.CopycatWallBlock;
@@ -529,6 +532,25 @@ public class CCBlocks {
                     .onRegister(b -> CopycatFenceGateBlock.fenceGate = b)
                     .tag(BlockTags.FENCE_GATES, Tags.Blocks.FENCE_GATES, BlockTags.UNSTABLE_BOTTOM_CENTER, AllTags.AllBlockTags.MOVABLE_EMPTY_COLLIDER.tag)
                     .blockstate((c, p) -> p.simpleBlock(c.getEntry(), p.models().withExistingParent("wrapped_copycat_fence_gate", "block/barrier")))
+                    .register();
+
+    public static final BlockEntry<CopycatTrapdoorBlock> COPYCAT_TRAPDOOR =
+            REGISTRATE.block("copycat_trapdoor", CopycatTrapdoorBlock::new)
+                    .transform(BuilderTransformers.copycat())
+                    .properties(p -> p.isValidSpawn((state, level, pos, entity) -> false))
+                    .tag(BlockTags.TRAPDOORS)
+                    .transform(FeatureToggle.register())
+                    .onRegister(CreateRegistrate.blockModel(() -> CopycatTrapdoorModel::new))
+                    .item()
+                    .transform(customItemModel("copycat_base", "trapdoor"))
+                    .register();
+
+    public static final BlockEntry<WrappedTrapdoorBlock> WRAPPED_COPYCAT_TRAPDOOR =
+            REGISTRATE.block("wrapped_copycat_trapdoor", p -> new WrappedTrapdoorBlock(p, BlockSetType.OAK))
+                    .initialProperties(() -> Blocks.OAK_TRAPDOOR)
+                    .onRegister(b -> CopycatTrapdoorBlock.trapdoor = b)
+                    .tag(BlockTags.TRAPDOORS)
+                    .blockstate((c, p) -> p.simpleBlock(c.getEntry(), p.models().withExistingParent("wrapped_copycat_trapdoor", "block/barrier")))
                     .register();
 
     public static final BlockEntry<CopycatBoardBlock> COPYCAT_BOARD =

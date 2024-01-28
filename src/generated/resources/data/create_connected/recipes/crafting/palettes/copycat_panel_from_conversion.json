@@ -1,0 +1,31 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "create_connected:feature_enabled",
+          "feature": "create_connected:copycat_trapdoor",
+          "invert": false
+        },
+        {
+          "type": "create_connected:feature_enabled",
+          "feature": "create:copycat_panel",
+          "invert": false
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shapeless",
+        "category": "misc",
+        "ingredients": [
+          {
+            "item": "create_connected:copycat_trapdoor"
+          }
+        ],
+        "result": {
+          "item": "create:copycat_panel"
+        }
+      }
+    }
+  ]
+}
