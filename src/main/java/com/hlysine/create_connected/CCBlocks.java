@@ -13,6 +13,8 @@ import com.hlysine.create_connected.content.copycat.block.CopycatBlockBlock;
 import com.hlysine.create_connected.content.copycat.block.CopycatBlockModel;
 import com.hlysine.create_connected.content.copycat.board.CopycatBoardBlock;
 import com.hlysine.create_connected.content.copycat.board.CopycatBoardModel;
+import com.hlysine.create_connected.content.copycat.bytes.CopycatByteBlock;
+import com.hlysine.create_connected.content.copycat.bytes.CopycatByteModel;
 import com.hlysine.create_connected.content.copycat.fence.CopycatFenceBlock;
 import com.hlysine.create_connected.content.copycat.fence.CopycatFenceModel;
 import com.hlysine.create_connected.content.copycat.fence.WrappedFenceBlock;
@@ -575,6 +577,30 @@ public class CCBlocks {
                     })
                     .item()
                     .transform(customItemModel("copycat_base", "board"))
+                    .register();
+
+    public static final BlockEntry<CopycatByteBlock> COPYCAT_BYTE =
+            REGISTRATE.block("copycat_byte", CopycatByteBlock::new)
+                    .transform(BuilderTransformers.copycat())
+                    .transform(FeatureToggle.register())
+                    .onRegister(CreateRegistrate.blockModel(() -> CopycatByteModel::new))
+                    .loot((lt, block) -> {
+                        LootTable.Builder builder = LootTable.lootTable();
+                        for (CopycatByteBlock.Byte bite : CopycatByteBlock.allBytes) {
+                            builder.withPool(
+                                    LootPool.lootPool()
+                                            .setRolls(ConstantValue.exactly(1.0F))
+                                            .when(ExplosionCondition.survivesExplosion())
+                                            .when(LootItemBlockStatePropertyCondition
+                                                    .hasBlockStateProperties(block)
+                                                    .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(CopycatByteBlock.byByte(bite), true)))
+                                            .add(LootItem.lootTableItem(block))
+                            );
+                        }
+                        lt.add(block, builder);
+                    })
+                    .item()
+                    .transform(customItemModel("copycat_base", "byte"))
                     .register();
 
     public static final BlockEntry<WindowBlock> CHERRY_WINDOW = CCWindowGen.woodenWindowBlock(WoodType.CHERRY, Blocks.CHERRY_PLANKS, () -> RenderType::translucent, true);
