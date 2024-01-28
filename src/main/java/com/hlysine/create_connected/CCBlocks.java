@@ -284,6 +284,9 @@ public class CCBlocks {
                     .transform(LinkedTransmitterItem.register())
                     .onRegister(PreciseItemUseOverrides::addBlock)
                     .transform(CCDynamicModels.linkedTransmitter(
+                            new ResourceLocation(type.name() + "_button")
+                    ))
+                    .blockstate(CCBlockStateGen.linkedButton(
                             new ResourceLocation("block/" + namePath + "_button"),
                             new ResourceLocation("block/" + namePath + "_button_pressed")
                     ))
