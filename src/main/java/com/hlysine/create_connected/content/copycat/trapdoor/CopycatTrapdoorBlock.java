@@ -51,15 +51,7 @@ public class CopycatTrapdoorBlock extends WaterloggedCopycatWrappedBlock {
     public BlockState getStateForPlacement(@NotNull BlockPlaceContext pContext) {
         BlockState state = trapdoor.getStateForPlacement(pContext);
         if (state == null) return super.getStateForPlacement(pContext);
-        return copyBlockState(state, super.getStateForPlacement(pContext));
-    }
-
-    public static BlockState copyBlockState(BlockState source, BlockState destination) {
-        return destination
-                .setValue(FACING, source.getValue(FACING))
-                .setValue(OPEN, source.getValue(OPEN))
-                .setValue(HALF, source.getValue(HALF))
-                .setValue(POWERED, source.getValue(POWERED));
+        return copyState(state, super.getStateForPlacement(pContext), false);
     }
 
     @Override
@@ -121,6 +113,15 @@ public class CopycatTrapdoorBlock extends WaterloggedCopycatWrappedBlock {
     @Override
     public boolean supportsExternalFaceHiding(BlockState state) {
         return true;
+    }
+
+    public static BlockState copyState(BlockState from, BlockState to, boolean includeWaterlogged) {
+        return to
+                .setValue(FACING, from.getValue(FACING))
+                .setValue(OPEN, from.getValue(OPEN))
+                .setValue(HALF, from.getValue(HALF))
+                .setValue(POWERED, from.getValue(POWERED))
+                .setValue(WATERLOGGED, includeWaterlogged ? from.getValue(WATERLOGGED) : to.getValue(WATERLOGGED));
     }
 }
 

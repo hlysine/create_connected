@@ -20,7 +20,7 @@ public class DismountHelperMixin {
     private static BlockState getWrappedBlock(BlockGetter instance, BlockPos pos, Operation<BlockState> original) {
         BlockState state = original.call(instance, pos);
         if (state.getBlock() instanceof CopycatTrapdoorBlock)
-            return CopycatTrapdoorBlock.copyBlockState(state, ICopycatWithWrappedBlock.unwrap(state.getBlock()).defaultBlockState());
+            return CopycatTrapdoorBlock.copyState(state, ICopycatWithWrappedBlock.unwrap(state.getBlock()).defaultBlockState(), true);
         else
             return state;
     }
