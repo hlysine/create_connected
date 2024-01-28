@@ -114,7 +114,11 @@ public class CopycatByteBlock extends WaterloggedCopycatBlock implements ISpecia
         BlockPos blockPos = context.getClickedPos();
         BlockState state = context.getLevel().getBlockState(blockPos);
         Vec3 bias = Vec3.atLowerCornerOf(context.getClickedFace().getNormal()).scale(1 / 16f);
-        Byte bite = getByteFromVec(context.getClickLocation().add(bias));
+        Vec3 biasedLocation = context.getClickLocation().add(bias);
+        if (!BlockPos.containing(biasedLocation).equals(context.getClickedPos())) {
+            biasedLocation = clampToBlockPos(biasedLocation, context.getClickedPos());
+        }
+        Byte bite = getByteFromVec(biasedLocation, context.getClickedPos());
         if (state.is(this)) {
             if (!state.getValue(byByte(bite)))
                 return state.setValue(byByte(bite), true);
@@ -139,9 +143,10 @@ public class CopycatByteBlock extends WaterloggedCopycatBlock implements ISpecia
         if (!itemstack.is(this.asItem())) return false;
         Vec3 bias = Vec3.atLowerCornerOf(pUseContext.getClickedFace().getNormal()).scale(1 / 16f);
         Vec3 biasedLocation = pUseContext.getClickLocation().add(bias);
-        Byte bite = getByteFromVec(biasedLocation);
-        if (!BlockPos.containing(biasedLocation).equals(pUseContext.getClickedPos()))
-            return false;
+        if (!BlockPos.containing(biasedLocation).equals(pUseContext.getClickedPos())) {
+            biasedLocation = clampToBlockPos(biasedLocation, pUseContext.getClickedPos());
+        }
+        Byte bite = getByteFromVec(biasedLocation, pUseContext.getClickedPos());
         return !pState.getValue(byByte(bite));
     }
 
@@ -157,7 +162,7 @@ public class CopycatByteBlock extends WaterloggedCopycatBlock implements ISpecia
         BlockPos pos = context.getClickedPos();
         Player player = context.getPlayer();
         Vec3 bias = Vec3.atLowerCornerOf(context.getClickedFace().getNormal()).scale(-1 / 16f);
-        Byte bite = getByteFromVec(context.getClickLocation().add(bias));
+        Byte bite = getByteFromVec(context.getClickLocation().add(bias), context.getClickedPos());
         if (world instanceof ServerLevel) {
             if (player != null && !player.isCreative()) {
                 List<ItemStack> drops = Block.getDrops(defaultBlockState().setValue(byByte(bite), true), (ServerLevel) world, pos, world.getBlockEntity(pos), player, context.getItemInHand());
@@ -201,8 +206,16 @@ public class CopycatByteBlock extends WaterloggedCopycatBlock implements ISpecia
         return mapBytes(pState, bite -> bite(invertX != bite.x, bite.y, invertZ != bite.z));
     }
 
-    public static Byte getByteFromVec(Vec3 vec) {
-        vec = vec.subtract(Mth.floor(vec.x), Mth.floor(vec.y), Mth.floor(vec.z));
+    public static Vec3 clampToBlockPos(Vec3 vec, BlockPos pos) {
+        return new Vec3(
+                Mth.clamp(vec.x, pos.getX(), pos.getX() + 1),
+                Mth.clamp(vec.y, pos.getY(), pos.getY() + 1),
+                Mth.clamp(vec.z, pos.getZ(), pos.getZ() + 1)
+        );
+    }
+
+    public static Byte getByteFromVec(Vec3 vec, BlockPos pos) {
+        vec = vec.subtract(pos.getX(), pos.getY(), pos.getZ());
         return bite(vec.x > 0.5, vec.y > 0.5, vec.z > 0.5);
     }
 
