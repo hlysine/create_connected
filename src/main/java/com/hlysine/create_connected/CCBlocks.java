@@ -283,7 +283,7 @@ public class CCBlocks {
                     .tag(AllTags.AllBlockTags.SAFE_NBT.tag)
                     .transform(LinkedTransmitterItem.register())
                     .onRegister(PreciseItemUseOverrides::addBlock)
-                    .blockstate(CCBlockStateGen.linkedButton(
+                    .transform(CCDynamicModels.linkedTransmitter(
                             new ResourceLocation("block/" + namePath + "_button"),
                             new ResourceLocation("block/" + namePath + "_button_pressed")
                     ))
