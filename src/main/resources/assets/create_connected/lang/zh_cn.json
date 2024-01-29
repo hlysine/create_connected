@@ -33,6 +33,7 @@
   "block.create_connected.copycat_block.tooltip.summary": "任意的_完整方块_转换为装饰克隆物。",
   "block.create_connected.copycat_board.tooltip.condition1": "右击时",
   "block.create_connected.copycat_fence.tooltip.condition1": "右击时",
+  "block.create_connected.copycat_fence_gate.tooltip.condition1": "右击时",
   "block.create_connected.copycat_slab": "伪装台阶",
   "block.create_connected.copycat_slab.tooltip.behaviour1": "如果可能，将根据_手持物品_改变_材质_。_再次点击_以循环切换_方向_或_充能_状态。使用_扳手_重置材质。",
   "block.create_connected.copycat_slab.tooltip.condition1": "右击时",
