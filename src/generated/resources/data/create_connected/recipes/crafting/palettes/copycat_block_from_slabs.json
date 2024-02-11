@@ -9,6 +9,13 @@
           "invert": false
         },
         {
+          "type": "forge:not",
+          "value": {
+            "type": "create_connected:feature_enabled_in_copycats",
+            "feature": "create_connected:copycat_block"
+          }
+        },
+        {
           "type": "create_connected:feature_enabled",
           "feature": "create_connected:copycat_slab",
           "invert": false
