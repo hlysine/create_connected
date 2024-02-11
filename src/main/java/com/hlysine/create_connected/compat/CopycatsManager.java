@@ -2,22 +2,29 @@ package com.hlysine.create_connected.compat;
 
 import com.hlysine.create_connected.CCBlocks;
 import com.hlysine.create_connected.CCItems;
+import com.hlysine.create_connected.CreateConnected;
+import com.hlysine.create_connected.config.CCConfigs;
 import com.simibubi.create.foundation.utility.RegisteredObjects;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import com.tterrag.registrate.util.entry.ItemEntry;
+import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.Property;
+import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.fml.LogicalSide;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class CopycatsManager {
     public static Map<String, BlockEntry<?>> BLOCK_MAP = new HashMap<>();
     public static Map<String, ItemEntry<?>> ITEM_MAP = new HashMap<>();
+
+    public static final Map<Level, Set<BlockPos>> migrationQueue = Collections.synchronizedMap(new WeakHashMap<>());
 
     static {
         BLOCK_MAP.put(CCBlocks.COPYCAT_BLOCK.getKey().location().getPath(), com.copycatsplus.copycats.CCBlocks.COPYCAT_BLOCK);
@@ -93,5 +100,43 @@ public class CopycatsManager {
         if (!existsInCopycats(key))
             return false;
         return com.copycatsplus.copycats.config.FeatureToggle.isEnabled(Mods.COPYCATS.rl(key.getPath()));
+    }
+
+    public static void enqueueMigration(Level level, BlockPos pos) {
+        migrationQueue
+                .computeIfAbsent(level, $ -> Collections.synchronizedSet(new LinkedHashSet<>()))
+                .add(pos);
+    }
+
+    public static void onLevelTick(TickEvent.LevelTickEvent event) {
+        if (event.haveTime() && event.side == LogicalSide.SERVER) {
+            if (!CCConfigs.common().migrateCopycatsOnInitialize.get()) {
+                migrationQueue.clear();
+                return;
+            }
+            Level level = event.level;
+            synchronized (migrationQueue) {
+                if (migrationQueue.containsKey(level)) {
+                    Set<BlockPos> list = migrationQueue.get(level);
+                    synchronized (list) {
+                        if (list.size() > 0)
+                            CreateConnected.LOGGER.debug("Copycats: Migrated " + list.size() + " copycats in " + level.dimension().location());
+                        for (Iterator<BlockPos> iterator = list.iterator(); iterator.hasNext(); ) {
+                            BlockPos pos = iterator.next();
+                            if (!level.isLoaded(pos)) {
+                                iterator.remove();
+                                continue;
+                            }
+                            BlockState state = level.getBlockState(pos);
+                            BlockState converted = CopycatsManager.convert(state);
+                            if (!converted.is(state.getBlock())) {
+                                level.setBlock(pos, converted, 2 | 16 | 32);
+                            }
+                            iterator.remove();
+                        }
+                    }
+                }
+            }
+        }
     }
 }
