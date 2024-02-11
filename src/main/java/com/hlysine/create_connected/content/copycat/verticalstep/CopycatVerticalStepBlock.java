@@ -3,6 +3,7 @@ package com.hlysine.create_connected.content.copycat.verticalstep;
 import com.hlysine.create_connected.CCBlocks;
 import com.hlysine.create_connected.CCShapes;
 import com.hlysine.create_connected.content.copycat.ShimWaterloggedCopycatBlock;
+import com.hlysine.create_connected.content.copycat.MigratingWaterloggedCopycatBlock;
 import com.simibubi.create.foundation.placement.IPlacementHelper;
 import com.simibubi.create.foundation.placement.PlacementHelpers;
 import com.simibubi.create.foundation.placement.PoleHelper;
@@ -145,7 +146,7 @@ public class CopycatVerticalStepBlock extends ShimWaterloggedCopycatBlock {
     }
 
     @Override
-    public BlockState getStateForPlacement(BlockPlaceContext context) {
+    public BlockState getStateForPlacement(@NotNull BlockPlaceContext context) {
         BlockState stateForPlacement = super.getStateForPlacement(context);
         assert stateForPlacement != null;
 

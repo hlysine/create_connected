@@ -11,15 +11,9 @@ import net.minecraftforge.common.crafting.conditions.IConditionSerializer;
 public class FeatureEnabledCondition implements ICondition {
     private static final ResourceLocation NAME = CreateConnected.asResource("feature_enabled");
     private final ResourceLocation feature;
-    private final boolean invert;
-
-    public FeatureEnabledCondition(ResourceLocation feature, boolean invert) {
-        this.feature = feature;
-        this.invert = invert;
-    }
 
     public FeatureEnabledCondition(ResourceLocation feature) {
-        this(feature, false);
+        this.feature = feature;
     }
 
     @Override
@@ -30,7 +24,7 @@ public class FeatureEnabledCondition implements ICondition {
     @SuppressWarnings("removal")
     @Override
     public boolean test() {
-        return FeatureToggle.isEnabled(feature) != invert;
+        return FeatureToggle.isEnabled(feature);
     }
 
     public static class Serializer implements IConditionSerializer<FeatureEnabledCondition> {
@@ -39,14 +33,12 @@ public class FeatureEnabledCondition implements ICondition {
         @Override
         public void write(JsonObject json, FeatureEnabledCondition value) {
             json.addProperty("feature", value.feature.toString());
-            json.addProperty("invert", value.invert);
         }
 
         @Override
         public FeatureEnabledCondition read(JsonObject json) {
             return new FeatureEnabledCondition(
-                    new ResourceLocation(GsonHelper.getAsString(json, "feature")),
-                    GsonHelper.getAsBoolean(json, "invert")
+                    new ResourceLocation(GsonHelper.getAsString(json, "feature"))
             );
         }
 

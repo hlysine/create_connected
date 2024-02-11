@@ -4,6 +4,7 @@ import com.hlysine.create_connected.CCBlocks;
 import com.hlysine.create_connected.CCShapes;
 import com.hlysine.create_connected.content.copycat.ICopycatWithWrappedBlock;
 import com.hlysine.create_connected.content.copycat.ShimWaterloggedCopycatBlock;
+import com.hlysine.create_connected.content.copycat.MigratingWaterloggedCopycatBlock;
 import com.simibubi.create.content.decoration.copycat.CopycatBlock;
 import com.simibubi.create.foundation.placement.IPlacementHelper;
 import com.simibubi.create.foundation.placement.PlacementHelpers;
@@ -134,12 +135,12 @@ public class CopycatSlabBlock extends ShimWaterloggedCopycatBlock implements ICo
     }
 
     @Override
-    public BlockState getStateForPlacement(BlockPlaceContext context) {
+    public BlockState getStateForPlacement(@NotNull BlockPlaceContext context) {
         BlockState stateForPlacement = super.getStateForPlacement(context);
         assert stateForPlacement != null;
         BlockPos blockPos = context.getClickedPos();
         BlockState state = context.getLevel().getBlockState(blockPos);
-        if (state.is(this)) {
+        if (isSelfState(state)) {
             return state
                     .setValue(SLAB_TYPE, SlabType.DOUBLE)
                     .setValue(WATERLOGGED, false);

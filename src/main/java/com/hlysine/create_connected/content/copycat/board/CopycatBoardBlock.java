@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableMap;
 import com.hlysine.create_connected.CCItems;
 import com.hlysine.create_connected.CCShapes;
 import com.hlysine.create_connected.content.copycat.ShimWaterloggedCopycatBlock;
+import com.hlysine.create_connected.content.copycat.MigratingWaterloggedCopycatBlock;
 import com.simibubi.create.content.schematics.requirement.ISpecialBlockItemRequirement;
 import com.simibubi.create.content.schematics.requirement.ItemRequirement;
 import com.simibubi.create.foundation.utility.Iterate;
@@ -108,12 +109,12 @@ public class CopycatBoardBlock extends ShimWaterloggedCopycatBlock implements IS
     }
 
     @Override
-    public BlockState getStateForPlacement(BlockPlaceContext context) {
+    public BlockState getStateForPlacement(@NotNull BlockPlaceContext context) {
         BlockState stateForPlacement = super.getStateForPlacement(context);
         assert stateForPlacement != null;
         BlockPos blockPos = context.getClickedPos();
         BlockState state = context.getLevel().getBlockState(blockPos);
-        if (state.is(this)) {
+        if (isSelfState(state)) {
             if (!state.getValue(byDirection(context.getClickedFace().getOpposite())))
                 return state.setValue(byDirection(context.getClickedFace().getOpposite()), true);
             else

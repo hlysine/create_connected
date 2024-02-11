@@ -1,5 +1,7 @@
 package com.hlysine.create_connected;
 
+import com.hlysine.create_connected.compat.CopycatsManager;
+import com.hlysine.create_connected.compat.Mods;
 import com.hlysine.create_connected.config.CCConfigs;
 import com.hlysine.create_connected.datagen.CCDatagen;
 import com.hlysine.create_connected.datagen.advancements.CCAdvancements;
@@ -65,6 +67,9 @@ public class CreateConnected {
         CCItemAttributes.register();
         CCInteractionBehaviours.register();
         CCMovementBehaviours.register();
+
+        if (Mods.COPYCATS.isLoaded())
+            forgeEventBus.addListener(CopycatsManager::onLevelTick);
 
         modEventBus.addListener(EventPriority.LOWEST, CCDatagen::gatherData);
         modEventBus.addGenericListener(SoundEvent.class, CCSoundEvents::register);

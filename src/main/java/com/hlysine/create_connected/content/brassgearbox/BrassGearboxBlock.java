@@ -153,7 +153,8 @@ public class BrassGearboxBlock extends RotatedPillarKineticBlock implements IBE<
             case 2 -> state.getValue(FACE_2_FLIPPED);
             case 3 -> state.getValue(FACE_3_FLIPPED);
             case 4 -> state.getValue(FACE_4_FLIPPED);
-            default -> throw new IllegalStateException("Unexpected value: " + faceId);
+            default -> false; // throw new IllegalStateException("Unexpected value: " + faceId);
+            // cannot throw here, possibly due to mod incompatibility
         };
     }
 
