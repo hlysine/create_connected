@@ -119,7 +119,7 @@ public class CopycatStairsBlock extends WaterloggedCopycatWrappedBlock {
 
     @Override
     public @NotNull BlockState updateShape(@NotNull BlockState pState, @NotNull Direction pDirection, @NotNull BlockState pNeighborState, @NotNull LevelAccessor pLevel, @NotNull BlockPos pCurrentPos, @NotNull BlockPos pNeighborPos) {
-        return migrate(stairs.updateShape(pState, pDirection, pNeighborState, pLevel, pCurrentPos, pNeighborPos));
+        return migrateOnUpdate(pLevel.isClientSide(), stairs.updateShape(pState, pDirection, pNeighborState, pLevel, pCurrentPos, pNeighborPos));
     }
 
     @Override

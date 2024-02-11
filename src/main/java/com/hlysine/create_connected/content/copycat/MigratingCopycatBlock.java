@@ -2,6 +2,7 @@ package com.hlysine.create_connected.content.copycat;
 
 import com.hlysine.create_connected.compat.CopycatsManager;
 import com.hlysine.create_connected.compat.Mods;
+import com.hlysine.create_connected.config.CCConfigs;
 import com.simibubi.create.content.decoration.copycat.CopycatBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -35,7 +36,13 @@ public abstract class MigratingCopycatBlock extends CopycatBlock {
 
     @Override
     public @NotNull BlockState updateShape(@NotNull BlockState pState, @NotNull Direction pDirection, @NotNull BlockState pNeighborState, @NotNull LevelAccessor pLevel, @NotNull BlockPos pCurrentPos, @NotNull BlockPos pNeighborPos) {
-        return migrate(super.updateShape(pState, pDirection, pNeighborState, pLevel, pCurrentPos, pNeighborPos));
+        return migrateOnUpdate(pLevel.isClientSide(), super.updateShape(pState, pDirection, pNeighborState, pLevel, pCurrentPos, pNeighborPos));
+    }
+
+    protected static BlockState migrateOnUpdate(boolean isClient, BlockState state) {
+        if (!isClient && CCConfigs.common().migrateCopycatsOnBlockUpdate.get())
+            return migrate(state);
+        return state;
     }
 
     protected static BlockState migrate(BlockState state) {
