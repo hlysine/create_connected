@@ -636,10 +636,10 @@ public class CCStandardRecipes extends CreateRecipeProvider {
         }
     }
 
-//    @Override
-//    public String getName() {
-//        return "Create: Connected's Standard Recipes";
-//    }
+    @Override
+    public @NotNull String getName() {
+        return "Create: Connected's Standard Recipes";
+    }
 
     public CCStandardRecipes(PackOutput p_i48262_1_) {
         super(p_i48262_1_);
