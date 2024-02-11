@@ -25,7 +25,6 @@
     "create_connected:copycat_fence",
     "create_connected:copycat_wall",
     "create_connected:copycat_fence_gate",
-    "create_connected:copycat_trapdoor",
     "create_connected:copycat_board"
   ]
 }

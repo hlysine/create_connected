@@ -52,7 +52,6 @@ public class CCCreativeTabs {
             CCBlocks.COPYCAT_STAIRS,
             CCBlocks.COPYCAT_FENCE,
             CCBlocks.COPYCAT_FENCE_GATE,
-            CCBlocks.COPYCAT_TRAPDOOR,
             CCBlocks.COPYCAT_WALL,
             CCBlocks.COPYCAT_BOARD,
             CCItems.COPYCAT_BOX,
