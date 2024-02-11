@@ -107,7 +107,7 @@ public class CopycatBoardBlock extends MigratingWaterloggedCopycatBlock implemen
         assert stateForPlacement != null;
         BlockPos blockPos = context.getClickedPos();
         BlockState state = context.getLevel().getBlockState(blockPos);
-        if (state.is(this)) {
+        if (isSelfState(state)) {
             if (!state.getValue(byDirection(context.getClickedFace().getOpposite())))
                 return state.setValue(byDirection(context.getClickedFace().getOpposite()), true);
             else

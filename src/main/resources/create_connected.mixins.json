@@ -9,6 +9,7 @@
     "ItemUseOverridesMixin",
     "KineticBlockAdvancementMixin",
     "ManualApplicationRecipeMixin",
+    "compat.CopycatBlockMixin",
     "contraption.AbstractContainerMenuMixin",
     "contraption.ContainerLevelAccessMixin",
     "contraption.ContraptionMixin",

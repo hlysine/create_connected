@@ -21,4 +21,9 @@ public abstract class MigratingWaterloggedCopycatBlock extends WaterloggedCopyca
         assert state != null;
         return Mods.COPYCATS.runIfInstalled(() -> () -> CopycatsManager.convertIfEnabled(state)).orElse(state);
     }
+
+    protected boolean isSelfState(BlockState state) {
+        if (state.is(this)) return true;
+        return Mods.COPYCATS.runIfInstalled(() -> () -> state.is(CopycatsManager.convertIfEnabled(this))).orElse(false);
+    }
 }

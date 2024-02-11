@@ -65,10 +65,22 @@ public class CopycatsManager {
         return to.setValue(property, from.getValue(property));
     }
 
+    public static Block convertIfEnabled(Block block) {
+        if (isFeatureEnabled(RegisteredObjects.getKeyOrThrow(block)))
+            return convert(block);
+        return block;
+    }
+
     public static BlockState convertIfEnabled(BlockState state) {
         if (isFeatureEnabled(RegisteredObjects.getKeyOrThrow(state.getBlock())))
             return convert(state);
         return state;
+    }
+
+    public static ItemLike convertIfEnabled(ItemLike item) {
+        if (isFeatureEnabled(RegisteredObjects.getKeyOrThrow(item.asItem())))
+            return convert(item);
+        return item;
     }
 
     public static boolean existsInCopycats(ResourceLocation key) {

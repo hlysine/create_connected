@@ -138,7 +138,7 @@ public class CopycatSlabBlock extends MigratingWaterloggedCopycatBlock implement
         assert stateForPlacement != null;
         BlockPos blockPos = context.getClickedPos();
         BlockState state = context.getLevel().getBlockState(blockPos);
-        if (state.is(this)) {
+        if (isSelfState(state)) {
             return state
                     .setValue(SLAB_TYPE, SlabType.DOUBLE)
                     .setValue(WATERLOGGED, false);
