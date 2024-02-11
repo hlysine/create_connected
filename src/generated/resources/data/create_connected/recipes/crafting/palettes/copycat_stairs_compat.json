@@ -5,8 +5,7 @@
       "conditions": [
         {
           "type": "create_connected:feature_enabled",
-          "feature": "create_connected:copycat_stairs",
-          "invert": false
+          "feature": "create_connected:copycat_stairs"
         },
         {
           "type": "create_connected:feature_enabled_in_copycats",

@@ -5,8 +5,7 @@
       "conditions": [
         {
           "type": "create_connected:feature_enabled",
-          "feature": "create:copycat_step",
-          "invert": false
+          "feature": "create:copycat_step"
         },
         {
           "type": "forge:not",
@@ -17,8 +16,7 @@
         },
         {
           "type": "create_connected:feature_enabled",
-          "feature": "create_connected:copycat_vertical_step",
-          "invert": false
+          "feature": "create_connected:copycat_vertical_step"
         }
       ],
       "recipe": {

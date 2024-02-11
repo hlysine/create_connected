@@ -37,8 +37,7 @@
       "conditions": [
         {
           "type": "create_connected:feature_enabled",
-          "feature": "create_connected:item_silo",
-          "invert": false
+          "feature": "create_connected:item_silo"
         }
       ]
     }

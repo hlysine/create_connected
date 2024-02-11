@@ -5,8 +5,7 @@
       "conditions": [
         {
           "type": "create_connected:feature_enabled",
-          "feature": "create_connected:copycat_wall",
-          "invert": false
+          "feature": "create_connected:copycat_wall"
         },
         {
           "type": "forge:not",

@@ -5,8 +5,7 @@
       "conditions": [
         {
           "type": "create_connected:feature_enabled",
-          "feature": "create_connected:bamboo_window_pane",
-          "invert": false
+          "feature": "create_connected:bamboo_window_pane"
         }
       ],
       "recipe": {

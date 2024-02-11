@@ -39,8 +39,7 @@
       "conditions": [
         {
           "type": "create_connected:feature_enabled",
-          "feature": "create_connected:copycat_fence",
-          "invert": false
+          "feature": "create_connected:copycat_fence"
         },
         {
           "type": "forge:not",
