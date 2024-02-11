@@ -5,6 +5,28 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.7.0 - 2024-02-11
+
+### Added
+
+- Recipe compatibility and auto-migration with Create: Copycats+
+- New translations (thanks
+  [Crowdin contributors](https://crowdin.com/project/create-connected-mod/reports/top-members)!)
+
+### Changed
+
+- `feature_enabled` condition no longer has an `invert` field. Please use the `forge:not` condition instead
+
+### Fixed
+
+- Incompatibility with Radium's pathfinding optimizations
+- Incompatibility with Diagonal Fences
+- Crash in certain instances where mod configs are accessed too early
+- Crash in certain instances when wrenching a Brass Gearbox
+- Incompatibility with Velocity due to bad network channel name
+- Item Silos behaving differently from Item Vaults around contraptions
+- Sequenced Pulse Generator not updating the block in front when signal strength changes
+
 ## 0.6.1 - 2024-01-24
 
 ### Fixed
@@ -66,7 +88,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - Restart the whole sequence from the beginning, allowing the Sequenced Gearshift to run indefinitely
 - A new toggle to disable "crafting remaining item" fix for manual application recipes
 - Translations for Russian, Japanese, Dutch, Chinese Simplified, Romanian
-  (thanks [Crowdin contributors](https://crowdin.com/project/create-connected-mod/members)!)
+  (thanks [Crowdin contributors](https://crowdin.com/project/create-connected-mod/reports/top-members)!)
 
 ### Changed
 
@@ -118,7 +140,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - Cartography Table
 - 2 music discs for iconic elevator music
 - Translations for Dutch, Japanese, Chinese Simplified, French, German
-  (thanks [Crowdin contributors](https://crowdin.com/project/create-connected-mod/members)!)
+  (thanks [Crowdin contributors](https://crowdin.com/project/create-connected-mod/reports/top-members)!)
 
 ### Fixed
 

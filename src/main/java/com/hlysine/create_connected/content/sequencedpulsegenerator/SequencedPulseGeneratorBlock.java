@@ -78,6 +78,11 @@ public class SequencedPulseGeneratorBlock extends AbstractDiodeBlock implements 
     }
 
     @Override
+    public void updateNeighborsInFront(@NotNull Level pLevel, @NotNull BlockPos pPos, @NotNull BlockState pState) {
+        super.updateNeighborsInFront(pLevel, pPos, pState);
+    }
+
+    @Override
     public void tick(@NotNull BlockState state, @NotNull ServerLevel worldIn, @NotNull BlockPos pos, @NotNull RandomSource r) {
         if (!this.isLocked(worldIn, pos, state)) {
             boolean prevPower = state.getValue(POWERED);
