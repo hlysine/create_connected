@@ -336,13 +336,13 @@ public class CCStandardRecipes extends CreateRecipeProvider {
     }
 
     GeneratedRecipe copycat(ItemProviderEntry<? extends ItemLike> result, int resultCount) {
-        if (CopycatsManager.convert(result) != result)
-            create(() -> CopycatsManager.convert(result)).withSuffix("_compat")
-                    .requiresFeature(RegisteredObjects.getKeyOrThrow(result.asItem()))
+        if (CopycatsManager.convert(result.get()) != result.get())
+            create(() -> CopycatsManager.convert(result.get())).withSuffix("_compat")
+                    .requiresFeature(RegisteredObjects.getKeyOrThrow(result.get().asItem()))
                     .unlockedBy(result::get)
                     .enabledInCopycats()
                     .viaShapeless(b -> b
-                            .requires(result)
+                            .requires(result.get())
                     );
         return create(result)
                 .unlockedBy(AllItems.ZINC_INGOT::get)

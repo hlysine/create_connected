@@ -50,7 +50,7 @@ public class CopycatsManager {
         ItemEntry<?> result = ITEM_MAP.get(RegisteredObjects.getKeyOrThrow(self).getPath());
         if (result != null) return result.get();
         BlockEntry<?> blockResult = BLOCK_MAP.get(RegisteredObjects.getKeyOrThrow(self).getPath());
-        if (blockResult != null) return blockResult.asItem();
+        if (blockResult != null) return blockResult.get().asItem();
         return self;
     }
 

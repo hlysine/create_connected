@@ -13,7 +13,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.storage.loot.LootParams;
+import net.minecraft.world.level.storage.loot.LootContext;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -65,7 +65,7 @@ public abstract class MigratingCopycatBlock extends CopycatBlock {
     }
 
     @Override
-    public @NotNull List<ItemStack> getDrops(@NotNull BlockState pState, LootParams.@NotNull Builder pParams) {
+    public @NotNull List<ItemStack> getDrops(@NotNull BlockState pState, LootContext.@NotNull Builder pParams) {
         List<ItemStack> drops = super.getDrops(pState, pParams);
         for (int i = 0; i < drops.size(); i++) {
             ItemStack drop = drops.get(i);
