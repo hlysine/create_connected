@@ -165,8 +165,7 @@ public class CopycatByteBlock extends WaterloggedCopycatBlock implements ISpecia
                     player.getInventory().placeItemBackInInventory(drop);
                 }
             }
-            BlockPos up = pos.relative(Direction.UP);
-            world.setBlockAndUpdate(pos, state.setValue(byByte(bite), false).updateShape(Direction.UP, world.getBlockState(up), world, pos, up));
+            world.setBlockAndUpdate(pos, state.setValue(byByte(bite), false));
             playRemoveSound(world, pos);
         }
         return InteractionResult.SUCCESS;

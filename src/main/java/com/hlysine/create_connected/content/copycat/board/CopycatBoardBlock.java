@@ -179,8 +179,7 @@ public class CopycatBoardBlock extends WaterloggedCopycatBlock implements ISpeci
                     player.getInventory().placeItemBackInInventory(drop);
                 }
             }
-            BlockPos up = pos.relative(Direction.UP);
-            world.setBlockAndUpdate(pos, state.setValue(byDirection(options.get(0)), false).updateShape(Direction.UP, world.getBlockState(up), world, pos, up));
+            world.setBlockAndUpdate(pos, state.setValue(byDirection(options.get(0)), false));
             playRemoveSound(world, pos);
         }
         return InteractionResult.SUCCESS;
