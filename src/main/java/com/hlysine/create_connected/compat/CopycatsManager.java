@@ -9,6 +9,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.Property;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -47,6 +49,26 @@ public class CopycatsManager {
 
     public static ItemLike convert(ItemLike self) {
         return convert(self.asItem());
+    }
+
+    public static BlockState convert(BlockState state) {
+        Block converted = convert(state.getBlock());
+        if (state.getBlock() == converted) return state;
+        BlockState newState = converted.defaultBlockState();
+        for (Property<?> property : state.getProperties()) {
+            newState = copyProperty(state, newState, property);
+        }
+        return newState;
+    }
+
+    private static <T extends Comparable<T>> BlockState copyProperty(BlockState from, BlockState to, Property<T> property) {
+        return to.setValue(property, from.getValue(property));
+    }
+
+    public static BlockState convertIfEnabled(BlockState state) {
+        if (isFeatureEnabled(RegisteredObjects.getKeyOrThrow(state.getBlock())))
+            return convert(state);
+        return state;
     }
 
     public static boolean existsInCopycats(ResourceLocation key) {
