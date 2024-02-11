@@ -6,7 +6,9 @@ import com.simibubi.create.content.decoration.copycat.CopycatBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -38,5 +40,15 @@ public abstract class MigratingCopycatBlock extends CopycatBlock {
     protected boolean isSelfState(BlockState state) {
         if (state.is(this)) return true;
         return Mods.COPYCATS.runIfInstalled(() -> () -> state.is(CopycatsManager.convertIfEnabled(this))).orElse(false);
+    }
+
+    @Override
+    public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
+        if (Mods.COPYCATS.runIfInstalled(() -> () -> {
+            Block oldBlock = CopycatsManager.convertIfEnabled(pState.getBlock());
+            Block newBlock = CopycatsManager.convertIfEnabled(pNewState.getBlock());
+            return oldBlock.equals(newBlock);
+        }).orElse(false)) return;
+        super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
     }
 }
