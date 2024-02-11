@@ -95,6 +95,9 @@ minecraft {
             property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
             property 'mixin.debug.countInjections', 'true'
 
+            //Allows for reloading the project during runtime with compatible java
+            jvmArg "-XX:+AllowEnhancedClassRedefinition"
+
             arg '-mixin.config=create_connected.mixins.json'
 
             mods {
