@@ -102,7 +102,7 @@ public class CopycatBoardBlock extends MigratingWaterloggedCopycatBlock implemen
     }
 
     @Override
-    public BlockState getStateForPlacement(BlockPlaceContext context) {
+    public BlockState getStateForPlacement(@NotNull BlockPlaceContext context) {
         BlockState stateForPlacement = super.getStateForPlacement(context);
         assert stateForPlacement != null;
         BlockPos blockPos = context.getClickedPos();

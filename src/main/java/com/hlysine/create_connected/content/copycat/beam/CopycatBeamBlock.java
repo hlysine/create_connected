@@ -118,7 +118,7 @@ public class CopycatBeamBlock extends MigratingWaterloggedCopycatBlock {
     }
 
     @Override
-    public BlockState getStateForPlacement(BlockPlaceContext context) {
+    public BlockState getStateForPlacement(@NotNull BlockPlaceContext context) {
         BlockState stateForPlacement = super.getStateForPlacement(context);
         assert stateForPlacement != null;
         Axis axis = context.getNearestLookingDirection().getAxis();
