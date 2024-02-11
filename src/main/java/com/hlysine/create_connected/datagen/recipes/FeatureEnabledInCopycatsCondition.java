@@ -22,8 +22,9 @@ public class FeatureEnabledInCopycatsCondition implements ICondition {
         return NAME;
     }
 
+    @SuppressWarnings("removal")
     @Override
-    public boolean test(IContext context) {
+    public boolean test() {
         return Mods.COPYCATS.runIfInstalled(() -> () -> CopycatsManager.isFeatureEnabled(feature)).orElse(false);
     }
 

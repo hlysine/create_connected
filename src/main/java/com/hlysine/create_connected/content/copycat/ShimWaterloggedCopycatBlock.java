@@ -1,13 +1,12 @@
 package com.hlysine.create_connected.content.copycat;
 
-import com.simibubi.create.content.decoration.copycat.WaterloggedCopycatBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
-public abstract class ShimWaterloggedCopycatBlock extends WaterloggedCopycatBlock implements IShimCopycatBlock {
+public abstract class ShimWaterloggedCopycatBlock extends MigratingWaterloggedCopycatBlock implements IShimCopycatBlock {
     public ShimWaterloggedCopycatBlock(Properties pProperties) {
         super(pProperties);
     }

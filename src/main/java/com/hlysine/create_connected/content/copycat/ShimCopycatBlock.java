@@ -7,7 +7,7 @@ import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
-public abstract class ShimCopycatBlock extends CopycatBlock implements IShimCopycatBlock {
+public abstract class ShimCopycatBlock extends MigratingCopycatBlock implements IShimCopycatBlock {
     public ShimCopycatBlock(Properties pProperties) {
         super(pProperties);
     }
