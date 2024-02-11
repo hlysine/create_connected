@@ -427,6 +427,7 @@ public class CCBlocks {
                     .loot((lt, block) -> lt.add(block, lt.createSlabItemTable(block)))
                     .onRegister(CreateRegistrate.blockModel(() -> CopycatSlabModel::new))
                     .item()
+                    .tag(CCTags.Items.COPYCAT_SLAB.tag)
                     .transform(customItemModel("copycat_base", "slab"))
                     .register();
 
@@ -436,6 +437,7 @@ public class CCBlocks {
                     .transform(FeatureToggle.register())
                     .onRegister(CreateRegistrate.blockModel(() -> CopycatBlockModel::new))
                     .item()
+                    .tag(CCTags.Items.COPYCAT_BLOCK.tag)
                     .transform(customItemModel("copycat_base", "block"))
                     .register();
 
@@ -445,6 +447,7 @@ public class CCBlocks {
                     .transform(FeatureToggle.register())
                     .onRegister(CreateRegistrate.blockModel(() -> CopycatBeamModel::new))
                     .item()
+                    .tag(CCTags.Items.COPYCAT_BEAM.tag)
                     .transform(customItemModel("copycat_base", "beam"))
                     .register();
 
@@ -454,6 +457,7 @@ public class CCBlocks {
                     .transform(FeatureToggle.register())
                     .onRegister(CreateRegistrate.blockModel(() -> CopycatVerticalStepModel::new))
                     .item()
+                    .tag(CCTags.Items.COPYCAT_VERTICAL_STEP.tag)
                     .transform(customItemModel("copycat_base", "vertical_step"))
                     .register();
 
@@ -464,6 +468,7 @@ public class CCBlocks {
                     .transform(FeatureToggle.register())
                     .onRegister(CreateRegistrate.blockModel(() -> CopycatStairsModel::new))
                     .item()
+                    .tag(CCTags.Items.COPYCAT_STAIRS.tag)
                     .transform(customItemModel("copycat_base", "stairs"))
                     .register();
 
@@ -482,6 +487,7 @@ public class CCBlocks {
                     .transform(FeatureToggle.register())
                     .onRegister(CreateRegistrate.blockModel(() -> CopycatFenceModel::new))
                     .item()
+                    .tag(CCTags.Items.COPYCAT_FENCE.tag)
                     .transform(customItemModel("copycat_base", "fence"))
                     .register();
 
@@ -501,6 +507,7 @@ public class CCBlocks {
                     .transform(FeatureToggle.register())
                     .onRegister(CreateRegistrate.blockModel(() -> CopycatWallModel::new))
                     .item()
+                    .tag(CCTags.Items.COPYCAT_WALL.tag)
                     .transform(customItemModel("copycat_base", "wall"))
                     .register();
 
@@ -520,6 +527,7 @@ public class CCBlocks {
                     .transform(FeatureToggle.register())
                     .onRegister(CreateRegistrate.blockModel(() -> CopycatFenceGateModel::new))
                     .item()
+                    .tag(CCTags.Items.COPYCAT_FENCE_GATE.tag)
                     .transform(customItemModel("copycat_base", "fence_gate"))
                     .register();
 
@@ -552,6 +560,7 @@ public class CCBlocks {
                         lt.add(block, builder);
                     })
                     .item()
+                    .tag(CCTags.Items.COPYCAT_BOARD.tag)
                     .transform(customItemModel("copycat_base", "board"))
                     .register();
 
