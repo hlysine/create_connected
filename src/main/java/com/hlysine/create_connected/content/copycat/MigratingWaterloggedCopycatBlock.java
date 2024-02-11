@@ -5,14 +5,20 @@ import com.hlysine.create_connected.compat.Mods;
 import com.simibubi.create.content.decoration.copycat.WaterloggedCopycatBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.loot.LootParams;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
+
+@SuppressWarnings("deprecation")
 public abstract class MigratingWaterloggedCopycatBlock extends WaterloggedCopycatBlock {
 
     public MigratingWaterloggedCopycatBlock(Properties pProperties) {
@@ -49,5 +55,18 @@ public abstract class MigratingWaterloggedCopycatBlock extends WaterloggedCopyca
             return oldBlock.equals(newBlock);
         }).orElse(false)) return;
         super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
+    }
+
+    @Override
+    public @NotNull List<ItemStack> getDrops(@NotNull BlockState pState, LootParams.@NotNull Builder pParams) {
+        List<ItemStack> drops = super.getDrops(pState, pParams);
+        for (int i = 0; i < drops.size(); i++) {
+            ItemStack drop = drops.get(i);
+            Item converted = CopycatsManager.convert(drop.getItem());
+            if (!converted.equals(drop.getItem())) {
+                drops.set(i, new ItemStack(converted, drop.getCount()));
+            }
+        }
+        return drops;
     }
 }
