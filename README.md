@@ -116,7 +116,7 @@ can [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/O4O2
 
 **Translation**
 
-- Thanks [Crowdin contributors](https://crowdin.com/project/create-connected-mod/members) for their effort in
+- Thanks [Crowdin contributors](https://crowdin.com/project/create-connected-mod/reports/top-members) for their effort in
   localization
 
 **Inspiration**
