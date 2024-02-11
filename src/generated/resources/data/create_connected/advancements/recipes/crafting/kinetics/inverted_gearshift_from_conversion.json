@@ -38,13 +38,11 @@
       "conditions": [
         {
           "type": "create_connected:feature_enabled",
-          "feature": "create:gearshift",
-          "invert": false
+          "feature": "create:gearshift"
         },
         {
           "type": "create_connected:feature_enabled",
-          "feature": "create_connected:inverted_gearshift",
-          "invert": false
+          "feature": "create_connected:inverted_gearshift"
         }
       ]
     }

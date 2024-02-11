@@ -38,13 +38,11 @@
       "conditions": [
         {
           "type": "create_connected:feature_enabled",
-          "feature": "create_connected:vertical_parallel_gearbox",
-          "invert": false
+          "feature": "create_connected:vertical_parallel_gearbox"
         },
         {
           "type": "create_connected:feature_enabled",
-          "feature": "create_connected:parallel_gearbox",
-          "invert": false
+          "feature": "create_connected:parallel_gearbox"
         }
       ]
     }

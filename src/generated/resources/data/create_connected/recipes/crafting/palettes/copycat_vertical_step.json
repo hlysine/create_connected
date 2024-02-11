@@ -5,8 +5,14 @@
       "conditions": [
         {
           "type": "create_connected:feature_enabled",
-          "feature": "create_connected:copycat_vertical_step",
-          "invert": false
+          "feature": "create_connected:copycat_vertical_step"
+        },
+        {
+          "type": "forge:not",
+          "value": {
+            "type": "create_connected:feature_enabled_in_copycats",
+            "feature": "create_connected:copycat_vertical_step"
+          }
         }
       ],
       "recipe": {

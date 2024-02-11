@@ -5,13 +5,11 @@
       "conditions": [
         {
           "type": "create_connected:feature_enabled",
-          "feature": "create_connected:linked_transmitter",
-          "invert": false
+          "feature": "create_connected:linked_transmitter"
         },
         {
           "type": "create_connected:feature_enabled",
-          "feature": "create:redstone_link",
-          "invert": false
+          "feature": "create:redstone_link"
         }
       ],
       "recipe": {

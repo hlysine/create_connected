@@ -1,7 +1,6 @@
 package com.hlysine.create_connected.content.copycat;
 
 import com.simibubi.create.AllTags;
-import com.simibubi.create.content.decoration.copycat.WaterloggedCopycatBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -11,7 +10,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 
 @SuppressWarnings("deprecation")
-public abstract class WaterloggedCopycatWrappedBlock extends WaterloggedCopycatBlock implements ICopycatWithWrappedBlock {
+public abstract class WaterloggedCopycatWrappedBlock extends MigratingWaterloggedCopycatBlock implements ICopycatWithWrappedBlock {
 
     public WaterloggedCopycatWrappedBlock(Properties properties) {
         super(properties);

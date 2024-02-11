@@ -38,13 +38,11 @@
       "conditions": [
         {
           "type": "create_connected:feature_enabled",
-          "feature": "create:clutch",
-          "invert": false
+          "feature": "create:clutch"
         },
         {
           "type": "create_connected:feature_enabled",
-          "feature": "create_connected:inverted_clutch",
-          "invert": false
+          "feature": "create_connected:inverted_clutch"
         }
       ]
     }

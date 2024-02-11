@@ -5,8 +5,7 @@
       "conditions": [
         {
           "type": "create_connected:feature_enabled",
-          "feature": "create_connected:centrifugal_clutch",
-          "invert": false
+          "feature": "create_connected:centrifugal_clutch"
         }
       ],
       "recipe": {

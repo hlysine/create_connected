@@ -5,13 +5,11 @@
       "conditions": [
         {
           "type": "create_connected:feature_enabled",
-          "feature": "create_connected:six_way_gearbox",
-          "invert": false
+          "feature": "create_connected:six_way_gearbox"
         },
         {
           "type": "create_connected:feature_enabled",
-          "feature": "create_connected:parallel_gearbox",
-          "invert": false
+          "feature": "create_connected:parallel_gearbox"
         }
       ],
       "recipe": {
