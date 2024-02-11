@@ -4,7 +4,6 @@
       "conditions": [
         {
           "feature": "create_connected:empty_fan_catalyst",
-          "invert": false,
           "type": "create_connected:feature_enabled"
         }
       ],

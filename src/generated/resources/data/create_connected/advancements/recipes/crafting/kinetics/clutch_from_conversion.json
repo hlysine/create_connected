@@ -4,12 +4,10 @@
       "conditions": [
         {
           "feature": "create_connected:inverted_clutch",
-          "invert": false,
           "type": "create_connected:feature_enabled"
         },
         {
           "feature": "create:clutch",
-          "invert": false,
           "type": "create_connected:feature_enabled"
         }
       ],

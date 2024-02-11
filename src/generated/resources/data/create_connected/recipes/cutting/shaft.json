@@ -14,7 +14,6 @@
   "conditions": [
     {
       "feature": "create_connected:shear_pin",
-      "invert": false,
       "type": "create_connected:feature_enabled"
     }
   ]

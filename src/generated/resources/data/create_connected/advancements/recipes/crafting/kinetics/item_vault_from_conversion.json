@@ -4,12 +4,10 @@
       "conditions": [
         {
           "feature": "create_connected:item_silo",
-          "invert": false,
           "type": "create_connected:feature_enabled"
         },
         {
           "feature": "create:item_vault",
-          "invert": false,
           "type": "create_connected:feature_enabled"
         }
       ],

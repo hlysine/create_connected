@@ -4,12 +4,10 @@
       "conditions": [
         {
           "feature": "create_connected:linked_transmitter",
-          "invert": false,
           "type": "create_connected:feature_enabled"
         },
         {
           "feature": "create:redstone_link",
-          "invert": false,
           "type": "create_connected:feature_enabled"
         }
       ],

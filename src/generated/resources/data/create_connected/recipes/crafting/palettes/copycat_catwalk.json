@@ -5,8 +5,14 @@
       "conditions": [
         {
           "feature": "create_connected:copycat_catwalk",
-          "invert": false,
           "type": "create_connected:feature_enabled"
+        },
+        {
+          "value": {
+            "feature": "create_connected:copycat_catwalk",
+            "type": "create_connected:feature_enabled_in_copycats"
+          },
+          "type": "forge:not"
         }
       ],
       "recipe": {

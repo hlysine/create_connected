@@ -5,7 +5,6 @@
       "conditions": [
         {
           "feature": "create_connected:centrifugal_clutch",
-          "invert": false,
           "type": "create_connected:feature_enabled"
         }
       ],

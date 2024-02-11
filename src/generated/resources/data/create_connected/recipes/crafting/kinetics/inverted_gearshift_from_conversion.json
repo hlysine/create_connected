@@ -5,12 +5,10 @@
       "conditions": [
         {
           "feature": "create:gearshift",
-          "invert": false,
           "type": "create_connected:feature_enabled"
         },
         {
           "feature": "create_connected:inverted_gearshift",
-          "invert": false,
           "type": "create_connected:feature_enabled"
         }
       ],

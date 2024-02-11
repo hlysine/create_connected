@@ -5,12 +5,17 @@
       "conditions": [
         {
           "feature": "create_connected:copycat_slab",
-          "invert": false,
           "type": "create_connected:feature_enabled"
         },
         {
+          "value": {
+            "feature": "create_connected:copycat_slab",
+            "type": "create_connected:feature_enabled_in_copycats"
+          },
+          "type": "forge:not"
+        },
+        {
           "feature": "create_connected:copycat_beam",
-          "invert": false,
           "type": "create_connected:feature_enabled"
         }
       ],

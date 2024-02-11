@@ -4,12 +4,12 @@
     {
       "conditions": [
         {
-          "type": "create_connected:feature_enabled",
-          "feature": "create_connected:copycat_wall"
+          "feature": "create_connected:copycat_wall",
+          "type": "create_connected:feature_enabled"
         },
         {
-          "type": "create_connected:feature_enabled_in_copycats",
-          "feature": "copycats:copycat_wall"
+          "feature": "copycats:copycat_wall",
+          "type": "create_connected:feature_enabled_in_copycats"
         }
       ],
       "recipe": {
