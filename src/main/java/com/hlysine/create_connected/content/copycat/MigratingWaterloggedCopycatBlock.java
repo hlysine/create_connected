@@ -67,13 +67,15 @@ public abstract class MigratingWaterloggedCopycatBlock extends WaterloggedCopyca
     @Override
     public @NotNull List<ItemStack> getDrops(@NotNull BlockState pState, LootParams.@NotNull Builder pParams) {
         List<ItemStack> drops = super.getDrops(pState, pParams);
-        for (int i = 0; i < drops.size(); i++) {
-            ItemStack drop = drops.get(i);
-            Item converted = CopycatsManager.convert(drop.getItem());
-            if (!converted.equals(drop.getItem())) {
-                drops.set(i, new ItemStack(converted, drop.getCount()));
+        return Mods.COPYCATS.runIfInstalled(() -> () -> {
+            for (int i = 0; i < drops.size(); i++) {
+                ItemStack drop = drops.get(i);
+                Item converted = CopycatsManager.convert(drop.getItem());
+                if (!converted.equals(drop.getItem())) {
+                    drops.set(i, new ItemStack(converted, drop.getCount()));
+                }
             }
-        }
-        return drops;
+            return drops;
+        }).orElse(drops);
     }
 }
