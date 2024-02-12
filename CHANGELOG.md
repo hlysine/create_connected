@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.7.1 - 2024-02-12
+
+### Fixed
+
+- Crash when copycats are broken without Create: Copycats+ installed (#44)
+
 ## 0.7.0 - 2024-02-11
 
 ### Added
@@ -19,13 +25,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- Incompatibility with Radium's pathfinding optimizations
-- Incompatibility with Diagonal Fences
-- Crash in certain instances where mod configs are accessed too early
-- Crash in certain instances when wrenching a Brass Gearbox
-- Incompatibility with Velocity due to bad network channel name
-- Item Silos behaving differently from Item Vaults around contraptions
-- Sequenced Pulse Generator not updating the block in front when signal strength changes
+- Incompatibility with Radium's pathfinding optimizations (#32)
+- Incompatibility with Diagonal Fences (#33)
+- Crash in certain instances where mod configs are accessed too early (#34)
+- Crash in certain instances when wrenching a Brass Gearbox (#36)
+- Incompatibility with Velocity due to bad network channel name (#38)
+- Item Silos behaving differently from Item Vaults around contraptions (#39)
+- Sequenced Pulse Generator not updating the block in front when signal strength changes (#42)
 
 ## 0.6.1 - 2024-01-24
 
