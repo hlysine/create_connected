@@ -51,5 +51,21 @@
   "block.create_connected.sequenced_pulse_generator": "Sekvenční generátor signálu",
   "block.create_connected.shear_pin": "Střižný kolík",
   "block.create_connected.shear_pin.tooltip.summary": "Konektor na jedno použití, který se _rozbije_, když se síť _přetíží_.",
-  "create.gui.sequenced_gearshift.instruction.loop": "Smyčka"
+  "block.create_connected.six_way_gearbox": "Šestistupňová převodovka",
+  "block.create_connected.six_way_gearbox.tooltip.summary": "Převodovka s hřídeli na _všech 6 stranách_. Horní a dolní se otáčí _poloviční rychlostí_.",
+  "block.create_connected.wrapped_copycat_fence": "Zabalený imitační plot",
+  "block.create_connected.wrapped_copycat_fence_gate": "Zabalená imitační branka",
+  "block.create_connected.wrapped_copycat_stairs": "Zabalené imitační schody",
+  "block.create_connected.wrapped_copycat_wall": "Zabalená imitační zídka",
+  "create.gui.sequenced_gearshift.instruction.loop": "Smyčka",
+  "create.gui.sequenced_gearshift.instruction.loop.descriptive": "Restartovat celou sekvenci",
+  "create.gui.sequenced_gearshift.instruction.turn_await": "Udržovat",
+  "create.gui.sequenced_gearshift.instruction.turn_await.descriptive": "Točit do nového redstonového signálu",
+  "create.gui.sequenced_gearshift.instruction.turn_time": "Čas",
+  "create.gui.sequenced_gearshift.instruction.turn_time.descriptive": "Točit na danou dobu",
+  "create.gui.sequenced_gearshift.instruction.turn_time.duration": "Doba trvání",
+  "create.item_attributes.id_contains": "má slovo \"%1$s\" v ID",
+  "create.item_attributes.id_contains.inverted": "nemá slovo \"%1$s\" v ID",
+  "create.item_attributes.max_damage": "má %1$s maximální trvanlivost",
+  "create.item_attributes.max_damage.inverted": "nemá %1$s maximální trvanlivost"
 }
