@@ -13,8 +13,6 @@ import com.hlysine.create_connected.content.copycat.block.CopycatBlockBlock;
 import com.hlysine.create_connected.content.copycat.block.CopycatBlockModel;
 import com.hlysine.create_connected.content.copycat.board.CopycatBoardBlock;
 import com.hlysine.create_connected.content.copycat.board.CopycatBoardModel;
-import com.hlysine.create_connected.content.copycat.bytes.CopycatByteBlock;
-import com.hlysine.create_connected.content.copycat.bytes.CopycatByteModel;
 import com.hlysine.create_connected.content.copycat.fence.CopycatFenceBlock;
 import com.hlysine.create_connected.content.copycat.fence.CopycatFenceModel;
 import com.hlysine.create_connected.content.copycat.fence.WrappedFenceBlock;
@@ -26,9 +24,6 @@ import com.hlysine.create_connected.content.copycat.slab.CopycatSlabModel;
 import com.hlysine.create_connected.content.copycat.stairs.CopycatStairsBlock;
 import com.hlysine.create_connected.content.copycat.stairs.CopycatStairsModel;
 import com.hlysine.create_connected.content.copycat.stairs.WrappedStairsBlock;
-import com.hlysine.create_connected.content.copycat.trapdoor.CopycatTrapdoorBlock;
-import com.hlysine.create_connected.content.copycat.trapdoor.CopycatTrapdoorModel;
-import com.hlysine.create_connected.content.copycat.trapdoor.WrappedTrapdoorBlock;
 import com.hlysine.create_connected.content.copycat.verticalstep.CopycatVerticalStepBlock;
 import com.hlysine.create_connected.content.copycat.verticalstep.CopycatVerticalStepModel;
 import com.hlysine.create_connected.content.copycat.wall.CopycatWallBlock;
@@ -435,6 +430,7 @@ public class CCBlocks {
                     .loot((lt, block) -> lt.add(block, lt.createSlabItemTable(block)))
                     .onRegister(CreateRegistrate.blockModel(() -> CopycatSlabModel::new))
                     .item()
+                    .tag(CCTags.Items.COPYCAT_SLAB.tag)
                     .transform(customItemModel("copycat_base", "slab"))
                     .register();
 
@@ -444,6 +440,7 @@ public class CCBlocks {
                     .transform(FeatureToggle.register())
                     .onRegister(CreateRegistrate.blockModel(() -> CopycatBlockModel::new))
                     .item()
+                    .tag(CCTags.Items.COPYCAT_BLOCK.tag)
                     .transform(customItemModel("copycat_base", "block"))
                     .register();
 
@@ -453,6 +450,7 @@ public class CCBlocks {
                     .transform(FeatureToggle.register())
                     .onRegister(CreateRegistrate.blockModel(() -> CopycatBeamModel::new))
                     .item()
+                    .tag(CCTags.Items.COPYCAT_BEAM.tag)
                     .transform(customItemModel("copycat_base", "beam"))
                     .register();
 
@@ -462,6 +460,7 @@ public class CCBlocks {
                     .transform(FeatureToggle.register())
                     .onRegister(CreateRegistrate.blockModel(() -> CopycatVerticalStepModel::new))
                     .item()
+                    .tag(CCTags.Items.COPYCAT_VERTICAL_STEP.tag)
                     .transform(customItemModel("copycat_base", "vertical_step"))
                     .register();
 
@@ -472,6 +471,7 @@ public class CCBlocks {
                     .transform(FeatureToggle.register())
                     .onRegister(CreateRegistrate.blockModel(() -> CopycatStairsModel::new))
                     .item()
+                    .tag(CCTags.Items.COPYCAT_STAIRS.tag)
                     .transform(customItemModel("copycat_base", "stairs"))
                     .register();
 
@@ -490,6 +490,7 @@ public class CCBlocks {
                     .transform(FeatureToggle.register())
                     .onRegister(CreateRegistrate.blockModel(() -> CopycatFenceModel::new))
                     .item()
+                    .tag(CCTags.Items.COPYCAT_FENCE.tag)
                     .transform(customItemModel("copycat_base", "fence"))
                     .register();
 
@@ -509,6 +510,7 @@ public class CCBlocks {
                     .transform(FeatureToggle.register())
                     .onRegister(CreateRegistrate.blockModel(() -> CopycatWallModel::new))
                     .item()
+                    .tag(CCTags.Items.COPYCAT_WALL.tag)
                     .transform(customItemModel("copycat_base", "wall"))
                     .register();
 
@@ -528,6 +530,7 @@ public class CCBlocks {
                     .transform(FeatureToggle.register())
                     .onRegister(CreateRegistrate.blockModel(() -> CopycatFenceGateModel::new))
                     .item()
+                    .tag(CCTags.Items.COPYCAT_FENCE_GATE.tag)
                     .transform(customItemModel("copycat_base", "fence_gate"))
                     .register();
 
@@ -537,25 +540,6 @@ public class CCBlocks {
                     .onRegister(b -> CopycatFenceGateBlock.fenceGate = b)
                     .tag(BlockTags.FENCE_GATES, Tags.Blocks.FENCE_GATES, BlockTags.UNSTABLE_BOTTOM_CENTER, AllTags.AllBlockTags.MOVABLE_EMPTY_COLLIDER.tag)
                     .blockstate((c, p) -> p.simpleBlock(c.getEntry(), p.models().withExistingParent("wrapped_copycat_fence_gate", "block/barrier")))
-                    .register();
-
-    public static final BlockEntry<CopycatTrapdoorBlock> COPYCAT_TRAPDOOR =
-            REGISTRATE.block("copycat_trapdoor", CopycatTrapdoorBlock::new)
-                    .transform(BuilderTransformers.copycat())
-                    .properties(p -> p.isValidSpawn((state, level, pos, entity) -> false))
-                    .tag(BlockTags.TRAPDOORS)
-                    .transform(FeatureToggle.register())
-                    .onRegister(CreateRegistrate.blockModel(() -> CopycatTrapdoorModel::new))
-                    .item()
-                    .transform(customItemModel("copycat_base", "trapdoor"))
-                    .register();
-
-    public static final BlockEntry<WrappedTrapdoorBlock> WRAPPED_COPYCAT_TRAPDOOR =
-            REGISTRATE.block("wrapped_copycat_trapdoor", p -> new WrappedTrapdoorBlock(p, BlockSetType.OAK))
-                    .initialProperties(() -> Blocks.OAK_TRAPDOOR)
-                    .onRegister(b -> CopycatTrapdoorBlock.trapdoor = b)
-                    .tag(BlockTags.TRAPDOORS)
-                    .blockstate((c, p) -> p.simpleBlock(c.getEntry(), p.models().withExistingParent("wrapped_copycat_trapdoor", "block/barrier")))
                     .register();
 
     public static final BlockEntry<CopycatBoardBlock> COPYCAT_BOARD =
@@ -579,31 +563,8 @@ public class CCBlocks {
                         lt.add(block, builder);
                     })
                     .item()
+                    .tag(CCTags.Items.COPYCAT_BOARD.tag)
                     .transform(customItemModel("copycat_base", "board"))
-                    .register();
-
-    public static final BlockEntry<CopycatByteBlock> COPYCAT_BYTE =
-            REGISTRATE.block("copycat_byte", CopycatByteBlock::new)
-                    .transform(BuilderTransformers.copycat())
-                    .transform(FeatureToggle.register())
-                    .onRegister(CreateRegistrate.blockModel(() -> CopycatByteModel::new))
-                    .loot((lt, block) -> {
-                        LootTable.Builder builder = LootTable.lootTable();
-                        for (CopycatByteBlock.Byte bite : CopycatByteBlock.allBytes) {
-                            builder.withPool(
-                                    LootPool.lootPool()
-                                            .setRolls(ConstantValue.exactly(1.0F))
-                                            .when(ExplosionCondition.survivesExplosion())
-                                            .when(LootItemBlockStatePropertyCondition
-                                                    .hasBlockStateProperties(block)
-                                                    .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(CopycatByteBlock.byByte(bite), true)))
-                                            .add(LootItem.lootTableItem(block))
-                            );
-                        }
-                        lt.add(block, builder);
-                    })
-                    .item()
-                    .transform(customItemModel("copycat_base", "byte"))
                     .register();
 
     public static final BlockEntry<WindowBlock> CHERRY_WINDOW = CCWindowGen.woodenWindowBlock(WoodType.CHERRY, Blocks.CHERRY_PLANKS, () -> RenderType::translucent, true);

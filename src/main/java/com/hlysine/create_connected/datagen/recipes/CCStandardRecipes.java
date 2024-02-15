@@ -7,6 +7,7 @@ import com.google.gson.JsonObject;
 import com.hlysine.create_connected.CCBlocks;
 import com.hlysine.create_connected.CCItems;
 import com.hlysine.create_connected.CreateConnected;
+import com.hlysine.create_connected.compat.CopycatsManager;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllItems;
 import com.simibubi.create.AllTags;
@@ -194,6 +195,7 @@ public class CCStandardRecipes extends CreateRecipeProvider {
 
     GeneratedRecipe COPYCAT_SLAB_FROM_PANELS = create(CCBlocks.COPYCAT_SLAB).withSuffix("_from_panels").unlockedBy(AllBlocks.COPYCAT_PANEL::get)
             .requiresResultFeature()
+            .disabledInCopycats()
             .viaShaped(b -> b
                     .define('p', AllBlocks.COPYCAT_PANEL)
                     .pattern("p")
@@ -202,6 +204,7 @@ public class CCStandardRecipes extends CreateRecipeProvider {
 
     GeneratedRecipe COPYCAT_SLAB_FROM_STEPS = create(CCBlocks.COPYCAT_SLAB).withSuffix("_from_steps").unlockedBy(AllBlocks.COPYCAT_STEP::get)
             .requiresResultFeature()
+            .disabledInCopycats()
             .viaShaped(b -> b
                     .define('s', AllBlocks.COPYCAT_STEP)
                     .pattern("ss")
@@ -209,6 +212,7 @@ public class CCStandardRecipes extends CreateRecipeProvider {
 
     GeneratedRecipe COPYCAT_SLAB_FROM_BEAMS = create(CCBlocks.COPYCAT_SLAB).withSuffix("_from_beams").unlockedBy(CCBlocks.COPYCAT_BEAM::get)
             .requiresResultFeature()
+            .disabledInCopycats()
             .requiresFeature(CCBlocks.COPYCAT_BEAM)
             .viaShaped(b -> b
                     .define('s', CCBlocks.COPYCAT_BEAM)
@@ -219,6 +223,7 @@ public class CCStandardRecipes extends CreateRecipeProvider {
 
     GeneratedRecipe COPYCAT_BLOCK_FROM_SLABS = create(CCBlocks.COPYCAT_BLOCK).withSuffix("_from_slabs").unlockedBy(CCBlocks.COPYCAT_SLAB::get)
             .requiresResultFeature()
+            .disabledInCopycats()
             .requiresFeature(CCBlocks.COPYCAT_SLAB)
             .viaShaped(b -> b
                     .define('s', CCBlocks.COPYCAT_SLAB)
@@ -229,7 +234,7 @@ public class CCStandardRecipes extends CreateRecipeProvider {
     GeneratedRecipe COPYCAT_BEAM = copycat(CCBlocks.COPYCAT_BEAM, 4);
 
     GeneratedRecipe COPYCAT_STEP_CYCLE =
-            conversionCycle(ImmutableList.of(AllBlocks.COPYCAT_STEP, CCBlocks.COPYCAT_VERTICAL_STEP));
+            copycatCycle(ImmutableList.of(AllBlocks.COPYCAT_STEP, CCBlocks.COPYCAT_VERTICAL_STEP));
 
     GeneratedRecipe COPYCAT_VERTICAL_STEP = copycat(CCBlocks.COPYCAT_VERTICAL_STEP, 4);
 
@@ -239,17 +244,13 @@ public class CCStandardRecipes extends CreateRecipeProvider {
 
     GeneratedRecipe COPYCAT_FENCE_GATE = copycat(CCBlocks.COPYCAT_FENCE_GATE, 1);
 
-    GeneratedRecipe COPYCAT_TRAPDOOR = copycat(CCBlocks.COPYCAT_TRAPDOOR, 4);
-
-    GeneratedRecipe COPYCAT_TRAPDOOR_CYCLE =
-            conversionCycle(ImmutableList.of(AllBlocks.COPYCAT_PANEL, CCBlocks.COPYCAT_TRAPDOOR));
-
     GeneratedRecipe COPYCAT_WALL = copycat(CCBlocks.COPYCAT_WALL, 1);
 
     GeneratedRecipe COPYCAT_BOARD = copycat(CCBlocks.COPYCAT_BOARD, 8);
 
     GeneratedRecipe COPYCAT_BOX = create(CCItems.COPYCAT_BOX).unlockedBy(CCBlocks.COPYCAT_BOARD::get)
             .requiresResultFeature()
+            .disabledInCopycats()
             .viaShaped(b -> b
                     .define('s', CCBlocks.COPYCAT_BOARD)
                     .pattern("ss ")
@@ -259,13 +260,12 @@ public class CCStandardRecipes extends CreateRecipeProvider {
 
     GeneratedRecipe COPYCAT_CATWALK = create(CCItems.COPYCAT_CATWALK).unlockedBy(CCBlocks.COPYCAT_BOARD::get)
             .requiresResultFeature()
+            .disabledInCopycats()
             .viaShaped(b -> b
                     .define('s', CCBlocks.COPYCAT_BOARD)
                     .pattern("s s")
                     .pattern(" s ")
             );
-
-    GeneratedRecipe COPYCAT_BYTE = copycat(CCBlocks.COPYCAT_BYTE, 8);
 
     GeneratedRecipe CHERRY_WINDOW = window(() -> Items.CHERRY_PLANKS, CCBlocks.CHERRY_WINDOW);
     GeneratedRecipe BAMBOO_WINDOW = window(() -> Items.BAMBOO_PLANKS, CCBlocks.BAMBOO_WINDOW);
@@ -300,6 +300,21 @@ public class CCStandardRecipes extends CreateRecipeProvider {
         });
     }
 
+    GeneratedRecipe copycatCycle(List<ItemProviderEntry<? extends ItemLike>> cycle) {
+        GeneratedRecipe result = null;
+        for (int i = 0; i < cycle.size(); i++) {
+            ItemProviderEntry<? extends ItemLike> currentEntry = cycle.get(i);
+            ItemProviderEntry<? extends ItemLike> nextEntry = cycle.get((i + 1) % cycle.size());
+            result = create(nextEntry).withSuffix("_from_conversion")
+                    .unlockedBy(currentEntry::get)
+                    .requiresFeature(currentEntry.getId())
+                    .disabledInCopycats()
+                    .requiresFeature(nextEntry.getId())
+                    .viaShapeless(b -> b.requires(currentEntry.get()));
+        }
+        return result;
+    }
+
     GeneratedRecipe conversionCycle(List<ItemProviderEntry<? extends ItemLike>> cycle) {
         GeneratedRecipe result = null;
         for (int i = 0; i < cycle.size(); i++) {
@@ -325,9 +340,18 @@ public class CCStandardRecipes extends CreateRecipeProvider {
     }
 
     GeneratedRecipe copycat(ItemProviderEntry<? extends ItemLike> result, int resultCount) {
+        if (CopycatsManager.convert(result) != result)
+            create(() -> CopycatsManager.convert(result)).withSuffix("_compat")
+                    .requiresFeature(RegisteredObjects.getKeyOrThrow(result.asItem()))
+                    .unlockedBy(result::get)
+                    .enabledInCopycats()
+                    .viaShapeless(b -> b
+                            .requires(result)
+                    );
         return create(result)
                 .unlockedBy(AllItems.ZINC_INGOT::get)
                 .requiresResultFeature()
+                .disabledInCopycats()
                 .viaStonecutting(DataIngredient.tag(AllTags.forgeItemTag("ingots/zinc")), resultCount);
     }
 
@@ -428,25 +452,25 @@ public class CCStandardRecipes extends CreateRecipeProvider {
             return this;
         }
 
-        GeneratedRecipeBuilder requiresFeature(ResourceLocation location, boolean invert) {
-            recipeConditions.add(new FeatureEnabledCondition(location, invert));
+        GeneratedRecipeBuilder requiresFeature(ResourceLocation location) {
+            recipeConditions.add(new FeatureEnabledCondition(location));
             return this;
         }
 
-        GeneratedRecipeBuilder requiresFeature(ResourceLocation location) {
-            return requiresFeature(location, false);
-        }
-
-        GeneratedRecipeBuilder requiresFeature(BlockEntry<?> block, boolean invert) {
-            return requiresFeature(block.getId(), invert);
-        }
-
         GeneratedRecipeBuilder requiresFeature(BlockEntry<?> block) {
-            return requiresFeature(block, false);
+            return requiresFeature(block.getId());
         }
 
         GeneratedRecipeBuilder requiresResultFeature() {
             return requiresFeature(RegisteredObjects.getKeyOrThrow(result.get().asItem()));
+        }
+
+        GeneratedRecipeBuilder disabledInCopycats() {
+            return withCondition(new NotCondition(new FeatureEnabledInCopycatsCondition(RegisteredObjects.getKeyOrThrow(result.get().asItem()))));
+        }
+
+        GeneratedRecipeBuilder enabledInCopycats() {
+            return withCondition(new FeatureEnabledInCopycatsCondition(RegisteredObjects.getKeyOrThrow(result.get().asItem())));
         }
 
         GeneratedRecipeBuilder withSuffix(String suffix) {
@@ -612,10 +636,10 @@ public class CCStandardRecipes extends CreateRecipeProvider {
         }
     }
 
-//    @Override
-//    public String getName() {
-//        return "Create: Connected's Standard Recipes";
-//    }
+    @Override
+    public @NotNull String getName() {
+        return "Create: Connected's Standard Recipes";
+    }
 
     public CCStandardRecipes(PackOutput p_i48262_1_) {
         super(p_i48262_1_);

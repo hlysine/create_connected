@@ -39,8 +39,14 @@
       "conditions": [
         {
           "type": "create_connected:feature_enabled",
-          "feature": "create_connected:copycat_catwalk",
-          "invert": false
+          "feature": "create_connected:copycat_catwalk"
+        },
+        {
+          "type": "forge:not",
+          "value": {
+            "type": "create_connected:feature_enabled_in_copycats",
+            "feature": "create_connected:copycat_catwalk"
+          }
         }
       ]
     }
