@@ -45,6 +45,7 @@ import com.hlysine.create_connected.content.sequencedpulsegenerator.SequencedPul
 import com.hlysine.create_connected.content.shearpin.ShearPinBlock;
 import com.hlysine.create_connected.content.sixwaygearbox.SixWayGearboxBlock;
 import com.hlysine.create_connected.datagen.CCBlockStateGen;
+import com.hlysine.create_connected.datagen.CCDynamicModels;
 import com.hlysine.create_connected.datagen.CCWindowGen;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllSpriteShifts;

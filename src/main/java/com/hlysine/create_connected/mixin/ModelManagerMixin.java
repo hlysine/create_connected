@@ -1,6 +1,6 @@
 package com.hlysine.create_connected.mixin;
 
-import com.hlysine.create_connected.CCDynamicModels;
+import com.hlysine.create_connected.datagen.CCDynamicModels;
 import net.minecraft.client.resources.model.ModelBakery;
 import net.minecraft.client.resources.model.ModelManager;
 import net.minecraft.resources.ResourceLocation;

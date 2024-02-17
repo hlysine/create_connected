@@ -161,10 +161,6 @@ repositories {
         name = "ModMaven"
         url = "https://modmaven.dev"
     }
-    maven {
-        name = "Modrinth"
-        url = "https://api.modrinth.com/maven"
-    }
 
     // If you have mod jar dependencies in ./libs, you can declare them as a repository like so.
     // See https://docs.gradle.org/current/userguide/declaring_repositories.html#sub:flat_dir_resolver
@@ -202,6 +198,7 @@ dependencies {
     // This maps to ./libs/coolmod-${mc_version}-${coolmod_version}.jar
     // The group id is ignored when searching -- in this case, it is "blank"
     implementation fg.deobf("blank:copycats-${copycats_minecraft_version}:${copycats_version}")
+    implementation fg.deobf("blank:design_decor-${design_decor_minecraft_version}:${design_decor_version}")
 
     // For more info:
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html

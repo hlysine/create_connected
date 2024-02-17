@@ -1,6 +1,7 @@
-package com.hlysine.create_connected;
+package com.hlysine.create_connected.datagen;
 
 import com.google.gson.JsonElement;
+import com.hlysine.create_connected.CreateConnected;
 import com.hlysine.create_connected.content.linkedtransmitter.LinkedTransmitterBlock;
 import com.tterrag.registrate.builders.BlockBuilder;
 import com.tterrag.registrate.util.nullness.NonNullFunction;
