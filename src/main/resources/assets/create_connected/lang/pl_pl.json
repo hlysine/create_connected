@@ -1,4 +1,6 @@
 {
   "advancement.create_connected.brass_gearbox": "Poważna Organizacja",
-  "advancement.create_connected.brass_gearbox.desc": "Postaw Mosiężną przekładnię"
+  "advancement.create_connected.brass_gearbox.desc": "Postaw Mosiężną przekładnię",
+  "advancement.create_connected.control_chip": "Precyzyjne Produkowanie",
+  "advancement.create_connected.control_chip.desc": "Stwórz Sterujący Procesor"
 }
