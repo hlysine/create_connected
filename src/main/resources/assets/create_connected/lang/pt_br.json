@@ -1,3 +1,18 @@
 {
-  "advancement.create_connected.brass_gearbox": "Organização Séria"
+  "advancement.create_connected.brass_gearbox": "Organização Séria",
+  "block.create_connected.brass_gearbox": "Caixa de Transmissão de Latão",
+  "block.create_connected.brass_gearbox.tooltip.summary": "Uma Caixa de Transmissão onde as 4 saídas são _configuráveis de forma independente_.",
+  "block.create_connected.overstress_clutch": "Embreagem de Estresse",
+  "block.create_connected.overstress_clutch.tooltip.behaviour1": "_Redefine_ para o estado inicial.",
+  "block.create_connected.overstress_clutch.tooltip.condition1": "Quando Clique-Direito com a Chave Inglesa",
+  "block.create_connected.overstress_clutch.tooltip.summary": "Uma embreagem que _desacopla_ após um tempo _ajustável_ em quanto a rede estiver _sobrecarregada_.",
+  "block.create_connected.parallel_gearbox": "Caixa de Transmissão Paralela",
+  "block.create_connected.shear_pin": "Eixo Frágil",
+  "block.create_connected.shear_pin.tooltip.summary": "Um eixo de uso único, que _quebra_ quando o sistema está _Sobrestressado_.",
+  "block.create_connected.six_way_gearbox": "Caixa de Transmissão de 6 Eixos",
+  "block.create_connected.six_way_gearbox.tooltip.summary": "Uma Caixa de Transmissão com _6 saídas_. As saídas superior e inferior tem _metade da velocidade_.",
+  "item.create_connected.vertical_brass_gearbox.tooltip.summary": "Uma Caixa de Transmissão onde as 4 saídas são _configuráveis de forma independente_.",
+  "item.create_connected.vertical_parallel_gearbox": "Caixa de Transmissão Paralela Vertical",
+  "item.create_connected.vertical_six_way_gearbox": "Caixa de Transmissão de 6 Eixos Vertical",
+  "item.create_connected.vertical_six_way_gearbox.tooltip.summary": "Uma Caixa de Transmissão com _6 saídas_. As saídas laterais têm _metade da velocidade_."
 }
