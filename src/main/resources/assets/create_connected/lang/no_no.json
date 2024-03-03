@@ -9,5 +9,12 @@
   "block.create_connected.copycat_board.tooltip.condition1": "Når høyreklikket",
   "block.create_connected.copycat_fence.tooltip.condition1": "Når høyreklikket",
   "block.create_connected.copycat_fence_gate.tooltip.condition1": "Når høyreklikket",
-  "block.create_connected.copycat_slab.tooltip.condition1": "Når høyreklikket"
+  "block.create_connected.copycat_slab.tooltip.condition1": "Når høyreklikket",
+  "block.create_connected.inverted_clutch": "Omvendt kobling",
+  "block.create_connected.inverted_gearshift": "Omvendt giromveksler",
+  "block.create_connected.item_silo": "Silo",
+  "block.create_connected.item_silo.tooltip.summary": "Et _vertikalt_ gjenstandshvelv.",
+  "block.create_connected.overstress_clutch": "Overbelastningskobling",
+  "block.create_connected.overstress_clutch.tooltip.condition1": "Når høyreklikket med skiftenøkkel",
+  "block.create_connected.parallel_gearbox": "Parallell girkasse"
 }
