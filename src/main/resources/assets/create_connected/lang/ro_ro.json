@@ -28,5 +28,21 @@
   "block.create_connected.copycat_board.tooltip.condition1": "Când se face Clic R",
   "block.create_connected.copycat_board.tooltip.summary": "_Transformă_ orice _bloc complet_ într-o placă decorativă. Mai multe plăci pot fi plasate în același spațiu bloc.",
   "block.create_connected.copycat_fence.tooltip.behaviour1": "Dacă este posibil, aplică _obiectului ținut în mână_ ca _material_. _Faceți din nou clic_ pentru a schimba starea de _orientare_ sau _alimentare_. Folosiți o _cheie_ pentru a _reseta_ materialul.",
-  "block.create_connected.copycat_fence.tooltip.summary": "_Transformă_ orice _bloc complet_ într-un gard decorativ."
+  "block.create_connected.copycat_fence.tooltip.condition1": "Când se face Clic R",
+  "block.create_connected.copycat_fence.tooltip.summary": "_Transformă_ orice _bloc complet_ într-un gard decorativ.",
+  "block.create_connected.copycat_fence_gate.tooltip.behaviour1": "Dacă este posibil, aplică _obiectului ținut în mână_ ca _material_. _Faceți din nou clic_ pentru a schimba starea de _orientare_ sau _alimentare_. Folosiți o _cheie_ pentru a _reseta_ materialul.",
+  "block.create_connected.copycat_fence_gate.tooltip.condition1": "Când se face Clic R",
+  "block.create_connected.copycat_slab.tooltip.behaviour1": "Dacă este posibil, aplică _obiectului ținut în mână_ ca _material_. _Faceți din nou clic_ pentru a schimba starea de _orientare_ sau _alimentare_. Folosiți o _cheie_ pentru a _reseta_ materialul.",
+  "block.create_connected.copycat_slab.tooltip.condition1": "Când se face Clic R",
+  "block.create_connected.copycat_stairs.tooltip.behaviour1": "Dacă este posibil, aplică _obiectului ținut în mână_ ca _material_. _Faceți din nou clic_ pentru a schimba starea de _orientare_ sau _alimentare_. Folosiți o _cheie_ pentru a _reseta_ materialul.",
+  "block.create_connected.copycat_stairs.tooltip.condition1": "Când se face Clic R",
+  "block.create_connected.copycat_vertical_step.tooltip.behaviour1": "Dacă este posibil, aplică _obiectului ținut în mână_ ca _material_. _Faceți din nou clic_ pentru a schimba starea de _orientare_ sau _alimentare_. Folosiți o _cheie_ pentru a _reseta_ materialul.",
+  "block.create_connected.copycat_vertical_step.tooltip.condition1": "Când se face Clic R",
+  "block.create_connected.copycat_wall.tooltip.behaviour1": "Dacă este posibil, aplică _obiectului ținut în mână_ ca _material_. _Faceți din nou clic_ pentru a schimba starea de _orientare_ sau _alimentare_. Folosiți o _cheie_ pentru a _reseta_ materialul.",
+  "block.create_connected.copycat_wall.tooltip.condition1": "Când se face Clic R",
+  "item.create_connected.copycat_box.tooltip.behaviour1": "Dacă este posibil, aplică _obiectului ținut în mână_ ca _material_. _Faceți din nou clic_ pentru a schimba starea de _orientare_ sau _alimentare_. Folosiți o _cheie_ pentru a _reseta_ materialul.",
+  "item.create_connected.copycat_box.tooltip.condition1": "Când se face Clic R",
+  "item.create_connected.copycat_catwalk.tooltip.behaviour1": "Dacă este posibil, aplică _obiectului ținut în mână_ ca _material_. _Faceți din nou clic_ pentru a schimba starea de _orientare_ sau _alimentare_. Folosiți o _cheie_ pentru a _reseta_ materialul.",
+  "item.create_connected.copycat_catwalk.tooltip.condition1": "Când se face Clic R",
+  "item.create_connected.vertical_brass_gearbox.tooltip.summary": "O cutie de viteze în care direcția de rotație a tuturor celor 4 laturi este _configurabilă independent_."
 }

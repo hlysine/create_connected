@@ -13,6 +13,7 @@
   "block.create_connected.linked_jungle_button": "Bouton de Jungle lié",
   "block.create_connected.parallel_gearbox": "Boite de vitesse parallèle",
   "block.create_connected.six_way_gearbox": "Boîte à 6 vitesses",
+  "create.gui.sequenced_gearshift.instruction.loop": "Boucle",
   "create.gui.sequenced_gearshift.instruction.turn_await": "Maintenir",
   "create.gui.sequenced_gearshift.instruction.turn_time": "Temps",
   "create.gui.sequenced_gearshift.instruction.turn_time.duration": "Durée",
