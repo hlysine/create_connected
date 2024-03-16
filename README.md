@@ -26,10 +26,12 @@ out [Create: Power Loader](https://modrinth.com/mod/create-power-loader)**
 All copycats from Create: Connected, Create: More Copycats and Create: Copies and Cats are merged into the ultimate
 mod - [**Create: Copycats+**](https://modrinth.com/mod/copycats) !
 
-- Forge/**Fabric** 1.20.1/1.19.2/1.18.2
+Copycats+ exclusive features include:
+
+- Forge/**Fabric** 1.20.1/1.19.2/1.18.2 support
 - Even more copycats
 - Improved copycat model quality
-- Toggleable connective textures
+- Toggleable connected textures
 
 ![Copycats+](https://cdn.modrinth.com/data/UT2M39wf/images/e20c128b7c0e000e904584811d20f753d846af80.png)
 
