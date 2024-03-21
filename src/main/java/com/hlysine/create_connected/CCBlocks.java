@@ -119,7 +119,7 @@ public class CCBlocks {
             .onRegister(CreateRegistrate.connectedTextures(() -> new EncasedCTBehaviour(AllSpriteShifts.ANDESITE_CASING)))
             .onRegister(CreateRegistrate.casingConnectivity((block, cc) -> cc.make(block, AllSpriteShifts.ANDESITE_CASING,
                     (s, f) -> f.getAxis() == s.getValue(ParallelGearboxBlock.AXIS))))
-            .blockstate((c, p) -> axisBlock(c, p, $ -> partialBaseModel(c, p), false))
+            .blockstate((c, p) -> CCBlockStateGen.axisBlock(c, p, $ -> partialBaseModel(c, p), false))
             .item()
             .transform(customItemModel())
             .register();
@@ -132,7 +132,7 @@ public class CCBlocks {
             .transform(FeatureToggle.register())
             .transform(axeOrPickaxe())
             .lang("6-way Gearbox")
-            .blockstate((c, p) -> axisBlock(c, p, $ -> partialBaseModel(c, p), false))
+            .blockstate((c, p) -> CCBlockStateGen.axisBlock(c, p, $ -> partialBaseModel(c, p), false))
             .item()
             .transform(customItemModel())
             .register();
