@@ -1,17 +1,13 @@
 {
   "variants": {
     "axis=x": {
-      "model": "create_connected:block/parallel_gearbox/block",
-      "x": 90,
-      "y": 90
+      "model": "create_connected:block/parallel_gearbox/block_x"
     },
     "axis=y": {
-      "model": "create_connected:block/parallel_gearbox/block"
+      "model": "create_connected:block/parallel_gearbox/block_y"
     },
     "axis=z": {
-      "model": "create_connected:block/parallel_gearbox/block",
-      "x": 90,
-      "y": 180
+      "model": "create_connected:block/parallel_gearbox/block_z"
     }
   }
 }
