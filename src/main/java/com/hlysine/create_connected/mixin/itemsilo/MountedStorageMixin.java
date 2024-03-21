@@ -51,8 +51,8 @@ public class MountedStorageMixin {
             cancellable = true
     )
     private void removeItemSilo(CallbackInfo ci) {
-        if (blockEntity instanceof ItemVaultBlockEntity) {
-            handler = ((ItemVaultBlockEntity) blockEntity).getInventoryOfBlock();
+        if (blockEntity instanceof ItemSiloBlockEntity) {
+            handler = ((ItemSiloBlockEntity) blockEntity).getInventoryOfBlock();
             valid = true;
             ci.cancel();
         }
@@ -64,8 +64,8 @@ public class MountedStorageMixin {
             cancellable = true
     )
     private void addItemSilo(BlockEntity be, CallbackInfo ci) {
-        if (be instanceof ItemVaultBlockEntity) {
-            ((ItemVaultBlockEntity) be).applyInventoryToBlock(handler);
+        if (be instanceof ItemSiloBlockEntity) {
+            ((ItemSiloBlockEntity) be).applyInventoryToBlock(handler);
             ci.cancel();
         }
     }

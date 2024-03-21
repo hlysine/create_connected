@@ -4,6 +4,9 @@ import com.hlysine.create_connected.content.brassgearbox.BrassGearboxBlock;
 import com.hlysine.create_connected.content.linkedtransmitter.LinkedTransmitterBlock;
 import com.hlysine.create_connected.content.sequencedpulsegenerator.SequencedPulseGeneratorBlock;
 import com.mojang.datafixers.util.Function4;
+import com.mojang.datafixers.util.Function5;
+import com.simibubi.create.content.kinetics.base.RotatedPillarKineticBlock;
+import com.simibubi.create.content.kinetics.gearbox.GearboxBlock;
 import com.simibubi.create.foundation.utility.Iterate;
 import com.tterrag.registrate.providers.DataGenContext;
 import com.tterrag.registrate.providers.RegistrateBlockstateProvider;
@@ -142,51 +145,63 @@ public class CCBlockStateGen {
             ResourceLocation sideBottom = p.modLoc("block/" + c.getName() + "_bottom");
 
             Vector<ModelFile> models = new Vector<>(16);
-            for (boolean isFace1Flipped : Iterate.falseAndTrue)
-                for (boolean isFace2Flipped : Iterate.falseAndTrue)
-                    for (boolean isFace3Flipped : Iterate.falseAndTrue)
-                        for (boolean isFace4Flipped : Iterate.falseAndTrue)
-                            models.add(p.models()
-                                    .withExistingParent(
-                                            c.getName()
-                                                    + (isFace1Flipped ? "_1" : "")
-                                                    + (isFace2Flipped ? "_2" : "")
-                                                    + (isFace3Flipped ? "_3" : "")
-                                                    + (isFace4Flipped ? "_4" : ""),
-                                            p.modLoc("block/brass_gearbox/block")
-                                    )
-                                    .texture("1", isFace1Flipped ? sideTop : sideBottom)
-                                    .texture("2", isFace2Flipped ? sideTop : sideBottom)
-                                    .texture("3", isFace3Flipped ? sideTop : sideBottom)
-                                    .texture("4", isFace4Flipped ? sideTop : sideBottom)
-                            );
-            Function4<Boolean, Boolean, Boolean, Boolean, ModelFile> modelFunc = (f1, f2, f3, f4) -> models.get((f1 ? 8 : 0) + (f2 ? 4 : 0) + (f3 ? 2 : 0) + (f4 ? 1 : 0));
+            for (Direction.Axis axis : Iterate.axes)
+                for (boolean isFace1Flipped : Iterate.falseAndTrue)
+                    for (boolean isFace2Flipped : Iterate.falseAndTrue)
+                        for (boolean isFace3Flipped : Iterate.falseAndTrue)
+                            for (boolean isFace4Flipped : Iterate.falseAndTrue)
+                                models.add(p.models()
+                                        .withExistingParent(
+                                                c.getName()
+                                                        + "_" + axis.getName()
+                                                        + (isFace1Flipped ? "_1" : "")
+                                                        + (isFace2Flipped ? "_2" : "")
+                                                        + (isFace3Flipped ? "_3" : "")
+                                                        + (isFace4Flipped ? "_4" : ""),
+                                                p.modLoc("block/brass_gearbox/block_" + axis.getName())
+                                        )
+                                        .texture("1", isFace1Flipped ? sideTop : sideBottom)
+                                        .texture("2", isFace2Flipped ? sideTop : sideBottom)
+                                        .texture("3", isFace3Flipped ? sideTop : sideBottom)
+                                        .texture("4", isFace4Flipped ? sideTop : sideBottom)
+                                );
+            Function<BlockState, ModelFile> modelFunc = (state) -> {
+                Direction.Axis axis = state.getValue(BrassGearboxBlock.AXIS);
+                boolean f1 = state.getValue(BrassGearboxBlock.FACE_1_FLIPPED);
+                boolean f2 = state.getValue(BrassGearboxBlock.FACE_2_FLIPPED);
+                boolean f3 = state.getValue(BrassGearboxBlock.FACE_3_FLIPPED);
+                boolean f4 = state.getValue(BrassGearboxBlock.FACE_4_FLIPPED);
+                return models.get(axis.ordinal() * 16 + (f1 ? 8 : 0) + (f2 ? 4 : 0) + (f3 ? 2 : 0) + (f4 ? 1 : 0));
+            };
 
-            noZRotationAxisBlock(c, p, state -> modelFunc.apply(
-                    state.getValue(BrassGearboxBlock.FACE_1_FLIPPED),
-                    state.getValue(BrassGearboxBlock.FACE_2_FLIPPED),
-                    state.getValue(BrassGearboxBlock.FACE_3_FLIPPED),
-                    state.getValue(BrassGearboxBlock.FACE_4_FLIPPED)
-            ));
+            p.getVariantBuilder(c.getEntry())
+                    .forAllStatesExcept(
+                            state -> ConfiguredModel.builder()
+                                    .modelFile(modelFunc.apply(state))
+                                    .uvLock(false)
+                                    .build(),
+                            BlockStateProperties.WATERLOGGED
+                    );
         };
     }
 
-    public static <T extends Block> void noZRotationAxisBlock(DataGenContext<Block, T> ctx, RegistrateBlockstateProvider prov,
-                                                              Function<BlockState, ModelFile> modelFunc) {
-        noZRotationAxisBlock(ctx, prov, modelFunc, false);
-    }
-
-    public static <T extends Block> void noZRotationAxisBlock(DataGenContext<Block, T> ctx, RegistrateBlockstateProvider prov,
-                                                              Function<BlockState, ModelFile> modelFunc, boolean uvLock) {
-        prov.getVariantBuilder(ctx.getEntry())
-                .forAllStatesExcept(state -> {
-                    Direction.Axis axis = state.getValue(BlockStateProperties.AXIS);
-                    return ConfiguredModel.builder()
-                            .modelFile(modelFunc.apply(state))
-                            .uvLock(uvLock)
-                            .rotationX(axis == Direction.Axis.Y ? 0 : 90)
-                            .rotationY(axis == Direction.Axis.X ? 90 : 0)
-                            .build();
-                }, BlockStateProperties.WATERLOGGED);
+    public static <B extends RotatedPillarKineticBlock> NonNullBiConsumer<DataGenContext<Block, B>, RegistrateBlockstateProvider> axisBlock() {
+        return (c, p) -> {
+            Vector<ModelFile> models = new Vector<>(16);
+            for (Direction.Axis axis : Iterate.axes)
+                models.add(p.models().getExistingFile(p.modLoc("block/" + c.getName() + "/block_" + axis.getName())));
+            Function<BlockState, ModelFile> modelFunc = (state) -> {
+                Direction.Axis axis = state.getValue(BrassGearboxBlock.AXIS);
+                return models.get(axis.ordinal());
+            };
+            p.getVariantBuilder(c.getEntry())
+                    .forAllStatesExcept(
+                            state -> ConfiguredModel.builder()
+                                    .modelFile(modelFunc.apply(state))
+                                    .uvLock(false)
+                                    .build(),
+                            BlockStateProperties.WATERLOGGED
+                    );
+        };
     }
 }
