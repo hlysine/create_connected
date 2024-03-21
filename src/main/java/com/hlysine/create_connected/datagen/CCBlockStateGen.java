@@ -5,6 +5,8 @@ import com.hlysine.create_connected.content.linkedtransmitter.LinkedTransmitterB
 import com.hlysine.create_connected.content.sequencedpulsegenerator.SequencedPulseGeneratorBlock;
 import com.mojang.datafixers.util.Function4;
 import com.mojang.datafixers.util.Function5;
+import com.simibubi.create.content.kinetics.base.RotatedPillarKineticBlock;
+import com.simibubi.create.content.kinetics.gearbox.GearboxBlock;
 import com.simibubi.create.foundation.utility.Iterate;
 import com.tterrag.registrate.providers.DataGenContext;
 import com.tterrag.registrate.providers.RegistrateBlockstateProvider;
@@ -173,26 +175,33 @@ public class CCBlockStateGen {
             };
 
             p.getVariantBuilder(c.getEntry())
-                    .forAllStatesExcept(state -> {
-                        return ConfiguredModel.builder()
-                                .modelFile(modelFunc.apply(state))
-                                .uvLock(false)
-                                .build();
-                    }, BlockStateProperties.WATERLOGGED);
+                    .forAllStatesExcept(
+                            state -> ConfiguredModel.builder()
+                                    .modelFile(modelFunc.apply(state))
+                                    .uvLock(false)
+                                    .build(),
+                            BlockStateProperties.WATERLOGGED
+                    );
         };
     }
 
-    public static <T extends Block> void axisBlock(DataGenContext<Block, T> ctx, RegistrateBlockstateProvider prov,
-                                                   Function<BlockState, ModelFile> modelFunc, boolean uvLock) {
-        prov.getVariantBuilder(ctx.getEntry())
-                .forAllStatesExcept(state -> {
-                    Direction.Axis axis = state.getValue(BlockStateProperties.AXIS);
-                    return ConfiguredModel.builder()
-                            .modelFile(modelFunc.apply(state))
-                            .uvLock(uvLock)
-                            .rotationX(axis == Direction.Axis.Y ? 0 : 90)
-                            .rotationY(axis == Direction.Axis.X ? 90 : axis == Direction.Axis.Z ? 180 : 0)
-                            .build();
-                }, BlockStateProperties.WATERLOGGED);
+    public static <B extends RotatedPillarKineticBlock> NonNullBiConsumer<DataGenContext<Block, B>, RegistrateBlockstateProvider> axisBlock() {
+        return (c, p) -> {
+            Vector<ModelFile> models = new Vector<>(16);
+            for (Direction.Axis axis : Iterate.axes)
+                models.add(p.models().getExistingFile(p.modLoc("block/" + c.getName() + "/block_" + axis.getName())));
+            Function<BlockState, ModelFile> modelFunc = (state) -> {
+                Direction.Axis axis = state.getValue(BrassGearboxBlock.AXIS);
+                return models.get(axis.ordinal());
+            };
+            p.getVariantBuilder(c.getEntry())
+                    .forAllStatesExcept(
+                            state -> ConfiguredModel.builder()
+                                    .modelFile(modelFunc.apply(state))
+                                    .uvLock(false)
+                                    .build(),
+                            BlockStateProperties.WATERLOGGED
+                    );
+        };
     }
 }
