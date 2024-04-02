@@ -40,7 +40,7 @@
   "block.create_connected.copycat_fence": "Імітаційний паркан",
   "block.create_connected.copycat_fence.tooltip.behaviour1": "Принагідно застосовує _утримуваний предмет_ як свій _матеріал_. Клацніть ще раз, щоб змінити _орієнтацію_ або перемикнути стан _живлення_. Використовуйте _гайковий ключ_ для _скидання_ матеріалу.",
   "block.create_connected.copycat_fence.tooltip.condition1": "Коли клацнуто ПКМ",
-  "block.create_connected.copycat_fence.tooltip.summary": "_Перетворює_ будь-який _суцільний блок_ на його декоративний паркан.",
+  "block.create_connected.copycat_fence.tooltip.summary": "_Перетворює_ будь-який _суцільний блок_ на декоративний паркан.",
   "block.create_connected.copycat_fence_gate": "Імітаційна хвіртка",
   "block.create_connected.copycat_fence_gate.tooltip.behaviour1": "Принагідно застосовує _утримуваний предмет_ як свій _матеріал_. Клацніть ще раз, щоб змінити _орієнтацію_ або перемикнути стан _живлення_. Використовуйте _гайковий ключ_ для _скидання_ матеріалу.",
   "block.create_connected.copycat_fence_gate.tooltip.condition1": "Коли клацнуто ПКМ",
