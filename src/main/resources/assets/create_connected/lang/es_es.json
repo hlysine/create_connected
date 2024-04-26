@@ -14,6 +14,8 @@
   "block.create_connected.bamboo_window": "Ventana de bambú",
   "block.create_connected.bamboo_window_pane": "Panel de Ventana de Bambú",
   "block.create_connected.brake": "Freno",
+  "block.create_connected.cherry_window": "Ventana de Cerezo",
+  "block.create_connected.copycat_beam.tooltip.condition1": "Cuando se hace clic derecho",
   "block.create_connected.copycat_block.tooltip.condition1": "Cuando se hace clic derecho",
   "block.create_connected.copycat_board.tooltip.condition1": "Cuando se hace clic derecho",
   "block.create_connected.copycat_fence.tooltip.condition1": "Cuando se hace clic derecho",
