@@ -1,4 +1,6 @@
 {
+  "advancement.create_connected.brass_gearbox.desc": "放置一個黃銅齒輪箱",
+  "advancement.create_connected.overstress_clutch": "斷路器",
   "block.create_connected.copycat_beam": "偽裝樑",
   "block.create_connected.copycat_beam.tooltip.behaviour1": "如果可以，將根據_手持物品_改片_材質_。_再次點擊_以循環切換_方向_或_充能_狀態。使用_扳手_重置材質。",
   "block.create_connected.copycat_beam.tooltip.condition1": "當右鍵時",
