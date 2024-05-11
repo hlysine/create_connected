@@ -153,7 +153,7 @@
   "create_connected.ponder.inverted_clutch.text_1": "反転クラッチは回転を伝達しません...",
   "create_connected.ponder.inverted_clutch.text_2": "...レッドストーン信号を与えられない限りは",
   "create_connected.ponder.inverted_gearshift.header": "反転ギアシフトによる回転力の制御",
-  "create_connected.ponder.inverted_gearshift.text_1": "反転ギアシフトは、回転方向を逆にまっすぐ伝達します",
+  "create_connected.ponder.inverted_gearshift.text_1": "反転ギアシフトは、回転方向を逆にしてまっすぐ伝達します",
   "create_connected.ponder.inverted_gearshift.text_2": "レッドストーン信号を受けると、回転方向を変更せずに回転します",
   "create_connected.ponder.linked_transmitter.header": "リンク送信機の使い方",
   "create_connected.ponder.linked_transmitter.text_1": "リンク送信機をレッドストーン入力装置に右クリックして、それを入力装置に接続します",
