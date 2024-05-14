@@ -1,4 +1,5 @@
 plugins {
+    id 'java'
     id 'eclipse'
     id 'idea'
     id 'maven-publish'
@@ -6,7 +7,52 @@ plugins {
     id 'org.parchmentmc.librarian.forgegradle' version '1.+'
     id 'org.spongepowered.mixin' version '0.7.38'
     id 'me.modmuss50.mod-publish-plugin' version '0.4.5'
+    id "systems.manifold.manifold-gradle-plugin" version '0.0.2-alpha'
 }
+
+/**
+ * Creates the list of preprocessors to use.
+ *
+ * @param mcVers array of all MC versions
+ * @param mcIndex array index of the currently active MC version
+ */
+def writeBuildGradlePredefine(List<String> mcVers, int mcIndex)
+{
+    // Build the list of preprocessors to use
+    StringBuilder sb = new StringBuilder();
+
+    sb.append("# DON'T TOUCH THIS FILE, This is handled by the build script\n");
+
+    for (int i = 0; i < mcVers.size(); i++)
+    {
+        String verStr = mcVers[i].replace(".", "_");
+        sb.append("MC_" + verStr + "=" + i.toString() + "\n");
+
+        if (mcIndex == i)
+            sb.append("MC_VER=" + i.toString() + "\n");
+    }
+
+
+    // Check if this is a development build
+    if (mod_version.toLowerCase().contains("dev"))
+    {
+        // WARNING: only use this for logging, we don't want to have confusion
+        // when a method doesn't work correctly in the release build.
+        sb.append("DEV_BUILD=\n");
+    }
+
+    new File(projectDir, "build.properties").text = sb.toString()
+}
+
+// Transfers the values set in settings.gradle to the rest of the project
+project.gradle.ext.getProperties().each { prop ->
+    rootProject.ext.set(prop.key, prop.value)
+//    println "Added prop [key:" + prop.key + ", value:" + prop.value + "]"
+}
+
+// Sets up manifold stuff
+writeBuildGradlePredefine(rootProject.mcVers, rootProject.mcIndex)
+
 
 def secrets = new Properties()
 if (file("./secrets.properties").exists()) {
@@ -15,7 +61,8 @@ if (file("./secrets.properties").exists()) {
     }
 }
 
-version = mod_version
+def combinedVersion = "$mod_version-mc$minecraft_version"
+version = combinedVersion
 group = mod_group_id
 
 base {
@@ -27,6 +74,10 @@ jarJar.enable()
 mixin {
     add sourceSets.main, "create_connected.refmap.json"
     config 'create_connected.mixins.json'
+}
+
+manifold {
+    manifoldVersion = rootProject.manifold_version
 }
 
 // Mojang ships Java 17 to end users in 1.18+, so your mod should target Java 17.
@@ -141,7 +192,11 @@ sourceSets.main.resources { srcDir 'src/generated/resources' }
 repositories {
     // Put repositories for dependencies here
     // ForgeGradle automatically adds the Forge maven and Maven Central for you
-
+    jcenter()
+    maven {
+        name = 'Sonatype'
+        url = 'https://oss.sonatype.org/content/repositories/snapshots/'
+    }
     maven {
         name = 'tterrag maven'
         url = 'https://maven.tterrag.com/'
@@ -208,6 +263,9 @@ dependencies {
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
 
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+
+    annotationProcessor "systems.manifold:manifold-preprocessor:${rootProject.manifold_version}"
+    testAnnotationProcessor "systems.manifold:manifold-preprocessor:${rootProject.manifold_version}"
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.
@@ -227,7 +285,7 @@ tasks.named('processResources', ProcessResources).configure {
             mod_id                 : mod_id,
             mod_name               : mod_name,
             mod_license            : mod_license,
-            mod_version            : mod_version,
+            mod_version            : combinedVersion,
             mod_authors            : mod_authors,
             mod_description        : mod_description,
     ]
@@ -298,8 +356,22 @@ tasks.jarJar.configure {
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
+    options.release.set(17)
+    options.compilerArgs += ['-Xlint:deprecation', '-Xlint:unchecked']
 }
 
+if (JavaVersion.current() != JavaVersion.VERSION_1_8 &&
+        sourceSets.main.allJava.files.any {it.name == "module-info.java"}) {
+    tasks.withType(JavaCompile) {
+        // if you DO define a module-info.java file:
+        options.compilerArgs += ['-Xplugin:Manifold', '--module-path', it.classpath.asPath]
+    }
+} else {
+    tasks.withType(JavaCompile) {
+        // If you DO NOT define a module-info.java file:
+        options.compilerArgs += ['-Xplugin:Manifold']
+    }
+}
 
 tasks.publishMods.dependsOn(tasks.assemble)
 tasks.publishMods.mustRunAfter(tasks.build)
