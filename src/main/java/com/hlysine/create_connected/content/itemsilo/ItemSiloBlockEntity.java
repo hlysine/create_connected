@@ -116,12 +116,12 @@ public class ItemSiloBlockEntity extends SmartBlockEntity implements IMultiBlock
 
     @SuppressWarnings("unchecked")
     @Override
-    public ItemSiloBlockEntity getControllerBE() {
+    public <T extends BlockEntity & IMultiBlockEntityContainer> T getControllerBE() {
         if (isController())
-            return this;
+            return (T) this;
         BlockEntity blockEntity = level.getBlockEntity(controller);
         if (blockEntity instanceof ItemSiloBlockEntity)
-            return (ItemSiloBlockEntity) blockEntity;
+            return (T) blockEntity;
         return null;
     }
 

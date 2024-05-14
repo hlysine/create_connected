@@ -38,6 +38,7 @@ import java.util.function.Supplier;
 
 import static com.simibubi.create.foundation.data.CreateRegistrate.connectedTextures;
 
+@SuppressWarnings("removal")
 public class CCWindowGen {
 
     public static BlockEntry<WindowBlock> woodenWindowBlock(WoodType woodType,

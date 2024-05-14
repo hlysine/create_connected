@@ -29,6 +29,7 @@ public abstract class COMPATFenceBlockMixin extends CrossCollisionBlock {
             remap = false,
             require = 0, expect = 0
     )
+    @SuppressWarnings("target")
     public void hasProperties(CallbackInfoReturnable<Boolean> cir) {
         if (ICopycatWithWrappedBlock.unwrap(this) instanceof WrappedFenceBlock) cir.setReturnValue(false);
     }

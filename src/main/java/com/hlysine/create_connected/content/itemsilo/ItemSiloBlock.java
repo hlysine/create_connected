@@ -25,6 +25,7 @@ import net.minecraftforge.common.util.ForgeSoundType;
 
 import javax.annotation.Nullable;
 
+@SuppressWarnings("deprecation")
 public class ItemSiloBlock extends Block implements IWrenchable, IBE<ItemSiloBlockEntity> {
     public static final BooleanProperty LARGE = ItemVaultBlock.LARGE;
 

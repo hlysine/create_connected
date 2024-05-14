@@ -106,6 +106,7 @@ public class LinkedAnalogLeverBlock extends AnalogLeverBlock implements ISpecial
         return InteractionResult.PASS;
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public void onRemove(@NotNull BlockState state, @NotNull Level world, @NotNull BlockPos pos, @NotNull BlockState newState, boolean isMoving) {
         if (!state.is(newState.getBlock()) && !isMoving && getBlockEntityOptional(world, pos).map(be -> ((LinkedAnalogLeverBlockEntity) be).containsBase).orElse(false))

@@ -20,6 +20,7 @@ public class SequencerInstructionsMixin {
     @Shadow
     @Final
     @Mutable
+    @SuppressWarnings("target")
     private static SequencerInstructions[] $VALUES;
 
     @Unique

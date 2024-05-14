@@ -115,6 +115,7 @@ public class SequencedPulseGeneratorBlock extends AbstractDiodeBlock implements 
         return spg.getCurrentSignal();
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public int getSignal(BlockState blockState, @NotNull BlockGetter blockAccess, @NotNull BlockPos
             pos, @NotNull Direction side) {

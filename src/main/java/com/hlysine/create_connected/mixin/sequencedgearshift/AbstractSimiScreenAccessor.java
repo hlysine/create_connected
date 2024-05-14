@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 
 import java.util.Collection;
 
-@Mixin(AbstractSimiScreen.class)
+@Mixin(value = AbstractSimiScreen.class, remap = false)
 public interface AbstractSimiScreenAccessor {
     @Invoker
     void callRemoveWidgets(Collection<? extends GuiEventListener> widgets);
