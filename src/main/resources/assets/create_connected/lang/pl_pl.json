@@ -145,6 +145,7 @@
   "create_connected.overstress_clutch.uncouple_delay": "Opóźnienie odłączenia",
   "create_connected.ponder.chain_cogwheel_relay.header": "Przekazywanie siły obrotowej za pomocą łańcuchowych kół zębatych",
   "create_connected.ponder.chain_cogwheel_relay.text_1": "Łańcuchowe Koła Zębate są przekaźnikami łańcuchowymi z dodatkowym kołem zębatym",
+  "create_connected.ponder.chain_cogwheel_relay.text_2": "Łączą się z innymi elementami łańcuchowymi w rzędzie",
   "create_connected.ponder.linked_transmitter.header": "Używanie Połączonych nadajników",
   "create_connected.ponder.linked_transmitter.text_1": "Kliknij prawym przyciskiem myszy na wejście redstone z Połączonym nadajnikiem, aby przyczepić go do wejścia",
   "create_connected.ponder.linked_transmitter.text_2": "Połączone nadajniki mogą zdalnie przesyłać sygnały wejść",
