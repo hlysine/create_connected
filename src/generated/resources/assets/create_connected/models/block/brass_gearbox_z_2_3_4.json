@@ -1,8 +1,8 @@
 {
-  "parent": "create_connected:block/brass_gearbox/block",
+  "parent": "create_connected:block/brass_gearbox/block_z",
   "textures": {
     "1": "create_connected:block/brass_gearbox_bottom",
-    "2": "create_connected:block/brass_gearbox_bottom",
+    "2": "create_connected:block/brass_gearbox_top",
     "3": "create_connected:block/brass_gearbox_top",
     "4": "create_connected:block/brass_gearbox_top"
   }

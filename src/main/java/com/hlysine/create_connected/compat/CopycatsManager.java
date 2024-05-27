@@ -41,15 +41,19 @@ public class CopycatsManager {
     }
 
     public static Block convert(Block self) {
-        BlockEntry<?> result = BLOCK_MAP.get(RegisteredObjects.getKeyOrThrow(self).getPath());
+        ResourceLocation key = RegisteredObjects.getKeyOrThrow(self);
+        if (!validateNamespace(key)) return self;
+        BlockEntry<?> result = BLOCK_MAP.get(key.getPath());
         if (result != null) return result.get();
         return self;
     }
 
     public static Item convert(Item self) {
-        ItemEntry<?> result = ITEM_MAP.get(RegisteredObjects.getKeyOrThrow(self).getPath());
+        ResourceLocation key = RegisteredObjects.getKeyOrThrow(self);
+        if (!validateNamespace(key)) return self;
+        ItemEntry<?> result = ITEM_MAP.get(key.getPath());
         if (result != null) return result.get();
-        BlockEntry<?> blockResult = BLOCK_MAP.get(RegisteredObjects.getKeyOrThrow(self).getPath());
+        BlockEntry<?> blockResult = BLOCK_MAP.get(key.getPath());
         if (blockResult != null) return blockResult.asItem();
         return self;
     }
@@ -73,24 +77,35 @@ public class CopycatsManager {
     }
 
     public static Block convertIfEnabled(Block block) {
-        if (isFeatureEnabled(RegisteredObjects.getKeyOrThrow(block)))
+        ResourceLocation key = RegisteredObjects.getKeyOrThrow(block);
+        if (!validateNamespace(key)) return block;
+        if (isFeatureEnabled(key))
             return convert(block);
         return block;
     }
 
     public static BlockState convertIfEnabled(BlockState state) {
-        if (isFeatureEnabled(RegisteredObjects.getKeyOrThrow(state.getBlock())))
+        ResourceLocation key = RegisteredObjects.getKeyOrThrow(state.getBlock());
+        if (!validateNamespace(key)) return state;
+        if (isFeatureEnabled(key))
             return convert(state);
         return state;
     }
 
     public static ItemLike convertIfEnabled(ItemLike item) {
-        if (isFeatureEnabled(RegisteredObjects.getKeyOrThrow(item.asItem())))
+        ResourceLocation key = RegisteredObjects.getKeyOrThrow(item.asItem());
+        if (!validateNamespace(key)) return item;
+        if (isFeatureEnabled(key))
             return convert(item);
         return item;
     }
 
+    private static boolean validateNamespace(ResourceLocation key) {
+        return key.getNamespace().equals(CreateConnected.MODID) || key.getNamespace().equals(Mods.COPYCATS.id());
+    }
+
     public static boolean existsInCopycats(ResourceLocation key) {
+        if (!validateNamespace(key)) return false;
         if (BLOCK_MAP.containsKey(key.getPath())) return true;
         if (ITEM_MAP.containsKey(key.getPath())) return true;
         return false;

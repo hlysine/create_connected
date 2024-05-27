@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.7.4 - 2024-03-21
+
+### Fixed
+
+- Item Silo losing its content when being disassembled from a contraption (#57)
+- Incorrect texture uv rotation on Brass and Parallel Gearboxes (#55)
+
+## 0.7.3 - 2024-03-16
+
+### Fixed
+
+- Crash due to Copycat Slabs from C:Dreams and Desires interfering with the copycat migration process (#48)
+- Encased Chain Cogwheels not connecting to each other via their cogwheels when they are not in a line (#52)
+
 ## 0.7.2 - 2024-02-13
 
 ### Changed

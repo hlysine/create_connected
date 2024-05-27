@@ -120,7 +120,7 @@ public class CCBlocks {
             .onRegister(CreateRegistrate.connectedTextures(() -> new EncasedCTBehaviour(AllSpriteShifts.ANDESITE_CASING)))
             .onRegister(CreateRegistrate.casingConnectivity((block, cc) -> cc.make(block, AllSpriteShifts.ANDESITE_CASING,
                     (s, f) -> f.getAxis() == s.getValue(ParallelGearboxBlock.AXIS))))
-            .blockstate((c, p) -> axisBlock(c, p, $ -> partialBaseModel(c, p), false))
+            .blockstate(CCBlockStateGen.axisBlock())
             .item()
             .transform(customItemModel())
             .register();
