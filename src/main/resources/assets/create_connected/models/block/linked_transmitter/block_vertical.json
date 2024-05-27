@@ -4,7 +4,8 @@
 	"render_type": "minecraft:cutout_mipped",
 	"textures": {
 		"redstone_antenna": "create:block/redstone_antenna",
-		"redstone_bridge": "create:block/redstone_bridge"
+		"redstone_bridge": "create:block/redstone_bridge",
+		"particle": "create:block/redstone_bridge"
 	},
 	"elements": [
 		{

@@ -1,20 +1,15 @@
 package com.hlysine.create_connected.content.copycat.wall;
 
-import com.hlysine.create_connected.content.copycat.ICopycatWithWrappedBlock;
+import com.hlysine.create_connected.content.copycat.WaterloggedCopycatWrappedBlock;
 import com.simibubi.create.content.decoration.copycat.CopycatBlock;
-import com.simibubi.create.content.decoration.copycat.WaterloggedCopycatBlock;
 import com.simibubi.create.foundation.utility.Iterate;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
@@ -22,7 +17,6 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.WallSide;
 import net.minecraft.world.level.pathfinder.PathComputationType;
-import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
@@ -34,7 +28,7 @@ import static net.minecraft.core.Direction.Axis;
 import static net.minecraft.world.level.block.WallBlock.*;
 
 @SuppressWarnings("deprecation")
-public class CopycatWallBlock extends WaterloggedCopycatBlock implements ICopycatWithWrappedBlock {
+public class CopycatWallBlock extends WaterloggedCopycatWrappedBlock {
 
     public static WallBlock wall;
 
@@ -68,15 +62,6 @@ public class CopycatWallBlock extends WaterloggedCopycatBlock implements ICopyca
     }
 
     @Override
-    public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
-        InteractionResult result = super.use(pState, pLevel, pPos, pPlayer, pHand, pHit);
-        if (result == InteractionResult.PASS) {
-            return wall.use(pState, pLevel, pPos, pPlayer, pHand, pHit);
-        }
-        return result;
-    }
-
-    @Override
     public boolean collisionExtendsVertically(BlockState state, BlockGetter level, BlockPos pos, Entity collidingEntity) {
         return true;
     }
@@ -97,8 +82,8 @@ public class CopycatWallBlock extends WaterloggedCopycatBlock implements ICopyca
     }
 
     @Override
-    public BlockState updateShape(BlockState pState, Direction pDirection, BlockState pNeighborState, LevelAccessor pLevel, BlockPos pCurrentPos, BlockPos pNeighborPos) {
-        return wall.updateShape(pState, pDirection, pNeighborState, pLevel, pCurrentPos, pNeighborPos);
+    public @NotNull BlockState updateShape(@NotNull BlockState pState, @NotNull Direction pDirection, @NotNull BlockState pNeighborState, @NotNull LevelAccessor pLevel, @NotNull BlockPos pCurrentPos, @NotNull BlockPos pNeighborPos) {
+        return migrateOnUpdate(pLevel.isClientSide(), wall.updateShape(pState, pDirection, pNeighborState, pLevel, pCurrentPos, pNeighborPos));
     }
 
     @Override

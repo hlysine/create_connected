@@ -2,7 +2,7 @@ package com.hlysine.create_connected.content.copycat.verticalstep;
 
 import com.hlysine.create_connected.CCBlocks;
 import com.hlysine.create_connected.CCShapes;
-import com.simibubi.create.content.decoration.copycat.WaterloggedCopycatBlock;
+import com.hlysine.create_connected.content.copycat.MigratingWaterloggedCopycatBlock;
 import com.simibubi.create.foundation.placement.IPlacementHelper;
 import com.simibubi.create.foundation.placement.PlacementHelpers;
 import com.simibubi.create.foundation.placement.PoleHelper;
@@ -40,7 +40,7 @@ import java.util.function.Predicate;
 
 import static net.minecraft.core.Direction.Axis;
 
-public class CopycatVerticalStepBlock extends WaterloggedCopycatBlock {
+public class CopycatVerticalStepBlock extends MigratingWaterloggedCopycatBlock {
 
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 
@@ -144,7 +144,7 @@ public class CopycatVerticalStepBlock extends WaterloggedCopycatBlock {
     }
 
     @Override
-    public BlockState getStateForPlacement(BlockPlaceContext context) {
+    public BlockState getStateForPlacement(@NotNull BlockPlaceContext context) {
         BlockState stateForPlacement = super.getStateForPlacement(context);
         assert stateForPlacement != null;
 

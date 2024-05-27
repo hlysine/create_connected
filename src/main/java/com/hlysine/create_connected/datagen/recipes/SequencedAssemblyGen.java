@@ -9,6 +9,7 @@ import com.simibubi.create.content.processing.sequenced.SequencedAssemblyRecipeB
 import com.simibubi.create.foundation.data.recipe.CreateRecipeProvider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.Items;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.function.UnaryOperator;
 
@@ -42,7 +43,7 @@ public class SequencedAssemblyGen extends CreateRecipeProvider {
     }
 
     @Override
-    public String getName() {
+    public @NotNull String getName() {
         return "Create: Connected's Sequenced Assembly Recipes";
     }
 }

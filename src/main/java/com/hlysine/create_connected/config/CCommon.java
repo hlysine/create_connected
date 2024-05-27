@@ -11,6 +11,10 @@ public class CCommon extends SyncConfigBase {
         return "common";
     }
 
+    public final ConfigBool migrateCopycatsOnBlockUpdate = b(true, "migrateCopycatsOnBlockUpdate", Comments.migrateCopycatsOnBlockUpdate);
+
+    public final ConfigBool migrateCopycatsOnInitialize = b(true, "migrateCopycatsOnInitialize", Comments.migrateCopycatsOnInitialize);
+
     public final CFeatures toggle = nested(0, CFeatures::new, Comments.toggle);
 
     public void register() {
@@ -26,6 +30,8 @@ public class CCommon extends SyncConfigBase {
 
     private static class Comments {
         static String toggle = "Enable/disable features. Values on server override clients";
+        static String migrateCopycatsOnBlockUpdate = "Migrate copycats to Create: Copycats+ when they receive a block update";
+        static String migrateCopycatsOnInitialize = "Migrate copycats to Create: Copycats+ when their block entities are initialized";
     }
 
     private class SyncConfig extends SyncConfigBase.SyncConfig {

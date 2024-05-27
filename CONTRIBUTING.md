@@ -61,5 +61,9 @@ it. I can also provide help by explaining some of the mod's inner workings.
 
 ### New features
 
-Please open an issue before working on new features so that no effort is wasted. A complete feature would include block
+Please **open an issue for discussion** before working on new features so that no effort is wasted. A complete feature
+would include block
 logic, textures, models, feature toggle, configs and ponder, but I'll accept PRs as long as the first 3 are done.
+
+PRs are welcome even if you are new to modding, but please be patient with them while we work on polishing your code
+together.

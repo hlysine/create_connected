@@ -88,11 +88,10 @@ public class SequencedPulseGeneratorBlockEntity extends SmartBlockEntity {
     }
 
     private void applySignal() {
-        if (getBlockState().getValue(POWERING) == (currentSignal > 0)) {
-            level.markAndNotifyBlock(getBlockPos(), level.getChunkAt(getBlockPos()), getBlockState(), getBlockState(), 3, 512);
-        } else {
-            level.setBlockAndUpdate(getBlockPos(), getBlockState().setValue(POWERING, currentSignal > 0));
+        if (getBlockState().getValue(POWERING) != (currentSignal > 0)) {
+            level.setBlock(getBlockPos(), getBlockState().setValue(POWERING, currentSignal > 0), 2);
         }
+        ((SequencedPulseGeneratorBlock) getBlockState().getBlock()).updateNeighborsInFront(level, getBlockPos(), getBlockState());
     }
 
     private void executeInstruction(Function<Instruction, Function<SequencedPulseGeneratorBlockEntity, InstructionResult>> instructionEvent, boolean allowImmediate, int recursionDepth) {

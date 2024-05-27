@@ -1,26 +1,20 @@
 package com.hlysine.create_connected.content.copycat.fence;
 
-import com.hlysine.create_connected.content.copycat.ICopycatWithWrappedBlock;
+import com.hlysine.create_connected.content.copycat.WaterloggedCopycatWrappedBlock;
 import com.simibubi.create.content.decoration.copycat.CopycatBlock;
-import com.simibubi.create.content.decoration.copycat.WaterloggedCopycatBlock;
 import com.simibubi.create.foundation.utility.Iterate;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.pathfinder.PathComputationType;
-import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
@@ -29,7 +23,7 @@ import org.jetbrains.annotations.Nullable;
 import static net.minecraft.world.level.block.CrossCollisionBlock.*;
 
 @SuppressWarnings("deprecation")
-public class CopycatFenceBlock extends WaterloggedCopycatBlock implements ICopycatWithWrappedBlock {
+public class CopycatFenceBlock extends WaterloggedCopycatWrappedBlock {
 
     public static FenceBlock fence;
 
@@ -58,20 +52,7 @@ public class CopycatFenceBlock extends WaterloggedCopycatBlock implements ICopyc
     public BlockState getStateForPlacement(@NotNull BlockPlaceContext pContext) {
         BlockState state = fence.getStateForPlacement(pContext);
         if (state == null) return super.getStateForPlacement(pContext);
-        return super.getStateForPlacement(pContext)
-                .setValue(NORTH, state.getValue(NORTH))
-                .setValue(SOUTH, state.getValue(SOUTH))
-                .setValue(EAST, state.getValue(EAST))
-                .setValue(WEST, state.getValue(WEST));
-    }
-
-    @Override
-    public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
-        InteractionResult result = super.use(pState, pLevel, pPos, pPlayer, pHand, pHit);
-        if (result == InteractionResult.PASS) {
-            return fence.use(pState, pLevel, pPos, pPlayer, pHand, pHit);
-        }
-        return result;
+        return copyState(state, super.getStateForPlacement(pContext), false);
     }
 
     @Override
@@ -120,8 +101,8 @@ public class CopycatFenceBlock extends WaterloggedCopycatBlock implements ICopyc
     }
 
     @Override
-    public BlockState updateShape(BlockState pState, Direction pDirection, BlockState pNeighborState, LevelAccessor pLevel, BlockPos pCurrentPos, BlockPos pNeighborPos) {
-        return fence.updateShape(pState, pDirection, pNeighborState, pLevel, pCurrentPos, pNeighborPos);
+    public @NotNull BlockState updateShape(@NotNull BlockState pState, @NotNull Direction pDirection, @NotNull BlockState pNeighborState, @NotNull LevelAccessor pLevel, @NotNull BlockPos pCurrentPos, @NotNull BlockPos pNeighborPos) {
+        return migrateOnUpdate(pLevel.isClientSide(), fence.updateShape(pState, pDirection, pNeighborState, pLevel, pCurrentPos, pNeighborPos));
     }
 
     @Override
@@ -185,6 +166,15 @@ public class CopycatFenceBlock extends WaterloggedCopycatBlock implements ICopyc
 
     public static BooleanProperty byDirection(Direction direction) {
         return PipeBlock.PROPERTY_BY_DIRECTION.get(direction);
+    }
+
+    public static BlockState copyState(BlockState from, BlockState to, boolean includeWaterlogged) {
+        return to
+                .setValue(NORTH, from.getValue(NORTH))
+                .setValue(SOUTH, from.getValue(SOUTH))
+                .setValue(EAST, from.getValue(EAST))
+                .setValue(WEST, from.getValue(WEST))
+                .setValue(WATERLOGGED, includeWaterlogged ? from.getValue(WATERLOGGED) : to.getValue(WATERLOGGED));
     }
 }
 

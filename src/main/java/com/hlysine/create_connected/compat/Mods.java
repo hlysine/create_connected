@@ -13,6 +13,7 @@ import java.util.function.Supplier;
  */
 public enum Mods {
     JEI("jei"),
+    COPYCATS("copycats"),
     DIAGONAL_FENCES("diagonalfences");
 
     private final String id;

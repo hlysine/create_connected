@@ -5,6 +5,58 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.7.4 - 2024-03-21
+
+### Fixed
+
+- Item Silo losing its content when being disassembled from a contraption (#57)
+- Incorrect texture uv rotation on Brass and Parallel Gearboxes (#55)
+
+## 0.7.3 - 2024-03-16
+
+### Fixed
+
+- Crash due to Copycat Slabs from C:Dreams and Desires interfering with the copycat migration process (#48)
+- Encased Chain Cogwheels not connecting to each other via their cogwheels when they are not in a line (#52)
+
+## 0.7.2 - 2024-02-13
+
+### Changed
+
+- Upgraded gradle version to 8.4
+
+### Fixed
+
+- Unknown error during the publish process, causing a corrupted binary for v0.7.1 (copycats-plus/copycats#6)
+
+## 0.7.1 - 2024-02-12
+
+### Fixed
+
+- Crash when copycats are broken without Create: Copycats+ installed (#44)
+
+## 0.7.0 - 2024-02-11
+
+### Added
+
+- Recipe compatibility and auto-migration with Create: Copycats+
+- New translations (thanks
+  [Crowdin contributors](https://crowdin.com/project/create-connected-mod/reports/top-members)!)
+
+### Changed
+
+- `feature_enabled` condition no longer has an `invert` field. Please use the `forge:not` condition instead
+
+### Fixed
+
+- Incompatibility with Radium's pathfinding optimizations (#32)
+- Incompatibility with Diagonal Fences (#33)
+- Crash in certain instances where mod configs are accessed too early (#34)
+- Crash in certain instances when wrenching a Brass Gearbox (#36)
+- Incompatibility with Velocity due to bad network channel name (#38)
+- Item Silos behaving differently from Item Vaults around contraptions (#39)
+- Sequenced Pulse Generator not updating the block in front when signal strength changes (#42)
+
 ## 0.6.1 - 2024-01-24
 
 ### Fixed
@@ -66,7 +118,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - Restart the whole sequence from the beginning, allowing the Sequenced Gearshift to run indefinitely
 - A new toggle to disable "crafting remaining item" fix for manual application recipes
 - Translations for Russian, Japanese, Dutch, Chinese Simplified, Romanian
-  (thanks [Crowdin contributors](https://crowdin.com/project/create-connected-mod/members)!)
+  (thanks [Crowdin contributors](https://crowdin.com/project/create-connected-mod/reports/top-members)!)
 
 ### Changed
 
@@ -118,7 +170,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - Cartography Table
 - 2 music discs for iconic elevator music
 - Translations for Dutch, Japanese, Chinese Simplified, French, German
-  (thanks [Crowdin contributors](https://crowdin.com/project/create-connected-mod/members)!)
+  (thanks [Crowdin contributors](https://crowdin.com/project/create-connected-mod/reports/top-members)!)
 
 ### Fixed
 

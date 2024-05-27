@@ -64,7 +64,7 @@ public abstract class SyncConfigBase extends ConfigBase {
             Function<CompoundTag, T> messageSupplier
     ) {
         syncChannel = NetworkRegistry.newSimpleChannel(
-                CreateConnected.asResource("config." + getName()),
+                CreateConnected.asResource("config_" + getName()),
                 () -> configVersion,
                 configVersion::equals,
                 configVersion::equals

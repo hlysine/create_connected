@@ -7,7 +7,7 @@
 <a title="Modrinth" target="_blank" href="https://modrinth.com/mod/create-connected/"><img src="https://img.shields.io/modrinth/dt/Vg5TIO6d?style=flat&label=Modrinth"></a>
 <a title="CurseForge" target="_blank" href="https://www.curseforge.com/minecraft/mc-mods/create-connected"><img src="https://img.shields.io/curseforge/dt/947914?style=flat&label=CurseForge"></a>
 <a title="Crowdin" target="_blank" href="https://crowdin.com/project/create-connected-mod"><img src="https://badges.crowdin.net/create-connected-mod/localized.svg"></a>
-<a title="Discord" target="_blank" href="https://discord.gg/3AvrppcgG3"><img src="https://img.shields.io/badge/Discord-%235865F2.svg?logo=discord&logoColor=white"></a>
+<a title="Discord" target="_blank" href="https://discord.gg/3AvrppcgG3"><img src="https://discordapp.com/api/guilds/891929048895356948/widget.png?style=shield"></a>
 </p>
 
 A Create mod add-on adding quality-of-life blocks that you wish existed in Create.
@@ -19,21 +19,25 @@ out [Create: Power Loader](https://modrinth.com/mod/create-power-loader)**
 
 > Join us in the [Create: Addon Hub](https://discord.gg/3AvrppcgG3) server for a chat!
 
-## What's new in 0.6
+## What's new in 0.7
 
-**New Copycats**
+**Compatibility with Create: Copycats+**
 
-![copycat_stairs](https://github.com/hlysine/create_connected/assets/25472513/3cbe9205-8c8d-4785-b82c-c6abcc965989) ![copycat_fence](https://github.com/hlysine/create_connected/assets/25472513/1c1647e4-1e2d-444c-b258-ade19517a7dd) ![copycat_fence_gate](https://github.com/hlysine/create_connected/assets/25472513/4d091424-2bac-4d12-9c3f-3dbc6860e6c5) ![copycat_wall](https://github.com/hlysine/create_connected/assets/25472513/1df1d22d-fd33-43db-a4a6-90112268d212) ![copycat_board](https://github.com/hlysine/create_connected/assets/25472513/ebc89786-459e-447d-a4f0-61403ae426fc) ![copycat_box](https://github.com/hlysine/create_connected/assets/25472513/31729e1d-c0a6-4951-b0c1-dc013cb59ab1) ![copycat_catwalk](https://github.com/hlysine/create_connected/assets/25472513/1cab88d4-a4fc-450d-90a7-e0104e863a88)
+All copycats from Create: Connected, Create: More Copycats and Create: Copies and Cats are merged into the ultimate
+mod - [**Create: Copycats+**](https://modrinth.com/mod/copycats) !
 
-A new set of copycats with more complex geometry. Note that connected textures or translucency may not work perfectly on
-some of them.
+Copycats+ exclusive features include:
 
-**Lockable Linked Transmitter**
+- Forge/**Fabric** 1.20.1/1.19.2/1.18.2 support
+- Even more copycats
+- Improved copycat model quality
+- Toggleable connected textures
 
-![linked_transmitter](https://github.com/hlysine/create_connected/assets/25472513/edb1593f-e815-4a36-b0bb-91ae0eb318bf)
+![Copycats+](https://cdn.modrinth.com/data/UT2M39wf/images/e20c128b7c0e000e904584811d20f753d846af80.png)
 
-Linked Transmitters can now be locked by sneak-right-clicking the transmitter module to prevent misclicks on the
-frequency slots.
+All your existing C:Connected copycats will migrate seamlessly and progressively when you install Copycats+ and
+Connected side-by-side.
+Keep both mods installed to avoid data loss in existing worlds.
 
 **Various bug fixes**
 
@@ -106,7 +110,8 @@ at [the contributing guide](https://github.com/hlysine/create_connected/blob/mai
 
 ## Support
 
-The best way to support my work is to simply download this mod on [**Modrinth**](https://modrinth.com/mod/create-connected).
+The best way to support my work is to simply download this mod on [**Modrinth
+**](https://modrinth.com/mod/create-connected).
 Enjoy a smoother download experience and support open source software with a single click.
 
 If you would like to offer more direct support, you
@@ -116,7 +121,8 @@ can [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/O4O2
 
 **Translation**
 
-- Thanks [Crowdin contributors](https://crowdin.com/project/create-connected-mod/members) for their effort in
+- Thanks [Crowdin contributors](https://crowdin.com/project/create-connected-mod/reports/top-members) for their effort
+  in
   localization
 
 **Inspiration**

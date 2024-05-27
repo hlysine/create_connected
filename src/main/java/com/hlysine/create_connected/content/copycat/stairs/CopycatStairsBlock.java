@@ -1,15 +1,12 @@
 package com.hlysine.create_connected.content.copycat.stairs;
 
-import com.hlysine.create_connected.content.copycat.ICopycatWithWrappedBlock;
+import com.hlysine.create_connected.content.copycat.WaterloggedCopycatWrappedBlock;
 import com.simibubi.create.content.decoration.copycat.CopycatBlock;
-import com.simibubi.create.content.decoration.copycat.WaterloggedCopycatBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.*;
@@ -19,7 +16,6 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.Half;
 import net.minecraft.world.level.block.state.properties.StairsShape;
 import net.minecraft.world.level.pathfinder.PathComputationType;
-import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
@@ -29,7 +25,7 @@ import static net.minecraft.core.Direction.*;
 import static net.minecraft.world.level.block.StairBlock.HALF;
 
 @SuppressWarnings("deprecation")
-public class CopycatStairsBlock extends WaterloggedCopycatBlock implements ICopycatWithWrappedBlock {
+public class CopycatStairsBlock extends WaterloggedCopycatWrappedBlock {
 
     public static StairBlock stairs;
 
@@ -57,10 +53,7 @@ public class CopycatStairsBlock extends WaterloggedCopycatBlock implements ICopy
     public BlockState getStateForPlacement(@NotNull BlockPlaceContext pContext) {
         BlockState state = stairs.getStateForPlacement(pContext);
         if (state == null) return super.getStateForPlacement(pContext);
-        return super.getStateForPlacement(pContext)
-                .setValue(StairBlock.FACING, state.getValue(StairBlock.FACING))
-                .setValue(HALF, state.getValue(HALF))
-                .setValue(StairBlock.SHAPE, state.getValue(StairBlock.SHAPE));
+        return copyState(state, super.getStateForPlacement(pContext), false);
     }
 
     @Override
@@ -120,22 +113,13 @@ public class CopycatStairsBlock extends WaterloggedCopycatBlock implements ICopy
     }
 
     @Override
-    public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
-        InteractionResult result = super.use(pState, pLevel, pPos, pPlayer, pHand, pHit);
-        if (result == InteractionResult.PASS) {
-            return stairs.use(pState, pLevel, pPos, pPlayer, pHand, pHit);
-        }
-        return result;
-    }
-
-    @Override
     public void wasExploded(@NotNull Level pLevel, @NotNull BlockPos pPos, @NotNull Explosion pExplosion) {
         stairs.wasExploded(pLevel, pPos, pExplosion);
     }
 
     @Override
     public @NotNull BlockState updateShape(@NotNull BlockState pState, @NotNull Direction pDirection, @NotNull BlockState pNeighborState, @NotNull LevelAccessor pLevel, @NotNull BlockPos pCurrentPos, @NotNull BlockPos pNeighborPos) {
-        return stairs.updateShape(pState, pDirection, pNeighborState, pLevel, pCurrentPos, pNeighborPos);
+        return migrateOnUpdate(pLevel.isClientSide(), stairs.updateShape(pState, pDirection, pNeighborState, pLevel, pCurrentPos, pNeighborPos));
     }
 
     @Override
@@ -312,6 +296,14 @@ public class CopycatStairsBlock extends WaterloggedCopycatBlock implements ICopy
             }
         }
         return faceShape;
+    }
+
+    public static BlockState copyState(BlockState from, BlockState to, boolean includeWaterlogged) {
+        return to
+                .setValue(StairBlock.FACING, from.getValue(StairBlock.FACING))
+                .setValue(HALF, from.getValue(HALF))
+                .setValue(StairBlock.SHAPE, from.getValue(StairBlock.SHAPE))
+                .setValue(WATERLOGGED, includeWaterlogged ? from.getValue(WATERLOGGED) : to.getValue(WATERLOGGED));
     }
 
     private static class FaceShape {
