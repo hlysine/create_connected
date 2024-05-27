@@ -29,6 +29,7 @@ import com.hlysine.create_connected.content.copycat.verticalstep.CopycatVertical
 import com.hlysine.create_connected.content.copycat.wall.CopycatWallBlock;
 import com.hlysine.create_connected.content.copycat.wall.CopycatWallModel;
 import com.hlysine.create_connected.content.copycat.wall.WrappedWallBlock;
+import com.hlysine.create_connected.content.fluidvessel.*;
 import com.hlysine.create_connected.content.freewheelclutch.FreewheelClutchBlock;
 import com.hlysine.create_connected.content.invertedclutch.InvertedClutchBlock;
 import com.hlysine.create_connected.content.invertedgearshift.InvertedGearshiftBlock;
@@ -65,6 +66,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
@@ -85,6 +87,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
+import static com.simibubi.create.content.redstone.displayLink.AllDisplayBehaviours.assignDataBehaviour;
 import static com.simibubi.create.foundation.data.AssetLookup.partialBaseModel;
 import static com.simibubi.create.foundation.data.BlockStateGen.axisBlock;
 import static com.simibubi.create.foundation.data.CreateRegistrate.connectedTextures;
@@ -418,6 +421,41 @@ public class CCBlocks {
             .item(ItemSiloItem::new)
             .build()
             .register();
+
+    public static final BlockEntry<FluidVesselBlock> FLUID_VESSEL = REGISTRATE.block("fluid_vessel", FluidVesselBlock::regular)
+            .initialProperties(SharedProperties::copperMetal)
+            .properties(p -> p.noOcclusion().isRedstoneConductor((p1, p2, p3) -> true))
+            .transform(pickaxeOnly())
+            .transform(FeatureToggle.register())
+            .blockstate(new FluidVesselGenerator()::generate)
+            .onRegister(CreateRegistrate.blockModel(() -> FluidVesselModel::standard))
+            .onRegister(assignDataBehaviour(new BoilerDisplaySource(), "boiler_status"))
+            .addLayer(() -> RenderType::cutoutMipped)
+            .item(FluidVesselItem::new)
+            .model(AssetLookup.customBlockItemModel("_", "block_x_single_window"))
+            .build()
+            .register();
+
+    public static final BlockEntry<FluidVesselBlock> CREATIVE_FLUID_VESSEL =
+            REGISTRATE.block("creative_fluid_vessel", FluidVesselBlock::creative)
+                    .initialProperties(SharedProperties::copperMetal)
+                    .properties(p -> p.noOcclusion().mapColor(MapColor.COLOR_PURPLE))
+                    .transform(pickaxeOnly())
+                    .transform(FeatureToggle.registerDependent(FLUID_VESSEL))
+                    .tag(AllTags.AllBlockTags.SAFE_NBT.tag)
+                    .blockstate(new FluidVesselGenerator("creative_")::generate)
+                    .onRegister(CreateRegistrate.blockModel(() -> FluidVesselModel::creative))
+                    .addLayer(() -> RenderType::cutoutMipped)
+                    .item(FluidVesselItem::new)
+                    .properties(p -> p.rarity(Rarity.EPIC))
+                    .model((c, p) -> p.withExistingParent(c.getName(), p.modLoc("block/fluid_vessel/block_x_single_window"))
+                            .texture("5", Create.asResource("block/creative_fluid_tank_window_single"))
+                            .texture("1", Create.asResource("block/creative_fluid_tank"))
+                            .texture("particle", Create.asResource("block/creative_fluid_tank"))
+                            .texture("4", Create.asResource("block/creative_casing"))
+                            .texture("0", Create.asResource("block/creative_casing")))
+                    .build()
+                    .register();
 
     public static final BlockEntry<CopycatSlabBlock> COPYCAT_SLAB =
             REGISTRATE.block("copycat_slab", CopycatSlabBlock::new)

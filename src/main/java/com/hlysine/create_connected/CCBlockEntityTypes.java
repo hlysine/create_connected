@@ -5,6 +5,9 @@ import com.hlysine.create_connected.content.brassgearbox.BrassGearboxBlockEntity
 import com.hlysine.create_connected.content.brassgearbox.BrassGearboxInstance;
 import com.hlysine.create_connected.content.brassgearbox.BrassGearboxRenderer;
 import com.hlysine.create_connected.content.centrifugalclutch.CentrifugalClutchBlockEntity;
+import com.hlysine.create_connected.content.fluidvessel.CreativeFluidVesselBlockEntity;
+import com.hlysine.create_connected.content.fluidvessel.FluidVesselBlockEntity;
+import com.hlysine.create_connected.content.fluidvessel.FluidVesselRenderer;
 import com.hlysine.create_connected.content.freewheelclutch.FreewheelClutchBlockEntity;
 import com.hlysine.create_connected.content.invertedclutch.InvertedClutchBlockEntity;
 import com.hlysine.create_connected.content.invertedgearshift.InvertedGearshiftBlockEntity;
@@ -119,6 +122,18 @@ public class CCBlockEntityTypes {
     public static final BlockEntityEntry<ItemSiloBlockEntity> ITEM_SILO = REGISTRATE
             .blockEntity("item_silo", ItemSiloBlockEntity::new)
             .validBlocks(CCBlocks.ITEM_SILO)
+            .register();
+
+    public static final BlockEntityEntry<FluidVesselBlockEntity> FLUID_VESSEL = REGISTRATE
+            .blockEntity("fluid_vessel", FluidVesselBlockEntity::new)
+            .validBlocks(CCBlocks.FLUID_VESSEL)
+            .renderer(() -> FluidVesselRenderer::new)
+            .register();
+
+    public static final BlockEntityEntry<CreativeFluidVesselBlockEntity> CREATIVE_FLUID_VESSEL = REGISTRATE
+            .blockEntity("creative_fluid_vessel", CreativeFluidVesselBlockEntity::new)
+            .validBlocks(CCBlocks.CREATIVE_FLUID_VESSEL)
+            .renderer(() -> FluidVesselRenderer::new)
             .register();
 
     public static final BlockEntityEntry<SequencedPulseGeneratorBlockEntity> SEQUENCED_PULSE_GENERATOR = REGISTRATE

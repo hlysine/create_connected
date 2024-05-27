@@ -15,6 +15,7 @@
     "create_connected:linked_mangrove_button",
     "create_connected:linked_bamboo_button",
     "create_connected:linked_lever",
-    "create_connected:linked_analog_lever"
+    "create_connected:linked_analog_lever",
+    "create_connected:creative_fluid_vessel"
   ]
 }

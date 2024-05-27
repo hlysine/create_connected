@@ -38,6 +38,8 @@ public class CCCreativeTabs {
             CCBlocks.FREEWHEEL_CLUTCH,
             CCBlocks.BRAKE,
             CCBlocks.ITEM_SILO,
+            CCBlocks.FLUID_VESSEL,
+            CCBlocks.CREATIVE_FLUID_VESSEL,
             CCBlocks.SEQUENCED_PULSE_GENERATOR,
             CCItems.LINKED_TRANSMITTER,
             CCBlocks.EMPTY_FAN_CATALYST,
