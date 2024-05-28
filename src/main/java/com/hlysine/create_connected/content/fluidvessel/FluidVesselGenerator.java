@@ -41,6 +41,9 @@ public class FluidVesselGenerator extends SpecialBlockStateGen {
         Shape shape = state.getValue(SHAPE);
         Axis axis = state.getValue(AXIS);
 
+        if (positive && negative)
+            shape = shape.nonSingleVariant();
+
         String shapeName = "middle";
         if (positive && negative)
             shapeName = "single";

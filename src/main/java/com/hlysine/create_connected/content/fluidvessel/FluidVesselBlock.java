@@ -330,7 +330,26 @@ public class FluidVesselBlock extends Block implements IWrenchable, IBE<FluidVes
     }
 
     public enum Shape implements StringRepresentable {
-        PLAIN, WINDOW, WINDOW_TOP, WINDOW_MIDDLE, WINDOW_BOTTOM;
+        PLAIN, WINDOW, WINDOW_TOP, WINDOW_MIDDLE, WINDOW_BOTTOM, WINDOW_SINGLE, WINDOW_TOP_SINGLE, WINDOW_MIDDLE_SINGLE, WINDOW_BOTTOM_SINGLE;
+
+        @Override
+        public String getSerializedName() {
+            return Lang.asId(name());
+        }
+
+        public Shape nonSingleVariant() {
+            return switch (this) {
+                case WINDOW_SINGLE -> WINDOW;
+                case WINDOW_TOP_SINGLE -> WINDOW_TOP;
+                case WINDOW_MIDDLE_SINGLE -> WINDOW_MIDDLE;
+                case WINDOW_BOTTOM_SINGLE -> WINDOW_BOTTOM;
+                default -> this;
+            };
+        }
+    }
+
+    public enum WindowType implements StringRepresentable {
+        SIDE_WIDE, SIDE_NARROW_ENDS, SIDE_NARROW_THIRDS;
 
         @Override
         public String getSerializedName() {

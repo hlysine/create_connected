@@ -5,6 +5,7 @@ import com.simibubi.create.content.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.content.fluids.tank.FluidTankBlockEntity;
 import com.simibubi.create.foundation.blockEntity.IMultiBlockEntityContainer;
 import com.simibubi.create.foundation.fluid.SmartFluidTank;
+import com.simibubi.create.foundation.utility.NBTHelper;
 import com.simibubi.create.foundation.utility.animation.LerpedFloat;
 import com.simibubi.create.foundation.utility.animation.LerpedFloat.Chaser;
 import com.simibubi.create.infrastructure.config.AllConfigs;
@@ -37,11 +38,14 @@ public class FluidVesselBlockEntity extends FluidTankBlockEntity implements IHav
 
     private static final int MAX_SIZE = 3;
 
+    protected WindowType windowType;
+
     // For rendering purposes only
     private LerpedFloat fluidLevel;
 
     public FluidVesselBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
+        windowType = WindowType.SIDE_WIDE;
         boiler = new BoilerData();
         refreshCapability();
     }
@@ -189,7 +193,18 @@ public class FluidVesselBlockEntity extends FluidTankBlockEntity implements IHav
             return;
         if (be.boiler.isActive())
             return;
-        be.setWindows(!be.window);
+        if (!be.window) {
+            be.setWindowType(WindowType.SIDE_WIDE);
+            be.setWindows(true);
+        } else {
+            WindowType[] types = WindowType.values();
+            if (be.windowType.ordinal() < types.length - 1) {
+                be.setWindowType(types[be.windowType.ordinal() + 1]);
+                be.setWindows(true);
+            } else {
+                be.setWindows(false);
+            }
+        }
     }
 
     @Override
@@ -200,6 +215,14 @@ public class FluidVesselBlockEntity extends FluidTankBlockEntity implements IHav
         if (!be.boiler.isActive())
             return;
         be.boiler.needsHeatLevelUpdate = true;
+    }
+
+    public WindowType getWindowType() {
+        return windowType;
+    }
+
+    public void setWindowType(WindowType windowType) {
+        this.windowType = windowType;
     }
 
     @Override
@@ -220,16 +243,31 @@ public class FluidVesselBlockEntity extends FluidTankBlockEntity implements IHav
                         continue;
 
                     Shape shape = Shape.PLAIN;
-                    if (window && (widthOffset == 0 || widthOffset == width - 1)) {
-                        if (width == 1)
-                            shape = Shape.WINDOW;
-                        else if (yOffset == 0)
-                            shape = Shape.WINDOW_TOP;
-                        else if (yOffset == width - 1)
-                            shape = Shape.WINDOW_BOTTOM;
-                        else
-                            shape = Shape.WINDOW_MIDDLE;
-                    }
+                    if (window)
+                        if (windowType == WindowType.SIDE_WIDE || height <= 1) {
+                            if ((widthOffset == 0 || widthOffset == width - 1)) {
+                                if (width == 1)
+                                    shape = Shape.WINDOW;
+                                else if (yOffset == 0)
+                                    shape = Shape.WINDOW_TOP;
+                                else if (yOffset == width - 1)
+                                    shape = Shape.WINDOW_BOTTOM;
+                                else
+                                    shape = Shape.WINDOW_MIDDLE;
+                            }
+                        } else if (windowType == WindowType.SIDE_NARROW_ENDS || windowType == WindowType.SIDE_NARROW_THIRDS) {
+                            int windowOffset = windowType == WindowType.SIDE_NARROW_ENDS ? 0 : Math.max(1, height / 3 - 1);
+                            if ((lengthOffset == windowOffset || lengthOffset == height - 1 - windowOffset) && (widthOffset == 0 || widthOffset == width - 1)) {
+                                if (width == 1)
+                                    shape = Shape.WINDOW_SINGLE;
+                                else if (yOffset == 0)
+                                    shape = Shape.WINDOW_TOP_SINGLE;
+                                else if (yOffset == width - 1)
+                                    shape = Shape.WINDOW_BOTTOM_SINGLE;
+                                else
+                                    shape = Shape.WINDOW_MIDDLE_SINGLE;
+                            }
+                        }
 
                     level.setBlock(pos, blockState.setValue(SHAPE, shape), 22);
                     level.getChunkSource()
@@ -353,6 +391,7 @@ public class FluidVesselBlockEntity extends FluidTankBlockEntity implements IHav
 
         if (isController()) {
             window = compound.getBoolean("Window");
+            windowType = NBTHelper.readEnum(compound, "WindowType", WindowType.class);
             width = compound.getInt("Size");
             height = compound.getInt("Height");
             tankInventory.setCapacity(getTotalTankSize() * getCapacityMultiplier());
@@ -406,6 +445,7 @@ public class FluidVesselBlockEntity extends FluidTankBlockEntity implements IHav
             compound.put("Controller", NbtUtils.writeBlockPos(controller));
         if (isController()) {
             compound.putBoolean("Window", window);
+            NBTHelper.writeEnum(compound, "WindowType", windowType);
             compound.put("TankContent", tankInventory.writeToNBT(new CompoundTag()));
             compound.putInt("Size", width);
             compound.putInt("Height", height);
@@ -477,6 +517,33 @@ public class FluidVesselBlockEntity extends FluidTankBlockEntity implements IHav
         onFluidStackChanged(tankInventory.getFluid());
         updateBoilerState();
         setChanged();
+    }
+
+    @Override
+    public void setExtraData(@Nullable Object data) {
+        if (data == null) {
+            window = false;
+            windowType = WindowType.SIDE_WIDE;
+        } else if (data instanceof WindowType type) {
+            window = true;
+            windowType = type;
+        }
+    }
+
+    @Override
+    @Nullable
+    public Object getExtraData() {
+        return window ? windowType : null;
+    }
+
+    @Override
+    public Object modifyExtraData(Object data) {
+        if (data == null || (data instanceof WindowType)) {
+            if (data != null && !window) return data;
+            if (window) return windowType;
+            return null;
+        }
+        return data;
     }
 
     @Override

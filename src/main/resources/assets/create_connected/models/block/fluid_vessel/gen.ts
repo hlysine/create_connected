@@ -46,7 +46,7 @@ const template = `{
 }`
 
 await Promise.all(files.map(async (file) => {
-    if (await Bun.file(file + ".json").exists()) return;
-    const isX = file.startsWith("block_x");
-    await Bun.write(file + ".json", isX ? template : template.replace(/_x_/g, "_z_"));
+    if (!file.includes("window")) return;
+    if (await Bun.file(file + "_single.json").exists()) return;
+    await Bun.write(file + "_single.json", template.replace(/block_x_single_window/g, file));
 }));
