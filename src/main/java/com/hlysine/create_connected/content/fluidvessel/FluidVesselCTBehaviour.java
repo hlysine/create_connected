@@ -35,6 +35,8 @@ public class FluidVesselCTBehaviour extends ConnectedTextureBehaviour.Base {
         boolean alongX = vesselAxis == Direction.Axis.X;
         if (face == Direction.UP && alongX)
             return super.getUpDirection(reader, pos, state, face).getClockWise();
+        if (face == Direction.UP && !alongX)
+            return super.getUpDirection(reader, pos, state, face).getOpposite();
         if (face == Direction.DOWN && alongX)
             return super.getUpDirection(reader, pos, state, face).getCounterClockWise();
         if (face.getAxis() == vesselAxis || face.getAxis().isVertical())
@@ -48,6 +50,8 @@ public class FluidVesselCTBehaviour extends ConnectedTextureBehaviour.Base {
         boolean alongX = vesselAxis == Direction.Axis.X;
         if (face == Direction.UP && alongX)
             return super.getRightDirection(reader, pos, state, face).getClockWise();
+        if (face == Direction.UP && !alongX)
+            return super.getRightDirection(reader, pos, state, face);
         if (face == Direction.DOWN && alongX)
             return super.getRightDirection(reader, pos, state, face).getCounterClockWise();
         if (face.getAxis() == vesselAxis || face.getAxis().isVertical())
