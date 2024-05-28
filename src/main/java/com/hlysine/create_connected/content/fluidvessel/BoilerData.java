@@ -49,15 +49,6 @@ public class BoilerData extends com.simibubi.create.content.fluids.tank.BoilerDa
     int ticksUntilNextSample;
     int currentIndex;
 
-    // heat score
-    public boolean needsHeatLevelUpdate;
-    public boolean passiveHeat;
-    public int activeHeat;
-
-    public float waterSupply;
-    public int attachedEngines;
-    public int attachedWhistles;
-
     // display
     private int maxHeatForSize = 0;
     private int maxHeatForWater = 0;
