@@ -305,8 +305,7 @@ public class FluidVesselBlock extends Block implements IWrenchable, IBE<FluidVes
         Axis axis = state.getValue(AXIS);
         if (axis == mirrorAxis) {
             return state.setValue(POSITIVE, state.getValue(NEGATIVE))
-                    .setValue(NEGATIVE, state.getValue(POSITIVE))
-                    .setValue(SHAPE, state.getValue(SHAPE).mirror());
+                    .setValue(NEGATIVE, state.getValue(POSITIVE));
         } else {
             return state;
         }
@@ -326,74 +325,17 @@ public class FluidVesselBlock extends Block implements IWrenchable, IBE<FluidVes
         } else if (axis == Axis.Z) {
             return state.setValue(AXIS, Axis.X)
                     .setValue(POSITIVE, state.getValue(NEGATIVE))
-                    .setValue(NEGATIVE, state.getValue(POSITIVE))
-                    .setValue(SHAPE, state.getValue(SHAPE).mirror());
+                    .setValue(NEGATIVE, state.getValue(POSITIVE));
         }
         return state;
     }
 
     public enum Shape implements StringRepresentable {
-        PLAIN, WINDOW, WINDOW_P, WINDOW_N, WINDOW_MP, WINDOW_MN, WINDOW_BP, WINDOW_BN, WINDOW_TP, WINDOW_TN, WINDOW_TOP, WINDOW_MIDDLE, WINDOW_BOTTOM;
+        PLAIN, WINDOW, WINDOW_TOP, WINDOW_MIDDLE, WINDOW_BOTTOM;
 
         @Override
         public String getSerializedName() {
             return Lang.asId(name());
-        }
-
-        public Shape mirror() {
-            return switch (this) {
-                case WINDOW_P -> WINDOW_N;
-                case WINDOW_N -> WINDOW_P;
-                case WINDOW_MP -> WINDOW_MN;
-                case WINDOW_MN -> WINDOW_MP;
-                case WINDOW_BP -> WINDOW_BN;
-                case WINDOW_BN -> WINDOW_BP;
-                case WINDOW_TP -> WINDOW_TN;
-                case WINDOW_TN -> WINDOW_TP;
-                default -> this;
-            };
-        }
-
-        public static Shape getForCentered(int yOffset, int height) {
-            if (height == 1) return WINDOW;
-            if (yOffset == 0) return WINDOW_TOP;
-            if (yOffset == height - 1) return WINDOW_BOTTOM;
-            return WINDOW_MIDDLE;
-        }
-
-        public static Shape getForNegativeHalf(int yOffset, int height) {
-            if (height == 1) return WINDOW_N;
-            if (yOffset == 0) return WINDOW_TN;
-            if (yOffset == height - 1) return WINDOW_BN;
-            return WINDOW_MN;
-        }
-
-        public static Shape getForPositiveHalf(int yOffset, int height) {
-            if (height == 1) return WINDOW_P;
-            if (yOffset == 0) return WINDOW_TP;
-            if (yOffset == height - 1) return WINDOW_BP;
-            return WINDOW_MP;
-        }
-
-        public Shape fixShapeForCaps(boolean positive, boolean negative) {
-            if (positive && negative) {
-                if (this == PLAIN || this == WINDOW || this == WINDOW_TOP || this == WINDOW_MIDDLE || this == WINDOW_BOTTOM)
-                    return this;
-                else
-                    return WINDOW;
-            } else if (positive) {
-                if (this == PLAIN || this == WINDOW_TN || this == WINDOW_MN || this == WINDOW_BN || this == WINDOW_N)
-                    return this;
-                else
-                    return PLAIN;
-            } else if (negative) {
-                if (this == PLAIN || this == WINDOW_TP || this == WINDOW_MP || this == WINDOW_BP || this == WINDOW_P)
-                    return this;
-                else
-                    return PLAIN;
-            } else {
-                return this;
-            }
         }
     }
 

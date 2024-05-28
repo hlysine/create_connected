@@ -453,6 +453,8 @@ public class CCBlocks {
                             .texture("1", Create.asResource("block/creative_fluid_tank"))
                             .texture("particle", Create.asResource("block/creative_fluid_tank"))
                             .texture("4", Create.asResource("block/creative_casing"))
+                            .texture("6", p.modLoc("block/fluid_container_window"))
+                            .texture("7", p.modLoc("block/creative_fluid_container_window_single"))
                             .texture("0", Create.asResource("block/creative_casing")))
                     .build()
                     .register();

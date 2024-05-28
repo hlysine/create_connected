@@ -38,7 +38,7 @@ public class FluidVesselGenerator extends SpecialBlockStateGen {
     public <T extends Block> ModelFile getModel(DataGenContext<Block, T> ctx, RegistrateBlockstateProvider prov, BlockState state) {
         Boolean positive = state.getValue(POSITIVE);
         Boolean negative = state.getValue(NEGATIVE);
-        Shape shape = state.getValue(SHAPE).fixShapeForCaps(positive, negative);
+        Shape shape = state.getValue(SHAPE);
         Axis axis = state.getValue(AXIS);
 
         String shapeName = "middle";
@@ -61,6 +61,8 @@ public class FluidVesselGenerator extends SpecialBlockStateGen {
                     .texture("3", Create.asResource("block/" + prefix + "fluid_tank_window"))
                     .texture("4", Create.asResource("block/" + prefix + "casing"))
                     .texture("5", Create.asResource("block/" + prefix + "fluid_tank_window_single"))
+                    .texture("6", prov.modLoc("block/" + prefix + "fluid_container_window"))
+                    .texture("7", prov.modLoc("block/" + prefix + "fluid_container_window_single"))
                     .texture("particle", Create.asResource("block/" + prefix + "fluid_tank"));
 
         return AssetLookup.partialBaseModel(ctx, prov, modelName);

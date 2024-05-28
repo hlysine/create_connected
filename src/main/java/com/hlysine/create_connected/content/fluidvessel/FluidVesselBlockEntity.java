@@ -291,13 +291,14 @@ public class FluidVesselBlockEntity extends SmartBlockEntity implements IHaveGog
 
                     Shape shape = Shape.PLAIN;
                     if (window && (widthOffset == 0 || widthOffset == width - 1)) {
-                        if (length % 2 == 0 && lengthOffset == length / 2 - 1) {
-                            shape = Shape.getForPositiveHalf(yOffset, width);
-                        } else if (length % 2 == 0 && lengthOffset == length / 2) {
-                            shape = Shape.getForNegativeHalf(yOffset, width);
-                        } else if (length % 2 == 1 && lengthOffset == length / 2) {
-                            shape = Shape.getForCentered(yOffset, width);
-                        }
+                        if (width == 1)
+                            shape = Shape.WINDOW;
+                        else if (yOffset == 0)
+                            shape = Shape.WINDOW_TOP;
+                        else if (yOffset == width - 1)
+                            shape = Shape.WINDOW_BOTTOM;
+                        else
+                            shape = Shape.WINDOW_MIDDLE;
                     }
 
                     level.setBlock(pos, blockState.setValue(SHAPE, shape), 22);

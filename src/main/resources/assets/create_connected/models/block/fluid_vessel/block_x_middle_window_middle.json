@@ -1,3 +1,17 @@
 {
-    "parent": "create_connected:block/fluid_vessel/block_x_single_window"
+	"credit": "Made with Blockbench",
+	"parent": "block/block",
+	"textures": {
+		"1": "create:block/fluid_tank",
+		"3": "create:block/fluid_tank_window",
+		"particle": "create:block/fluid_tank"
+	},
+	"groups": [
+		{
+			"name": "tank",
+			"origin": [8, 8, -23],
+			"color": 0,
+			"children": []
+		}
+	]
 }
