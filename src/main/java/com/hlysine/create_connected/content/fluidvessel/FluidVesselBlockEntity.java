@@ -290,28 +290,13 @@ public class FluidVesselBlockEntity extends SmartBlockEntity implements IHaveGog
                         continue;
 
                     Shape shape = Shape.PLAIN;
-                    if (window) {
-                        // SIZE 1: Every vessel has a window
-                        if (width == 1) {
-                            shape = Shape.WINDOW;
-                        }
-                        // SIZE 2: Every vessel has a corner window
-                        else if (width == 2) {
-                            shape = yOffset == 0
-                                    ? widthOffset == 0
-                                    ? Shape.WINDOW_TP
-                                    : Shape.WINDOW_TN
-                                    : widthOffset == 0
-                                    ? Shape.WINDOW_BP
-                                    : Shape.WINDOW_BN;
-                        }
-                        // SIZE 3: Vessels in the center have a window
-                        else if (width == 3 && (lengthOffset == 0 || lengthOffset == length - 1) && widthOffset == 1) {
-                            shape = yOffset == 0
-                                    ? Shape.WINDOW_TOP
-                                    : yOffset == 1
-                                    ? Shape.WINDOW_MIDDLE
-                                    : Shape.WINDOW_BOTTOM;
+                    if (window && (widthOffset == 0 || widthOffset == width - 1)) {
+                        if (length % 2 == 0 && lengthOffset == length / 2 - 1) {
+                            shape = Shape.getForPositiveHalf(yOffset, width);
+                        } else if (length % 2 == 0 && lengthOffset == length / 2) {
+                            shape = Shape.getForNegativeHalf(yOffset, width);
+                        } else if (length % 2 == 1 && lengthOffset == length / 2) {
+                            shape = Shape.getForCentered(yOffset, width);
                         }
                     }
 

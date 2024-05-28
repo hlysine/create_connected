@@ -38,20 +38,20 @@ public class FluidVesselGenerator extends SpecialBlockStateGen {
     public <T extends Block> ModelFile getModel(DataGenContext<Block, T> ctx, RegistrateBlockstateProvider prov, BlockState state) {
         Boolean positive = state.getValue(POSITIVE);
         Boolean negative = state.getValue(NEGATIVE);
-        Shape shape = state.getValue(SHAPE);
+        Shape shape = state.getValue(SHAPE).fixShapeForCaps(positive, negative);
         Axis axis = state.getValue(AXIS);
 
-        String caps = "middle";
+        String shapeName = "middle";
         if (positive && negative)
-            caps = "single";
+            shapeName = "single";
         else if (positive)
-            caps = "positive";
+            shapeName = "positive";
         else if (negative)
-            caps = "negative";
+            shapeName = "negative";
 
         String modelName = (axis == Axis.X ? "x" : "z") +
-                "_" + caps +
-                (!positive && !negative || shape == Shape.PLAIN ? "" : "_" + shape.getSerializedName());
+                "_" + shapeName +
+                (shape == Shape.PLAIN ? "" : "_" + shape.getSerializedName());
 
         if (!prefix.isEmpty())
             return prov.models()
