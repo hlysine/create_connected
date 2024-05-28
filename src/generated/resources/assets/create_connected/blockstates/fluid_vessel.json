@@ -4,79 +4,115 @@
       "model": "create_connected:block/fluid_vessel/block_x_middle"
     },
     "axis=x,negative=false,positive=false,shape=window": {
-      "model": "create_connected:block/fluid_vessel/block_x_middle"
+      "model": "create_connected:block/fluid_vessel/block_x_middle_window"
     },
     "axis=x,negative=false,positive=false,shape=window_bn": {
-      "model": "create_connected:block/fluid_vessel/block_x_middle"
+      "model": "create_connected:block/fluid_vessel/block_x_middle_window_bn"
     },
     "axis=x,negative=false,positive=false,shape=window_bottom": {
-      "model": "create_connected:block/fluid_vessel/block_x_middle"
+      "model": "create_connected:block/fluid_vessel/block_x_middle_window_bottom"
     },
     "axis=x,negative=false,positive=false,shape=window_bp": {
-      "model": "create_connected:block/fluid_vessel/block_x_middle"
+      "model": "create_connected:block/fluid_vessel/block_x_middle_window_bp"
     },
     "axis=x,negative=false,positive=false,shape=window_middle": {
-      "model": "create_connected:block/fluid_vessel/block_x_middle"
+      "model": "create_connected:block/fluid_vessel/block_x_middle_window_middle"
+    },
+    "axis=x,negative=false,positive=false,shape=window_mn": {
+      "model": "create_connected:block/fluid_vessel/block_x_middle_window_mn"
+    },
+    "axis=x,negative=false,positive=false,shape=window_mp": {
+      "model": "create_connected:block/fluid_vessel/block_x_middle_window_mp"
+    },
+    "axis=x,negative=false,positive=false,shape=window_n": {
+      "model": "create_connected:block/fluid_vessel/block_x_middle_window_n"
+    },
+    "axis=x,negative=false,positive=false,shape=window_p": {
+      "model": "create_connected:block/fluid_vessel/block_x_middle_window_p"
     },
     "axis=x,negative=false,positive=false,shape=window_tn": {
-      "model": "create_connected:block/fluid_vessel/block_x_middle"
+      "model": "create_connected:block/fluid_vessel/block_x_middle_window_tn"
     },
     "axis=x,negative=false,positive=false,shape=window_top": {
-      "model": "create_connected:block/fluid_vessel/block_x_middle"
+      "model": "create_connected:block/fluid_vessel/block_x_middle_window_top"
     },
     "axis=x,negative=false,positive=false,shape=window_tp": {
-      "model": "create_connected:block/fluid_vessel/block_x_middle"
+      "model": "create_connected:block/fluid_vessel/block_x_middle_window_tp"
     },
     "axis=x,negative=false,positive=true,shape=plain": {
       "model": "create_connected:block/fluid_vessel/block_x_positive"
     },
     "axis=x,negative=false,positive=true,shape=window": {
-      "model": "create_connected:block/fluid_vessel/block_x_positive_window"
+      "model": "create_connected:block/fluid_vessel/block_x_positive"
     },
     "axis=x,negative=false,positive=true,shape=window_bn": {
       "model": "create_connected:block/fluid_vessel/block_x_positive_window_bn"
     },
     "axis=x,negative=false,positive=true,shape=window_bottom": {
-      "model": "create_connected:block/fluid_vessel/block_x_positive_window_bottom"
+      "model": "create_connected:block/fluid_vessel/block_x_positive"
     },
     "axis=x,negative=false,positive=true,shape=window_bp": {
-      "model": "create_connected:block/fluid_vessel/block_x_positive_window_bp"
+      "model": "create_connected:block/fluid_vessel/block_x_positive"
     },
     "axis=x,negative=false,positive=true,shape=window_middle": {
-      "model": "create_connected:block/fluid_vessel/block_x_positive_window_middle"
+      "model": "create_connected:block/fluid_vessel/block_x_positive"
+    },
+    "axis=x,negative=false,positive=true,shape=window_mn": {
+      "model": "create_connected:block/fluid_vessel/block_x_positive_window_mn"
+    },
+    "axis=x,negative=false,positive=true,shape=window_mp": {
+      "model": "create_connected:block/fluid_vessel/block_x_positive"
+    },
+    "axis=x,negative=false,positive=true,shape=window_n": {
+      "model": "create_connected:block/fluid_vessel/block_x_positive_window_n"
+    },
+    "axis=x,negative=false,positive=true,shape=window_p": {
+      "model": "create_connected:block/fluid_vessel/block_x_positive"
     },
     "axis=x,negative=false,positive=true,shape=window_tn": {
       "model": "create_connected:block/fluid_vessel/block_x_positive_window_tn"
     },
     "axis=x,negative=false,positive=true,shape=window_top": {
-      "model": "create_connected:block/fluid_vessel/block_x_positive_window_top"
+      "model": "create_connected:block/fluid_vessel/block_x_positive"
     },
     "axis=x,negative=false,positive=true,shape=window_tp": {
-      "model": "create_connected:block/fluid_vessel/block_x_positive_window_tp"
+      "model": "create_connected:block/fluid_vessel/block_x_positive"
     },
     "axis=x,negative=true,positive=false,shape=plain": {
       "model": "create_connected:block/fluid_vessel/block_x_negative"
     },
     "axis=x,negative=true,positive=false,shape=window": {
-      "model": "create_connected:block/fluid_vessel/block_x_negative_window"
+      "model": "create_connected:block/fluid_vessel/block_x_negative"
     },
     "axis=x,negative=true,positive=false,shape=window_bn": {
-      "model": "create_connected:block/fluid_vessel/block_x_negative_window_bn"
+      "model": "create_connected:block/fluid_vessel/block_x_negative"
     },
     "axis=x,negative=true,positive=false,shape=window_bottom": {
-      "model": "create_connected:block/fluid_vessel/block_x_negative_window_bottom"
+      "model": "create_connected:block/fluid_vessel/block_x_negative"
     },
     "axis=x,negative=true,positive=false,shape=window_bp": {
       "model": "create_connected:block/fluid_vessel/block_x_negative_window_bp"
     },
     "axis=x,negative=true,positive=false,shape=window_middle": {
-      "model": "create_connected:block/fluid_vessel/block_x_negative_window_middle"
+      "model": "create_connected:block/fluid_vessel/block_x_negative"
+    },
+    "axis=x,negative=true,positive=false,shape=window_mn": {
+      "model": "create_connected:block/fluid_vessel/block_x_negative"
+    },
+    "axis=x,negative=true,positive=false,shape=window_mp": {
+      "model": "create_connected:block/fluid_vessel/block_x_negative_window_mp"
+    },
+    "axis=x,negative=true,positive=false,shape=window_n": {
+      "model": "create_connected:block/fluid_vessel/block_x_negative"
+    },
+    "axis=x,negative=true,positive=false,shape=window_p": {
+      "model": "create_connected:block/fluid_vessel/block_x_negative_window_p"
     },
     "axis=x,negative=true,positive=false,shape=window_tn": {
-      "model": "create_connected:block/fluid_vessel/block_x_negative_window_tn"
+      "model": "create_connected:block/fluid_vessel/block_x_negative"
     },
     "axis=x,negative=true,positive=false,shape=window_top": {
-      "model": "create_connected:block/fluid_vessel/block_x_negative_window_top"
+      "model": "create_connected:block/fluid_vessel/block_x_negative"
     },
     "axis=x,negative=true,positive=false,shape=window_tp": {
       "model": "create_connected:block/fluid_vessel/block_x_negative_window_tp"
@@ -88,103 +124,151 @@
       "model": "create_connected:block/fluid_vessel/block_x_single_window"
     },
     "axis=x,negative=true,positive=true,shape=window_bn": {
-      "model": "create_connected:block/fluid_vessel/block_x_single_window_bn"
+      "model": "create_connected:block/fluid_vessel/block_x_single_window"
     },
     "axis=x,negative=true,positive=true,shape=window_bottom": {
       "model": "create_connected:block/fluid_vessel/block_x_single_window_bottom"
     },
     "axis=x,negative=true,positive=true,shape=window_bp": {
-      "model": "create_connected:block/fluid_vessel/block_x_single_window_bp"
+      "model": "create_connected:block/fluid_vessel/block_x_single_window"
     },
     "axis=x,negative=true,positive=true,shape=window_middle": {
       "model": "create_connected:block/fluid_vessel/block_x_single_window_middle"
     },
+    "axis=x,negative=true,positive=true,shape=window_mn": {
+      "model": "create_connected:block/fluid_vessel/block_x_single_window"
+    },
+    "axis=x,negative=true,positive=true,shape=window_mp": {
+      "model": "create_connected:block/fluid_vessel/block_x_single_window"
+    },
+    "axis=x,negative=true,positive=true,shape=window_n": {
+      "model": "create_connected:block/fluid_vessel/block_x_single_window"
+    },
+    "axis=x,negative=true,positive=true,shape=window_p": {
+      "model": "create_connected:block/fluid_vessel/block_x_single_window"
+    },
     "axis=x,negative=true,positive=true,shape=window_tn": {
-      "model": "create_connected:block/fluid_vessel/block_x_single_window_tn"
+      "model": "create_connected:block/fluid_vessel/block_x_single_window"
     },
     "axis=x,negative=true,positive=true,shape=window_top": {
       "model": "create_connected:block/fluid_vessel/block_x_single_window_top"
     },
     "axis=x,negative=true,positive=true,shape=window_tp": {
-      "model": "create_connected:block/fluid_vessel/block_x_single_window_tp"
+      "model": "create_connected:block/fluid_vessel/block_x_single_window"
     },
     "axis=z,negative=false,positive=false,shape=plain": {
       "model": "create_connected:block/fluid_vessel/block_z_middle"
     },
     "axis=z,negative=false,positive=false,shape=window": {
-      "model": "create_connected:block/fluid_vessel/block_z_middle"
+      "model": "create_connected:block/fluid_vessel/block_z_middle_window"
     },
     "axis=z,negative=false,positive=false,shape=window_bn": {
-      "model": "create_connected:block/fluid_vessel/block_z_middle"
+      "model": "create_connected:block/fluid_vessel/block_z_middle_window_bn"
     },
     "axis=z,negative=false,positive=false,shape=window_bottom": {
-      "model": "create_connected:block/fluid_vessel/block_z_middle"
+      "model": "create_connected:block/fluid_vessel/block_z_middle_window_bottom"
     },
     "axis=z,negative=false,positive=false,shape=window_bp": {
-      "model": "create_connected:block/fluid_vessel/block_z_middle"
+      "model": "create_connected:block/fluid_vessel/block_z_middle_window_bp"
     },
     "axis=z,negative=false,positive=false,shape=window_middle": {
-      "model": "create_connected:block/fluid_vessel/block_z_middle"
+      "model": "create_connected:block/fluid_vessel/block_z_middle_window_middle"
+    },
+    "axis=z,negative=false,positive=false,shape=window_mn": {
+      "model": "create_connected:block/fluid_vessel/block_z_middle_window_mn"
+    },
+    "axis=z,negative=false,positive=false,shape=window_mp": {
+      "model": "create_connected:block/fluid_vessel/block_z_middle_window_mp"
+    },
+    "axis=z,negative=false,positive=false,shape=window_n": {
+      "model": "create_connected:block/fluid_vessel/block_z_middle_window_n"
+    },
+    "axis=z,negative=false,positive=false,shape=window_p": {
+      "model": "create_connected:block/fluid_vessel/block_z_middle_window_p"
     },
     "axis=z,negative=false,positive=false,shape=window_tn": {
-      "model": "create_connected:block/fluid_vessel/block_z_middle"
+      "model": "create_connected:block/fluid_vessel/block_z_middle_window_tn"
     },
     "axis=z,negative=false,positive=false,shape=window_top": {
-      "model": "create_connected:block/fluid_vessel/block_z_middle"
+      "model": "create_connected:block/fluid_vessel/block_z_middle_window_top"
     },
     "axis=z,negative=false,positive=false,shape=window_tp": {
-      "model": "create_connected:block/fluid_vessel/block_z_middle"
+      "model": "create_connected:block/fluid_vessel/block_z_middle_window_tp"
     },
     "axis=z,negative=false,positive=true,shape=plain": {
       "model": "create_connected:block/fluid_vessel/block_z_positive"
     },
     "axis=z,negative=false,positive=true,shape=window": {
-      "model": "create_connected:block/fluid_vessel/block_z_positive_window"
+      "model": "create_connected:block/fluid_vessel/block_z_positive"
     },
     "axis=z,negative=false,positive=true,shape=window_bn": {
       "model": "create_connected:block/fluid_vessel/block_z_positive_window_bn"
     },
     "axis=z,negative=false,positive=true,shape=window_bottom": {
-      "model": "create_connected:block/fluid_vessel/block_z_positive_window_bottom"
+      "model": "create_connected:block/fluid_vessel/block_z_positive"
     },
     "axis=z,negative=false,positive=true,shape=window_bp": {
-      "model": "create_connected:block/fluid_vessel/block_z_positive_window_bp"
+      "model": "create_connected:block/fluid_vessel/block_z_positive"
     },
     "axis=z,negative=false,positive=true,shape=window_middle": {
-      "model": "create_connected:block/fluid_vessel/block_z_positive_window_middle"
+      "model": "create_connected:block/fluid_vessel/block_z_positive"
+    },
+    "axis=z,negative=false,positive=true,shape=window_mn": {
+      "model": "create_connected:block/fluid_vessel/block_z_positive_window_mn"
+    },
+    "axis=z,negative=false,positive=true,shape=window_mp": {
+      "model": "create_connected:block/fluid_vessel/block_z_positive"
+    },
+    "axis=z,negative=false,positive=true,shape=window_n": {
+      "model": "create_connected:block/fluid_vessel/block_z_positive_window_n"
+    },
+    "axis=z,negative=false,positive=true,shape=window_p": {
+      "model": "create_connected:block/fluid_vessel/block_z_positive"
     },
     "axis=z,negative=false,positive=true,shape=window_tn": {
       "model": "create_connected:block/fluid_vessel/block_z_positive_window_tn"
     },
     "axis=z,negative=false,positive=true,shape=window_top": {
-      "model": "create_connected:block/fluid_vessel/block_z_positive_window_top"
+      "model": "create_connected:block/fluid_vessel/block_z_positive"
     },
     "axis=z,negative=false,positive=true,shape=window_tp": {
-      "model": "create_connected:block/fluid_vessel/block_z_positive_window_tp"
+      "model": "create_connected:block/fluid_vessel/block_z_positive"
     },
     "axis=z,negative=true,positive=false,shape=plain": {
       "model": "create_connected:block/fluid_vessel/block_z_negative"
     },
     "axis=z,negative=true,positive=false,shape=window": {
-      "model": "create_connected:block/fluid_vessel/block_z_negative_window"
+      "model": "create_connected:block/fluid_vessel/block_z_negative"
     },
     "axis=z,negative=true,positive=false,shape=window_bn": {
-      "model": "create_connected:block/fluid_vessel/block_z_negative_window_bn"
+      "model": "create_connected:block/fluid_vessel/block_z_negative"
     },
     "axis=z,negative=true,positive=false,shape=window_bottom": {
-      "model": "create_connected:block/fluid_vessel/block_z_negative_window_bottom"
+      "model": "create_connected:block/fluid_vessel/block_z_negative"
     },
     "axis=z,negative=true,positive=false,shape=window_bp": {
       "model": "create_connected:block/fluid_vessel/block_z_negative_window_bp"
     },
     "axis=z,negative=true,positive=false,shape=window_middle": {
-      "model": "create_connected:block/fluid_vessel/block_z_negative_window_middle"
+      "model": "create_connected:block/fluid_vessel/block_z_negative"
+    },
+    "axis=z,negative=true,positive=false,shape=window_mn": {
+      "model": "create_connected:block/fluid_vessel/block_z_negative"
+    },
+    "axis=z,negative=true,positive=false,shape=window_mp": {
+      "model": "create_connected:block/fluid_vessel/block_z_negative_window_mp"
+    },
+    "axis=z,negative=true,positive=false,shape=window_n": {
+      "model": "create_connected:block/fluid_vessel/block_z_negative"
+    },
+    "axis=z,negative=true,positive=false,shape=window_p": {
+      "model": "create_connected:block/fluid_vessel/block_z_negative_window_p"
     },
     "axis=z,negative=true,positive=false,shape=window_tn": {
-      "model": "create_connected:block/fluid_vessel/block_z_negative_window_tn"
+      "model": "create_connected:block/fluid_vessel/block_z_negative"
     },
     "axis=z,negative=true,positive=false,shape=window_top": {
-      "model": "create_connected:block/fluid_vessel/block_z_negative_window_top"
+      "model": "create_connected:block/fluid_vessel/block_z_negative"
     },
     "axis=z,negative=true,positive=false,shape=window_tp": {
       "model": "create_connected:block/fluid_vessel/block_z_negative_window_tp"
@@ -196,25 +280,37 @@
       "model": "create_connected:block/fluid_vessel/block_z_single_window"
     },
     "axis=z,negative=true,positive=true,shape=window_bn": {
-      "model": "create_connected:block/fluid_vessel/block_z_single_window_bn"
+      "model": "create_connected:block/fluid_vessel/block_z_single_window"
     },
     "axis=z,negative=true,positive=true,shape=window_bottom": {
       "model": "create_connected:block/fluid_vessel/block_z_single_window_bottom"
     },
     "axis=z,negative=true,positive=true,shape=window_bp": {
-      "model": "create_connected:block/fluid_vessel/block_z_single_window_bp"
+      "model": "create_connected:block/fluid_vessel/block_z_single_window"
     },
     "axis=z,negative=true,positive=true,shape=window_middle": {
       "model": "create_connected:block/fluid_vessel/block_z_single_window_middle"
     },
+    "axis=z,negative=true,positive=true,shape=window_mn": {
+      "model": "create_connected:block/fluid_vessel/block_z_single_window"
+    },
+    "axis=z,negative=true,positive=true,shape=window_mp": {
+      "model": "create_connected:block/fluid_vessel/block_z_single_window"
+    },
+    "axis=z,negative=true,positive=true,shape=window_n": {
+      "model": "create_connected:block/fluid_vessel/block_z_single_window"
+    },
+    "axis=z,negative=true,positive=true,shape=window_p": {
+      "model": "create_connected:block/fluid_vessel/block_z_single_window"
+    },
     "axis=z,negative=true,positive=true,shape=window_tn": {
-      "model": "create_connected:block/fluid_vessel/block_z_single_window_tn"
+      "model": "create_connected:block/fluid_vessel/block_z_single_window"
     },
     "axis=z,negative=true,positive=true,shape=window_top": {
       "model": "create_connected:block/fluid_vessel/block_z_single_window_top"
     },
     "axis=z,negative=true,positive=true,shape=window_tp": {
-      "model": "create_connected:block/fluid_vessel/block_z_single_window_tp"
+      "model": "create_connected:block/fluid_vessel/block_z_single_window"
     }
   }
 }
