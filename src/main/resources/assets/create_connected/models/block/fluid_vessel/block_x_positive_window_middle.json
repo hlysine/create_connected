@@ -4,8 +4,8 @@
 	"textures": {
 		"0": "create:block/fluid_tank_top",
 		"1": "create:block/fluid_tank",
-		"3": "create:block/fluid_tank_window",
 		"4": "create:block/fluid_tank_inner",
+		"6": "create_connected:block/fluid_container_window",
 		"particle": "create:block/fluid_tank"
 	},
 	"elements": [
@@ -25,22 +25,22 @@
 		},
 		{
 			"name": "Window",
-			"from": [8, 0, 0.95],
+			"from": [0, 0, 0.95],
 			"to": [12, 16, 0.95],
 			"rotation": {"angle": 0, "axis": "z", "origin": [8, 8, 8]},
 			"faces": {
-				"north": {"uv": [16, 0, 12, 16], "texture": "#3", "cullface": "north"},
-				"south": {"uv": [12, 0, 16, 16], "texture": "#3", "cullface": "north"}
+				"north": {"uv": [0, 4, 4.8, 12], "texture": "#6", "cullface": "north"},
+				"south": {"uv": [11.2, 4, 16, 12], "texture": "#6", "cullface": "north"}
 			}
 		},
 		{
 			"name": "Window",
-			"from": [8, 0, 15.05],
+			"from": [0, 0, 15.05],
 			"to": [12, 16, 15.05],
 			"rotation": {"angle": 0, "axis": "z", "origin": [8, 8, 8]},
 			"faces": {
-				"north": {"uv": [16, 0, 12, 16], "texture": "#3", "cullface": "south"},
-				"south": {"uv": [12, 0, 16, 16], "texture": "#3", "cullface": "south"}
+				"north": {"uv": [0, 4, 4.8, 12], "texture": "#6", "cullface": "south"},
+				"south": {"uv": [11.2, 4, 16, 12], "texture": "#6", "cullface": "south"}
 			}
 		}
 	],
