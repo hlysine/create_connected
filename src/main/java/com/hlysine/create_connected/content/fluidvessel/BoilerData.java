@@ -1,5 +1,6 @@
 package com.hlysine.create_connected.content.fluidvessel;
 
+import com.hlysine.create_connected.config.CServer;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.Create;
 import com.simibubi.create.content.decoration.steamWhistle.WhistleBlock;
@@ -127,11 +128,11 @@ public class BoilerData extends com.simibubi.create.content.fluids.tank.BoilerDa
     @Override
     public float getEngineEfficiency(int boilerSize) {
         if (isPassive(boilerSize))
-            return passiveEngineEfficiency / attachedEngines;
+            return passiveEngineEfficiency / attachedEngines * CServer.VesselBoilerStressMultiplier.get().floatValue();
         if (activeHeat == 0)
             return 0;
         int actualHeat = getActualHeat(boilerSize);
-        return attachedEngines <= actualHeat ? 1 : (float) actualHeat / attachedEngines;
+        return (attachedEngines <= actualHeat ? 1 : (float) actualHeat / attachedEngines) * CServer.VesselBoilerStressMultiplier.get().floatValue();
     }
 
     private int getActualHeat(int boilerSize) {
@@ -395,6 +396,7 @@ public class BoilerData extends com.simibubi.create.content.fluids.tank.BoilerDa
             }
         }
 
+        activeHeat = (int) Math.floor(activeHeat * CServer.VesselHeatMultiplier.get().floatValue());
         passiveHeat &= activeHeat == 0;
 
         return prevActive != activeHeat || prevPassive != passiveHeat;
