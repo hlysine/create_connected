@@ -29,7 +29,7 @@ public class FluidVesselRenderer extends SafeBlockEntityRenderer<FluidVesselBloc
                               int light, int overlay) {
         if (!be.isController())
             return;
-        if (!be.window) {
+        if (!be.hasWindow()) {
             if (be.boiler.isActive())
                 renderAsBoiler(be, partialTicks, ms, buffer, light, overlay);
             return;
@@ -42,14 +42,14 @@ public class FluidVesselRenderer extends SafeBlockEntityRenderer<FluidVesselBloc
         float capSize = 1 / 4f;
         float tankHullSize = 1 / 16f + 1 / 128f;
         float minPuddleHeight = 1 / 16f;
-        float totalHeight = be.width - 2 * tankHullSize - minPuddleHeight;
+        float totalHeight = be.getWidth() - 2 * tankHullSize - minPuddleHeight;
 
         float level = fluidLevel.getValue(partialTicks);
         if (level < 1 / (512f * totalHeight))
             return;
         float clampedLevel = Mth.clamp(level * totalHeight, 0, totalHeight);
 
-        FluidTank tank = be.vesselInventory;
+        FluidTank tank = (FluidTank) be.getTankInventory();
         FluidStack fluidStack = tank.getFluid();
 
         if (fluidStack.isEmpty())
@@ -61,7 +61,7 @@ public class FluidVesselRenderer extends SafeBlockEntityRenderer<FluidVesselBloc
 
         Axis axis = be.getAxis();
         float xMin = axis == Axis.X ? capSize : tankHullSize;
-        float xMax = axis == Axis.X ? xMin + be.length - 2 * capSize : xMin + be.width - 2 * tankHullSize;
+        float xMax = axis == Axis.X ? xMin + be.getHeight() - 2 * capSize : xMin + be.getWidth() - 2 * tankHullSize;
         float yMin = totalHeight + tankHullSize + minPuddleHeight - clampedLevel;
         float yMax = yMin + clampedLevel;
 
@@ -71,7 +71,7 @@ public class FluidVesselRenderer extends SafeBlockEntityRenderer<FluidVesselBloc
         }
 
         float zMin = axis == Axis.Z ? capSize : tankHullSize;
-        float zMax = axis == Axis.Z ? zMin + be.length - 2 * capSize : zMin + be.width - 2 * tankHullSize;
+        float zMax = axis == Axis.Z ? zMin + be.getHeight() - 2 * capSize : zMin + be.getWidth() - 2 * tankHullSize;
 
         ms.pushPose();
         ms.translate(0, clampedLevel - totalHeight, 0);
@@ -86,25 +86,25 @@ public class FluidVesselRenderer extends SafeBlockEntityRenderer<FluidVesselBloc
         ms.pushPose();
         TransformStack msr = TransformStack.cast(ms);
         Axis axis = be.getAxis();
-        msr.translate(axis == Axis.X ? be.length / 2f : be.width / 2f, 0.5, axis == Axis.Z ? be.length / 2f : be.width / 2f);
+        msr.translate(axis == Axis.X ? be.getHeight() / 2f : be.getWidth() / 2f, 0.5, axis == Axis.Z ? be.getHeight() / 2f : be.getWidth() / 2f);
 
         float dialPivot = 5.75f / 16;
         float progress = be.boiler.gauge.getValue(partialTicks);
 
         for (Direction d : Iterate.horizontalDirections) {
-            if (d.getAxis() == axis)
+            if (d.getAxis() != axis)
                 continue;
             ms.pushPose();
             CachedBufferer.partial(AllPartialModels.BOILER_GAUGE, blockState)
                     .rotateY(d.toYRot())
                     .unCentre()
-                    .translate(be.width / 2f - 6 / 16f, 0, 0)
+                    .translate(be.getWidth() / 2f - 6 / 16f, 0, 0)
                     .light(light)
                     .renderInto(ms, vb);
             CachedBufferer.partial(AllPartialModels.BOILER_GAUGE_DIAL, blockState)
                     .rotateY(d.toYRot())
                     .unCentre()
-                    .translate(be.width / 2f - 6 / 16f, 0, 0)
+                    .translate(be.getWidth() / 2f - 6 / 16f, 0, 0)
                     .translate(0, dialPivot, dialPivot)
                     .rotateX(-90 * progress)
                     .translate(0, -dialPivot, -dialPivot)

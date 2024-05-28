@@ -5,11 +5,12 @@ import com.simibubi.create.Create;
 import com.simibubi.create.content.decoration.steamWhistle.WhistleBlock;
 import com.simibubi.create.content.decoration.steamWhistle.WhistleBlockEntity;
 import com.simibubi.create.content.equipment.goggles.IHaveGoggleInformation;
+import com.simibubi.create.content.fluids.tank.BoilerHeaters;
+import com.simibubi.create.content.fluids.tank.FluidTankBlockEntity;
 import com.simibubi.create.content.kinetics.BlockStressValues;
 import com.simibubi.create.content.kinetics.steamEngine.SteamEngineBlock;
 import com.simibubi.create.foundation.advancement.AdvancementBehaviour;
 import com.simibubi.create.foundation.advancement.AllAdvancements;
-import com.simibubi.create.foundation.fluid.FluidHelper;
 import com.simibubi.create.foundation.utility.Components;
 import com.simibubi.create.foundation.utility.Iterate;
 import com.simibubi.create.foundation.utility.Lang;
@@ -26,7 +27,6 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.capability.IFluidHandler;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
@@ -34,9 +34,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static net.minecraft.core.Direction.*;
+import static net.minecraft.core.Direction.Axis;
 
-public class BoilerData {
+public class BoilerData extends com.simibubi.create.content.fluids.tank.BoilerData {
 
     static final int SAMPLE_RATE = 5;
 
@@ -66,7 +66,8 @@ public class BoilerData {
 
     public LerpedFloat gauge = LerpedFloat.linear();
 
-    public void tick(FluidVesselBlockEntity controller) {
+    @Override
+    public void tick(FluidTankBlockEntity controller) {
         if (!isActive())
             return;
         if (controller.getLevel().isClientSide) {
@@ -81,7 +82,7 @@ public class BoilerData {
         ticksUntilNextSample--;
         if (ticksUntilNextSample > 0)
             return;
-        int capacity = controller.vesselInventory.getCapacity();
+        int capacity = controller.getTankInventory().getCapacity();
         if (capacity == 0)
             return;
 
@@ -100,33 +101,39 @@ public class BoilerData {
         if (controller instanceof CreativeFluidVesselBlockEntity)
             waterSupply = waterSupplyPerLevel * 20;
 
-        if (getActualHeat(controller.getTotalVesselSize()) == 18)
+        if (getActualHeat(controller.getTotalTankSize()) == 18)
             controller.award(AllAdvancements.STEAM_ENGINE_MAXED);
 
         controller.notifyUpdate();
     }
 
+    @Override
     public int getTheoreticalHeatLevel() {
         return activeHeat;
     }
 
+    @Override
     public int getMaxHeatLevelForBoilerSize(int boilerSize) {
         return (int) Math.min(18, boilerSize / 4);
     }
 
+    @Override
     public int getMaxHeatLevelForWaterSupply() {
         return (int) Math.min(18, Mth.ceil(waterSupply) / waterSupplyPerLevel);
     }
 
+    @Override
     public boolean isPassive() {
         return passiveHeat && maxHeatForSize > 0 && maxHeatForWater > 0;
     }
 
+    @Override
     public boolean isPassive(int boilerSize) {
         calcMinMaxForSize(boilerSize);
         return isPassive();
     }
 
+    @Override
     public float getEngineEfficiency(int boilerSize) {
         if (isPassive(boilerSize))
             return passiveEngineEfficiency / attachedEngines;
@@ -143,6 +150,7 @@ public class BoilerData {
         return actualHeat;
     }
 
+    @Override
     public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking, int boilerSize) {
         if (!isActive())
             return false;
@@ -202,6 +210,7 @@ public class BoilerData {
         return true;
     }
 
+    @Override
     public void calcMinMaxForSize(int boilerSize) {
         maxHeatForSize = getMaxHeatLevelForBoilerSize(boilerSize);
         maxHeatForWater = getMaxHeatLevelForWaterSupply();
@@ -210,6 +219,7 @@ public class BoilerData {
         maxValue = Math.max(passiveHeat ? 1 : activeHeat, Math.max(maxHeatForWater, maxHeatForSize));
     }
 
+    @Override
     @NotNull
     public MutableComponent getHeatLevelTextComponent() {
         int boilerLevel = Math.min(activeHeat, Math.min(maxHeatForWater, maxHeatForSize));
@@ -220,14 +230,17 @@ public class BoilerData {
                 : Lang.translateDirect("boiler.lvl", String.valueOf(boilerLevel)));
     }
 
+    @Override
     public MutableComponent getSizeComponent(boolean forGoggles, boolean useBlocksAsBars, ChatFormatting... styles) {
         return componentHelper("size", maxHeatForSize, forGoggles, useBlocksAsBars, styles);
     }
 
+    @Override
     public MutableComponent getWaterComponent(boolean forGoggles, boolean useBlocksAsBars, ChatFormatting... styles) {
         return componentHelper("water", maxHeatForWater, forGoggles, useBlocksAsBars, styles);
     }
 
+    @Override
     public MutableComponent getHeatComponent(boolean forGoggles, boolean useBlocksAsBars, ChatFormatting... styles) {
         return componentHelper("heat", passiveHeat ? 1 : activeHeat, forGoggles, useBlocksAsBars, styles);
     }
@@ -270,7 +283,11 @@ public class BoilerData {
                 .withStyle(format);
     }
 
-    public boolean evaluate(FluidVesselBlockEntity controller) {
+    @Override
+    public boolean evaluate(FluidTankBlockEntity base) {
+        if (!(base instanceof FluidVesselBlockEntity controller))
+            return super.evaluate(base);
+
         BlockPos controllerPos = controller.getBlockPos();
         Level level = controller.getLevel();
         int prevEngines = attachedEngines;
@@ -279,9 +296,9 @@ public class BoilerData {
         attachedWhistles = 0;
 
         Axis axis = controller.getAxis();
-        for (int yOffset = 0; yOffset < controller.width; yOffset++) {
-            for (int lengthOffset = 0; lengthOffset < controller.length; lengthOffset++) {
-                for (int widthOffset = 0; widthOffset < controller.width; widthOffset++) {
+        for (int yOffset = 0; yOffset < controller.getWidth(); yOffset++) {
+            for (int lengthOffset = 0; lengthOffset < controller.getHeight(); lengthOffset++) {
+                for (int widthOffset = 0; widthOffset < controller.getWidth(); widthOffset++) {
 
                     BlockPos pos = controllerPos.offset(
                             axis == Axis.X ? lengthOffset : widthOffset,
@@ -309,7 +326,13 @@ public class BoilerData {
         return prevEngines != attachedEngines || prevWhistles != attachedWhistles;
     }
 
-    public void checkPipeOrganAdvancement(FluidVesselBlockEntity controller) {
+    @Override
+    public void checkPipeOrganAdvancement(FluidTankBlockEntity base) {
+        if (!(base instanceof FluidVesselBlockEntity controller)) {
+            super.checkPipeOrganAdvancement(base);
+            return;
+        }
+
         if (!controller.getBehaviour(AdvancementBehaviour.TYPE)
                 .isOwnerPresent())
             return;
@@ -319,9 +342,9 @@ public class BoilerData {
         Set<Integer> whistlePitches = new HashSet<>();
 
         Axis axis = controller.getAxis();
-        for (int yOffset = 0; yOffset < controller.width; yOffset++) {
-            for (int lengthOffset = 0; lengthOffset < controller.length; lengthOffset++) {
-                for (int widthOffset = 0; widthOffset < controller.width; widthOffset++) {
+        for (int yOffset = 0; yOffset < controller.getWidth(); yOffset++) {
+            for (int lengthOffset = 0; lengthOffset < controller.getHeight(); lengthOffset++) {
+                for (int widthOffset = 0; widthOffset < controller.getWidth(); widthOffset++) {
 
                     BlockPos pos = controllerPos.offset(
                             axis == Axis.X ? lengthOffset : widthOffset,
@@ -349,7 +372,11 @@ public class BoilerData {
             controller.award(AllAdvancements.PIPE_ORGAN);
     }
 
-    public boolean updateTemperature(FluidVesselBlockEntity controller) {
+    @Override
+    public boolean updateTemperature(FluidTankBlockEntity base) {
+        if (!(base instanceof FluidVesselBlockEntity controller))
+            return super.evaluate(base);
+
         BlockPos controllerPos = controller.getBlockPos();
         Level level = controller.getLevel();
         needsHeatLevelUpdate = false;
@@ -360,8 +387,8 @@ public class BoilerData {
         activeHeat = 0;
 
         Axis axis = controller.getAxis();
-        for (int lengthOffset = 0; lengthOffset < controller.length; lengthOffset++) {
-            for (int widthOffset = 0; widthOffset < controller.width; widthOffset++) {
+        for (int lengthOffset = 0; lengthOffset < controller.getHeight(); lengthOffset++) {
+            for (int widthOffset = 0; widthOffset < controller.getWidth(); widthOffset++) {
                 BlockPos pos = controllerPos.offset(
                         axis == Axis.X ? lengthOffset : widthOffset,
                         -1,
@@ -382,10 +409,12 @@ public class BoilerData {
         return prevActive != activeHeat || prevPassive != passiveHeat;
     }
 
+    @Override
     public boolean isActive() {
         return attachedEngines > 0 || attachedWhistles > 0;
     }
 
+    @Override
     public void clear() {
         waterSupply = 0;
         activeHeat = 0;
@@ -394,6 +423,7 @@ public class BoilerData {
         Arrays.fill(supplyOverTime, 0);
     }
 
+    @Override
     public CompoundTag write() {
         CompoundTag nbt = new CompoundTag();
         nbt.putFloat("Supply", waterSupply);
@@ -405,6 +435,7 @@ public class BoilerData {
         return nbt;
     }
 
+    @Override
     public void read(CompoundTag nbt, int boilerSize) {
         waterSupply = nbt.getFloat("Supply");
         activeHeat = nbt.getInt("ActiveHeat");
@@ -421,31 +452,12 @@ public class BoilerData {
         gauge.chase(target, 0.125f, Chaser.EXP);
     }
 
+    @Override
     public BoilerFluidHandler createHandler() {
         return new BoilerFluidHandler();
     }
 
-    public class BoilerFluidHandler implements IFluidHandler {
-
-        @Override
-        public int getTanks() {
-            return 1;
-        }
-
-        @Override
-        public FluidStack getFluidInTank(int tank) {
-            return FluidStack.EMPTY;
-        }
-
-        @Override
-        public int getTankCapacity(int tank) {
-            return 10000;
-        }
-
-        @Override
-        public boolean isFluidValid(int tank, FluidStack stack) {
-            return FluidHelper.isWater(stack.getFluid());
-        }
+    public class BoilerFluidHandler extends com.simibubi.create.content.fluids.tank.BoilerData.BoilerFluidHandler {
 
         @Override
         public int fill(FluidStack resource, FluidAction action) {
@@ -455,16 +467,6 @@ public class BoilerData {
             if (action.execute())
                 gatheredSupply += amount;
             return amount;
-        }
-
-        @Override
-        public FluidStack drain(FluidStack resource, FluidAction action) {
-            return FluidStack.EMPTY;
-        }
-
-        @Override
-        public FluidStack drain(int maxDrain, FluidAction action) {
-            return FluidStack.EMPTY;
         }
 
     }

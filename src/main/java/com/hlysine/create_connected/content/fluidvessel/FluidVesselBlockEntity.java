@@ -2,10 +2,8 @@ package com.hlysine.create_connected.content.fluidvessel;
 
 import com.simibubi.create.api.connectivity.ConnectivityHandler;
 import com.simibubi.create.content.equipment.goggles.IHaveGoggleInformation;
-import com.simibubi.create.foundation.advancement.AllAdvancements;
+import com.simibubi.create.content.fluids.tank.FluidTankBlockEntity;
 import com.simibubi.create.foundation.blockEntity.IMultiBlockEntityContainer;
-import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
-import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.fluid.SmartFluidTank;
 import com.simibubi.create.foundation.utility.animation.LerpedFloat;
 import com.simibubi.create.foundation.utility.animation.LerpedFloat.Chaser;
@@ -24,7 +22,6 @@ import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidType;
-import net.minecraftforge.fluids.IFluidTank;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
@@ -34,49 +31,27 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 import static com.hlysine.create_connected.content.fluidvessel.FluidVesselBlock.*;
-import static net.minecraft.core.Direction.*;
+import static net.minecraft.core.Direction.Axis;
 
-public class FluidVesselBlockEntity extends SmartBlockEntity implements IHaveGoggleInformation, IMultiBlockEntityContainer.Fluid {
+public class FluidVesselBlockEntity extends FluidTankBlockEntity implements IHaveGoggleInformation, IMultiBlockEntityContainer.Fluid {
 
     private static final int MAX_SIZE = 3;
-
-    protected LazyOptional<IFluidHandler> fluidCapability;
-    protected boolean forceFluidLevelUpdate;
-    protected FluidTank vesselInventory;
-    protected BlockPos controller;
-    protected BlockPos lastKnownPos;
-    protected boolean updateConnectivity;
-    protected boolean window;
-    protected int luminosity;
-    protected int width;
-    protected int length;
-
-    public BoilerData boiler;
-
-    private static final int SYNC_RATE = 8;
-    protected int syncCooldown;
-    protected boolean queuedSync;
 
     // For rendering purposes only
     private LerpedFloat fluidLevel;
 
     public FluidVesselBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
-        vesselInventory = createInventory();
-        fluidCapability = LazyOptional.of(() -> vesselInventory);
-        forceFluidLevelUpdate = true;
-        updateConnectivity = false;
-        window = true;
-        length = 1;
-        width = 1;
         boiler = new BoilerData();
         refreshCapability();
     }
 
+    @Override
     protected SmartFluidTank createInventory() {
         return new SmartFluidTank(getCapacityMultiplier(), this::onFluidStackChanged);
     }
 
+    @Override
     protected void updateConnectivity() {
         updateConnectivity = false;
         if (level.isClientSide)
@@ -89,25 +64,8 @@ public class FluidVesselBlockEntity extends SmartBlockEntity implements IHaveGog
     @Override
     public void tick() {
         super.tick();
-        if (syncCooldown > 0) {
-            syncCooldown--;
-            if (syncCooldown == 0 && queuedSync)
-                sendData();
-        }
-
-        if (lastKnownPos == null)
-            lastKnownPos = getBlockPos();
-        else if (!lastKnownPos.equals(worldPosition) && worldPosition != null) {
-            onPositionChanged();
-            return;
-        }
-
-        if (updateConnectivity)
-            updateConnectivity();
         if (fluidLevel != null)
             fluidLevel.tickChaser();
-        if (isController())
-            boiler.tick(this);
     }
 
     @Override
@@ -125,19 +83,12 @@ public class FluidVesselBlockEntity extends SmartBlockEntity implements IHaveGog
                 && worldPosition.getY() == controller.getY() && worldPosition.getZ() == controller.getZ();
     }
 
-    @Override
-    public void initialize() {
-        super.initialize();
-        sendData();
-        if (level.isClientSide)
-            invalidateRenderBoundingBox();
-    }
-
     private void onPositionChanged() {
         removeController(true);
         lastKnownPos = worldPosition;
     }
 
+    @Override
     protected void onFluidStackChanged(FluidStack newFluidStack) {
         if (!hasLevel())
             return;
@@ -153,7 +104,7 @@ public class FluidVesselBlockEntity extends SmartBlockEntity implements IHaveGog
             boolean isBright = reversed ? (width - yOffset <= maxY) : (yOffset < maxY);
             int actualLuminosity = isBright ? luminosity : luminosity > 0 ? 1 : 0;
 
-            for (int lengthOffset = 0; lengthOffset < length; lengthOffset++) {
+            for (int lengthOffset = 0; lengthOffset < height; lengthOffset++) {
                 for (int widthOffset = 0; widthOffset < width; widthOffset++) {
                     BlockPos pos = this.worldPosition.offset(
                             axis == Axis.X ? lengthOffset : widthOffset,
@@ -185,15 +136,6 @@ public class FluidVesselBlockEntity extends SmartBlockEntity implements IHaveGog
         }
     }
 
-    protected void setLuminosity(int luminosity) {
-        if (level.isClientSide)
-            return;
-        if (this.luminosity == luminosity)
-            return;
-        this.luminosity = luminosity;
-        sendData();
-    }
-
     @SuppressWarnings("unchecked")
     @Override
     public FluidVesselBlockEntity getControllerBE() {
@@ -205,25 +147,27 @@ public class FluidVesselBlockEntity extends SmartBlockEntity implements IHaveGog
         return null;
     }
 
-    public void applyFluidVesselSize(int blocks) {
-        vesselInventory.setCapacity(blocks * getCapacityMultiplier());
-        int overflow = vesselInventory.getFluidAmount() - vesselInventory.getCapacity();
+    @Override
+    public void applyFluidTankSize(int blocks) {
+        tankInventory.setCapacity(blocks * getCapacityMultiplier());
+        int overflow = tankInventory.getFluidAmount() - tankInventory.getCapacity();
         if (overflow > 0)
-            vesselInventory.drain(overflow, FluidAction.EXECUTE);
+            tankInventory.drain(overflow, FluidAction.EXECUTE);
         forceFluidLevelUpdate = true;
     }
 
+    @Override
     public void removeController(boolean keepFluids) {
         if (level.isClientSide)
             return;
         updateConnectivity = true;
         if (!keepFluids)
-            applyFluidVesselSize(1);
+            applyFluidTankSize(1);
         controller = null;
         width = 1;
-        length = 1;
+        height = 1;
         boiler.clear();
-        onFluidStackChanged(vesselInventory.getFluid());
+        onFluidStackChanged(tankInventory.getFluid());
 
         BlockState state = getBlockState();
         if (isVessel(state)) {
@@ -238,6 +182,7 @@ public class FluidVesselBlockEntity extends SmartBlockEntity implements IHaveGog
         sendData();
     }
 
+    @Override
     public void toggleWindows() {
         FluidVesselBlockEntity be = getControllerBE();
         if (be == null)
@@ -247,6 +192,7 @@ public class FluidVesselBlockEntity extends SmartBlockEntity implements IHaveGog
         be.setWindows(!be.window);
     }
 
+    @Override
     public void updateBoilerTemperature() {
         FluidVesselBlockEntity be = getControllerBE();
         if (be == null)
@@ -256,28 +202,12 @@ public class FluidVesselBlockEntity extends SmartBlockEntity implements IHaveGog
         be.boiler.needsHeatLevelUpdate = true;
     }
 
-    public void sendDataImmediately() {
-        syncCooldown = 0;
-        queuedSync = false;
-        sendData();
-    }
-
     @Override
-    public void sendData() {
-        if (syncCooldown > 0) {
-            queuedSync = true;
-            return;
-        }
-        super.sendData();
-        queuedSync = false;
-        syncCooldown = SYNC_RATE;
-    }
-
     public void setWindows(boolean window) {
         this.window = window;
         Axis axis = getAxis();
         for (int yOffset = 0; yOffset < width; yOffset++) {
-            for (int lengthOffset = 0; lengthOffset < length; lengthOffset++) {
+            for (int lengthOffset = 0; lengthOffset < height; lengthOffset++) {
                 for (int widthOffset = 0; widthOffset < width; widthOffset++) {
 
                     BlockPos pos = this.worldPosition.offset(
@@ -310,6 +240,7 @@ public class FluidVesselBlockEntity extends SmartBlockEntity implements IHaveGog
         }
     }
 
+    @Override
     public void updateBoilerState() {
         if (!isController())
             return;
@@ -323,7 +254,7 @@ public class FluidVesselBlockEntity extends SmartBlockEntity implements IHaveGog
 
             Axis axis = getAxis();
             for (int yOffset = 0; yOffset < width; yOffset++)
-                for (int lengthOffset = 0; lengthOffset < length; lengthOffset++)
+                for (int lengthOffset = 0; lengthOffset < height; lengthOffset++)
                     for (int widthOffset = 0; widthOffset < width; widthOffset++)
                         if (level.getBlockEntity(
                                 worldPosition.offset(
@@ -359,7 +290,7 @@ public class FluidVesselBlockEntity extends SmartBlockEntity implements IHaveGog
     }
 
     private IFluidHandler handlerForCapability() {
-        return isController() ? boiler.isActive() ? boiler.createHandler() : vesselInventory
+        return isController() ? boiler.isActive() ? boiler.createHandler() : tankInventory
                 : getControllerBE() != null ? getControllerBE().handlerForCapability() : new FluidTank(0);
     }
 
@@ -373,16 +304,17 @@ public class FluidVesselBlockEntity extends SmartBlockEntity implements IHaveGog
         if (isController()) {
             Axis axis = getAxis();
             return super.createRenderBoundingBox().expandTowards(
-                    axis == Axis.X ? (length - 1) : (width - 1),
+                    axis == Axis.X ? (height - 1) : (width - 1),
                     width - 1,
-                    axis == Axis.Z ? (length - 1) : (width - 1)
+                    axis == Axis.Z ? (height - 1) : (width - 1)
             );
         } else
             return super.createRenderBoundingBox();
     }
 
+    @Override
     @Nullable
-    public FluidVesselBlockEntity getOtherFluidVesselBlockEntity(Direction direction) {
+    public FluidVesselBlockEntity getOtherFluidTankBlockEntity(Direction direction) {
         BlockEntity otherBE = level.getBlockEntity(worldPosition.relative(direction));
         if (otherBE instanceof FluidVesselBlockEntity)
             return (FluidVesselBlockEntity) otherBE;
@@ -394,7 +326,7 @@ public class FluidVesselBlockEntity extends SmartBlockEntity implements IHaveGog
         FluidVesselBlockEntity controllerBE = getControllerBE();
         if (controllerBE == null)
             return false;
-        if (controllerBE.boiler.addToGoggleTooltip(tooltip, isPlayerSneaking, controllerBE.getTotalVesselSize()))
+        if (controllerBE.boiler.addToGoggleTooltip(tooltip, isPlayerSneaking, controllerBE.getTotalTankSize()))
             return true;
         return containedFluidTooltip(tooltip, isPlayerSneaking,
                 controllerBE.getCapability(ForgeCapabilities.FLUID_HANDLER));
@@ -406,7 +338,7 @@ public class FluidVesselBlockEntity extends SmartBlockEntity implements IHaveGog
 
         BlockPos controllerBefore = controller;
         int prevWidth = width;
-        int prevLength = length;
+        int prevLength = height;
         int prevLum = luminosity;
 
         updateConnectivity = compound.contains("Uninitialized");
@@ -422,14 +354,14 @@ public class FluidVesselBlockEntity extends SmartBlockEntity implements IHaveGog
         if (isController()) {
             window = compound.getBoolean("Window");
             width = compound.getInt("Size");
-            length = compound.getInt("Length");
-            vesselInventory.setCapacity(getTotalVesselSize() * getCapacityMultiplier());
-            vesselInventory.readFromNBT(compound.getCompound("VesselContent"));
-            if (vesselInventory.getSpace() < 0)
-                vesselInventory.drain(-vesselInventory.getSpace(), FluidAction.EXECUTE);
+            height = compound.getInt("Height");
+            tankInventory.setCapacity(getTotalTankSize() * getCapacityMultiplier());
+            tankInventory.readFromNBT(compound.getCompound("TankContent"));
+            if (tankInventory.getSpace() < 0)
+                tankInventory.drain(-tankInventory.getSpace(), FluidAction.EXECUTE);
         }
 
-        boiler.read(compound.getCompound("Boiler"), width * width * length);
+        boiler.read(compound.getCompound("Boiler"), width * width * height);
 
         if (compound.contains("ForceFluidLevel") || fluidLevel == null)
             fluidLevel = LerpedFloat.linear()
@@ -440,11 +372,11 @@ public class FluidVesselBlockEntity extends SmartBlockEntity implements IHaveGog
 
         boolean changeOfController =
                 controllerBefore == null ? controller != null : !controllerBefore.equals(controller);
-        if (changeOfController || prevWidth != width || prevLength != length) {
+        if (changeOfController || prevWidth != width || prevLength != height) {
             if (hasLevel())
                 level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 16);
             if (isController())
-                vesselInventory.setCapacity(getCapacityMultiplier() * getTotalVesselSize());
+                tankInventory.setCapacity(getCapacityMultiplier() * getTotalTankSize());
             invalidateRenderBoundingBox();
         }
         if (isController()) {
@@ -463,10 +395,6 @@ public class FluidVesselBlockEntity extends SmartBlockEntity implements IHaveGog
             fluidLevel.chase(fluidLevel.getChaseTarget(), 0.125f, Chaser.EXP);
     }
 
-    public float getFillState() {
-        return (float) vesselInventory.getFluidAmount() / vesselInventory.getCapacity();
-    }
-
     @Override
     public void write(CompoundTag compound, boolean clientPacket) {
         if (updateConnectivity)
@@ -478,9 +406,9 @@ public class FluidVesselBlockEntity extends SmartBlockEntity implements IHaveGog
             compound.put("Controller", NbtUtils.writeBlockPos(controller));
         if (isController()) {
             compound.putBoolean("Window", window);
-            compound.put("VesselContent", vesselInventory.writeToNBT(new CompoundTag()));
+            compound.put("TankContent", tankInventory.writeToNBT(new CompoundTag()));
             compound.putInt("Size", width);
-            compound.putInt("Length", length);
+            compound.putInt("Height", height);
         }
         compound.putInt("Luminosity", luminosity);
         super.write(compound, clientPacket);
@@ -504,24 +432,6 @@ public class FluidVesselBlockEntity extends SmartBlockEntity implements IHaveGog
         return super.getCapability(cap, side);
     }
 
-    @Override
-    public void invalidate() {
-        super.invalidate();
-    }
-
-    @Override
-    public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
-        registerAwardables(behaviours, AllAdvancements.STEAM_ENGINE_MAXED, AllAdvancements.PIPE_ORGAN);
-    }
-
-    public IFluidTank getVesselInventory() {
-        return vesselInventory;
-    }
-
-    public int getTotalVesselSize() {
-        return width * width * length;
-    }
-
     public static int getMaxSize() {
         return MAX_SIZE;
     }
@@ -530,14 +440,16 @@ public class FluidVesselBlockEntity extends SmartBlockEntity implements IHaveGog
         return AllConfigs.server().fluids.fluidTankCapacity.get() * 1000;
     }
 
-    public static int getMaxLength() {
+    public static int getMaxHeight() {
         return AllConfigs.server().fluids.fluidTankMaxHeight.get();
     }
 
+    @Override
     public LerpedFloat getFluidLevel() {
         return fluidLevel;
     }
 
+    @Override
     public void setFluidLevel(LerpedFloat fluidLevel) {
         this.fluidLevel = fluidLevel;
     }
@@ -556,36 +468,15 @@ public class FluidVesselBlockEntity extends SmartBlockEntity implements IHaveGog
                     ? getController().getX() == getBlockPos().getX()
                     : getController().getZ() == getBlockPos().getZ());
             state = state.setValue(POSITIVE, axis == Axis.X
-                    ? getController().getX() + length - 1 == getBlockPos().getX()
-                    : getController().getZ() + length - 1 == getBlockPos().getZ());
+                    ? getController().getX() + height - 1 == getBlockPos().getX()
+                    : getController().getZ() + height - 1 == getBlockPos().getZ());
             level.setBlock(getBlockPos(), state, 6);
         }
         if (isController())
             setWindows(window);
-        onFluidStackChanged(vesselInventory.getFluid());
+        onFluidStackChanged(tankInventory.getFluid());
         updateBoilerState();
         setChanged();
-    }
-
-    @Override
-    public void setExtraData(@Nullable Object data) {
-        if (data instanceof Boolean)
-            window = (boolean) data;
-    }
-
-    @Override
-    @Nullable
-    public Object getExtraData() {
-        return window;
-    }
-
-    @Override
-    public Object modifyExtraData(Object data) {
-        if (data instanceof Boolean windows) {
-            windows |= window;
-            return windows;
-        }
-        return data;
     }
 
     @Override
@@ -596,7 +487,7 @@ public class FluidVesselBlockEntity extends SmartBlockEntity implements IHaveGog
     @Override
     public int getMaxLength(Axis longAxis, int width) {
         if (longAxis == Axis.Y) return getMaxWidth();
-        return getMaxLength();
+        return getMaxHeight();
     }
 
     @Override
@@ -606,12 +497,12 @@ public class FluidVesselBlockEntity extends SmartBlockEntity implements IHaveGog
 
     @Override
     public int getHeight() {
-        return length;
+        return height;
     }
 
     @Override
     public void setHeight(int height) {
-        this.length = height;
+        this.height = height;
     }
 
     @Override
@@ -625,28 +516,21 @@ public class FluidVesselBlockEntity extends SmartBlockEntity implements IHaveGog
     }
 
     @Override
-    public boolean hasTank() {
-        return true;
-    }
-
-    @Override
     public int getTankSize(int tank) {
         return getCapacityMultiplier();
     }
 
     @Override
     public void setTankSize(int tank, int blocks) {
-        applyFluidVesselSize(blocks);
+        applyFluidTankSize(blocks);
     }
 
-    @Override
-    public IFluidTank getTank(int tank) {
-        return vesselInventory;
+    public boolean hasWindow() {
+        return window;
     }
 
-    @Override
-    public FluidStack getFluid(int tank) {
-        return vesselInventory.getFluid()
-                .copy();
+    public int getLuminosity() {
+        return luminosity;
     }
+
 }

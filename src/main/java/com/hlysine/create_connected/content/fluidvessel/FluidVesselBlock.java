@@ -3,6 +3,7 @@ package com.hlysine.create_connected.content.fluidvessel;
 import com.hlysine.create_connected.CCBlockEntityTypes;
 import com.simibubi.create.api.connectivity.ConnectivityHandler;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
+import com.simibubi.create.content.fluids.tank.CreativeFluidTankBlockEntity;
 import com.simibubi.create.content.fluids.transfer.GenericItemEmptying;
 import com.simibubi.create.content.fluids.transfer.GenericItemFilling;
 import com.simibubi.create.foundation.advancement.AdvancementBehaviour;
@@ -55,8 +56,6 @@ import net.minecraftforge.common.util.ForgeSoundType;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
-
-import static com.hlysine.create_connected.content.fluidvessel.CreativeFluidVesselBlockEntity.*;
 
 public class FluidVesselBlock extends Block implements IWrenchable, IBE<FluidVesselBlockEntity> {
 
@@ -132,9 +131,9 @@ public class FluidVesselBlock extends Block implements IWrenchable, IBE<FluidVes
         if (vesselAt == null)
             return 0;
         FluidVesselBlockEntity controllerBE = vesselAt.getControllerBE();
-        if (controllerBE == null || !controllerBE.window)
+        if (controllerBE == null || !controllerBE.hasWindow())
             return 0;
-        return vesselAt.luminosity;
+        return vesselAt.getLuminosity();
     }
 
     @Override
@@ -210,7 +209,7 @@ public class FluidVesselBlock extends Block implements IWrenchable, IBE<FluidVes
             if (creative && !onClient) {
                 FluidStack fluidInItem = GenericItemEmptying.emptyItem(world, heldItem, true)
                         .getFirst();
-                if (!fluidInItem.isEmpty() && fluidVessel instanceof CreativeSmartFluidVessel creativeVessel)
+                if (!fluidInItem.isEmpty() && fluidVessel instanceof CreativeFluidTankBlockEntity.CreativeSmartFluidTank creativeVessel)
                     creativeVessel.setContainedFluid(fluidInItem);
             }
 
@@ -222,7 +221,7 @@ public class FluidVesselBlock extends Block implements IWrenchable, IBE<FluidVes
 
         if (exchange == FluidExchange.TANK_TO_ITEM) {
             if (creative && !onClient)
-                if (fluidVessel instanceof CreativeSmartFluidVessel creativeVessel)
+                if (fluidVessel instanceof CreativeFluidTankBlockEntity.CreativeSmartFluidTank creativeVessel)
                     creativeVessel.setContainedFluid(FluidStack.EMPTY);
 
             Fluid fluid = prevFluidInTank.getFluid();
@@ -257,7 +256,7 @@ public class FluidVesselBlock extends Block implements IWrenchable, IBE<FluidVes
 
                         Vec3 vec = ray.getLocation();
                         vec = new Vec3(vec.x, controllerBE.getBlockPos()
-                                .getY() + level * (controllerBE.length - .5f) + .25f, vec.z);
+                                .getY() + level * (controllerBE.getHeight() - .5f) + .25f, vec.z);
                         Vec3 motion = player.position()
                                 .subtract(vec)
                                 .scale(1 / 20f);

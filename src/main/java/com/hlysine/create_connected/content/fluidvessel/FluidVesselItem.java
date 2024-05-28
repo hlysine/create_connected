@@ -44,14 +44,14 @@ public class FluidVesselItem extends BlockItem {
 		if (nbt != null) {
 			nbt.remove("Luminosity");
 			nbt.remove("Size");
-			nbt.remove("Length");
+			nbt.remove("Height");
 			nbt.remove("Controller");
 			nbt.remove("LastKnownPos");
-			if (nbt.contains("VesselContent")) {
-				FluidStack fluid = FluidStack.loadFluidStackFromNBT(nbt.getCompound("VesselContent"));
+			if (nbt.contains("TankContent")) {
+				FluidStack fluid = FluidStack.loadFluidStackFromNBT(nbt.getCompound("TankContent"));
 				if (!fluid.isEmpty()) {
 					fluid.setAmount(Math.min(FluidVesselBlockEntity.getCapacityMultiplier(), fluid.getAmount()));
-					nbt.put("VesselContent", fluid.writeToNBT(new CompoundTag()));
+					nbt.put("TankContent", fluid.writeToNBT(new CompoundTag()));
 				}
 			}
 		}
@@ -86,7 +86,7 @@ public class FluidVesselItem extends BlockItem {
 		if (controllerBE == null)
 			return;
 
-		int width = controllerBE.width;
+		int width = controllerBE.getWidth();
 		if (width == 1)
 			return;
 
@@ -100,7 +100,7 @@ public class FluidVesselItem extends BlockItem {
 		Direction vesselFacing = Direction.fromAxisAndDirection(vesselAxis, Direction.AxisDirection.POSITIVE);
 		BlockPos startPos = face == vesselFacing.getOpposite()
 				? controllerBE.getBlockPos().relative(vesselFacing.getOpposite())
-				: controllerBE.getBlockPos().relative(vesselFacing, controllerBE.length);
+				: controllerBE.getBlockPos().relative(vesselFacing, controllerBE.getHeight());
 
 		if (VecHelper.getCoordinate(startPos, vesselAxis) != VecHelper.getCoordinate(pos, vesselAxis))
 			return;
