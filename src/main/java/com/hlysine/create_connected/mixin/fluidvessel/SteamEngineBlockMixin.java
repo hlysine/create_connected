@@ -35,7 +35,7 @@ public class SteamEngineBlockMixin {
             at = @At("HEAD"),
             method = "canAttach",
             cancellable = true,
-            remap = true
+            remap = false
     )
     private static void canAttach(LevelReader pReader, BlockPos pPos, Direction pDirection, CallbackInfoReturnable<Boolean> cir) {
         BlockPos blockpos = pPos.relative(pDirection);
