@@ -72,6 +72,7 @@
   "block.create_connected.fan_smoking_catalyst.tooltip.summary": "Vyhrazené zařízení pro _hromadné uzení_. Obsah katalyzátoru neinteraguje s prostředím.",
   "block.create_connected.fan_splashing_catalyst": "Prací katalyzátor větráku",
   "block.create_connected.fan_splashing_catalyst.tooltip.summary": "Vyhrazené zařízení pro _hromadné praní_. Obsah katalyzátoru neinteraguje s prostředím.",
+  "block.create_connected.fluid_vessel.tooltip.condition1": "Při pravém kliknutí pomocí montážního klíče",
   "block.create_connected.freewheel_clutch": "Volnoběžná spojka",
   "block.create_connected.freewheel_clutch.tooltip.summary": "Spojka, která je _spřáhnuta_ pouze tehdy, pokud se vstup otáčí ve _správném směru_ podle konfigurace.",
   "block.create_connected.inverted_clutch": "Obrácená spojka",
