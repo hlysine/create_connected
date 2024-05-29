@@ -49,6 +49,7 @@ public class CCCreativeTabs {
             CCBlocks.FAN_SMOKING_CATALYST,
             CCBlocks.FAN_SPLASHING_CATALYST,
             CCBlocks.FAN_HAUNTING_CATALYST,
+            CCBlocks.FAN_FREEZING_CATALYST,
             CCBlocks.COPYCAT_BLOCK,
             CCBlocks.COPYCAT_SLAB,
             CCBlocks.COPYCAT_BEAM,
