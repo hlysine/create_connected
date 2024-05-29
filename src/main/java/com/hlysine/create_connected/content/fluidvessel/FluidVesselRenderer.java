@@ -56,7 +56,7 @@ public class FluidVesselRenderer extends SafeBlockEntityRenderer<FluidVesselBloc
             return;
 
         boolean top = fluidStack.getFluid()
-                .getFluidType()
+                .getAttributes()
                 .isLighterThanAir();
 
         Axis axis = be.getAxis();

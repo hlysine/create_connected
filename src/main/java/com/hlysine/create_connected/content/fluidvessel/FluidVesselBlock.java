@@ -20,6 +20,7 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.InteractionHand;
@@ -51,10 +52,11 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.ForgeSoundType;
 import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 
 public class FluidVesselBlock extends Block implements IWrenchable, IBE<FluidVesselBlockEntity> {
@@ -181,7 +183,7 @@ public class FluidVesselBlock extends Block implements IWrenchable, IBE<FluidVes
         if (be == null)
             return InteractionResult.FAIL;
 
-        LazyOptional<IFluidHandler> vesselCapability = be.getCapability(ForgeCapabilities.FLUID_HANDLER);
+        LazyOptional<IFluidHandler> vesselCapability = be.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY);
         if (!vesselCapability.isPresent())
             return InteractionResult.PASS;
         IFluidHandler fluidVessel = vesselCapability.orElse(null);
@@ -216,7 +218,11 @@ public class FluidVesselBlock extends Block implements IWrenchable, IBE<FluidVes
             Fluid fluid = fluidInVessel.getFluid();
             fluidState = fluid.defaultFluidState()
                     .createLegacyBlock();
-            soundevent = FluidHelper.getEmptySound(fluidInVessel);
+            FluidAttributes attributes = fluid.getAttributes();
+            soundevent = attributes.getEmptySound();
+            if (soundevent == null)
+                soundevent =
+                        FluidHelper.isTag(fluid, FluidTags.LAVA) ? SoundEvents.BUCKET_EMPTY_LAVA : SoundEvents.BUCKET_EMPTY;
         }
 
         if (exchange == FluidExchange.TANK_TO_ITEM) {
@@ -227,7 +233,11 @@ public class FluidVesselBlock extends Block implements IWrenchable, IBE<FluidVes
             Fluid fluid = prevFluidInTank.getFluid();
             fluidState = fluid.defaultFluidState()
                     .createLegacyBlock();
-            soundevent = FluidHelper.getFillSound(prevFluidInTank);
+            soundevent = fluid.getAttributes()
+                    .getFillSound();
+            if (soundevent == null)
+                soundevent =
+                        FluidHelper.isTag(fluid, FluidTags.LAVA) ? SoundEvents.BUCKET_FILL_LAVA : SoundEvents.BUCKET_FILL;
         }
 
         if (soundevent != null && !onClient) {
@@ -249,7 +259,7 @@ public class FluidVesselBlock extends Block implements IWrenchable, IBE<FluidVes
                         float level = (float) fluidInVessel.getAmount() / fluidVessel.getTankCapacity(0);
 
                         boolean reversed = fluidInVessel.getFluid()
-                                .getFluidType()
+                                .getAttributes()
                                 .isLighterThanAir();
                         if (reversed)
                             level = 1 - level;
