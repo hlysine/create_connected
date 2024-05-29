@@ -17,6 +17,9 @@ public class CServer extends ConfigBase {
     private final ConfigFloat vesselHeatMultiplier = f(0.5f, 0.0f, "vesselHeatMultiplier", Comments.vesselHeatMultiplier);
     public static final Supplier<Double> VesselHeatMultiplier = CCConfigs.safeGetter(() -> CCConfigs.server().vesselHeatMultiplier.get(), 0.5);
 
+    private final ConfigInt vesselMaxLevel = i(18, 0, 18, "vesselMaxLevel", Comments.vesselMaxLevel);
+    public static final Supplier<Integer> VesselMaxLevel = CCConfigs.safeGetter(() -> CCConfigs.server().vesselMaxLevel.get(), 0);
+
     public final CStress stressValues = nested(0, CStress::new, Comments.stress);
     public final ConfigFloat brakeActiveStress = f(16384, Float.NEGATIVE_INFINITY, Float.POSITIVE_INFINITY, "brakeActiveStress", Comments.brakeActiveStress);
 
@@ -33,5 +36,6 @@ public class CServer extends ConfigBase {
         static String applicationRemainingItemFix = "Enable the fix that gives remaining items after manual application";
         static String vesselBoilerStressMultiplier = "Modify the stress output when a Fluid Vessel is used as a boiler";
         static String vesselHeatMultiplier = "Modify the heat level when a Fluid Vessel is used as a boiler";
+        static String vesselMaxLevel = "Limit the max boiler level achievable with a Fluid Vessel";
     }
 }

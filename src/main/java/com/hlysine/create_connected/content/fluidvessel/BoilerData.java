@@ -49,6 +49,7 @@ public class BoilerData extends com.simibubi.create.content.fluids.tank.BoilerDa
     float[] supplyOverTime = new float[10];
     int ticksUntilNextSample;
     int currentIndex;
+    int configLevelCap = 18;
 
     // display
     private int maxHeatForSize = 0;
@@ -62,6 +63,9 @@ public class BoilerData extends com.simibubi.create.content.fluids.tank.BoilerDa
     public void tick(FluidTankBlockEntity controller) {
         if (!isActive())
             return;
+
+        configLevelCap = CServer.VesselMaxLevel.get();
+
         if (controller.getLevel().isClientSide) {
             gauge.tickChaser();
             float current = gauge.getValue(1);
@@ -138,7 +142,7 @@ public class BoilerData extends com.simibubi.create.content.fluids.tank.BoilerDa
     private int getActualHeat(int boilerSize) {
         int forBoilerSize = getMaxHeatLevelForBoilerSize(boilerSize);
         int forWaterSupply = getMaxHeatLevelForWaterSupply();
-        int actualHeat = Math.min(activeHeat, Math.min(forWaterSupply, forBoilerSize));
+        int actualHeat = Math.min(Math.min(activeHeat, Math.min(forWaterSupply, forBoilerSize)), configLevelCap);
         return actualHeat;
     }
 
@@ -152,9 +156,14 @@ public class BoilerData extends com.simibubi.create.content.fluids.tank.BoilerDa
 
         calcMinMaxForSize(boilerSize);
 
-        tooltip.add(indent.plainCopy()
-                .append(
-                        Lang.translateDirect("boiler.status", getHeatLevelTextComponent().withStyle(ChatFormatting.GREEN))));
+        if (configLevelCap < 18)
+            tooltip.add(indent.plainCopy().append(
+                    Lang.translateDirect("boiler.status", getHeatLevelTextComponent().withStyle(ChatFormatting.GREEN).append(Component.literal(" / " + configLevelCap).withStyle(ChatFormatting.GRAY)))
+            ));
+        else
+            tooltip.add(indent.plainCopy().append(
+                    Lang.translateDirect("boiler.status", getHeatLevelTextComponent().withStyle(ChatFormatting.GREEN))
+            ));
         tooltip.add(indent2.plainCopy()
                 .append(getSizeComponent(true, false)));
         tooltip.add(indent2.plainCopy()
@@ -165,7 +174,7 @@ public class BoilerData extends com.simibubi.create.content.fluids.tank.BoilerDa
         if (attachedEngines == 0)
             return true;
 
-        int boilerLevel = Math.min(activeHeat, Math.min(maxHeatForWater, maxHeatForSize));
+        int boilerLevel = Math.min(Math.min(activeHeat, Math.min(maxHeatForWater, maxHeatForSize)), configLevelCap);
         double totalSU = getEngineEfficiency(boilerSize) * 16 * Math.max(boilerLevel, attachedEngines)
                 * BlockStressValues.getCapacity(AllBlocks.STEAM_ENGINE.get());
 
@@ -207,14 +216,14 @@ public class BoilerData extends com.simibubi.create.content.fluids.tank.BoilerDa
         maxHeatForSize = getMaxHeatLevelForBoilerSize(boilerSize);
         maxHeatForWater = getMaxHeatLevelForWaterSupply();
 
-        minValue = Math.min(passiveHeat ? 1 : activeHeat, Math.min(maxHeatForWater, maxHeatForSize));
+        minValue = Math.min(configLevelCap, Math.min(passiveHeat ? 1 : activeHeat, Math.min(maxHeatForWater, maxHeatForSize)));
         maxValue = Math.max(passiveHeat ? 1 : activeHeat, Math.max(maxHeatForWater, maxHeatForSize));
     }
 
     @Override
     @NotNull
     public MutableComponent getHeatLevelTextComponent() {
-        int boilerLevel = Math.min(activeHeat, Math.min(maxHeatForWater, maxHeatForSize));
+        int boilerLevel = Math.min(Math.min(activeHeat, Math.min(maxHeatForWater, maxHeatForSize)), configLevelCap);
 
         return isPassive() ? Lang.translateDirect("boiler.passive")
                 : (boilerLevel == 0 ? Lang.translateDirect("boiler.idle")
@@ -282,6 +291,7 @@ public class BoilerData extends com.simibubi.create.content.fluids.tank.BoilerDa
 
         BlockPos controllerPos = controller.getBlockPos();
         Level level = controller.getLevel();
+        configLevelCap = CServer.VesselMaxLevel.get();
         int prevEngines = attachedEngines;
         int prevWhistles = attachedWhistles;
         attachedEngines = 0;
@@ -396,7 +406,7 @@ public class BoilerData extends com.simibubi.create.content.fluids.tank.BoilerDa
             }
         }
 
-        activeHeat = (int) Math.floor(activeHeat * CServer.VesselHeatMultiplier.get().floatValue());
+        activeHeat = Math.max(0, Math.min(18, (int) Math.floor(activeHeat * CServer.VesselHeatMultiplier.get().floatValue())));
         passiveHeat &= activeHeat == 0;
 
         return prevActive != activeHeat || prevPassive != passiveHeat;
@@ -440,7 +450,7 @@ public class BoilerData extends com.simibubi.create.content.fluids.tank.BoilerDa
 
         int forBoilerSize = getMaxHeatLevelForBoilerSize(boilerSize);
         int forWaterSupply = getMaxHeatLevelForWaterSupply();
-        int actualHeat = Math.min(activeHeat, Math.min(forWaterSupply, forBoilerSize));
+        int actualHeat = Math.min(Math.min(activeHeat, Math.min(forWaterSupply, forBoilerSize)), configLevelCap);
         float target = isPassive(boilerSize) ? 1 / 8f : forBoilerSize == 0 ? 0 : actualHeat / (forBoilerSize * 1f);
         gauge.chase(target, 0.125f, Chaser.EXP);
     }
