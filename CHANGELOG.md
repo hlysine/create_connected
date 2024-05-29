@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.8.1 - 2024-05-29
+
+### Added
+
+- A new config for Fluid Vessels to limit the maximum boiler level
+- Translations for new features in Russian, Japanese and Simplified Chinese (thanks [Crowdin contributors](https://crowdin.com/project/create-connected-mod/reports/top-members)!)
+
+### Fixed
+
+- Boiler gauge not updating on Fluid Vessels
+- Heat level for Fluid Vessels is now capped at level 18
+- Various issues in Russian translation (thanks VladisCrafter!)
+  - Text overflow for sequencer instructions
+  - Incorrect ponder strings
+  - Inaccurate translations for some entries
+
 ## 0.8.0 - 2024-05-29
 
 ### Added

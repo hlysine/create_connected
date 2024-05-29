@@ -68,6 +68,8 @@
   "block.create_connected.encased_chain_cogwheel": "ケース入りチェーン歯車",
   "block.create_connected.fan_blasting_catalyst": "ファンの精錬触媒",
   "block.create_connected.fan_blasting_catalyst.tooltip.summary": "_一括精錬_専用のデバイス。内部の触媒は環境と相互作用しない。",
+  "block.create_connected.fan_freezing_catalyst": "ファンの凍結触媒",
+  "block.create_connected.fan_freezing_catalyst.tooltip.summary": "_一括凍結_専用のデバイス。内部の触媒は環境と相互作用しない。",
   "block.create_connected.fan_haunting_catalyst": "ファンの憑霊触媒",
   "block.create_connected.fan_haunting_catalyst.tooltip.summary": "_一括憑霊_専用のデバイス。内部の触媒は環境と相互作用しない。",
   "block.create_connected.fan_smoking_catalyst": "ファンの燻製触媒",
