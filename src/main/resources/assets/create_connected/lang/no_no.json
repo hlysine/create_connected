@@ -10,6 +10,7 @@
   "block.create_connected.copycat_fence.tooltip.condition1": "Når høyreklikket",
   "block.create_connected.copycat_fence_gate.tooltip.condition1": "Når høyreklikket",
   "block.create_connected.copycat_slab.tooltip.condition1": "Når høyreklikket",
+  "block.create_connected.fluid_vessel.tooltip.condition1": "Når høyreklikket med skiftenøkkel",
   "block.create_connected.inverted_clutch": "Omvendt kobling",
   "block.create_connected.inverted_gearshift": "Omvendt giromveksler",
   "block.create_connected.item_silo": "Silo",
