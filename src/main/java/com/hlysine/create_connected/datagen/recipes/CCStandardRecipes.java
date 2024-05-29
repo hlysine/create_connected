@@ -57,15 +57,15 @@ public class CCStandardRecipes extends CreateRecipeProvider {
     GeneratedRecipe CRANK_WHEEL = create(CCBlocks.CRANK_WHEEL).unlockedBy(AllBlocks.COGWHEEL::get)
             .requiresResultFeature()
             .viaShapeless(b -> b
-                    .requires(AllBlocks.HAND_CRANK)
-                    .requires(AllBlocks.COGWHEEL)
+                    .requires(AllBlocks.HAND_CRANK.get())
+                    .requires(AllBlocks.COGWHEEL.get())
             );
 
     GeneratedRecipe LARGE_CRANK_WHEEL = create(CCBlocks.LARGE_CRANK_WHEEL).unlockedBy(AllBlocks.LARGE_COGWHEEL::get)
             .requiresResultFeature()
             .viaShapeless(b -> b
-                    .requires(AllBlocks.HAND_CRANK)
-                    .requires(AllBlocks.LARGE_COGWHEEL)
+                    .requires(AllBlocks.HAND_CRANK.get())
+                    .requires(AllBlocks.LARGE_COGWHEEL.get())
             );
 
     GeneratedRecipe INVERTED_CLUTCH_CYCLE =
@@ -192,7 +192,7 @@ public class CCStandardRecipes extends CreateRecipeProvider {
 
     GeneratedRecipe FLUID_VESSEL = create(CCBlocks.FLUID_VESSEL).unlockedByTag(() -> Tags.Items.BARRELS_WOODEN)
             .requiresResultFeature()
-            .viaShaped(b -> b.define('B', AllItems.COPPER_SHEET)
+            .viaShaped(b -> b.define('B', AllItems.COPPER_SHEET.get())
                     .define('C', Tags.Items.BARRELS_WOODEN)
                     .pattern("BCB"));
 

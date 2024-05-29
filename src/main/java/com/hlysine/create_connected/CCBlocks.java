@@ -117,7 +117,7 @@ public class CCBlocks {
 
     public static final BlockEntry<CrankWheelBlock.Small> CRANK_WHEEL = REGISTRATE.block("crank_wheel", CrankWheelBlock.Small::new)
             .initialProperties(SharedProperties::wooden)
-            .properties(p -> p.mapColor(MapColor.PODZOL))
+            .properties(p -> p.color(MaterialColor.PODZOL))
             .transform(axeOrPickaxe())
             .blockstate(BlockStateGen.directionalBlockProvider(true))
             .transform(BlockStressDefaults.setCapacity(8.0))
@@ -131,7 +131,7 @@ public class CCBlocks {
 
     public static final BlockEntry<CrankWheelBlock.Large> LARGE_CRANK_WHEEL = REGISTRATE.block("large_crank_wheel", CrankWheelBlock.Large::new)
             .initialProperties(SharedProperties::wooden)
-            .properties(p -> p.mapColor(MapColor.PODZOL))
+            .properties(p -> p.color(MaterialColor.PODZOL))
             .transform(axeOrPickaxe())
             .blockstate(BlockStateGen.directionalBlockProvider(true))
             .transform(BlockStressDefaults.setCapacity(8.0))
@@ -460,7 +460,7 @@ public class CCBlocks {
     public static final BlockEntry<WrenchableBlock> FAN_FREEZING_CATALYST = REGISTRATE.block("fan_freezing_catalyst", WrenchableBlock::new)
             .initialProperties(() -> Blocks.IRON_BLOCK)
             .properties(p -> p
-                    .mapColor(MapColor.TERRACOTTA_YELLOW)
+                    .color(MaterialColor.TERRACOTTA_YELLOW)
                     .requiresCorrectToolForDrops()
                     .noOcclusion()
                     .isRedstoneConductor((state, level, pos) -> false)
@@ -506,7 +506,7 @@ public class CCBlocks {
     public static final BlockEntry<FluidVesselBlock> CREATIVE_FLUID_VESSEL =
             REGISTRATE.block("creative_fluid_vessel", FluidVesselBlock::creative)
                     .initialProperties(SharedProperties::copperMetal)
-                    .properties(p -> p.noOcclusion().mapColor(MapColor.COLOR_PURPLE))
+                    .properties(p -> p.noOcclusion().color(MaterialColor.COLOR_PURPLE))
                     .transform(pickaxeOnly())
                     .transform(FeatureToggle.registerDependent(FLUID_VESSEL))
                     .tag(AllTags.AllBlockTags.SAFE_NBT.tag)
