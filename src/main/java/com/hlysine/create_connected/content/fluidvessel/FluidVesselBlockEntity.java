@@ -186,6 +186,15 @@ public class FluidVesselBlockEntity extends FluidTankBlockEntity implements IHav
         sendData();
     }
 
+    public boolean isWindowTypeAllowed(WindowType type) {
+        return switch (type) {
+            case SIDE_WIDE -> true;
+            case SIDE_NARROW_ENDS -> height >= 2;
+            case SIDE_NARROW_THIRDS -> height >= 3;
+            case SIDE_HORIZONTAL -> width > 2 && width % 2 == 1;
+        };
+    }
+
     @Override
     public void toggleWindows() {
         FluidVesselBlockEntity be = getControllerBE();
@@ -198,12 +207,20 @@ public class FluidVesselBlockEntity extends FluidTankBlockEntity implements IHav
             be.setWindows(true);
         } else {
             WindowType[] types = WindowType.values();
-            if (be.windowType.ordinal() < types.length - 1) {
-                be.setWindowType(types[be.windowType.ordinal() + 1]);
-                be.setWindows(true);
-            } else {
+            if (be.windowType.ordinal() >= types.length - 1) {
                 be.setWindows(false);
+                return;
             }
+            WindowType nextType = types[be.windowType.ordinal() + 1];
+            while (!be.isWindowTypeAllowed(nextType)) {
+                if (nextType.ordinal() >= types.length - 1) {
+                    be.setWindows(false);
+                    return;
+                }
+                nextType = types[nextType.ordinal() + 1];
+            }
+            be.setWindowType(nextType);
+            be.setWindows(true);
         }
     }
 
@@ -244,7 +261,7 @@ public class FluidVesselBlockEntity extends FluidTankBlockEntity implements IHav
 
                     Shape shape = Shape.PLAIN;
                     if (window)
-                        if (windowType == WindowType.SIDE_WIDE || height <= 1) {
+                        if (windowType == WindowType.SIDE_WIDE || height <= 1 || windowType == WindowType.SIDE_HORIZONTAL && width <= 2) {
                             if ((widthOffset == 0 || widthOffset == width - 1)) {
                                 if (width == 1)
                                     shape = Shape.WINDOW;
@@ -266,6 +283,10 @@ public class FluidVesselBlockEntity extends FluidTankBlockEntity implements IHav
                                     shape = Shape.WINDOW_BOTTOM_SINGLE;
                                 else
                                     shape = Shape.WINDOW_MIDDLE_SINGLE;
+                            }
+                        } else if (windowType == WindowType.SIDE_HORIZONTAL) {
+                            if (yOffset == width / 2) {
+                                shape = Shape.WINDOW;
                             }
                         }
 

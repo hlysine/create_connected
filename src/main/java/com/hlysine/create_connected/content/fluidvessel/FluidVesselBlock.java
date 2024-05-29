@@ -349,7 +349,7 @@ public class FluidVesselBlock extends Block implements IWrenchable, IBE<FluidVes
     }
 
     public enum WindowType implements StringRepresentable {
-        SIDE_WIDE, SIDE_NARROW_ENDS, SIDE_NARROW_THIRDS;
+        SIDE_WIDE, SIDE_NARROW_ENDS, SIDE_NARROW_THIRDS, SIDE_HORIZONTAL;
 
         @Override
         public String getSerializedName() {

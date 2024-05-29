@@ -26,7 +26,7 @@
 			"faces": {
 				"east": {"uv": [12, 16, 16, 0], "rotation": 90, "texture": "#1", "cullface": "west"},
 				"west": {"uv": [12, 0, 16, 16], "rotation": 90, "texture": "#1", "cullface": "west"},
-				"up": {"uv": [15, 16, 16, 0], "texture": "#1", "cullface": "west"}
+				"up": {"uv": [0, 16, 1, 0], "texture": "#1", "cullface": "west"}
 			}
 		},
 		{
