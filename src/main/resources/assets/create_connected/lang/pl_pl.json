@@ -72,6 +72,7 @@
   "block.create_connected.fan_smoking_catalyst.tooltip.summary": "Dedykowane urządzenie do _Hurtowego wędzenia_. Zawartość katalizatora nie wchodzi w interakcje ze środowiskiem.",
   "block.create_connected.fan_splashing_catalyst": "Katalizator płukania",
   "block.create_connected.fan_splashing_catalyst.tooltip.summary": "Dedykowane urządzenie do _Hurtowe płukania_. Zawartość katalizatora nie wchodzi w interakcje ze środowiskiem.",
+  "block.create_connected.fluid_vessel.tooltip.condition1": "Kiedy kliknięto prawym przyciskiem myszy z Kluczem",
   "block.create_connected.freewheel_clutch": "Wolnobiegowe Sprzęgło",
   "block.create_connected.freewheel_clutch.tooltip.summary": "Sprzęgło, które jest tylko _podłączone_ jeżeli wejście kręci się we _właściwą stronę_ zgodnie z konfiguracją.",
   "block.create_connected.inverted_clutch": "Odwrócone Sprzęgło",
