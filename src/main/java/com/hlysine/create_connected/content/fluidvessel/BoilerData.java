@@ -155,7 +155,7 @@ public class BoilerData extends com.simibubi.create.content.fluids.tank.BoilerDa
 
         if (configLevelCap < 18)
             tooltip.add(indent.plainCopy().append(
-                    Lang.translateDirect("boiler.status", getHeatLevelTextComponent().withStyle(ChatFormatting.GREEN).append(Component.literal(" / " + configLevelCap).withStyle(ChatFormatting.GRAY)))
+                    Lang.translateDirect("boiler.status", getHeatLevelTextComponent().withStyle(ChatFormatting.GREEN).append(Components.literal(" / " + configLevelCap).withStyle(ChatFormatting.GRAY)))
             ));
         else
             tooltip.add(indent.plainCopy().append(
