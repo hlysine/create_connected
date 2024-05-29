@@ -174,6 +174,16 @@ public class CCStandardRecipes extends CreateRecipeProvider {
     GeneratedRecipe ITEM_SILO_CYCLE =
             conversionCycle(ImmutableList.of(CCBlocks.ITEM_SILO, AllBlocks.ITEM_VAULT));
 
+
+    GeneratedRecipe FLUID_VESSEL = create(CCBlocks.FLUID_VESSEL).unlockedByTag(() -> Tags.Items.BARRELS_WOODEN)
+            .requiresResultFeature()
+            .viaShaped(b -> b.define('B', AllItems.COPPER_SHEET)
+                    .define('C', Tags.Items.BARRELS_WOODEN)
+                    .pattern("BCB"));
+
+    GeneratedRecipe FLUID_VESSEL_CYCLE =
+            conversionCycle(ImmutableList.of(CCBlocks.FLUID_VESSEL, AllBlocks.FLUID_TANK));
+
     GeneratedRecipe EMPTY_FAN_CATALYST = create(CCBlocks.EMPTY_FAN_CATALYST).unlockedBy(AllBlocks.BRASS_BLOCK::get)
             .requiresResultFeature()
             .viaShaped(b -> b
