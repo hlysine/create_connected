@@ -93,6 +93,9 @@ public class LinkedAnalogLeverBlock extends AnalogLeverBlock implements ISpecial
                                           @NotNull Player player,
                                           @NotNull InteractionHand hand,
                                           @NotNull BlockHitResult hit) {
+        if (player.isSpectator())
+            return InteractionResult.PASS;
+
         if (isHittingBase(state, level, pos, hit)) {
             return super.use(state, level, pos, player, hand, hit);
         }
