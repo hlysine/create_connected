@@ -5,6 +5,7 @@ import com.hlysine.create_connected.content.brassgearbox.BrassGearboxBlockEntity
 import com.hlysine.create_connected.content.brassgearbox.BrassGearboxInstance;
 import com.hlysine.create_connected.content.brassgearbox.BrassGearboxRenderer;
 import com.hlysine.create_connected.content.centrifugalclutch.CentrifugalClutchBlockEntity;
+import com.hlysine.create_connected.content.crankwheel.CrankWheelBlockEntity;
 import com.hlysine.create_connected.content.fluidvessel.CreativeFluidVesselBlockEntity;
 import com.hlysine.create_connected.content.fluidvessel.FluidVesselBlockEntity;
 import com.hlysine.create_connected.content.fluidvessel.FluidVesselRenderer;
@@ -25,6 +26,8 @@ import com.hlysine.create_connected.content.sixwaygearbox.SixWayGearboxBlockEnti
 import com.hlysine.create_connected.content.sixwaygearbox.SixWayGearboxInstance;
 import com.hlysine.create_connected.content.sixwaygearbox.SixWayGearboxRenderer;
 import com.simibubi.create.content.decoration.copycat.CopycatBlockEntity;
+import com.simibubi.create.content.kinetics.crank.HandCrankInstance;
+import com.simibubi.create.content.kinetics.crank.HandCrankRenderer;
 import com.simibubi.create.content.kinetics.simpleRelays.BracketedKineticBlockEntityInstance;
 import com.simibubi.create.content.kinetics.simpleRelays.BracketedKineticBlockEntityRenderer;
 import com.simibubi.create.content.kinetics.simpleRelays.SimpleKineticBlockEntity;
@@ -45,6 +48,13 @@ public class CCBlockEntityTypes {
             .instance(() -> EncasedCogInstance::small, false)
             .validBlocks(CCBlocks.ENCASED_CHAIN_COGWHEEL)
             .renderer(() -> EncasedCogRenderer::small)
+            .register();
+
+    public static final BlockEntityEntry<CrankWheelBlockEntity> CRANK_WHEEL = REGISTRATE
+            .blockEntity("crank_wheel", CrankWheelBlockEntity::new)
+            .instance(() -> HandCrankInstance::new)
+            .validBlocks(CCBlocks.CRANK_WHEEL, CCBlocks.LARGE_CRANK_WHEEL)
+            .renderer(() -> HandCrankRenderer::new)
             .register();
 
     public static final BlockEntityEntry<ParallelGearboxBlockEntity> PARALLEL_GEARBOX = REGISTRATE

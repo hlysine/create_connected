@@ -53,6 +53,20 @@ public class CCStandardRecipes extends CreateRecipeProvider {
                     .requires(AllBlocks.COGWHEEL)
             );
 
+    GeneratedRecipe CRANK_WHEEL = create(CCBlocks.CRANK_WHEEL).unlockedBy(AllBlocks.COGWHEEL::get)
+            .requiresResultFeature()
+            .viaShapeless(b -> b
+                    .requires(AllBlocks.HAND_CRANK)
+                    .requires(AllBlocks.COGWHEEL)
+            );
+
+    GeneratedRecipe LARGE_CRANK_WHEEL = create(CCBlocks.LARGE_CRANK_WHEEL).unlockedBy(AllBlocks.LARGE_COGWHEEL::get)
+            .requiresResultFeature()
+            .viaShapeless(b -> b
+                    .requires(AllBlocks.HAND_CRANK)
+                    .requires(AllBlocks.LARGE_COGWHEEL)
+            );
+
     GeneratedRecipe INVERTED_CLUTCH_CYCLE =
             conversionCycle(ImmutableList.of(AllBlocks.CLUTCH, CCBlocks.INVERTED_CLUTCH));
 

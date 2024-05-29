@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "create_connected:large_crank_wheel"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "create_connected:blocks/large_crank_wheel"
+}

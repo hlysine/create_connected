@@ -1,12 +1,12 @@
 package com.hlysine.create_connected;
 
 import com.hlysine.create_connected.config.FeatureToggle;
+import com.hlysine.create_connected.content.BlockStressDefaults;
 import com.hlysine.create_connected.content.WrenchableBlock;
 import com.hlysine.create_connected.content.brake.BrakeBlock;
 import com.hlysine.create_connected.content.brassgearbox.BrassGearboxBlock;
 import com.hlysine.create_connected.content.centrifugalclutch.CentrifugalClutchBlock;
 import com.hlysine.create_connected.content.chaincogwheel.ChainCogwheelBlock;
-import com.hlysine.create_connected.content.BlockStressDefaults;
 import com.hlysine.create_connected.content.copycat.beam.CopycatBeamBlock;
 import com.hlysine.create_connected.content.copycat.beam.CopycatBeamModel;
 import com.hlysine.create_connected.content.copycat.block.CopycatBlockBlock;
@@ -29,7 +29,11 @@ import com.hlysine.create_connected.content.copycat.verticalstep.CopycatVertical
 import com.hlysine.create_connected.content.copycat.wall.CopycatWallBlock;
 import com.hlysine.create_connected.content.copycat.wall.CopycatWallModel;
 import com.hlysine.create_connected.content.copycat.wall.WrappedWallBlock;
-import com.hlysine.create_connected.content.fluidvessel.*;
+import com.hlysine.create_connected.content.crankwheel.CrankWheelBlock;
+import com.hlysine.create_connected.content.fluidvessel.FluidVesselBlock;
+import com.hlysine.create_connected.content.fluidvessel.FluidVesselGenerator;
+import com.hlysine.create_connected.content.fluidvessel.FluidVesselItem;
+import com.hlysine.create_connected.content.fluidvessel.FluidVesselModel;
 import com.hlysine.create_connected.content.freewheelclutch.FreewheelClutchBlock;
 import com.hlysine.create_connected.content.invertedclutch.InvertedClutchBlock;
 import com.hlysine.create_connected.content.invertedgearshift.InvertedGearshiftBlock;
@@ -57,6 +61,7 @@ import com.simibubi.create.content.decoration.palettes.WindowBlock;
 import com.simibubi.create.content.kinetics.chainDrive.ChainDriveGenerator;
 import com.simibubi.create.content.kinetics.simpleRelays.BracketedKineticBlockModel;
 import com.simibubi.create.content.redstone.displayLink.source.BoilerDisplaySource;
+import com.simibubi.create.foundation.block.ItemUseOverrides;
 import com.simibubi.create.foundation.data.*;
 import com.simibubi.create.foundation.utility.Iterate;
 import com.tterrag.registrate.providers.DataGenContext;
@@ -113,6 +118,34 @@ public class CCBlocks {
                     .item()
                     .transform(customItemModel())
                     .register();
+
+    public static final BlockEntry<CrankWheelBlock.Small> CRANK_WHEEL = REGISTRATE.block("crank_wheel", CrankWheelBlock.Small::new)
+            .initialProperties(SharedProperties::wooden)
+            .properties(p -> p.mapColor(MapColor.PODZOL))
+            .transform(axeOrPickaxe())
+            .blockstate(BlockStateGen.directionalBlockProvider(true))
+            .transform(BlockStressDefaults.setCapacity(8.0))
+            .transform(BlockStressDefaults.setGeneratorSpeed(CrankWheelBlock::getSpeedRange))
+            .transform(FeatureToggle.register())
+            .tag(AllTags.AllBlockTags.BRITTLE.tag)
+            .onRegister(ItemUseOverrides::addBlock)
+            .item()
+            .transform(customItemModel())
+            .register();
+
+    public static final BlockEntry<CrankWheelBlock.Large> LARGE_CRANK_WHEEL = REGISTRATE.block("large_crank_wheel", CrankWheelBlock.Large::new)
+            .initialProperties(SharedProperties::wooden)
+            .properties(p -> p.mapColor(MapColor.PODZOL))
+            .transform(axeOrPickaxe())
+            .blockstate(BlockStateGen.directionalBlockProvider(true))
+            .transform(BlockStressDefaults.setCapacity(8.0))
+            .transform(BlockStressDefaults.setGeneratorSpeed(CrankWheelBlock::getSpeedRange))
+            .transform(FeatureToggle.register())
+            .tag(AllTags.AllBlockTags.BRITTLE.tag)
+            .onRegister(ItemUseOverrides::addBlock)
+            .item()
+            .transform(customItemModel())
+            .register();
 
     public static final BlockEntry<ParallelGearboxBlock> PARALLEL_GEARBOX = REGISTRATE.block("parallel_gearbox", ParallelGearboxBlock::new)
             .initialProperties(SharedProperties::stone)

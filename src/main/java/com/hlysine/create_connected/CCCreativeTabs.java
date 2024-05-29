@@ -24,6 +24,8 @@ public class CCCreativeTabs {
 
     public static final List<ItemProviderEntry<?>> ITEMS = List.of(
             CCBlocks.ENCASED_CHAIN_COGWHEEL,
+            CCBlocks.CRANK_WHEEL,
+            CCBlocks.LARGE_CRANK_WHEEL,
             CCBlocks.INVERTED_CLUTCH,
             CCBlocks.INVERTED_GEARSHIFT,
             CCBlocks.PARALLEL_GEARBOX,
