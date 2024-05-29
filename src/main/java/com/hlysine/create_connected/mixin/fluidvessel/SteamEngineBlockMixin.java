@@ -33,8 +33,9 @@ public class SteamEngineBlockMixin {
 
     @Inject(
             at = @At("HEAD"),
-            method = "canAttach(Lnet/minecraft/world/level/LevelReader;Lnet/minecraft/core/BlockPos;Lnet/minecraft/core/Direction;)Z",
-            cancellable = true
+            method = "canAttach",
+            cancellable = true,
+            remap = true
     )
     private static void canAttach(LevelReader pReader, BlockPos pPos, Direction pDirection, CallbackInfoReturnable<Boolean> cir) {
         BlockPos blockpos = pPos.relative(pDirection);
