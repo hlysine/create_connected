@@ -261,7 +261,11 @@ public class FluidVesselBlockEntity extends FluidTankBlockEntity implements IHav
 
                     Shape shape = Shape.PLAIN;
                     if (window)
-                        if (windowType == WindowType.SIDE_WIDE || height <= 1 || windowType == WindowType.SIDE_HORIZONTAL && width <= 2) {
+                        if (windowType == WindowType.SIDE_HORIZONTAL) {
+                            if (yOffset == width / 2) {
+                                shape = Shape.WINDOW;
+                            }
+                        } else if (windowType == WindowType.SIDE_WIDE || height <= 1) {
                             if ((widthOffset == 0 || widthOffset == width - 1)) {
                                 if (width == 1)
                                     shape = Shape.WINDOW;
@@ -283,10 +287,6 @@ public class FluidVesselBlockEntity extends FluidTankBlockEntity implements IHav
                                     shape = Shape.WINDOW_BOTTOM_SINGLE;
                                 else
                                     shape = Shape.WINDOW_MIDDLE_SINGLE;
-                            }
-                        } else if (windowType == WindowType.SIDE_HORIZONTAL) {
-                            if (yOffset == width / 2) {
-                                shape = Shape.WINDOW;
                             }
                         }
 
