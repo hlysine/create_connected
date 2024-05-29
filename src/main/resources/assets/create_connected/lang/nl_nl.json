@@ -72,6 +72,7 @@
   "block.create_connected.fan_smoking_catalyst.tooltip.summary": "Toegewijd apparaat voor _bulk roken_. Inhoud van de katalysator heeft geen effect op de omgeving.",
   "block.create_connected.fan_splashing_catalyst": "Waaier Wassingskatalysator",
   "block.create_connected.fan_splashing_catalyst.tooltip.summary": "Toegewijd apparaat voor _bulk wassen_. Inhoud van de katalysator heeft geen effect op de omgeving.",
+  "block.create_connected.fluid_vessel.tooltip.condition1": "Bij rechter muisklik met Moersleutel",
   "block.create_connected.freewheel_clutch": "Vrijloop Koppeling",
   "block.create_connected.freewheel_clutch.tooltip.summary": "Een koppeling die alleen _koppelt_ als de invoer in _dezelfde richting_ draait als ingesteld is.",
   "block.create_connected.inverted_clutch": "Omgekeerde Koppeling",
