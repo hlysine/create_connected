@@ -4,8 +4,8 @@
     {
       "conditions": [
         {
-          "type": "create_connected:feature_enabled",
-          "feature": "create_connected:crank_wheel"
+          "feature": "create_connected:crank_wheel",
+          "type": "create_connected:feature_enabled"
         }
       ],
       "recipe": {

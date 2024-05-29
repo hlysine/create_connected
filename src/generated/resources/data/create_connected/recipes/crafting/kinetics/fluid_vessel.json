@@ -4,12 +4,15 @@
     {
       "conditions": [
         {
-          "type": "create_connected:feature_enabled",
-          "feature": "create_connected:fluid_vessel"
+          "feature": "create_connected:fluid_vessel",
+          "type": "create_connected:feature_enabled"
         }
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "BCB"
+        ],
         "key": {
           "B": {
             "item": "create:copper_sheet"
@@ -18,9 +21,6 @@
             "tag": "forge:barrels/wooden"
           }
         },
-        "pattern": [
-          "BCB"
-        ],
         "result": {
           "item": "create_connected:fluid_vessel"
         }

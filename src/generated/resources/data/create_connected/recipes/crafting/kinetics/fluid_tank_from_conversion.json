@@ -4,12 +4,12 @@
     {
       "conditions": [
         {
-          "type": "create_connected:feature_enabled",
-          "feature": "create_connected:fluid_vessel"
+          "feature": "create_connected:fluid_vessel",
+          "type": "create_connected:feature_enabled"
         },
         {
-          "type": "create_connected:feature_enabled",
-          "feature": "create:fluid_tank"
+          "feature": "create:fluid_tank",
+          "type": "create_connected:feature_enabled"
         }
       ],
       "recipe": {
