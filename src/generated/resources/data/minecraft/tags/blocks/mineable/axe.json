@@ -1,6 +1,8 @@
 {
   "values": [
     "create_connected:encased_chain_cogwheel",
+    "create_connected:crank_wheel",
+    "create_connected:large_crank_wheel",
     "create_connected:parallel_gearbox",
     "create_connected:six_way_gearbox",
     "create_connected:overstress_clutch",

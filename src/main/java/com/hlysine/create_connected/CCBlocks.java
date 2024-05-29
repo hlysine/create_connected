@@ -1,12 +1,12 @@
 package com.hlysine.create_connected;
 
 import com.hlysine.create_connected.config.FeatureToggle;
+import com.hlysine.create_connected.content.BlockStressDefaults;
 import com.hlysine.create_connected.content.WrenchableBlock;
 import com.hlysine.create_connected.content.brake.BrakeBlock;
 import com.hlysine.create_connected.content.brassgearbox.BrassGearboxBlock;
 import com.hlysine.create_connected.content.centrifugalclutch.CentrifugalClutchBlock;
 import com.hlysine.create_connected.content.chaincogwheel.ChainCogwheelBlock;
-import com.hlysine.create_connected.content.BlockStressDefaults;
 import com.hlysine.create_connected.content.copycat.beam.CopycatBeamBlock;
 import com.hlysine.create_connected.content.copycat.beam.CopycatBeamModel;
 import com.hlysine.create_connected.content.copycat.block.CopycatBlockBlock;
@@ -29,6 +29,11 @@ import com.hlysine.create_connected.content.copycat.verticalstep.CopycatVertical
 import com.hlysine.create_connected.content.copycat.wall.CopycatWallBlock;
 import com.hlysine.create_connected.content.copycat.wall.CopycatWallModel;
 import com.hlysine.create_connected.content.copycat.wall.WrappedWallBlock;
+import com.hlysine.create_connected.content.crankwheel.CrankWheelBlock;
+import com.hlysine.create_connected.content.fluidvessel.FluidVesselBlock;
+import com.hlysine.create_connected.content.fluidvessel.FluidVesselGenerator;
+import com.hlysine.create_connected.content.fluidvessel.FluidVesselItem;
+import com.hlysine.create_connected.content.fluidvessel.FluidVesselModel;
 import com.hlysine.create_connected.content.freewheelclutch.FreewheelClutchBlock;
 import com.hlysine.create_connected.content.invertedclutch.InvertedClutchBlock;
 import com.hlysine.create_connected.content.invertedgearshift.InvertedGearshiftBlock;
@@ -52,6 +57,8 @@ import com.simibubi.create.Create;
 import com.simibubi.create.content.decoration.encasing.EncasedCTBehaviour;
 import com.simibubi.create.content.kinetics.chainDrive.ChainDriveGenerator;
 import com.simibubi.create.content.kinetics.simpleRelays.BracketedKineticBlockModel;
+import com.simibubi.create.content.redstone.displayLink.source.BoilerDisplaySource;
+import com.simibubi.create.foundation.block.ItemUseOverrides;
 import com.simibubi.create.foundation.data.*;
 import com.simibubi.create.foundation.utility.Iterate;
 import com.tterrag.registrate.providers.DataGenContext;
@@ -62,6 +69,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.WoodType;
@@ -81,6 +89,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
+import static com.simibubi.create.content.redstone.displayLink.AllDisplayBehaviours.assignDataBehaviour;
 import static com.simibubi.create.foundation.data.AssetLookup.partialBaseModel;
 import static com.simibubi.create.foundation.data.BlockStateGen.axisBlock;
 import static com.simibubi.create.foundation.data.CreateRegistrate.connectedTextures;
@@ -105,6 +114,34 @@ public class CCBlocks {
                     .item()
                     .transform(customItemModel())
                     .register();
+
+    public static final BlockEntry<CrankWheelBlock.Small> CRANK_WHEEL = REGISTRATE.block("crank_wheel", CrankWheelBlock.Small::new)
+            .initialProperties(SharedProperties::wooden)
+            .properties(p -> p.mapColor(MapColor.PODZOL))
+            .transform(axeOrPickaxe())
+            .blockstate(BlockStateGen.directionalBlockProvider(true))
+            .transform(BlockStressDefaults.setCapacity(8.0))
+            .transform(BlockStressDefaults.setGeneratorSpeed(CrankWheelBlock::getSpeedRange))
+            .transform(FeatureToggle.register())
+            .tag(AllTags.AllBlockTags.BRITTLE.tag)
+            .onRegister(ItemUseOverrides::addBlock)
+            .item()
+            .transform(customItemModel())
+            .register();
+
+    public static final BlockEntry<CrankWheelBlock.Large> LARGE_CRANK_WHEEL = REGISTRATE.block("large_crank_wheel", CrankWheelBlock.Large::new)
+            .initialProperties(SharedProperties::wooden)
+            .properties(p -> p.mapColor(MapColor.PODZOL))
+            .transform(axeOrPickaxe())
+            .blockstate(BlockStateGen.directionalBlockProvider(true))
+            .transform(BlockStressDefaults.setCapacity(8.0))
+            .transform(BlockStressDefaults.setGeneratorSpeed(CrankWheelBlock::getSpeedRange))
+            .transform(FeatureToggle.register())
+            .tag(AllTags.AllBlockTags.BRITTLE.tag)
+            .onRegister(ItemUseOverrides::addBlock)
+            .item()
+            .transform(customItemModel())
+            .register();
 
     public static final BlockEntry<ParallelGearboxBlock> PARALLEL_GEARBOX = REGISTRATE.block("parallel_gearbox", ParallelGearboxBlock::new)
             .initialProperties(SharedProperties::stone)
@@ -420,6 +457,23 @@ public class CCBlocks {
             .transform(customItemModel())
             .register();
 
+    public static final BlockEntry<WrenchableBlock> FAN_FREEZING_CATALYST = REGISTRATE.block("fan_freezing_catalyst", WrenchableBlock::new)
+            .initialProperties(() -> Blocks.IRON_BLOCK)
+            .properties(p -> p
+                    .mapColor(MapColor.TERRACOTTA_YELLOW)
+                    .requiresCorrectToolForDrops()
+                    .noOcclusion()
+                    .isRedstoneConductor((state, level, pos) -> false)
+            )
+            .addLayer(() -> RenderType::cutoutMipped)
+            .transform(pickaxeOnly())
+            .transform(FeatureToggle.register())
+            .blockstate((c, p) -> p.simpleBlock(c.getEntry(), AssetLookup.partialBaseModel(c, p)))
+            .tag(AllTags.AllBlockTags.FAN_TRANSPARENT.tag)
+            .item()
+            .transform(customItemModel())
+            .register();
+
     public static final BlockEntry<ItemSiloBlock> ITEM_SILO = REGISTRATE.block("item_silo", ItemSiloBlock::new)
             .initialProperties(SharedProperties::softMetal)
             .properties(p -> p.color(MaterialColor.TERRACOTTA_BLUE).sound(SoundType.NETHERITE_BLOCK)
@@ -434,6 +488,43 @@ public class CCBlocks {
             .item(ItemSiloItem::new)
             .build()
             .register();
+
+    public static final BlockEntry<FluidVesselBlock> FLUID_VESSEL = REGISTRATE.block("fluid_vessel", FluidVesselBlock::regular)
+            .initialProperties(SharedProperties::copperMetal)
+            .properties(p -> p.noOcclusion().isRedstoneConductor((p1, p2, p3) -> true))
+            .transform(pickaxeOnly())
+            .transform(FeatureToggle.register())
+            .blockstate(new FluidVesselGenerator()::generate)
+            .onRegister(CreateRegistrate.blockModel(() -> FluidVesselModel::standard))
+            .onRegister(assignDataBehaviour(new BoilerDisplaySource(), "boiler_status"))
+            .addLayer(() -> RenderType::cutoutMipped)
+            .item(FluidVesselItem::new)
+            .model(AssetLookup.customBlockItemModel("_", "block_x_single_window"))
+            .build()
+            .register();
+
+    public static final BlockEntry<FluidVesselBlock> CREATIVE_FLUID_VESSEL =
+            REGISTRATE.block("creative_fluid_vessel", FluidVesselBlock::creative)
+                    .initialProperties(SharedProperties::copperMetal)
+                    .properties(p -> p.noOcclusion().mapColor(MapColor.COLOR_PURPLE))
+                    .transform(pickaxeOnly())
+                    .transform(FeatureToggle.registerDependent(FLUID_VESSEL))
+                    .tag(AllTags.AllBlockTags.SAFE_NBT.tag)
+                    .blockstate(new FluidVesselGenerator("creative_")::generate)
+                    .onRegister(CreateRegistrate.blockModel(() -> FluidVesselModel::creative))
+                    .addLayer(() -> RenderType::cutoutMipped)
+                    .item(FluidVesselItem::new)
+                    .properties(p -> p.rarity(Rarity.EPIC))
+                    .model((c, p) -> p.withExistingParent(c.getName(), p.modLoc("block/fluid_vessel/block_x_single_window"))
+                            .texture("5", Create.asResource("block/creative_fluid_tank_window_single"))
+                            .texture("1", Create.asResource("block/creative_fluid_tank"))
+                            .texture("particle", Create.asResource("block/creative_fluid_tank"))
+                            .texture("4", Create.asResource("block/creative_casing"))
+                            .texture("6", p.modLoc("block/fluid_container_window"))
+                            .texture("7", p.modLoc("block/creative_fluid_container_window_single"))
+                            .texture("0", Create.asResource("block/creative_casing")))
+                    .build()
+                    .register();
 
     public static final BlockEntry<CopycatSlabBlock> COPYCAT_SLAB =
             REGISTRATE.block("copycat_slab", CopycatSlabBlock::new)

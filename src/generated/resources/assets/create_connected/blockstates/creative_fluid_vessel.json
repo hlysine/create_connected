@@ -1,0 +1,220 @@
+{
+  "variants": {
+    "axis=x,negative=false,positive=false,shape=plain": {
+      "model": "create_connected:block/creative_x_middle"
+    },
+    "axis=x,negative=false,positive=false,shape=window": {
+      "model": "create_connected:block/creative_x_middle_window"
+    },
+    "axis=x,negative=false,positive=false,shape=window_bottom": {
+      "model": "create_connected:block/creative_x_middle_window_bottom"
+    },
+    "axis=x,negative=false,positive=false,shape=window_bottom_single": {
+      "model": "create_connected:block/creative_x_middle_window_bottom_single"
+    },
+    "axis=x,negative=false,positive=false,shape=window_middle": {
+      "model": "create_connected:block/creative_x_middle_window_middle"
+    },
+    "axis=x,negative=false,positive=false,shape=window_middle_single": {
+      "model": "create_connected:block/creative_x_middle_window_middle_single"
+    },
+    "axis=x,negative=false,positive=false,shape=window_single": {
+      "model": "create_connected:block/creative_x_middle_window_single"
+    },
+    "axis=x,negative=false,positive=false,shape=window_top": {
+      "model": "create_connected:block/creative_x_middle_window_top"
+    },
+    "axis=x,negative=false,positive=false,shape=window_top_single": {
+      "model": "create_connected:block/creative_x_middle_window_top_single"
+    },
+    "axis=x,negative=false,positive=true,shape=plain": {
+      "model": "create_connected:block/creative_x_positive"
+    },
+    "axis=x,negative=false,positive=true,shape=window": {
+      "model": "create_connected:block/creative_x_positive_window"
+    },
+    "axis=x,negative=false,positive=true,shape=window_bottom": {
+      "model": "create_connected:block/creative_x_positive_window_bottom"
+    },
+    "axis=x,negative=false,positive=true,shape=window_bottom_single": {
+      "model": "create_connected:block/creative_x_positive_window_bottom_single"
+    },
+    "axis=x,negative=false,positive=true,shape=window_middle": {
+      "model": "create_connected:block/creative_x_positive_window_middle"
+    },
+    "axis=x,negative=false,positive=true,shape=window_middle_single": {
+      "model": "create_connected:block/creative_x_positive_window_middle_single"
+    },
+    "axis=x,negative=false,positive=true,shape=window_single": {
+      "model": "create_connected:block/creative_x_positive_window_single"
+    },
+    "axis=x,negative=false,positive=true,shape=window_top": {
+      "model": "create_connected:block/creative_x_positive_window_top"
+    },
+    "axis=x,negative=false,positive=true,shape=window_top_single": {
+      "model": "create_connected:block/creative_x_positive_window_top_single"
+    },
+    "axis=x,negative=true,positive=false,shape=plain": {
+      "model": "create_connected:block/creative_x_negative"
+    },
+    "axis=x,negative=true,positive=false,shape=window": {
+      "model": "create_connected:block/creative_x_negative_window"
+    },
+    "axis=x,negative=true,positive=false,shape=window_bottom": {
+      "model": "create_connected:block/creative_x_negative_window_bottom"
+    },
+    "axis=x,negative=true,positive=false,shape=window_bottom_single": {
+      "model": "create_connected:block/creative_x_negative_window_bottom_single"
+    },
+    "axis=x,negative=true,positive=false,shape=window_middle": {
+      "model": "create_connected:block/creative_x_negative_window_middle"
+    },
+    "axis=x,negative=true,positive=false,shape=window_middle_single": {
+      "model": "create_connected:block/creative_x_negative_window_middle_single"
+    },
+    "axis=x,negative=true,positive=false,shape=window_single": {
+      "model": "create_connected:block/creative_x_negative_window_single"
+    },
+    "axis=x,negative=true,positive=false,shape=window_top": {
+      "model": "create_connected:block/creative_x_negative_window_top"
+    },
+    "axis=x,negative=true,positive=false,shape=window_top_single": {
+      "model": "create_connected:block/creative_x_negative_window_top_single"
+    },
+    "axis=x,negative=true,positive=true,shape=plain": {
+      "model": "create_connected:block/creative_x_single"
+    },
+    "axis=x,negative=true,positive=true,shape=window": {
+      "model": "create_connected:block/creative_x_single_window"
+    },
+    "axis=x,negative=true,positive=true,shape=window_bottom": {
+      "model": "create_connected:block/creative_x_single_window_bottom"
+    },
+    "axis=x,negative=true,positive=true,shape=window_bottom_single": {
+      "model": "create_connected:block/creative_x_single_window_bottom"
+    },
+    "axis=x,negative=true,positive=true,shape=window_middle": {
+      "model": "create_connected:block/creative_x_single_window_middle"
+    },
+    "axis=x,negative=true,positive=true,shape=window_middle_single": {
+      "model": "create_connected:block/creative_x_single_window_middle"
+    },
+    "axis=x,negative=true,positive=true,shape=window_single": {
+      "model": "create_connected:block/creative_x_single_window"
+    },
+    "axis=x,negative=true,positive=true,shape=window_top": {
+      "model": "create_connected:block/creative_x_single_window_top"
+    },
+    "axis=x,negative=true,positive=true,shape=window_top_single": {
+      "model": "create_connected:block/creative_x_single_window_top"
+    },
+    "axis=z,negative=false,positive=false,shape=plain": {
+      "model": "create_connected:block/creative_z_middle"
+    },
+    "axis=z,negative=false,positive=false,shape=window": {
+      "model": "create_connected:block/creative_z_middle_window"
+    },
+    "axis=z,negative=false,positive=false,shape=window_bottom": {
+      "model": "create_connected:block/creative_z_middle_window_bottom"
+    },
+    "axis=z,negative=false,positive=false,shape=window_bottom_single": {
+      "model": "create_connected:block/creative_z_middle_window_bottom_single"
+    },
+    "axis=z,negative=false,positive=false,shape=window_middle": {
+      "model": "create_connected:block/creative_z_middle_window_middle"
+    },
+    "axis=z,negative=false,positive=false,shape=window_middle_single": {
+      "model": "create_connected:block/creative_z_middle_window_middle_single"
+    },
+    "axis=z,negative=false,positive=false,shape=window_single": {
+      "model": "create_connected:block/creative_z_middle_window_single"
+    },
+    "axis=z,negative=false,positive=false,shape=window_top": {
+      "model": "create_connected:block/creative_z_middle_window_top"
+    },
+    "axis=z,negative=false,positive=false,shape=window_top_single": {
+      "model": "create_connected:block/creative_z_middle_window_top_single"
+    },
+    "axis=z,negative=false,positive=true,shape=plain": {
+      "model": "create_connected:block/creative_z_positive"
+    },
+    "axis=z,negative=false,positive=true,shape=window": {
+      "model": "create_connected:block/creative_z_positive_window"
+    },
+    "axis=z,negative=false,positive=true,shape=window_bottom": {
+      "model": "create_connected:block/creative_z_positive_window_bottom"
+    },
+    "axis=z,negative=false,positive=true,shape=window_bottom_single": {
+      "model": "create_connected:block/creative_z_positive_window_bottom_single"
+    },
+    "axis=z,negative=false,positive=true,shape=window_middle": {
+      "model": "create_connected:block/creative_z_positive_window_middle"
+    },
+    "axis=z,negative=false,positive=true,shape=window_middle_single": {
+      "model": "create_connected:block/creative_z_positive_window_middle_single"
+    },
+    "axis=z,negative=false,positive=true,shape=window_single": {
+      "model": "create_connected:block/creative_z_positive_window_single"
+    },
+    "axis=z,negative=false,positive=true,shape=window_top": {
+      "model": "create_connected:block/creative_z_positive_window_top"
+    },
+    "axis=z,negative=false,positive=true,shape=window_top_single": {
+      "model": "create_connected:block/creative_z_positive_window_top_single"
+    },
+    "axis=z,negative=true,positive=false,shape=plain": {
+      "model": "create_connected:block/creative_z_negative"
+    },
+    "axis=z,negative=true,positive=false,shape=window": {
+      "model": "create_connected:block/creative_z_negative_window"
+    },
+    "axis=z,negative=true,positive=false,shape=window_bottom": {
+      "model": "create_connected:block/creative_z_negative_window_bottom"
+    },
+    "axis=z,negative=true,positive=false,shape=window_bottom_single": {
+      "model": "create_connected:block/creative_z_negative_window_bottom_single"
+    },
+    "axis=z,negative=true,positive=false,shape=window_middle": {
+      "model": "create_connected:block/creative_z_negative_window_middle"
+    },
+    "axis=z,negative=true,positive=false,shape=window_middle_single": {
+      "model": "create_connected:block/creative_z_negative_window_middle_single"
+    },
+    "axis=z,negative=true,positive=false,shape=window_single": {
+      "model": "create_connected:block/creative_z_negative_window_single"
+    },
+    "axis=z,negative=true,positive=false,shape=window_top": {
+      "model": "create_connected:block/creative_z_negative_window_top"
+    },
+    "axis=z,negative=true,positive=false,shape=window_top_single": {
+      "model": "create_connected:block/creative_z_negative_window_top_single"
+    },
+    "axis=z,negative=true,positive=true,shape=plain": {
+      "model": "create_connected:block/creative_z_single"
+    },
+    "axis=z,negative=true,positive=true,shape=window": {
+      "model": "create_connected:block/creative_z_single_window"
+    },
+    "axis=z,negative=true,positive=true,shape=window_bottom": {
+      "model": "create_connected:block/creative_z_single_window_bottom"
+    },
+    "axis=z,negative=true,positive=true,shape=window_bottom_single": {
+      "model": "create_connected:block/creative_z_single_window_bottom"
+    },
+    "axis=z,negative=true,positive=true,shape=window_middle": {
+      "model": "create_connected:block/creative_z_single_window_middle"
+    },
+    "axis=z,negative=true,positive=true,shape=window_middle_single": {
+      "model": "create_connected:block/creative_z_single_window_middle"
+    },
+    "axis=z,negative=true,positive=true,shape=window_single": {
+      "model": "create_connected:block/creative_z_single_window"
+    },
+    "axis=z,negative=true,positive=true,shape=window_top": {
+      "model": "create_connected:block/creative_z_single_window_top"
+    },
+    "axis=z,negative=true,positive=true,shape=window_top_single": {
+      "model": "create_connected:block/creative_z_single_window_top"
+    }
+  }
+}

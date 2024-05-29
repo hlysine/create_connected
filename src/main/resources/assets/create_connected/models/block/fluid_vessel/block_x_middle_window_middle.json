@@ -1,0 +1,38 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "block/block",
+	"textures": {
+		"6": "create_connected:block/fluid_container_window",
+		"particle": "create:block/fluid_tank"
+	},
+	"elements": [
+		{
+			"name": "Window",
+			"from": [0, 0, 0.95],
+			"to": [16, 16, 0.95],
+			"rotation": {"angle": 0, "axis": "z", "origin": [8, 4, 8]},
+			"faces": {
+				"north": {"uv": [4.8, 4, 11.2, 12], "texture": "#6", "cullface": "north"},
+				"south": {"uv": [4.8, 4, 11.2, 12], "texture": "#6", "cullface": "north"}
+			}
+		},
+		{
+			"name": "Window",
+			"from": [0, 0, 15.05],
+			"to": [16, 16, 15.05],
+			"rotation": {"angle": 0, "axis": "z", "origin": [8, 4, 8]},
+			"faces": {
+				"north": {"uv": [4.8, 4, 11.2, 12], "texture": "#6", "cullface": "south"},
+				"south": {"uv": [4.8, 4, 11.2, 12], "texture": "#6", "cullface": "south"}
+			}
+		}
+	],
+	"groups": [
+		{
+			"name": "tank",
+			"origin": [8, 8, -23],
+			"color": 0,
+			"children": [0, 1]
+		}
+	]
+}

@@ -1,1 +1,21 @@
-{}
+{
+  "advancement.create_connected.brass_gearbox": "Alvorlig rydding",
+  "advancement.create_connected.control_chip": "Presis framstilling",
+  "advancement.create_connected.root": "Velkommen til Create: Sammenkoblet",
+  "advancement.create_connected.root.desc": "Dingsebomser til alle situasjoner",
+  "block.create_connected.bamboo_window": "Bambusvindu",
+  "block.create_connected.copycat_beam.tooltip.condition1": "Når høyreklikket",
+  "block.create_connected.copycat_block.tooltip.condition1": "Når høyreklikket",
+  "block.create_connected.copycat_board.tooltip.condition1": "Når høyreklikket",
+  "block.create_connected.copycat_fence.tooltip.condition1": "Når høyreklikket",
+  "block.create_connected.copycat_fence_gate.tooltip.condition1": "Når høyreklikket",
+  "block.create_connected.copycat_slab.tooltip.condition1": "Når høyreklikket",
+  "block.create_connected.fluid_vessel.tooltip.condition1": "Når høyreklikket med skiftenøkkel",
+  "block.create_connected.inverted_clutch": "Omvendt kobling",
+  "block.create_connected.inverted_gearshift": "Omvendt giromveksler",
+  "block.create_connected.item_silo": "Silo",
+  "block.create_connected.item_silo.tooltip.summary": "Et _vertikalt_ gjenstandshvelv.",
+  "block.create_connected.overstress_clutch": "Overbelastningskobling",
+  "block.create_connected.overstress_clutch.tooltip.condition1": "Når høyreklikket med skiftenøkkel",
+  "block.create_connected.parallel_gearbox": "Parallell girkasse"
+}

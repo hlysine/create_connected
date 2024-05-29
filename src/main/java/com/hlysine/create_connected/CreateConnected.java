@@ -63,7 +63,6 @@ public class CreateConnected {
         CCConfigs.register(ModLoadingContext.get());
         CCConfigs.common().register();
 
-        CCItemAttributes.register();
         CCInteractionBehaviours.register();
         CCMovementBehaviours.register();
 

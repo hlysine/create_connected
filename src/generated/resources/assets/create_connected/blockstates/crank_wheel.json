@@ -1,0 +1,160 @@
+{
+  "variants": {
+    "axis=x,facing=down,waterlogged=false": {
+      "model": "create_connected:block/crank_wheel/block",
+      "x": 180
+    },
+    "axis=x,facing=down,waterlogged=true": {
+      "model": "create_connected:block/crank_wheel/block",
+      "x": 180
+    },
+    "axis=x,facing=east,waterlogged=false": {
+      "model": "create_connected:block/crank_wheel/block",
+      "x": 90,
+      "y": 90
+    },
+    "axis=x,facing=east,waterlogged=true": {
+      "model": "create_connected:block/crank_wheel/block",
+      "x": 90,
+      "y": 90
+    },
+    "axis=x,facing=north,waterlogged=false": {
+      "model": "create_connected:block/crank_wheel/block",
+      "x": 90
+    },
+    "axis=x,facing=north,waterlogged=true": {
+      "model": "create_connected:block/crank_wheel/block",
+      "x": 90
+    },
+    "axis=x,facing=south,waterlogged=false": {
+      "model": "create_connected:block/crank_wheel/block",
+      "x": 90,
+      "y": 180
+    },
+    "axis=x,facing=south,waterlogged=true": {
+      "model": "create_connected:block/crank_wheel/block",
+      "x": 90,
+      "y": 180
+    },
+    "axis=x,facing=up,waterlogged=false": {
+      "model": "create_connected:block/crank_wheel/block"
+    },
+    "axis=x,facing=up,waterlogged=true": {
+      "model": "create_connected:block/crank_wheel/block"
+    },
+    "axis=x,facing=west,waterlogged=false": {
+      "model": "create_connected:block/crank_wheel/block",
+      "x": 90,
+      "y": 270
+    },
+    "axis=x,facing=west,waterlogged=true": {
+      "model": "create_connected:block/crank_wheel/block",
+      "x": 90,
+      "y": 270
+    },
+    "axis=y,facing=down,waterlogged=false": {
+      "model": "create_connected:block/crank_wheel/block",
+      "x": 180
+    },
+    "axis=y,facing=down,waterlogged=true": {
+      "model": "create_connected:block/crank_wheel/block",
+      "x": 180
+    },
+    "axis=y,facing=east,waterlogged=false": {
+      "model": "create_connected:block/crank_wheel/block",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y,facing=east,waterlogged=true": {
+      "model": "create_connected:block/crank_wheel/block",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y,facing=north,waterlogged=false": {
+      "model": "create_connected:block/crank_wheel/block",
+      "x": 90
+    },
+    "axis=y,facing=north,waterlogged=true": {
+      "model": "create_connected:block/crank_wheel/block",
+      "x": 90
+    },
+    "axis=y,facing=south,waterlogged=false": {
+      "model": "create_connected:block/crank_wheel/block",
+      "x": 90,
+      "y": 180
+    },
+    "axis=y,facing=south,waterlogged=true": {
+      "model": "create_connected:block/crank_wheel/block",
+      "x": 90,
+      "y": 180
+    },
+    "axis=y,facing=up,waterlogged=false": {
+      "model": "create_connected:block/crank_wheel/block"
+    },
+    "axis=y,facing=up,waterlogged=true": {
+      "model": "create_connected:block/crank_wheel/block"
+    },
+    "axis=y,facing=west,waterlogged=false": {
+      "model": "create_connected:block/crank_wheel/block",
+      "x": 90,
+      "y": 270
+    },
+    "axis=y,facing=west,waterlogged=true": {
+      "model": "create_connected:block/crank_wheel/block",
+      "x": 90,
+      "y": 270
+    },
+    "axis=z,facing=down,waterlogged=false": {
+      "model": "create_connected:block/crank_wheel/block",
+      "x": 180
+    },
+    "axis=z,facing=down,waterlogged=true": {
+      "model": "create_connected:block/crank_wheel/block",
+      "x": 180
+    },
+    "axis=z,facing=east,waterlogged=false": {
+      "model": "create_connected:block/crank_wheel/block",
+      "x": 90,
+      "y": 90
+    },
+    "axis=z,facing=east,waterlogged=true": {
+      "model": "create_connected:block/crank_wheel/block",
+      "x": 90,
+      "y": 90
+    },
+    "axis=z,facing=north,waterlogged=false": {
+      "model": "create_connected:block/crank_wheel/block",
+      "x": 90
+    },
+    "axis=z,facing=north,waterlogged=true": {
+      "model": "create_connected:block/crank_wheel/block",
+      "x": 90
+    },
+    "axis=z,facing=south,waterlogged=false": {
+      "model": "create_connected:block/crank_wheel/block",
+      "x": 90,
+      "y": 180
+    },
+    "axis=z,facing=south,waterlogged=true": {
+      "model": "create_connected:block/crank_wheel/block",
+      "x": 90,
+      "y": 180
+    },
+    "axis=z,facing=up,waterlogged=false": {
+      "model": "create_connected:block/crank_wheel/block"
+    },
+    "axis=z,facing=up,waterlogged=true": {
+      "model": "create_connected:block/crank_wheel/block"
+    },
+    "axis=z,facing=west,waterlogged=false": {
+      "model": "create_connected:block/crank_wheel/block",
+      "x": 90,
+      "y": 270
+    },
+    "axis=z,facing=west,waterlogged=true": {
+      "model": "create_connected:block/crank_wheel/block",
+      "x": 90,
+      "y": 270
+    }
+  }
+}

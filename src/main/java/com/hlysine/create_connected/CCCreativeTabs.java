@@ -14,6 +14,8 @@ public class CCCreativeTabs {
 
     public static final List<ItemProviderEntry<?>> ITEMS = List.of(
             CCBlocks.ENCASED_CHAIN_COGWHEEL,
+            CCBlocks.CRANK_WHEEL,
+            CCBlocks.LARGE_CRANK_WHEEL,
             CCBlocks.INVERTED_CLUTCH,
             CCBlocks.INVERTED_GEARSHIFT,
             CCBlocks.PARALLEL_GEARBOX,
@@ -28,6 +30,8 @@ public class CCCreativeTabs {
             CCBlocks.FREEWHEEL_CLUTCH,
             CCBlocks.BRAKE,
             CCBlocks.ITEM_SILO,
+            CCBlocks.FLUID_VESSEL,
+            CCBlocks.CREATIVE_FLUID_VESSEL,
             CCBlocks.SEQUENCED_PULSE_GENERATOR,
             CCItems.LINKED_TRANSMITTER,
             CCBlocks.EMPTY_FAN_CATALYST,
@@ -35,6 +39,7 @@ public class CCCreativeTabs {
             CCBlocks.FAN_SMOKING_CATALYST,
             CCBlocks.FAN_SPLASHING_CATALYST,
             CCBlocks.FAN_HAUNTING_CATALYST,
+            CCBlocks.FAN_FREEZING_CATALYST,
             CCBlocks.COPYCAT_BLOCK,
             CCBlocks.COPYCAT_SLAB,
             CCBlocks.COPYCAT_BEAM,

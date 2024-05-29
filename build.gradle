@@ -161,9 +161,29 @@ repositories {
         name = "ModMaven"
         url = "https://modmaven.dev"
     }
-    maven {
-        name = "Modrinth"
-        url = "https://api.modrinth.com/maven"
+    exclusiveContent {
+        forRepository {
+            maven {
+                name = "Modrinth"
+                url = "https://api.modrinth.com/maven"
+            }
+        }
+        forRepositories(fg.repository)
+        filter {
+            includeGroup "maven.modrinth"
+        }
+    }
+    exclusiveContent {
+        forRepository {
+            maven {
+                name = "Curse Maven"
+                url = "https://cursemaven.com"
+            }
+        }
+        forRepositories(fg.repository)
+        filter {
+            includeGroup "curse.maven"
+        }
     }
 
     // If you have mod jar dependencies in ./libs, you can declare them as a repository like so.
@@ -202,6 +222,8 @@ dependencies {
     // This maps to ./libs/coolmod-${mc_version}-${coolmod_version}.jar
     // The group id is ignored when searching -- in this case, it is "blank"
     implementation fg.deobf("blank:copycats-${copycats_minecraft_version}:${copycats_version}")
+//    implementation fg.deobf("maven.modrinth:create-garnished:${garnished_version}+${garnished_minecraft_version}")
+//    implementation fg.deobf("maven.modrinth:create-dreams-and-desires:${dreams_desires_minecraft_version}-${dreams_desires_version}")
 
     // For more info:
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html

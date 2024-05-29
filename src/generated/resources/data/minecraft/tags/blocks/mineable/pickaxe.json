@@ -1,6 +1,8 @@
 {
   "values": [
     "create_connected:encased_chain_cogwheel",
+    "create_connected:crank_wheel",
+    "create_connected:large_crank_wheel",
     "create_connected:parallel_gearbox",
     "create_connected:six_way_gearbox",
     "create_connected:overstress_clutch",
@@ -16,7 +18,10 @@
     "create_connected:fan_smoking_catalyst",
     "create_connected:fan_splashing_catalyst",
     "create_connected:fan_haunting_catalyst",
+    "create_connected:fan_freezing_catalyst",
     "create_connected:item_silo",
+    "create_connected:fluid_vessel",
+    "create_connected:creative_fluid_vessel",
     "create_connected:copycat_slab",
     "create_connected:copycat_block",
     "create_connected:copycat_beam",

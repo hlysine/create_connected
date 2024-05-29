@@ -19,6 +19,8 @@ public class CCPonders {
     public static void register() {
         HELPER.forComponents(CCBlocks.ENCASED_CHAIN_COGWHEEL)
                 .addStoryBoard("chain_cogwheel", ChainCogwheelScenes::chainCogwheelAsRelay, AllPonderTags.KINETIC_RELAYS);
+        HELPER.forComponents(CCBlocks.CRANK_WHEEL, CCBlocks.LARGE_CRANK_WHEEL)
+                .addStoryBoard("crank_wheel", CrankWheelScenes::crankWheel, AllPonderTags.KINETIC_SOURCES);
         HELPER.forComponents(CCBlocks.INVERTED_CLUTCH)
                 .addStoryBoard("inverted_clutch", InvertedClutchScenes::invertedClutch, AllPonderTags.KINETIC_RELAYS);
         HELPER.forComponents(CCBlocks.INVERTED_GEARSHIFT)
@@ -30,6 +32,8 @@ public class CCPonders {
         HELPER.forComponents(CCItems.LINKED_TRANSMITTER)
                 .addStoryBoard("linked_transmitter", LinkedTransmitterScenes::linkedTransmitter, AllPonderTags.REDSTONE);
 
+        PonderRegistry.TAGS.forTag(AllPonderTags.KINETIC_SOURCES)
+                .add(CCBlocks.CRANK_WHEEL);
         PonderRegistry.TAGS.forTag(AllPonderTags.KINETIC_RELAYS)
                 .add(CCBlocks.ENCASED_CHAIN_COGWHEEL)
                 .add(CCBlocks.INVERTED_CLUTCH)

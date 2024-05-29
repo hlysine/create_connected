@@ -19,6 +19,8 @@ public class ItemApplicationRecipeGen extends ProcessingRecipeGen {
             "splashing_catalyst", Items.WATER_BUCKET::asItem, CCBlocks.FAN_SPLASHING_CATALYST.get()::asItem);
     GeneratedRecipe HAUNTING_CATALYST = fanCatalystFromEmpty(
             "haunting_catalyst", Items.SOUL_SAND::asItem, CCBlocks.FAN_HAUNTING_CATALYST.get()::asItem);
+    GeneratedRecipe FREEZING_CATALYST = fanCatalystFromEmpty(
+            "freezing_catalyst", Items.POWDER_SNOW_BUCKET::asItem, CCBlocks.FAN_FREEZING_CATALYST::asItem);
 
     protected GeneratedRecipe fanCatalystFromEmpty(String type, Supplier<ItemLike> ingredient, Supplier<ItemLike> output) {
         return create(type + "_from_empty", b -> b.require(CCBlocks.EMPTY_FAN_CATALYST.get())
