@@ -19,30 +19,20 @@ out [Create: Power Loader](https://modrinth.com/mod/create-power-loader)**
 
 > Join us in the [Create: Addon Hub](https://discord.gg/3AvrppcgG3) server for a chat!
 
-## What's new in 0.7
+## What's new in 0.8
 
-**Compatibility with Create: Copycats+**
+![fluid_vessel](https://github.com/hlysine/create_connected/assets/25472513/aeebc30a-ea8c-4aaa-b80c-36993ea7b5d5) ![creative_fluid_vessel](https://github.com/hlysine/create_connected/assets/25472513/80ad7d61-731e-494d-a334-d59215874aa3) **Fluid Vessel**
 
-All copycats from Create: Connected, Create: More Copycats and Create: Copies and Cats are merged into the ultimate
-mod - [**Create: Copycats+**](https://modrinth.com/mod/copycats) !
+Horizontal fluid tanks with full support of all fluid tank features! Boilers made from fluid vessels are nerfed by
+default, but can be changed in the server config. You can also cycle through multiple window shapes using a wrench.
 
-Copycats+ exclusive features include:
+![crank_wheel](https://github.com/hlysine/create_connected/assets/25472513/36c28f61-423b-493e-943b-534a4d4bcd39) ![large_crank_wheel](https://github.com/hlysine/create_connected/assets/25472513/c4b94676-4ec0-46de-8a15-317c1689aa57) **Small/Large Crank Wheels**
 
-- Forge/**Fabric** 1.20.1/1.19.2/1.18.2 support
-- Even more copycats
-- Improved copycat model quality
-- Toggleable connected textures
+Hand cranks with built-in cogwheels. Useful in tight spaces and for gear ratios.
 
-![Copycats+](https://cdn.modrinth.com/data/UT2M39wf/images/e20c128b7c0e000e904584811d20f753d846af80.png)
+![fan_freezing_catalyst](https://github.com/hlysine/create_connected/assets/25472513/f7e07503-f2ec-48d1-9fb1-d74e65253632) **Fan Freezing Catalyst**
 
-All your existing C:Connected copycats will migrate seamlessly and progressively when you install Copycats+ and
-Connected side-by-side.
-Keep both mods installed to avoid data loss in existing worlds.
-
-**Various bug fixes**
-
-Multiple crashes have been fixed. If you've had issues with Create: Connected in your modpacks before, please try again
-with this new version.
+A new catalyst for bulk freezing. Works with Create: Garnished and Create: Dreams & Desires.
 
 ## Features
 
