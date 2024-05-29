@@ -72,6 +72,7 @@
   "block.create_connected.fan_smoking_catalyst.tooltip.summary": "_훈연_ 전용 장치입니다. 촉매의 내용물은 외부 환경과 상호작용하지 않습니다.",
   "block.create_connected.fan_splashing_catalyst": "선풍기 세척 촉매",
   "block.create_connected.fan_splashing_catalyst.tooltip.summary": "_세척_ 전용 장치입니다. 촉매의 내용물은 외부 환경과 상호작용하지 않습니다.",
+  "block.create_connected.fluid_vessel.tooltip.condition1": "렌치로 우클릭",
   "block.create_connected.freewheel_clutch": "프리휠 클러치",
   "block.create_connected.freewheel_clutch.tooltip.summary": "입력 회전 방향이 설정한 _회전 방향과 일치할 때만_ 연결되는 클러치입니다.",
   "block.create_connected.inverted_clutch": "반전 클러치",

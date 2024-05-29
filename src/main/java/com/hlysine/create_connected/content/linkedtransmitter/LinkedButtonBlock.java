@@ -95,6 +95,9 @@ public class LinkedButtonBlock extends ButtonBlock implements IBE<LinkedTransmit
                                           @NotNull Player player,
                                           @NotNull InteractionHand hand,
                                           @NotNull BlockHitResult hit) {
+        if (player.isSpectator())
+            return InteractionResult.PASS;
+
         if (isHittingBase(state, level, pos, hit)) {
             if (!player.isShiftKeyDown())
                 return super.use(state, level, pos, player, hand, hit);

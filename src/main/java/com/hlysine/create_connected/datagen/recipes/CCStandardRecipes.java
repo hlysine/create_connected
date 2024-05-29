@@ -54,6 +54,20 @@ public class CCStandardRecipes extends CreateRecipeProvider {
                     .requires(AllBlocks.COGWHEEL.get())
             );
 
+    GeneratedRecipe CRANK_WHEEL = create(CCBlocks.CRANK_WHEEL).unlockedBy(AllBlocks.COGWHEEL::get)
+            .requiresResultFeature()
+            .viaShapeless(b -> b
+                    .requires(AllBlocks.HAND_CRANK.get())
+                    .requires(AllBlocks.COGWHEEL.get())
+            );
+
+    GeneratedRecipe LARGE_CRANK_WHEEL = create(CCBlocks.LARGE_CRANK_WHEEL).unlockedBy(AllBlocks.LARGE_COGWHEEL::get)
+            .requiresResultFeature()
+            .viaShapeless(b -> b
+                    .requires(AllBlocks.HAND_CRANK.get())
+                    .requires(AllBlocks.LARGE_COGWHEEL.get())
+            );
+
     GeneratedRecipe INVERTED_CLUTCH_CYCLE =
             conversionCycle(ImmutableList.of(AllBlocks.CLUTCH, CCBlocks.INVERTED_CLUTCH));
 
@@ -175,6 +189,16 @@ public class CCStandardRecipes extends CreateRecipeProvider {
     GeneratedRecipe ITEM_SILO_CYCLE =
             conversionCycle(ImmutableList.of(CCBlocks.ITEM_SILO, AllBlocks.ITEM_VAULT));
 
+
+    GeneratedRecipe FLUID_VESSEL = create(CCBlocks.FLUID_VESSEL).unlockedByTag(() -> Tags.Items.BARRELS_WOODEN)
+            .requiresResultFeature()
+            .viaShaped(b -> b.define('B', AllItems.COPPER_SHEET.get())
+                    .define('C', Tags.Items.BARRELS_WOODEN)
+                    .pattern("BCB"));
+
+    GeneratedRecipe FLUID_VESSEL_CYCLE =
+            conversionCycle(ImmutableList.of(CCBlocks.FLUID_VESSEL, AllBlocks.FLUID_TANK));
+
     GeneratedRecipe EMPTY_FAN_CATALYST = create(CCBlocks.EMPTY_FAN_CATALYST).unlockedBy(AllBlocks.BRASS_BLOCK::get)
             .requiresResultFeature()
             .viaShaped(b -> b
@@ -189,6 +213,7 @@ public class CCStandardRecipes extends CreateRecipeProvider {
     GeneratedRecipe EMPTY_CATALYST_FROM_SMOKING = clearFanCatalyst("smoking", CCBlocks.FAN_SMOKING_CATALYST);
     GeneratedRecipe EMPTY_CATALYST_FROM_SPLASHING = clearFanCatalyst("splashing", CCBlocks.FAN_SPLASHING_CATALYST);
     GeneratedRecipe EMPTY_CATALYST_FROM_HAUNTING = clearFanCatalyst("haunting", CCBlocks.FAN_HAUNTING_CATALYST);
+    GeneratedRecipe EMPTY_CATALYST_FROM_FREEZING = clearFanCatalyst("freezing", CCBlocks.FAN_FREEZING_CATALYST);
 
     private final Marker PALETTES = enterFolder("palettes");
 

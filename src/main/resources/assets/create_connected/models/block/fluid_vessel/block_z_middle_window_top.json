@@ -1,0 +1,72 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "block/block",
+	"textures": {
+		"1": "create:block/fluid_tank",
+		"6": "create_connected:block/fluid_container_window",
+		"particle": "create:block/fluid_tank"
+	},
+	"elements": [
+		{
+			"name": "SideRight",
+			"from": [0, 0, 0],
+			"to": [1, 8, 16],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 8, 8]},
+			"faces": {
+				"east": {"uv": [8, 16, 16, 0], "rotation": 90, "texture": "#1", "cullface": "west"},
+				"west": {"uv": [8, 0, 16, 16], "rotation": 90, "texture": "#1", "cullface": "west"},
+				"up": {"uv": [0, 16, 1, 0], "texture": "#1", "cullface": "west"}
+			}
+		},
+		{
+			"name": "Window",
+			"from": [15.05, 8, 0],
+			"to": [15.05, 16, 16],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 8, 8]},
+			"faces": {
+				"east": {"uv": [4.8, 12, 11.2, 16], "texture": "#6", "cullface": "east"},
+				"west": {"uv": [4.8, 12, 11.2, 16], "texture": "#6", "cullface": "east"}
+			}
+		},
+		{
+			"name": "Window",
+			"from": [0.95, 8, 0],
+			"to": [0.95, 16, 16],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 8, 8]},
+			"faces": {
+				"east": {"uv": [4.8, 12, 11.2, 16], "texture": "#6", "cullface": "west"},
+				"west": {"uv": [4.8, 12, 11.2, 16], "texture": "#6", "cullface": "west"}
+			}
+		},
+		{
+			"name": "SideLeft",
+			"from": [15, 0, 0],
+			"to": [16, 8, 16],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 8, 8]},
+			"faces": {
+				"east": {"uv": [8, 16, 16, 0], "rotation": 90, "texture": "#1", "cullface": "east"},
+				"west": {"uv": [8, 0, 16, 16], "rotation": 90, "texture": "#1", "cullface": "east"},
+				"up": {"uv": [16, 16, 15, 0], "texture": "#1", "cullface": "east"}
+			}
+		},
+		{
+			"name": "SideRight",
+			"from": [0, 0, 0],
+			"to": [16, 1, 16],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 8, 8]},
+			"faces": {
+				"up": {"uv": [0, 16, 16, 0], "texture": "#1", "cullface": "down"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#1", "cullface": "down"}
+			}
+		}
+	],
+	"groups": [
+		{
+			"name": "tank",
+			"origin": [8, 8, -23],
+			"color": 0,
+			"children": [0, 1, 2, 3]
+		},
+		4
+	]
+}

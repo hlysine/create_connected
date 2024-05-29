@@ -5,6 +5,26 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.8.0 - 2024-05-29
+
+### Added
+
+- **Fluid Vessel - Horizontal Fluid Tank**
+  - A horizontal variant of the Fluid Tank
+  - Can be turned into a boiler with reduced efficiency (efficiency is configurable)
+  - Cycle through multiple window shapes using a Wrench
+- Small and Large Crank Wheels
+  - Hand Crank + Cogwheels = Crank Wheels
+- Fan Freezing Catalyst
+  - Works with bulk freezing in Create: Garnished and Create: Dreams & Desires
+- New translations and new languages (thanks [Crowdin contributors](https://crowdin.com/project/create-connected-mod/reports/top-members)!)
+
+### Fixed
+
+- A startup crash due to incompatibility when item attributes are accessed too early (#62)
+- Missing particles for Linked Transmitters (#58)
+- Linked Transmitters being interactable when in spectator mode
+
 ## 0.7.4 - 2024-03-21
 
 ### Fixed
