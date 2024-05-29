@@ -68,6 +68,8 @@
   "block.create_connected.encased_chain_cogwheel": "链式齿轮箱",
   "block.create_connected.fan_blasting_catalyst": "鼓风机冶炼触媒",
   "block.create_connected.fan_blasting_catalyst.tooltip.summary": "_冶炼_专用设备，触媒的内容不与环境发生反应。",
+  "block.create_connected.fan_freezing_catalyst": "鼓风机冷冻触媒",
+  "block.create_connected.fan_freezing_catalyst.tooltip.summary": "_冷冻_专用设备，触媒的内容不与环境发生反应。",
   "block.create_connected.fan_haunting_catalyst": "鼓风机缠魂触媒",
   "block.create_connected.fan_haunting_catalyst.tooltip.summary": "_缠魂_专用设备，触媒的内容不与环境发生反应。",
   "block.create_connected.fan_smoking_catalyst": "鼓风机烟熏触媒",
