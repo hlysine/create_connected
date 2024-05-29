@@ -72,6 +72,7 @@
   "block.create_connected.fan_smoking_catalyst.tooltip.summary": "_一括燻製_専用のデバイス。内部の触媒は環境と相互作用しない。",
   "block.create_connected.fan_splashing_catalyst": "ファンの洗浄触媒",
   "block.create_connected.fan_splashing_catalyst.tooltip.summary": "_一括洗浄_専用のデバイス。内部の触媒は環境と相互作用しない。",
+  "block.create_connected.fluid_vessel.tooltip.condition1": "レンチで右クリックしたとき",
   "block.create_connected.freewheel_clutch": "フリーホイールクラッチ",
   "block.create_connected.freewheel_clutch.tooltip.summary": "入力が設定された_正しい方向_で回転する場合にのみ、_結合_するクラッチ。",
   "block.create_connected.inverted_clutch": "反転クラッチ",
