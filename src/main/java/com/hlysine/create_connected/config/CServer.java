@@ -11,8 +11,8 @@ public class CServer extends ConfigBase {
     private final ConfigBool applicationRemainingItemFix = b(true, "applicationRemainingItemFix", Comments.applicationRemainingItemFix);
     public static final Supplier<Boolean> ApplicationRemainingItemFix = CCConfigs.safeGetter(() -> CCConfigs.server().applicationRemainingItemFix.get(), true);
 
-    private final ConfigFloat vesselBoilerStressMultiplier = f(0.75f, 0.0f, "vesselBoilerStressMultiplier", Comments.vesselBoilerStressMultiplier);
-    public static final Supplier<Double> VesselBoilerStressMultiplier = CCConfigs.safeGetter(() -> CCConfigs.server().vesselBoilerStressMultiplier.get(), 0.75);
+    private final ConfigFloat vesselBoilerStressMultiplier = f(0.8125f, 0.0f, "vesselBoilerStressMultiplier", Comments.vesselBoilerStressMultiplier);
+    public static final Supplier<Double> VesselBoilerStressMultiplier = CCConfigs.safeGetter(() -> CCConfigs.server().vesselBoilerStressMultiplier.get(), 0.8);
 
     private final ConfigFloat vesselHeatMultiplier = f(0.5f, 0.0f, "vesselHeatMultiplier", Comments.vesselHeatMultiplier);
     public static final Supplier<Double> VesselHeatMultiplier = CCConfigs.safeGetter(() -> CCConfigs.server().vesselHeatMultiplier.get(), 0.5);
