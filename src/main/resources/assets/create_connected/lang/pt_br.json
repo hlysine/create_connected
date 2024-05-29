@@ -72,6 +72,7 @@
   "block.create_connected.fan_smoking_catalyst.tooltip.summary": "Dispositivo dedicado para _defumação massiva_. O conteúdo do catalisador não interage com o ambiente.",
   "block.create_connected.fan_splashing_catalyst": "Catalisador Ventilacional Molhado",
   "block.create_connected.fan_splashing_catalyst.tooltip.summary": "Dispositivo dedicado para _enxágue massivo_. O conteúdo do catalisador não interage com o ambiente.",
+  "block.create_connected.fluid_vessel.tooltip.condition1": "Quando Clique-Direito com a Chave-Inglesa",
   "block.create_connected.freewheel_clutch": "Embreagem de Rotação Direcionada",
   "block.create_connected.freewheel_clutch.tooltip.summary": "Uma embreagem que só é _acoplada_ se força de entrada girar na _mesma direção_ a qual foi ajustada.",
   "block.create_connected.inverted_clutch": "Embreagem Invertida",
