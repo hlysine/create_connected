@@ -72,6 +72,7 @@
   "block.create_connected.fan_smoking_catalyst.tooltip.summary": "Спеціальний пристрій для _масового копчення_. Вміст прискорювача не взаємодіє з навколишнім середовищем.",
   "block.create_connected.fan_splashing_catalyst": "Прискорювач масового промивання",
   "block.create_connected.fan_splashing_catalyst.tooltip.summary": "Спеціальний пристрій для _масового промивання_. Вміст прискорювача не взаємодіє з навколишнім середовищем.",
+  "block.create_connected.fluid_vessel.tooltip.condition1": "Коли клацнуто ПКМ гайковим ключем",
   "block.create_connected.freewheel_clutch": "Зчеплення вільного ходу",
   "block.create_connected.freewheel_clutch.tooltip.summary": "Зчеплення, яке _активує з'єднання_ лише тоді, коли вхідний вал обертається в _правильному напрямку_, як зазначено в налаштуванні.",
   "block.create_connected.inverted_clutch": "Інвертоване зчеплення",
