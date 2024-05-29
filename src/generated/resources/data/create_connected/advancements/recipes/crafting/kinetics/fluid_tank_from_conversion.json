@@ -33,8 +33,7 @@
           "recipes": [
             "create_connected:crafting/kinetics/fluid_tank_from_conversion"
           ]
-        },
-        "sends_telemetry_event": false
+        }
       },
       "conditions": [
         {

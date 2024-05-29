@@ -10,7 +10,6 @@
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
-        "category": "misc",
         "key": {
           "B": {
             "item": "create:copper_sheet"
@@ -24,8 +23,7 @@
         ],
         "result": {
           "item": "create_connected:fluid_vessel"
-        },
-        "show_notification": true
+        }
       }
     }
   ]
