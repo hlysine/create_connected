@@ -451,7 +451,7 @@ public class CCBlocks {
             )
             .addLayer(() -> RenderType::cutoutMipped)
             .transform(pickaxeOnly())
-            .transform(FeatureToggle.registerDependent(CCBlocks.EMPTY_FAN_CATALYST))
+            .transform(FeatureToggle.register())
             .blockstate((c, p) -> p.simpleBlock(c.getEntry(), AssetLookup.partialBaseModel(c, p)))
             .tag(AllTags.AllBlockTags.FAN_TRANSPARENT.tag)
             .item()
