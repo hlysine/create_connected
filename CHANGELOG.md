@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Boiler gauge not updating on Fluid Vessels
+- Heat level for Fluid Vessels is now capped at level 18
 - Various issues in Russian translation (thanks VladisCrafter!)
   - Text overflow for sequencer instructions
   - Incorrect ponder strings
