@@ -15,7 +15,6 @@ import com.simibubi.create.foundation.advancement.AllAdvancements;
 import com.simibubi.create.foundation.utility.Components;
 import com.simibubi.create.foundation.utility.Iterate;
 import com.simibubi.create.foundation.utility.Lang;
-import com.simibubi.create.foundation.utility.animation.LerpedFloat;
 import com.simibubi.create.foundation.utility.animation.LerpedFloat.Chaser;
 import joptsimple.internal.Strings;
 import net.minecraft.ChatFormatting;
@@ -56,8 +55,6 @@ public class BoilerData extends com.simibubi.create.content.fluids.tank.BoilerDa
     private int maxHeatForWater = 0;
     private int minValue = 0;
     private int maxValue = 0;
-
-    public LerpedFloat gauge = LerpedFloat.linear();
 
     @Override
     public void tick(FluidTankBlockEntity controller) {
@@ -450,7 +447,7 @@ public class BoilerData extends com.simibubi.create.content.fluids.tank.BoilerDa
 
         int forBoilerSize = getMaxHeatLevelForBoilerSize(boilerSize);
         int forWaterSupply = getMaxHeatLevelForWaterSupply();
-        int actualHeat = Math.min(Math.min(activeHeat, Math.min(forWaterSupply, forBoilerSize)), configLevelCap);
+        int actualHeat = Math.min(activeHeat, Math.min(forWaterSupply, forBoilerSize));
         float target = isPassive(boilerSize) ? 1 / 8f : forBoilerSize == 0 ? 0 : actualHeat / (forBoilerSize * 1f);
         gauge.chase(target, 0.125f, Chaser.EXP);
     }
