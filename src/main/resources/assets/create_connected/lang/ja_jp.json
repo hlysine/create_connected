@@ -77,7 +77,7 @@
   "block.create_connected.fan_splashing_catalyst": "ファンの洗浄触媒",
   "block.create_connected.fan_splashing_catalyst.tooltip.summary": "_一括洗浄_専用のデバイス。内部の触媒は環境と相互作用しない。",
   "block.create_connected.fluid_vessel": "液体ベッセル",
-  "block.create_connected.fluid_vessel.tooltip.behaviour1": "窓の形状を_切り替え_る。",
+  "block.create_connected.fluid_vessel.tooltip.behaviour1": "窓の形状を_切り替える_。",
   "block.create_connected.fluid_vessel.tooltip.condition1": "レンチで右クリックしたとき",
   "block.create_connected.fluid_vessel.tooltip.summary": "_水平方向_の液体タンク。ボイラーとして使用すると効率が低下する。",
   "block.create_connected.freewheel_clutch": "フリーホイールクラッチ",
