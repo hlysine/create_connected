@@ -82,6 +82,7 @@
   "block.create_connected.fluid_vessel.tooltip.summary": "A _horizontal_ fluid tank. Less efficient when used as a boiler.",
   "block.create_connected.freewheel_clutch": "Freewheel Clutch",
   "block.create_connected.freewheel_clutch.tooltip.summary": "A clutch that is only _coupled_ if the input spins in the _correct direction_ as configured.",
+  "block.create_connected.inventory_access_port": "Inventory Access Port",
   "block.create_connected.inverted_clutch": "Inverted Clutch",
   "block.create_connected.inverted_gearshift": "Inverted Gearshift",
   "block.create_connected.item_silo": "Item Silo",

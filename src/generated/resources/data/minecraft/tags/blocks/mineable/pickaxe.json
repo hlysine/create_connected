@@ -22,6 +22,7 @@
     "create_connected:item_silo",
     "create_connected:fluid_vessel",
     "create_connected:creative_fluid_vessel",
+    "create_connected:inventory_access_port",
     "create_connected:copycat_slab",
     "create_connected:copycat_block",
     "create_connected:copycat_beam",

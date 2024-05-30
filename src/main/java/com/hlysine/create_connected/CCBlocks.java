@@ -35,6 +35,8 @@ import com.hlysine.create_connected.content.fluidvessel.FluidVesselGenerator;
 import com.hlysine.create_connected.content.fluidvessel.FluidVesselItem;
 import com.hlysine.create_connected.content.fluidvessel.FluidVesselModel;
 import com.hlysine.create_connected.content.freewheelclutch.FreewheelClutchBlock;
+import com.hlysine.create_connected.content.inventoryaccessport.InventoryAccessPortBlock;
+import com.hlysine.create_connected.content.inventoryaccessport.InventoryAccessPortGenerator;
 import com.hlysine.create_connected.content.invertedclutch.InvertedClutchBlock;
 import com.hlysine.create_connected.content.invertedgearshift.InvertedGearshiftBlock;
 import com.hlysine.create_connected.content.itemsilo.ItemSiloBlock;
@@ -508,6 +510,16 @@ public class CCBlocks {
                             .texture("7", p.modLoc("block/creative_fluid_container_window_single"))
                             .texture("0", Create.asResource("block/creative_casing")))
                     .build()
+                    .register();
+
+    public static final BlockEntry<InventoryAccessPortBlock> INVENTORY_ACCESS_PORT =
+            REGISTRATE.block("inventory_access_port", InventoryAccessPortBlock::new)
+                    .initialProperties(SharedProperties::stone)
+                    .properties(p -> p.mapColor(MapColor.TERRACOTTA_BROWN).noOcclusion())
+                    .transform(axeOrPickaxe())
+                    .blockstate(new InventoryAccessPortGenerator()::generate)
+                    .item()
+                    .transform(customItemModel("_", "block_wall"))
                     .register();
 
     public static final BlockEntry<CopycatSlabBlock> COPYCAT_SLAB =

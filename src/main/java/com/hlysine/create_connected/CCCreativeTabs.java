@@ -42,6 +42,7 @@ public class CCCreativeTabs {
             CCBlocks.ITEM_SILO,
             CCBlocks.FLUID_VESSEL,
             CCBlocks.CREATIVE_FLUID_VESSEL,
+            CCBlocks.INVENTORY_ACCESS_PORT,
             CCBlocks.SEQUENCED_PULSE_GENERATOR,
             CCItems.LINKED_TRANSMITTER,
             CCBlocks.EMPTY_FAN_CATALYST,

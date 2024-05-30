@@ -10,6 +10,7 @@ import com.hlysine.create_connected.content.fluidvessel.CreativeFluidVesselBlock
 import com.hlysine.create_connected.content.fluidvessel.FluidVesselBlockEntity;
 import com.hlysine.create_connected.content.fluidvessel.FluidVesselRenderer;
 import com.hlysine.create_connected.content.freewheelclutch.FreewheelClutchBlockEntity;
+import com.hlysine.create_connected.content.inventoryaccessport.InventoryAccessPortBlockEntity;
 import com.hlysine.create_connected.content.invertedclutch.InvertedClutchBlockEntity;
 import com.hlysine.create_connected.content.invertedgearshift.InvertedGearshiftBlockEntity;
 import com.hlysine.create_connected.content.itemsilo.ItemSiloBlockEntity;
@@ -144,6 +145,11 @@ public class CCBlockEntityTypes {
             .blockEntity("creative_fluid_vessel", CreativeFluidVesselBlockEntity::new)
             .validBlocks(CCBlocks.CREATIVE_FLUID_VESSEL)
             .renderer(() -> FluidVesselRenderer::new)
+            .register();
+
+    public static final BlockEntityEntry<InventoryAccessPortBlockEntity> INVENTORY_ACCESS_PORT = REGISTRATE
+            .blockEntity("inventory_access_port", InventoryAccessPortBlockEntity::new)
+            .validBlocks(CCBlocks.INVENTORY_ACCESS_PORT)
             .register();
 
     public static final BlockEntityEntry<SequencedPulseGeneratorBlockEntity> SEQUENCED_PULSE_GENERATOR = REGISTRATE
