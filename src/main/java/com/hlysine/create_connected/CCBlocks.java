@@ -37,6 +37,7 @@ import com.hlysine.create_connected.content.fluidvessel.FluidVesselModel;
 import com.hlysine.create_connected.content.freewheelclutch.FreewheelClutchBlock;
 import com.hlysine.create_connected.content.inventoryaccessport.InventoryAccessPortBlock;
 import com.hlysine.create_connected.content.inventoryaccessport.InventoryAccessPortGenerator;
+import com.hlysine.create_connected.content.inventorybridge.InventoryBridgeBlock;
 import com.hlysine.create_connected.content.invertedclutch.InvertedClutchBlock;
 import com.hlysine.create_connected.content.invertedgearshift.InvertedGearshiftBlock;
 import com.hlysine.create_connected.content.itemsilo.ItemSiloBlock;
@@ -521,6 +522,27 @@ public class CCBlocks {
                     .blockstate(new InventoryAccessPortGenerator()::generate)
                     .item()
                     .transform(customItemModel("_", "block_wall"))
+                    .register();
+
+    public static final BlockEntry<InventoryBridgeBlock> INVENTORY_BRIDGE =
+            REGISTRATE.block("inventory_bridge", InventoryBridgeBlock::new)
+                    .initialProperties(SharedProperties::stone)
+                    .properties(p -> p.mapColor(MapColor.TERRACOTTA_BROWN).noOcclusion())
+                    .transform(axeOrPickaxe())
+                    .transform(FeatureToggle.register())
+                    .blockstate((c, p) -> BlockStateGen.axisBlock(c, p, state -> {
+                        boolean negative = state.getValue(InventoryBridgeBlock.ATTACHED_NEGATIVE);
+                        boolean positive = state.getValue(InventoryBridgeBlock.ATTACHED_POSITIVE);
+                        if (negative && positive)
+                            return AssetLookup.partialBaseModel(c, p, "both");
+                        if (negative)
+                            return AssetLookup.partialBaseModel(c, p, "negative");
+                        if (positive)
+                            return AssetLookup.partialBaseModel(c, p, "positive");
+                        return AssetLookup.partialBaseModel(c, p);
+                    }))
+                    .item()
+                    .transform(customItemModel())
                     .register();
 
     public static final BlockEntry<CopycatSlabBlock> COPYCAT_SLAB =

@@ -42,7 +42,7 @@ public class InventoryAccessPortBlockEntity extends SmartBlockEntity {
     }
 
     public boolean isAttached() {
-        return !powered && observedInventory.hasInventory() && !(observedInventory.getInventory() instanceof InventoryAccessHandler);
+        return !powered && observedInventory.hasInventory() && !(observedInventory.getInventory() instanceof WrappedItemHandler);
     }
 
     public void updateConnectedInventory() {
@@ -80,14 +80,17 @@ public class InventoryAccessPortBlockEntity extends SmartBlockEntity {
     }
 
     private IItemHandler getConnectedItemHandler() {
-        return powered ? null : observedInventory.getInventory();
+        if (powered) return null;
+        IItemHandler handler = observedInventory.getInventory();
+        if (handler instanceof WrappedItemHandler) return null;
+        return handler;
     }
 
     private void initCapability() {
         itemCapability = LazyOptional.of(InventoryAccessHandler::new);
     }
 
-    private class InventoryAccessHandler implements IItemHandler {
+    private class InventoryAccessHandler implements WrappedItemHandler {
         @Override
         public int getSlots() {
             IItemHandler handler = getConnectedItemHandler();

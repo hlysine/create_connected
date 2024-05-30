@@ -210,6 +210,13 @@ public class CCStandardRecipes extends CreateRecipeProvider {
                     .pattern("E")
             );
 
+    GeneratedRecipe INVENTORY_BRIDGE = create(CCBlocks.INVENTORY_BRIDGE).unlockedBy(AllItems.ELECTRON_TUBE::get)
+            .requiresResultFeature()
+            .viaShapeless(b -> b
+                    .requires(CCBlocks.INVENTORY_ACCESS_PORT)
+                    .requires(CCBlocks.INVENTORY_ACCESS_PORT)
+            );
+
     GeneratedRecipe EMPTY_FAN_CATALYST = create(CCBlocks.EMPTY_FAN_CATALYST).unlockedBy(AllBlocks.BRASS_BLOCK::get)
             .requiresResultFeature()
             .viaShaped(b -> b
