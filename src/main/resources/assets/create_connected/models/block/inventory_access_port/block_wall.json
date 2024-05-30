@@ -2,7 +2,7 @@
 	"credit": "Made with Blockbench",
 	"parent": "block/block",
 	"textures": {
-		"5": "create:block/threshold_switch_front",
+		"5": "create_connected:block/inventory_access_port_front",
 		"6": "create_connected:block/inventory_access_port_top",
 		"particle": "create_connected:block/inventory_access_port_off",
 		"level": "create_connected:block/inventory_access_port_off"
