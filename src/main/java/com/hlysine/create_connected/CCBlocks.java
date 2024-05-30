@@ -517,6 +517,7 @@ public class CCBlocks {
                     .initialProperties(SharedProperties::stone)
                     .properties(p -> p.mapColor(MapColor.TERRACOTTA_BROWN).noOcclusion())
                     .transform(axeOrPickaxe())
+                    .transform(FeatureToggle.register())
                     .blockstate(new InventoryAccessPortGenerator()::generate)
                     .item()
                     .transform(customItemModel("_", "block_wall"))

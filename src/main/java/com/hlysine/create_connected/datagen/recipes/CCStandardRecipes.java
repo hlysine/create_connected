@@ -198,6 +198,18 @@ public class CCStandardRecipes extends CreateRecipeProvider {
     GeneratedRecipe FLUID_VESSEL_CYCLE =
             conversionCycle(ImmutableList.of(CCBlocks.FLUID_VESSEL, AllBlocks.FLUID_TANK));
 
+    GeneratedRecipe INVENTORY_ACCESS_PORT = create(CCBlocks.INVENTORY_ACCESS_PORT).unlockedBy(AllItems.ELECTRON_TUBE::get)
+            .requiresResultFeature()
+            .returns(2)
+            .viaShaped(b -> b
+                    .define('B', AllBlocks.BRASS_CASING)
+                    .define('C', AllBlocks.CHUTE)
+                    .define('E', AllItems.ELECTRON_TUBE)
+                    .pattern("B")
+                    .pattern("C")
+                    .pattern("E")
+            );
+
     GeneratedRecipe EMPTY_FAN_CATALYST = create(CCBlocks.EMPTY_FAN_CATALYST).unlockedBy(AllBlocks.BRASS_BLOCK::get)
             .requiresResultFeature()
             .viaShaped(b -> b

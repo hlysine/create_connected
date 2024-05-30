@@ -8,6 +8,7 @@ import com.simibubi.create.foundation.blockEntity.behaviour.inventory.InvManipul
 import com.simibubi.create.foundation.utility.BlockFace;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -24,11 +25,13 @@ import static com.hlysine.create_connected.content.inventoryaccessport.Inventory
 public class InventoryAccessPortBlockEntity extends SmartBlockEntity {
     protected LazyOptional<IItemHandler> itemCapability;
     private InvManipulationBehaviour observedInventory;
+    private boolean powered;
 
     public InventoryAccessPortBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
 
         itemCapability = LazyOptional.empty();
+        powered = false;
     }
 
     @Override
@@ -39,11 +42,16 @@ public class InventoryAccessPortBlockEntity extends SmartBlockEntity {
     }
 
     public boolean isAttached() {
-        return observedInventory.hasInventory() && !(observedInventory.getInventory() instanceof InventoryAccessHandler);
+        return !powered && observedInventory.hasInventory() && !(observedInventory.getInventory() instanceof InventoryAccessHandler);
     }
 
     public void updateConnectedInventory() {
         observedInventory.findNewCapability();
+        boolean previouslyPowered = powered;
+        powered = level.hasNeighborSignal(worldPosition);
+        if (powered != previouslyPowered) {
+            notifyUpdate();
+        }
         if (isAttached() != getBlockState().getValue(ATTACHED)) {
             BlockState state = getBlockState().cycle(ATTACHED);
             level.setBlockAndUpdate(worldPosition, state);
@@ -59,8 +67,20 @@ public class InventoryAccessPortBlockEntity extends SmartBlockEntity {
         return super.getCapability(cap, side);
     }
 
+    @Override
+    protected void read(CompoundTag compound, boolean clientPacket) {
+        super.read(compound, clientPacket);
+        powered = compound.getBoolean("Powered");
+    }
+
+    @Override
+    protected void write(CompoundTag compound, boolean clientPacket) {
+        super.write(compound, clientPacket);
+        compound.putBoolean("Powered", powered);
+    }
+
     private IItemHandler getConnectedItemHandler() {
-        return observedInventory.getInventory();
+        return powered ? null : observedInventory.getInventory();
     }
 
     private void initCapability() {

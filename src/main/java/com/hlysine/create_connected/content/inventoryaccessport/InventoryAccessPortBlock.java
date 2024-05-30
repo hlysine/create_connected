@@ -8,7 +8,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Axis;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -77,10 +76,27 @@ public class InventoryAccessPortBlock extends DirectedDirectionalBlock implement
         withBlockEntityDo(worldIn, pos, InventoryAccessPortBlockEntity::updateConnectedInventory);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
-    public void onNeighborChange(BlockState state, LevelReader level, BlockPos pos, BlockPos neighbor) {
-        withBlockEntityDo(level, pos, InventoryAccessPortBlockEntity::updateConnectedInventory);
-        super.onNeighborChange(state, level, pos, neighbor);
+    public void neighborChanged(@NotNull BlockState pState, @NotNull Level pLevel, @NotNull BlockPos pPos, @NotNull Block pBlock, @NotNull BlockPos pFromPos, boolean pIsMoving) {
+        withBlockEntityDo(pLevel, pPos, InventoryAccessPortBlockEntity::updateConnectedInventory);
+        super.neighborChanged(pState, pLevel, pPos, pBlock, pFromPos, pIsMoving);
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    public boolean hasAnalogOutputSignal(@NotNull BlockState state) {
+        return true;
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    public int getAnalogOutputSignal(@NotNull BlockState blockState, @NotNull Level worldIn, @NotNull BlockPos pos) {
+        if (!blockState.getValue(ATTACHED)) return 0;
+        BlockPos targetPos = pos.relative(DirectedDirectionalBlock.getTargetDirection(blockState));
+        BlockState targetState = worldIn.getBlockState(targetPos);
+        if (targetState.is(this)) return 0;
+        return targetState.hasAnalogOutputSignal() ? targetState.getAnalogOutputSignal(worldIn, targetPos) : 0;
     }
 
     @Override

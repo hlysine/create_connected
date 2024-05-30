@@ -163,6 +163,7 @@
   "create_connected.ponder.crank_wheel.text_1": "Crank Wheels can be used by players to apply rotational force manually",
   "create_connected.ponder.crank_wheel.text_2": "Hold Right-Click to rotate it Counter-Clockwise",
   "create_connected.ponder.crank_wheel.text_3": "Sneak and Hold Right-Click to rotate it Clockwise",
+  "create_connected.ponder.inventory_access_port.header": "Connecting to inventories with Inventory Access Port",
   "create_connected.ponder.inverted_clutch.header": "Controlling rotational force using an Inverted Clutch",
   "create_connected.ponder.inverted_clutch.text_1": "Inverted Clutches will not relay rotation...",
   "create_connected.ponder.inverted_clutch.text_2": "...unless they are powered by Redstone",
