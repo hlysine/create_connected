@@ -31,8 +31,8 @@ public class InventoryBridgeBlockEntity extends SmartBlockEntity {
     private InvManipulationBehaviour positiveInventory;
 
     SidedFilteringBehaviour filters;
-    FilteringBehaviour negativeFilter;
-    FilteringBehaviour positiveFilter;
+    public FilteringBehaviour negativeFilter;
+    public FilteringBehaviour positiveFilter;
 
     private boolean powered;
 
@@ -170,9 +170,19 @@ public class InventoryBridgeBlockEntity extends SmartBlockEntity {
             if (handler1 == null && handler2 == null) {
                 return stack;
             } else if (handler1 == null) {
-                return positiveFilter.test(stack) ? handler2.insertItem(slot, stack, simulate) : stack;
+                boolean negative = negativeFilter.test(stack);
+                boolean positive = positiveFilter.test(stack);
+                if (!positive) return stack;
+                if (negative && !negativeFilter.getFilter().isEmpty() && positiveFilter.getFilter().isEmpty())
+                    return stack;
+                return handler2.insertItem(slot, stack, simulate);
             } else if (handler2 == null) {
-                return negativeFilter.test(stack) ? handler1.insertItem(slot, stack, simulate) : stack;
+                boolean negative = negativeFilter.test(stack);
+                boolean positive = positiveFilter.test(stack);
+                if (!negative) return stack;
+                if (positive && !positiveFilter.getFilter().isEmpty() && negativeFilter.getFilter().isEmpty())
+                    return stack;
+                return handler1.insertItem(slot, stack, simulate);
             } else {
                 boolean negative = negativeFilter.test(stack);
                 boolean positive = positiveFilter.test(stack);
@@ -180,6 +190,10 @@ public class InventoryBridgeBlockEntity extends SmartBlockEntity {
                 if (!negative && !positive) return stack;
                 if (negative && !positive && slot >= size1) return stack;
                 if (positive && !negative && slot < size1) return stack;
+                boolean negativeFilterEmpty = negativeFilter.getFilter().isEmpty();
+                boolean positiveFilterEmpty = positiveFilter.getFilter().isEmpty();
+                if (slot >= size1 && negative && positiveFilterEmpty) return stack;
+                if (slot < size1 && positive && negativeFilterEmpty) return stack;
                 return slot < size1
                         ? handler1.insertItem(slot, stack, simulate)
                         : handler2.insertItem(slot - size1, stack, simulate);
@@ -225,9 +239,19 @@ public class InventoryBridgeBlockEntity extends SmartBlockEntity {
             if (handler1 == null && handler2 == null) {
                 return false;
             } else if (handler1 == null) {
-                return positiveFilter.test(stack) && handler2.isItemValid(slot, stack);
+                boolean negative = negativeFilter.test(stack);
+                boolean positive = positiveFilter.test(stack);
+                if (!positive) return false;
+                if (negative && !negativeFilter.getFilter().isEmpty() && positiveFilter.getFilter().isEmpty())
+                    return false;
+                return handler2.isItemValid(slot, stack);
             } else if (handler2 == null) {
-                return negativeFilter.test(stack) && handler1.isItemValid(slot, stack);
+                boolean negative = negativeFilter.test(stack);
+                boolean positive = positiveFilter.test(stack);
+                if (!negative) return false;
+                if (positive && !positiveFilter.getFilter().isEmpty() && negativeFilter.getFilter().isEmpty())
+                    return false;
+                return handler1.isItemValid(slot, stack);
             } else {
                 boolean negative = negativeFilter.test(stack);
                 boolean positive = positiveFilter.test(stack);
@@ -235,6 +259,10 @@ public class InventoryBridgeBlockEntity extends SmartBlockEntity {
                 if (!negative && !positive) return false;
                 if (negative && !positive && slot >= size1) return false;
                 if (positive && !negative && slot < size1) return false;
+                boolean negativeFilterEmpty = negativeFilter.getFilter().isEmpty();
+                boolean positiveFilterEmpty = positiveFilter.getFilter().isEmpty();
+                if (slot >= size1 && negative && positiveFilterEmpty) return false;
+                if (slot < size1 && positive && negativeFilterEmpty) return false;
                 return slot < size1
                         ? handler1.isItemValid(slot, stack)
                         : handler2.isItemValid(slot - size1, stack);

@@ -34,7 +34,8 @@ public class CCPonders {
         HELPER.forComponents(CCBlocks.INVENTORY_ACCESS_PORT)
                 .addStoryBoard("inventory_access_port", InventoryAccessPortScenes::inventoryAccessPort, AllPonderTags.LOGISTICS);
         HELPER.forComponents(CCBlocks.INVENTORY_BRIDGE)
-                .addStoryBoard("inventory_bridge", InventoryBridgeScenes::inventoryBridge, AllPonderTags.LOGISTICS);
+                .addStoryBoard("inventory_bridge", InventoryBridgeScenes::inventoryBridge, AllPonderTags.LOGISTICS)
+                .addStoryBoard("inventory_bridge_filter", InventoryBridgeScenes::filtering, AllPonderTags.LOGISTICS);
 
         PonderRegistry.TAGS.forTag(AllPonderTags.KINETIC_SOURCES)
                 .add(CCBlocks.CRANK_WHEEL);
