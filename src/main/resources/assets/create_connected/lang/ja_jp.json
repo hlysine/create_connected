@@ -173,7 +173,6 @@
   "create_connected.ponder.inventory_access_port.text_6": "...インベントリに接続することができます",
   "create_connected.ponder.inventory_access_port.text_7": "ポートを数珠つなぎに接続することはできません",
   "create_connected.ponder.inventory_access_port.text_8": "ただし、レッドストーン信号によって無効化することができます",
-  "create_connected.ponder.inventory_bridge.header": "インベントリブリッジを使ったインベントリの接続",
   "create_connected.ponder.inventory_bridge.text_1": "インベントリブリッジは、同時に2つのインベントリに接続するためのインターフェースを提供します",
   "create_connected.ponder.inventory_bridge.text_2": "ブリッジを使用しても、収納スペースの容量は増加しません",
   "create_connected.ponder.inventory_bridge.text_3": "ブリッジ自体に接続された機械のみが両方のインベントリに接続できます",
