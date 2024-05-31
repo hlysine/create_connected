@@ -3,6 +3,8 @@ package com.hlysine.create_connected.content.inventorybridge;
 import com.hlysine.create_connected.content.inventoryaccessport.WrappedItemHandler;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
+import com.simibubi.create.foundation.blockEntity.behaviour.filtering.FilteringBehaviour;
+import com.simibubi.create.foundation.blockEntity.behaviour.filtering.SidedFilteringBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.inventory.CapManipulationBehaviourBase;
 import com.simibubi.create.foundation.blockEntity.behaviour.inventory.InvManipulationBehaviour;
 import com.simibubi.create.foundation.utility.BlockFace;
@@ -27,6 +29,11 @@ public class InventoryBridgeBlockEntity extends SmartBlockEntity {
     protected LazyOptional<IItemHandler> itemCapability;
     private InvManipulationBehaviour negativeInventory;
     private InvManipulationBehaviour positiveInventory;
+
+    SidedFilteringBehaviour filters;
+    FilteringBehaviour negativeFilter;
+    FilteringBehaviour positiveFilter;
+
     private boolean powered;
 
     public InventoryBridgeBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
@@ -44,6 +51,19 @@ public class InventoryBridgeBlockEntity extends SmartBlockEntity {
                 (w, p, s) -> new BlockFace(p, InventoryBridgeBlock.getPositiveTarget(s));
         behaviours.add(negativeInventory = new InvManipulationBehaviour(this, towardBlockFacing1));
         behaviours.add(positiveInventory = new InvManipulationBehaviour(this, towardBlockFacing2));
+        behaviours.add(filters = new SidedFilteringBehaviour(
+                this,
+                new InventoryBridgeFilterSlot(),
+                (facing, filter) -> {
+                    if (facing.getAxisDirection() == Direction.AxisDirection.NEGATIVE) {
+                        negativeFilter = filter;
+                    } else {
+                        positiveFilter = filter;
+                    }
+                    return filter;
+                },
+                facing -> facing.getAxis() == getBlockState().getValue(InventoryBridgeBlock.AXIS)
+        ));
     }
 
     public boolean isAttachedNegative() {
@@ -108,10 +128,10 @@ public class InventoryBridgeBlockEntity extends SmartBlockEntity {
     }
 
     private void initCapability() {
-        itemCapability = LazyOptional.of(InventoryAccessHandler::new);
+        itemCapability = LazyOptional.of(InventoryBridgeHandler::new);
     }
 
-    private class InventoryAccessHandler implements WrappedItemHandler {
+    private class InventoryBridgeHandler implements WrappedItemHandler {
         @Override
         public int getSlots() {
             IItemHandler handler1 = getNegativeHandler();
@@ -150,12 +170,19 @@ public class InventoryBridgeBlockEntity extends SmartBlockEntity {
             if (handler1 == null && handler2 == null) {
                 return stack;
             } else if (handler1 == null) {
-                return handler2.insertItem(slot, stack, simulate);
+                return positiveFilter.test(stack) ? handler2.insertItem(slot, stack, simulate) : stack;
             } else if (handler2 == null) {
-                return handler1.insertItem(slot, stack, simulate);
+                return negativeFilter.test(stack) ? handler1.insertItem(slot, stack, simulate) : stack;
             } else {
+                boolean negative = negativeFilter.test(stack);
+                boolean positive = positiveFilter.test(stack);
                 int size1 = handler1.getSlots();
-                return slot < size1 ? handler1.insertItem(slot, stack, simulate) : handler2.insertItem(slot - size1, stack, simulate);
+                if (!negative && !positive) return stack;
+                if (negative && !positive && slot >= size1) return stack;
+                if (positive && !negative && slot < size1) return stack;
+                return slot < size1
+                        ? handler1.insertItem(slot, stack, simulate)
+                        : handler2.insertItem(slot - size1, stack, simulate);
             }
         }
 
@@ -198,12 +225,19 @@ public class InventoryBridgeBlockEntity extends SmartBlockEntity {
             if (handler1 == null && handler2 == null) {
                 return false;
             } else if (handler1 == null) {
-                return handler2.isItemValid(slot, stack);
+                return positiveFilter.test(stack) && handler2.isItemValid(slot, stack);
             } else if (handler2 == null) {
-                return handler1.isItemValid(slot, stack);
+                return negativeFilter.test(stack) && handler1.isItemValid(slot, stack);
             } else {
+                boolean negative = negativeFilter.test(stack);
+                boolean positive = positiveFilter.test(stack);
                 int size1 = handler1.getSlots();
-                return slot < size1 ? handler1.isItemValid(slot, stack) : handler2.isItemValid(slot - size1, stack);
+                if (!negative && !positive) return false;
+                if (negative && !positive && slot >= size1) return false;
+                if (positive && !negative && slot < size1) return false;
+                return slot < size1
+                        ? handler1.isItemValid(slot, stack)
+                        : handler2.isItemValid(slot - size1, stack);
             }
         }
     }

@@ -156,6 +156,7 @@ public class CCBlockEntityTypes {
     public static final BlockEntityEntry<InventoryBridgeBlockEntity> INVENTORY_BRIDGE = REGISTRATE
             .blockEntity("inventory_bridge", InventoryBridgeBlockEntity::new)
             .validBlocks(CCBlocks.INVENTORY_BRIDGE)
+            .renderer(() -> SmartBlockEntityRenderer::new)
             .register();
 
     public static final BlockEntityEntry<SequencedPulseGeneratorBlockEntity> SEQUENCED_PULSE_GENERATOR = REGISTRATE
