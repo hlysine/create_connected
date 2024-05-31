@@ -82,6 +82,8 @@
   "block.create_connected.fluid_vessel.tooltip.summary": "_水平方向_の液体タンク。ボイラーとして使用すると効率が低下する。",
   "block.create_connected.freewheel_clutch": "フリーホイールクラッチ",
   "block.create_connected.freewheel_clutch.tooltip.summary": "入力が設定された_正しい方向_で回転する場合にのみ、_結合_するクラッチ。",
+  "block.create_connected.inventory_access_port": "インベントリアクセスポート",
+  "block.create_connected.inventory_bridge": "インベントリブリッジ",
   "block.create_connected.inverted_clutch": "反転クラッチ",
   "block.create_connected.inverted_gearshift": "反転ギアシフト",
   "block.create_connected.item_silo": "アイテム貯蔵庫",
