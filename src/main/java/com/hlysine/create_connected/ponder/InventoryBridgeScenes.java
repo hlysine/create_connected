@@ -14,7 +14,7 @@ import net.minecraft.world.phys.shapes.Shapes;
 
 public class InventoryBridgeScenes {
     public static void inventoryBridge(SceneBuilder scene, SceneBuildingUtil util) {
-        scene.title("inventory_bridge", "Connecting to inventories with Inventory Bridge");
+        scene.title("inventory_bridge", "Connecting two inventories with Inventory Bridge");
         scene.configureBasePlate(0, 0, 5);
 
         Selection vault1 = util.select.fromTo(3, 1, 0, 4, 2, 1);
