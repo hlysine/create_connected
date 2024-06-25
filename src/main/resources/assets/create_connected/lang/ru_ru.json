@@ -69,7 +69,6 @@
   "block.create_connected.fan_blasting_catalyst": "Катализатор массового плавления",
   "block.create_connected.fan_blasting_catalyst.tooltip.summary": "Компонент, предназначенный для _массового плавления_. Содержимое катализатора не взаимодействует с окружающей средой.",
   "block.create_connected.fan_freezing_catalyst": "Катализатор массовой заморозки",
-  "block.create_connected.fan_freezing_catalyst.tooltip.summary": "Компонент, предназначенный для _массовой заморозки_. Содержимое катализатора не взаимодействует с окружающей средой.",
   "block.create_connected.fan_haunting_catalyst": "Катализатор призрачного наполнения",
   "block.create_connected.fan_haunting_catalyst.tooltip.summary": "Компонент, предназначенный для _призрачного наполнения_. Содержимое катализатора не взаимодействует с окружающей средой.",
   "block.create_connected.fan_smoking_catalyst": "Катализатор массового копчения",
