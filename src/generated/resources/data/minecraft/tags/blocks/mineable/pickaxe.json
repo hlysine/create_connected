@@ -19,6 +19,7 @@
     "create_connected:fan_splashing_catalyst",
     "create_connected:fan_haunting_catalyst",
     "create_connected:fan_freezing_catalyst",
+    "create_connected:fan_seething_catalyst",
     "create_connected:item_silo",
     "create_connected:fluid_vessel",
     "create_connected:creative_fluid_vessel",

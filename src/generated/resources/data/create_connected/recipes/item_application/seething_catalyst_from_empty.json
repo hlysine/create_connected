@@ -1,0 +1,26 @@
+{
+  "type": "create:item_application",
+  "conditions": [
+    {
+      "type": "create_connected:feature_enabled",
+      "feature": "create_connected:empty_fan_catalyst"
+    },
+    {
+      "type": "forge:mod_loaded",
+      "modid": "create_dd"
+    }
+  ],
+  "ingredients": [
+    {
+      "item": "create_connected:empty_fan_catalyst"
+    },
+    {
+      "item": "create_dd:infernal_mechanism"
+    }
+  ],
+  "results": [
+    {
+      "item": "create_connected:fan_seething_catalyst"
+    }
+  ]
+}

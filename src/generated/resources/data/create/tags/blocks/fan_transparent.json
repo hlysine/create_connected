@@ -5,6 +5,7 @@
     "create_connected:fan_smoking_catalyst",
     "create_connected:fan_splashing_catalyst",
     "create_connected:fan_haunting_catalyst",
-    "create_connected:fan_freezing_catalyst"
+    "create_connected:fan_freezing_catalyst",
+    "create_connected:fan_seething_catalyst"
   ]
 }

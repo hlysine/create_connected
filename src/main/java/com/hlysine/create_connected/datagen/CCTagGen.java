@@ -27,6 +27,8 @@ public class CCTagGen {
                 .add(CCBlocks.WRAPPED_COPYCAT_FENCE.get());
         prov.tag(BlockTags.create(Mods.DREAMS_DESIRES.rl("fan_processing_catalysts_freezing")))
                 .add(CCBlocks.FAN_FREEZING_CATALYST.get());
+        prov.tag(BlockTags.create(Mods.DREAMS_DESIRES.rl("fan_processing_catalysts_superheating")))
+                .add(CCBlocks.FAN_SEETHING_CATALYST.get());
         prov.tag(BlockTags.create(Mods.GARNISHED.rl("fan_processing_catalysts/freezing")))
                 .add(CCBlocks.FAN_FREEZING_CATALYST.get());
     }
