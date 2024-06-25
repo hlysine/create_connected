@@ -69,7 +69,6 @@
   "block.create_connected.fan_blasting_catalyst": "Tavný katalyzátor větráku",
   "block.create_connected.fan_blasting_catalyst.tooltip.summary": "Vyhrazené zařízení pro _hromadné tavení_. Obsah katalyzátoru neinteraguje s prostředím.",
   "block.create_connected.fan_freezing_catalyst": "Zmrazovací katalyzátor větráku",
-  "block.create_connected.fan_freezing_catalyst.tooltip.summary": "Vyhrazené zařízení pro _hromadné mrazení_. Obsah katalyzátoru neinteraguje s prostředím.",
   "block.create_connected.fan_haunting_catalyst": "Posedlý katalyzátor větráku",
   "block.create_connected.fan_haunting_catalyst.tooltip.summary": "Vyhrazené zařízení pro _hromadné posednutí_. Obsah katalyzátoru neinteraguje s prostředím.",
   "block.create_connected.fan_smoking_catalyst": "Uzený katalyzátor větráku",
