@@ -183,6 +183,7 @@
   "create_connected.ponder.inventory_bridge.text_5": "Mosty však nelze spojit do korálku",
   "create_connected.ponder.inventory_bridge.text_6": "Použitím redstonového signálu most vypnete",
   "create_connected.ponder.inventory_bridge_filter.header": "Filtrování předmětů pomocí inventářového mostu",
+  "create_connected.ponder.inventory_bridge_filter.text_1": "Filtrovací sloty na inventářovém mostu určují, do kterého inventáře mají vložené předměty přejít",
   "create_connected.ponder.inventory_bridge_filter.text_2": "Předměty, které neodpovídají žádnému z filtrů, nelze do mostu vložit",
   "create_connected.ponder.inventory_bridge_filter.text_3": "Neprázdné filtry mají přednost před prázdnými...",
   "create_connected.ponder.inventory_bridge_filter.text_4": "...a brání tomu, aby se shodné předměty dostaly na nefiltrovanou stranu",
