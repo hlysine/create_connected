@@ -61,6 +61,7 @@
   "block.create_connected.copycat_wall.tooltip.behaviour1": "Принагідно застосовує _утримуваний предмет_ як свій _матеріал_. Клацніть ще раз, щоб змінити _орієнтацію_ або перемикнути стан _живлення_. Використовуйте _гайковий ключ_ для _скидання_ матеріалу.",
   "block.create_connected.copycat_wall.tooltip.condition1": "Коли клацнуто ПКМ",
   "block.create_connected.copycat_wall.tooltip.summary": "_Перетворює_ будь-який _суцільний блок_ на декоративну стіну.",
+  "block.create_connected.crank_wheel": "Колісна корба",
   "block.create_connected.empty_fan_catalyst": "Порожній прискорювач вентилятора",
   "block.create_connected.empty_fan_catalyst.tooltip.summary": "_Вставте_ матеріал, щоб прискорити _роботу вентилятора_.",
   "block.create_connected.encased_chain_cogwheel": "Облицьована ланцюгова шестірня",
