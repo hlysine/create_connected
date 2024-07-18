@@ -1,1 +1,19 @@
-{}
+{
+  "advancement.create_connected.brass_gearbox": "Komoly rendszerezés",
+  "advancement.create_connected.brass_gearbox.desc": "Helyezz le egy sárgaréz-fogaskerékházat!",
+  "advancement.create_connected.control_chip": "Precíz összeépítés",
+  "advancement.create_connected.control_chip.desc": "Építs össze egy vezérlőcsippet!",
+  "advancement.create_connected.overpowered_brake_0": "Túlerőben",
+  "advancement.create_connected.overpowered_brake_0.desc": "Ne hagyd egy féknek, hogy megállítsa a stressz-hálózatod! §7(Rejtett előrelépés)",
+  "advancement.create_connected.overstress_clutch": "Kismegszakító",
+  "advancement.create_connected.overstress_clutch.desc": "Aktiválj egy terhelés-kuplungot!",
+  "advancement.create_connected.pulse_generator_infinite_loop": "Végtelen ciklus",
+  "advancement.create_connected.pulse_generator_infinite_loop.desc": "Zavarj meg egy önműködő jelgenerátort egy hibás programmal! §7(Rejtett előrelépés)",
+  "advancement.create_connected.root": "Üdv a Create: Connected -ben!",
+  "advancement.create_connected.root.desc": "Kütyük minden szituációhoz.",
+  "advancement.create_connected.sequenced_pulse_generator": "Számítási hatalom",
+  "advancement.create_connected.sequenced_pulse_generator.desc": "Helyezz le egy önműködő jelgenerátort!",
+  "advancement.create_connected.shear_pin": "Reccs!",
+  "advancement.create_connected.shear_pin.desc": "Törj el egy nyírócsapot!",
+  "block.create_connected.bamboo_window": "Bambusz ablak"
+}
