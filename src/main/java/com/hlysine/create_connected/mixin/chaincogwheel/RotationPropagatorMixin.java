@@ -32,10 +32,10 @@ public class RotationPropagatorMixin {
         final IRotate definitionTo = (IRotate) toBlock;
         final BlockPos diff = to.getBlockPos()
                 .subtract(from.getBlockPos());
-        final Direction direction = Direction.getNearest(diff.getX(), diff.getY(), diff.getZ());
+        final Direction direction = Direction.fromDelta(diff.getX(), diff.getY(), diff.getZ());
 
         if (stateFrom.is(CCBlocks.ENCASED_CHAIN_COGWHEEL.get()) && stateTo.is(CCBlocks.ENCASED_CHAIN_COGWHEEL.get())) {
-            if (diff.distManhattan(BlockPos.ZERO) != 1) {
+            if (direction == null) {
                 cir.setReturnValue(0f);
                 return;
             }
@@ -49,6 +49,10 @@ public class RotationPropagatorMixin {
                     cir.setReturnValue(-1f);
                     return;
                 }
+                cir.setReturnValue(0f);
+            }
+        } else if (stateFrom.getBlock() instanceof ChainDriveBlock && stateTo.getBlock() instanceof ChainDriveBlock) {
+            if (direction == null) {
                 cir.setReturnValue(0f);
             }
         }
