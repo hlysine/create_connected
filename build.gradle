@@ -93,7 +93,6 @@ minecraft {
 
             property 'mixin.env.remapRefMap', 'true'
             property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
-            property 'mixin.debug.countInjections', 'true'
 
             //Allows for reloading the project during runtime with compatible java
             jvmArg "-XX:+AllowEnhancedClassRedefinition"
@@ -161,6 +160,11 @@ repositories {
         name = "ModMaven"
         url = "https://modmaven.dev"
     }
+    maven {
+        // maven for Copycats+
+        name = "realrobotixCopycats"
+        url = "https://maven.realrobotix.me/copycats"
+    }
     exclusiveContent {
         forRepository {
             maven {
@@ -221,9 +225,9 @@ dependencies {
     // Example mod dependency using a mod jar from ./libs with a flat dir repository
     // This maps to ./libs/coolmod-${mc_version}-${coolmod_version}.jar
     // The group id is ignored when searching -- in this case, it is "blank"
-    implementation fg.deobf("blank:copycats-${copycats_minecraft_version}:${copycats_version}")
 //    implementation fg.deobf("maven.modrinth:create-garnished:${garnished_version}+${garnished_minecraft_version}")
     implementation fg.deobf("maven.modrinth:create-dreams-and-desires:${dreams_desires_minecraft_version}-${dreams_desires_version}")
+    implementation fg.deobf("com.copycatsplus:copycats:${copycats_version}+mc.${copycats_minecraft_version}-forge")
 
     // For more info:
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
