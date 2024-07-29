@@ -2,10 +2,8 @@ package com.hlysine.create_connected.mixin.itemsilo;
 
 import com.hlysine.create_connected.content.itemsilo.ItemSiloBlockEntity;
 import com.simibubi.create.content.contraptions.MountedStorage;
-import com.simibubi.create.content.logistics.vault.ItemVaultBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.items.ItemStackHandler;
-import org.spongepowered.asm.mixin.Debug;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -14,7 +12,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(value = MountedStorage.class, remap = false)
-@Debug(export = true)
 public class MountedStorageMixin {
     @Shadow
     boolean noFuel;
