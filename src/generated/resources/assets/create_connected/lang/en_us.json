@@ -72,6 +72,8 @@
   "block.create_connected.fan_freezing_catalyst.tooltip.summary": "Dedicated _bulk freezing_ device for compatible mods. Content of the catalyst does not interact with the environment.",
   "block.create_connected.fan_haunting_catalyst": "Fan Haunting Catalyst",
   "block.create_connected.fan_haunting_catalyst.tooltip.summary": "Dedicated _bulk haunting_ device. Content of the catalyst does not interact with the environment.",
+  "block.create_connected.fan_sanding_catalyst": "Fan Sanding Catalyst",
+  "block.create_connected.fan_sanding_catalyst.tooltip.summary": "Dedicated _bulk sanding_ device for Create: Dreams and Desires. Content of the catalyst does not interact with the environment.",
   "block.create_connected.fan_seething_catalyst": "Fan Seething Catalyst",
   "block.create_connected.fan_seething_catalyst.tooltip.summary": "Dedicated _bulk superheating_ device for Create: Dreams and Desires. Content of the catalyst does not interact with the environment.",
   "block.create_connected.fan_smoking_catalyst": "Fan Smoking Catalyst",

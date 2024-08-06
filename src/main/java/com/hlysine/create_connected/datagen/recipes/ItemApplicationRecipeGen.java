@@ -1,14 +1,14 @@
 package com.hlysine.create_connected.datagen.recipes;
 
 import com.hlysine.create_connected.CCBlocks;
-import com.hlysine.create_connected.compat.Mods;
+import com.simibubi.create.AllItems;
 import com.simibubi.create.AllRecipeTypes;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.crafting.conditions.ICondition;
-import net.minecraftforge.common.crafting.conditions.ModLoadedCondition;
 
 import java.util.function.Supplier;
 
@@ -26,7 +26,9 @@ public class ItemApplicationRecipeGen extends ProcessingRecipeGen {
     GeneratedRecipe FREEZING_CATALYST = fanCatalystFromEmpty(
             "freezing_catalyst", Items.POWDER_SNOW_BUCKET, CCBlocks.FAN_FREEZING_CATALYST::asItem);
     GeneratedRecipe SEETHING_CATALYST = fanCatalystFromEmpty(
-            "seething_catalyst", Mods.DREAMS_DESIRES.getIngredient("infernal_mechanism"), CCBlocks.FAN_SEETHING_CATALYST::asItem, new ModLoadedCondition(Mods.DREAMS_DESIRES.id()));
+            "seething_catalyst", AllItems.BLAZE_CAKE, CCBlocks.FAN_SEETHING_CATALYST::asItem);
+    GeneratedRecipe SANDING_CATALYST = fanCatalystFromEmpty(
+            "sanding_catalyst", Blocks.SAND, CCBlocks.FAN_SANDING_CATALYST::asItem);
 
     protected GeneratedRecipe fanCatalystFromEmpty(String type, ItemLike ingredient, Supplier<ItemLike> output) {
         return fanCatalystFromEmpty(type, Ingredient.of(ingredient), output);

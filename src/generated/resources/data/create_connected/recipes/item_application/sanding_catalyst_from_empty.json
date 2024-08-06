@@ -11,12 +11,12 @@
       "item": "create_connected:empty_fan_catalyst"
     },
     {
-      "item": "create:blaze_cake"
+      "item": "minecraft:sand"
     }
   ],
   "results": [
     {
-      "item": "create_connected:fan_seething_catalyst"
+      "item": "create_connected:fan_sanding_catalyst"
     }
   ]
 }
