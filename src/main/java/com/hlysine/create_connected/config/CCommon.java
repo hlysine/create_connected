@@ -17,6 +17,8 @@ public class CCommon extends SyncConfigBase {
 
     public final CFeatures toggle = nested(0, CFeatures::new, Comments.toggle);
 
+    public final CFeatureCategories categories = nested(0, CFeatureCategories::new, Comments.categories);
+
     public void register() {
         registerAsSyncRoot(
                 VERSION,
@@ -30,6 +32,7 @@ public class CCommon extends SyncConfigBase {
 
     private static class Comments {
         static String toggle = "Enable/disable features. Values on server override clients";
+        static String categories = "Enable/disable categories of features. Disabling a category hides all related features. Values on server override clients";
         static String migrateCopycatsOnBlockUpdate = "Migrate copycats to Create: Copycats+ when they receive a block update";
         static String migrateCopycatsOnInitialize = "Migrate copycats to Create: Copycats+ when their block entities are initialized";
     }

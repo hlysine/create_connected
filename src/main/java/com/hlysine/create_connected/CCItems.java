@@ -1,5 +1,6 @@
 package com.hlysine.create_connected;
 
+import com.hlysine.create_connected.config.FeatureCategory;
 import com.hlysine.create_connected.config.FeatureToggle;
 import com.hlysine.create_connected.content.brassgearbox.VerticalBrassGearboxItem;
 import com.hlysine.create_connected.content.copycat.board.CopycatBoxItem;
@@ -54,7 +55,7 @@ public class CCItems {
     public static final ItemEntry<LinkedTransmitterItem> LINKED_TRANSMITTER =
             REGISTRATE.item("linked_transmitter", LinkedTransmitterItem::new)
                     .model(AssetLookup.customGenericItemModel("linked_transmitter", "item"))
-                    .transform(FeatureToggle.register())
+                    .transform(FeatureToggle.register(FeatureCategory.REDSTONE))
                     .register();
 
     public static final ItemEntry<CopycatBoxItem> COPYCAT_BOX =
