@@ -17,11 +17,13 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Supplier;
 
 public class FeatureToggle {
     public static final Set<ResourceLocation> TOGGLEABLE_FEATURES = new HashSet<>();
     public static final Map<ResourceLocation, ResourceLocation> DEPENDENT_FEATURES = new HashMap<>();
     public static final Map<ResourceLocation, Set<FeatureCategory>> FEATURE_CATEGORIES = new HashMap<>();
+    public static final Map<ResourceLocation, Supplier<Boolean>> FEATURE_CONDITIONS = new HashMap<>();
 
     public static void register(ResourceLocation key) {
         TOGGLEABLE_FEATURES.add(key);
@@ -39,6 +41,10 @@ public class FeatureToggle {
     public static void registerDependent(ResourceLocation key, ResourceLocation dependency, FeatureCategory... categories) {
         registerDependent(key, dependency);
         FEATURE_CATEGORIES.put(key, Set.of(categories));
+    }
+
+    public static void addCondition(ResourceLocation key, Supplier<Boolean> condition) {
+        FEATURE_CONDITIONS.put(key, condition);
     }
 
     /**
@@ -105,6 +111,16 @@ public class FeatureToggle {
         };
     }
 
+    /**
+     * Add a condition to this feature.
+     */
+    public static <R, T extends R, P, S extends Builder<R, T, P, S>> NonNullUnaryOperator<S> addCondition(Supplier<Boolean> condition) {
+        return b -> {
+            addCondition(new ResourceLocation(b.getOwner().getModid(), b.getName()), condition);
+            return b;
+        };
+    }
+
     private static CFeatures getToggles() {
         return CCConfigs.common().toggle;
     }
@@ -126,6 +142,9 @@ public class FeatureToggle {
             for (FeatureCategory category : categories) {
                 if (!getCategories().isEnabled(category)) return false;
             }
+        }
+        if (FEATURE_CONDITIONS.containsKey(key)) {
+            if (!FEATURE_CONDITIONS.get(key).get()) return false;
         }
         if (getToggles().hasToggle(key)) {
             return getToggles().isEnabled(key);
