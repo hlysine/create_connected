@@ -72,6 +72,8 @@
   "block.create_connected.fan_freezing_catalyst.tooltip.summary": "Vyhrazené zařízení pro _hromadné mrazení_ pro kompatibilní mody. Obsah katalyzátoru neinteraguje s prostředím.",
   "block.create_connected.fan_haunting_catalyst": "Posedlý katalyzátor větráku",
   "block.create_connected.fan_haunting_catalyst.tooltip.summary": "Vyhrazené zařízení pro _hromadné posednutí_. Obsah katalyzátoru neinteraguje s prostředím.",
+  "block.create_connected.fan_sanding_catalyst": "Pískovací katalyzátor větráku",
+  "block.create_connected.fan_sanding_catalyst.tooltip.summary": "Vyhrazené zařízení pro _hromadné pískování_ pro Create: Sny a Touhy. Obsah katalyzátoru neinteraguje s prostředím.",
   "block.create_connected.fan_seething_catalyst": "Žhavý katalyzátor větráku",
   "block.create_connected.fan_seething_catalyst.tooltip.summary": "Vyhrazené zařízení pro _hromadné žhavení_ pro Create: Sny a Touhy. Obsah katalyzátoru neinteraguje s prostředím.",
   "block.create_connected.fan_smoking_catalyst": "Uzený katalyzátor větráku",
