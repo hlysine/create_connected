@@ -72,6 +72,8 @@
   "block.create_connected.fan_freezing_catalyst.tooltip.summary": "Спеціальний пристрій для _масового заморожування_, придатного до сумісних модів. Вміст каталізатора не взаємодіє з навколишнім середовищем.",
   "block.create_connected.fan_haunting_catalyst": "Каталізатор масового переслідування привидами",
   "block.create_connected.fan_haunting_catalyst.tooltip.summary": "Спеціальний пристрій для _масового переслідування привидами_. Вміст каталізатора не взаємодіє з навколишнім середовищем.",
+  "block.create_connected.fan_sanding_catalyst": "Каталізатор масової наждачної обробки",
+  "block.create_connected.fan_sanding_catalyst.tooltip.summary": "Спеціальний пристрій для _масової наждачної обробки_, придатного до Create: Dreams and Desires. Вміст каталізатора не взаємодіє з навколишнім середовищем.",
   "block.create_connected.fan_seething_catalyst": "Каталізатор масового википання",
   "block.create_connected.fan_seething_catalyst.tooltip.summary": "Спеціальний пристрій для _масового сильного нагріву_, придатного до Create: Dreams and Desires. Вміст каталізатора не взаємодіє з навколишнім середовищем.",
   "block.create_connected.fan_smoking_catalyst": "Каталізатор масового копчення",
