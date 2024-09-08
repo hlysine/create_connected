@@ -35,19 +35,21 @@ public class RotationPropagatorMixin {
         final Direction direction = Direction.getNearest(diff.getX(), diff.getY(), diff.getZ());
 
         if (stateFrom.is(CCBlocks.ENCASED_CHAIN_COGWHEEL.get()) && stateTo.is(CCBlocks.ENCASED_CHAIN_COGWHEEL.get())) {
+            if (diff.distManhattan(BlockPos.ZERO) != 1) {
+                cir.setReturnValue(0f);
+                return;
+            }
             boolean connected = ChainDriveBlock.areBlocksConnected(stateFrom, stateTo, direction);
             if (!connected) {
-                if (diff.distManhattan(BlockPos.ZERO) != 1) {
-                    cir.setReturnValue(0f);
-                    return;
-                }
                 if (direction.getAxis() == definitionFrom.getRotationAxis(stateFrom)) {
                     cir.setReturnValue(0f);
                     return;
                 }
                 if (definitionFrom.getRotationAxis(stateFrom) == definitionTo.getRotationAxis(stateTo)) {
                     cir.setReturnValue(-1f);
+                    return;
                 }
+                cir.setReturnValue(0f);
             }
         }
     }
