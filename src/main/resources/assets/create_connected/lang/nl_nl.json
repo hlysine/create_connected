@@ -150,6 +150,8 @@
   "create_connected.ponder.chain_cogwheel_relay.text_3": "Alle assen die op deze manier verbonden zijn zullen in dezelfde richting draaien",
   "create_connected.ponder.chain_cogwheel_relay.text_4": "Tandwielen kunnen overal in de rij verbinden met Kettingstandwielen",
   "create_connected.ponder.chain_cogwheel_relay.text_5": "Elk deel van de rij kan met 90 graden gedraaid worden",
+  "create_connected.ponder.inventory_bridge_filter.text_4": "...en voorkomen dat overeenkomende items naar de ongefilterde kant gaan",
+  "create_connected.ponder.inventory_bridge_filter.text_5": "Filters worden genegeerd als je items uit een inventaris haalt",
   "create_connected.ponder.inverted_clutch.header": "Draaikracht besturen met een Omgekeerde Koppeling",
   "create_connected.ponder.inverted_clutch.text_1": "Omgekeerde Koppelingen zullen geen rotatie doorgeven...",
   "create_connected.ponder.inverted_clutch.text_2": "...maar niet als ze geactiveerd zijn door Redstone",
