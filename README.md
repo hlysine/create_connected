@@ -21,15 +21,15 @@ out [Create: Power Loader](https://modrinth.com/mod/create-power-loader)**
 
 ## What's new in 0.9
 
-![inventory_access_port](https://github.com/user-attachments/assets/71f730ec-55d2-44a7-bb2e-435a9253caa1) **Inventory Access Port**
+![inventory_access_port](https://github.com/user-attachments/assets/11f8bc2b-3c63-4aa4-a068-f581e114a4a0) **Inventory Access Port**
 
 Attach to any inventory to expand its surface area. Great for access in tight spaces and smart setups with threshold switches.
 
-![inventory_bridge](https://github.com/user-attachments/assets/bc83cd73-ef69-43ee-9938-f714aaddb9b6) **Inventory Bridge**
+![inventory_bridge](https://github.com/user-attachments/assets/a92555a4-4f27-441a-8128-4c03edccdb85) **Inventory Bridge**
 
 Provides an interface to access two inventories simultaneously. Also comes with filter slots to quickly sort incoming items.
 
-![fan_sanding_catalyst](https://github.com/user-attachments/assets/af9ae49c-7110-43d0-80f0-61f5079e6814) ![fan_seething_catalyst](https://github.com/user-attachments/assets/5c4f35dc-4ab1-4dde-854e-40928e3a8a5c) **Fan Sanding/Seething Catalyst**
+![fan_sanding_catalyst](https://github.com/user-attachments/assets/0689fddd-f698-4b72-80e8-19a3f9833440) ![fan_seething_catalyst](https://github.com/user-attachments/assets/8e15a9e4-a173-40de-9240-990beaefc43e) **Fan Sanding/Seething Catalyst**
 
 More bulk processing compatibility with Create: Dreams and Desires. Only appears when Create: Dreams and Desires is installed.
 
