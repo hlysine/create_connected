@@ -33,6 +33,11 @@ Provides an interface to access two inventories simultaneously. Also comes with 
 
 More bulk processing compatibility with Create: Dreams and Desires. Only appears when Create: Dreams and Desires is installed.
 
+**Note for 1.18 and 1.19 users**
+
+Create has dropped support for 1.18 and 1.19 since 0.5.1g. As a result, backporting to 1.18 and 1.19 is no longer
+a priority for Create: Connected. Depending on circumstances, updates will be delayed and new features may not be backported.
+
 ## Features
 
 ### New Blocks and Items
