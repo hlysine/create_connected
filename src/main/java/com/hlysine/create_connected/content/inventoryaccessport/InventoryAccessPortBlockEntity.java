@@ -19,6 +19,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.function.Supplier;
 
 import static com.hlysine.create_connected.content.inventoryaccessport.InventoryAccessPortBlock.*;
 
@@ -91,40 +92,63 @@ public class InventoryAccessPortBlockEntity extends SmartBlockEntity {
     }
 
     private class InventoryAccessHandler implements WrappedItemHandler {
+
+        private final ThreadLocal<Boolean> recursionGuard = ThreadLocal.withInitial(() -> false);
+
+        private <T> T preventRecursion(Supplier<T> value, T defaultValue) {
+            if (recursionGuard.get()) return defaultValue;
+            recursionGuard.set(true);
+            T result = value.get();
+            recursionGuard.set(false);
+            return result;
+        }
+
         @Override
         public int getSlots() {
-            IItemHandler handler = getConnectedItemHandler();
-            return handler == null ? 0 : handler.getSlots();
+            return preventRecursion(() -> {
+                IItemHandler handler = getConnectedItemHandler();
+                return handler == null ? 0 : handler.getSlots();
+            }, 0);
         }
 
         @Override
         public @NotNull ItemStack getStackInSlot(int i) {
-            IItemHandler handler = getConnectedItemHandler();
-            return handler == null ? ItemStack.EMPTY : handler.getStackInSlot(i);
+            return preventRecursion(() -> {
+                IItemHandler handler = getConnectedItemHandler();
+                return handler == null ? ItemStack.EMPTY : handler.getStackInSlot(i);
+            }, ItemStack.EMPTY);
         }
 
         @Override
         public @NotNull ItemStack insertItem(int i, @NotNull ItemStack itemStack, boolean b) {
-            IItemHandler handler = getConnectedItemHandler();
-            return handler == null ? itemStack : handler.insertItem(i, itemStack, b);
+            return preventRecursion(() -> {
+                IItemHandler handler = getConnectedItemHandler();
+                return handler == null ? itemStack : handler.insertItem(i, itemStack, b);
+            }, itemStack);
         }
 
         @Override
         public @NotNull ItemStack extractItem(int i, int i1, boolean b) {
-            IItemHandler handler = getConnectedItemHandler();
-            return handler == null ? ItemStack.EMPTY : handler.extractItem(i, i1, b);
+            return preventRecursion(() -> {
+                IItemHandler handler = getConnectedItemHandler();
+                return handler == null ? ItemStack.EMPTY : handler.extractItem(i, i1, b);
+            }, ItemStack.EMPTY);
         }
 
         @Override
         public int getSlotLimit(int i) {
-            IItemHandler handler = getConnectedItemHandler();
-            return handler == null ? 0 : handler.getSlotLimit(i);
+            return preventRecursion(() -> {
+                IItemHandler handler = getConnectedItemHandler();
+                return handler == null ? 0 : handler.getSlotLimit(i);
+            }, 0);
         }
 
         @Override
         public boolean isItemValid(int i, @NotNull ItemStack itemStack) {
-            IItemHandler handler = getConnectedItemHandler();
-            return handler != null && handler.isItemValid(i, itemStack);
+            return preventRecursion(() -> {
+                IItemHandler handler = getConnectedItemHandler();
+                return handler != null && handler.isItemValid(i, itemStack);
+            }, false);
         }
     }
 }
