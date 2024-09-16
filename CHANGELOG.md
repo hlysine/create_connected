@@ -5,6 +5,31 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.9.0 - 2024-09-16
+
+### Added
+
+- **Inventory Access Port**
+  - Attaches to an inventory to expand its surface area for other blocks to interact with
+- **Inventory Bridge**
+  - Attaches to two inventories to access both inventories simultaneously
+  - Accepts filters to control which items are allowed to pass through
+- **Fan Sanding/Seething Catalyst**
+  - Compatibility for bulk sanding/superheating in Create: Dreams & Desires
+- **Feature categories**
+  - Disable features of the same category at once
+
+### Changed
+
+- Catalysts are now hidden if the corresponding add-on is not installed
+- Updated Control Chip texture (credits to @LunarAnticGitHub)
+
+### Fixed
+
+- Crash when copycats from Create: Connected are migrated to newer versions of Create: Copycats+
+- Remove debug exports of mixin code
+- Incorrect rotation propagation for encased chain cogwheels
+
 ## 0.8.2 - 2024-05-29
 
 ### Fixed
