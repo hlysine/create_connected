@@ -1,6 +1,7 @@
 package com.hlysine.create_connected.content.inventorybridge;
 
 import com.hlysine.create_connected.CCBlockEntityTypes;
+import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.foundation.block.IBE;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -20,7 +21,7 @@ import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.items.IItemHandler;
 import org.jetbrains.annotations.NotNull;
 
-public class InventoryBridgeBlock extends Block implements IBE<InventoryBridgeBlockEntity> {
+public class InventoryBridgeBlock extends Block implements IBE<InventoryBridgeBlockEntity>, IWrenchable {
 
     public static BooleanProperty ATTACHED_POSITIVE = BooleanProperty.create("attached_positive");
     public static BooleanProperty ATTACHED_NEGATIVE = BooleanProperty.create("attached_negative");
