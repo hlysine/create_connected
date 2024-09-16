@@ -19,20 +19,19 @@ A Create mod add-on adding quality-of-life blocks that you wish existed in Creat
 > **Want reliable, immersive chunk-loading for your Create machines? Check
 out [Create: Power Loader](https://modrinth.com/mod/create-power-loader)**
 
-## What's new in 0.8
+## What's new in 0.9
 
-![fluid_vessel](https://github.com/hlysine/create_connected/assets/25472513/aeebc30a-ea8c-4aaa-b80c-36993ea7b5d5) ![creative_fluid_vessel](https://github.com/hlysine/create_connected/assets/25472513/80ad7d61-731e-494d-a334-d59215874aa3) **Fluid Vessel**
+![inventory_access_port](https://github.com/user-attachments/assets/71f730ec-55d2-44a7-bb2e-435a9253caa1) **Inventory Access Port**
 
-Horizontal fluid tanks with full support of all fluid tank features! Boilers made from fluid vessels are nerfed by
-default, but can be changed in the server config. You can also cycle through multiple window shapes using a wrench.
+Attach to any inventory to expand its surface area. Great for access in tight spaces and smart setups with threshold switches.
 
-![crank_wheel](https://github.com/hlysine/create_connected/assets/25472513/36c28f61-423b-493e-943b-534a4d4bcd39) ![large_crank_wheel](https://github.com/hlysine/create_connected/assets/25472513/c4b94676-4ec0-46de-8a15-317c1689aa57) **Small/Large Crank Wheels**
+![inventory_bridge](https://github.com/user-attachments/assets/bc83cd73-ef69-43ee-9938-f714aaddb9b6) **Inventory Bridge**
 
-Hand cranks with built-in cogwheels. Useful in tight spaces and for gear ratios.
+Provides an interface to access two inventories simultaneously. Also comes with filter slots to quickly sort incoming items.
 
-![fan_freezing_catalyst](https://github.com/hlysine/create_connected/assets/25472513/f7e07503-f2ec-48d1-9fb1-d74e65253632) **Fan Freezing Catalyst**
+![fan_sanding_catalyst](https://github.com/user-attachments/assets/af9ae49c-7110-43d0-80f0-61f5079e6814) ![fan_seething_catalyst](https://github.com/user-attachments/assets/5c4f35dc-4ab1-4dde-854e-40928e3a8a5c) **Fan Sanding/Seething Catalyst**
 
-A new catalyst for bulk freezing. Works with Create: Garnished and Create: Dreams & Desires.
+More bulk processing compatibility with Create: Dreams and Desires. Only appears when Create: Dreams and Desires is installed.
 
 ## Features
 
