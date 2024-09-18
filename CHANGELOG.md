@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.9.1 - 2024-09-18
+
+### Changed
+
+- Enabled auto-report for crashes in the mod if you have Neruina installed
+
+### Fixed
+
+- Ticking block entity crash due to incompatibility with contraption changes in Create 0.5.1g
+  - This version also attempts to fix worlds that have already been corrupted by the crash, but due to the nature of the crash, multi-block silos may be split into individual silos after recovery
+- Incorrect rotation propagation for encased chain cogwheels (again)
+
 ## 0.9.0 - 2024-09-16
 
 ### Added
