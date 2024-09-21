@@ -62,6 +62,8 @@
   "block.create_connected.copycat_wall.tooltip.condition1": "En cas de clic droit",
   "block.create_connected.copycat_wall.tooltip.summary": "_Transforme_ n'importe quel _bloc plein_ en un mur décoratif.",
   "block.create_connected.crank_wheel": "Roue Manivelle",
+  "block.create_connected.creative_fluid_vessel": "Réservoir à Fluide Horizontal Créatif",
+  "block.create_connected.empty_fan_catalyst": "Catalyseur de Ventilateur Vide",
   "block.create_connected.inverted_clutch": "Embrayage inversé",
   "block.create_connected.linked_cherry_button": "Bouton de cerisier lié",
   "block.create_connected.linked_jungle_button": "Bouton de Jungle lié",
