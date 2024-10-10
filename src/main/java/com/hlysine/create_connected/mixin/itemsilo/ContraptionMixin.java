@@ -90,6 +90,8 @@ public abstract class ContraptionMixin {
         }
         toBeReplaced.clear();
         for (BlockPos blockPos : capturedMultiblocks.keySet()) {
+            if (!blocks.containsKey(blockPos))
+                continue;
             if (!(blocks.get(blockPos).state().getBlock() instanceof ItemSiloBlock))
                 continue;
             Collection<StructureTemplate.StructureBlockInfo> parts = capturedMultiblocks.get(blockPos);
