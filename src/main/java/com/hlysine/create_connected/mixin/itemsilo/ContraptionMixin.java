@@ -10,10 +10,12 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.lang.reflect.Field;
 import java.util.*;
 
 /**
@@ -24,17 +26,35 @@ public abstract class ContraptionMixin {
     @Shadow
     protected Map<BlockPos, StructureTemplate.StructureBlockInfo> blocks;
 
-    @Shadow
-    protected Multimap<BlockPos, StructureTemplate.StructureBlockInfo> capturedMultiblocks;
+    @Unique
+    private Optional<Field> create_connected$capturedMultiblocks = null;
 
     @Shadow
     protected abstract BlockPos toLocalPos(BlockPos globalPos);
 
+    @SuppressWarnings("unchecked")
     @Inject(
             at = @At("RETURN"),
-            method = "readNBT"
+            method = "readNBT",
+            require = 0
     )
     private void fixNBT(Level world, CompoundTag nbt, boolean spawnData, CallbackInfo ci) {
+        if (create_connected$capturedMultiblocks == null) {
+            try {
+                create_connected$capturedMultiblocks = Optional.of(Contraption.class.getDeclaredField("capturedMultiblocks"));
+            } catch (NoSuchFieldException e) {
+                create_connected$capturedMultiblocks = Optional.empty();
+            }
+        }
+        if (create_connected$capturedMultiblocks.isEmpty()) {
+            return;
+        }
+        Multimap<BlockPos, StructureTemplate.StructureBlockInfo> capturedMultiblocks = null;
+        try {
+            capturedMultiblocks = (Multimap<BlockPos, StructureTemplate.StructureBlockInfo>) create_connected$capturedMultiblocks.get().get(this);
+        } catch (IllegalAccessException e) {
+            return;
+        }
         List<Map.Entry<BlockPos, StructureTemplate.StructureBlockInfo>> toBeReplaced = new ArrayList<>();
         for (Iterator<Map.Entry<BlockPos, StructureTemplate.StructureBlockInfo>> iterator = blocks.entrySet().iterator(); iterator.hasNext(); ) {
             Map.Entry<BlockPos, StructureTemplate.StructureBlockInfo> entry = iterator.next();
