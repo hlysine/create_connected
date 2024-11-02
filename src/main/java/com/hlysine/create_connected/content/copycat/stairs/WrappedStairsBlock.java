@@ -9,4 +9,11 @@ public class WrappedStairsBlock extends StairBlock {
     public WrappedStairsBlock(Supplier<BlockState> state, Properties properties) {
         super(state, properties);
     }
+
+    /**
+     * For compatibility with Additional Placements
+     */
+    public boolean generateAdditionalStates() {
+        return false;
+    }
 }

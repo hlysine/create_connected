@@ -6,4 +6,11 @@ public class WrappedWallBlock extends WallBlock {
     public WrappedWallBlock(Properties properties) {
         super(properties);
     }
+
+    /**
+     * For compatibility with Additional Placements
+     */
+    public boolean generateAdditionalStates() {
+        return false;
+    }
 }

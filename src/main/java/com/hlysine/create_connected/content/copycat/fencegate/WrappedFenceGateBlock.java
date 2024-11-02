@@ -7,4 +7,11 @@ public class WrappedFenceGateBlock extends FenceGateBlock {
     public WrappedFenceGateBlock(Properties pProperties, WoodType pType) {
         super(pProperties, pType);
     }
+
+    /**
+     * For compatibility with Additional Placements
+     */
+    public boolean generateAdditionalStates() {
+        return false;
+    }
 }
