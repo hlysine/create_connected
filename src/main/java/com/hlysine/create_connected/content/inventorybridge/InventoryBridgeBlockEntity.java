@@ -209,8 +209,10 @@ public class InventoryBridgeBlockEntity extends SmartBlockEntity {
                     if (positive && !negative && slot < size1) return stack;
                     boolean negativeFilterEmpty = negativeFilter.getFilter().isEmpty();
                     boolean positiveFilterEmpty = positiveFilter.getFilter().isEmpty();
-                    if (slot >= size1 && negative && positiveFilterEmpty) return stack;
-                    if (slot < size1 && positive && negativeFilterEmpty) return stack;
+                    if (!negativeFilterEmpty || !positiveFilterEmpty) {
+                        if (slot >= size1 && negative && positiveFilterEmpty) return stack;
+                        if (slot < size1 && positive && negativeFilterEmpty) return stack;
+                    }
                     return slot < size1
                             ? handler1.insertItem(slot, stack, simulate)
                             : handler2.insertItem(slot - size1, stack, simulate);
@@ -284,8 +286,10 @@ public class InventoryBridgeBlockEntity extends SmartBlockEntity {
                     if (positive && !negative && slot < size1) return false;
                     boolean negativeFilterEmpty = negativeFilter.getFilter().isEmpty();
                     boolean positiveFilterEmpty = positiveFilter.getFilter().isEmpty();
-                    if (slot >= size1 && negative && positiveFilterEmpty) return false;
-                    if (slot < size1 && positive && negativeFilterEmpty) return false;
+                    if (!negativeFilterEmpty || !positiveFilterEmpty) {
+                        if (slot >= size1 && negative && positiveFilterEmpty) return false;
+                        if (slot < size1 && positive && negativeFilterEmpty) return false;
+                    }
                     return slot < size1
                             ? handler1.isItemValid(slot, stack)
                             : handler2.isItemValid(slot - size1, stack);
