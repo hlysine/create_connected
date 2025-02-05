@@ -1,0 +1,36 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "create_connected:feature_enabled",
+          "feature": "create_connected:inventory_access_port"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "key": {
+          "B": {
+            "item": "create:brass_casing"
+          },
+          "C": {
+            "item": "create:chute"
+          },
+          "E": {
+            "item": "create:electron_tube"
+          }
+        },
+        "pattern": [
+          "B",
+          "C",
+          "E"
+        ],
+        "result": {
+          "count": 2,
+          "item": "create_connected:inventory_access_port"
+        }
+      }
+    }
+  ]
+}

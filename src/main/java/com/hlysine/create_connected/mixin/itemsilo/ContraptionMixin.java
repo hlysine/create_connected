@@ -1,41 +1,114 @@
 package com.hlysine.create_connected.mixin.itemsilo;
 
-import com.hlysine.create_connected.content.itemsilo.ItemSiloBlockEntity;
+import com.google.common.collect.Multimap;
+import com.hlysine.create_connected.content.itemsilo.ItemSiloBlock;
 import com.simibubi.create.content.contraptions.Contraption;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.lang.reflect.Field;
+import java.util.*;
+
+/**
+ * Data fixer for contraptions with corrupted item silo NBT
+ */
 @Mixin(value = Contraption.class, remap = false)
 public abstract class ContraptionMixin {
     @Shadow
+    protected Map<BlockPos, StructureTemplate.StructureBlockInfo> blocks;
+
+    @Unique
+    private Optional<Field> create_connected$capturedMultiblocks = null;
+
+    @Shadow
     protected abstract BlockPos toLocalPos(BlockPos globalPos);
 
+    @SuppressWarnings("unchecked")
     @Inject(
-            at = @At("HEAD"),
-            method = "getBlockEntityNBT(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;)Lnet/minecraft/nbt/CompoundTag;",
-            cancellable = true
+            at = @At("RETURN"),
+            method = "readNBT",
+            require = 0
     )
-    private void getItemSiloNBT(Level world, BlockPos pos, CallbackInfoReturnable<CompoundTag> cir) {
-        BlockEntity blockEntity = world.getBlockEntity(pos);
-        if (blockEntity instanceof ItemSiloBlockEntity) {
-            CompoundTag nbt = blockEntity.saveWithFullMetadata();
-            nbt.remove("x");
-            nbt.remove("y");
-            nbt.remove("z");
+    private void fixNBT(Level world, CompoundTag nbt, boolean spawnData, CallbackInfo ci) {
+        if (create_connected$capturedMultiblocks == null) {
+            try {
+                create_connected$capturedMultiblocks = Optional.of(Contraption.class.getDeclaredField("capturedMultiblocks"));
+            } catch (NoSuchFieldException e) {
+                create_connected$capturedMultiblocks = Optional.empty();
+            }
+        }
+        if (create_connected$capturedMultiblocks.isEmpty()) {
+            return;
+        }
+        Multimap<BlockPos, StructureTemplate.StructureBlockInfo> capturedMultiblocks = null;
+        try {
+            capturedMultiblocks = (Multimap<BlockPos, StructureTemplate.StructureBlockInfo>) create_connected$capturedMultiblocks.get().get(this);
+        } catch (IllegalAccessException e) {
+            return;
+        }
+        List<Map.Entry<BlockPos, StructureTemplate.StructureBlockInfo>> toBeReplaced = new ArrayList<>();
+        for (Iterator<Map.Entry<BlockPos, StructureTemplate.StructureBlockInfo>> iterator = blocks.entrySet().iterator(); iterator.hasNext(); ) {
+            Map.Entry<BlockPos, StructureTemplate.StructureBlockInfo> entry = iterator.next();
+            if (!(entry.getValue().state.getBlock() instanceof ItemSiloBlock))
+                continue;
+            if (!entry.getValue().nbt.contains("Length") && (
+                    blocks.get(NbtUtils.readBlockPos(entry.getValue().nbt.getCompound("Controller"))) == null ||
+                            !(blocks.get(NbtUtils.readBlockPos(entry.getValue().nbt.getCompound("Controller"))).state.getBlock() instanceof ItemSiloBlock))) {
+                entry.getValue().nbt.put("Controller", NbtUtils.writeBlockPos(entry.getKey()));
+                entry.getValue().nbt.putInt("Length", 1);
+                entry.getValue().nbt.putInt("Size", 1);
+                iterator.remove();
+                toBeReplaced.add(new AbstractMap.SimpleEntry<>(entry.getKey(), new StructureTemplate.StructureBlockInfo(entry.getKey(), entry.getValue().state.setValue(ItemSiloBlock.LARGE, false), entry.getValue().nbt)));
+            }
+        }
+        for (Map.Entry<BlockPos, StructureTemplate.StructureBlockInfo> entry : toBeReplaced) {
+            blocks.put(entry.getKey(), entry.getValue());
+        }
+        toBeReplaced.clear();
+        for (Iterator<Map.Entry<BlockPos, StructureTemplate.StructureBlockInfo>> iterator = capturedMultiblocks.entries().iterator(); iterator.hasNext(); ) {
+            Map.Entry<BlockPos, StructureTemplate.StructureBlockInfo> entry = iterator.next();
+            if (!(entry.getValue().state.getBlock() instanceof ItemSiloBlock))
+                continue;
+            if (!blocks.containsKey(entry.getKey()) || !(blocks.get(entry.getKey()).state.getBlock() instanceof ItemSiloBlock)) {
+                if (entry.getValue().nbt.contains("Controller")) {
+                    iterator.remove();
+                    toBeReplaced.add(new AbstractMap.SimpleEntry<>(NbtUtils.readBlockPos(entry.getValue().nbt.getCompound("Controller")), entry.getValue()));
+                }
+            }
+        }
+        for (Map.Entry<BlockPos, StructureTemplate.StructureBlockInfo> entry : toBeReplaced) {
+            capturedMultiblocks.put(entry.getKey(), entry.getValue());
+        }
+        toBeReplaced.clear();
+        for (BlockPos blockPos : capturedMultiblocks.keySet()) {
+            if (!blocks.containsKey(blockPos))
+                continue;
+            if (!(blocks.get(blockPos).state.getBlock() instanceof ItemSiloBlock))
+                continue;
+            Collection<StructureTemplate.StructureBlockInfo> parts = capturedMultiblocks.get(blockPos);
 
-            if (nbt.contains("Controller"))
-                nbt.put("Controller",
-                        NbtUtils.writeBlockPos(toLocalPos(NbtUtils.readBlockPos(nbt.getCompound("Controller")))));
-
-            cir.setReturnValue(nbt);
+            if (parts.size() == 1) {
+                StructureTemplate.StructureBlockInfo part = parts.iterator().next();
+                if (part.nbt.contains("Length") && part.nbt.getInt("Length") > 1) {
+                    part.nbt.putInt("Length", 1);
+                    part.nbt.putInt("Size", 1);
+                    toBeReplaced.add(new AbstractMap.SimpleEntry<>(blockPos, new StructureTemplate.StructureBlockInfo(part.pos, part.state.setValue(ItemSiloBlock.LARGE, false), part.nbt)));
+                }
+            }
+        }
+        for (Map.Entry<BlockPos, StructureTemplate.StructureBlockInfo> entry : toBeReplaced) {
+            capturedMultiblocks.removeAll(entry.getKey());
+            capturedMultiblocks.put(entry.getKey(), entry.getValue());
+            blocks.put(entry.getValue().pos, entry.getValue());
         }
     }
 }

@@ -14,6 +14,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import static com.hlysine.create_connected.content.MathHelper.DirectionFromDelta;
+
 @Mixin(value = RotationPropagator.class, remap = false)
 public class RotationPropagatorMixin {
     @Inject(
@@ -32,22 +34,28 @@ public class RotationPropagatorMixin {
         final IRotate definitionTo = (IRotate) toBlock;
         final BlockPos diff = to.getBlockPos()
                 .subtract(from.getBlockPos());
-        final Direction direction = Direction.getNearest(diff.getX(), diff.getY(), diff.getZ());
+        final Direction direction = DirectionFromDelta(diff.getX(), diff.getY(), diff.getZ());
 
         if (stateFrom.is(CCBlocks.ENCASED_CHAIN_COGWHEEL.get()) && stateTo.is(CCBlocks.ENCASED_CHAIN_COGWHEEL.get())) {
+            if (direction == null) {
+                cir.setReturnValue(0f);
+                return;
+            }
             boolean connected = ChainDriveBlock.areBlocksConnected(stateFrom, stateTo, direction);
             if (!connected) {
-                if (diff.distManhattan(BlockPos.ZERO) != 1) {
-                    cir.setReturnValue(0f);
-                    return;
-                }
                 if (direction.getAxis() == definitionFrom.getRotationAxis(stateFrom)) {
                     cir.setReturnValue(0f);
                     return;
                 }
                 if (definitionFrom.getRotationAxis(stateFrom) == definitionTo.getRotationAxis(stateTo)) {
                     cir.setReturnValue(-1f);
+                    return;
                 }
+                cir.setReturnValue(0f);
+            }
+        } else if (stateFrom.getBlock() instanceof ChainDriveBlock && stateTo.getBlock() instanceof ChainDriveBlock) {
+            if (direction == null) {
+                cir.setReturnValue(0f);
             }
         }
     }

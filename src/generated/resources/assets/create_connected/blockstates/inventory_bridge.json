@@ -1,0 +1,56 @@
+{
+  "variants": {
+    "attached_negative=false,attached_positive=false,axis=x": {
+      "model": "create_connected:block/inventory_bridge/block",
+      "x": 90,
+      "y": 90
+    },
+    "attached_negative=false,attached_positive=false,axis=y": {
+      "model": "create_connected:block/inventory_bridge/block"
+    },
+    "attached_negative=false,attached_positive=false,axis=z": {
+      "model": "create_connected:block/inventory_bridge/block",
+      "x": 90,
+      "y": 180
+    },
+    "attached_negative=false,attached_positive=true,axis=x": {
+      "model": "create_connected:block/inventory_bridge/block_positive",
+      "x": 90,
+      "y": 90
+    },
+    "attached_negative=false,attached_positive=true,axis=y": {
+      "model": "create_connected:block/inventory_bridge/block_positive"
+    },
+    "attached_negative=false,attached_positive=true,axis=z": {
+      "model": "create_connected:block/inventory_bridge/block_positive",
+      "x": 90,
+      "y": 180
+    },
+    "attached_negative=true,attached_positive=false,axis=x": {
+      "model": "create_connected:block/inventory_bridge/block_negative",
+      "x": 90,
+      "y": 90
+    },
+    "attached_negative=true,attached_positive=false,axis=y": {
+      "model": "create_connected:block/inventory_bridge/block_negative"
+    },
+    "attached_negative=true,attached_positive=false,axis=z": {
+      "model": "create_connected:block/inventory_bridge/block_negative",
+      "x": 90,
+      "y": 180
+    },
+    "attached_negative=true,attached_positive=true,axis=x": {
+      "model": "create_connected:block/inventory_bridge/block_both",
+      "x": 90,
+      "y": 90
+    },
+    "attached_negative=true,attached_positive=true,axis=y": {
+      "model": "create_connected:block/inventory_bridge/block_both"
+    },
+    "attached_negative=true,attached_positive=true,axis=z": {
+      "model": "create_connected:block/inventory_bridge/block_both",
+      "x": 90,
+      "y": 180
+    }
+  }
+}

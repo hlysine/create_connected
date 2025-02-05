@@ -1,12 +1,19 @@
 package com.hlysine.create_connected.compat;
 
+import com.google.gson.JsonObject;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.ForgeRegistries;
+import org.jetbrains.annotations.NotNull;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 import java.util.function.Supplier;
+import java.util.stream.Stream;
 
 /**
  * For compatibility with and without another mod present, we have to define load conditions of the specific code
@@ -41,6 +48,25 @@ public enum Mods {
 
     public Item getItem(ResourceLocation id) {
         return ForgeRegistries.ITEMS.getValue(id);
+    }
+
+    /**
+     * Get an ingredient for data generation of crafting recipes without having the mod installed.
+     */
+    public Ingredient getIngredient(String id) {
+        return new Ingredient(Stream.of(new Ingredient.Value() {
+            @Override
+            public @NotNull Collection<ItemStack> getItems() {
+                return List.of();
+            }
+
+            @Override
+            public @NotNull JsonObject serialize() {
+                JsonObject jsonobject = new JsonObject();// 248
+                jsonobject.addProperty("item", rl(id).toString());// 249
+                return jsonobject;// 250
+            }
+        }));
     }
 
     /**

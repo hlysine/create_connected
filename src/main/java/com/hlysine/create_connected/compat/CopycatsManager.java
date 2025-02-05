@@ -13,6 +13,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraftforge.event.TickEvent;
@@ -73,7 +74,11 @@ public class CopycatsManager {
     }
 
     private static <T extends Comparable<T>> BlockState copyProperty(BlockState from, BlockState to, Property<T> property) {
-        return to.setValue(property, from.getValue(property));
+        return from.getOptionalValue(property).map(value -> {
+            if (to.hasProperty(property))
+                return to.setValue(property, value);
+            return to;
+        }).orElse(to);
     }
 
     public static Block convertIfEnabled(Block block) {
@@ -147,6 +152,10 @@ public class CopycatsManager {
                             if (!converted.is(state.getBlock())) {
                                 level.setBlock(pos, converted, 2 | 16 | 32);
                             }
+                            // Re-set block entity to trigger Copycats+ migration
+                            BlockEntity be = level.getBlockEntity(pos);
+                            if (be != null)
+                                level.setBlockEntity(be);
                             iterator.remove();
                         }
                     }

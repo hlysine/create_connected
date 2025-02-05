@@ -2,6 +2,7 @@ package com.hlysine.create_connected.datagen;
 
 import com.hlysine.create_connected.CCSpriteShifts;
 import com.hlysine.create_connected.CreateConnected;
+import com.hlysine.create_connected.config.FeatureCategory;
 import com.hlysine.create_connected.config.FeatureToggle;
 import com.simibubi.create.Create;
 import com.simibubi.create.content.decoration.palettes.ConnectedGlassPaneBlock;
@@ -69,7 +70,7 @@ public class CCWindowGen {
                         .isViewBlocking(CCWindowGen::never)
                         .color(color.get()))
                 .loot(RegistrateBlockLootTables::dropWhenSilkTouch)
-                .transform(FeatureToggle.register())
+                .transform(FeatureToggle.register(FeatureCategory.PALETTE))
                 .blockstate((c, p) -> p.simpleBlock(c.get(), p.models()
                         .cubeColumn(c.getName(), sideTexture.apply(c.getName()), endTexture.apply(c.getName()))))
                 .tag(BlockTags.IMPERMEABLE)

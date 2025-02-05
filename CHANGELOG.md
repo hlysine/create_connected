@@ -5,6 +5,67 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.9.4 - 2025-02-05
+
+### Added
+
+- Stub for 1.19 and 1.18 backports
+- Tons of new translations (thanks [Crowdin contributors](https://crowdin.com/project/create-connected-mod/)!)
+    - Translators have been hard at work supporting multiple languages, so I figured it's time to release them while I
+      work on the backports
+
+## 0.9.3 - 2025-01-01
+
+### Fixed
+
+- Inventory bridge not working with two inventories when both item filters are empty
+- Copycat incompatibility with AdditionalPlacements
+
+## 0.9.2 - 2024-10-12
+
+### Fixed
+
+- Restored compatibility with Create 0.5.1f
+- Fixed a crash when contraption data is fixed with a copycat block assembled in a contraption
+
+## 0.9.1 - 2024-09-18
+
+### Changed
+
+- Enabled auto-report for crashes in the mod if you have Neruina installed
+
+### Fixed
+
+- Ticking block entity crash due to incompatibility with contraption changes in Create 0.5.1g
+    - This version also attempts to fix worlds that have already been corrupted by the crash, but due to the nature of
+      the crash, multi-block silos may be split into individual silos after recovery
+- Incorrect rotation propagation for encased chain cogwheels (again)
+
+## 0.9.0 - 2024-09-16
+
+### Added
+
+- **Inventory Access Port**
+    - Attaches to an inventory to expand its surface area for other blocks to interact with
+- **Inventory Bridge**
+    - Attaches to two inventories to access both inventories simultaneously
+    - Accepts filters to control which items are allowed to pass through
+- **Fan Sanding/Seething Catalyst**
+    - Compatibility for bulk sanding/superheating in Create: Dreams & Desires
+- **Feature categories**
+    - Disable features of the same category at once
+
+### Changed
+
+- Catalysts are now hidden if the corresponding add-on is not installed
+- Updated Control Chip texture (credits to @LunarAnticGitHub)
+
+### Fixed
+
+- Crash when copycats from Create: Connected are migrated to newer versions of Create: Copycats+
+- Remove debug exports of mixin code
+- Incorrect rotation propagation for encased chain cogwheels
+
 ## 0.8.2 - 2024-05-29
 
 ### Fixed
@@ -16,30 +77,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - A new config for Fluid Vessels to limit the maximum boiler level
-- Translations for new features in Russian, Japanese and Simplified Chinese (thanks [Crowdin contributors](https://crowdin.com/project/create-connected-mod/reports/top-members)!)
+- Translations for new features in Russian, Japanese and Simplified Chinese (
+  thanks [Crowdin contributors](https://crowdin.com/project/create-connected-mod/reports/top-members)!)
 
 ### Fixed
 
 - Boiler gauge not updating on Fluid Vessels
 - Heat level for Fluid Vessels is now capped at level 18
 - Various issues in Russian translation (thanks VladisCrafter!)
-  - Text overflow for sequencer instructions
-  - Incorrect ponder strings
-  - Inaccurate translations for some entries
+    - Text overflow for sequencer instructions
+    - Incorrect ponder strings
+    - Inaccurate translations for some entries
 
 ## 0.8.0 - 2024-05-29
 
 ### Added
 
 - **Fluid Vessel - Horizontal Fluid Tank**
-  - A horizontal variant of the Fluid Tank
-  - Can be turned into a boiler with reduced efficiency (efficiency is configurable)
-  - Cycle through multiple window shapes using a Wrench
+    - A horizontal variant of the Fluid Tank
+    - Can be turned into a boiler with reduced efficiency (efficiency is configurable)
+    - Cycle through multiple window shapes using a Wrench
 - Small and Large Crank Wheels
-  - Hand Crank + Cogwheels = Crank Wheels
+    - Hand Crank + Cogwheels = Crank Wheels
 - Fan Freezing Catalyst
-  - Works with bulk freezing in Create: Garnished and Create: Dreams & Desires
-- New translations and new languages (thanks [Crowdin contributors](https://crowdin.com/project/create-connected-mod/reports/top-members)!)
+    - Works with bulk freezing in Create: Garnished and Create: Dreams & Desires
+- New translations and new languages (
+  thanks [Crowdin contributors](https://crowdin.com/project/create-connected-mod/reports/top-members)!)
 
 ### Fixed
 

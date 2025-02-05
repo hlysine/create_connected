@@ -1,0 +1,6 @@
+{
+  "parent": "create_connected:block/inventory_access_port/block_wall",
+  "textures": {
+    "level": "create_connected:block/inventory_access_port_on"
+  }
+}

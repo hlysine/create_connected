@@ -23,8 +23,12 @@ public class CCTagGen {
         prov.tag(BlockTags.create(Mods.DIAGONAL_FENCES.rl("non_diagonal_fences")))
                 .add(CCBlocks.COPYCAT_FENCE.get())
                 .add(CCBlocks.WRAPPED_COPYCAT_FENCE.get());
-        prov.tag(BlockTags.create(Mods.DREAMS_DESIRES.rl("fan_processing_catalysts_freezing")))
+        prov.tag(BlockTags.create(Mods.DREAMS_DESIRES.rl("fan_processing_catalysts/freezing")))
                 .add(CCBlocks.FAN_FREEZING_CATALYST.get());
+        prov.tag(BlockTags.create(Mods.DREAMS_DESIRES.rl("fan_processing_catalysts/seething")))
+                .add(CCBlocks.FAN_SEETHING_CATALYST.get());
+        prov.tag(BlockTags.create(Mods.DREAMS_DESIRES.rl("fan_processing_catalysts/sanding")))
+                .add(CCBlocks.FAN_SANDING_CATALYST.get());
         prov.tag(BlockTags.create(Mods.GARNISHED.rl("fan_processing_catalysts/freezing")))
                 .add(CCBlocks.FAN_FREEZING_CATALYST.get());
     }
