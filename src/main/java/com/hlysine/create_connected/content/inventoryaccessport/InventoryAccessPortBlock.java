@@ -18,7 +18,7 @@ import net.minecraft.world.level.block.state.properties.AttachFace;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
+import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import org.jetbrains.annotations.NotNull;
 
@@ -39,7 +39,7 @@ public class InventoryAccessPortBlock extends DirectedDirectionalBlock implement
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         BlockState state = defaultBlockState();
-        Capability<IItemHandler> itemCap = ForgeCapabilities.ITEM_HANDLER;
+        Capability<IItemHandler> itemCap = CapabilityItemHandler.ITEM_HANDLER_CAPABILITY;
 
         Direction preferredFacing = null;
         for (Direction face : context.getNearestLookingDirections()) {

@@ -1,11 +1,5 @@
 {
   "type": "create:item_application",
-  "conditions": [
-    {
-      "type": "create_connected:feature_enabled",
-      "feature": "create_connected:empty_fan_catalyst"
-    }
-  ],
   "ingredients": [
     {
       "item": "create_connected:empty_fan_catalyst"
@@ -17,6 +11,12 @@
   "results": [
     {
       "item": "create_connected:fan_seething_catalyst"
+    }
+  ],
+  "conditions": [
+    {
+      "feature": "create_connected:empty_fan_catalyst",
+      "type": "create_connected:feature_enabled"
     }
   ]
 }

@@ -4,8 +4,8 @@
     {
       "conditions": [
         {
-          "type": "create_connected:feature_enabled",
-          "feature": "create_connected:inventory_bridge"
+          "feature": "create_connected:inventory_bridge",
+          "type": "create_connected:feature_enabled"
         }
       ],
       "recipe": {

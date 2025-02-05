@@ -4,8 +4,8 @@
     {
       "conditions": [
         {
-          "type": "create_connected:feature_enabled",
-          "feature": "create_connected:empty_fan_catalyst"
+          "feature": "create_connected:empty_fan_catalyst",
+          "type": "create_connected:feature_enabled"
         }
       ],
       "recipe": {

@@ -49,7 +49,7 @@ public class FeatureToggle {
     /**
      * Register this object to be a feature that is toggleable by the user
      */
-    public static <R, T extends R, P, S extends Builder<R, T, P, S>> NonNullUnaryOperator<S> register() {
+    public static <R extends IForgeRegistryEntry<R>, T extends R, P, S extends Builder<R, T, P, S>> NonNullUnaryOperator<S> register() {
         return b -> {
             register(new ResourceLocation(b.getOwner().getModid(), b.getName()));
             return b;
@@ -70,7 +70,7 @@ public class FeatureToggle {
      * Register this object to be dependent on another feature.
      * This object cannot be toggled directly, and will only be enabled if the dependency is enabled.
      */
-    public static <R, T extends R, P, S extends Builder<R, T, P, S>> NonNullUnaryOperator<S> registerDependent(ResourceLocation dependency) {
+    public static <R extends IForgeRegistryEntry<R>, T extends R, P, S extends Builder<R, T, P, S>> NonNullUnaryOperator<S> registerDependent(ResourceLocation dependency) {
         return b -> {
             registerDependent(new ResourceLocation(b.getOwner().getModid(), b.getName()), dependency);
             return b;
@@ -103,7 +103,7 @@ public class FeatureToggle {
      * Register this object to be dependent on another feature.
      * This object cannot be toggled directly, and will only be enabled if the dependency is enabled.
      */
-    public static <R, T extends R, P, S extends Builder<R, T, P, S>> NonNullUnaryOperator<S> registerDependent(BlockEntry<?> dependency, FeatureCategory... categories) {
+    public static <R extends IForgeRegistryEntry<R>, T extends R, P, S extends Builder<R, T, P, S>> NonNullUnaryOperator<S> registerDependent(BlockEntry<?> dependency, FeatureCategory... categories) {
         return b -> {
             registerDependent(new ResourceLocation(b.getOwner().getModid(), b.getName()), dependency.getId(), categories);
             return b;
@@ -113,7 +113,7 @@ public class FeatureToggle {
     /**
      * Add a condition to this feature.
      */
-    public static <R, T extends R, P, S extends Builder<R, T, P, S>> NonNullUnaryOperator<S> addCondition(Supplier<Boolean> condition) {
+    public static <R extends IForgeRegistryEntry<R>, T extends R, P, S extends Builder<R, T, P, S>> NonNullUnaryOperator<S> addCondition(Supplier<Boolean> condition) {
         return b -> {
             addCondition(new ResourceLocation(b.getOwner().getModid(), b.getName()), condition);
             return b;
