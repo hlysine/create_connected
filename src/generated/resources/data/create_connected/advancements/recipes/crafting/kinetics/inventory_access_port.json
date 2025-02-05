@@ -33,8 +33,7 @@
           "recipes": [
             "create_connected:crafting/kinetics/inventory_access_port"
           ]
-        },
-        "sends_telemetry_event": false
+        }
       },
       "conditions": [
         {

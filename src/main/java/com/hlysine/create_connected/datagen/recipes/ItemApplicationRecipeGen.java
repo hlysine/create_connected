@@ -26,9 +26,9 @@ public class ItemApplicationRecipeGen extends ProcessingRecipeGen {
     GeneratedRecipe FREEZING_CATALYST = fanCatalystFromEmpty(
             "freezing_catalyst", Items.POWDER_SNOW_BUCKET::asItem, CCBlocks.FAN_FREEZING_CATALYST.get()::asItem);
     GeneratedRecipe SEETHING_CATALYST = fanCatalystFromEmpty(
-            "seething_catalyst", AllItems.BLAZE_CAKE, CCBlocks.FAN_SEETHING_CATALYST::asItem);
+            "seething_catalyst", AllItems.BLAZE_CAKE.get(), CCBlocks.FAN_SEETHING_CATALYST.get()::asItem);
     GeneratedRecipe SANDING_CATALYST = fanCatalystFromEmpty(
-            "sanding_catalyst", Blocks.SAND, CCBlocks.FAN_SANDING_CATALYST::asItem);
+            "sanding_catalyst", Blocks.SAND, CCBlocks.FAN_SANDING_CATALYST.get()::asItem);
 
     protected GeneratedRecipe fanCatalystFromEmpty(String type, ItemLike ingredient, Supplier<ItemLike> output) {
         return fanCatalystFromEmpty(type, Ingredient.of(ingredient), output);
@@ -42,7 +42,7 @@ public class ItemApplicationRecipeGen extends ProcessingRecipeGen {
     }
 
     protected GeneratedRecipe fanCatalystFromEmpty(String type, Ingredient ingredient, Supplier<ItemLike> output, ICondition condition) {
-        return create(type + "_from_empty", b -> b.require(CCBlocks.EMPTY_FAN_CATALYST)
+        return create(type + "_from_empty", b -> b.require(CCBlocks.EMPTY_FAN_CATALYST.get())
                 .require(ingredient)
                 .withCondition(new FeatureEnabledCondition(CCBlocks.EMPTY_FAN_CATALYST.getId()))
                 .withCondition(condition)

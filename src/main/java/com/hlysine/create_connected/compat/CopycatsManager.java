@@ -74,7 +74,11 @@ public class CopycatsManager {
     }
 
     private static <T extends Comparable<T>> BlockState copyProperty(BlockState from, BlockState to, Property<T> property) {
-        return from.getOptionalValue(property).map(value -> to.trySetValue(property, value)).orElse(to);
+        return from.getOptionalValue(property).map(value -> {
+            if (to.hasProperty(property))
+                return to.setValue(property, value);
+            return to;
+        }).orElse(to);
     }
 
     public static Block convertIfEnabled(Block block) {

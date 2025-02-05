@@ -483,7 +483,7 @@ public class CCBlocks {
     public static final BlockEntry<WrenchableBlock> FAN_SEETHING_CATALYST = REGISTRATE.block("fan_seething_catalyst", WrenchableBlock::new)
             .initialProperties(() -> Blocks.IRON_BLOCK)
             .properties(p -> p
-                    .mapColor(MapColor.TERRACOTTA_YELLOW)
+                    .color(MaterialColor.TERRACOTTA_YELLOW)
                     .requiresCorrectToolForDrops()
                     .noOcclusion()
                     .lightLevel(s -> 12)
@@ -502,7 +502,7 @@ public class CCBlocks {
     public static final BlockEntry<WrenchableBlock> FAN_SANDING_CATALYST = REGISTRATE.block("fan_sanding_catalyst", WrenchableBlock::new)
             .initialProperties(() -> Blocks.IRON_BLOCK)
             .properties(p -> p
-                    .mapColor(MapColor.TERRACOTTA_YELLOW)
+                    .color(MaterialColor.TERRACOTTA_YELLOW)
                     .requiresCorrectToolForDrops()
                     .noOcclusion()
                     .isRedstoneConductor((state, level, pos) -> false)
@@ -572,7 +572,7 @@ public class CCBlocks {
     public static final BlockEntry<InventoryAccessPortBlock> INVENTORY_ACCESS_PORT =
             REGISTRATE.block("inventory_access_port", InventoryAccessPortBlock::new)
                     .initialProperties(SharedProperties::stone)
-                    .properties(p -> p.mapColor(MapColor.TERRACOTTA_BROWN).noOcclusion())
+                    .properties(p -> p.color(MaterialColor.TERRACOTTA_BROWN).noOcclusion())
                     .transform(axeOrPickaxe())
                     .transform(FeatureToggle.register(FeatureCategory.LOGISTICS))
                     .blockstate(new InventoryAccessPortGenerator()::generate)
@@ -583,7 +583,7 @@ public class CCBlocks {
     public static final BlockEntry<InventoryBridgeBlock> INVENTORY_BRIDGE =
             REGISTRATE.block("inventory_bridge", InventoryBridgeBlock::new)
                     .initialProperties(SharedProperties::stone)
-                    .properties(p -> p.mapColor(MapColor.TERRACOTTA_BROWN).noOcclusion())
+                    .properties(p -> p.color(MaterialColor.TERRACOTTA_BROWN).noOcclusion())
                     .transform(axeOrPickaxe())
                     .transform(FeatureToggle.register(FeatureCategory.LOGISTICS))
                     .blockstate((c, p) -> BlockStateGen.axisBlock(c, p, state -> {

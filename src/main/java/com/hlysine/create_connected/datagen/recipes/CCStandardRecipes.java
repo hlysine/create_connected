@@ -203,9 +203,9 @@ public class CCStandardRecipes extends CreateRecipeProvider {
             .requiresResultFeature()
             .returns(2)
             .viaShaped(b -> b
-                    .define('B', AllBlocks.BRASS_CASING)
-                    .define('C', AllBlocks.CHUTE)
-                    .define('E', AllItems.ELECTRON_TUBE)
+                    .define('B', AllBlocks.BRASS_CASING.get())
+                    .define('C', AllBlocks.CHUTE.get())
+                    .define('E', AllItems.ELECTRON_TUBE.get())
                     .pattern("B")
                     .pattern("C")
                     .pattern("E")
@@ -214,8 +214,8 @@ public class CCStandardRecipes extends CreateRecipeProvider {
     GeneratedRecipe INVENTORY_BRIDGE = create(CCBlocks.INVENTORY_BRIDGE).unlockedBy(AllItems.ELECTRON_TUBE::get)
             .requiresResultFeature()
             .viaShapeless(b -> b
-                    .requires(CCBlocks.INVENTORY_ACCESS_PORT)
-                    .requires(CCBlocks.INVENTORY_ACCESS_PORT)
+                    .requires(CCBlocks.INVENTORY_ACCESS_PORT.get())
+                    .requires(CCBlocks.INVENTORY_ACCESS_PORT.get())
             );
 
     GeneratedRecipe EMPTY_FAN_CATALYST = create(CCBlocks.EMPTY_FAN_CATALYST).unlockedBy(AllBlocks.BRASS_BLOCK::get)

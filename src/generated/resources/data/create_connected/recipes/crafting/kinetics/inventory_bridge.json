@@ -10,7 +10,6 @@
       ],
       "recipe": {
         "type": "minecraft:crafting_shapeless",
-        "category": "misc",
         "ingredients": [
           {
             "item": "create_connected:inventory_access_port"

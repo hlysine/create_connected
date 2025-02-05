@@ -58,16 +58,16 @@ public abstract class ContraptionMixin {
         List<Map.Entry<BlockPos, StructureTemplate.StructureBlockInfo>> toBeReplaced = new ArrayList<>();
         for (Iterator<Map.Entry<BlockPos, StructureTemplate.StructureBlockInfo>> iterator = blocks.entrySet().iterator(); iterator.hasNext(); ) {
             Map.Entry<BlockPos, StructureTemplate.StructureBlockInfo> entry = iterator.next();
-            if (!(entry.getValue().state().getBlock() instanceof ItemSiloBlock))
+            if (!(entry.getValue().state.getBlock() instanceof ItemSiloBlock))
                 continue;
-            if (!entry.getValue().nbt().contains("Length") && (
-                    blocks.get(NbtUtils.readBlockPos(entry.getValue().nbt().getCompound("Controller"))) == null ||
-                            !(blocks.get(NbtUtils.readBlockPos(entry.getValue().nbt().getCompound("Controller"))).state().getBlock() instanceof ItemSiloBlock))) {
-                entry.getValue().nbt().put("Controller", NbtUtils.writeBlockPos(entry.getKey()));
-                entry.getValue().nbt().putInt("Length", 1);
-                entry.getValue().nbt().putInt("Size", 1);
+            if (!entry.getValue().nbt.contains("Length") && (
+                    blocks.get(NbtUtils.readBlockPos(entry.getValue().nbt.getCompound("Controller"))) == null ||
+                            !(blocks.get(NbtUtils.readBlockPos(entry.getValue().nbt.getCompound("Controller"))).state.getBlock() instanceof ItemSiloBlock))) {
+                entry.getValue().nbt.put("Controller", NbtUtils.writeBlockPos(entry.getKey()));
+                entry.getValue().nbt.putInt("Length", 1);
+                entry.getValue().nbt.putInt("Size", 1);
                 iterator.remove();
-                toBeReplaced.add(new AbstractMap.SimpleEntry<>(entry.getKey(), new StructureTemplate.StructureBlockInfo(entry.getKey(), entry.getValue().state().setValue(ItemSiloBlock.LARGE, false), entry.getValue().nbt())));
+                toBeReplaced.add(new AbstractMap.SimpleEntry<>(entry.getKey(), new StructureTemplate.StructureBlockInfo(entry.getKey(), entry.getValue().state.setValue(ItemSiloBlock.LARGE, false), entry.getValue().nbt)));
             }
         }
         for (Map.Entry<BlockPos, StructureTemplate.StructureBlockInfo> entry : toBeReplaced) {
@@ -76,12 +76,12 @@ public abstract class ContraptionMixin {
         toBeReplaced.clear();
         for (Iterator<Map.Entry<BlockPos, StructureTemplate.StructureBlockInfo>> iterator = capturedMultiblocks.entries().iterator(); iterator.hasNext(); ) {
             Map.Entry<BlockPos, StructureTemplate.StructureBlockInfo> entry = iterator.next();
-            if (!(entry.getValue().state().getBlock() instanceof ItemSiloBlock))
+            if (!(entry.getValue().state.getBlock() instanceof ItemSiloBlock))
                 continue;
-            if (!blocks.containsKey(entry.getKey()) || !(blocks.get(entry.getKey()).state().getBlock() instanceof ItemSiloBlock)) {
-                if (entry.getValue().nbt().contains("Controller")) {
+            if (!blocks.containsKey(entry.getKey()) || !(blocks.get(entry.getKey()).state.getBlock() instanceof ItemSiloBlock)) {
+                if (entry.getValue().nbt.contains("Controller")) {
                     iterator.remove();
-                    toBeReplaced.add(new AbstractMap.SimpleEntry<>(NbtUtils.readBlockPos(entry.getValue().nbt().getCompound("Controller")), entry.getValue()));
+                    toBeReplaced.add(new AbstractMap.SimpleEntry<>(NbtUtils.readBlockPos(entry.getValue().nbt.getCompound("Controller")), entry.getValue()));
                 }
             }
         }
@@ -92,23 +92,23 @@ public abstract class ContraptionMixin {
         for (BlockPos blockPos : capturedMultiblocks.keySet()) {
             if (!blocks.containsKey(blockPos))
                 continue;
-            if (!(blocks.get(blockPos).state().getBlock() instanceof ItemSiloBlock))
+            if (!(blocks.get(blockPos).state.getBlock() instanceof ItemSiloBlock))
                 continue;
             Collection<StructureTemplate.StructureBlockInfo> parts = capturedMultiblocks.get(blockPos);
 
             if (parts.size() == 1) {
                 StructureTemplate.StructureBlockInfo part = parts.iterator().next();
-                if (part.nbt().contains("Length") && part.nbt().getInt("Length") > 1) {
-                    part.nbt().putInt("Length", 1);
-                    part.nbt().putInt("Size", 1);
-                    toBeReplaced.add(new AbstractMap.SimpleEntry<>(blockPos, new StructureTemplate.StructureBlockInfo(part.pos(), part.state().setValue(ItemSiloBlock.LARGE, false), part.nbt())));
+                if (part.nbt.contains("Length") && part.nbt.getInt("Length") > 1) {
+                    part.nbt.putInt("Length", 1);
+                    part.nbt.putInt("Size", 1);
+                    toBeReplaced.add(new AbstractMap.SimpleEntry<>(blockPos, new StructureTemplate.StructureBlockInfo(part.pos, part.state.setValue(ItemSiloBlock.LARGE, false), part.nbt)));
                 }
             }
         }
         for (Map.Entry<BlockPos, StructureTemplate.StructureBlockInfo> entry : toBeReplaced) {
             capturedMultiblocks.removeAll(entry.getKey());
             capturedMultiblocks.put(entry.getKey(), entry.getValue());
-            blocks.put(entry.getValue().pos(), entry.getValue());
+            blocks.put(entry.getValue().pos, entry.getValue());
         }
     }
 }

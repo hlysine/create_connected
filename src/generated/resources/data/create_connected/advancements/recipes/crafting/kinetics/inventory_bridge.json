@@ -33,8 +33,7 @@
           "recipes": [
             "create_connected:crafting/kinetics/inventory_bridge"
           ]
-        },
-        "sends_telemetry_event": false
+        }
       },
       "conditions": [
         {

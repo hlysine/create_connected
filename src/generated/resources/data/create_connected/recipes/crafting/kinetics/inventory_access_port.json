@@ -10,7 +10,6 @@
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
-        "category": "misc",
         "key": {
           "B": {
             "item": "create:brass_casing"
@@ -30,8 +29,7 @@
         "result": {
           "count": 2,
           "item": "create_connected:inventory_access_port"
-        },
-        "show_notification": true
+        }
       }
     }
   ]
