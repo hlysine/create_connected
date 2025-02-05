@@ -6,4 +6,11 @@ public class WrappedFenceGateBlock extends FenceGateBlock {
     public WrappedFenceGateBlock(Properties pProperties) {
         super(pProperties);
     }
+
+    /**
+     * For compatibility with Additional Placements
+     */
+    public boolean generateAdditionalStates() {
+        return false;
+    }
 }

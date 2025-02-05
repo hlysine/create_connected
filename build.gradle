@@ -93,7 +93,6 @@ minecraft {
 
             property 'mixin.env.remapRefMap', 'true'
             property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
-            property 'mixin.debug.countInjections', 'true'
 
             //Allows for reloading the project during runtime with compatible java
             jvmArg "-XX:+AllowEnhancedClassRedefinition"
@@ -161,6 +160,11 @@ repositories {
         name = "ModMaven"
         url = "https://modmaven.dev"
     }
+    maven {
+        // maven for Copycats+
+        name = "realrobotixCopycats"
+        url = "https://maven.realrobotix.me/copycats"
+    }
     exclusiveContent {
         forRepository {
             maven {
@@ -201,8 +205,8 @@ dependencies {
     // then special handling is done to allow a setup of a vanilla dependency without the use of an external repository.
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 
-    compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.3.5"))
-    implementation(jarJar("io.github.llamalad7:mixinextras-forge:0.3.5")) {
+    compileOnly annotationProcessor("io.github.llamalad7:mixinextras-common:0.3.5")
+    implementation jarJar("io.github.llamalad7:mixinextras-forge:0.3.5") {
         jarJar.ranged(it, "[0.3.5,)")
     }
 
@@ -213,17 +217,18 @@ dependencies {
     // Example mod dependency with JEI - using fg.deobf() ensures the dependency is remapped to your development mappings
     // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime
     // compile against the JEI API but do not include it at runtime
-    compileOnly(fg.deobf("mezz.jei:jei-${jei_minecraft_version}-common-api:${jei_version}"))
-    compileOnly(fg.deobf("mezz.jei:jei-${jei_minecraft_version}-forge-api:${jei_version}"))
+    compileOnly fg.deobf("mezz.jei:jei-${jei_minecraft_version}-common-api:${jei_version}")
+    compileOnly fg.deobf("mezz.jei:jei-${jei_minecraft_version}-forge-api:${jei_version}")
     // at runtime, use the full JEI jar for Forge
-    runtimeOnly(fg.deobf("mezz.jei:jei-${jei_minecraft_version}-forge:${jei_version}"))
+    runtimeOnly fg.deobf("mezz.jei:jei-${jei_minecraft_version}-forge:${jei_version}")
 
     // Example mod dependency using a mod jar from ./libs with a flat dir repository
     // This maps to ./libs/coolmod-${mc_version}-${coolmod_version}.jar
     // The group id is ignored when searching -- in this case, it is "blank"
-    implementation fg.deobf("blank:copycats-${copycats_minecraft_version}:${copycats_version}")
 //    implementation fg.deobf("maven.modrinth:create-garnished:${garnished_version}+${garnished_minecraft_version}")
-//    implementation fg.deobf("maven.modrinth:create-dreams-and-desires:${dreams_desires_version}")
+//    runtimeOnly fg.deobf("maven.modrinth:create-dreams-and-desires:${dreams_desires_minecraft_version}-${dreams_desires_version}")
+    implementation fg.deobf("com.copycatsplus:copycats:${copycats_version}+mc.${copycats_minecraft_version}-forge")
+    runtimeOnly fg.deobf("curse.maven:additional-placements-674852:6057790")
 
     // For more info:
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html

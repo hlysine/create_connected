@@ -14,39 +14,42 @@ A Create mod add-on adding quality-of-life blocks that you wish existed in Creat
 
 [![BisectHosting](https://www.bisecthosting.com/partners/custom-banners/cd02548b-be01-4a01-b707-ffcb913f5299.webp)](https://bisecthosting.com/lysine)
 
+[![Create: Addon Hub server](https://discordapp.com/api/guilds/891929048895356948/widget.png?style=banner2)](https://discord.gg/3AvrppcgG3)
+
 > **Want reliable, immersive chunk-loading for your Create machines? Check
 out [Create: Power Loader](https://modrinth.com/mod/create-power-loader)**
 
-> Join us in the [Create: Addon Hub](https://discord.gg/3AvrppcgG3) server for a chat!
+## What's new in 0.9
 
-## What's new in 0.8
+![inventory_access_port](https://github.com/user-attachments/assets/11f8bc2b-3c63-4aa4-a068-f581e114a4a0) **Inventory Access Port**
 
-![fluid_vessel](https://github.com/hlysine/create_connected/assets/25472513/aeebc30a-ea8c-4aaa-b80c-36993ea7b5d5) ![creative_fluid_vessel](https://github.com/hlysine/create_connected/assets/25472513/80ad7d61-731e-494d-a334-d59215874aa3) **Fluid Vessel**
+Attach to any inventory to expand its surface area. Great for access in tight spaces and smart setups with threshold switches.
 
-Horizontal fluid tanks with full support of all fluid tank features! Boilers made from fluid vessels are nerfed by
-default, but can be changed in the server config. You can also cycle through multiple window shapes using a wrench.
+![inventory_bridge](https://github.com/user-attachments/assets/a92555a4-4f27-441a-8128-4c03edccdb85) **Inventory Bridge**
 
-![crank_wheel](https://github.com/hlysine/create_connected/assets/25472513/36c28f61-423b-493e-943b-534a4d4bcd39) ![large_crank_wheel](https://github.com/hlysine/create_connected/assets/25472513/c4b94676-4ec0-46de-8a15-317c1689aa57) **Small/Large Crank Wheels**
+Provides an interface to access two inventories simultaneously. Also comes with filter slots to quickly sort incoming items.
 
-Hand cranks with built-in cogwheels. Useful in tight spaces and for gear ratios.
+![fan_sanding_catalyst](https://github.com/user-attachments/assets/0689fddd-f698-4b72-80e8-19a3f9833440) ![fan_seething_catalyst](https://github.com/user-attachments/assets/8e15a9e4-a173-40de-9240-990beaefc43e) **Fan Sanding/Seething Catalyst**
 
-![fan_freezing_catalyst](https://github.com/hlysine/create_connected/assets/25472513/f7e07503-f2ec-48d1-9fb1-d74e65253632) **Fan Freezing Catalyst**
+More bulk processing compatibility with Create: Dreams and Desires. Only appears when Create: Dreams and Desires is installed.
 
-A new catalyst for bulk freezing. Works with Create: Garnished and Create: Dreams & Desires.
+**Note for 1.18 and 1.19 users**
+
+Create has dropped support for 1.18 and 1.19 since 0.5.1g. As a result, backporting to 1.18 and 1.19 is no longer
+a priority for Create: Connected. Depending on circumstances, updates will be delayed and new features may not be backported.
 
 ## Features
 
 ### New Blocks and Items
 
-New kinetic components, copycats, redstone components and more!
-Visit [the GitHub wiki](https://github.com/hlysine/create_connected/wiki/New-Features) for a complete list!
+Clutches and gearboxes for your Create machines, diodes and transmitters for your redstone circuits, and rotated vaults and tanks for better logistics!
+A complete package for all your technical Create needs. Visit [the GitHub wiki](https://github.com/hlysine/create_connected/wiki/New-Features) for a complete list.
 
 [![All features](https://cdn.modrinth.com/data/Vg5TIO6d/images/897c4d67eae94a366c49782ddb1654c5a6e383c5.png)](https://github.com/hlysine/create_connected/wiki/New-Features)
 
 ### Feature toggle
 
-Selectively enable/disable features in this mod as you see fit. Disabled features are unobtainable in survival and
-hidden in creative/JEI.
+Don't like certain features? You can disable them in the configs. Think a horizontal tank is too OP? You can nerf it in the configs. This mod is highly customizable to fit your modpack's needs.
 
 [![Feature Toggle System](https://cdn.modrinth.com/data/Vg5TIO6d/images/d74a9a1a353caee83b0d5dc69c60305a14699d3a.png)](https://github.com/hlysine/create_connected/wiki/Configs)
 
@@ -59,18 +62,15 @@ Small and simple QoL enhancement to Create's features.
 
 ## Download
 
-This is a pre-release version of the mod. World corruption is not expected, but do expect small bugs and rare crashes.
-Make regular backups if you decide to play this mod in your long-term worlds.
-
 Find this mod on [**Modrinth**](https://modrinth.com/mod/create-connected) or
 [**CurseForge**](https://legacy.curseforge.com/minecraft/mc-mods/create-connected).
 
 **Supported Create versions:**
 
-| Create | Create: Connected |
-|--------|-------------------|
-| 0.5.1e | 0.0.2             |
-| 0.5.1f | 0.0.3 - latest    |
+| Create   | Create: Connected |
+|----------|-------------------|
+| 0.5.1e   | 0.0.2             |
+| 0.5.1f/g | 0.0.3 - latest    |
 
 ## Compatibility
 
@@ -100,8 +100,7 @@ at [the contributing guide](https://github.com/hlysine/create_connected/blob/mai
 
 ## Support
 
-The best way to support my work is to simply download this mod on [**Modrinth
-**](https://modrinth.com/mod/create-connected).
+The best way to support my work is to simply download this mod on [**Modrinth**](https://modrinth.com/mod/create-connected).
 Enjoy a smoother download experience and support open source software with a single click.
 
 If you would like to offer more direct support, you
@@ -112,8 +111,7 @@ can [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/O4O2
 **Translation**
 
 - Thanks [Crowdin contributors](https://crowdin.com/project/create-connected-mod/reports/top-members) for their effort
-  in
-  localization
+  in localization
 
 **Inspiration**
 

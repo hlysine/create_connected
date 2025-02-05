@@ -199,6 +199,25 @@ public class CCStandardRecipes extends CreateRecipeProvider {
     GeneratedRecipe FLUID_VESSEL_CYCLE =
             conversionCycle(ImmutableList.of(CCBlocks.FLUID_VESSEL, AllBlocks.FLUID_TANK));
 
+    GeneratedRecipe INVENTORY_ACCESS_PORT = create(CCBlocks.INVENTORY_ACCESS_PORT).unlockedBy(AllItems.ELECTRON_TUBE::get)
+            .requiresResultFeature()
+            .returns(2)
+            .viaShaped(b -> b
+                    .define('B', AllBlocks.BRASS_CASING)
+                    .define('C', AllBlocks.CHUTE)
+                    .define('E', AllItems.ELECTRON_TUBE)
+                    .pattern("B")
+                    .pattern("C")
+                    .pattern("E")
+            );
+
+    GeneratedRecipe INVENTORY_BRIDGE = create(CCBlocks.INVENTORY_BRIDGE).unlockedBy(AllItems.ELECTRON_TUBE::get)
+            .requiresResultFeature()
+            .viaShapeless(b -> b
+                    .requires(CCBlocks.INVENTORY_ACCESS_PORT)
+                    .requires(CCBlocks.INVENTORY_ACCESS_PORT)
+            );
+
     GeneratedRecipe EMPTY_FAN_CATALYST = create(CCBlocks.EMPTY_FAN_CATALYST).unlockedBy(AllBlocks.BRASS_BLOCK::get)
             .requiresResultFeature()
             .viaShaped(b -> b
@@ -214,6 +233,8 @@ public class CCStandardRecipes extends CreateRecipeProvider {
     GeneratedRecipe EMPTY_CATALYST_FROM_SPLASHING = clearFanCatalyst("splashing", CCBlocks.FAN_SPLASHING_CATALYST);
     GeneratedRecipe EMPTY_CATALYST_FROM_HAUNTING = clearFanCatalyst("haunting", CCBlocks.FAN_HAUNTING_CATALYST);
     GeneratedRecipe EMPTY_CATALYST_FROM_FREEZING = clearFanCatalyst("freezing", CCBlocks.FAN_FREEZING_CATALYST);
+    GeneratedRecipe EMPTY_CATALYST_FROM_SEETHING = clearFanCatalyst("seething", CCBlocks.FAN_SEETHING_CATALYST);
+    GeneratedRecipe EMPTY_CATALYST_FROM_SANDING = clearFanCatalyst("sanding", CCBlocks.FAN_SANDING_CATALYST);
 
     private final Marker PALETTES = enterFolder("palettes");
 

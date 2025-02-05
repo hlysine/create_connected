@@ -34,6 +34,13 @@ public abstract class MigratingCopycatBlock extends CopycatBlock {
         return migrate(state);
     }
 
+    /**
+     * For compatibility with Additional Placements
+     */
+    public boolean generateAdditionalStates() {
+        return false;
+    }
+
     @Override
     public @NotNull BlockState updateShape(@NotNull BlockState pState, @NotNull Direction pDirection, @NotNull BlockState pNeighborState, @NotNull LevelAccessor pLevel, @NotNull BlockPos pCurrentPos, @NotNull BlockPos pNeighborPos) {
         return migrateOnUpdate(pLevel.isClientSide(), super.updateShape(pState, pDirection, pNeighborState, pLevel, pCurrentPos, pNeighborPos));
