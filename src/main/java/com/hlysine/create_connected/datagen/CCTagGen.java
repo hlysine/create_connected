@@ -31,6 +31,12 @@ public class CCTagGen {
                 .add(CCBlocks.FAN_SEETHING_CATALYST.get());
         prov.tag(BlockTags.create(Mods.DREAMS_DESIRES.rl("fan_processing_catalysts/sanding")))
                 .add(CCBlocks.FAN_SANDING_CATALYST.get());
+        prov.tag(BlockTags.create(Mods.DREAMS_DESIRES.rl("fan_processing_catalysts_freezing")))
+                .add(CCBlocks.FAN_FREEZING_CATALYST.get());
+        prov.tag(BlockTags.create(Mods.DREAMS_DESIRES.rl("fan_processing_catalysts_seething")))
+                .add(CCBlocks.FAN_SEETHING_CATALYST.get());
+        prov.tag(BlockTags.create(Mods.DREAMS_DESIRES.rl("fan_processing_catalysts_sanding")))
+                .add(CCBlocks.FAN_SANDING_CATALYST.get());
         prov.tag(BlockTags.create(Mods.GARNISHED.rl("fan_processing_catalysts/freezing")))
                 .add(CCBlocks.FAN_FREEZING_CATALYST.get());
     }
