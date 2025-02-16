@@ -72,6 +72,7 @@
   "block.create_connected.fan_freezing_catalyst.tooltip.summary": "Dispositivo dedicado a _voladuras a granel_. El contenido del catalizador no interactúa con el entorno.",
   "block.create_connected.fan_haunting_catalyst": "Ventilador catalizador embrujado",
   "block.create_connected.fan_haunting_catalyst.tooltip.summary": "Dispositivo dedicado a _voladuras a granel_. El contenido del catalizador no interactúa con el entorno.",
+  "block.create_connected.fan_sanding_catalyst": "Catalizador de lavado de arena",
   "block.create_connected.fan_seething_catalyst": "Ventilador catalizador hirviente",
   "block.create_connected.fan_seething_catalyst.tooltip.summary": "Dispositivo dedicado a _voladuras a granel_. El contenido del catalizador no interactúa con el entorno.",
   "block.create_connected.fan_smoking_catalyst": "Ventilador catalizador humoso",
