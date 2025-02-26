@@ -74,6 +74,8 @@
   "block.create_connected.fan_haunting_catalyst.tooltip.summary": "_심령_ 전용 장치입니다. 촉매의 내용물은 외부 환경과 상호작용하지 않습니다.",
   "block.create_connected.fan_sanding_catalyst": "선풍기 사포 촉매",
   "block.create_connected.fan_sanding_catalyst.tooltip.summary": " _사포_ 촉매입니다. 촉매의 내용물은 외부 환경과 상호작용하지 않습니다.",
+  "block.create_connected.fan_seething_catalyst": "들끓는 선풍기 촉매",
+  "block.create_connected.fan_seething_catalyst.tooltip.summary": "'Create: 환상과 욕망' 모드 전용 _묶음 초과열용_ 장치입니다. 촉매의 내용물은 주변 환경의 영향을 받지 않습니다.",
   "block.create_connected.fan_smoking_catalyst": "선풍기 훈연 촉매",
   "block.create_connected.fan_smoking_catalyst.tooltip.summary": "_훈연_ 전용 장치입니다. 촉매의 내용물은 외부 환경과 상호작용하지 않습니다.",
   "block.create_connected.fan_splashing_catalyst": "선풍기 세척 촉매",
