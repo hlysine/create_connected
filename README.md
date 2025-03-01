@@ -18,7 +18,7 @@ A Create mod add-on adding quality-of-life blocks that you wish existed in Creat
 
 > **Want reliable, immersive chunk-loading for your Create machines? Check
 out [Create: Power Loader](https://modrinth.com/mod/create-power-loader)**
-> 
+
 ## Create 6 and Minecraft 1.21
 
 **Current status: ⏳ Not started** (ETA Apr/May 2025)
