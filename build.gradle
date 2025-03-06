@@ -336,6 +336,7 @@ publishMods {
     type = BETA
     file = tasks.jarJar.archiveFile
     modLoaders.add("forge")
+    modLoaders.add("neoforge")
 
     github {
         accessToken = secrets.GITHUB_TOKEN
