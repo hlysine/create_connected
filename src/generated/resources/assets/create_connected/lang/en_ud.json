@@ -129,6 +129,7 @@
   "create.item_attributes.stack_size": "%1$s o\u0287 s\u029E\u0254\u0250\u0287s",
   "create.item_attributes.stack_size.inverted": "%1$s o\u0287 \u029E\u0254\u0250\u0287s \u0287ou s\u01DDop",
   "create_connected.centrifugal_clutch.speed_threshold": "p\u05DFo\u0265s\u01DD\u0279\u0265\u27D8 p\u01DD\u01DDdS",
+  "create_connected.display_source.boiler_status": "sn\u0287\u0250\u0287S \u0279\u01DD\u05DF\u0131o\u15FA",
   "create_connected.gui.overstress_clutch.uncoupled": "p\u01DD\u05DFdno\u0254u\u2229",
   "create_connected.gui.overstress_clutch.uncoupled_explanation": "\u02D9\u203E\u01DDs\u05DFnd \u01DDuo\u0287sp\u01DD\u0279\u203E \u0250 \u0279o \u203E\u0265\u0254u\u01DD\u0279\u028D\u203E \u0250 \u0265\u0287\u0131\u028D \u0265\u0254\u0287n\u05DF\u0254 s\u0131\u0265\u0287 \u203Ebu\u0131\u0287\u0287\u01DDs\u01DD\u0279\u203E \u01DD\u0279o\u025F\u01DDq \u029E\u0279o\u028D\u0287\u01DDu \u01DD\u0265\u0287 x\u0131\u2132 \u02D9ss\u01DD\u0279\u0287s o\u0287 \u01DDnp \u203Ep\u01DD\u05DFdno\u0254un\u203E s\u0131 \u0265\u0254\u0287n\u05DF\u0254 s\u0131\u0265\u27D8",
   "create_connected.gui.sequenced_pulse_generator.instruction": "uo\u0131\u0287\u0254n\u0279\u0287suI",
