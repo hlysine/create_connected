@@ -136,6 +136,7 @@
   "create.item_attributes.stack_size": "最大堆叠数为 %1$s",
   "create.item_attributes.stack_size.inverted": "最大堆叠数不为 %1$s",
   "create_connected.centrifugal_clutch.speed_threshold": "速度阈值",
+  "create_connected.display_source.boiler_status": "锅炉状态",
   "create_connected.gui.overstress_clutch.uncoupled": "未耦合",
   "create_connected.gui.overstress_clutch.uncoupled_explanation": "该离合器因应力过载_断开_。请修复网络，然后用_扳手_或_红石脉冲信号__重置_该离合器。",
   "create_connected.gui.sequenced_pulse_generator.instruction": "指令",
