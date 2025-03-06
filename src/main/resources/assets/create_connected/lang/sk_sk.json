@@ -1,1 +1,20 @@
-{}
+{
+  "block.create_connected.copycat_beam": "Imitačný stĺp",
+  "block.create_connected.copycat_beam.tooltip.condition1": "Pri pravom kliknutí",
+  "block.create_connected.copycat_block": "Imitačný blok",
+  "block.create_connected.copycat_block.tooltip.condition1": "Pri pravom kliknutí",
+  "block.create_connected.copycat_board": "Imitačná doska",
+  "block.create_connected.copycat_board.tooltip.condition1": "Pri pravom kliknutí",
+  "block.create_connected.copycat_fence": "Imitačný plot",
+  "block.create_connected.copycat_fence.tooltip.condition1": "Pri pravom kliknutí",
+  "block.create_connected.copycat_fence_gate": "Imitačná bránka",
+  "block.create_connected.copycat_fence_gate.tooltip.condition1": "Pri pravom kliknutí",
+  "block.create_connected.copycat_slab": "Imitačný polblok",
+  "block.create_connected.copycat_slab.tooltip.condition1": "Pri pravom kliknutí",
+  "block.create_connected.copycat_stairs": "Imitačné schody",
+  "block.create_connected.copycat_stairs.tooltip.condition1": "Pri pravom kliknutí",
+  "block.create_connected.copycat_vertical_step": "Imitačný zvislý polblok",
+  "block.create_connected.copycat_vertical_step.tooltip.condition1": "Pri pravom kliknutí",
+  "block.create_connected.copycat_wall": "Imitačný múrik",
+  "block.create_connected.copycat_wall.tooltip.condition1": "Pri pravom kliknutí"
+}
