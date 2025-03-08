@@ -136,6 +136,7 @@
   "create.item_attributes.stack_size": "hromadí se do %1$s",
   "create.item_attributes.stack_size.inverted": "nehromadí se do %1$s",
   "create_connected.centrifugal_clutch.speed_threshold": "Prahová hodnota rychlosti",
+  "create_connected.display_source.boiler_status": "Stav kotle",
   "create_connected.gui.overstress_clutch.uncoupled": "Odpřáhlé",
   "create_connected.gui.overstress_clutch.uncoupled_explanation": "Tato spojka je _odpřáhlá_ kvůli napětí. Před _resetováním_ této spojky pomocí _montážního klíče_ nebo _redstonového signálu_ opravte síť.",
   "create_connected.gui.sequenced_pulse_generator.instruction": "Pokyn",
