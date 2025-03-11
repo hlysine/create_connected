@@ -136,6 +136,7 @@
   "create.item_attributes.stack_size": "%1$s개까지 겹칠 수 있음",
   "create.item_attributes.stack_size.inverted": "%1$s개까지 겹칠 수 없음",
   "create_connected.centrifugal_clutch.speed_threshold": "속도 한계점",
+  "create_connected.display_source.boiler_status": "보일러 상태",
   "create_connected.gui.overstress_clutch.uncoupled": "연결되지 않음",
   "create_connected.gui.overstress_clutch.uncoupled_explanation": "이 클러치는 피로도 때문에 _연결이 끊어졌습니다_. _렌치_나 _레드스톤 신호_로 클러치를 _초기화_하기 전에 먼저 동력망을 고치세요.",
   "create_connected.gui.sequenced_pulse_generator.instruction": "명령어",
