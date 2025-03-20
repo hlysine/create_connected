@@ -1,1 +1,6 @@
-{}
+{
+  "advancement.create_connected.brass_gearbox": "Сур'ёзная арганізацыя",
+  "advancement.create_connected.brass_gearbox.desc": "Пастаўце латуневую скрынку перадач",
+  "advancement.create_connected.control_chip": "Дакладнае выраб",
+  "advancement.create_connected.control_chip.desc": "Збярыце кантрольны чып"
+}
