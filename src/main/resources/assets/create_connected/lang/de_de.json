@@ -136,6 +136,7 @@
   "create.item_attributes.stack_size": "Stapelt sich zu %1$s",
   "create.item_attributes.stack_size.inverted": "Stapelt sich nicht zu %1$s",
   "create_connected.centrifugal_clutch.speed_threshold": "Geschwindigkeits Grenzwert",
+  "create_connected.display_source.boiler_status": "Kesselstatus",
   "create_connected.gui.overstress_clutch.uncoupled": "Entkoppelt",
   "create_connected.gui.overstress_clutch.uncoupled_explanation": "Diese Kupplung ist _entkuppelt_ aufgrund von Stress. Repariere das Netzwerk bevor diese Kupplung mit einem _Schraubenschlüssel_ oder einem _Redstone Signal_ zurückgesetzt wird.",
   "create_connected.gui.sequenced_pulse_generator.instruction": "Anleitung",
