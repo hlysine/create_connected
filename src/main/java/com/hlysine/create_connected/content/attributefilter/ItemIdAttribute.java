@@ -1,18 +1,25 @@
 package com.hlysine.create_connected.content.attributefilter;
 
-import com.simibubi.create.content.logistics.filter.ItemAttribute;
+import com.simibubi.create.Create;
+import com.simibubi.create.api.registry.CreateBuiltInRegistries;
+import com.simibubi.create.content.logistics.item.filter.attribute.ItemAttribute;
+import com.simibubi.create.content.logistics.item.filter.attribute.ItemAttributeType;
+import net.minecraft.core.Registry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class ItemIdAttribute implements ItemAttribute {
-
-    public static void register() {
-        ItemAttribute.register(new ItemIdAttribute("dummy"));
-    }
-
+    private static final String TRANSLATION_KEY = "id_contains";
+    private static final String WORD_KEY = "word";
+    private static final String DEFAULT_WORD = "dummy";
     String word;
 
     public ItemIdAttribute(String word) {
@@ -20,26 +27,19 @@ public class ItemIdAttribute implements ItemAttribute {
     }
 
     @Override
-    public boolean appliesTo(ItemStack itemStack) {
-        return itemStack.getItem().toString().contains(word);
+    public boolean appliesTo(ItemStack stack, Level world) {
+        return stack.getItem().toString().contains(word);
     }
 
     @Override
-    public List<ItemAttribute> listAttributesOf(ItemStack itemStack) {
-        String[] words = itemStack.getItem().toString().split("_");
-
-        List<ItemAttribute> atts = new ArrayList<>();
-        for (String word : words) {
-            if (word.length() > 2) {
-                atts.add(new ItemIdAttribute(word));
-            }
-        }
-        return atts;
+    public ItemAttributeType getType() {
+        return Registry.register(CreateBuiltInRegistries.ITEM_ATTRIBUTE_TYPE, Create.asResource(getTranslationKey()), new ItemIdAttribute.Type());
     }
+
 
     @Override
     public String getTranslationKey() {
-        return "id_contains";
+        return TRANSLATION_KEY;
     }
 
     @Override
@@ -48,12 +48,57 @@ public class ItemIdAttribute implements ItemAttribute {
     }
 
     @Override
-    public void writeNBT(CompoundTag nbt) {
-        nbt.putString("word", this.word);
+    public void save(CompoundTag nbt) {
+        nbt.putString(WORD_KEY, this.word);
     }
 
     @Override
-    public ItemAttribute readNBT(CompoundTag nbt) {
-        return new ItemIdAttribute(nbt.getString("word"));
+    public void load(CompoundTag nbt) {
+        word = nbt.getString(WORD_KEY);
+    }
+
+    public static class Type implements ItemAttributeType {
+        @Override
+        public @NotNull ItemAttribute createAttribute() {
+            return new ItemIdAttribute(DEFAULT_WORD);
+        }
+
+        @Override
+        public List<ItemAttribute> getAllAttributes(ItemStack itemStack, Level level) {
+            if (itemStack == null) {
+                return Collections.emptyList();
+            }
+
+            String itemName = itemStack.getItem().toString();
+            if (itemName.isEmpty()) {
+                return Collections.emptyList();
+            }
+
+            return Arrays.stream(itemName.split("_"))
+                    .filter(word -> word.length() > 2)
+                    .map(ItemIdAttribute::new)
+                    .collect(Collectors.toList());
+        }
+    }
+
+
+    public static class Deserializer implements ItemAttribute.LegacyDeserializer {
+        private static final ItemIdAttribute.Type ITEM_ID_ATTRIBUTE_TYPE = new ItemIdAttribute.Type();
+
+        private static final Function<CompoundTag, ItemAttribute> FUNC = tag -> {
+            ItemAttribute attribute = ITEM_ID_ATTRIBUTE_TYPE.createAttribute();
+            attribute.load(tag);
+            return attribute;
+        };
+
+        @Override
+        public String getNBTKey() {
+            return WORD_KEY;
+        }
+
+        @Override
+        public ItemAttribute readNBT(CompoundTag nbt) {
+            return FUNC.apply(nbt);
+        }
     }
 }

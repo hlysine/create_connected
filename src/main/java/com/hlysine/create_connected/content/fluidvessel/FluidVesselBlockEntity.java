@@ -1,14 +1,13 @@
 package com.hlysine.create_connected.content.fluidvessel;
 
 import com.simibubi.create.api.connectivity.ConnectivityHandler;
-import com.simibubi.create.content.equipment.goggles.IHaveGoggleInformation;
+import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.content.fluids.tank.FluidTankBlockEntity;
 import com.simibubi.create.foundation.blockEntity.IMultiBlockEntityContainer;
 import com.simibubi.create.foundation.fluid.SmartFluidTank;
-import com.simibubi.create.foundation.utility.NBTHelper;
-import com.simibubi.create.foundation.utility.animation.LerpedFloat;
-import com.simibubi.create.foundation.utility.animation.LerpedFloat.Chaser;
 import com.simibubi.create.infrastructure.config.AllConfigs;
+import net.createmod.catnip.animation.LerpedFloat;
+import net.createmod.catnip.nbt.NBTHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -46,7 +45,7 @@ public class FluidVesselBlockEntity extends FluidTankBlockEntity implements IHav
     public FluidVesselBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
         windowType = WindowType.SIDE_WIDE;
-        boiler = new BoilerData();
+        boiler = new com.hlysine.create_connected.content.fluidvessel.BoilerData();
         refreshCapability();
     }
 
@@ -136,14 +135,14 @@ public class FluidVesselBlockEntity extends FluidTankBlockEntity implements IHav
             if (fluidLevel == null)
                 fluidLevel = LerpedFloat.linear()
                         .startWithValue(getFillState());
-            fluidLevel.chase(getFillState(), .5f, Chaser.EXP);
+            fluidLevel.chase(getFillState(), .5f, LerpedFloat.Chaser.EXP);
         }
     }
 
     @SuppressWarnings("unchecked")
     @Override
     public FluidVesselBlockEntity getControllerBE() {
-        if (isController())
+        if (isController() || !hasLevel())
             return this;
         BlockEntity blockEntity = level.getBlockEntity(controller);
         if (blockEntity instanceof FluidVesselBlockEntity)
@@ -427,6 +426,8 @@ public class FluidVesselBlockEntity extends FluidTankBlockEntity implements IHav
             fluidLevel = LerpedFloat.linear()
                     .startWithValue(getFillState());
 
+        updateCapability = true;
+
         if (!clientPacket)
             return;
 
@@ -444,7 +445,7 @@ public class FluidVesselBlockEntity extends FluidTankBlockEntity implements IHav
             if (compound.contains("ForceFluidLevel") || fluidLevel == null)
                 fluidLevel = LerpedFloat.linear()
                         .startWithValue(fillState);
-            fluidLevel.chase(fillState, 0.5f, Chaser.EXP);
+            fluidLevel.chase(fillState, 0.5f, LerpedFloat.Chaser.EXP);
         }
         if (luminosity != prevLum && hasLevel())
             level.getChunkSource()
@@ -452,7 +453,7 @@ public class FluidVesselBlockEntity extends FluidTankBlockEntity implements IHav
                     .checkBlock(worldPosition);
 
         if (compound.contains("LazySync"))
-            fluidLevel.chase(fluidLevel.getChaseTarget(), 0.125f, Chaser.EXP);
+            fluidLevel.chase(fluidLevel.getChaseTarget(), 0.125f, LerpedFloat.Chaser.EXP);
     }
 
     @Override

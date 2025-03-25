@@ -2,8 +2,8 @@ package com.hlysine.create_connected;
 
 import com.hlysine.create_connected.content.brake.BrakeBlockEntity;
 import com.hlysine.create_connected.content.brassgearbox.BrassGearboxBlockEntity;
-import com.hlysine.create_connected.content.brassgearbox.BrassGearboxInstance;
 import com.hlysine.create_connected.content.brassgearbox.BrassGearboxRenderer;
+import com.hlysine.create_connected.content.brassgearbox.BrassGearboxVisual;
 import com.hlysine.create_connected.content.centrifugalclutch.CentrifugalClutchBlockEntity;
 import com.hlysine.create_connected.content.crankwheel.CrankWheelBlockEntity;
 import com.hlysine.create_connected.content.fluidvessel.CreativeFluidVesselBlockEntity;
@@ -20,24 +20,24 @@ import com.hlysine.create_connected.content.linkedtransmitter.LinkedAnalogLeverR
 import com.hlysine.create_connected.content.linkedtransmitter.LinkedTransmitterBlockEntity;
 import com.hlysine.create_connected.content.overstressclutch.OverstressClutchBlockEntity;
 import com.hlysine.create_connected.content.parallelgearbox.ParallelGearboxBlockEntity;
-import com.hlysine.create_connected.content.parallelgearbox.ParallelGearboxInstance;
 import com.hlysine.create_connected.content.parallelgearbox.ParallelGearboxRenderer;
+import com.hlysine.create_connected.content.parallelgearbox.ParallelGearboxVisual;
 import com.hlysine.create_connected.content.sequencedpulsegenerator.SequencedPulseGeneratorBlockEntity;
 import com.hlysine.create_connected.content.shearpin.ShearPinBlockEntity;
 import com.hlysine.create_connected.content.sixwaygearbox.SixWayGearboxBlockEntity;
-import com.hlysine.create_connected.content.sixwaygearbox.SixWayGearboxInstance;
 import com.hlysine.create_connected.content.sixwaygearbox.SixWayGearboxRenderer;
+import com.hlysine.create_connected.content.sixwaygearbox.SixWayGearboxVisual;
 import com.simibubi.create.content.decoration.copycat.CopycatBlockEntity;
-import com.simibubi.create.content.kinetics.crank.HandCrankInstance;
 import com.simibubi.create.content.kinetics.crank.HandCrankRenderer;
-import com.simibubi.create.content.kinetics.simpleRelays.BracketedKineticBlockEntityInstance;
+import com.simibubi.create.content.kinetics.crank.HandCrankVisual;
 import com.simibubi.create.content.kinetics.simpleRelays.BracketedKineticBlockEntityRenderer;
+import com.simibubi.create.content.kinetics.simpleRelays.BracketedKineticBlockEntityVisual;
 import com.simibubi.create.content.kinetics.simpleRelays.SimpleKineticBlockEntity;
-import com.simibubi.create.content.kinetics.simpleRelays.encased.EncasedCogInstance;
 import com.simibubi.create.content.kinetics.simpleRelays.encased.EncasedCogRenderer;
-import com.simibubi.create.content.kinetics.transmission.SplitShaftInstance;
+import com.simibubi.create.content.kinetics.simpleRelays.encased.EncasedCogVisual;
 import com.simibubi.create.content.kinetics.transmission.SplitShaftRenderer;
-import com.simibubi.create.content.redstone.analogLever.AnalogLeverInstance;
+import com.simibubi.create.content.kinetics.transmission.SplitShaftVisual;
+import com.simibubi.create.content.redstone.analogLever.AnalogLeverVisual;
 import com.simibubi.create.foundation.blockEntity.renderer.SmartBlockEntityRenderer;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
@@ -47,28 +47,28 @@ public class CCBlockEntityTypes {
 
     public static final BlockEntityEntry<SimpleKineticBlockEntity> ENCASED_CHAIN_COGWHEEL = REGISTRATE
             .blockEntity("encased_chain_cogwheel", SimpleKineticBlockEntity::new)
-            .instance(() -> EncasedCogInstance::small, false)
+            .visual(() -> EncasedCogVisual::small, false)
             .validBlocks(CCBlocks.ENCASED_CHAIN_COGWHEEL)
             .renderer(() -> EncasedCogRenderer::small)
             .register();
 
     public static final BlockEntityEntry<CrankWheelBlockEntity> CRANK_WHEEL = REGISTRATE
             .blockEntity("crank_wheel", CrankWheelBlockEntity::new)
-            .instance(() -> HandCrankInstance::new)
+            .visual(() -> HandCrankVisual::new)
             .validBlocks(CCBlocks.CRANK_WHEEL, CCBlocks.LARGE_CRANK_WHEEL)
             .renderer(() -> HandCrankRenderer::new)
             .register();
 
     public static final BlockEntityEntry<ParallelGearboxBlockEntity> PARALLEL_GEARBOX = REGISTRATE
             .blockEntity("parallel_gearbox", ParallelGearboxBlockEntity::new)
-            .instance(() -> ParallelGearboxInstance::new, false)
+            .visual(() -> ParallelGearboxVisual::new, false)
             .validBlocks(CCBlocks.PARALLEL_GEARBOX)
             .renderer(() -> ParallelGearboxRenderer::new)
             .register();
 
     public static final BlockEntityEntry<SixWayGearboxBlockEntity> SIX_WAY_GEARBOX = REGISTRATE
             .blockEntity("six_way_gearbox", SixWayGearboxBlockEntity::new)
-            .instance(() -> SixWayGearboxInstance::new, false)
+            .visual(() -> SixWayGearboxVisual::new, false)
             .validBlocks(CCBlocks.SIX_WAY_GEARBOX)
             .renderer(() -> SixWayGearboxRenderer::new)
             .register();
@@ -76,7 +76,7 @@ public class CCBlockEntityTypes {
 
     public static final BlockEntityEntry<OverstressClutchBlockEntity> OVERSTRESS_CLUTCH = REGISTRATE
             .blockEntity("overstress_clutch", OverstressClutchBlockEntity::new)
-            .instance(() -> SplitShaftInstance::new, false)
+            .visual(() -> SplitShaftVisual::new, false)
             .validBlocks(CCBlocks.OVERSTRESS_CLUTCH)
             .renderer(() -> SplitShaftRenderer::new)
             .register();
@@ -84,49 +84,49 @@ public class CCBlockEntityTypes {
 
     public static final BlockEntityEntry<ShearPinBlockEntity> SHEAR_PIN = REGISTRATE
             .blockEntity("shear_pin", ShearPinBlockEntity::new)
-            .instance(() -> BracketedKineticBlockEntityInstance::new, false)
+            .visual(() -> BracketedKineticBlockEntityVisual::create, false)
             .validBlocks(CCBlocks.SHEAR_PIN)
             .renderer(() -> BracketedKineticBlockEntityRenderer::new)
             .register();
 
     public static final BlockEntityEntry<InvertedClutchBlockEntity> INVERTED_CLUTCH = REGISTRATE
             .blockEntity("inverted_clutch", InvertedClutchBlockEntity::new)
-            .instance(() -> SplitShaftInstance::new, false)
+            .visual(() -> SplitShaftVisual::new, false)
             .validBlocks(CCBlocks.INVERTED_CLUTCH)
             .renderer(() -> SplitShaftRenderer::new)
             .register();
 
     public static final BlockEntityEntry<InvertedGearshiftBlockEntity> INVERTED_GEARSHIFT = REGISTRATE
             .blockEntity("inverted_gearshift", InvertedGearshiftBlockEntity::new)
-            .instance(() -> SplitShaftInstance::new, false)
+            .visual(() -> SplitShaftVisual::new, false)
             .validBlocks(CCBlocks.INVERTED_GEARSHIFT)
             .renderer(() -> SplitShaftRenderer::new)
             .register();
 
     public static final BlockEntityEntry<CentrifugalClutchBlockEntity> CENTRIFUGAL_CLUTCH = REGISTRATE
             .blockEntity("centrifugal_clutch", CentrifugalClutchBlockEntity::new)
-            .instance(() -> SplitShaftInstance::new, false)
+            .visual(() -> SplitShaftVisual::new, false)
             .validBlocks(CCBlocks.CENTRIFUGAL_CLUTCH)
             .renderer(() -> SplitShaftRenderer::new)
             .register();
 
     public static final BlockEntityEntry<FreewheelClutchBlockEntity> FREEWHEEL_CLUTCH = REGISTRATE
             .blockEntity("freewheel_clutch", FreewheelClutchBlockEntity::new)
-            .instance(() -> SplitShaftInstance::new, false)
+            .visual(() -> SplitShaftVisual::new, false)
             .validBlocks(CCBlocks.FREEWHEEL_CLUTCH)
             .renderer(() -> SplitShaftRenderer::new)
             .register();
 
     public static final BlockEntityEntry<BrassGearboxBlockEntity> BRASS_GEARBOX = REGISTRATE
             .blockEntity("brass_gearbox", BrassGearboxBlockEntity::new)
-            .instance(() -> BrassGearboxInstance::new, false)
+            .visual(() -> BrassGearboxVisual::new, false)
             .validBlocks(CCBlocks.BRASS_GEARBOX)
             .renderer(() -> BrassGearboxRenderer::new)
             .register();
 
     public static final BlockEntityEntry<BrakeBlockEntity> BRAKE = REGISTRATE
             .blockEntity("brake", BrakeBlockEntity::new)
-            .instance(() -> SplitShaftInstance::new, false)
+            .visual(() -> SplitShaftVisual::new, false)
             .validBlocks(CCBlocks.BRAKE)
             .renderer(() -> SplitShaftRenderer::new)
             .register();
@@ -176,7 +176,7 @@ public class CCBlockEntityTypes {
 
     public static final BlockEntityEntry<LinkedAnalogLeverBlockEntity> LINKED_ANALOG_LEVER = REGISTRATE
             .blockEntity("linked_analog_lever", LinkedAnalogLeverBlockEntity::new)
-            .instance(() -> AnalogLeverInstance::new)
+            .visual(() -> AnalogLeverVisual::new)
             .validBlocks(CCBlocks.LINKED_ANALOG_LEVER)
             .renderer(() -> LinkedAnalogLeverRenderer::new)
             .register();

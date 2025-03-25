@@ -1,12 +1,14 @@
 package com.hlysine.create_connected.content.inventorybridge;
 
 
-import com.jozufozu.flywheel.util.transform.TransformStack;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.foundation.blockEntity.behaviour.CenteredSideValueBoxTransform;
-import com.simibubi.create.foundation.utility.AngleHelper;
-import com.simibubi.create.foundation.utility.VecHelper;
+import dev.engine_room.flywheel.lib.transform.TransformStack;
+import net.createmod.catnip.math.AngleHelper;
+import net.createmod.catnip.math.VecHelper;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 
@@ -17,7 +19,7 @@ public class InventoryBridgeFilterSlot extends CenteredSideValueBoxTransform {
     }
 
     @Override
-    public Vec3 getLocalOffset(BlockState state) {
+    public Vec3 getLocalOffset(LevelAccessor level, BlockPos pos, BlockState state) {
         Vec3 location = getSouthLocation();
         if (getSide() == Direction.UP) {
             location = new Vec3(location.x, 1 - location.y, location.z);
@@ -29,10 +31,10 @@ public class InventoryBridgeFilterSlot extends CenteredSideValueBoxTransform {
 
 
     @Override
-    public void rotate(BlockState state, PoseStack ms) {
-        super.rotate(state, ms);
+    public void rotate(LevelAccessor level, BlockPos pos, BlockState state, PoseStack ms) {
+        super.rotate(level, pos,state, ms);
         if (getSide() == Direction.UP)
-            TransformStack.cast(ms)
+            TransformStack.of(ms)
                     .rotateZ(180);
     }
 

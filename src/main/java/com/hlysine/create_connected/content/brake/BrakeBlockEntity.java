@@ -4,7 +4,7 @@ import com.hlysine.create_connected.CCBlocks;
 import com.hlysine.create_connected.config.CCConfigs;
 import com.hlysine.create_connected.datagen.advancements.AdvancementBehaviour;
 import com.hlysine.create_connected.datagen.advancements.CCAdvancements;
-import com.simibubi.create.content.kinetics.BlockStressValues;
+import com.simibubi.create.api.stress.BlockStressValues;
 import com.simibubi.create.content.kinetics.transmission.SplitShaftBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import net.minecraft.core.BlockPos;

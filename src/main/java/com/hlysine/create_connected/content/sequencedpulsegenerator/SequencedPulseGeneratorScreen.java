@@ -9,14 +9,13 @@ import com.hlysine.create_connected.CCPackets;
 import com.hlysine.create_connected.Lang;
 import com.hlysine.create_connected.content.sequencedpulsegenerator.instructions.EndInstruction;
 import com.hlysine.create_connected.content.sequencedpulsegenerator.instructions.Instruction;
-import com.simibubi.create.foundation.gui.AbstractSimiScreen;
 import com.simibubi.create.foundation.gui.AllIcons;
-import com.simibubi.create.foundation.gui.element.GuiGameElement;
 import com.simibubi.create.foundation.gui.widget.IconButton;
 import com.simibubi.create.foundation.gui.widget.ScrollInput;
 import com.simibubi.create.foundation.gui.widget.SelectionScrollInput;
-import com.simibubi.create.foundation.utility.Components;
 
+import net.createmod.catnip.gui.AbstractSimiScreen;
+import net.createmod.catnip.gui.element.GuiGameElement;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.network.chat.Component;
@@ -154,10 +153,10 @@ public class SequencedPulseGeneratorScreen extends AbstractSimiScreen {
                 Function<Integer, String> formatter = instruction.parameter.formatter();
                 String text = formatter == null ? String.valueOf(instruction.getValue()) : formatter.apply(instruction.getValue());
                 int stringWidth = font.width(text);
-                label(graphics, 90 + (12 - stringWidth / 2), yOffset - 1, Components.literal(text));
+                label(graphics, 90 + (12 - stringWidth / 2), yOffset - 1, Component.literal(text));
             }
             if (instruction.hasSignal)
-                label(graphics, 127, yOffset - 1, Components.literal(String.valueOf(instruction.getSignal())));
+                label(graphics, 127, yOffset - 1, Component.literal(String.valueOf(instruction.getSignal())));
         }
 
         graphics.drawString(font, title, x + (background.width - 8) / 2 - font.width(title) / 2, y + 4, 0x592424, false);

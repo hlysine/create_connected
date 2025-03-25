@@ -10,7 +10,9 @@ import com.simibubi.create.foundation.item.ItemHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
@@ -46,6 +48,23 @@ public class ItemSiloBlock extends Block implements IWrenchable, IBE<ItemSiloBlo
         if (pIsMoving)
             return;
         withBlockEntityDo(pLevel, pPos, ItemSiloBlockEntity::updateConnectivity);
+    }
+
+    @Override
+    public InteractionResult onWrenched(BlockState state, UseOnContext context) {
+        if (context.getClickedFace()
+                .getAxis()
+                .isVertical()) {
+            BlockEntity be = context.getLevel()
+                    .getBlockEntity(context.getClickedPos());
+            if (be instanceof ItemSiloBlockEntity vault) {
+                ConnectivityHandler.splitMulti(vault);
+                vault.removeController(true);
+            }
+            state = state.setValue(LARGE, false);
+        }
+        InteractionResult onWrenched = IWrenchable.super.onWrenched(state, context);
+        return onWrenched;
     }
 
     @Override

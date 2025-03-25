@@ -1,10 +1,12 @@
 package com.hlysine.create_connected.content;
 
-import com.jozufozu.flywheel.util.transform.TransformStack;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.foundation.blockEntity.behaviour.CenteredSideValueBoxTransform;
-import com.simibubi.create.foundation.utility.AngleHelper;
+import dev.engine_room.flywheel.lib.transform.TransformStack;
+import net.createmod.catnip.math.AngleHelper;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 
 import static net.minecraft.world.level.block.state.properties.BlockStateProperties.FACING;
@@ -19,16 +21,16 @@ public class ClutchValueBox extends CenteredSideValueBoxTransform {
     }
 
     @Override
-    public void rotate(BlockState state, PoseStack ms) {
+    public void rotate(LevelAccessor level, BlockPos pos, BlockState state, PoseStack ms) {
         Direction facing = getSide();
         float xRot = facing == Direction.UP ? 90 : facing == Direction.DOWN ? 270 : 0;
         float yRot = AngleHelper.horizontalAngle(facing) + 180;
 
         if (facing.getAxis() == Direction.Axis.Y)
-            TransformStack.cast(ms)
+            TransformStack.of(ms)
                     .rotateY(180 + AngleHelper.horizontalAngle(state.getValue(FACING)));
 
-        TransformStack.cast(ms)
+        TransformStack.of(ms)
                 .rotateY(yRot)
                 .rotateX(xRot);
     }

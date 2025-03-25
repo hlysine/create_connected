@@ -2,6 +2,8 @@ package com.hlysine.create_connected.content.itemsilo;
 
 import com.hlysine.create_connected.CCBlockEntityTypes;
 import com.simibubi.create.api.connectivity.ConnectivityHandler;
+import com.simibubi.create.api.packager.InventoryIdentifier;
+import com.simibubi.create.content.logistics.vault.ItemVaultBlock;
 import com.simibubi.create.foundation.blockEntity.IMultiBlockEntityContainer;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
@@ -17,6 +19,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.IItemHandler;
@@ -29,6 +32,7 @@ import java.util.List;
 public class ItemSiloBlockEntity extends SmartBlockEntity implements IMultiBlockEntityContainer.Inventory {
 
     protected LazyOptional<IItemHandler> itemCapability;
+    protected InventoryIdentifier invId;
 
     protected ItemStackHandler inventory;
     protected BlockPos controller;
@@ -45,7 +49,8 @@ public class ItemSiloBlockEntity extends SmartBlockEntity implements IMultiBlock
             @Override
             protected void onContentsChanged(int slot) {
                 super.onContentsChanged(slot);
-                ItemSiloBlockEntity.this.updateComparators();
+                updateComparators();
+                level.blockEntityChanged(worldPosition);
             }
         };
 
@@ -242,9 +247,11 @@ public class ItemSiloBlockEntity extends SmartBlockEntity implements IMultiBlock
                 return;
             controllerBE.initCapability();
             itemCapability = controllerBE.itemCapability;
+            invId = controllerBE.invId;
             return;
         }
 
+        boolean alongZ = ItemVaultBlock.getVaultBlockAxis(getBlockState()) == Axis.Z;
         IItemHandlerModifiable[] invs = new IItemHandlerModifiable[length * radius * radius];
         for (int yOffset = 0; yOffset < length; yOffset++) {
             for (int xOffset = 0; xOffset < radius; xOffset++) {
@@ -260,6 +267,13 @@ public class ItemSiloBlockEntity extends SmartBlockEntity implements IMultiBlock
 
         IItemHandler itemHandler = new VersionedInventoryWrapper(new CombinedInvWrapper(invs));
         itemCapability = LazyOptional.of(() -> itemHandler);
+
+        // build an identifier encompassing all component vaults
+        BlockPos farCorner = alongZ
+                ? worldPosition.offset(radius, radius, length)
+                : worldPosition.offset(length, radius, radius);
+        BoundingBox bounds = BoundingBox.fromCorners(this.worldPosition, farCorner);
+        this.invId = new InventoryIdentifier.Bounds(bounds);
     }
 
     public static int getMaxLength(int radius) {

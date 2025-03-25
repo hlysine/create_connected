@@ -2,7 +2,7 @@ package com.hlysine.create_connected.mixin.fluidvessel;
 
 import com.hlysine.create_connected.content.fluidvessel.FluidVesselBlock;
 import com.simibubi.create.api.connectivity.ConnectivityHandler;
-import com.simibubi.create.content.contraptions.BlockMovementChecks;
+import com.simibubi.create.api.contraption.BlockMovementChecks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.Level;
@@ -17,7 +17,7 @@ public class BlockMovementChecksMixin {
 
     @Inject(
             at = @At("HEAD"),
-            method = "isBlockAttachedTowardsFallback(Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/core/Direction;)Z",
+            method = "isBlockAttachedTowards(Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/core/Direction;)Z",
             cancellable = true
     )
     private static void isFluidVesselAttached(BlockState state, Level world, BlockPos pos, Direction direction, CallbackInfoReturnable<Boolean> cir) {

@@ -1,12 +1,12 @@
 package com.hlysine.create_connected.content.freewheelclutch;
 
 import com.hlysine.create_connected.CCBlocks;
+import com.hlysine.create_connected.Lang;
 import com.hlysine.create_connected.content.ClutchValueBox;
 import com.simibubi.create.content.kinetics.RotationPropagator;
 import com.simibubi.create.content.kinetics.transmission.SplitShaftBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.scrollValue.ScrollOptionBehaviour;
-import com.simibubi.create.foundation.utility.Lang;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;

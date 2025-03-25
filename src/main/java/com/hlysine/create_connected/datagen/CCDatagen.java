@@ -10,9 +10,9 @@ import com.hlysine.create_connected.datagen.recipes.CCStandardRecipes;
 import com.hlysine.create_connected.datagen.recipes.ProcessingRecipeGen;
 import com.hlysine.create_connected.datagen.recipes.SequencedAssemblyGen;
 import com.simibubi.create.foundation.data.CreateRegistrate;
-import com.simibubi.create.foundation.ponder.PonderLocalization;
 import com.simibubi.create.foundation.utility.FilesHelper;
 import com.tterrag.registrate.providers.ProviderType;
+import net.createmod.ponder.foundation.registration.PonderLocalization;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
@@ -79,9 +79,9 @@ public class CCDatagen {
         // Register these since FMLClientSetupEvent does not run during datagen
         CCPonders.register();
 
-        PonderLocalization.generateSceneLang();
+        new PonderLocalization().generateSceneLang();
 
-        PonderLocalization.provideLang(CreateConnected.MODID, consumer);
+        new PonderLocalization().provideLang(CreateConnected.MODID, consumer);
     }
 }
 

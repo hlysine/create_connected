@@ -1,13 +1,12 @@
 package com.hlysine.create_connected.content;
 
 import com.google.common.collect.ImmutableList;
+import com.hlysine.create_connected.Lang;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.ValueBoxTransform;
 import com.simibubi.create.foundation.blockEntity.behaviour.ValueSettingsBoard;
 import com.simibubi.create.foundation.blockEntity.behaviour.ValueSettingsFormatter;
 import com.simibubi.create.foundation.blockEntity.behaviour.scrollValue.ScrollValueBehaviour;
-import com.simibubi.create.foundation.utility.Components;
-import com.simibubi.create.foundation.utility.Lang;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -24,7 +23,7 @@ public class RotationScrollValueBehaviour extends ScrollValueBehaviour {
 
     @Override
     public ValueSettingsBoard createBoard(Player player, BlockHitResult hitResult) {
-        ImmutableList<Component> rows = ImmutableList.of(Components.literal("⟳")
+        ImmutableList<Component> rows = ImmutableList.of(Component.literal("⟳")
                 .withStyle(ChatFormatting.BOLD));
         ValueSettingsFormatter formatter = new ValueSettingsFormatter(this::formatSettings);
         return new ValueSettingsBoard(label, 256, 32, rows, formatter);

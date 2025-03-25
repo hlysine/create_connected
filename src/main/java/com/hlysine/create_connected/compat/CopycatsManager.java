@@ -1,12 +1,10 @@
 package com.hlysine.create_connected.compat;
 
-import com.hlysine.create_connected.CCBlocks;
-import com.hlysine.create_connected.CCItems;
 import com.hlysine.create_connected.CreateConnected;
 import com.hlysine.create_connected.config.CCConfigs;
-import com.simibubi.create.foundation.utility.RegisteredObjects;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import com.tterrag.registrate.util.entry.ItemEntry;
+import net.createmod.catnip.platform.ForgeRegisteredObjectsHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
@@ -21,6 +19,11 @@ import net.minecraftforge.fml.LogicalSide;
 
 import java.util.*;
 
+/**
+ *
+ * @deprecated This must be updated once Copycats supports Create 6+
+ */
+@Deprecated(since = "Create 6+")
 public class CopycatsManager {
     public static Map<String, BlockEntry<?>> BLOCK_MAP = new HashMap<>();
     public static Map<String, ItemEntry<?>> ITEM_MAP = new HashMap<>();
@@ -28,21 +31,21 @@ public class CopycatsManager {
     public static final Map<Level, Set<BlockPos>> migrationQueue = Collections.synchronizedMap(new WeakHashMap<>());
 
     static {
-        BLOCK_MAP.put(CCBlocks.COPYCAT_BLOCK.getKey().location().getPath(), com.copycatsplus.copycats.CCBlocks.COPYCAT_BLOCK);
-        BLOCK_MAP.put(CCBlocks.COPYCAT_SLAB.getKey().location().getPath(), com.copycatsplus.copycats.CCBlocks.COPYCAT_SLAB);
-        BLOCK_MAP.put(CCBlocks.COPYCAT_BEAM.getKey().location().getPath(), com.copycatsplus.copycats.CCBlocks.COPYCAT_BEAM);
-        BLOCK_MAP.put(CCBlocks.COPYCAT_VERTICAL_STEP.getKey().location().getPath(), com.copycatsplus.copycats.CCBlocks.COPYCAT_VERTICAL_STEP);
-        BLOCK_MAP.put(CCBlocks.COPYCAT_STAIRS.getKey().location().getPath(), com.copycatsplus.copycats.CCBlocks.COPYCAT_STAIRS);
-        BLOCK_MAP.put(CCBlocks.COPYCAT_FENCE.getKey().location().getPath(), com.copycatsplus.copycats.CCBlocks.COPYCAT_FENCE);
-        BLOCK_MAP.put(CCBlocks.COPYCAT_FENCE_GATE.getKey().location().getPath(), com.copycatsplus.copycats.CCBlocks.COPYCAT_FENCE_GATE);
-        BLOCK_MAP.put(CCBlocks.COPYCAT_WALL.getKey().location().getPath(), com.copycatsplus.copycats.CCBlocks.COPYCAT_WALL);
-        BLOCK_MAP.put(CCBlocks.COPYCAT_BOARD.getKey().location().getPath(), com.copycatsplus.copycats.CCBlocks.COPYCAT_BOARD);
-        ITEM_MAP.put(CCItems.COPYCAT_BOX.getKey().location().getPath(), com.copycatsplus.copycats.CCItems.COPYCAT_BOX);
-        ITEM_MAP.put(CCItems.COPYCAT_CATWALK.getKey().location().getPath(), com.copycatsplus.copycats.CCItems.COPYCAT_CATWALK);
+//        BLOCK_MAP.put(CCBlocks.COPYCAT_BLOCK.getKey().location().getPath(), com.copycatsplus.copycats.CCBlocks.COPYCAT_BLOCK);
+//        BLOCK_MAP.put(CCBlocks.COPYCAT_SLAB.getKey().location().getPath(), com.copycatsplus.copycats.CCBlocks.COPYCAT_SLAB);
+//        BLOCK_MAP.put(CCBlocks.COPYCAT_BEAM.getKey().location().getPath(), com.copycatsplus.copycats.CCBlocks.COPYCAT_BEAM);
+//        BLOCK_MAP.put(CCBlocks.COPYCAT_VERTICAL_STEP.getKey().location().getPath(), com.copycatsplus.copycats.CCBlocks.COPYCAT_VERTICAL_STEP);
+//        BLOCK_MAP.put(CCBlocks.COPYCAT_STAIRS.getKey().location().getPath(), com.copycatsplus.copycats.CCBlocks.COPYCAT_STAIRS);
+//        BLOCK_MAP.put(CCBlocks.COPYCAT_FENCE.getKey().location().getPath(), com.copycatsplus.copycats.CCBlocks.COPYCAT_FENCE);
+//        BLOCK_MAP.put(CCBlocks.COPYCAT_FENCE_GATE.getKey().location().getPath(), com.copycatsplus.copycats.CCBlocks.COPYCAT_FENCE_GATE);
+//        BLOCK_MAP.put(CCBlocks.COPYCAT_WALL.getKey().location().getPath(), com.copycatsplus.copycats.CCBlocks.COPYCAT_WALL);
+//        BLOCK_MAP.put(CCBlocks.COPYCAT_BOARD.getKey().location().getPath(), com.copycatsplus.copycats.CCBlocks.COPYCAT_BOARD);
+//        ITEM_MAP.put(CCItems.COPYCAT_BOX.getKey().location().getPath(), com.copycatsplus.copycats.CCItems.COPYCAT_BOX);
+//        ITEM_MAP.put(CCItems.COPYCAT_CATWALK.getKey().location().getPath(), com.copycatsplus.copycats.CCItems.COPYCAT_CATWALK);
     }
 
     public static Block convert(Block self) {
-        ResourceLocation key = RegisteredObjects.getKeyOrThrow(self);
+        ResourceLocation key = new ForgeRegisteredObjectsHelper().getKeyOrThrow(self);
         if (!validateNamespace(key)) return self;
         BlockEntry<?> result = BLOCK_MAP.get(key.getPath());
         if (result != null) return result.get();
@@ -50,7 +53,7 @@ public class CopycatsManager {
     }
 
     public static Item convert(Item self) {
-        ResourceLocation key = RegisteredObjects.getKeyOrThrow(self);
+        ResourceLocation key = new ForgeRegisteredObjectsHelper().getKeyOrThrow(self);
         if (!validateNamespace(key)) return self;
         ItemEntry<?> result = ITEM_MAP.get(key.getPath());
         if (result != null) return result.get();
@@ -78,7 +81,7 @@ public class CopycatsManager {
     }
 
     public static Block convertIfEnabled(Block block) {
-        ResourceLocation key = RegisteredObjects.getKeyOrThrow(block);
+        ResourceLocation key = new ForgeRegisteredObjectsHelper().getKeyOrThrow(block);
         if (!validateNamespace(key)) return block;
         if (isFeatureEnabled(key))
             return convert(block);
@@ -86,7 +89,7 @@ public class CopycatsManager {
     }
 
     public static BlockState convertIfEnabled(BlockState state) {
-        ResourceLocation key = RegisteredObjects.getKeyOrThrow(state.getBlock());
+        ResourceLocation key = new ForgeRegisteredObjectsHelper().getKeyOrThrow(state.getBlock());
         if (!validateNamespace(key)) return state;
         if (isFeatureEnabled(key))
             return convert(state);
@@ -94,7 +97,7 @@ public class CopycatsManager {
     }
 
     public static ItemLike convertIfEnabled(ItemLike item) {
-        ResourceLocation key = RegisteredObjects.getKeyOrThrow(item.asItem());
+        ResourceLocation key = new ForgeRegisteredObjectsHelper().getKeyOrThrow(item.asItem());
         if (!validateNamespace(key)) return item;
         if (isFeatureEnabled(key))
             return convert(item);
@@ -112,10 +115,11 @@ public class CopycatsManager {
         return false;
     }
 
+    // TODO: Do not forget about this
     public static boolean isFeatureEnabled(ResourceLocation key) {
-        if (!existsInCopycats(key))
+//        if (!existsInCopycats(key))
             return false;
-        return com.copycatsplus.copycats.config.FeatureToggle.isEnabled(Mods.COPYCATS.rl(key.getPath()));
+//        return com.copycatsplus.copycats.config.FeatureToggle.isEnabled(Mods.COPYCATS.rl(key.getPath()));
     }
 
     public static void enqueueMigration(Level level, BlockPos pos) {

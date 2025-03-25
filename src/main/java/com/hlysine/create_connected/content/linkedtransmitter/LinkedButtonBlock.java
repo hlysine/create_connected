@@ -4,8 +4,8 @@ import com.hlysine.create_connected.CCBlockEntityTypes;
 import com.hlysine.create_connected.CCItems;
 import com.hlysine.create_connected.CCShapes;
 import com.simibubi.create.AllSoundEvents;
+import com.simibubi.create.api.schematic.requirement.SpecialBlockItemRequirement;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
-import com.simibubi.create.content.schematics.requirement.ISpecialBlockItemRequirement;
 import com.simibubi.create.content.schematics.requirement.ItemRequirement;
 import com.simibubi.create.foundation.block.IBE;
 import net.minecraft.core.BlockPos;
@@ -36,7 +36,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LinkedButtonBlock extends ButtonBlock implements IBE<LinkedTransmitterBlockEntity>, ISpecialBlockItemRequirement, IWrenchable, LinkedTransmitterBlock {
+public class LinkedButtonBlock extends ButtonBlock implements IBE<LinkedTransmitterBlockEntity>, SpecialBlockItemRequirement, IWrenchable, LinkedTransmitterBlock {
     public static BooleanProperty LOCKED = BlockStateProperties.LOCKED;
 
     private final ButtonBlock base;

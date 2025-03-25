@@ -10,8 +10,8 @@ import com.mojang.logging.LogUtils;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.foundation.item.ItemDescription;
 import com.simibubi.create.foundation.item.KineticStats;
-import com.simibubi.create.foundation.item.TooltipHelper;
 import com.simibubi.create.foundation.item.TooltipModifier;
+import net.createmod.catnip.lang.FontHelper;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
@@ -36,7 +36,7 @@ public class CreateConnected {
     private static final CreateRegistrate REGISTRATE = CreateRegistrate.create(MODID);
 
     static {
-        REGISTRATE.setTooltipModifierFactory(item -> new ItemDescription.Modifier(item, TooltipHelper.Palette.STANDARD_CREATE)
+        REGISTRATE.setTooltipModifierFactory(item -> new ItemDescription.Modifier(item, FontHelper.Palette.STANDARD_CREATE)
                 .andThen(TooltipModifier.mapNull(KineticStats.create(item))));
     }
 
@@ -65,6 +65,7 @@ public class CreateConnected {
 
         CCInteractionBehaviours.register();
         CCMovementBehaviours.register();
+        CCMountedStorageTypes.register();
 
         if (Mods.COPYCATS.isLoaded())
             forgeEventBus.addListener(CopycatsManager::onLevelTick);

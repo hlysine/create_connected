@@ -1,10 +1,10 @@
 package com.hlysine.create_connected.content.contraption.jukebox;
 
 import com.hlysine.create_connected.CCPackets;
+import com.simibubi.create.api.behaviour.interaction.MovingInteractionBehaviour;
 import com.simibubi.create.content.contraptions.AbstractContraptionEntity;
 import com.simibubi.create.content.contraptions.Contraption;
-import com.simibubi.create.content.contraptions.behaviour.MovingInteractionBehaviour;
-import com.simibubi.create.foundation.utility.worldWrappers.WrappedWorld;
+import net.createmod.catnip.levelWrappers.WrappedLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.stats.Stats;
 import net.minecraft.tags.ItemTags;
@@ -59,7 +59,7 @@ public class JukeboxInteractionBehaviour extends MovingInteractionBehaviour {
         BlockPos realPos = BlockPos.containing(contraptionEntity.toGlobalVector(Vec3.atCenterOf(contraptionPos), 1));
         JukeboxBlockEntity be = new JukeboxBlockEntity(realPos, currentState);
         be.load(contraption.getBlocks().get(contraptionPos).nbt());
-        be.setLevel(new WrappedWorld(contraptionEntity.level()) {
+        be.setLevel(new WrappedLevel(contraptionEntity.level()) {
             @Override
             public boolean setBlock(BlockPos pos, BlockState newState, int flags) {
                 if (pos.equals(realPos)) {

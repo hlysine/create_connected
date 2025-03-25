@@ -4,9 +4,9 @@ import com.hlysine.create_connected.CCBlockEntityTypes;
 import com.hlysine.create_connected.CCItems;
 import com.hlysine.create_connected.CCShapes;
 import com.simibubi.create.AllSoundEvents;
+import com.simibubi.create.api.schematic.requirement.SpecialBlockItemRequirement;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.content.redstone.analogLever.AnalogLeverBlock;
-import com.simibubi.create.content.schematics.requirement.ISpecialBlockItemRequirement;
 import com.simibubi.create.content.schematics.requirement.ItemRequirement;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
 import net.minecraft.core.BlockPos;
@@ -36,7 +36,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LinkedAnalogLeverBlock extends AnalogLeverBlock implements ISpecialBlockItemRequirement, IWrenchable, LinkedTransmitterBlock {
+public class LinkedAnalogLeverBlock extends AnalogLeverBlock implements SpecialBlockItemRequirement, IWrenchable, LinkedTransmitterBlock {
     public static BooleanProperty LOCKED = BlockStateProperties.LOCKED;
 
     public static final BooleanProperty POWERED = BlockStateProperties.POWERED;

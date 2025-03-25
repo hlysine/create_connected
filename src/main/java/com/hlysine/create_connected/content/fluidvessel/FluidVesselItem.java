@@ -3,7 +3,7 @@ package com.hlysine.create_connected.content.fluidvessel;
 import com.hlysine.create_connected.CCBlockEntityTypes;
 import com.hlysine.create_connected.CCBlocks;
 import com.simibubi.create.api.connectivity.ConnectivityHandler;
-import com.simibubi.create.foundation.utility.VecHelper;
+import net.createmod.catnip.math.VecHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Axis;

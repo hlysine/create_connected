@@ -1,13 +1,13 @@
 package com.hlysine.create_connected.content.sixwaygearbox;
 
-import com.jozufozu.flywheel.backend.Backend;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.AllPartialModels;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntityRenderer;
-import com.simibubi.create.foundation.render.CachedBufferer;
-import com.simibubi.create.foundation.render.SuperByteBuffer;
-import com.simibubi.create.foundation.utility.AnimationTickHolder;
-import com.simibubi.create.foundation.utility.Iterate;
+import dev.engine_room.flywheel.api.visualization.VisualizationManager;
+import net.createmod.catnip.animation.AnimationTickHolder;
+import net.createmod.catnip.data.Iterate;
+import net.createmod.catnip.render.CachedBuffers;
+import net.createmod.catnip.render.SuperByteBuffer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
@@ -26,7 +26,7 @@ public class SixWayGearboxRenderer extends KineticBlockEntityRenderer<SixWayGear
     @Override
     protected void renderSafe(SixWayGearboxBlockEntity be, float partialTicks, PoseStack ms, MultiBufferSource buffer,
                               int light, int overlay) {
-        if (Backend.canUseInstancing(be.getLevel())) return;
+        if (VisualizationManager.supportsVisualization(be.getLevel())) return;
 
         final BlockState state = be.getBlockState();
         final Axis boxAxis = state.getValue(BlockStateProperties.AXIS);
@@ -36,7 +36,7 @@ public class SixWayGearboxRenderer extends KineticBlockEntityRenderer<SixWayGear
         for (Direction direction : Iterate.directions) {
             final Axis axis = direction.getAxis();
 
-            SuperByteBuffer shaft = CachedBufferer.partialFacing(AllPartialModels.SHAFT_HALF, be.getBlockState(), direction);
+            SuperByteBuffer shaft = CachedBuffers.partialFacing(AllPartialModels.SHAFT_HALF, be.getBlockState(), direction);
             float offset = getRotationOffsetForPosition(be, pos, axis);
             float angle = (time * be.getSpeed() * 3f / 10) % 360;
 

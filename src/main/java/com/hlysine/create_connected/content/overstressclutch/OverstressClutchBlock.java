@@ -7,7 +7,7 @@ import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.content.kinetics.RotationPropagator;
 import com.simibubi.create.content.kinetics.base.AbstractEncasedShaftBlock;
 import com.simibubi.create.foundation.block.IBE;
-import com.simibubi.create.foundation.utility.Lang;
+import com.simibubi.create.foundation.utility.CreateLang;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
@@ -122,7 +122,7 @@ public class OverstressClutchBlock extends AbstractEncasedShaftBlock implements 
 
         @Override
         public @NotNull String getSerializedName() {
-            return Lang.asId(name());
+            return CreateLang.asId(name());
         }
     }
 }

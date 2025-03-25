@@ -1,7 +1,7 @@
 package com.hlysine.create_connected.config;
 
 import com.hlysine.create_connected.CreateConnected;
-import com.simibubi.create.foundation.config.ConfigBase;
+import net.createmod.catnip.config.ConfigBase;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;

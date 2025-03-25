@@ -13,7 +13,8 @@ import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.*;
 import com.simibubi.create.foundation.blockEntity.behaviour.scrollValue.ScrollValueBehaviour;
 import com.simibubi.create.foundation.item.TooltipHelper;
-import com.simibubi.create.foundation.utility.Components;
+import com.simibubi.create.foundation.utility.CreateLang;
+import net.createmod.catnip.lang.FontHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -45,7 +46,7 @@ public class OverstressClutchBlockEntity extends SplitShaftBlockEntity {
     @Override
     public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
         AdvancementBehaviour.registerAwardables(this, behaviours, CCAdvancements.OVERSTRESS_CLUTCH);
-        maxDelay = new TimeDelayScrollValueBehaviour(Components.translatable("create_connected.overstress_clutch.uncouple_delay"), this,
+        maxDelay = new TimeDelayScrollValueBehaviour(Component.translatable("create_connected.overstress_clutch.uncouple_delay"), this,
                 new CenteredSideValueBoxTransform((state, d) -> {
                     Direction.Axis axis = d.getAxis();
                     Direction.Axis bearingAxis = state.getValue(OverstressClutchBlock.AXIS);
@@ -126,7 +127,7 @@ public class OverstressClutchBlockEntity extends SplitShaftBlockEntity {
                     .style(GOLD)
                     .forGoggles(tooltip);
             Component hint = Lang.translateDirect("gui.overstress_clutch.uncoupled_explanation");
-            List<Component> cutString = TooltipHelper.cutTextComponent(hint, TooltipHelper.Palette.GRAY_AND_WHITE);
+            List<Component> cutString = TooltipHelper.cutTextComponent(hint, FontHelper.Palette.GRAY_AND_WHITE);
             for (Component component : cutString)
                 Lang.builder()
                         .add(component.copy())
@@ -176,12 +177,12 @@ public class OverstressClutchBlockEntity extends SplitShaftBlockEntity {
         @Override
         public ValueSettingsBoard createBoard(Player player, BlockHitResult hitResult) {
             return new ValueSettingsBoard(label, 60, 10,
-                    com.simibubi.create.foundation.utility.Lang.translatedOptions("generic.unit", "ticks", "seconds", "minutes"),
+                    CreateLang.translatedOptions("generic.unit", "ticks", "seconds", "minutes"),
                     new ValueSettingsFormatter(this::formatSettings));
         }
 
         @Override
-        public void onShortInteract(Player player, InteractionHand hand, Direction side) {
+        public void onShortInteract(Player player, InteractionHand hand, Direction side, BlockHitResult hitResult) {
             BlockState blockState = blockEntity.getBlockState();
             if (blockState.getBlock() instanceof BrassDiodeBlock bdb)
                 bdb.toggle(getWorld(), getPos(), blockState, player, hand);
@@ -218,7 +219,7 @@ public class OverstressClutchBlockEntity extends SplitShaftBlockEntity {
 
         public MutableComponent formatSettings(ValueSettings settings) {
             int value = Math.max(1, settings.value());
-            return Components.literal(switch (settings.row()) {
+            return Component.literal(switch (settings.row()) {
                 case 0 -> value + "t";
                 case 1 -> "0:" + (value < 10 ? "0" : "") + value;
                 default -> value + ":00";

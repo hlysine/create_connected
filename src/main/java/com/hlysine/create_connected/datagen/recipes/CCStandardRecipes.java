@@ -12,10 +12,10 @@ import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllItems;
 import com.simibubi.create.AllTags;
 import com.simibubi.create.foundation.data.recipe.CreateRecipeProvider;
-import com.simibubi.create.foundation.utility.RegisteredObjects;
 import com.tterrag.registrate.util.DataIngredient;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import com.tterrag.registrate.util.entry.ItemProviderEntry;
+import net.createmod.catnip.platform.ForgeRegisteredObjectsHelper;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
@@ -388,7 +388,7 @@ public class CCStandardRecipes extends CreateRecipeProvider {
     GeneratedRecipe copycat(ItemProviderEntry<? extends ItemLike> result, int resultCount) {
         if (CopycatsManager.convert(result) != result)
             create(() -> CopycatsManager.convert(result)).withSuffix("_compat")
-                    .requiresFeature(RegisteredObjects.getKeyOrThrow(result.asItem()))
+                    .requiresFeature(new ForgeRegisteredObjectsHelper().getKeyOrThrow(result.asItem()))
                     .unlockedBy(result::get)
                     .enabledInCopycats()
                     .viaShapeless(b -> b
@@ -508,15 +508,15 @@ public class CCStandardRecipes extends CreateRecipeProvider {
         }
 
         GeneratedRecipeBuilder requiresResultFeature() {
-            return requiresFeature(RegisteredObjects.getKeyOrThrow(result.get().asItem()));
+            return requiresFeature(new ForgeRegisteredObjectsHelper().getKeyOrThrow(result.get().asItem()));
         }
 
         GeneratedRecipeBuilder disabledInCopycats() {
-            return withCondition(new NotCondition(new FeatureEnabledInCopycatsCondition(RegisteredObjects.getKeyOrThrow(result.get().asItem()))));
+            return withCondition(new NotCondition(new FeatureEnabledInCopycatsCondition(new ForgeRegisteredObjectsHelper().getKeyOrThrow(result.get().asItem()))));
         }
 
         GeneratedRecipeBuilder enabledInCopycats() {
-            return withCondition(new FeatureEnabledInCopycatsCondition(RegisteredObjects.getKeyOrThrow(result.get().asItem())));
+            return withCondition(new FeatureEnabledInCopycatsCondition(new ForgeRegisteredObjectsHelper().getKeyOrThrow(result.get().asItem())));
         }
 
         GeneratedRecipeBuilder withSuffix(String suffix) {
@@ -592,7 +592,7 @@ public class CCStandardRecipes extends CreateRecipeProvider {
         }
 
         private ResourceLocation getRegistryName() {
-            return compatDatagenOutput == null ? RegisteredObjects.getKeyOrThrow(result.get()
+            return compatDatagenOutput == null ? new ForgeRegisteredObjectsHelper().getKeyOrThrow(result.get()
                     .asItem()) : compatDatagenOutput;
         }
 
@@ -675,7 +675,7 @@ public class CCStandardRecipes extends CreateRecipeProvider {
 
                     b.save(result -> consumer.accept(
                             isOtherMod ? new ModdedCookingRecipeResult(result, compatDatagenOutput, recipeConditions)
-                                    : result), createSimpleLocation(RegisteredObjects.getKeyOrThrow(serializer)
+                                    : result), createSimpleLocation(new ForgeRegisteredObjectsHelper().getKeyOrThrow(serializer)
                             .getPath()));
                 });
             }

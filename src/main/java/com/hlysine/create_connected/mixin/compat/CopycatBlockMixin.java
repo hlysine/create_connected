@@ -1,14 +1,19 @@
 package com.hlysine.create_connected.mixin.compat;
 
-import com.copycatsplus.copycats.content.copycat.board.CopycatBoardBlock;
-import com.copycatsplus.copycats.content.copycat.slab.CopycatSlabBlock;
 import com.hlysine.create_connected.compat.CopycatsManager;
+import com.hlysine.create_connected.content.copycat.board.CopycatBoardBlock;
+import com.hlysine.create_connected.content.copycat.slab.CopycatSlabBlock;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
+/**
+ *
+ * @deprecated This must be updated once Copycats supports Create 6+
+ */
+@Deprecated(since = "Create 6+")
 @Mixin({CopycatSlabBlock.class, CopycatBoardBlock.class})
 public class CopycatBlockMixin {
     @Redirect(

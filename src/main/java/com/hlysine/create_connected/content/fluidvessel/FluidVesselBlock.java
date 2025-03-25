@@ -11,7 +11,7 @@ import com.simibubi.create.foundation.block.IBE;
 import com.simibubi.create.foundation.blockEntity.ComparatorUtil;
 import com.simibubi.create.foundation.fluid.FluidHelper;
 import com.simibubi.create.foundation.fluid.FluidHelper.FluidExchange;
-import com.simibubi.create.foundation.utility.Lang;
+import com.simibubi.create.foundation.utility.CreateLang;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Axis;
@@ -334,7 +334,7 @@ public class FluidVesselBlock extends Block implements IWrenchable, IBE<FluidVes
 
         @Override
         public String getSerializedName() {
-            return Lang.asId(name());
+            return CreateLang.asId(name());
         }
 
         public Shape nonSingleVariant() {
@@ -353,7 +353,7 @@ public class FluidVesselBlock extends Block implements IWrenchable, IBE<FluidVes
 
         @Override
         public String getSerializedName() {
-            return Lang.asId(name());
+            return CreateLang.asId(name());
         }
     }
 

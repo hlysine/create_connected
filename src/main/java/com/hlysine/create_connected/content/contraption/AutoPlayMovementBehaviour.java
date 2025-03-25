@@ -18,8 +18,8 @@ import java.util.Objects;
 public abstract class AutoPlayMovementBehaviour extends SlidingDoorMovementBehaviour {
 
     @Override
-    public boolean renderAsNormalBlockEntity() {
-        return false;
+    public boolean disableBlockEntityRendering() {
+        return true;
     }
 
     @Override
