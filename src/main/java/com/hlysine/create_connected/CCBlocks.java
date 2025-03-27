@@ -55,7 +55,10 @@ import com.hlysine.create_connected.content.shearpin.ShearPinBlock;
 import com.hlysine.create_connected.content.sixwaygearbox.SixWayGearboxBlock;
 import com.hlysine.create_connected.datagen.CCBlockStateGen;
 import com.hlysine.create_connected.datagen.CCWindowGen;
-import com.simibubi.create.*;
+import com.simibubi.create.AllBlocks;
+import com.simibubi.create.AllSpriteShifts;
+import com.simibubi.create.AllTags;
+import com.simibubi.create.Create;
 import com.simibubi.create.api.contraption.storage.item.MountedItemStorageType;
 import com.simibubi.create.api.stress.BlockStressValues;
 import com.simibubi.create.content.decoration.encasing.EncasedCTBehaviour;
@@ -525,8 +528,8 @@ public class CCBlocks {
             .transform(FeatureToggle.register(FeatureCategory.LOGISTICS))
             .blockstate(new FluidVesselGenerator()::generate)
             .onRegister(CreateRegistrate.blockModel(() -> FluidVesselModel::standard))
-            .transform(displaySource(AllDisplaySources.BOILER))
-            .transform(mountedFluidStorage(AllMountedStorageTypes.FLUID_TANK))
+            .transform(displaySource(CCDisplaySources.BOILER_STATUS))
+            .transform(mountedFluidStorage(CCMountedStorageTypes.FLUID_TANK))
             .onRegister(movementBehaviour(new FluidTankMovementBehavior()))
             .addLayer(() -> RenderType::cutoutMipped)
             .item(FluidVesselItem::new)

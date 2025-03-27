@@ -66,6 +66,7 @@ public class CreateConnected {
         CCInteractionBehaviours.register();
         CCMovementBehaviours.register();
         CCMountedStorageTypes.register();
+        CCDisplaySources.register();
 
         if (Mods.COPYCATS.isLoaded())
             forgeEventBus.addListener(CopycatsManager::onLevelTick);
