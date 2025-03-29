@@ -126,5 +126,8 @@
   "create.gui.sequenced_gearshift.instruction.loop.descriptive": "Reštartujte celú sekvenciu",
   "create.gui.sequenced_gearshift.instruction.turn_await": "Udržať",
   "create.gui.sequenced_gearshift.instruction.turn_await.descriptive": "Otáčajte, kým sa neobjaví nový Redstone Pulse",
-  "create.gui.sequenced_gearshift.instruction.turn_time": "Čas"
+  "create.gui.sequenced_gearshift.instruction.turn_time": "Čas",
+  "create.gui.sequenced_gearshift.instruction.turn_time.descriptive": "Obráťte sa na čas",
+  "create.gui.sequenced_gearshift.instruction.turn_time.duration": "Trvanie",
+  "create.item_attributes.id_contains": "má v ID slovo „%1$s“."
 }
