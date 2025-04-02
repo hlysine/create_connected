@@ -65,6 +65,7 @@ import com.simibubi.create.api.contraption.BlockMovementChecks;
 import com.simibubi.create.content.decoration.encasing.EncasedCTBehaviour;
 import com.simibubi.create.content.decoration.palettes.ConnectedGlassPaneBlock;
 import com.simibubi.create.content.decoration.palettes.WindowBlock;
+import com.simibubi.create.content.fluids.tank.FluidTankMovementBehavior;
 import com.simibubi.create.content.kinetics.chainDrive.ChainDriveGenerator;
 import com.simibubi.create.content.kinetics.simpleRelays.BracketedKineticBlockModel;
 import com.simibubi.create.content.redstone.displayLink.source.BoilerDisplaySource;
@@ -100,6 +101,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
+import static com.simibubi.create.api.behaviour.movement.MovementBehaviour.movementBehaviour;
 import static com.simibubi.create.content.redstone.displayLink.AllDisplayBehaviours.assignDataBehaviour;
 import static com.simibubi.create.foundation.data.AssetLookup.partialBaseModel;
 import static com.simibubi.create.foundation.data.BlockStateGen.axisBlock;
@@ -535,6 +537,7 @@ public class CCBlocks {
                     return BlockMovementChecks.CheckResult.of(ConnectivityHandler.isConnected(world, pos, pos.relative(direction)));
                 return BlockMovementChecks.CheckResult.PASS;
             }))
+            .onRegister(movementBehaviour(new FluidTankMovementBehavior()))
             .onRegister(assignDataBehaviour(new BoilerDisplaySource(), "boiler_status"))
             .addLayer(() -> RenderType::cutoutMipped)
             .item(FluidVesselItem::new)
