@@ -2,7 +2,8 @@ package com.hlysine.create_connected.content.itemsilo;
 
 import com.hlysine.create_connected.CCBlockEntityTypes;
 import com.simibubi.create.api.connectivity.ConnectivityHandler;
-import com.simibubi.create.foundation.utility.VecHelper;
+import com.simibubi.create.content.equipment.symmetryWand.SymmetryWandItem;
+import net.createmod.catnip.math.VecHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Axis;
@@ -63,6 +64,8 @@ public class ItemSiloItem extends BlockItem {
         BlockState placedOnState = world.getBlockState(placedOnPos);
 
         if (!ItemSiloBlock.isVault(placedOnState))
+            return;
+        if (SymmetryWandItem.presentInHotbar(player))
             return;
         ItemSiloBlockEntity tankAt = ConnectivityHandler.partAt(CCBlockEntityTypes.ITEM_SILO.get(), world, placedOnPos);
         if (tankAt == null)

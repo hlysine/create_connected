@@ -91,13 +91,14 @@ minecraft {
             // Please read: https://stackoverflow.com/questions/2031163/when-to-use-the-different-log-levels
             property 'forge.logging.console.level', 'debug'
 
-            property 'mixin.env.remapRefMap', 'true'
-            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+            property "mixin.env.remapRefMap", "true"
+            property "mixin.env.refMapRemappingFile", "${projectDir}/build/createSrgToMcp/output.srg"
 
             //Allows for reloading the project during runtime with compatible java
             jvmArg "-XX:+AllowEnhancedClassRedefinition"
 
             arg '-mixin.config=create_connected.mixins.json'
+            arg '-mixin.config=create.mixins.json'
 
             mods {
                 "${mod_id}" {
@@ -142,8 +143,16 @@ repositories {
     // ForgeGradle automatically adds the Forge maven and Maven Central for you
 
     maven {
-        name = 'tterrag maven'
-        url = 'https://maven.tterrag.com/'
+        // Create, Ponder, Flywheel
+        url = "https://maven.createmod.net"
+    }
+    maven {
+        // Registrate
+        url = "https://maven.tterrag.com"
+    }
+    maven {
+        // ForgeConfigAPIPort
+        url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven/"
     }
     maven {
         // location of the maven that hosts JEI files before January 2023
@@ -205,14 +214,16 @@ dependencies {
     // then special handling is done to allow a setup of a vanilla dependency without the use of an external repository.
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 
-    compileOnly annotationProcessor("io.github.llamalad7:mixinextras-common:0.3.5")
-    implementation jarJar("io.github.llamalad7:mixinextras-forge:0.3.5") {
-        jarJar.ranged(it, "[0.3.5,)")
+    compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:${mixin_extras_version}"))
+    implementation(jarJar("io.github.llamalad7:mixinextras-forge:${mixin_extras_version}")) {
+        jarJar.ranged(it, "[${mixin_extras_version},)")
     }
 
-    implementation fg.deobf("com.simibubi.create:create-${create_minecraft_version}:${create_version}:slim") { transitive = false }
-    implementation fg.deobf("com.jozufozu.flywheel:flywheel-forge-${flywheel_minecraft_version}:${flywheel_version}")
-    implementation fg.deobf("com.tterrag.registrate:Registrate:${registrate_version}")
+    implementation(fg.deobf("com.simibubi.create:create-${minecraft_version}:${create_version}:slim") { transitive = false })
+    implementation(fg.deobf("net.createmod.ponder:Ponder-Forge-${minecraft_version}:${ponder_version}"))
+    compileOnly(fg.deobf("dev.engine-room.flywheel:flywheel-forge-api-${flywheel_minecraft_version}:${flywheel_version}"))
+    runtimeOnly(fg.deobf("dev.engine-room.flywheel:flywheel-forge-${flywheel_minecraft_version}:${flywheel_version}"))
+    implementation(fg.deobf("com.tterrag.registrate:Registrate:${registrate_version}"))
 
     // Example mod dependency with JEI - using fg.deobf() ensures the dependency is remapped to your development mappings
     // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime
@@ -332,8 +343,8 @@ tasks.publishMods.dependsOn(tasks.assemble)
 tasks.publishMods.mustRunAfter(tasks.build)
 
 publishMods {
-    changelog = "Check out the detailed changelog at https://github.com/hlysine/create_connected/blob/main/CHANGELOG.md"
-    type = BETA
+    changelog = "## NOTE: Create: Connected 1.0.0 or above only works with Create 6.0.0 or above!\\n\\nCheck out the detailed changelog at https://github.com/hlysine/create_connected/blob/main/CHANGELOG.md"
+    type = STABLE
     file = tasks.jarJar.archiveFile
     modLoaders.add("forge")
     modLoaders.add("neoforge")
@@ -365,6 +376,6 @@ publishMods {
 }
 
 wrapper {
-    gradleVersion = '8.4'
+    gradleVersion = '8.10'
     distributionType = Wrapper.DistributionType.BIN
 }

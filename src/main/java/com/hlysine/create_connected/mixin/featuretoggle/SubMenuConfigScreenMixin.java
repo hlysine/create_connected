@@ -2,8 +2,8 @@ package com.hlysine.create_connected.mixin.featuretoggle;
 
 import com.hlysine.create_connected.CreateConnected;
 import com.hlysine.create_connected.config.CCConfigs;
-import com.simibubi.create.foundation.config.ui.ConfigScreen;
-import com.simibubi.create.foundation.config.ui.SubMenuConfigScreen;
+import net.createmod.catnip.config.ui.ConfigScreen;
+import net.createmod.catnip.config.ui.SubMenuConfigScreen;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.util.LogicalSidedProvider;
@@ -22,7 +22,7 @@ public class SubMenuConfigScreenMixin {
             at = @At("TAIL")
     )
     private void saveChangesAndRefresh(CallbackInfo ci) {
-        if (ConfigScreen.modID.equals(CreateConnected.MODID)) {
+        if (ConfigScreen.modID != null && ConfigScreen.modID.equals(CreateConnected.MODID)) {
             if (EffectiveSide.get().isServer() || FMLEnvironment.dist == Dist.CLIENT && Minecraft.getInstance().hasSingleplayerServer())
                 LogicalSidedProvider.WORKQUEUE.get(LogicalSide.SERVER).submit(() -> CCConfigs.common().syncToAllPlayers());
         }

@@ -37,6 +37,7 @@
     "itemattributes.StandardTraitsMixin",
     "itemsilo.BlockMovementChecksMixin",
     "itemsilo.ContraptionMixin",
+    "itemsilo.MountedStorageManagerMixin",
     "itemsilo.MountedStorageMixin",
     "linkedtransmitter.AnalogLeverBlockEntityAccessor",
     "linkedtransmitter.AnalogLeverBlockMixin",

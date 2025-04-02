@@ -7,6 +7,7 @@ import com.hlysine.create_connected.datagen.CCDatagen;
 import com.hlysine.create_connected.datagen.advancements.CCAdvancements;
 import com.hlysine.create_connected.datagen.advancements.CCTriggers;
 import com.mojang.logging.LogUtils;
+import com.simibubi.create.Create;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.foundation.item.ItemDescription;
 import com.simibubi.create.foundation.item.KineticStats;
@@ -22,6 +23,7 @@ import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.registries.RegisterEvent;
 import org.slf4j.Logger;
 
 // The value here should match an entry in the META-INF/mods.toml file
@@ -47,6 +49,7 @@ public class CreateConnected {
 
         // Register the commonSetup method for mod loading
         modEventBus.addListener(this::commonSetup);
+        modEventBus.addListener(this::onRegister);
         CCCraftingConditions.register();
 
         // Register ourselves for server and other game events we are interested in
@@ -63,9 +66,6 @@ public class CreateConnected {
         CCConfigs.register(ModLoadingContext.get());
         CCConfigs.common().register();
 
-        CCInteractionBehaviours.register();
-        CCMovementBehaviours.register();
-
         if (Mods.COPYCATS.isLoaded())
             forgeEventBus.addListener(CopycatsManager::onLevelTick);
 
@@ -78,7 +78,14 @@ public class CreateConnected {
         event.enqueueWork(() -> {
             CCAdvancements.register();
             CCTriggers.register();
+
+            CCInteractionBehaviours.register();
+            CCMovementBehaviours.register();
         });
+    }
+
+    public void onRegister(final RegisterEvent event) {
+        CCItemAttributes.register();
     }
 
     public static CreateRegistrate getRegistrate() {

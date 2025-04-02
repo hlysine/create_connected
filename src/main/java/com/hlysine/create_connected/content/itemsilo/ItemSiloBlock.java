@@ -20,7 +20,6 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition.Builder;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.ForgeSoundType;
 
 import javax.annotation.Nullable;
@@ -99,11 +98,7 @@ public class ItemSiloBlock extends Block implements IWrenchable, IBE<ItemSiloBlo
 
     @Override
     public int getAnalogOutputSignal(BlockState pState, Level pLevel, BlockPos pPos) {
-        return getBlockEntityOptional(pLevel, pPos)
-                .map(vte -> vte.getCapability(ForgeCapabilities.ITEM_HANDLER))
-                .map(lo -> lo.map(ItemHelper::calcRedstoneFromInventory)
-                        .orElse(0))
-                .orElse(0);
+        return ItemHelper.calcRedstoneFromBlockEntity(this, pLevel, pPos);
     }
 
     @Override

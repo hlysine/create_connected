@@ -60,6 +60,8 @@ import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllSpriteShifts;
 import com.simibubi.create.AllTags;
 import com.simibubi.create.Create;
+import com.simibubi.create.api.connectivity.ConnectivityHandler;
+import com.simibubi.create.api.contraption.BlockMovementChecks;
 import com.simibubi.create.content.decoration.encasing.EncasedCTBehaviour;
 import com.simibubi.create.content.decoration.palettes.ConnectedGlassPaneBlock;
 import com.simibubi.create.content.decoration.palettes.WindowBlock;
@@ -512,6 +514,11 @@ public class CCBlocks {
                             .modelFile(AssetLookup.standardModel(c, p))
                             .build()))
             .onRegister(connectedTextures(ItemSiloCTBehaviour::new))
+            .onRegister(b -> BlockMovementChecks.registerAttachedCheck((state, world, pos, direction) -> {
+                if (state.getBlock() instanceof ItemSiloBlock)
+                    return BlockMovementChecks.CheckResult.of(ConnectivityHandler.isConnected(world, pos, pos.relative(direction)));
+                return BlockMovementChecks.CheckResult.PASS;
+            }))
             .item(ItemSiloItem::new)
             .build()
             .register();
@@ -523,6 +530,11 @@ public class CCBlocks {
             .transform(FeatureToggle.register(FeatureCategory.LOGISTICS))
             .blockstate(new FluidVesselGenerator()::generate)
             .onRegister(CreateRegistrate.blockModel(() -> FluidVesselModel::standard))
+            .onRegister(b -> BlockMovementChecks.registerAttachedCheck((state, world, pos, direction) -> {
+                if (state.getBlock() instanceof FluidVesselBlock)
+                    return BlockMovementChecks.CheckResult.of(ConnectivityHandler.isConnected(world, pos, pos.relative(direction)));
+                return BlockMovementChecks.CheckResult.PASS;
+            }))
             .onRegister(assignDataBehaviour(new BoilerDisplaySource(), "boiler_status"))
             .addLayer(() -> RenderType::cutoutMipped)
             .item(FluidVesselItem::new)
