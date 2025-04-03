@@ -1,8 +1,9 @@
 package com.hlysine.create_connected;
 
-import com.simibubi.create.foundation.utility.Components;
-import com.simibubi.create.foundation.utility.LangBuilder;
-import com.simibubi.create.foundation.utility.LangNumberFormat;
+import com.simibubi.create.Create;
+import net.createmod.catnip.lang.Lang;
+import net.createmod.catnip.lang.LangBuilder;
+import net.createmod.catnip.lang.LangNumberFormat;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.item.ItemStack;
@@ -11,23 +12,16 @@ import net.minecraftforge.fluids.FluidStack;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
-public class Lang {
+public class ConnectedLang extends Lang {
+
     /**
-     * legacy-ish. Use Lang.translate and other builder methods where possible
+     * legacy-ish. Use CreateLang.translate and other builder methods where possible
+     *
      */
     public static MutableComponent translateDirect(String key, Object... args) {
-        return Components.translatable(CreateConnected.MODID + "." + key, resolveBuilders(args));
-    }
-
-    public static String asId(String name) {
-        return name.toLowerCase(Locale.ROOT);
-    }
-
-    public static String nonPluralId(String name) {
-        String asId = asId(name);
-        return asId.endsWith("s") ? asId.substring(0, asId.length() - 1) : asId;
+        Object[] args1 = LangBuilder.resolveBuilders(args);
+        return Component.translatable(CreateConnected.MODID + "." + key, args1);
     }
 
     public static List<Component> translatedOptions(String prefix, String... keys) {
@@ -40,14 +34,8 @@ public class Lang {
     //
 
     public static LangBuilder builder() {
-        return new LangBuilder(CreateConnected.MODID);
+        return new LangBuilder(Create.ID);
     }
-
-    public static LangBuilder builder(String namespace) {
-        return new LangBuilder(namespace);
-    }
-
-    //
 
     public static LangBuilder blockName(BlockState state) {
         return builder().add(state.getBlock()
@@ -76,13 +64,9 @@ public class Lang {
         return builder().text(text);
     }
 
-    //
-
-    public static Object[] resolveBuilders(Object[] args) {
-        for (int i = 0; i < args.length; i++)
-            if (args[i] instanceof LangBuilder cb)
-                args[i] = cb.component();
-        return args;
+    @Deprecated // Use while implementing and replace all references with Lang.translate
+    public static LangBuilder temporaryText(String text) {
+        return builder().text(text);
     }
 
 }

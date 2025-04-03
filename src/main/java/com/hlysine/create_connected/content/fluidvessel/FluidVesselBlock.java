@@ -1,7 +1,7 @@
 package com.hlysine.create_connected.content.fluidvessel;
 
-import com.copycatsplus.copycats.CCLang;
 import com.hlysine.create_connected.CCBlockEntityTypes;
+import com.hlysine.create_connected.ConnectedLang;
 import com.simibubi.create.api.connectivity.ConnectivityHandler;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.content.fluids.tank.CreativeFluidTankBlockEntity;
@@ -333,7 +333,7 @@ public class FluidVesselBlock extends Block implements IWrenchable, IBE<FluidVes
 
         @Override
         public String getSerializedName() {
-            return CCLang.asId(name());
+            return ConnectedLang.asId(name());
         }
 
         public Shape nonSingleVariant() {
@@ -352,7 +352,7 @@ public class FluidVesselBlock extends Block implements IWrenchable, IBE<FluidVes
 
         @Override
         public String getSerializedName() {
-            return CCLang.asId(name());
+            return ConnectedLang.asId(name());
         }
     }
 

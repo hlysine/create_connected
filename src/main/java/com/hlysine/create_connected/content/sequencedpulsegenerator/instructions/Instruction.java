@@ -1,7 +1,7 @@
 package com.hlysine.create_connected.content.sequencedpulsegenerator.instructions;
 
 import com.hlysine.create_connected.CCGuiTextures;
-import com.hlysine.create_connected.Lang;
+import com.hlysine.create_connected.ConnectedLang;
 import com.hlysine.create_connected.content.sequencedpulsegenerator.SequencedPulseGeneratorBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.scrollValue.ScrollValueBehaviour;
 import net.minecraft.nbt.CompoundTag;
@@ -159,7 +159,7 @@ public abstract class Instruction {
     }
 
     public String getLangKey() {
-        return "gui.sequenced_pulse_generator.instruction." + Lang.asId(instructionId);
+        return "gui.sequenced_pulse_generator.instruction." + ConnectedLang.asId(instructionId);
     }
 
     public String getDescriptiveLangKey() {
@@ -168,14 +168,14 @@ public abstract class Instruction {
 
     public String getParameterLangKey() {
         if (parameter != null)
-            return getLangKey() + "." + Lang.asId(parameter.parameterId);
+            return getLangKey() + "." + ConnectedLang.asId(parameter.parameterId);
         return getLangKey() + ".missing";
     }
 
     public static List<Component> getOptions() {
         List<Component> options = new ArrayList<>();
         for (Instruction value : INSTRUCTION_MAP.values())
-            options.add(Lang.translateDirect(value.getDescriptiveLangKey()));
+            options.add(ConnectedLang.translateDirect(value.getDescriptiveLangKey()));
         return options;
     }
 

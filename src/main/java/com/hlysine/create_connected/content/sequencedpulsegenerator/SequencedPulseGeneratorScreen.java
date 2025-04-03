@@ -1,26 +1,24 @@
 package com.hlysine.create_connected.content.sequencedpulsegenerator;
 
-import java.util.Vector;
-import java.util.function.Function;
-
 import com.hlysine.create_connected.CCBlocks;
 import com.hlysine.create_connected.CCGuiTextures;
 import com.hlysine.create_connected.CCPackets;
-import com.hlysine.create_connected.Lang;
+import com.hlysine.create_connected.ConnectedLang;
 import com.hlysine.create_connected.content.sequencedpulsegenerator.instructions.EndInstruction;
 import com.hlysine.create_connected.content.sequencedpulsegenerator.instructions.Instruction;
-import com.simibubi.create.foundation.gui.AbstractSimiScreen;
 import com.simibubi.create.foundation.gui.AllIcons;
-import com.simibubi.create.foundation.gui.element.GuiGameElement;
 import com.simibubi.create.foundation.gui.widget.IconButton;
 import com.simibubi.create.foundation.gui.widget.ScrollInput;
 import com.simibubi.create.foundation.gui.widget.SelectionScrollInput;
-import com.simibubi.create.foundation.utility.Components;
-
+import net.createmod.catnip.gui.AbstractSimiScreen;
+import net.createmod.catnip.gui.element.GuiGameElement;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
+
+import java.util.Vector;
+import java.util.function.Function;
 
 import static com.hlysine.create_connected.content.sequencedpulsegenerator.SequencedPulseGeneratorBlockEntity.INSTRUCTION_CAPACITY;
 
@@ -37,7 +35,7 @@ public class SequencedPulseGeneratorScreen extends AbstractSimiScreen {
     private Vector<Vector<ScrollInput>> inputs;
 
     public SequencedPulseGeneratorScreen(SequencedPulseGeneratorBlockEntity be) {
-        super(Lang.translateDirect("gui.sequenced_pulse_generator.title"));
+        super(ConnectedLang.translateDirect("gui.sequenced_pulse_generator.title"));
         this.instructions = be.instructions;
         this.be = be;
         compareTag = Instruction.serializeAll(instructions);
@@ -79,7 +77,7 @@ public class SequencedPulseGeneratorScreen extends AbstractSimiScreen {
                         .forOptions(Instruction.getOptions())
                         .calling(state -> instructionUpdated(row, state))
                         .setState(instruction.getOrdinal())
-                        .titled(Lang.translateDirect("gui.sequenced_pulse_generator.instruction"));
+                        .titled(ConnectedLang.translateDirect("gui.sequenced_pulse_generator.instruction"));
         ScrollInput value =
                 new ScrollInput(x + 58, y + rowHeight * row, 28, 18)
                         .calling(state -> instructions.get(row).setValue(state));
@@ -88,7 +86,7 @@ public class SequencedPulseGeneratorScreen extends AbstractSimiScreen {
                         .withRange(0, 16)
                         .setState(instruction.getSignal())
                         .calling(state -> instructions.get(row).setSignal(state))
-                        .titled(Lang.translateDirect("gui.sequenced_pulse_generator.signal"));
+                        .titled(ConnectedLang.translateDirect("gui.sequenced_pulse_generator.signal"));
 
         rowInputs.add(type);
         rowInputs.add(value);
@@ -108,7 +106,7 @@ public class SequencedPulseGeneratorScreen extends AbstractSimiScreen {
         value.active = value.visible = hasValue;
         if (hasValue) {
             value.withRange(instruction.parameter.minValue(), instruction.parameter.maxValue() + 1)
-                    .titled(Lang.translateDirect(instruction.getParameterLangKey()))
+                    .titled(ConnectedLang.translateDirect(instruction.getParameterLangKey()))
                     .withShiftStep(instruction.parameter.shiftStepValue())
                     .setState(instruction.getValue())
                     .onChanged();
@@ -149,15 +147,15 @@ public class SequencedPulseGeneratorScreen extends AbstractSimiScreen {
             Instruction instruction = instructions.get(row);
             instruction.getBackground().render(graphics, x, y + 16 + yOffset);
 
-            label(graphics, 36, yOffset - 1, Lang.translateDirect(instruction.getLangKey()));
+            label(graphics, 36, yOffset - 1, ConnectedLang.translateDirect(instruction.getLangKey()));
             if (instruction.parameter != null) {
                 Function<Integer, String> formatter = instruction.parameter.formatter();
                 String text = formatter == null ? String.valueOf(instruction.getValue()) : formatter.apply(instruction.getValue());
                 int stringWidth = font.width(text);
-                label(graphics, 90 + (12 - stringWidth / 2), yOffset - 1, Components.literal(text));
+                label(graphics, 90 + (12 - stringWidth / 2), yOffset - 1, Component.literal(text));
             }
             if (instruction.hasSignal)
-                label(graphics, 127, yOffset - 1, Components.literal(String.valueOf(instruction.getSignal())));
+                label(graphics, 127, yOffset - 1, Component.literal(String.valueOf(instruction.getSignal())));
         }
 
         graphics.drawString(font, title, x + (background.width - 8) / 2 - font.width(title) / 2, y + 4, 0x592424, false);

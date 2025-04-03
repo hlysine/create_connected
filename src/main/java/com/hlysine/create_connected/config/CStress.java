@@ -1,5 +1,6 @@
 package com.hlysine.create_connected.config;
 
+import com.hlysine.create_connected.CreateConnected;
 import com.simibubi.create.Create;
 import com.tterrag.registrate.builders.BlockBuilder;
 import com.tterrag.registrate.util.nullness.NonNullUnaryOperator;
@@ -82,7 +83,7 @@ public class CStress extends ConfigBase {
     }
 
     private static void assertFromCC(BlockBuilder<?, ?> builder) {
-        if (!builder.getOwner().getModid().equals(Create.ID)) {
+        if (!builder.getOwner().getModid().equals(CreateConnected.MODID)) {
             throw new IllegalStateException("Unrelated blocks cannot be added to the config of Create: Connected.");
         }
     }

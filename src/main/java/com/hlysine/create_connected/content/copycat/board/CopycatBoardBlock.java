@@ -3,9 +3,10 @@ package com.hlysine.create_connected.content.copycat.board;
 import com.google.common.collect.ImmutableMap;
 import com.hlysine.create_connected.CCShapes;
 import com.hlysine.create_connected.content.copycat.MigratingWaterloggedCopycatBlock;
-import com.simibubi.create.content.schematics.requirement.ISpecialBlockItemRequirement;
+import com.simibubi.create.api.schematic.requirement.SpecialBlockItemRequirement;
+import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.content.schematics.requirement.ItemRequirement;
-import com.simibubi.create.foundation.utility.Iterate;
+import net.createmod.catnip.data.Iterate;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Position;
@@ -37,7 +38,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.*;
 import java.util.function.Function;
 
-public class CopycatBoardBlock extends MigratingWaterloggedCopycatBlock implements ISpecialBlockItemRequirement {
+public class CopycatBoardBlock extends MigratingWaterloggedCopycatBlock implements SpecialBlockItemRequirement {
     public static BooleanProperty UP = BlockStateProperties.UP;
     public static BooleanProperty DOWN = BlockStateProperties.DOWN;
     public static BooleanProperty NORTH = BlockStateProperties.NORTH;
@@ -180,7 +181,7 @@ public class CopycatBoardBlock extends MigratingWaterloggedCopycatBlock implemen
                 }
             }
             world.setBlockAndUpdate(pos, state.setValue(byDirection(options.get(0)), false));
-            playRemoveSound(world, pos);
+            IWrenchable.playRemoveSound(world, pos);
         }
         return InteractionResult.SUCCESS;
     }

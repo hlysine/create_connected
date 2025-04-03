@@ -6,7 +6,7 @@ import com.simibubi.create.content.kinetics.RotationPropagator;
 import com.simibubi.create.content.kinetics.transmission.SplitShaftBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.scrollValue.ScrollOptionBehaviour;
-import com.simibubi.create.foundation.utility.Lang;
+import com.simibubi.create.foundation.utility.CreateLang;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
@@ -34,7 +34,7 @@ public class FreewheelClutchBlockEntity extends SplitShaftBlockEntity {
     public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
         super.addBehaviours(behaviours);
         movementDirection = new ScrollOptionBehaviour<>(RotationDirection.class,
-                Lang.translateDirect("contraptions.windmill.rotation_direction"),
+                CreateLang.translateDirect("contraptions.windmill.rotation_direction"),
                 this,
                 new ClutchValueBox());
         movementDirection.withCallback(i -> this.onKineticUpdate());

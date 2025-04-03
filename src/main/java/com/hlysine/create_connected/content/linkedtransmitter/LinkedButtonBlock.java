@@ -2,10 +2,9 @@ package com.hlysine.create_connected.content.linkedtransmitter;
 
 import com.hlysine.create_connected.CCBlockEntityTypes;
 import com.hlysine.create_connected.CCItems;
-import com.hlysine.create_connected.CCShapes;
 import com.simibubi.create.AllSoundEvents;
+import com.simibubi.create.api.schematic.requirement.SpecialBlockItemRequirement;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
-import com.simibubi.create.content.schematics.requirement.ISpecialBlockItemRequirement;
 import com.simibubi.create.content.schematics.requirement.ItemRequirement;
 import com.simibubi.create.foundation.block.IBE;
 import net.minecraft.core.BlockPos;
@@ -36,7 +35,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LinkedButtonBlock extends ButtonBlock implements IBE<LinkedTransmitterBlockEntity>, ISpecialBlockItemRequirement, IWrenchable, LinkedTransmitterBlock {
+public class LinkedButtonBlock extends ButtonBlock implements IBE<LinkedTransmitterBlockEntity>, SpecialBlockItemRequirement, IWrenchable, LinkedTransmitterBlock {
     public static BooleanProperty LOCKED = BlockStateProperties.LOCKED;
 
     private final ButtonBlock base;
@@ -68,21 +67,13 @@ public class LinkedButtonBlock extends ButtonBlock implements IBE<LinkedTransmit
                                         @NotNull BlockPos pos,
                                         @NotNull CollisionContext context) {
         Direction facing = state.getValue(ButtonBlock.FACING);
-        return Shapes.or(switch (state.getValue(ButtonBlock.FACE)) {
-            case FLOOR -> CCShapes.FLOOR_LINKED_TRANSMITTER.get(facing);
-            case WALL -> CCShapes.WALL_LINKED_TRANSMITTER.get(facing);
-            case CEILING -> CCShapes.CEILING_LINKED_TRANSMITTER.get(facing);
-        }, super.getShape(state, level, pos, context));
+        return Shapes.or(getTransmitterShape(state), super.getShape(state, level, pos, context));
     }
 
     @SuppressWarnings("deprecation")
     @Override
     public @NotNull List<ItemStack> getDrops(@NotNull BlockState state, LootParams.@NotNull Builder builder) {
         return base.getDrops(state, builder);
-    }
-
-    private boolean isHittingBase(BlockState state, BlockGetter level, BlockPos pos, HitResult hit) {
-        return super.getShape(state, level, pos, CollisionContext.empty()).bounds().inflate(0.01 / 16).move(pos).contains(hit.getLocation());
     }
 
     @Override

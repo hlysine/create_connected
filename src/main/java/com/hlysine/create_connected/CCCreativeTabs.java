@@ -67,11 +67,7 @@ public class CCCreativeTabs {
             CCItems.COPYCAT_CATWALK,
             CCItems.CONTROL_CHIP,
             CCItems.MUSIC_DISC_ELEVATOR,
-            CCItems.MUSIC_DISC_INTERLUDE,
-            CCBlocks.CHERRY_WINDOW,
-            CCBlocks.BAMBOO_WINDOW,
-            CCBlocks.CHERRY_WINDOW_PANE,
-            CCBlocks.BAMBOO_WINDOW_PANE
+            CCItems.MUSIC_DISC_INTERLUDE
     );
 
     public static final RegistryObject<CreativeModeTab> MAIN = CREATIVE_MODE_TABS.register("main", () -> CreativeModeTab.builder()

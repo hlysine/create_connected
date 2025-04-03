@@ -4,7 +4,6 @@ import com.hlysine.create_connected.CCBlocks;
 import com.hlysine.create_connected.config.CCConfigs;
 import com.hlysine.create_connected.datagen.advancements.AdvancementBehaviour;
 import com.hlysine.create_connected.datagen.advancements.CCAdvancements;
-import com.simibubi.create.content.kinetics.BlockStressValues;
 import com.simibubi.create.content.kinetics.transmission.SplitShaftBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import net.minecraft.core.BlockPos;
@@ -16,12 +15,13 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
+import java.util.function.DoubleSupplier;
 
 import static com.hlysine.create_connected.content.brake.BrakeBlock.POWERED;
 
 public class BrakeBlockEntity extends SplitShaftBlockEntity {
 
-    private static final int TICK_INTERVAL = 3;
+    private static final int TICK_INTERVAL = 5;
     private static final float MIN_ADVANCEMENT_SPEED = 8;
     private int tickTimer = 0;
     private boolean advancementAwarded = false;
@@ -54,7 +54,8 @@ public class BrakeBlockEntity extends SplitShaftBlockEntity {
         if (tickTimer-- < 0) {
             tickTimer = TICK_INTERVAL;
 
-            double unpoweredStress = BlockStressValues.getImpact(CCBlocks.BRAKE.get());
+            DoubleSupplier stressSupplier = CCConfigs.server().stressValues.getImpact(CCBlocks.BRAKE.get());
+            double unpoweredStress = stressSupplier == null ? 0 : stressSupplier.getAsDouble();
             double poweredStress = CCConfigs.server().brakeActiveStress.get();
             boolean isBraking = getBlockState().getValue(POWERED) == (poweredStress >= unpoweredStress);
             if (unpoweredStress == poweredStress) {

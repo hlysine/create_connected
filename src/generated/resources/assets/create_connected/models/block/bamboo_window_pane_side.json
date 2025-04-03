@@ -1,7 +1,0 @@
-{
-  "parent": "create:block/connected_glass_pane/side",
-  "textures": {
-    "edge": "minecraft:block/bamboo_planks",
-    "pane": "create_connected:block/bamboo_window"
-  }
-}
