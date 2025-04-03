@@ -1,6 +1,6 @@
 package com.hlysine.create_connected.config;
 
-import com.simibubi.create.foundation.config.ConfigBase;
+import net.createmod.catnip.config.ConfigBase;
 
 import java.util.function.Supplier;
 
