@@ -119,7 +119,7 @@
   "block.create_connected.six_way_gearbox": "6方向ギアボックス",
   "block.create_connected.six_way_gearbox.tooltip.summary": "_6面すべて_にシャフトが付いたギアボックス。上部と下部のシャフトは_半分の速度_で回転する。",
   "block.create_connected.wrapped_copycat_fence": "覆われたコピーフェンス",
-  "block.create_connected.wrapped_copycat_fence_gate": "覆われたコピーフェンスゲート",
+  "block.create_connected.wrapped_copycat_fence_gate": "ラップされたコピー猫のフェンスゲート",
   "block.create_connected.wrapped_copycat_stairs": "覆われたコピー階段",
   "block.create_connected.wrapped_copycat_wall": "覆われたコピー塀",
   "create.gui.sequenced_gearshift.instruction.loop": "ループ",
