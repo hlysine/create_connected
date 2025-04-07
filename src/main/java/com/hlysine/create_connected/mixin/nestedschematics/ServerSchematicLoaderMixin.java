@@ -37,6 +37,7 @@ public abstract class ServerSchematicLoaderMixin {
 
     @Unique
     private void deleteEmptyFolders(Path rootPath, Path pathToDelete) throws IOException {
+        if (!Files.exists(rootPath) || !Files.exists(pathToDelete)) return;
         pathToDelete = pathToDelete.getParent();
         while (!pathToDelete.equals(rootPath) && pathToDelete.toString().contains("schematics")) { // a failsafe to avoid deleting folders outside the schematics folder
             try (Stream<Path> paths = Files.list(pathToDelete)) {
