@@ -17,7 +17,6 @@ public class ConnectedLang extends Lang {
 
     /**
      * legacy-ish. Use CreateLang.translate and other builder methods where possible
-     *
      */
     public static MutableComponent translateDirect(String key, Object... args) {
         Object[] args1 = LangBuilder.resolveBuilders(args);
@@ -34,7 +33,7 @@ public class ConnectedLang extends Lang {
     //
 
     public static LangBuilder builder() {
-        return new LangBuilder(Create.ID);
+        return new LangBuilder(CreateConnected.MODID);
     }
 
     public static LangBuilder blockName(BlockState state) {

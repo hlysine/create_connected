@@ -138,7 +138,7 @@ public class CopycatFenceGateBlock extends WaterloggedCopycatWrappedBlock {
                 .setValue(POWERED, from.getValue(POWERED))
                 .setValue(IN_WALL, from.getValue(IN_WALL))
                 .setValue(FACING, from.getValue(FACING))
-                .setValue(WATERLOGGED, includeWaterlogged ? from.getValue(WATERLOGGED) : to.getValue(WATERLOGGED));
+                .trySetValue(WATERLOGGED, includeWaterlogged ? from.getOptionalValue(WATERLOGGED).orElse(false) : to.getOptionalValue(WATERLOGGED).orElse(false));
     }
 }
 

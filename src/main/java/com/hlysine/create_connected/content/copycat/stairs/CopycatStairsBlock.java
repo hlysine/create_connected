@@ -303,7 +303,7 @@ public class CopycatStairsBlock extends WaterloggedCopycatWrappedBlock {
                 .setValue(StairBlock.FACING, from.getValue(StairBlock.FACING))
                 .setValue(HALF, from.getValue(HALF))
                 .setValue(StairBlock.SHAPE, from.getValue(StairBlock.SHAPE))
-                .setValue(WATERLOGGED, includeWaterlogged ? from.getValue(WATERLOGGED) : to.getValue(WATERLOGGED));
+                .trySetValue(WATERLOGGED, includeWaterlogged ? from.getOptionalValue(WATERLOGGED).orElse(false) : to.getOptionalValue(WATERLOGGED).orElse(false));
     }
 
     private static class FaceShape {

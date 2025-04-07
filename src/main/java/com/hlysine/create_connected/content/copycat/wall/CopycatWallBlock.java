@@ -235,7 +235,7 @@ public class CopycatWallBlock extends WaterloggedCopycatWrappedBlock {
                 .setValue(SOUTH_WALL, from.getValue(SOUTH_WALL))
                 .setValue(EAST_WALL, from.getValue(EAST_WALL))
                 .setValue(WEST_WALL, from.getValue(WEST_WALL))
-                .setValue(WATERLOGGED, includeWaterlogged ? from.getValue(WATERLOGGED) : to.getValue(WATERLOGGED));
+                .trySetValue(WATERLOGGED, includeWaterlogged ? from.getOptionalValue(WATERLOGGED).orElse(false) : to.getOptionalValue(WATERLOGGED).orElse(false));
     }
 }
 

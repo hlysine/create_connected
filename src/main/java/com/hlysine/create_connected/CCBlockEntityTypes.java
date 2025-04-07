@@ -25,6 +25,7 @@ import com.hlysine.create_connected.content.parallelgearbox.ParallelGearboxRende
 import com.hlysine.create_connected.content.parallelgearbox.ParallelGearboxVisual;
 import com.hlysine.create_connected.content.sequencedpulsegenerator.SequencedPulseGeneratorBlockEntity;
 import com.hlysine.create_connected.content.shearpin.ShearPinBlockEntity;
+import com.hlysine.create_connected.content.shearpin.ShearPinVisual;
 import com.hlysine.create_connected.content.sixwaygearbox.SixWayGearboxBlockEntity;
 import com.hlysine.create_connected.content.sixwaygearbox.SixWayGearboxRenderer;
 import com.hlysine.create_connected.content.sixwaygearbox.SixWayGearboxVisual;
@@ -84,7 +85,7 @@ public class CCBlockEntityTypes {
 
     public static final BlockEntityEntry<ShearPinBlockEntity> SHEAR_PIN = REGISTRATE
             .blockEntity("shear_pin", ShearPinBlockEntity::new)
-            .visual(() -> BracketedKineticBlockEntityVisual::create, false)
+            .visual(() -> ShearPinVisual::new, false)
             .validBlocks(CCBlocks.SHEAR_PIN)
             .renderer(() -> BracketedKineticBlockEntityRenderer::new)
             .register();
