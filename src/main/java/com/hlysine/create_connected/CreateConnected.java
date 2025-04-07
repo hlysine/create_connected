@@ -7,6 +7,7 @@ import com.hlysine.create_connected.datagen.CCDatagen;
 import com.hlysine.create_connected.datagen.advancements.CCAdvancements;
 import com.hlysine.create_connected.datagen.advancements.CCTriggers;
 import com.mojang.logging.LogUtils;
+import com.simibubi.create.api.registry.CreateRegistries;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.foundation.item.ItemDescription;
 import com.simibubi.create.foundation.item.KineticStats;
@@ -86,7 +87,8 @@ public class CreateConnected {
     }
 
     public void onRegister(final RegisterEvent event) {
-        CCItemAttributes.register();
+        if (event.getRegistryKey().equals(CreateRegistries.ITEM_ATTRIBUTE_TYPE))
+            CCItemAttributes.register();
     }
 
     public static CreateRegistrate getRegistrate() {

@@ -10,16 +10,16 @@ import net.minecraft.core.Registry;
 
 public class CCItemAttributes {
 
+    public static final ItemAttributeType MAX_DAMAGE = register("max_damage", new ItemDamageAttribute.Type());
+    public static final ItemAttributeType ID_CONTAINS = register("id_contains", new ItemIdAttribute.Type());
+    public static final ItemAttributeType STACK_SIZE = register("stack_size", new ItemStackCountAttribute.Type());
+
     public static void register() {
         LegacyDeserializers.register();
-
-        register("max_damage", new ItemDamageAttribute.Type());
-        register("id_contains", new ItemIdAttribute.Type());
-        register("stack_size", new ItemStackCountAttribute.Type());
     }
 
-    private static void register(String id, ItemAttributeType type) {
-        Registry.register(CreateBuiltInRegistries.ITEM_ATTRIBUTE_TYPE, CreateConnected.asResource(id), type);
+    private static ItemAttributeType register(String id, ItemAttributeType type) {
+        return Registry.register(CreateBuiltInRegistries.ITEM_ATTRIBUTE_TYPE, CreateConnected.asResource(id), type);
     }
 
     @SuppressWarnings("deprecation")

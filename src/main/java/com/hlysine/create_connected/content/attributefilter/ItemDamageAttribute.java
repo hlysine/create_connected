@@ -1,5 +1,6 @@
 package com.hlysine.create_connected.content.attributefilter;
 
+import com.hlysine.create_connected.CCItemAttributes;
 import com.simibubi.create.content.logistics.item.filter.attribute.ItemAttribute;
 import com.simibubi.create.content.logistics.item.filter.attribute.ItemAttributeType;
 import net.minecraft.nbt.CompoundTag;
@@ -25,7 +26,7 @@ public class ItemDamageAttribute implements ItemAttribute {
 
     @Override
     public ItemAttributeType getType() {
-        return null;
+        return CCItemAttributes.MAX_DAMAGE;
     }
 
     @Override
@@ -45,7 +46,8 @@ public class ItemDamageAttribute implements ItemAttribute {
 
     @Override
     public void load(CompoundTag nbt) {
-        this.maxDamage = nbt.getInt("maxDamage");
+        if (nbt.contains("maxDamage"))
+            this.maxDamage = nbt.getInt("maxDamage");
     }
 
     public static class Type implements ItemAttributeType {

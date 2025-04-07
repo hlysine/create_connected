@@ -1,5 +1,6 @@
 package com.hlysine.create_connected.content.attributefilter;
 
+import com.hlysine.create_connected.CCItemAttributes;
 import com.simibubi.create.content.logistics.item.filter.attribute.ItemAttribute;
 import com.simibubi.create.content.logistics.item.filter.attribute.ItemAttributeType;
 import net.minecraft.nbt.CompoundTag;
@@ -25,7 +26,7 @@ public class ItemIdAttribute implements ItemAttribute {
 
     @Override
     public ItemAttributeType getType() {
-        return null;
+        return CCItemAttributes.ID_CONTAINS;
     }
 
     @Override
@@ -40,12 +41,14 @@ public class ItemIdAttribute implements ItemAttribute {
 
     @Override
     public void save(CompoundTag nbt) {
-        nbt.putString("word", this.word);
+        if (word != null)
+            nbt.putString("word", this.word);
     }
 
     @Override
     public void load(CompoundTag nbt) {
-        this.word = nbt.getString("word");
+        if (nbt.contains("word"))
+            this.word = nbt.getString("word");
     }
 
     public static class Type implements ItemAttributeType {

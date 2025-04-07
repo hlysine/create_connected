@@ -1,5 +1,6 @@
 package com.hlysine.create_connected.content.attributefilter;
 
+import com.hlysine.create_connected.CCItemAttributes;
 import com.simibubi.create.content.logistics.item.filter.attribute.ItemAttribute;
 import com.simibubi.create.content.logistics.item.filter.attribute.ItemAttributeType;
 import net.minecraft.nbt.CompoundTag;
@@ -25,7 +26,7 @@ public class ItemStackCountAttribute implements ItemAttribute {
 
     @Override
     public ItemAttributeType getType() {
-        return null;
+        return CCItemAttributes.STACK_SIZE;
     }
 
     @Override
@@ -45,7 +46,8 @@ public class ItemStackCountAttribute implements ItemAttribute {
 
     @Override
     public void load(CompoundTag nbt) {
-        this.stackSize = nbt.getInt("stackSize");
+        if (nbt.contains("stackSize"))
+            this.stackSize = nbt.getInt("stackSize");
     }
 
     public static class Type implements ItemAttributeType {
