@@ -2,6 +2,7 @@ package com.hlysine.create_connected.mixin.contraption;
 
 import com.simibubi.create.content.contraptions.Contraption;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.JukeboxBlockEntity;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
@@ -15,9 +16,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class ContraptionMixin {
     @Inject(
             at = @At("TAIL"),
-            method = "addBlock(Lnet/minecraft/core/BlockPos;Lorg/apache/commons/lang3/tuple/Pair;)V"
+            method = "addBlock(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lorg/apache/commons/lang3/tuple/Pair;)V"
     )
-    private void stopJukeboxOnMove(BlockPos pos, Pair<StructureTemplate.StructureBlockInfo, BlockEntity> pair, CallbackInfo ci) {
+    private void stopJukeboxOnMove(Level level, BlockPos pos, Pair<StructureTemplate.StructureBlockInfo, BlockEntity> pair, CallbackInfo ci) {
         if (pair.getValue() instanceof JukeboxBlockEntity be) {
             if (be.isRecordPlaying())
                 be.stopPlaying();

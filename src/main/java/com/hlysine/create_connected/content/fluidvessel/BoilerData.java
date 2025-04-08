@@ -2,37 +2,37 @@ package com.hlysine.create_connected.content.fluidvessel;
 
 import com.hlysine.create_connected.config.CServer;
 import com.simibubi.create.AllBlocks;
-import com.simibubi.create.Create;
+import com.simibubi.create.AllSoundEvents;
+import com.simibubi.create.api.boiler.BoilerHeater;
+import com.simibubi.create.api.stress.BlockStressValues;
 import com.simibubi.create.content.decoration.steamWhistle.WhistleBlock;
 import com.simibubi.create.content.decoration.steamWhistle.WhistleBlockEntity;
-import com.simibubi.create.content.equipment.goggles.IHaveGoggleInformation;
-import com.simibubi.create.content.fluids.tank.BoilerHeaters;
 import com.simibubi.create.content.fluids.tank.FluidTankBlockEntity;
-import com.simibubi.create.content.kinetics.BlockStressValues;
+import com.simibubi.create.content.fluids.tank.SoundPool;
 import com.simibubi.create.content.kinetics.steamEngine.SteamEngineBlock;
 import com.simibubi.create.foundation.advancement.AdvancementBehaviour;
 import com.simibubi.create.foundation.advancement.AllAdvancements;
-import com.simibubi.create.foundation.utility.Components;
-import com.simibubi.create.foundation.utility.Iterate;
-import com.simibubi.create.foundation.utility.Lang;
-import com.simibubi.create.foundation.utility.animation.LerpedFloat.Chaser;
+import com.simibubi.create.foundation.utility.CreateLang;
 import joptsimple.internal.Strings;
+import net.createmod.catnip.animation.LerpedFloat;
+import net.createmod.catnip.data.Iterate;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
 import net.minecraftforge.fluids.FluidStack;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import static net.minecraft.core.Direction.Axis;
 
@@ -56,6 +56,21 @@ public class BoilerData extends com.simibubi.create.content.fluids.tank.BoilerDa
     private int minValue = 0;
     private int maxValue = 0;
 
+    // client only sound control
+
+    // re-use the same lambda for each side
+    private final SoundPool.Sound sound = (level, pos) -> {
+        float volume = 3f / Math.max(2, attachedEngines / 6);
+        float pitch = 1.18f - level.random.nextFloat() * .25f;
+        level.playLocalSound(pos.getX(), pos.getY(), pos.getZ(),
+                SoundEvents.CANDLE_EXTINGUISH, SoundSource.BLOCKS, volume, pitch, false);
+
+        AllSoundEvents.STEAM.playAt(level, pos, volume / 16, .8f, false);
+    };
+    // separate pools for each side so they sound distinct when standing at corners of the boiler
+    private final EnumMap<Direction, SoundPool> pools = new EnumMap<>(Direction.class);
+
+
     @Override
     public void tick(FluidTankBlockEntity controller) {
         if (!isActive())
@@ -63,11 +78,13 @@ public class BoilerData extends com.simibubi.create.content.fluids.tank.BoilerDa
 
         configLevelCap = CServer.VesselMaxLevel.get();
 
-        if (controller.getLevel().isClientSide) {
+        Level level = controller.getLevel();
+        if (level.isClientSide) {
+            pools.values().forEach(p -> p.play(level));
             gauge.tickChaser();
             float current = gauge.getValue(1);
-            if (current > 1 && Create.RANDOM.nextFloat() < 1 / 2f)
-                gauge.setValueNoUpdate(current + Math.min(-(current - 1) * Create.RANDOM.nextFloat(), 0));
+            if (current > 1 && level.random.nextFloat() < 1 / 2f)
+                gauge.setValueNoUpdate(current + Math.min(-(current - 1) * level.random.nextFloat(), 0));
             return;
         }
         if (needsHeatLevelUpdate && updateTemperature(controller))
@@ -100,14 +117,27 @@ public class BoilerData extends com.simibubi.create.content.fluids.tank.BoilerDa
         controller.notifyUpdate();
     }
 
-    @Override
-    public int getTheoreticalHeatLevel() {
-        return activeHeat;
-    }
-
-    @Override
-    public int getMaxHeatLevelForBoilerSize(int boilerSize) {
-        return (int) Math.min(18, boilerSize / 4);
+    public void updateOcclusion(FluidTankBlockEntity base) {
+        if (!(base instanceof FluidVesselBlockEntity controller)) {
+            super.updateOcclusion(base);
+            return;
+        }
+        if (!controller.getLevel().isClientSide)
+            return;
+        if (attachedEngines + attachedWhistles == 0)
+            return;
+        for (Direction d : Iterate.horizontalDirections) {
+            boolean alongLength = d.getAxis() == controller.getAxis();
+            int size = alongLength ? controller.getHeight() : controller.getWidth();
+            AABB aabb =
+                    new AABB(controller.getBlockPos()).move(size / 2f - .5f, 0, size / 2f - .5f)
+                            .deflate(5f / 8);
+            aabb = aabb.move(d.getStepX() * (size / 2f + 1 / 4f), 0,
+                    d.getStepZ() * (size / 2f + 1 / 4f));
+            aabb = aabb.inflate(Math.abs(d.getStepZ()) / 2f, 0.25f, Math.abs(d.getStepX()) / 2f);
+            occludedDirections[d.get2DDataValue()] = !controller.getLevel()
+                    .noCollision(aabb);
+        }
     }
 
     @Override
@@ -148,61 +178,53 @@ public class BoilerData extends com.simibubi.create.content.fluids.tank.BoilerDa
         if (!isActive())
             return false;
 
-        Component indent = Components.literal(IHaveGoggleInformation.spacing);
-        Component indent2 = Components.literal(IHaveGoggleInformation.spacing + " ");
-
         calcMinMaxForSize(boilerSize);
 
         if (configLevelCap < 18)
-            tooltip.add(indent.plainCopy().append(
-                    Lang.translateDirect("boiler.status", getHeatLevelTextComponent().withStyle(ChatFormatting.GREEN).append(Component.literal(" / " + configLevelCap).withStyle(ChatFormatting.GRAY)))
-            ));
+            CreateLang.translate("boiler.status", getHeatLevelTextComponent().withStyle(ChatFormatting.GREEN).append(Component.literal(" / " + configLevelCap).withStyle(ChatFormatting.GRAY)))
+                    .forGoggles(tooltip);
         else
-            tooltip.add(indent.plainCopy().append(
-                    Lang.translateDirect("boiler.status", getHeatLevelTextComponent().withStyle(ChatFormatting.GREEN))
-            ));
-        tooltip.add(indent2.plainCopy()
-                .append(getSizeComponent(true, false)));
-        tooltip.add(indent2.plainCopy()
-                .append(getWaterComponent(true, false)));
-        tooltip.add(indent2.plainCopy()
-                .append(getHeatComponent(true, false)));
+            CreateLang.translate("boiler.status", getHeatLevelTextComponent().withStyle(ChatFormatting.GREEN))
+                    .forGoggles(tooltip);
+        CreateLang.builder().add(getSizeComponent(true, false)).forGoggles(tooltip, 1);
+        CreateLang.builder().add(getWaterComponent(true, false)).forGoggles(tooltip, 1);
+        CreateLang.builder().add(getHeatComponent(true, false)).forGoggles(tooltip, 1);
 
         if (attachedEngines == 0)
             return true;
 
-        int boilerLevel = Math.min(Math.min(activeHeat, Math.min(maxHeatForWater, maxHeatForSize)), configLevelCap);
+        int boilerLevel = Math.min(activeHeat, Math.min(maxHeatForWater, maxHeatForSize));
         double totalSU = getEngineEfficiency(boilerSize) * 16 * Math.max(boilerLevel, attachedEngines)
                 * BlockStressValues.getCapacity(AllBlocks.STEAM_ENGINE.get());
 
-        tooltip.add(Components.immutableEmpty());
+        tooltip.add(CommonComponents.EMPTY);
 
         if (attachedEngines > 0 && maxHeatForSize > 0 && maxHeatForWater == 0 && (passiveHeat ? 1 : activeHeat) > 0) {
-            Lang.translate("boiler.water_input_rate")
+            CreateLang.translate("boiler.water_input_rate")
                     .style(ChatFormatting.GRAY)
                     .forGoggles(tooltip);
-            Lang.number(waterSupply)
+            CreateLang.number(waterSupply)
                     .style(ChatFormatting.BLUE)
-                    .add(Lang.translate("generic.unit.millibuckets"))
-                    .add(Lang.text(" / ")
+                    .add(CreateLang.translate("generic.unit.millibuckets"))
+                    .add(CreateLang.text(" / ")
                             .style(ChatFormatting.GRAY))
-                    .add(Lang.translate("boiler.per_tick", Lang.number(waterSupplyPerLevel)
-                                    .add(Lang.translate("generic.unit.millibuckets")))
+                    .add(CreateLang.translate("boiler.per_tick", CreateLang.number(waterSupplyPerLevel)
+                                    .add(CreateLang.translate("generic.unit.millibuckets")))
                             .style(ChatFormatting.DARK_GRAY))
                     .forGoggles(tooltip, 1);
             return true;
         }
 
-        Lang.translate("tooltip.capacityProvided")
+        CreateLang.translate("tooltip.capacityProvided")
                 .style(ChatFormatting.GRAY)
                 .forGoggles(tooltip);
 
-        Lang.number(totalSU)
+        CreateLang.number(totalSU)
                 .translate("generic.unit.stress")
                 .style(ChatFormatting.AQUA)
                 .space()
-                .add((attachedEngines == 1 ? Lang.translate("boiler.via_one_engine")
-                        : Lang.translate("boiler.via_engines", attachedEngines)).style(ChatFormatting.DARK_GRAY))
+                .add((attachedEngines == 1 ? CreateLang.translate("boiler.via_one_engine")
+                        : CreateLang.translate("boiler.via_engines", attachedEngines)).style(ChatFormatting.DARK_GRAY))
                 .forGoggles(tooltip, 1);
 
         return true;
@@ -222,10 +244,10 @@ public class BoilerData extends com.simibubi.create.content.fluids.tank.BoilerDa
     public MutableComponent getHeatLevelTextComponent() {
         int boilerLevel = Math.min(Math.min(activeHeat, Math.min(maxHeatForWater, maxHeatForSize)), configLevelCap);
 
-        return isPassive() ? Lang.translateDirect("boiler.passive")
-                : (boilerLevel == 0 ? Lang.translateDirect("boiler.idle")
-                : boilerLevel == 18 ? Lang.translateDirect("boiler.max_lvl")
-                : Lang.translateDirect("boiler.lvl", String.valueOf(boilerLevel)));
+        return isPassive() ? CreateLang.translateDirect("boiler.passive")
+                : (boilerLevel == 0 ? CreateLang.translateDirect("boiler.idle")
+                : boilerLevel == 18 ? CreateLang.translateDirect("boiler.max_lvl")
+                : CreateLang.translateDirect("boiler.lvl", String.valueOf(boilerLevel)));
     }
 
     @Override
@@ -253,20 +275,19 @@ public class BoilerData extends com.simibubi.create.content.fluids.tank.BoilerDa
         ChatFormatting style1 = styles.length >= 1 ? styles[0] : ChatFormatting.GRAY;
         ChatFormatting style2 = styles.length >= 2 ? styles[1] : ChatFormatting.DARK_GRAY;
 
-        return Lang.translateDirect("boiler." + label)
+        return CreateLang.translateDirect("boiler." + label)
                 .withStyle(style1)
-                .append(Lang.translateDirect("boiler." + label + "_dots")
+                .append(CreateLang.translateDirect("boiler." + label + "_dots")
                         .withStyle(style2))
                 .append(base);
     }
 
     private MutableComponent blockComponent(int level) {
-        return Components.literal(
-                "" + "\u2588".repeat(minValue) + "\u2592".repeat(level - minValue) + "\u2591".repeat(maxValue - level));
+        return Component.literal("" + "\u2588".repeat(minValue) + "\u2592".repeat(level - minValue) + "\u2591".repeat(maxValue - level));
     }
 
     private MutableComponent barComponent(int level) {
-        return Components.empty()
+        return Component.empty()
                 .append(bars(Math.max(0, minValue - 1), ChatFormatting.DARK_GREEN))
                 .append(bars(minValue > 0 ? 1 : 0, ChatFormatting.GREEN))
                 .append(bars(Math.max(0, level - minValue), ChatFormatting.DARK_GREEN))
@@ -277,7 +298,7 @@ public class BoilerData extends com.simibubi.create.content.fluids.tank.BoilerDa
     }
 
     private MutableComponent bars(int level, ChatFormatting format) {
-        return Components.literal(Strings.repeat('|', level))
+        return Component.literal(Strings.repeat('|', level))
                 .withStyle(format);
     }
 
@@ -374,7 +395,7 @@ public class BoilerData extends com.simibubi.create.content.fluids.tank.BoilerDa
     @Override
     public boolean updateTemperature(FluidTankBlockEntity base) {
         if (!(base instanceof FluidVesselBlockEntity controller))
-            return super.evaluate(base);
+            return super.updateTemperature(base);
 
         BlockPos controllerPos = controller.getBlockPos();
         Level level = controller.getLevel();
@@ -394,7 +415,7 @@ public class BoilerData extends com.simibubi.create.content.fluids.tank.BoilerDa
                         axis == Axis.Z ? lengthOffset : widthOffset
                 );
                 BlockState blockState = level.getBlockState(pos);
-                float heat = BoilerHeaters.getActiveHeat(level, pos, blockState);
+                float heat = BoilerHeater.findHeat(level, pos, blockState);
                 if (heat == 0) {
                     passiveHeat = true;
                 } else if (heat > 0) {
@@ -407,11 +428,6 @@ public class BoilerData extends com.simibubi.create.content.fluids.tank.BoilerDa
         passiveHeat &= activeHeat == 0;
 
         return prevActive != activeHeat || prevPassive != passiveHeat;
-    }
-
-    @Override
-    public boolean isActive() {
-        return attachedEngines > 0 || attachedWhistles > 0;
     }
 
     @Override
@@ -449,7 +465,7 @@ public class BoilerData extends com.simibubi.create.content.fluids.tank.BoilerDa
         int forWaterSupply = getMaxHeatLevelForWaterSupply();
         int actualHeat = Math.min(activeHeat, Math.min(forWaterSupply, forBoilerSize));
         float target = isPassive(boilerSize) ? 1 / 8f : forBoilerSize == 0 ? 0 : actualHeat / (forBoilerSize * 1f);
-        gauge.chase(target, 0.125f, Chaser.EXP);
+        gauge.chase(target, 0.125f, LerpedFloat.Chaser.EXP);
     }
 
     @Override

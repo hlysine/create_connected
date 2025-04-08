@@ -1,14 +1,13 @@
 package com.hlysine.create_connected.content.fluidvessel;
 
 import com.simibubi.create.api.connectivity.ConnectivityHandler;
-import com.simibubi.create.content.equipment.goggles.IHaveGoggleInformation;
+import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.content.fluids.tank.FluidTankBlockEntity;
 import com.simibubi.create.foundation.blockEntity.IMultiBlockEntityContainer;
 import com.simibubi.create.foundation.fluid.SmartFluidTank;
-import com.simibubi.create.foundation.utility.NBTHelper;
-import com.simibubi.create.foundation.utility.animation.LerpedFloat;
-import com.simibubi.create.foundation.utility.animation.LerpedFloat.Chaser;
 import com.simibubi.create.infrastructure.config.AllConfigs;
+import net.createmod.catnip.animation.LerpedFloat;
+import net.createmod.catnip.nbt.NBTHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -18,7 +17,6 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
-import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
@@ -27,7 +25,6 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
@@ -37,6 +34,7 @@ import static net.minecraft.core.Direction.Axis;
 public class FluidVesselBlockEntity extends FluidTankBlockEntity implements IHaveGoggleInformation, IMultiBlockEntityContainer.Fluid {
 
     private static final int MAX_SIZE = 3;
+    private static final int SYNC_RATE = 8;
 
     protected WindowType windowType;
 
@@ -136,7 +134,7 @@ public class FluidVesselBlockEntity extends FluidTankBlockEntity implements IHav
             if (fluidLevel == null)
                 fluidLevel = LerpedFloat.linear()
                         .startWithValue(getFillState());
-            fluidLevel.chase(getFillState(), .5f, Chaser.EXP);
+            fluidLevel.chase(getFillState(), .5f, LerpedFloat.Chaser.EXP);
         }
     }
 
@@ -149,15 +147,6 @@ public class FluidVesselBlockEntity extends FluidTankBlockEntity implements IHav
         if (blockEntity instanceof FluidVesselBlockEntity)
             return (FluidVesselBlockEntity) blockEntity;
         return null;
-    }
-
-    @Override
-    public void applyFluidTankSize(int blocks) {
-        tankInventory.setCapacity(blocks * getCapacityMultiplier());
-        int overflow = tankInventory.getFluidAmount() - tankInventory.getCapacity();
-        if (overflow > 0)
-            tankInventory.drain(overflow, FluidAction.EXECUTE);
-        forceFluidLevelUpdate = true;
     }
 
     @Override
@@ -222,16 +211,6 @@ public class FluidVesselBlockEntity extends FluidTankBlockEntity implements IHav
             be.setWindowType(nextType);
             be.setWindows(true);
         }
-    }
-
-    @Override
-    public void updateBoilerTemperature() {
-        FluidVesselBlockEntity be = getControllerBE();
-        if (be == null)
-            return;
-        if (!be.boiler.isActive())
-            return;
-        be.boiler.needsHeatLevelUpdate = true;
     }
 
     public WindowType getWindowType() {
@@ -344,7 +323,7 @@ public class FluidVesselBlockEntity extends FluidTankBlockEntity implements IHav
 
     private void refreshCapability() {
         LazyOptional<IFluidHandler> oldCap = fluidCapability;
-        fluidCapability = LazyOptional.of(() -> handlerForCapability());
+        fluidCapability = LazyOptional.of(this::handlerForCapability);
         oldCap.invalidate();
     }
 
@@ -427,6 +406,8 @@ public class FluidVesselBlockEntity extends FluidTankBlockEntity implements IHav
             fluidLevel = LerpedFloat.linear()
                     .startWithValue(getFillState());
 
+        updateCapability = true;
+
         if (!clientPacket)
             return;
 
@@ -444,7 +425,7 @@ public class FluidVesselBlockEntity extends FluidTankBlockEntity implements IHav
             if (compound.contains("ForceFluidLevel") || fluidLevel == null)
                 fluidLevel = LerpedFloat.linear()
                         .startWithValue(fillState);
-            fluidLevel.chase(fillState, 0.5f, Chaser.EXP);
+            fluidLevel.chase(fillState, 0.5f, LerpedFloat.Chaser.EXP);
         }
         if (luminosity != prevLum && hasLevel())
             level.getChunkSource()
@@ -452,7 +433,7 @@ public class FluidVesselBlockEntity extends FluidTankBlockEntity implements IHav
                     .checkBlock(worldPosition);
 
         if (compound.contains("LazySync"))
-            fluidLevel.chase(fluidLevel.getChaseTarget(), 0.125f, Chaser.EXP);
+            fluidLevel.chase(fluidLevel.getChaseTarget(), 0.125f, LerpedFloat.Chaser.EXP);
     }
 
     @Override
@@ -481,16 +462,6 @@ public class FluidVesselBlockEntity extends FluidTankBlockEntity implements IHav
         if (queuedSync)
             compound.putBoolean("LazySync", true);
         forceFluidLevelUpdate = false;
-    }
-
-    @Nonnull
-    @Override
-    public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
-        if (!fluidCapability.isPresent())
-            refreshCapability();
-        if (cap == ForgeCapabilities.FLUID_HANDLER)
-            return fluidCapability.cast();
-        return super.getCapability(cap, side);
     }
 
     public static int getMaxSize() {

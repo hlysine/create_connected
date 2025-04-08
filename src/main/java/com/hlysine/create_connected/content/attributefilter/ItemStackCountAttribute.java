@@ -1,17 +1,17 @@
 package com.hlysine.create_connected.content.attributefilter;
 
-import com.simibubi.create.content.logistics.filter.ItemAttribute;
+import com.hlysine.create_connected.CCItemAttributes;
+import com.simibubi.create.content.logistics.item.filter.attribute.ItemAttribute;
+import com.simibubi.create.content.logistics.item.filter.attribute.ItemAttributeType;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ItemStackCountAttribute implements ItemAttribute {
-
-    public static void register() {
-        ItemAttribute.register(new ItemStackCountAttribute(64));
-    }
 
     int stackSize;
 
@@ -20,15 +20,13 @@ public class ItemStackCountAttribute implements ItemAttribute {
     }
 
     @Override
-    public boolean appliesTo(ItemStack itemStack) {
-        return itemStack.getMaxStackSize() == stackSize;
+    public boolean appliesTo(ItemStack stack, Level world) {
+        return stack.getMaxStackSize() == stackSize;
     }
 
     @Override
-    public List<ItemAttribute> listAttributesOf(ItemStack itemStack) {
-        List<ItemAttribute> atts = new ArrayList<>();
-        atts.add(new ItemStackCountAttribute(itemStack.getMaxStackSize()));
-        return atts;
+    public ItemAttributeType getType() {
+        return CCItemAttributes.STACK_SIZE;
     }
 
     @Override
@@ -38,16 +36,46 @@ public class ItemStackCountAttribute implements ItemAttribute {
 
     @Override
     public Object[] getTranslationParameters() {
-        return new Object[]{stackSize};
+        return new Object[]{String.valueOf(stackSize)};
     }
 
     @Override
-    public void writeNBT(CompoundTag nbt) {
-        nbt.putInt("stackSize", this.stackSize);
+    public void save(CompoundTag nbt) {
+        nbt.putInt("stackCount", this.stackSize);
     }
 
     @Override
-    public ItemAttribute readNBT(CompoundTag nbt) {
-        return new ItemStackCountAttribute(nbt.getInt("stackSize"));
+    public void load(CompoundTag nbt) {
+        this.stackSize = nbt.getInt("stackCount");
+    }
+
+    public static class Type implements ItemAttributeType {
+        @Override
+        public @NotNull ItemAttribute createAttribute() {
+            return new ItemStackCountAttribute(64);
+        }
+
+        @Override
+        public List<ItemAttribute> getAllAttributes(ItemStack stack, Level level) {
+            List<ItemAttribute> attributes = new ArrayList<>();
+            attributes.add(new ItemStackCountAttribute(stack.getMaxStackSize()));
+            return attributes;
+        }
+    }
+
+    @SuppressWarnings("deprecation")
+    public static class LegacyDeserializer implements ItemAttribute.LegacyDeserializer {
+
+        @Override
+        public String getNBTKey() {
+            return "stackSize";
+        }
+
+        @Override
+        public ItemAttribute readNBT(CompoundTag nbt) {
+            ItemAttribute attribute = new ItemStackCountAttribute(0);
+            attribute.load(nbt);
+            return attribute;
+        }
     }
 }

@@ -1,7 +1,7 @@
 package com.hlysine.create_connected.content.copycat.board;
 
 import com.hlysine.create_connected.CCBlocks;
-import com.simibubi.create.foundation.utility.Iterate;
+import net.createmod.catnip.data.Iterate;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.player.Player;

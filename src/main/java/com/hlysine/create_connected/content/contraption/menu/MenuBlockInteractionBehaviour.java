@@ -1,8 +1,8 @@
 package com.hlysine.create_connected.content.contraption.menu;
 
+import com.simibubi.create.api.behaviour.interaction.MovingInteractionBehaviour;
 import com.simibubi.create.content.contraptions.AbstractContraptionEntity;
 import com.simibubi.create.content.contraptions.Contraption;
-import com.simibubi.create.content.contraptions.behaviour.MovingInteractionBehaviour;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;

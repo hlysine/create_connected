@@ -89,7 +89,7 @@ public class CCTags {
         }
 
         Items(NameSpace namespace, String path, boolean optional, boolean alwaysDatagen) {
-            ResourceLocation id = new ResourceLocation(namespace.id, path == null ? Lang.asId(name()) : path);
+            ResourceLocation id = new ResourceLocation(namespace.id, path == null ? ConnectedLang.asId(name()) : path);
             if (optional) {
                 tag = optionalTag(ForgeRegistries.ITEMS, id);
             } else {

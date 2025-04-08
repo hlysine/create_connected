@@ -4,9 +4,9 @@ import com.hlysine.create_connected.CCBlocks;
 import com.hlysine.create_connected.CCItems;
 import com.hlysine.create_connected.CreateConnected;
 import com.hlysine.create_connected.config.CCConfigs;
-import com.simibubi.create.foundation.utility.RegisteredObjects;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import com.tterrag.registrate.util.entry.ItemEntry;
+import net.createmod.catnip.platform.CatnipServices;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
@@ -42,7 +42,7 @@ public class CopycatsManager {
     }
 
     public static Block convert(Block self) {
-        ResourceLocation key = RegisteredObjects.getKeyOrThrow(self);
+        ResourceLocation key = CatnipServices.REGISTRIES.getKeyOrThrow(self);
         if (!validateNamespace(key)) return self;
         BlockEntry<?> result = BLOCK_MAP.get(key.getPath());
         if (result != null) return result.get();
@@ -50,7 +50,7 @@ public class CopycatsManager {
     }
 
     public static Item convert(Item self) {
-        ResourceLocation key = RegisteredObjects.getKeyOrThrow(self);
+        ResourceLocation key = CatnipServices.REGISTRIES.getKeyOrThrow(self);
         if (!validateNamespace(key)) return self;
         ItemEntry<?> result = ITEM_MAP.get(key.getPath());
         if (result != null) return result.get();
@@ -78,7 +78,7 @@ public class CopycatsManager {
     }
 
     public static Block convertIfEnabled(Block block) {
-        ResourceLocation key = RegisteredObjects.getKeyOrThrow(block);
+        ResourceLocation key = CatnipServices.REGISTRIES.getKeyOrThrow(block);
         if (!validateNamespace(key)) return block;
         if (isFeatureEnabled(key))
             return convert(block);
@@ -86,7 +86,7 @@ public class CopycatsManager {
     }
 
     public static BlockState convertIfEnabled(BlockState state) {
-        ResourceLocation key = RegisteredObjects.getKeyOrThrow(state.getBlock());
+        ResourceLocation key = CatnipServices.REGISTRIES.getKeyOrThrow(state.getBlock());
         if (!validateNamespace(key)) return state;
         if (isFeatureEnabled(key))
             return convert(state);
@@ -94,7 +94,7 @@ public class CopycatsManager {
     }
 
     public static ItemLike convertIfEnabled(ItemLike item) {
-        ResourceLocation key = RegisteredObjects.getKeyOrThrow(item.asItem());
+        ResourceLocation key = CatnipServices.REGISTRIES.getKeyOrThrow(item.asItem());
         if (!validateNamespace(key)) return item;
         if (isFeatureEnabled(key))
             return convert(item);

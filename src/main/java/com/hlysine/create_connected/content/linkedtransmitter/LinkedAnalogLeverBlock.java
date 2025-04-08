@@ -2,15 +2,13 @@ package com.hlysine.create_connected.content.linkedtransmitter;
 
 import com.hlysine.create_connected.CCBlockEntityTypes;
 import com.hlysine.create_connected.CCItems;
-import com.hlysine.create_connected.CCShapes;
 import com.simibubi.create.AllSoundEvents;
+import com.simibubi.create.api.schematic.requirement.SpecialBlockItemRequirement;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.content.redstone.analogLever.AnalogLeverBlock;
-import com.simibubi.create.content.schematics.requirement.ISpecialBlockItemRequirement;
 import com.simibubi.create.content.schematics.requirement.ItemRequirement;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -36,7 +34,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LinkedAnalogLeverBlock extends AnalogLeverBlock implements ISpecialBlockItemRequirement, IWrenchable, LinkedTransmitterBlock {
+public class LinkedAnalogLeverBlock extends AnalogLeverBlock implements SpecialBlockItemRequirement, IWrenchable, LinkedTransmitterBlock {
     public static BooleanProperty LOCKED = BlockStateProperties.LOCKED;
 
     public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
@@ -68,22 +66,13 @@ public class LinkedAnalogLeverBlock extends AnalogLeverBlock implements ISpecial
                                         @NotNull BlockGetter level,
                                         @NotNull BlockPos pos,
                                         @NotNull CollisionContext context) {
-        Direction facing = state.getValue(AnalogLeverBlock.FACING);
-        return Shapes.or(switch (state.getValue(AnalogLeverBlock.FACE)) {
-            case FLOOR -> CCShapes.FLOOR_LINKED_TRANSMITTER.get(facing);
-            case WALL -> CCShapes.WALL_LINKED_TRANSMITTER.get(facing);
-            case CEILING -> CCShapes.CEILING_LINKED_TRANSMITTER.get(facing);
-        }, super.getShape(state, level, pos, context));
+        return Shapes.or(getTransmitterShape(state), super.getShape(state, level, pos, context));
     }
 
     @SuppressWarnings("deprecation")
     @Override
     public @NotNull List<ItemStack> getDrops(@NotNull BlockState state, LootParams.@NotNull Builder builder) {
         return getBase().getDrops(state, builder);
-    }
-
-    private boolean isHittingBase(BlockState state, BlockGetter level, BlockPos pos, HitResult hit) {
-        return super.getShape(state, level, pos, CollisionContext.empty()).bounds().inflate(0.01 / 16).move(pos).contains(hit.getLocation());
     }
 
     @Override

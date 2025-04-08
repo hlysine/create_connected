@@ -1,10 +1,9 @@
 package com.hlysine.create_connected.content.centrifugalclutch;
 
 import com.hlysine.create_connected.CCBlocks;
-import com.hlysine.create_connected.Lang;
+import com.hlysine.create_connected.ConnectedLang;
 import com.hlysine.create_connected.content.ClutchValueBox;
 import com.hlysine.create_connected.content.RotationScrollValueBehaviour;
-import com.simibubi.create.content.kinetics.KineticNetwork;
 import com.simibubi.create.content.kinetics.RotationPropagator;
 import com.simibubi.create.content.kinetics.transmission.SplitShaftBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
@@ -38,7 +37,7 @@ public class CentrifugalClutchBlockEntity extends SplitShaftBlockEntity {
     public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
         super.addBehaviours(behaviours);
         speedThreshold = new RotationScrollValueBehaviour(
-                Lang.translateDirect("centrifugal_clutch.speed_threshold"),
+                ConnectedLang.translateDirect("centrifugal_clutch.speed_threshold"),
                 this,
                 new ClutchValueBox()
         );

@@ -3,7 +3,8 @@ package com.hlysine.create_connected.content.fluidvessel;
 import com.hlysine.create_connected.CCBlockEntityTypes;
 import com.hlysine.create_connected.CCBlocks;
 import com.simibubi.create.api.connectivity.ConnectivityHandler;
-import com.simibubi.create.foundation.utility.VecHelper;
+import com.simibubi.create.content.equipment.symmetryWand.SymmetryWandItem;
+import net.createmod.catnip.math.VecHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Axis;
@@ -75,6 +76,8 @@ public class FluidVesselItem extends BlockItem {
 		BlockState placedOnState = world.getBlockState(placedOnPos);
 
 		if (!FluidVesselBlock.isVessel(placedOnState))
+			return;
+		if (SymmetryWandItem.presentInHotbar(player))
 			return;
 		boolean creative = getBlock().equals(CCBlocks.CREATIVE_FLUID_VESSEL.get());
 		FluidVesselBlockEntity tankAt = ConnectivityHandler.partAt(

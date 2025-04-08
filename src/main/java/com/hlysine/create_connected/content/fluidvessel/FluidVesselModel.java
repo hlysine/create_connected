@@ -4,7 +4,7 @@ import com.simibubi.create.AllSpriteShifts;
 import com.simibubi.create.api.connectivity.ConnectivityHandler;
 import com.simibubi.create.foundation.block.connected.CTModel;
 import com.simibubi.create.foundation.block.connected.CTSpriteShiftEntry;
-import com.simibubi.create.foundation.utility.Iterate;
+import net.createmod.catnip.data.Iterate;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.resources.model.BakedModel;
@@ -22,7 +22,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import static net.minecraft.core.Direction.*;
+import static net.minecraft.core.Direction.Axis;
 
 public class FluidVesselModel extends CTModel {
 

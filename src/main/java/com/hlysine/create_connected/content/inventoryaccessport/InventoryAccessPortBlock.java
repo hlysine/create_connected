@@ -7,6 +7,7 @@ import com.simibubi.create.foundation.block.IBE;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Axis;
+import net.minecraft.core.Vec3i;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -77,6 +78,12 @@ public class InventoryAccessPortBlock extends DirectedDirectionalBlock implement
     public void neighborChanged(@NotNull BlockState pState, @NotNull Level pLevel, @NotNull BlockPos pPos, @NotNull Block pBlock, @NotNull BlockPos pFromPos, boolean pIsMoving) {
         withBlockEntityDo(pLevel, pPos, InventoryAccessPortBlockEntity::updateConnectedInventory);
         super.neighborChanged(pState, pLevel, pPos, pBlock, pFromPos, pIsMoving);
+        Vec3i diff = pFromPos.subtract(pPos);
+        Direction fromSide = Direction.fromDelta(diff.getX(), diff.getY(), diff.getZ());
+        if (fromSide == null)
+            pLevel.updateNeighborsAt(pPos, this);
+        else
+            pLevel.updateNeighborsAtExceptFromFacing(pPos, this, fromSide);
     }
 
     @SuppressWarnings("deprecation")

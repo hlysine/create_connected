@@ -1,6 +1,7 @@
 package com.hlysine.create_connected.content.fluidvessel;
 
 import com.hlysine.create_connected.CCBlockEntityTypes;
+import com.hlysine.create_connected.ConnectedLang;
 import com.simibubi.create.api.connectivity.ConnectivityHandler;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.content.fluids.tank.CreativeFluidTankBlockEntity;
@@ -11,7 +12,6 @@ import com.simibubi.create.foundation.block.IBE;
 import com.simibubi.create.foundation.blockEntity.ComparatorUtil;
 import com.simibubi.create.foundation.fluid.FluidHelper;
 import com.simibubi.create.foundation.fluid.FluidHelper.FluidExchange;
-import com.simibubi.create.foundation.utility.Lang;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Axis;
@@ -278,9 +278,8 @@ public class FluidVesselBlock extends Block implements IWrenchable, IBE<FluidVes
     public void onRemove(BlockState state, Level world, BlockPos pos, BlockState newState, boolean isMoving) {
         if (state.hasBlockEntity() && (state.getBlock() != newState.getBlock() || !newState.hasBlockEntity())) {
             BlockEntity be = world.getBlockEntity(pos);
-            if (!(be instanceof FluidVesselBlockEntity))
+            if (!(be instanceof FluidVesselBlockEntity vesselBE))
                 return;
-            FluidVesselBlockEntity vesselBE = (FluidVesselBlockEntity) be;
             world.removeBlockEntity(pos);
             ConnectivityHandler.splitMulti(vesselBE);
         }
@@ -334,7 +333,7 @@ public class FluidVesselBlock extends Block implements IWrenchable, IBE<FluidVes
 
         @Override
         public String getSerializedName() {
-            return Lang.asId(name());
+            return ConnectedLang.asId(name());
         }
 
         public Shape nonSingleVariant() {
@@ -353,7 +352,7 @@ public class FluidVesselBlock extends Block implements IWrenchable, IBE<FluidVes
 
         @Override
         public String getSerializedName() {
-            return Lang.asId(name());
+            return ConnectedLang.asId(name());
         }
     }
 

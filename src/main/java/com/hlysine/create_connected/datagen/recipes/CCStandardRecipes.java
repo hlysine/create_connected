@@ -12,10 +12,10 @@ import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllItems;
 import com.simibubi.create.AllTags;
 import com.simibubi.create.foundation.data.recipe.CreateRecipeProvider;
-import com.simibubi.create.foundation.utility.RegisteredObjects;
 import com.tterrag.registrate.util.DataIngredient;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import com.tterrag.registrate.util.entry.ItemProviderEntry;
+import net.createmod.catnip.platform.CatnipServices;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
@@ -313,11 +313,6 @@ public class CCStandardRecipes extends CreateRecipeProvider {
                     .pattern(" s ")
             );
 
-    GeneratedRecipe CHERRY_WINDOW = window(() -> Items.CHERRY_PLANKS, CCBlocks.CHERRY_WINDOW);
-    GeneratedRecipe BAMBOO_WINDOW = window(() -> Items.BAMBOO_PLANKS, CCBlocks.BAMBOO_WINDOW);
-    GeneratedRecipe CHERRY_WINDOW_PANE = windowPane(() -> CCBlocks.CHERRY_WINDOW, CCBlocks.CHERRY_WINDOW_PANE);
-    GeneratedRecipe BAMBOO_WINDOW_PANE = windowPane(() -> CCBlocks.BAMBOO_WINDOW, CCBlocks.BAMBOO_WINDOW_PANE);
-
     String currentFolder = "";
 
     Marker enterFolder(String folder) {
@@ -388,7 +383,7 @@ public class CCStandardRecipes extends CreateRecipeProvider {
     GeneratedRecipe copycat(ItemProviderEntry<? extends ItemLike> result, int resultCount) {
         if (CopycatsManager.convert(result) != result)
             create(() -> CopycatsManager.convert(result)).withSuffix("_compat")
-                    .requiresFeature(RegisteredObjects.getKeyOrThrow(result.asItem()))
+                    .requiresFeature(CatnipServices.REGISTRIES.getKeyOrThrow(result.asItem()))
                     .unlockedBy(result::get)
                     .enabledInCopycats()
                     .viaShapeless(b -> b
@@ -508,15 +503,15 @@ public class CCStandardRecipes extends CreateRecipeProvider {
         }
 
         GeneratedRecipeBuilder requiresResultFeature() {
-            return requiresFeature(RegisteredObjects.getKeyOrThrow(result.get().asItem()));
+            return requiresFeature(CatnipServices.REGISTRIES.getKeyOrThrow(result.get().asItem()));
         }
 
         GeneratedRecipeBuilder disabledInCopycats() {
-            return withCondition(new NotCondition(new FeatureEnabledInCopycatsCondition(RegisteredObjects.getKeyOrThrow(result.get().asItem()))));
+            return withCondition(new NotCondition(new FeatureEnabledInCopycatsCondition(CatnipServices.REGISTRIES.getKeyOrThrow(result.get().asItem()))));
         }
 
         GeneratedRecipeBuilder enabledInCopycats() {
-            return withCondition(new FeatureEnabledInCopycatsCondition(RegisteredObjects.getKeyOrThrow(result.get().asItem())));
+            return withCondition(new FeatureEnabledInCopycatsCondition(CatnipServices.REGISTRIES.getKeyOrThrow(result.get().asItem())));
         }
 
         GeneratedRecipeBuilder withSuffix(String suffix) {
@@ -592,7 +587,7 @@ public class CCStandardRecipes extends CreateRecipeProvider {
         }
 
         private ResourceLocation getRegistryName() {
-            return compatDatagenOutput == null ? RegisteredObjects.getKeyOrThrow(result.get()
+            return compatDatagenOutput == null ? CatnipServices.REGISTRIES.getKeyOrThrow(result.get()
                     .asItem()) : compatDatagenOutput;
         }
 
@@ -675,7 +670,7 @@ public class CCStandardRecipes extends CreateRecipeProvider {
 
                     b.save(result -> consumer.accept(
                             isOtherMod ? new ModdedCookingRecipeResult(result, compatDatagenOutput, recipeConditions)
-                                    : result), createSimpleLocation(RegisteredObjects.getKeyOrThrow(serializer)
+                                    : result), createSimpleLocation(CatnipServices.REGISTRIES.getKeyOrThrow(serializer)
                             .getPath()));
                 });
             }

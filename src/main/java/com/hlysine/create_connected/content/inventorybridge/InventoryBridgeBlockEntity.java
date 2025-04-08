@@ -7,7 +7,7 @@ import com.simibubi.create.foundation.blockEntity.behaviour.filtering.FilteringB
 import com.simibubi.create.foundation.blockEntity.behaviour.filtering.SidedFilteringBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.inventory.CapManipulationBehaviourBase;
 import com.simibubi.create.foundation.blockEntity.behaviour.inventory.InvManipulationBehaviour;
-import com.simibubi.create.foundation.utility.BlockFace;
+import net.createmod.catnip.math.BlockFace;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;

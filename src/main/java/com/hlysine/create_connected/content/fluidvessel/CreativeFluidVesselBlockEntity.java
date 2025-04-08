@@ -11,18 +11,18 @@ import java.util.List;
 
 public class CreativeFluidVesselBlockEntity extends FluidVesselBlockEntity {
 
-	public CreativeFluidVesselBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
-		super(type, pos, state);
-	}
+    public CreativeFluidVesselBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
+        super(type, pos, state);
+    }
 
-	@Override
-	protected SmartFluidTank createInventory() {
-		return new CreativeFluidTankBlockEntity.CreativeSmartFluidTank(getCapacityMultiplier(), this::onFluidStackChanged);
-	}
+    @Override
+    protected SmartFluidTank createInventory() {
+        return new CreativeFluidTankBlockEntity.CreativeSmartFluidTank(getCapacityMultiplier(), this::onFluidStackChanged);
+    }
 
-	@Override
-	public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
-		return false;
-	}
+    @Override
+    public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
+        return false;
+    }
 
 }

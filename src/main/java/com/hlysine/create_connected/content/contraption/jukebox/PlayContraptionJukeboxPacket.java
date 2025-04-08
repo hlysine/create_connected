@@ -53,7 +53,6 @@ public class PlayContraptionJukeboxPacket extends SimplePacketBase {
         buffer.writeBoolean(silent);
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public boolean handle(NetworkEvent.Context context) {
         context.enqueueWork(() -> {

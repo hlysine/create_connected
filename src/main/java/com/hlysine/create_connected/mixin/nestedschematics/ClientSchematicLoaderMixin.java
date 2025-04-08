@@ -2,7 +2,6 @@ package com.hlysine.create_connected.mixin.nestedschematics;
 
 import com.hlysine.create_connected.config.CServer;
 import com.simibubi.create.content.schematics.client.ClientSchematicLoader;
-import com.simibubi.create.foundation.utility.Components;
 import net.minecraft.network.chat.Component;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -41,7 +40,7 @@ public class ClientSchematicLoaderMixin {
                             if (canRecurse && (depth != 0 || !path.getFileName().toString().equals("uploaded")))
                                 cc$searchInSubfolder(path.toString(), depth + 1);
                         } else if (depth != 0 && path.getFileName().toString().endsWith(".nbt")) {
-                            availableSchematics.add(Components.literal(base.relativize(path).toString().replace('\\', '/')));
+                            availableSchematics.add(Component.literal(base.relativize(path).toString().replace('\\', '/')));
                         }
                     });
         } catch (NoSuchFileException e) {

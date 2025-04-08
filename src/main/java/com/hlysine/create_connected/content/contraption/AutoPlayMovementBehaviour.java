@@ -18,11 +18,6 @@ import java.util.Objects;
 public abstract class AutoPlayMovementBehaviour extends SlidingDoorMovementBehaviour {
 
     @Override
-    public boolean renderAsNormalBlockEntity() {
-        return false;
-    }
-
-    @Override
     public void tick(MovementContext context) {
         Contraption contraption = context.contraption;
         StructureBlockInfo structureBlockInfo = contraption.getBlocks()

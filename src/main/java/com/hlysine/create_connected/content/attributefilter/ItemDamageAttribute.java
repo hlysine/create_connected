@@ -1,17 +1,17 @@
 package com.hlysine.create_connected.content.attributefilter;
 
-import com.simibubi.create.content.logistics.filter.ItemAttribute;
+import com.hlysine.create_connected.CCItemAttributes;
+import com.simibubi.create.content.logistics.item.filter.attribute.ItemAttribute;
+import com.simibubi.create.content.logistics.item.filter.attribute.ItemAttributeType;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ItemDamageAttribute implements ItemAttribute {
-
-    public static void register() {
-        ItemAttribute.register(new ItemDamageAttribute(0));
-    }
 
     int maxDamage;
 
@@ -20,15 +20,13 @@ public class ItemDamageAttribute implements ItemAttribute {
     }
 
     @Override
-    public boolean appliesTo(ItemStack itemStack) {
-        return itemStack.getMaxDamage() == maxDamage;
+    public boolean appliesTo(ItemStack stack, Level world) {
+        return stack.getMaxDamage() == maxDamage;
     }
 
     @Override
-    public List<ItemAttribute> listAttributesOf(ItemStack itemStack) {
-        List<ItemAttribute> atts = new ArrayList<>();
-        atts.add(new ItemDamageAttribute(itemStack.getMaxDamage()));
-        return atts;
+    public ItemAttributeType getType() {
+        return CCItemAttributes.MAX_DAMAGE;
     }
 
     @Override
@@ -38,16 +36,46 @@ public class ItemDamageAttribute implements ItemAttribute {
 
     @Override
     public Object[] getTranslationParameters() {
-        return new Object[]{maxDamage};
+        return new Object[]{String.valueOf(maxDamage)};
     }
 
     @Override
-    public void writeNBT(CompoundTag nbt) {
-        nbt.putInt("maxDamage", this.maxDamage);
+    public void save(CompoundTag nbt) {
+        nbt.putInt("maxDmg", this.maxDamage);
     }
 
     @Override
-    public ItemAttribute readNBT(CompoundTag nbt) {
-        return new ItemDamageAttribute(nbt.getInt("maxDamage"));
+    public void load(CompoundTag nbt) {
+        this.maxDamage = nbt.getInt("maxDmg");
+    }
+
+    public static class Type implements ItemAttributeType {
+        @Override
+        public @NotNull ItemAttribute createAttribute() {
+            return new ItemDamageAttribute(0);
+        }
+
+        @Override
+        public List<ItemAttribute> getAllAttributes(ItemStack stack, Level level) {
+            List<ItemAttribute> attributes = new ArrayList<>();
+            attributes.add(new ItemDamageAttribute(stack.getMaxDamage()));
+            return attributes;
+        }
+    }
+
+    @SuppressWarnings("deprecation")
+    public static class LegacyDeserializer implements ItemAttribute.LegacyDeserializer {
+
+        @Override
+        public String getNBTKey() {
+            return "maxDamage";
+        }
+
+        @Override
+        public ItemAttribute readNBT(CompoundTag nbt) {
+            ItemAttribute attribute = new ItemDamageAttribute(0);
+            attribute.load(nbt);
+            return attribute;
+        }
     }
 }

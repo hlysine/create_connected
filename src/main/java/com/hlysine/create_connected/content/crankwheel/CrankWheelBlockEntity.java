@@ -1,15 +1,12 @@
 package com.hlysine.create_connected.content.crankwheel;
 
 import com.hlysine.create_connected.CCPartialModels;
-import com.jozufozu.flywheel.api.Instancer;
-import com.jozufozu.flywheel.api.Material;
-import com.jozufozu.flywheel.core.materials.model.ModelData;
 import com.simibubi.create.content.kinetics.base.IRotate;
 import com.simibubi.create.content.kinetics.crank.HandCrankBlock;
 import com.simibubi.create.content.kinetics.crank.HandCrankBlockEntity;
 import com.simibubi.create.content.kinetics.simpleRelays.ICogWheel;
-import com.simibubi.create.foundation.render.CachedBufferer;
-import com.simibubi.create.foundation.render.SuperByteBuffer;
+import net.createmod.catnip.render.CachedBuffers;
+import net.createmod.catnip.render.SuperByteBuffer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -44,16 +41,6 @@ public class CrankWheelBlockEntity extends HandCrankBlockEntity {
         Direction facing = blockState.getOptionalValue(HandCrankBlock.FACING)
                 .orElse(Direction.UP);
         boolean isLarge = blockState.getBlock() instanceof CrankWheelBlock block && block.largeCog;
-        return CachedBufferer.partialFacing(isLarge ? CCPartialModels.LARGE_CRANK_WHEEL_HANDLE : CCPartialModels.CRANK_WHEEL_HANDLE, blockState, facing.getOpposite());
-    }
-
-    @Override
-    @OnlyIn(Dist.CLIENT)
-    public Instancer<ModelData> getRenderedHandleInstance(Material<ModelData> material) {
-        BlockState blockState = getBlockState();
-        Direction facing = blockState.getOptionalValue(HandCrankBlock.FACING)
-                .orElse(Direction.UP);
-        boolean isLarge = blockState.getBlock() instanceof CrankWheelBlock block && block.largeCog;
-        return material.getModel(isLarge ? CCPartialModels.LARGE_CRANK_WHEEL_HANDLE : CCPartialModels.CRANK_WHEEL_HANDLE, blockState, facing.getOpposite());
+        return CachedBuffers.partialFacing(isLarge ? CCPartialModels.LARGE_CRANK_WHEEL_HANDLE : CCPartialModels.CRANK_WHEEL_HANDLE, blockState, facing.getOpposite());
     }
 }

@@ -2,7 +2,7 @@ package com.hlysine.create_connected.datagen;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.hlysine.create_connected.CCPonders;
+import com.hlysine.create_connected.CCPonderPlugin;
 import com.hlysine.create_connected.CCSoundEvents;
 import com.hlysine.create_connected.CreateConnected;
 import com.hlysine.create_connected.datagen.advancements.CCAdvancements;
@@ -10,9 +10,9 @@ import com.hlysine.create_connected.datagen.recipes.CCStandardRecipes;
 import com.hlysine.create_connected.datagen.recipes.ProcessingRecipeGen;
 import com.hlysine.create_connected.datagen.recipes.SequencedAssemblyGen;
 import com.simibubi.create.foundation.data.CreateRegistrate;
-import com.simibubi.create.foundation.ponder.PonderLocalization;
 import com.simibubi.create.foundation.utility.FilesHelper;
 import com.tterrag.registrate.providers.ProviderType;
+import net.createmod.ponder.foundation.PonderIndex;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
@@ -76,12 +76,10 @@ public class CCDatagen {
     }
 
     private static void providePonderLang(BiConsumer<String, String> consumer) {
-        // Register these since FMLClientSetupEvent does not run during datagen
-        CCPonders.register();
+        // Register this since FMLClientSetupEvent does not run during datagen
+        PonderIndex.addPlugin(new CCPonderPlugin());
 
-        PonderLocalization.generateSceneLang();
-
-        PonderLocalization.provideLang(CreateConnected.MODID, consumer);
+        PonderIndex.getLangAccess().provideLang(CreateConnected.MODID, consumer);
     }
 }
 

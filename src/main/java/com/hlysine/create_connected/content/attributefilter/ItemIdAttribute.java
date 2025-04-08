@@ -1,17 +1,17 @@
 package com.hlysine.create_connected.content.attributefilter;
 
-import com.simibubi.create.content.logistics.filter.ItemAttribute;
+import com.hlysine.create_connected.CCItemAttributes;
+import com.simibubi.create.content.logistics.item.filter.attribute.ItemAttribute;
+import com.simibubi.create.content.logistics.item.filter.attribute.ItemAttributeType;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ItemIdAttribute implements ItemAttribute {
-
-    public static void register() {
-        ItemAttribute.register(new ItemIdAttribute("dummy"));
-    }
 
     String word;
 
@@ -20,21 +20,13 @@ public class ItemIdAttribute implements ItemAttribute {
     }
 
     @Override
-    public boolean appliesTo(ItemStack itemStack) {
-        return itemStack.getItem().toString().contains(word);
+    public boolean appliesTo(ItemStack stack, Level world) {
+        return stack.getItem().toString().contains(word);
     }
 
     @Override
-    public List<ItemAttribute> listAttributesOf(ItemStack itemStack) {
-        String[] words = itemStack.getItem().toString().split("_");
-
-        List<ItemAttribute> atts = new ArrayList<>();
-        for (String word : words) {
-            if (word.length() > 2) {
-                atts.add(new ItemIdAttribute(word));
-            }
-        }
-        return atts;
+    public ItemAttributeType getType() {
+        return CCItemAttributes.ID_CONTAINS;
     }
 
     @Override
@@ -48,12 +40,48 @@ public class ItemIdAttribute implements ItemAttribute {
     }
 
     @Override
-    public void writeNBT(CompoundTag nbt) {
-        nbt.putString("word", this.word);
+    public void save(CompoundTag nbt) {
+        nbt.putString("keyword", this.word);
     }
 
     @Override
-    public ItemAttribute readNBT(CompoundTag nbt) {
-        return new ItemIdAttribute(nbt.getString("word"));
+    public void load(CompoundTag nbt) {
+        this.word = nbt.getString("keyword");
+    }
+
+    public static class Type implements ItemAttributeType {
+        @Override
+        public @NotNull ItemAttribute createAttribute() {
+            return new ItemIdAttribute("dummy");
+        }
+
+        @Override
+        public List<ItemAttribute> getAllAttributes(ItemStack stack, Level level) {
+            String[] words = stack.getItem().toString().split("_");
+
+            List<ItemAttribute> attributes = new ArrayList<>();
+            for (String word : words) {
+                if (word.length() > 2) {
+                    attributes.add(new ItemIdAttribute(word));
+                }
+            }
+            return attributes;
+        }
+    }
+
+    @SuppressWarnings("deprecation")
+    public static class LegacyDeserializer implements ItemAttribute.LegacyDeserializer {
+
+        @Override
+        public String getNBTKey() {
+            return "word";
+        }
+
+        @Override
+        public ItemAttribute readNBT(CompoundTag nbt) {
+            ItemAttribute attribute = new ItemIdAttribute("dummy");
+            attribute.load(nbt);
+            return attribute;
+        }
     }
 }

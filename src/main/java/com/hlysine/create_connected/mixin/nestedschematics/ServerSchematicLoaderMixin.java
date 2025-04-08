@@ -3,6 +3,8 @@ package com.hlysine.create_connected.mixin.nestedschematics;
 import com.hlysine.create_connected.CreateConnected;
 import com.hlysine.create_connected.config.CServer;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.simibubi.create.content.schematics.ServerSchematicLoader;
 import com.simibubi.create.foundation.utility.FilesHelper;
@@ -35,6 +37,7 @@ public abstract class ServerSchematicLoaderMixin {
 
     @Unique
     private void deleteEmptyFolders(Path rootPath, Path pathToDelete) throws IOException {
+        if (!Files.exists(rootPath) || !Files.exists(pathToDelete)) return;
         pathToDelete = pathToDelete.getParent();
         while (!pathToDelete.equals(rootPath) && pathToDelete.toString().contains("schematics")) { // a failsafe to avoid deleting folders outside the schematics folder
             try (Stream<Path> paths = Files.list(pathToDelete)) {
@@ -78,7 +81,7 @@ public abstract class ServerSchematicLoaderMixin {
     @ModifyExpressionValue(
             at = @At(value = "INVOKE", target = "Ljava/nio/file/Files;list(Ljava/nio/file/Path;)Ljava/util/stream/Stream;"),
             slice = @Slice(
-                    from = @At(value = "FIELD", target = "Lcom/simibubi/create/infrastructure/config/CSchematics;maxSchematics:Lcom/simibubi/create/foundation/config/ConfigBase$ConfigInt;"),
+                    from = @At(value = "FIELD", target = "Lcom/simibubi/create/infrastructure/config/CSchematics;maxSchematics:Lnet/createmod/catnip/config/ConfigBase$ConfigInt;"),
                     to = @At(value = "INVOKE", target = "Ljava/util/stream/Stream;filter(Ljava/util/function/Predicate;)Ljava/util/stream/Stream;")
             ),
             method = "handleNewUpload(Lnet/minecraft/server/level/ServerPlayer;Ljava/lang/String;JLnet/minecraft/core/BlockPos;)V"
@@ -89,21 +92,15 @@ public abstract class ServerSchematicLoaderMixin {
         return Files.walk(Path.of(playerPath));
     }
 
-    @Inject(
-            at = @At(value = "INVOKE", target = "Ljava/nio/file/Files;deleteIfExists(Ljava/nio/file/Path;)Z", shift = At.Shift.AFTER),
+    @WrapOperation(
+            at = @At(value = "INVOKE", target = "Ljava/nio/file/Files;deleteIfExists(Ljava/nio/file/Path;)Z"),
             method = "handleNewUpload(Lnet/minecraft/server/level/ServerPlayer;Ljava/lang/String;JLnet/minecraft/core/BlockPos;)V"
     )
-    private void deleteEmptyFolders(ServerPlayer player,
-                                    String schematic,
-                                    long size,
-                                    BlockPos pos,
-                                    CallbackInfo ci,
-                                    @Local(ordinal = 1) String playerPath,
-                                    @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
-                                    @Local(ordinal = 0) Optional<Path> lastFilePath) throws IOException {
-        if (lastFilePath.isPresent()) {
-            deleteEmptyFolders(Path.of(playerPath), lastFilePath.get());
-        }
+    private boolean deleteEmptyFolders(Path path, Operation<Boolean> original,
+                                       @Local(ordinal = 1) String playerPath) throws IOException {
+        boolean result = original.call(path);
+        deleteEmptyFolders(Path.of(playerPath), path);
+        return result;
     }
 
     @Inject(

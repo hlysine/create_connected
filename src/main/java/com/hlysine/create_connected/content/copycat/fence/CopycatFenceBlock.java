@@ -2,7 +2,7 @@ package com.hlysine.create_connected.content.copycat.fence;
 
 import com.hlysine.create_connected.content.copycat.WaterloggedCopycatWrappedBlock;
 import com.simibubi.create.content.decoration.copycat.CopycatBlock;
-import com.simibubi.create.foundation.utility.Iterate;
+import net.createmod.catnip.data.Iterate;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.Entity;
@@ -174,7 +174,7 @@ public class CopycatFenceBlock extends WaterloggedCopycatWrappedBlock {
                 .setValue(SOUTH, from.getValue(SOUTH))
                 .setValue(EAST, from.getValue(EAST))
                 .setValue(WEST, from.getValue(WEST))
-                .setValue(WATERLOGGED, includeWaterlogged ? from.getValue(WATERLOGGED) : to.getValue(WATERLOGGED));
+                .trySetValue(WATERLOGGED, includeWaterlogged ? from.getOptionalValue(WATERLOGGED).orElse(false) : to.getOptionalValue(WATERLOGGED).orElse(false));
     }
 }
 
