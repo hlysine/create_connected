@@ -36,18 +36,17 @@ public class ItemStackCountAttribute implements ItemAttribute {
 
     @Override
     public Object[] getTranslationParameters() {
-        return new Object[]{stackSize};
+        return new Object[]{String.valueOf(stackSize)};
     }
 
     @Override
     public void save(CompoundTag nbt) {
-        nbt.putInt("stackSize", this.stackSize);
+        nbt.putInt("stackCount", this.stackSize);
     }
 
     @Override
     public void load(CompoundTag nbt) {
-        if (nbt.contains("stackSize"))
-            this.stackSize = nbt.getInt("stackSize");
+        this.stackSize = nbt.getInt("stackCount");
     }
 
     public static class Type implements ItemAttributeType {

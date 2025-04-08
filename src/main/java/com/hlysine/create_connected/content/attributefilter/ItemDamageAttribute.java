@@ -36,18 +36,17 @@ public class ItemDamageAttribute implements ItemAttribute {
 
     @Override
     public Object[] getTranslationParameters() {
-        return new Object[]{maxDamage};
+        return new Object[]{String.valueOf(maxDamage)};
     }
 
     @Override
     public void save(CompoundTag nbt) {
-        nbt.putInt("maxDamage", this.maxDamage);
+        nbt.putInt("maxDmg", this.maxDamage);
     }
 
     @Override
     public void load(CompoundTag nbt) {
-        if (nbt.contains("maxDamage"))
-            this.maxDamage = nbt.getInt("maxDamage");
+        this.maxDamage = nbt.getInt("maxDmg");
     }
 
     public static class Type implements ItemAttributeType {

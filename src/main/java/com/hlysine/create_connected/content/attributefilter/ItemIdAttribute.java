@@ -41,14 +41,12 @@ public class ItemIdAttribute implements ItemAttribute {
 
     @Override
     public void save(CompoundTag nbt) {
-        if (word != null)
-            nbt.putString("word", this.word);
+        nbt.putString("keyword", this.word);
     }
 
     @Override
     public void load(CompoundTag nbt) {
-        if (nbt.contains("word"))
-            this.word = nbt.getString("word");
+        this.word = nbt.getString("keyword");
     }
 
     public static class Type implements ItemAttributeType {
