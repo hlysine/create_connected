@@ -5,6 +5,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 1.0.0 - 2025-04-08 [1.20 only]
+
+### **This version is not compatible with Create 0.5.1 or earlier**
+
+### Changed
+
+- Copper texture has been changed to match the new Create style
+- Linked transmitters now use andesite instead of brass
+
+### Fixed
+
+- Fixed linked analog levers being unusable on VS2 ships due to a control conflict
+- Fixed crank wheel teeth not meshing correctly with other cogwheels
+
+### Removed
+
+- Cherry and bamboo windows and panes
+
 ## 0.9.5 - 2025-02-06 [1.18 only]
 
 ### Fixed
