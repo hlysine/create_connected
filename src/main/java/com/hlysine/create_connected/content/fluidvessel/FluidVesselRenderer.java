@@ -83,7 +83,7 @@ public class FluidVesselRenderer extends SafeBlockEntityRenderer<FluidVesselBloc
     protected void renderAsBoiler(FluidVesselBlockEntity be, float partialTicks, PoseStack ms, MultiBufferSource buffer,
                                   int light, int overlay) {
         BlockState blockState = be.getBlockState();
-        VertexConsumer vb = buffer.getBuffer(RenderType.solid());
+        VertexConsumer vb = buffer.getBuffer(RenderType.cutout());
         ms.pushPose();
         var msr = TransformStack.of(ms);
         Axis axis = be.getAxis();
@@ -111,7 +111,7 @@ public class FluidVesselRenderer extends SafeBlockEntityRenderer<FluidVesselBloc
                     .uncenter()
                     .translate(be.getWidth() / 2f - 6 / 16f, 0, 0)
                     .translate(0, dialPivotY, dialPivotZ)
-                    .rotateX(-90 * progress)
+                    .rotateXDegrees(-145 * progress + 90)
                     .translate(0, -dialPivotY, -dialPivotZ)
                     .light(light)
                     .renderInto(ms, vb);

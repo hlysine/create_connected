@@ -31,6 +31,7 @@
     "featuretoggle.CreativeModeTabsAccessor",
     "fluidvessel.BlazeBurnerBlockEntityMixin",
     "fluidvessel.FluidTankBlockEntityMixin",
+    "fluidvessel.SteamEngineBlockEntityMixin",
     "fluidvessel.SteamEngineBlockMixin",
     "fluidvessel.WhistleBlockMixin",
     "itemsilo.ContraptionMixin",
