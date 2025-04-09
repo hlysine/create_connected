@@ -5,9 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 1.0.1 - 2025-04-09 [1.20 only]
+
+### Fixed
+
+- Fixed steam engines not working on fluid vessels
+- Fixed boiler gauges turning black on fluid vessels
+
 ## 1.0.0 - 2025-04-08 [1.20 only]
 
 ### **This version is not compatible with Create 0.5.1 or earlier**
+
+**Special thanks to @c0nnor263 for their contributions to this update**
 
 ### Changed
 
