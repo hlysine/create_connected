@@ -5,5 +5,7 @@
   "advancement.create_connected.control_chip.desc": "Kontrol-txipa muntatu",
   "advancement.create_connected.overpowered_brake_0": "Gaindituta",
   "advancement.create_connected.overpowered_brake_0.desc": "Mantendu sare bat abiadura bizian funtzionatzen duen balazta elektriko bat erantsita\n§ 7 (Ezkutuko Aurrerapena)",
-  "advancement.create_connected.overstress_clutch": "Etengailu"
+  "advancement.create_connected.overstress_clutch": "Etengailu",
+  "block.create_connected.copycat_beam": "Kopiatu",
+  "block.create_connected.copycat_beam.tooltip.condition1": "Eskuineko botoiarekin klik egitean"
 }
