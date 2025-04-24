@@ -1,1 +1,10 @@
-{}
+{
+  "advancement.create_connected.brass_gearbox": "Sefydliad Difrifol",
+  "advancement.create_connected.brass_gearbox.desc": "Gosodwch Flwch Gêr Pres i lawr",
+  "advancement.create_connected.control_chip": "Gwneuthuriad Cywir",
+  "advancement.create_connected.control_chip.desc": "Cydosod Sglodyn Rheoli",
+  "advancement.create_connected.overpowered_brake_0": "Gorpwerus",
+  "advancement.create_connected.overpowered_brake_0.desc": "Cadwch rwydwaith yn rhedeg yn gyflym gyda brêc pŵer ynghlwm\n§7(Cynnydd Cudd)",
+  "advancement.create_connected.overstress_clutch": "Torrwr Cylchdaith",
+  "advancement.create_connected.overstress_clutch.desc": "Sbardun Clutch Overstress"
+}
