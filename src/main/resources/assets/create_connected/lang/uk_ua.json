@@ -132,7 +132,7 @@
   "create.item_attributes.stack_size": "складається до %1$s",
   "create.item_attributes.stack_size.inverted": "не складається до %1$s",
   "create_connected.centrifugal_clutch.speed_threshold": "Поріг швидкості",
-  "create_connected.display_source.boiler_status": "Статус бойлера",
+  "create_connected.display_source.boiler_status": "Стан котла",
   "create_connected.gui.overstress_clutch.uncoupled": "Від'єднано",
   "create_connected.gui.overstress_clutch.uncoupled_explanation": "Це зчеплення _від'єдналося_ через перенавантаження. Виправте мережу перед тим, як _скинути_ це зчеплення за допомогою _гайкового ключа_ або _редстоунового імпульсу_.",
   "create_connected.gui.sequenced_pulse_generator.instruction": "Вказівка",
