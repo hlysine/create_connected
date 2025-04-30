@@ -1,1 +1,7 @@
-{}
+{
+  "advancement.create_connected.brass_gearbox": "गंभीर संगठन",
+  "advancement.create_connected.brass_gearbox.desc": "पीतल का गियरबॉक्स नीचे रखें",
+  "advancement.create_connected.control_chip": "सटीक निर्माण",
+  "advancement.create_connected.control_chip.desc": "नियंत्रण चिप का निर्माण",
+  "advancement.create_connected.overpowered_brake_0": "जबर्दस्ती"
+}
