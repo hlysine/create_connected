@@ -2,7 +2,7 @@ package com.hlysine.create_connected.config;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.common.ForgeConfigSpec;
+import net.neoforged.common.ForgeConfigSpec;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -34,3 +34,9 @@ issueTrackerURL="https://github.com/hlysine/create_connected/issues"
     versionRange="${create_version_range}"
     ordering="NONE"
     side="BOTH"
+
+[[mixins]]
+    config="create_connected.mixins.json"
+
+[[accessTransformers]]
+    file="META-INF/accesstransformer.cfg"

@@ -19,12 +19,12 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.IItemHandlerModifiable;
-import net.minecraftforge.items.ItemStackHandler;
-import net.minecraftforge.items.wrapper.CombinedInvWrapper;
+import net.neoforged.common.capabilities.Capability;
+import net.neoforged.common.util.LazyOptional;
+import net.neoforged.items.IItemHandler;
+import net.neoforged.items.IItemHandlerModifiable;
+import net.neoforged.items.ItemStackHandler;
+import net.neoforged.items.wrapper.CombinedInvWrapper;
 
 import java.util.List;
 

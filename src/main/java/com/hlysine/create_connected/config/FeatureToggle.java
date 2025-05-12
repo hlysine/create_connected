@@ -8,10 +8,10 @@ import com.tterrag.registrate.util.entry.BlockEntry;
 import com.tterrag.registrate.util.nullness.NonNullUnaryOperator;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.common.util.LogicalSidedProvider;
-import net.minecraftforge.fml.DistExecutor;
-import net.minecraftforge.fml.LogicalSide;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.common.util.LogicalSidedProvider;
+import net.neoforged.fml.DistExecutor;
+import net.neoforged.fml.LogicalSide;
 
 import java.util.HashMap;
 import java.util.HashSet;

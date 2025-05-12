@@ -15,9 +15,9 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.AttachFace;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraftforge.client.model.generators.ConfiguredModel;
-import net.minecraftforge.client.model.generators.ModelFile;
-import net.minecraftforge.client.model.generators.MultiPartBlockStateBuilder;
+import net.neoforged.client.model.generators.ConfiguredModel;
+import net.neoforged.client.model.generators.ModelFile;
+import net.neoforged.client.model.generators.MultiPartBlockStateBuilder;
 import org.apache.commons.lang3.function.TriFunction;
 
 import java.util.HashMap;

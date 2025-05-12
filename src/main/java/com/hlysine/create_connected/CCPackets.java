@@ -7,12 +7,12 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.network.NetworkDirection;
-import net.minecraftforge.network.NetworkEvent.Context;
-import net.minecraftforge.network.NetworkRegistry;
-import net.minecraftforge.network.PacketDistributor;
-import net.minecraftforge.network.PacketDistributor.TargetPoint;
-import net.minecraftforge.network.simple.SimpleChannel;
+import net.neoforged.network.NetworkDirection;
+import net.neoforged.network.NetworkEvent.Context;
+import net.neoforged.network.NetworkRegistry;
+import net.neoforged.network.PacketDistributor;
+import net.neoforged.network.PacketDistributor.TargetPoint;
+import net.neoforged.network.simple.SimpleChannel;
 
 import java.util.function.BiConsumer;
 import java.util.function.Function;

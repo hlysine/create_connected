@@ -51,11 +51,11 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.common.util.ForgeSoundType;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.capability.IFluidHandler;
+import net.neoforged.common.capabilities.ForgeCapabilities;
+import net.neoforged.common.util.ForgeSoundType;
+import net.neoforged.common.util.LazyOptional;
+import net.neoforged.fluids.FluidStack;
+import net.neoforged.fluids.capability.IFluidHandler;
 
 public class FluidVesselBlock extends Block implements IWrenchable, IBE<FluidVesselBlockEntity> {
 

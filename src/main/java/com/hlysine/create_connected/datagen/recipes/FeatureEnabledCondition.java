@@ -5,8 +5,8 @@ import com.hlysine.create_connected.CreateConnected;
 import com.hlysine.create_connected.config.FeatureToggle;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
-import net.minecraftforge.common.crafting.conditions.ICondition;
-import net.minecraftforge.common.crafting.conditions.IConditionSerializer;
+import net.neoforged.common.crafting.conditions.ICondition;
+import net.neoforged.common.crafting.conditions.IConditionSerializer;
 
 public class FeatureEnabledCondition implements ICondition {
     private static final ResourceLocation NAME = CreateConnected.asResource("feature_enabled");

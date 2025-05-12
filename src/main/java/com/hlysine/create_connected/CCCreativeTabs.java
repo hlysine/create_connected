@@ -9,10 +9,10 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.event.BuildCreativeModeTabContentsEvent;
+import net.neoforged.eventbus.api.IEventBus;
+import net.neoforged.registries.DeferredRegister;
+import net.neoforged.registries.RegistryObject;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;

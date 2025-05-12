@@ -16,8 +16,8 @@ import net.createmod.ponder.foundation.PonderIndex;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
-import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.data.event.GatherDataEvent;
+import net.neoforged.common.data.ExistingFileHelper;
+import net.neoforged.data.event.GatherDataEvent;
 
 import java.util.Map.Entry;
 import java.util.concurrent.CompletableFuture;

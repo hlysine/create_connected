@@ -13,7 +13,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
-import net.minecraftforge.items.ItemStackHandler;
+import net.neoforged.items.ItemStackHandler;
 import org.jetbrains.annotations.Nullable;
 
 public class ItemSiloMountedStorage extends WrapperMountedItemStorage<ItemStackHandler> {

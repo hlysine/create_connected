@@ -29,12 +29,12 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.SimpleCraftingRecipeSerializer;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraftforge.common.Tags;
-import net.minecraftforge.common.crafting.ConditionalRecipe;
-import net.minecraftforge.common.crafting.CraftingHelper;
-import net.minecraftforge.common.crafting.conditions.ICondition;
-import net.minecraftforge.common.crafting.conditions.ModLoadedCondition;
-import net.minecraftforge.common.crafting.conditions.NotCondition;
+import net.neoforged.common.Tags;
+import net.neoforged.common.crafting.ConditionalRecipe;
+import net.neoforged.common.crafting.CraftingHelper;
+import net.neoforged.common.crafting.conditions.ICondition;
+import net.neoforged.common.crafting.conditions.ModLoadedCondition;
+import net.neoforged.common.crafting.conditions.NotCondition;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;

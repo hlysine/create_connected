@@ -2,7 +2,7 @@ package com.hlysine.create_connected;
 
 import com.hlysine.create_connected.datagen.recipes.FeatureEnabledCondition;
 import com.hlysine.create_connected.datagen.recipes.FeatureEnabledInCopycatsCondition;
-import net.minecraftforge.common.crafting.CraftingHelper;
+import net.neoforged.common.crafting.CraftingHelper;
 
 @SuppressWarnings("unused")
 public class CCCraftingConditions {

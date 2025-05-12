@@ -10,8 +10,8 @@ import net.createmod.catnip.config.ConfigBase;
 import net.createmod.catnip.platform.CatnipServices;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.common.ForgeConfigSpec.Builder;
-import net.minecraftforge.common.ForgeConfigSpec.ConfigValue;
+import net.neoforged.common.ForgeConfigSpec.Builder;
+import net.neoforged.common.ForgeConfigSpec.ConfigValue;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;

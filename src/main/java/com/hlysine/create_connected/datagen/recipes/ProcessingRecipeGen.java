@@ -14,7 +14,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
-import net.minecraftforge.fluids.FluidType;
+import net.neoforged.fluids.FluidType;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;

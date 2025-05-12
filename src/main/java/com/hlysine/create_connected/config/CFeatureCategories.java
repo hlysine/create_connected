@@ -1,7 +1,7 @@
 package com.hlysine.create_connected.config;
 
 import net.minecraft.nbt.CompoundTag;
-import net.minecraftforge.common.ForgeConfigSpec;
+import net.neoforged.common.ForgeConfigSpec;
 import org.jetbrains.annotations.ApiStatus;
 
 import java.util.HashMap;

@@ -11,7 +11,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.WallBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.WallSide;
-import net.minecraftforge.client.model.data.ModelData;
+import net.neoforged.client.model.data.ModelData;
 
 import java.util.ArrayList;
 import java.util.HashMap;

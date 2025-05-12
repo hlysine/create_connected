@@ -90,10 +90,10 @@ import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.predicates.ExplosionCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
-import net.minecraftforge.client.model.generators.ConfiguredModel;
-import net.minecraftforge.client.model.generators.ModelFile;
-import net.minecraftforge.common.Tags;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.neoforged.client.model.generators.ConfiguredModel;
+import net.neoforged.client.model.generators.ModelFile;
+import net.neoforged.common.Tags;
+import net.neoforged.registries.ForgeRegistries;
 
 import java.util.HashMap;
 import java.util.Map;

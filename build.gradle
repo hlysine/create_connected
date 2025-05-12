@@ -1,10 +1,8 @@
 plugins {
-    id 'eclipse'
     id 'idea'
+    id 'java-library'
     id 'maven-publish'
-    id 'net.minecraftforge.gradle' version '[6.0,6.2)'
-    id 'org.parchmentmc.librarian.forgegradle' version '1.+'
-    id 'org.spongepowered.mixin' version '0.7.38'
+    id 'net.neoforged.moddev' version '2.0.86'
     id 'me.modmuss50.mod-publish-plugin' version '0.4.5'
 }
 
@@ -22,75 +20,65 @@ base {
     archivesName = mod_id
 }
 
-jarJar.enable()
-
-mixin {
-    add sourceSets.main, "create_connected.refmap.json"
-    config 'create_connected.mixins.json'
-}
-
 // Java version target
-java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
 
 println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), Arch: ${System.getProperty 'os.arch'}"
-minecraft {
-    // Minecraft source mapping
-    mappings channel: mapping_channel, version: mapping_version
 
-    // Run "prepareX" tasks before game launch
-    // enableIdeaPrepareRuns = true
+neoForge {
+    version = neoforge_version
 
-    // Run Gradle's ProcessResources task(s) on IDE output locations before launching the game. REQUIRED
-    copyIdeResources = true
+    validateAccessTransformers = true
 
-    // Enable access transformers for use in development.
-    accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
+    accessTransformers {
+        file('src/main/resources/META-INF/accesstransformer.cfg')
+    }
+
+    parchment {
+        mappingsVersion = parchment_version
+        minecraftVersion = parchment_minecraft_version
+    }
 
     runs {
         configureEach {
-            workingDirectory project.file('run')
+            gameDirectory = project.file('run')
 
-            // Recommended logging data for a userdev environment
-            property 'forge.logging.markers', 'REGISTRIES'
+            systemProperty 'forge.logging.markers', 'REGISTRIES'
 
-            // Recommended logging level for the console
-            property 'forge.logging.console.level', 'debug'
-
-            property "mixin.env.remapRefMap", "true"
-            property "mixin.env.refMapRemappingFile", "${projectDir}/build/createSrgToMcp/output.srg"
+            logLevel = org.slf4j.event.Level.DEBUG
 
             //Allows for reloading the project during runtime with compatible jvm
-            jvmArg "-XX:+AllowEnhancedClassRedefinition"
+            jvmArgument "-XX:+AllowEnhancedClassRedefinition"
 
-            arg '-mixin.config=create_connected.mixins.json'
-            arg '-mixin.config=create.mixins.json'
-
-            mods {
-                "${mod_id}" {
-                    source sourceSets.main
-                }
-            }
+            systemProperty "mixin.env.remapRefMap", "true"
+            systemProperty "mixin.env.refMapRemappingFile", "${projectDir}/build/createSrgToMcp/output.srg"
         }
 
         client {
-            // Comma-separated list of namespaces to load gametests from. Empty = all namespaces.
-            property 'forge.enabledGameTestNamespaces', mod_id
+            client()
+
+            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
         }
 
         server {
-            workingDirectory project.file('run-server')
-            property 'forge.enabledGameTestNamespaces', mod_id
-            args '--nogui'
+            server()
+
+            gameDirectory = project.file('run-server')
+            programArgument '--nogui'
+            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
         }
 
         gameTestServer {
-            property 'forge.enabledGameTestNamespaces', mod_id
+            type = "gameTestServer"
+
+            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
         }
 
         data {
-            workingDirectory project.file('run-data')
+            data()
 
-            args '--mod', mod_id, '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/'), '--existing-mod', 'create'
+            gameDirectory = project.file('run-data')
+            programArguments.addAll '--mod', mod_id, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath(), '--existing-mod', 'create'
         }
     }
 }
@@ -104,8 +92,12 @@ repositories {
         url = "https://maven.createmod.net"
     }
     maven {
-        // Registrate
+        // Old repo for Registrate
         url = "https://maven.tterrag.com"
+    }
+    maven {
+        // Registrate
+        url = "https://mvn.devos.one/snapshots/"
     }
     maven {
         // ForgeConfigAPIPort
@@ -138,7 +130,6 @@ repositories {
                 url = "https://api.modrinth.com/maven"
             }
         }
-        forRepositories(fg.repository)
         filter {
             includeGroup "maven.modrinth"
         }
@@ -150,7 +141,6 @@ repositories {
                 url = "https://cursemaven.com"
             }
         }
-        forRepositories(fg.repository)
         filter {
             includeGroup "curse.maven"
         }
@@ -163,40 +153,36 @@ repositories {
 }
 
 dependencies {
-    minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
+    implementation "net.neoforged:neoforge:${neoforge_version}"
 
-    compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:${mixin_extras_version}"))
-    implementation(jarJar("io.github.llamalad7:mixinextras-forge:${mixin_extras_version}")) {
-        jarJar.ranged(it, "[${mixin_extras_version},)")
-    }
+    implementation("com.simibubi.create:create-${minecraft_version}:${create_version}:slim") { transitive = false }
+    implementation("net.createmod.ponder:Ponder-NeoForge-${minecraft_version}:${ponder_version}")
+    compileOnly("dev.engine-room.flywheel:flywheel-neoforge-api-${flywheel_minecraft_version}:${flywheel_version}")
+    runtimeOnly("dev.engine-room.flywheel:flywheel-neoforge-${flywheel_minecraft_version}:${flywheel_version}")
+    implementation("com.tterrag.registrate:Registrate:${registrate_version}")
 
-    implementation(fg.deobf("com.simibubi.create:create-${minecraft_version}:${create_version}:slim") { transitive = false })
-    implementation(fg.deobf("net.createmod.ponder:Ponder-Forge-${minecraft_version}:${ponder_version}"))
-    compileOnly(fg.deobf("dev.engine-room.flywheel:flywheel-forge-api-${flywheel_minecraft_version}:${flywheel_version}"))
-    runtimeOnly(fg.deobf("dev.engine-room.flywheel:flywheel-forge-${flywheel_minecraft_version}:${flywheel_version}"))
-    implementation(fg.deobf("com.tterrag.registrate:Registrate:${registrate_version}"))
+    compileOnly("mezz.jei:jei-${jei_minecraft_version}-common-api:${jei_version}")
+    compileOnly("mezz.jei:jei-${jei_minecraft_version}-neoforge-api:${jei_version}")
+    runtimeOnly("mezz.jei:jei-${jei_minecraft_version}-neoforge:${jei_version}")
 
-    compileOnly fg.deobf("mezz.jei:jei-${jei_minecraft_version}-common-api:${jei_version}")
-    compileOnly fg.deobf("mezz.jei:jei-${jei_minecraft_version}-forge-api:${jei_version}")
-    runtimeOnly fg.deobf("mezz.jei:jei-${jei_minecraft_version}-forge:${jei_version}")
+//    implementation("maven.modrinth:create-garnished:${garnished_version}")
+//    runtimeOnly("maven.modrinth:create-dreams-and-desires:${dreams_desires_version}")
+    implementation("com.copycatsplus:copycats:${copycats_version}")
+    runtimeOnly("maven.modrinth:additional-placements:${additional_placements_version}")
 
-//    implementation fg.deobf("maven.modrinth:create-garnished:${garnished_version}")
-//    runtimeOnly fg.deobf("maven.modrinth:create-dreams-and-desires:${dreams_desires_version}")
-    implementation fg.deobf("com.copycatsplus:copycats:${copycats_version}")
-    runtimeOnly fg.deobf("maven.modrinth:additional-placements:${additional_placements_version}")
-
-    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+    implementation(jarJar("io.github.llamalad7:mixinextras-neoforge:${mixin_extras_version}"))
 }
 
 // Expands all declared replace properties in the specified resource targets.
-tasks.named('processResources', ProcessResources).configure {
+processResources {
     duplicatesStrategy(DuplicatesStrategy.EXCLUDE)
+    filteringCharset = 'UTF-8'
 
     var replaceProperties = [
             minecraft_version      : minecraft_version,
             minecraft_version_range: minecraft_version_range,
-            forge_version          : forge_version,
-            forge_version_range    : forge_version_range,
+            neoforge_version       : neoforge_version,
+            neoforge_version_range : neoforge_version_range,
             loader_version_range   : loader_version_range,
             create_version_range   : create_version_range,
             mod_id                 : mod_id,
@@ -208,33 +194,15 @@ tasks.named('processResources', ProcessResources).configure {
     ]
     inputs.properties replaceProperties
 
-    filesMatching(['META-INF/mods.toml', 'pack.mcmeta']) {
+    filesMatching(['META-INF/neoforge.mods.toml', 'pack.mcmeta']) {
         expand replaceProperties + [project: project]
     }
 }
 
 // Get properties into the manifest for reading at runtime.
-tasks.named('jar', Jar).configure {
+jar {
     duplicatesStrategy(DuplicatesStrategy.EXCLUDE)
 
-    manifest {
-        attributes([
-                'Specification-Title'     : mod_id,
-                'Specification-Vendor'    : mod_authors,
-                'Specification-Version'   : '1',
-                'Implementation-Title'    : project.name,
-                'Implementation-Version'  : project.jar.archiveVersion,
-                'Implementation-Vendor'   : mod_authors,
-                'Implementation-Timestamp': new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
-                "MixinConfigs"            : "create_connected.mixins.json"
-        ])
-    }
-
-    // Reobfuscate jar file
-    finalizedBy 'reobfJar'
-}
-
-tasks.jarJar.configure {
     manifest {
         attributes([
                 'Specification-Title'     : mod_id,
@@ -243,13 +211,9 @@ tasks.jarJar.configure {
                 'Implementation-Title'    : project.name,
                 'Implementation-Version'  : project.jar.archiveVersion,
                 'Implementation-Vendor'   : mod_authors,
-                'Implementation-Timestamp': new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
-                "MixinConfigs"            : "create_connected.mixins.json"
+                'Implementation-Timestamp': new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
     }
-
-    // Reobfuscate jar file
-    finalizedBy 'reobfJarJar'
 }
 
 tasks.withType(JavaCompile).configureEach {
@@ -262,7 +226,7 @@ tasks.publishMods.mustRunAfter(tasks.build)
 publishMods {
     changelog = "## NOTE: Create: Connected 1.0.0 or above only works with Create 6.0.0 or above!\n\nCheck out the detailed changelog at https://github.com/hlysine/create_connected/blob/main/CHANGELOG.md"
     type = STABLE
-    file = tasks.jarJar.archiveFile
+    file = jar.archiveFile
     modLoaders.add("forge")
     modLoaders.add("neoforge")
 
@@ -292,7 +256,14 @@ publishMods {
     }
 }
 
+idea {
+    module {
+        downloadSources = true
+        downloadJavadoc = true
+    }
+}
+
 wrapper {
-    gradleVersion = '8.10'
+    gradleVersion = '8.10.1'
     distributionType = Wrapper.DistributionType.BIN
 }

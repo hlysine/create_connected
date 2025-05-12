@@ -16,8 +16,8 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Axis;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.capability.templates.FluidTank;
+import net.neoforged.fluids.FluidStack;
+import net.neoforged.fluids.capability.templates.FluidTank;
 
 public class FluidVesselRenderer extends SafeBlockEntityRenderer<FluidVesselBlockEntity> {
 

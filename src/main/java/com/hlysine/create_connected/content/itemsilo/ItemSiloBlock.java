@@ -20,7 +20,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition.Builder;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraftforge.common.util.ForgeSoundType;
+import net.neoforged.common.util.ForgeSoundType;
 
 import javax.annotation.Nullable;
 
