@@ -9,9 +9,9 @@ import com.tterrag.registrate.util.nullness.NonNullUnaryOperator;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import net.neoforged.api.distmarker.Dist;
-import net.neoforged.common.util.LogicalSidedProvider;
-import net.neoforged.fml.DistExecutor;
 import net.neoforged.fml.LogicalSide;
+import net.neoforged.fml.loading.FMLLoader;
+import net.neoforged.neoforge.common.util.LogicalSidedProvider;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -52,7 +52,7 @@ public class FeatureToggle {
      */
     public static <R, T extends R, P, S extends Builder<R, T, P, S>> NonNullUnaryOperator<S> register() {
         return b -> {
-            register(new ResourceLocation(b.getOwner().getModid(), b.getName()));
+            register(ResourceLocation.fromNamespaceAndPath(b.getOwner().getModid(), b.getName()));
             return b;
         };
     }
@@ -62,7 +62,7 @@ public class FeatureToggle {
      */
     public static <R, T extends R, P, S extends Builder<R, T, P, S>> NonNullUnaryOperator<S> register(FeatureCategory... categories) {
         return b -> {
-            register(new ResourceLocation(b.getOwner().getModid(), b.getName()), categories);
+            register(ResourceLocation.fromNamespaceAndPath(b.getOwner().getModid(), b.getName()), categories);
             return b;
         };
     }
@@ -73,7 +73,7 @@ public class FeatureToggle {
      */
     public static <R, T extends R, P, S extends Builder<R, T, P, S>> NonNullUnaryOperator<S> registerDependent(ResourceLocation dependency) {
         return b -> {
-            registerDependent(new ResourceLocation(b.getOwner().getModid(), b.getName()), dependency);
+            registerDependent(ResourceLocation.fromNamespaceAndPath(b.getOwner().getModid(), b.getName()), dependency);
             return b;
         };
     }
@@ -84,7 +84,7 @@ public class FeatureToggle {
      */
     public static <R, T extends R, P, S extends Builder<R, T, P, S>> NonNullUnaryOperator<S> registerDependent(ResourceLocation dependency, FeatureCategory... categories) {
         return b -> {
-            registerDependent(new ResourceLocation(b.getOwner().getModid(), b.getName()), dependency, categories);
+            registerDependent(ResourceLocation.fromNamespaceAndPath(b.getOwner().getModid(), b.getName()), dependency, categories);
             return b;
         };
     }
@@ -95,7 +95,7 @@ public class FeatureToggle {
      */
     public static <R, T extends R, P, S extends Builder<R, T, P, S>> NonNullUnaryOperator<S> registerDependent(BlockEntry<?> dependency) {
         return b -> {
-            registerDependent(new ResourceLocation(b.getOwner().getModid(), b.getName()), dependency.getId());
+            registerDependent(ResourceLocation.fromNamespaceAndPath(b.getOwner().getModid(), b.getName()), dependency.getId());
             return b;
         };
     }
@@ -106,7 +106,7 @@ public class FeatureToggle {
      */
     public static <R, T extends R, P, S extends Builder<R, T, P, S>> NonNullUnaryOperator<S> registerDependent(BlockEntry<?> dependency, FeatureCategory... categories) {
         return b -> {
-            registerDependent(new ResourceLocation(b.getOwner().getModid(), b.getName()), dependency.getId(), categories);
+            registerDependent(ResourceLocation.fromNamespaceAndPath(b.getOwner().getModid(), b.getName()), dependency.getId(), categories);
             return b;
         };
     }
@@ -116,7 +116,7 @@ public class FeatureToggle {
      */
     public static <R, T extends R, P, S extends Builder<R, T, P, S>> NonNullUnaryOperator<S> addCondition(Supplier<Boolean> condition) {
         return b -> {
-            addCondition(new ResourceLocation(b.getOwner().getModid(), b.getName()), condition);
+            addCondition(ResourceLocation.fromNamespaceAndPath(b.getOwner().getModid(), b.getName()), condition);
             return b;
         };
     }
@@ -156,14 +156,13 @@ public class FeatureToggle {
     }
 
     static void refreshItemVisibility() {
-        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () ->
-                LogicalSidedProvider.WORKQUEUE.get(LogicalSide.CLIENT).submit(() -> {
-                    CreativeModeTab.ItemDisplayParameters cachedParameters = CreativeModeTabsAccessor.getCACHED_PARAMETERS();
-                    if (cachedParameters != null) {
-                        CreativeModeTabsAccessor.callBuildAllTabContents(cachedParameters);
-                    }
-                    Mods.JEI.executeIfInstalled(() -> CreateConnectedJEI::refreshItemList);
-                })
-        );
+        if (FMLLoader.getDist() != Dist.CLIENT) return;
+        LogicalSidedProvider.WORKQUEUE.get(LogicalSide.CLIENT).executeBlocking(() -> {
+            CreativeModeTab.ItemDisplayParameters cachedParameters = CreativeModeTabsAccessor.getCACHED_PARAMETERS();
+            if (cachedParameters != null) {
+                CreativeModeTabsAccessor.callBuildAllTabContents(cachedParameters);
+            }
+            Mods.JEI.executeIfInstalled(() -> CreateConnectedJEI::refreshItemList);
+        });
     }
 }

@@ -71,10 +71,9 @@ public class BrassGearboxBlock extends RotatedPillarKineticBlock implements IBE<
     }
 
     @Override
-    public ItemStack getCloneItemStack(BlockState state, HitResult target, BlockGetter world, BlockPos pos,
-                                       Player player) {
+    public ItemStack getCloneItemStack(BlockState state, HitResult target, LevelReader level, BlockPos pos, Player player) {
         if (state.getValue(AXIS).isVertical())
-            return super.getCloneItemStack(state, target, world, pos, player);
+            return super.getCloneItemStack(state, target, level, pos, player);
         return new ItemStack(CCItems.VERTICAL_BRASS_GEARBOX.get());
     }
 
@@ -83,20 +82,16 @@ public class BrassGearboxBlock extends RotatedPillarKineticBlock implements IBE<
         return defaultBlockState().setValue(AXIS, Axis.Y);
     }
 
-    @SuppressWarnings("deprecation")
     @Override
-    public @NotNull InteractionResult use(
-            BlockState pState,
-            @NotNull Level pLevel,
-            @NotNull BlockPos pPos,
-            @NotNull Player pPlayer,
-            @NotNull InteractionHand pHand,
-            @NotNull BlockHitResult pHit) {
-        if (pState.getBlock() != this) return InteractionResult.PASS;
-        if (pPlayer.isHolding(AllItems.WRENCH.get())) return InteractionResult.PASS;
-        int face = getFaceId(pHit.getDirection(), pState.getValue(AXIS));
+    protected @NotNull InteractionResult useWithoutItem(BlockState state,
+                                                        @NotNull Level level,
+                                                        @NotNull BlockPos pos,
+                                                        @NotNull Player player,
+                                                        @NotNull BlockHitResult hitResult) {
+        if (state.getBlock() != this) return InteractionResult.PASS;
+        int face = getFaceId(hitResult.getDirection(), state.getValue(AXIS));
         if (face == 0) return InteractionResult.PASS;
-        KineticBlockEntity.switchToBlockState(pLevel, pPos, setFaceFlipped(face, pState, !isFaceFlipped(face, pState)));
+        KineticBlockEntity.switchToBlockState(level, pos, setFaceFlipped(face, state, !isFaceFlipped(face, state)));
         return InteractionResult.SUCCESS;
     }
 

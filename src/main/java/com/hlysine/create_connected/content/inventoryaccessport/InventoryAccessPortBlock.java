@@ -18,9 +18,9 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.AttachFace;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.neoforged.common.capabilities.Capability;
-import net.neoforged.common.capabilities.ForgeCapabilities;
-import net.neoforged.items.IItemHandler;
+import net.neoforged.neoforge.capabilities.BlockCapability;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.items.IItemHandler;
 import org.jetbrains.annotations.NotNull;
 
 public class InventoryAccessPortBlock extends DirectedDirectionalBlock implements IBE<InventoryAccessPortBlockEntity>, IWrenchable {
@@ -40,14 +40,14 @@ public class InventoryAccessPortBlock extends DirectedDirectionalBlock implement
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         BlockState state = defaultBlockState();
-        Capability<IItemHandler> itemCap = ForgeCapabilities.ITEM_HANDLER;
+        BlockCapability<IItemHandler, Direction> itemCap = Capabilities.ItemHandler.BLOCK;
 
         Direction preferredFacing = null;
         for (Direction face : context.getNearestLookingDirections()) {
             BlockEntity be = context.getLevel()
                     .getBlockEntity(context.getClickedPos()
                             .relative(face));
-            if (be != null && be.getCapability(itemCap).isPresent()) {
+            if (be != null && context.getLevel().getCapability(itemCap, be.getBlockPos(), null) != null) {
                 preferredFacing = face;
                 break;
             }
@@ -67,13 +67,11 @@ public class InventoryAccessPortBlock extends DirectedDirectionalBlock implement
         return state.setValue(FACING, preferredFacing);
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public void onPlace(@NotNull BlockState state, @NotNull Level worldIn, @NotNull BlockPos pos, @NotNull BlockState oldState, boolean isMoving) {
         withBlockEntityDo(worldIn, pos, InventoryAccessPortBlockEntity::updateConnectedInventory);
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public void neighborChanged(@NotNull BlockState pState, @NotNull Level pLevel, @NotNull BlockPos pPos, @NotNull Block pBlock, @NotNull BlockPos pFromPos, boolean pIsMoving) {
         withBlockEntityDo(pLevel, pPos, InventoryAccessPortBlockEntity::updateConnectedInventory);
@@ -86,13 +84,11 @@ public class InventoryAccessPortBlock extends DirectedDirectionalBlock implement
             pLevel.updateNeighborsAtExceptFromFacing(pPos, this, fromSide);
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public boolean hasAnalogOutputSignal(@NotNull BlockState state) {
         return true;
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public int getAnalogOutputSignal(@NotNull BlockState blockState, @NotNull Level worldIn, @NotNull BlockPos pos) {
         if (!blockState.getValue(ATTACHED)) return 0;

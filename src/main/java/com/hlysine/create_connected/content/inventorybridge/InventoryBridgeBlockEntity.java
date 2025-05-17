@@ -1,5 +1,6 @@
 package com.hlysine.create_connected.content.inventorybridge;
 
+import com.hlysine.create_connected.CCBlockEntityTypes;
 import com.hlysine.create_connected.content.inventoryaccessport.WrappedItemHandler;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
@@ -10,15 +11,15 @@ import com.simibubi.create.foundation.blockEntity.behaviour.inventory.InvManipul
 import net.createmod.catnip.math.BlockFace;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.common.capabilities.Capability;
-import net.neoforged.common.util.LazyOptional;
-import net.neoforged.items.IItemHandler;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
+import net.neoforged.neoforge.items.IItemHandler;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.function.Supplier;
@@ -27,7 +28,7 @@ import static com.hlysine.create_connected.content.inventorybridge.InventoryBrid
 import static com.hlysine.create_connected.content.inventorybridge.InventoryBridgeBlock.ATTACHED_POSITIVE;
 
 public class InventoryBridgeBlockEntity extends SmartBlockEntity {
-    protected LazyOptional<IItemHandler> itemCapability;
+    protected IItemHandler itemCapability;
     private InvManipulationBehaviour negativeInventory;
     private InvManipulationBehaviour positiveInventory;
 
@@ -40,8 +41,20 @@ public class InventoryBridgeBlockEntity extends SmartBlockEntity {
     public InventoryBridgeBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
 
-        itemCapability = LazyOptional.empty();
+        itemCapability = null;
         powered = false;
+    }
+
+    public static void registerCapabilities(RegisterCapabilitiesEvent event) {
+        event.registerBlockEntity(
+                Capabilities.ItemHandler.BLOCK,
+                CCBlockEntityTypes.INVENTORY_BRIDGE.get(),
+                (be, context) -> {
+                    if (be.itemCapability == null)
+                        be.refreshCapability();
+                    return be.itemCapability;
+                }
+        );
     }
 
     @Override
@@ -94,24 +107,15 @@ public class InventoryBridgeBlockEntity extends SmartBlockEntity {
     }
 
     @Override
-    public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
-        if (isItemHandlerCap(cap)) {
-            initCapability();
-            return itemCapability.cast();
-        }
-        return super.getCapability(cap, side);
+    protected void read(CompoundTag tag, HolderLookup.Provider registries, boolean clientPacket) {
+        super.read(tag, registries, clientPacket);
+        powered = tag.getBoolean("Powered");
     }
 
     @Override
-    protected void read(CompoundTag compound, boolean clientPacket) {
-        super.read(compound, clientPacket);
-        powered = compound.getBoolean("Powered");
-    }
-
-    @Override
-    protected void write(CompoundTag compound, boolean clientPacket) {
-        super.write(compound, clientPacket);
-        compound.putBoolean("Powered", powered);
+    protected void write(CompoundTag tag, HolderLookup.Provider registries, boolean clientPacket) {
+        super.write(tag, registries, clientPacket);
+        tag.putBoolean("Powered", powered);
     }
 
     private IItemHandler getNegativeHandler() {
@@ -128,8 +132,9 @@ public class InventoryBridgeBlockEntity extends SmartBlockEntity {
         return handler;
     }
 
-    private void initCapability() {
-        itemCapability = LazyOptional.of(InventoryBridgeHandler::new);
+    private void refreshCapability() {
+        itemCapability = new InventoryBridgeHandler();
+        invalidateCapabilities();
     }
 
     private class InventoryBridgeHandler implements WrappedItemHandler {

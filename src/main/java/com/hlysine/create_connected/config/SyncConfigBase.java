@@ -1,28 +1,26 @@
 package com.hlysine.create_connected.config;
 
 import com.hlysine.create_connected.CreateConnected;
+import io.netty.buffer.ByteBuf;
 import net.createmod.catnip.config.ConfigBase;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.minecraft.network.protocol.configuration.ServerConfigurationPacketListener;
 import net.minecraft.server.level.ServerPlayer;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.common.MinecraftForge;
-import net.neoforged.event.entity.player.PlayerEvent;
-import net.neoforged.fml.DistExecutor;
-import net.neoforged.network.NetworkEvent.Context;
-import net.neoforged.network.NetworkRegistry;
-import net.neoforged.network.PacketDistributor;
-import net.neoforged.network.simple.SimpleChannel;
-import net.neoforged.server.ServerLifecycleHooks;
+import net.minecraft.server.network.ConfigurationTask;
+import net.neoforged.neoforge.network.PacketDistributor;
+import net.neoforged.neoforge.network.configuration.ICustomConfigurationTask;
+import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
+import net.neoforged.neoforge.network.handling.DirectionalPayloadHandler;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
+import net.neoforged.neoforge.network.registration.PayloadRegistrar;
+import org.jetbrains.annotations.NotNull;
 
-import java.util.function.BiConsumer;
-import java.util.function.Function;
-import java.util.function.Supplier;
+import java.util.function.Consumer;
 
 public abstract class SyncConfigBase extends ConfigBase {
-
-    private SimpleChannel syncChannel;
-    private Function<CompoundTag, ? extends SyncConfig> messageSupplier;
 
     public final CompoundTag getSyncConfig() {
         CompoundTag nbt = new CompoundTag();
@@ -55,31 +53,6 @@ public abstract class SyncConfigBase extends ConfigBase {
     protected void readSyncConfig(CompoundTag nbt) {
     }
 
-    public <T extends SyncConfig> void registerAsSyncRoot(
-            String configVersion,
-            Class<T> messageType,
-            BiConsumer<T, FriendlyByteBuf> encoder,
-            Function<FriendlyByteBuf, T> decoder,
-            BiConsumer<T, Supplier<Context>> messageConsumer,
-            Function<CompoundTag, T> messageSupplier
-    ) {
-        syncChannel = NetworkRegistry.newSimpleChannel(
-                CreateConnected.asResource("config_" + getName()),
-                () -> configVersion,
-                configVersion::equals,
-                configVersion::equals
-        );
-        syncChannel.registerMessage(
-                0,
-                messageType,
-                encoder,
-                decoder,
-                messageConsumer
-        );
-        this.messageSupplier = messageSupplier;
-        MinecraftForge.EVENT_BUS.addListener(this::syncToPlayer);
-    }
-
     @Override
     public void onLoad() {
         super.onLoad();
@@ -93,50 +66,72 @@ public abstract class SyncConfigBase extends ConfigBase {
     }
 
     public void syncToAllPlayers() {
-        if (this.syncChannel == null) {
-            return; // not sync root
-        }
-        if (ServerLifecycleHooks.getCurrentServer() == null) {
-            CreateConnected.LOGGER.debug("Sync Config: Config sync skipped due to null server");
-            return;
-        }
         CreateConnected.LOGGER.debug("Sync Config: Sending server config to all players on reload");
-        syncChannel.send(PacketDistributor.ALL.noArg(), this.messageSupplier.apply(getSyncConfig()));
+        PacketDistributor.sendToAllPlayers(new SyncConfig(getSyncConfig()));
     }
 
-    private void syncToPlayer(PlayerEvent.PlayerLoggedInEvent event) {
-        ServerPlayer player = (ServerPlayer) event.getEntity();
+    private void syncToPlayer(ServerPlayer player) {
         if (player == null) return;
-        CreateConnected.LOGGER.debug("Sync Config: Sending server config to " + player.getScoreboardName());
-        syncChannel.send(PacketDistributor.PLAYER.with(() -> player), this.messageSupplier.apply(getSyncConfig()));
+        CreateConnected.LOGGER.debug("Sync Config: Sending server config to {}", player.getScoreboardName());
+        PacketDistributor.sendToPlayer(player, new SyncConfig(getSyncConfig()));
     }
 
-    public abstract static class SyncConfig {
+    protected void registerAsSyncRoot(final RegisterPayloadHandlersEvent event, final String version) {
+        final PayloadRegistrar registrar = event.registrar(version);
+        registrar.playBidirectional(
+                SyncConfig.TYPE,
+                SyncConfig.STREAM_CODEC,
+                new DirectionalPayloadHandler<>(
+                        this::handleClientData,
+                        this::handleServerData
+                )
+        );
+    }
 
-        private final CompoundTag nbt;
+    public void handleServerData(final SyncConfig data, final IPayloadContext context) {
+        // do nothing
+    }
 
-        protected SyncConfig(CompoundTag nbt) {
-            this.nbt = nbt;
-        }
+    public void handleClientData(final SyncConfig data, final IPayloadContext context) {
+        this.setSyncConfig(data.nbt());
+        CreateConnected.LOGGER.debug("Sync Config: Received and applied server config {}", data.nbt().toString());
+    }
 
-        protected abstract SyncConfigBase configInstance();
+    public record SyncConfig(CompoundTag nbt) implements CustomPacketPayload {
+        public static final Type<SyncConfig> TYPE = new Type<>(CreateConnected.asResource("sync_config"));
 
-        void encode(FriendlyByteBuf buf) {
-            buf.writeNbt(nbt);
-        }
+        public static final StreamCodec<ByteBuf, SyncConfig> STREAM_CODEC = StreamCodec.composite(
+                ByteBufCodecs.COMPOUND_TAG,
+                SyncConfig::nbt,
+                SyncConfig::new
+        );
 
-        static CompoundTag decode(FriendlyByteBuf buf) {
-            return buf.readAnySizeNbt();
-        }
-
-        void handle(Supplier<Context> context) {
-            Context ctx = context.get();
-            ctx.enqueueWork(() -> DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
-                configInstance().setSyncConfig(nbt);
-                CreateConnected.LOGGER.debug("Sync Config: Received and applied server config " + nbt.toString());
-            }));
-            ctx.setPacketHandled(true);
+        @Override
+        public @NotNull Type<? extends CustomPacketPayload> type() {
+            return TYPE;
         }
     }
 
+    public static abstract class SyncConfigTask implements ICustomConfigurationTask {
+        public static final ConfigurationTask.Type TYPE = new Type(CreateConnected.asResource("sync_config_task"));
+        private final ServerConfigurationPacketListener listener;
+
+        public SyncConfigTask(ServerConfigurationPacketListener listener) {
+            this.listener = listener;
+        }
+
+        protected abstract SyncConfigBase getSyncConfig();
+
+        @Override
+        public void run(final Consumer<CustomPacketPayload> sender) {
+            final SyncConfig payload = new SyncConfig(getSyncConfig().getSyncConfig());
+            sender.accept(payload);
+            listener.finishCurrentTask(this.type());
+        }
+
+        @Override
+        public @NotNull Type type() {
+            return TYPE;
+        }
+    }
 }

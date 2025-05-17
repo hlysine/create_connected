@@ -29,7 +29,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
-import net.neoforged.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.FluidStack;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;

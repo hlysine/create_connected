@@ -22,6 +22,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
@@ -56,7 +57,6 @@ public class ShearPinBlock extends AbstractBEShaftBlock<ShearPinBlockEntity> {
         return CCBlockEntityTypes.SHEAR_PIN.get();
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public void tick(@NotNull BlockState pState, ServerLevel pLevel, @NotNull BlockPos pPos, @NotNull RandomSource pRandom) {
         BlockEntity be = pLevel.getBlockEntity(pPos);
@@ -77,7 +77,6 @@ public class ShearPinBlock extends AbstractBEShaftBlock<ShearPinBlockEntity> {
         return CCBlocks.SHEAR_PIN.has(state);
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public @NotNull VoxelShape getShape(BlockState state, @NotNull BlockGetter worldIn, @NotNull BlockPos pos, @NotNull CollisionContext context) {
         return AllShapes.SIX_VOXEL_POLE.get(state.getValue(AXIS));
@@ -93,21 +92,18 @@ public class ShearPinBlock extends AbstractBEShaftBlock<ShearPinBlockEntity> {
         return .125f;
     }
 
-    @SuppressWarnings("deprecation")
     @Override
-    public @NotNull InteractionResult use(@NotNull BlockState state, @NotNull Level world, @NotNull BlockPos pos, Player player, @NotNull InteractionHand hand,
-                                          @NotNull BlockHitResult ray) {
+    public @NotNull ItemInteractionResult useItemOn(@NotNull ItemStack item, @NotNull BlockState state, @NotNull Level world, @NotNull BlockPos pos, Player player, @NotNull InteractionHand hand,
+                                                    @NotNull BlockHitResult ray) {
         if (player.isShiftKeyDown() || !player.mayBuild())
-            return InteractionResult.PASS;
-
-        ItemStack heldItem = player.getItemInHand(hand);
+            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
 
         IPlacementHelper helper = PlacementHelpers.get(placementHelperId);
-        if (helper.matchesItem(heldItem))
+        if (helper.matchesItem(item))
             return helper.getOffset(player, world, state, pos, ray)
-                    .placeInWorld(world, (BlockItem) heldItem.getItem(), player, hand, ray);
+                    .placeInWorld(world, (BlockItem) item.getItem(), player, hand, ray);
 
-        return InteractionResult.PASS;
+        return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
     }
 
     @MethodsReturnNonnullByDefault

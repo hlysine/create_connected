@@ -1,5 +1,6 @@
 package com.hlysine.create_connected.content.copycat.fencegate;
 
+import com.hlysine.create_connected.content.copycat.ICopycatWithWrappedBlock;
 import com.hlysine.create_connected.content.copycat.WaterloggedCopycatWrappedBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -23,7 +24,6 @@ import org.jetbrains.annotations.Nullable;
 
 import static net.minecraft.world.level.block.FenceGateBlock.*;
 
-@SuppressWarnings("deprecation")
 public class CopycatFenceGateBlock extends WaterloggedCopycatWrappedBlock {
 
     public static FenceGateBlock fenceGate;
@@ -63,47 +63,47 @@ public class CopycatFenceGateBlock extends WaterloggedCopycatWrappedBlock {
 
     @Override
     public @NotNull VoxelShape getShape(@NotNull BlockState pState, @NotNull BlockGetter pLevel, @NotNull BlockPos pPos, @NotNull CollisionContext pContext) {
-        return fenceGate.getShape(pState, pLevel, pPos, pContext);
+        return ICopycatWithWrappedBlock.wrappedState(fenceGate, pState).getShape(pLevel, pPos, pContext);
     }
 
     @Override
     public @NotNull BlockState updateShape(@NotNull BlockState pState, @NotNull Direction pDirection, @NotNull BlockState pNeighborState, @NotNull LevelAccessor pLevel, @NotNull BlockPos pCurrentPos, @NotNull BlockPos pNeighborPos) {
-        return migrateOnUpdate(pLevel.isClientSide(), fenceGate.updateShape(pState, pDirection, pNeighborState, pLevel, pCurrentPos, pNeighborPos));
+        return migrateOnUpdate(pLevel.isClientSide(), ICopycatWithWrappedBlock.unwrapForOperation(fenceGate, pState, state -> state.updateShape(pDirection, pNeighborState, pLevel, pCurrentPos, pNeighborPos)));
     }
 
     @Override
     public @NotNull VoxelShape getBlockSupportShape(@NotNull BlockState pState, @NotNull BlockGetter pReader, @NotNull BlockPos pPos) {
-        return fenceGate.getBlockSupportShape(pState, pReader, pPos);
+        return ICopycatWithWrappedBlock.wrappedState(fenceGate, pState).getBlockSupportShape(pReader, pPos);
     }
 
     @Override
     public @NotNull VoxelShape getCollisionShape(@NotNull BlockState pState, @NotNull BlockGetter pLevel, @NotNull BlockPos pPos, @NotNull CollisionContext pContext) {
-        return fenceGate.getCollisionShape(pState, pLevel, pPos, pContext);
+        return ICopycatWithWrappedBlock.wrappedState(fenceGate, pState).getCollisionShape(pLevel, pPos, pContext);
     }
 
     @Override
     public @NotNull VoxelShape getOcclusionShape(@NotNull BlockState pState, @NotNull BlockGetter pLevel, @NotNull BlockPos pPos) {
-        return fenceGate.getOcclusionShape(pState, pLevel, pPos);
+        return ICopycatWithWrappedBlock.wrappedState(fenceGate, pState).getOcclusionShape(pLevel, pPos);
     }
 
     @Override
-    public boolean isPathfindable(@NotNull BlockState pState, @NotNull BlockGetter pLevel, @NotNull BlockPos pPos, @NotNull PathComputationType pType) {
-        return fenceGate.isPathfindable(pState, pLevel, pPos, pType);
+    protected boolean isPathfindable(@NotNull BlockState pState, @NotNull PathComputationType pPathComputationType) {
+        return ICopycatWithWrappedBlock.wrappedState(fenceGate, pState).isPathfindable(pPathComputationType);
     }
 
     @Override
     public void neighborChanged(@NotNull BlockState pState, @NotNull Level pLevel, @NotNull BlockPos pPos, @NotNull Block pBlock, @NotNull BlockPos pFromPos, boolean pIsMoving) {
-        fenceGate.neighborChanged(pState, pLevel, pPos, pBlock, pFromPos, pIsMoving);
+        ICopycatWithWrappedBlock.wrappedState(fenceGate, pState).handleNeighborChanged(pLevel, pPos, pBlock, pFromPos, pIsMoving);
     }
 
     @Override
     public @NotNull BlockState rotate(@NotNull BlockState pState, @NotNull Rotation pRotation) {
-        return fenceGate.rotate(pState, pRotation);
+        return ICopycatWithWrappedBlock.unwrapForOperation(fenceGate, pState, state -> state.rotate(pRotation));
     }
 
     @Override
     public @NotNull BlockState mirror(@NotNull BlockState pState, @NotNull Mirror pMirror) {
-        return fenceGate.mirror(pState, pMirror);
+        return ICopycatWithWrappedBlock.unwrapForOperation(fenceGate, pState, state -> state.mirror(pMirror));
     }
 
     @Override

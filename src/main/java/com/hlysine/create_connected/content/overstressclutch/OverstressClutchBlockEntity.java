@@ -17,6 +17,7 @@ import com.simibubi.create.foundation.utility.CreateLang;
 import net.createmod.catnip.lang.FontHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -155,17 +156,16 @@ public class OverstressClutchBlockEntity extends SplitShaftBlockEntity {
         }
     }
 
-
     @Override
-    protected void read(CompoundTag compound, boolean clientPacket) {
+    protected void read(CompoundTag compound, HolderLookup.Provider registries, boolean clientPacket) {
         delay = compound.getInt("Delay");
-        super.read(compound, clientPacket);
+        super.read(compound, registries, clientPacket);
     }
 
     @Override
-    public void write(CompoundTag compound, boolean clientPacket) {
+    protected void write(CompoundTag compound, HolderLookup.Provider registries, boolean clientPacket) {
         compound.putInt("Delay", delay);
-        super.write(compound, clientPacket);
+        super.write(compound, registries, clientPacket);
     }
 
     public static class TimeDelayScrollValueBehaviour extends ScrollValueBehaviour {

@@ -5,6 +5,7 @@ import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.ValueBoxTransform;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -55,16 +56,15 @@ public class LinkedTransmitterBlockEntity extends SmartBlockEntity {
     }
 
     @Override
-    public void write(CompoundTag compound, boolean clientPacket) {
-        compound.putInt("Transmit", transmittedSignal);
-        super.write(compound, clientPacket);
+    protected void write(CompoundTag tag, HolderLookup.Provider registries, boolean clientPacket) {
+        tag.putInt("Transmit", transmittedSignal);
+        super.write(tag, registries, clientPacket);
     }
 
     @Override
-    protected void read(CompoundTag compound, boolean clientPacket) {
-        super.read(compound, clientPacket);
+    protected void read(CompoundTag tag, HolderLookup.Provider registries, boolean clientPacket) {
+        super.read(tag, registries, clientPacket);
         if (level == null || level.isClientSide || !link.newPosition)
-            transmittedSignal = compound.getInt("Transmit");
+            transmittedSignal = tag.getInt("Transmit");
     }
-
 }

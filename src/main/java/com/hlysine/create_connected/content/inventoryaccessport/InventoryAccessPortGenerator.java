@@ -8,7 +8,7 @@ import com.tterrag.registrate.providers.RegistrateBlockstateProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.client.model.generators.ModelFile;
+import net.neoforged.neoforge.client.model.generators.ModelFile;
 
 public class InventoryAccessPortGenerator extends SpecialBlockStateGen {
 

@@ -27,9 +27,8 @@ public abstract class AbstractBEShaftBlock<T extends KineticBlockEntity> extends
         registerDefaultState(super.defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, false));
     }
 
-    @SuppressWarnings("deprecation")
     @Override
-    public boolean isPathfindable(@NotNull BlockState state, @NotNull BlockGetter reader, @NotNull BlockPos pos, @NotNull PathComputationType type) {
+    protected boolean isPathfindable(BlockState state, PathComputationType pathComputationType) {
         return false;
     }
 
@@ -43,7 +42,6 @@ public abstract class AbstractBEShaftBlock<T extends KineticBlockEntity> extends
         return state.getValue(AXIS);
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public @NotNull FluidState getFluidState(@NotNull BlockState state) {
         return fluidState(state);
@@ -54,7 +52,6 @@ public abstract class AbstractBEShaftBlock<T extends KineticBlockEntity> extends
         super.createBlockStateDefinition(builder.add(BlockStateProperties.WATERLOGGED));
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public @NotNull BlockState updateShape(@NotNull BlockState state,
                                            @NotNull Direction direction,

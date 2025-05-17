@@ -16,6 +16,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.Vector;
 import java.util.function.Function;
@@ -178,7 +179,7 @@ public class SequencedPulseGeneratorScreen extends AbstractSimiScreen {
         ListTag serialized = Instruction.serializeAll(instructions);
         if (serialized.equals(compareTag))
             return;
-        CCPackets.getChannel().sendToServer(new ConfigureSequencedPulseGeneratorPacket(be.getBlockPos(), serialized));
+        PacketDistributor.sendToServer(new ConfigureSequencedPulseGeneratorPacket(be.getBlockPos(), serialized));
     }
 
     @Override

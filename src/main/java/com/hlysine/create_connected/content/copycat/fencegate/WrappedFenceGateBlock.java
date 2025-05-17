@@ -4,8 +4,8 @@ import net.minecraft.world.level.block.FenceGateBlock;
 import net.minecraft.world.level.block.state.properties.WoodType;
 
 public class WrappedFenceGateBlock extends FenceGateBlock {
-    public WrappedFenceGateBlock(Properties pProperties, WoodType pType) {
-        super(pProperties, pType);
+    public WrappedFenceGateBlock(WoodType pType, Properties pProperties) {
+        super(pType, pProperties);
     }
 
     /**

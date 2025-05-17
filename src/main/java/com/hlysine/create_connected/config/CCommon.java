@@ -1,13 +1,20 @@
 package com.hlysine.create_connected.config;
 
+import com.hlysine.create_connected.CreateConnected;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.protocol.configuration.ServerConfigurationPacketListener;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.network.event.RegisterConfigurationTasksEvent;
+import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
+import org.jetbrains.annotations.NotNull;
 
+@EventBusSubscriber(modid = CreateConnected.MODID, bus = EventBusSubscriber.Bus.MOD)
 public class CCommon extends SyncConfigBase {
-    private static final String VERSION = "1.0.0";
 
     @Override
-    public String getName() {
+    public @NotNull String getName() {
         return "common";
     }
 
@@ -19,15 +26,15 @@ public class CCommon extends SyncConfigBase {
 
     public final CFeatureCategories categories = nested(0, CFeatureCategories::new, Comments.categories);
 
-    public void register() {
-        registerAsSyncRoot(
-                VERSION,
-                SyncConfig.class,
-                SyncConfig::encode,
-                SyncConfig::new,
-                SyncConfig::handle,
-                SyncConfig::new
-        );
+    @SubscribeEvent
+    public static void register(final RegisterPayloadHandlersEvent event) {
+        CCConfigs.common().registerAsSyncRoot(event, "2.0.0");
+    }
+
+
+    @SubscribeEvent
+    public static void register(final RegisterConfigurationTasksEvent event) {
+        event.register(new CommonSyncConfigTask(event.getListener()));
     }
 
     private static class Comments {
@@ -37,19 +44,14 @@ public class CCommon extends SyncConfigBase {
         static String migrateCopycatsOnInitialize = "Migrate copycats to Create: Copycats+ when their block entities are initialized";
     }
 
-    private class SyncConfig extends SyncConfigBase.SyncConfig {
-
-        protected SyncConfig(FriendlyByteBuf buf) {
-            this(decode(buf));
-        }
-
-        protected SyncConfig(CompoundTag nbt) {
-            super(nbt);
+    public static class CommonSyncConfigTask extends SyncConfigTask {
+        public CommonSyncConfigTask(ServerConfigurationPacketListener listener) {
+            super(listener);
         }
 
         @Override
-        protected SyncConfigBase configInstance() {
-            return CCommon.this;
+        protected SyncConfigBase getSyncConfig() {
+            return CCConfigs.common();
         }
     }
 }

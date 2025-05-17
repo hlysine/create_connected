@@ -28,21 +28,23 @@ public class ParallelGearboxBlock extends RotatedPillarKineticBlock implements I
     }
 
     @Override
-    public PushReaction getPistonPushReaction(BlockState state) {
+    public PushReaction getPistonPushReaction(@NotNull BlockState state) {
         return PushReaction.PUSH_ONLY;
     }
 
-    @SuppressWarnings("deprecation")
     @Override
-    public List<ItemStack> getDrops(BlockState state, @NotNull LootParams.Builder builder) {
+    public @NotNull List<ItemStack> getDrops(BlockState state, @NotNull LootParams.Builder builder) {
         if (state.getValue(AXIS).isVertical())
             return super.getDrops(state, builder);
         return List.of(new ItemStack(CCItems.VERTICAL_PARALLEL_GEARBOX.get()));
     }
 
     @Override
-    public ItemStack getCloneItemStack(BlockState state, HitResult target, BlockGetter world, BlockPos pos,
-                                       Player player) {
+    public @NotNull ItemStack getCloneItemStack(BlockState state,
+                                                @NotNull HitResult target,
+                                                @NotNull LevelReader world,
+                                                @NotNull BlockPos pos,
+                                                @NotNull Player player) {
         if (state.getValue(AXIS).isVertical())
             return super.getCloneItemStack(state, target, world, pos, player);
         return new ItemStack(CCItems.VERTICAL_PARALLEL_GEARBOX.get());

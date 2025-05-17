@@ -1,17 +1,18 @@
 package com.hlysine.create_connected.datagen.advancements;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Supplier;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import com.google.gson.JsonObject;
 
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.advancements.critereon.ContextAwarePredicate;
-import net.minecraft.advancements.critereon.DeserializationContext;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.advancements.critereon.EntityPredicate;
 import net.minecraft.server.level.ServerPlayer;
 
 @MethodsReturnNonnullByDefault
@@ -22,28 +23,42 @@ public class SimpleCCTrigger extends CriterionTriggerBase<SimpleCCTrigger.Instan
         super(id);
     }
 
-    @Override
-    public SimpleCCTrigger.Instance createInstance(JsonObject json, DeserializationContext context) {
-        return new SimpleCCTrigger.Instance(getId());
-    }
-
     public void trigger(ServerPlayer player) {
         super.trigger(player, null);
     }
 
     public SimpleCCTrigger.Instance instance() {
-        return new SimpleCCTrigger.Instance(getId());
+        return new SimpleCCTrigger.Instance();
+    }
+
+    @Override
+    public Codec<SimpleCCTrigger.Instance> codec() {
+        return SimpleCCTrigger.Instance.CODEC;
     }
 
     public static class Instance extends CriterionTriggerBase.Instance {
+        private static final Codec<SimpleCCTrigger.Instance> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+                EntityPredicate.ADVANCEMENT_CODEC.optionalFieldOf("player").forGetter(SimpleCCTrigger.Instance::player)
+        ).apply(instance, SimpleCCTrigger.Instance::new));
 
-        public Instance(ResourceLocation idIn) {
-            super(idIn, ContextAwarePredicate.ANY);
+        private final Optional<ContextAwarePredicate> player;
+
+        public Instance() {
+            player = Optional.empty();
+        }
+
+        public Instance(Optional<ContextAwarePredicate> player) {
+            this.player = player;
         }
 
         @Override
         protected boolean test(@Nullable List<Supplier<Object>> suppliers) {
             return true;
+        }
+
+        @Override
+        public Optional<ContextAwarePredicate> player() {
+            return player;
         }
     }
 }

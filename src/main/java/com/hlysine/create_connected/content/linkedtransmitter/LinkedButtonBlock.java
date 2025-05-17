@@ -16,6 +16,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.ButtonBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -31,6 +32,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +43,7 @@ public class LinkedButtonBlock extends ButtonBlock implements IBE<LinkedTransmit
     private final ButtonBlock base;
 
     public LinkedButtonBlock(Properties pProperties, ButtonBlock base) {
-        super(pProperties, base.type, base.ticksToStayPressed, base.arrowsCanPress);
+        super(base.type, base.ticksToStayPressed, pProperties);
         this.base = base;
         registerDefaultState(defaultBlockState().setValue(LOCKED, false));
     }
@@ -70,25 +72,23 @@ public class LinkedButtonBlock extends ButtonBlock implements IBE<LinkedTransmit
         return Shapes.or(getTransmitterShape(state), super.getShape(state, level, pos, context));
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public @NotNull List<ItemStack> getDrops(@NotNull BlockState state, LootParams.@NotNull Builder builder) {
-        return base.getDrops(state, builder);
+        return base.defaultBlockState().getDrops(builder);
     }
 
     @Override
-    public @NotNull InteractionResult use(@NotNull BlockState state,
+    public @NotNull InteractionResult useWithoutItem(@NotNull BlockState state,
                                           @NotNull Level level,
                                           @NotNull BlockPos pos,
                                           @NotNull Player player,
-                                          @NotNull InteractionHand hand,
                                           @NotNull BlockHitResult hit) {
         if (player.isSpectator())
             return InteractionResult.PASS;
 
         if (isHittingBase(state, level, pos, hit)) {
             if (!player.isShiftKeyDown())
-                return super.use(state, level, pos, player, hand, hit);
+                return super.useWithoutItem(state, level, pos, player, hit);
             return InteractionResult.CONSUME;
         }
         if (player.isShiftKeyDown()) {
@@ -104,8 +104,8 @@ public class LinkedButtonBlock extends ButtonBlock implements IBE<LinkedTransmit
     @Override
     public void onRemove(@NotNull BlockState state, @NotNull Level world, @NotNull BlockPos pos, @NotNull BlockState newState, boolean isMoving) {
         if (!state.is(newState.getBlock()) && !isMoving && getBlockEntityOptional(world, pos).map(be -> be.containsBase).orElse(false))
-            Block.popResource(world, pos, new ItemStack(CCItems.LINKED_TRANSMITTER));
-        base.onRemove(state, world, pos, newState, isMoving);
+            Block.popResource(world, pos, new ItemStack(CCItems.LINKED_TRANSMITTER.get()));
+        base.defaultBlockState().onRemove(world, pos, newState, isMoving);
     }
 
     @Override
@@ -118,7 +118,7 @@ public class LinkedButtonBlock extends ButtonBlock implements IBE<LinkedTransmit
     public InteractionResult onWrenched(BlockState state, UseOnContext context) {
         Player player = context.getPlayer();
         if (!player.isCreative()) {
-            player.getInventory().placeItemBackInInventory(new ItemStack(CCItems.LINKED_TRANSMITTER));
+            player.getInventory().placeItemBackInInventory(new ItemStack(CCItems.LINKED_TRANSMITTER.get()));
         }
         withBlockEntityDo(context.getLevel(), context.getClickedPos(), be -> be.containsBase = false);
         replaceWithBase(state, context.getLevel(), context.getClickedPos());
@@ -152,8 +152,8 @@ public class LinkedButtonBlock extends ButtonBlock implements IBE<LinkedTransmit
     }
 
     @Override
-    public void press(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos) {
-        super.press(state, level, pos);
+    public void press(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos, @Nullable Player player) {
+        super.press(state, level, pos, player);
         updateTransmittedSignal(level, pos);
     }
 
@@ -168,7 +168,11 @@ public class LinkedButtonBlock extends ButtonBlock implements IBE<LinkedTransmit
     }
 
     @Override
-    public ItemStack getCloneItemStack(BlockState state, HitResult target, BlockGetter world, BlockPos pos, Player player) {
+    public @NotNull ItemStack getCloneItemStack(@NotNull BlockState state,
+                                                @NotNull HitResult target,
+                                                @NotNull LevelReader world,
+                                                @NotNull BlockPos pos,
+                                                @NotNull Player player) {
         if (isHittingBase(state, world, pos, target))
             return base.getCloneItemStack(state, target, world, pos, player);
         return new ItemStack(CCItems.LINKED_TRANSMITTER.get());

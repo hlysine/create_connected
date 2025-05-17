@@ -3,20 +3,24 @@ package com.hlysine.create_connected.content.itemsilo;
 import com.hlysine.create_connected.CCBlockEntityTypes;
 import com.simibubi.create.api.connectivity.ConnectivityHandler;
 import com.simibubi.create.content.equipment.symmetryWand.SymmetryWandItem;
+import com.simibubi.create.foundation.block.IBE;
 import net.createmod.catnip.math.VecHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Axis;
 import net.minecraft.core.Direction.AxisDirection;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class ItemSiloItem extends BlockItem {
@@ -35,19 +39,22 @@ public class ItemSiloItem extends BlockItem {
     }
 
     @Override
-    protected boolean updateCustomBlockEntityTag(BlockPos p_195943_1_, Level p_195943_2_, Player p_195943_3_,
-                                                 ItemStack p_195943_4_, BlockState p_195943_5_) {
-        MinecraftServer minecraftserver = p_195943_2_.getServer();
+    protected boolean updateCustomBlockEntityTag(BlockPos blockPos, Level level, Player player,
+                                                 ItemStack itemStack, BlockState blockState) {
+        MinecraftServer minecraftserver = level.getServer();
         if (minecraftserver == null)
             return false;
-        CompoundTag nbt = p_195943_4_.getTagElement("BlockEntityTag");
-        if (nbt != null) {
+        CustomData blockEntityData = itemStack.get(DataComponents.BLOCK_ENTITY_DATA);
+        if (blockEntityData != null) {
+            CompoundTag nbt = blockEntityData.copyTag();
             nbt.remove("Length");
             nbt.remove("Size");
             nbt.remove("Controller");
             nbt.remove("LastKnownPos");
+            BlockEntity.addEntityType(nbt, ((IBE<?>) this.getBlock()).getBlockEntityType());
+            itemStack.set(DataComponents.BLOCK_ENTITY_DATA, CustomData.of(nbt));
         }
-        return super.updateCustomBlockEntityTag(p_195943_1_, p_195943_2_, p_195943_3_, p_195943_4_, p_195943_5_);
+        return super.updateCustomBlockEntityTag(blockPos, level, player, itemStack, blockState);
     }
 
     private void tryMultiPlace(BlockPlaceContext ctx) {

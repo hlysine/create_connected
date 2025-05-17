@@ -1,9 +1,14 @@
 package com.hlysine.create_connected.content.attributefilter;
 
 import com.hlysine.create_connected.CCItemAttributes;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.simibubi.create.content.logistics.item.filter.attribute.ItemAttribute;
 import com.simibubi.create.content.logistics.item.filter.attribute.ItemAttributeType;
-import net.minecraft.nbt.CompoundTag;
+import io.netty.buffer.ByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
@@ -11,13 +16,13 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ItemDamageAttribute implements ItemAttribute {
+public record ItemDamageAttribute(int maxDamage) implements ItemAttribute {
+    public static final MapCodec<ItemDamageAttribute> CODEC = Codec.INT
+            .xmap(ItemDamageAttribute::new, ItemDamageAttribute::maxDamage)
+            .fieldOf("value");
 
-    int maxDamage;
-
-    public ItemDamageAttribute(int maxDamage) {
-        this.maxDamage = maxDamage;
-    }
+    public static final StreamCodec<ByteBuf, ItemDamageAttribute> STREAM_CODEC = ByteBufCodecs.INT
+            .map(ItemDamageAttribute::new, ItemDamageAttribute::maxDamage);
 
     @Override
     public boolean appliesTo(ItemStack stack, Level world) {
@@ -39,16 +44,6 @@ public class ItemDamageAttribute implements ItemAttribute {
         return new Object[]{String.valueOf(maxDamage)};
     }
 
-    @Override
-    public void save(CompoundTag nbt) {
-        nbt.putInt("maxDmg", this.maxDamage);
-    }
-
-    @Override
-    public void load(CompoundTag nbt) {
-        this.maxDamage = nbt.getInt("maxDmg");
-    }
-
     public static class Type implements ItemAttributeType {
         @Override
         public @NotNull ItemAttribute createAttribute() {
@@ -61,21 +56,15 @@ public class ItemDamageAttribute implements ItemAttribute {
             attributes.add(new ItemDamageAttribute(stack.getMaxDamage()));
             return attributes;
         }
-    }
-
-    @SuppressWarnings("deprecation")
-    public static class LegacyDeserializer implements ItemAttribute.LegacyDeserializer {
 
         @Override
-        public String getNBTKey() {
-            return "maxDamage";
+        public MapCodec<? extends ItemAttribute> codec() {
+            return CODEC;
         }
 
         @Override
-        public ItemAttribute readNBT(CompoundTag nbt) {
-            ItemAttribute attribute = new ItemDamageAttribute(0);
-            attribute.load(nbt);
-            return attribute;
+        public StreamCodec<? super RegistryFriendlyByteBuf, ? extends ItemAttribute> streamCodec() {
+            return STREAM_CODEC;
         }
     }
 }

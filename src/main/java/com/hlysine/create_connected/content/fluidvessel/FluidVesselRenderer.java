@@ -16,8 +16,8 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Axis;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.fluids.FluidStack;
-import net.neoforged.fluids.capability.templates.FluidTank;
+import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 
 public class FluidVesselRenderer extends SafeBlockEntityRenderer<FluidVesselBlockEntity> {
 
@@ -76,7 +76,7 @@ public class FluidVesselRenderer extends SafeBlockEntityRenderer<FluidVesselBloc
         ms.pushPose();
         ms.translate(0, clampedLevel - totalHeight, 0);
         FluidRenderer.renderFluidBox(fluidStack.getFluid(), fluidStack.getAmount(), xMin, yMin, zMin, xMax, yMax, zMax,
-                buffer, ms, light, false, true, fluidStack.getTag());
+                buffer, ms, light, false, true, fluidStack.getComponentsPatch());
         ms.popPose();
     }
 

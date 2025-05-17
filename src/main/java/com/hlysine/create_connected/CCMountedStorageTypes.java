@@ -12,14 +12,14 @@ import java.util.function.Supplier;
 public class CCMountedStorageTypes {
     private static final CreateRegistrate REGISTRATE = CreateConnected.getRegistrate();
 
-    public static final RegistryEntry<ItemSiloMountedStorageType> SILO = simpleItem("silo", ItemSiloMountedStorageType::new);
-    public static final RegistryEntry<FluidTankMountedStorageType> FLUID_TANK = simpleFluid("fluid_tank", FluidTankMountedStorageType::new);
+    public static final RegistryEntry<MountedItemStorageType<?>, ItemSiloMountedStorageType> SILO = simpleItem("silo", ItemSiloMountedStorageType::new);
+    public static final RegistryEntry<MountedFluidStorageType<?>, FluidTankMountedStorageType> FLUID_VESSEL = simpleFluid("fluid_vessel", FluidTankMountedStorageType::new);
 
-    private static <T extends MountedItemStorageType<?>> RegistryEntry<T> simpleItem(String name, Supplier<T> supplier) {
+    private static <T extends MountedItemStorageType<?>> RegistryEntry<MountedItemStorageType<?>, T> simpleItem(String name, Supplier<T> supplier) {
         return REGISTRATE.mountedItemStorage(name, supplier).register();
     }
 
-    private static <T extends MountedFluidStorageType<?>> RegistryEntry<T> simpleFluid(String name, Supplier<T> supplier) {
+    private static <T extends MountedFluidStorageType<?>> RegistryEntry<MountedFluidStorageType<?>, T> simpleFluid(String name, Supplier<T> supplier) {
         return REGISTRATE.mountedFluidStorage(name, supplier).register();
     }
 

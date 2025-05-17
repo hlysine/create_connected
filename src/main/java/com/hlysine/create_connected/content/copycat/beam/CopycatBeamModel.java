@@ -14,7 +14,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.client.model.data.ModelData;
+import net.neoforged.neoforge.client.model.data.ModelData;
 
 import java.util.ArrayList;
 import java.util.List;

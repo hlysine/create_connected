@@ -1,9 +1,15 @@
 package com.hlysine.create_connected.content.attributefilter;
 
 import com.hlysine.create_connected.CCItemAttributes;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.simibubi.create.content.logistics.item.filter.attribute.ItemAttribute;
 import com.simibubi.create.content.logistics.item.filter.attribute.ItemAttributeType;
+import io.netty.buffer.ByteBuf;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
@@ -11,13 +17,13 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ItemIdAttribute implements ItemAttribute {
+public record ItemIdAttribute(String word) implements ItemAttribute {
+    public static final MapCodec<ItemIdAttribute> CODEC = Codec.STRING
+            .xmap(ItemIdAttribute::new, ItemIdAttribute::word)
+            .fieldOf("value");
 
-    String word;
-
-    public ItemIdAttribute(String word) {
-        this.word = word;
-    }
+    public static final StreamCodec<ByteBuf, ItemIdAttribute> STREAM_CODEC = ByteBufCodecs.STRING_UTF8
+            .map(ItemIdAttribute::new, ItemIdAttribute::word);
 
     @Override
     public boolean appliesTo(ItemStack stack, Level world) {
@@ -39,16 +45,6 @@ public class ItemIdAttribute implements ItemAttribute {
         return new Object[]{word};
     }
 
-    @Override
-    public void save(CompoundTag nbt) {
-        nbt.putString("keyword", this.word);
-    }
-
-    @Override
-    public void load(CompoundTag nbt) {
-        this.word = nbt.getString("keyword");
-    }
-
     public static class Type implements ItemAttributeType {
         @Override
         public @NotNull ItemAttribute createAttribute() {
@@ -67,21 +63,15 @@ public class ItemIdAttribute implements ItemAttribute {
             }
             return attributes;
         }
-    }
-
-    @SuppressWarnings("deprecation")
-    public static class LegacyDeserializer implements ItemAttribute.LegacyDeserializer {
 
         @Override
-        public String getNBTKey() {
-            return "word";
+        public MapCodec<? extends ItemAttribute> codec() {
+            return CODEC;
         }
 
         @Override
-        public ItemAttribute readNBT(CompoundTag nbt) {
-            ItemAttribute attribute = new ItemIdAttribute("dummy");
-            attribute.load(nbt);
-            return attribute;
+        public StreamCodec<? super RegistryFriendlyByteBuf, ? extends ItemAttribute> streamCodec() {
+            return STREAM_CODEC;
         }
     }
 }

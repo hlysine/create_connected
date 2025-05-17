@@ -14,6 +14,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
@@ -52,21 +53,20 @@ public class CopycatVerticalStepBlock extends MigratingWaterloggedCopycatBlock {
                 .setValue(FACING, Direction.NORTH));
     }
 
-    @Override
-    public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand,
-                                 BlockHitResult ray) {
 
+    @Override
+    protected @NotNull ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
         if (!player.isShiftKeyDown() && player.mayBuild()) {
             ItemStack heldItem = player.getItemInHand(hand);
             IPlacementHelper placementHelper = PlacementHelpers.get(placementHelperId);
             if (placementHelper.matchesItem(heldItem)) {
-                placementHelper.getOffset(player, world, state, pos, ray)
-                        .placeInWorld(world, (BlockItem) heldItem.getItem(), player, hand, ray);
-                return InteractionResult.SUCCESS;
+                placementHelper.getOffset(player, level, state, pos, hitResult)
+                        .placeInWorld(level, (BlockItem) heldItem.getItem(), player, hand, hitResult);
+                return ItemInteractionResult.SUCCESS;
             }
         }
 
-        return super.use(state, world, pos, player, hand, ray);
+        return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
     }
 
     @Override
@@ -106,9 +106,8 @@ public class CopycatVerticalStepBlock extends MigratingWaterloggedCopycatBlock {
         }
     }
 
-    @SuppressWarnings("deprecation")
     @Override
-    public boolean isPathfindable(@NotNull BlockState pState, @NotNull BlockGetter pLevel, @NotNull BlockPos pPos, @NotNull PathComputationType pType) {
+    protected boolean isPathfindable(@NotNull BlockState state, @NotNull PathComputationType pathComputationType) {
         return false;
     }
 
@@ -165,7 +164,6 @@ public class CopycatVerticalStepBlock extends MigratingWaterloggedCopycatBlock {
         super.createBlockStateDefinition(pBuilder.add(FACING));
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public @NotNull VoxelShape getShape(BlockState pState, @NotNull BlockGetter pLevel, @NotNull BlockPos pPos, @NotNull CollisionContext pContext) {
         return CCShapes.CASING_8PX_VERTICAL.get(pState.getValue(FACING));
@@ -188,13 +186,11 @@ public class CopycatVerticalStepBlock extends MigratingWaterloggedCopycatBlock {
         return false;
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public @NotNull BlockState rotate(@NotNull BlockState pState, Rotation pRot) {
         return pState.setValue(FACING, pRot.rotate(pState.getValue(FACING)));
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public @NotNull BlockState mirror(@NotNull BlockState pState, @NotNull Mirror pMirror) {
         Axis mirrorAxis = null;

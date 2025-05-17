@@ -1,9 +1,15 @@
 package com.hlysine.create_connected.content.attributefilter;
 
 import com.hlysine.create_connected.CCItemAttributes;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.simibubi.create.content.logistics.item.filter.attribute.ItemAttribute;
 import com.simibubi.create.content.logistics.item.filter.attribute.ItemAttributeType;
+import io.netty.buffer.ByteBuf;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
@@ -11,13 +17,14 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ItemStackCountAttribute implements ItemAttribute {
+public record ItemStackCountAttribute(int stackSize) implements ItemAttribute {
+    public static final MapCodec<ItemStackCountAttribute> CODEC = Codec.INT
+            .xmap(ItemStackCountAttribute::new, ItemStackCountAttribute::stackSize)
+            .fieldOf("value");
 
-    int stackSize;
+    public static final StreamCodec<ByteBuf, ItemStackCountAttribute> STREAM_CODEC = ByteBufCodecs.INT
+            .map(ItemStackCountAttribute::new, ItemStackCountAttribute::stackSize);
 
-    public ItemStackCountAttribute(int stackSize) {
-        this.stackSize = stackSize;
-    }
 
     @Override
     public boolean appliesTo(ItemStack stack, Level world) {
@@ -39,16 +46,6 @@ public class ItemStackCountAttribute implements ItemAttribute {
         return new Object[]{String.valueOf(stackSize)};
     }
 
-    @Override
-    public void save(CompoundTag nbt) {
-        nbt.putInt("stackCount", this.stackSize);
-    }
-
-    @Override
-    public void load(CompoundTag nbt) {
-        this.stackSize = nbt.getInt("stackCount");
-    }
-
     public static class Type implements ItemAttributeType {
         @Override
         public @NotNull ItemAttribute createAttribute() {
@@ -61,21 +58,15 @@ public class ItemStackCountAttribute implements ItemAttribute {
             attributes.add(new ItemStackCountAttribute(stack.getMaxStackSize()));
             return attributes;
         }
-    }
-
-    @SuppressWarnings("deprecation")
-    public static class LegacyDeserializer implements ItemAttribute.LegacyDeserializer {
 
         @Override
-        public String getNBTKey() {
-            return "stackSize";
+        public MapCodec<? extends ItemAttribute> codec() {
+            return CODEC;
         }
 
         @Override
-        public ItemAttribute readNBT(CompoundTag nbt) {
-            ItemAttribute attribute = new ItemStackCountAttribute(0);
-            attribute.load(nbt);
-            return attribute;
+        public StreamCodec<? super RegistryFriendlyByteBuf, ? extends ItemAttribute> streamCodec() {
+            return STREAM_CODEC;
         }
     }
 }

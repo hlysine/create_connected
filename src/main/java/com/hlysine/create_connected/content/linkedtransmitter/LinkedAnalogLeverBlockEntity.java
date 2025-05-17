@@ -6,6 +6,7 @@ import com.simibubi.create.content.redstone.link.LinkBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.ValueBoxTransform;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -70,16 +71,15 @@ public class LinkedAnalogLeverBlockEntity extends AnalogLeverBlockEntity {
     }
 
     @Override
-    public void write(CompoundTag compound, boolean clientPacket) {
+    public void write(CompoundTag compound, HolderLookup.Provider registries, boolean clientPacket) {
         compound.putInt("Transmit", transmittedSignal);
-        super.write(compound, clientPacket);
+        super.write(compound, registries, clientPacket);
     }
 
     @Override
-    protected void read(CompoundTag compound, boolean clientPacket) {
-        super.read(compound, clientPacket);
+    protected void read(CompoundTag compound, HolderLookup.Provider registries, boolean clientPacket) {
+        super.read(compound, registries, clientPacket);
         if (level == null || level.isClientSide || !link.newPosition)
             transmittedSignal = compound.getInt("Transmit");
     }
-
 }

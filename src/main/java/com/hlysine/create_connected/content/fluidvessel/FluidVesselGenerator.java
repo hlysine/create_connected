@@ -7,7 +7,7 @@ import com.tterrag.registrate.providers.DataGenContext;
 import com.tterrag.registrate.providers.RegistrateBlockstateProvider;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.client.model.generators.ModelFile;
+import net.neoforged.neoforge.client.model.generators.ModelFile;
 
 import static com.hlysine.create_connected.content.fluidvessel.FluidVesselBlock.*;
 import static net.minecraft.core.Direction.Axis;

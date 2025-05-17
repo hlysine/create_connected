@@ -1,5 +1,6 @@
 package com.hlysine.create_connected.content.copycat.stairs;
 
+import com.hlysine.create_connected.content.copycat.ICopycatWithWrappedBlock;
 import com.hlysine.create_connected.content.copycat.WaterloggedCopycatWrappedBlock;
 import com.simibubi.create.content.decoration.copycat.CopycatBlock;
 import net.minecraft.core.BlockPos;
@@ -24,7 +25,6 @@ import org.jetbrains.annotations.Nullable;
 import static net.minecraft.core.Direction.*;
 import static net.minecraft.world.level.block.StairBlock.HALF;
 
-@SuppressWarnings("deprecation")
 public class CopycatStairsBlock extends WaterloggedCopycatWrappedBlock {
 
     public static StairBlock stairs;
@@ -63,22 +63,12 @@ public class CopycatStairsBlock extends WaterloggedCopycatWrappedBlock {
 
     @Override
     public @NotNull VoxelShape getShape(@NotNull BlockState pState, @NotNull BlockGetter pLevel, @NotNull BlockPos pPos, @NotNull CollisionContext pContext) {
-        return stairs.getShape(pState, pLevel, pPos, pContext);
-    }
-
-    @Override
-    public void animateTick(@NotNull BlockState pState, @NotNull Level pLevel, @NotNull BlockPos pPos, @NotNull RandomSource pRandom) {
-        stairs.animateTick(pState, pLevel, pPos, pRandom);
+        return ICopycatWithWrappedBlock.wrappedState(stairs, pState).getShape(pLevel, pPos, pContext);
     }
 
     @Override
     public void attack(@NotNull BlockState pState, @NotNull Level pLevel, @NotNull BlockPos pPos, @NotNull Player pPlayer) {
-        stairs.attack(pState, pLevel, pPos, pPlayer);
-    }
-
-    @Override
-    public void destroy(@NotNull LevelAccessor pLevel, @NotNull BlockPos pPos, @NotNull BlockState pState) {
-        stairs.destroy(pLevel, pPos, pState);
+        ICopycatWithWrappedBlock.wrappedState(stairs, pState).attack(pLevel, pPos, pPlayer);
     }
 
     @Override
@@ -88,53 +78,48 @@ public class CopycatStairsBlock extends WaterloggedCopycatWrappedBlock {
 
     @Override
     public void onPlace(@NotNull BlockState pState, @NotNull Level pLevel, @NotNull BlockPos pPos, @NotNull BlockState pOldState, boolean pIsMoving) {
-        stairs.onPlace(pState, pLevel, pPos, pOldState, pIsMoving);
+        ICopycatWithWrappedBlock.wrappedState(stairs, pState).onPlace(pLevel, pPos, pOldState, pIsMoving);
     }
 
     @Override
     public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
         super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
-        stairs.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
+        ICopycatWithWrappedBlock.wrappedState(stairs, pState).onRemove(pLevel, pPos, pNewState, pIsMoving);
     }
 
     @Override
     public boolean isRandomlyTicking(@NotNull BlockState pState) {
-        return stairs.isRandomlyTicking(pState);
+        return ICopycatWithWrappedBlock.wrappedState(stairs, pState).isRandomlyTicking();
     }
 
     @Override
     public void randomTick(@NotNull BlockState pState, @NotNull ServerLevel pLevel, @NotNull BlockPos pPos, @NotNull RandomSource pRandom) {
-        stairs.randomTick(pState, pLevel, pPos, pRandom);
+        ICopycatWithWrappedBlock.wrappedState(stairs, pState).randomTick(pLevel, pPos, pRandom);
     }
 
     @Override
     public void tick(@NotNull BlockState pState, @NotNull ServerLevel pLevel, @NotNull BlockPos pPos, @NotNull RandomSource pRandom) {
-        stairs.tick(pState, pLevel, pPos, pRandom);
-    }
-
-    @Override
-    public void wasExploded(@NotNull Level pLevel, @NotNull BlockPos pPos, @NotNull Explosion pExplosion) {
-        stairs.wasExploded(pLevel, pPos, pExplosion);
+        ICopycatWithWrappedBlock.wrappedState(stairs, pState).tick(pLevel, pPos, pRandom);
     }
 
     @Override
     public @NotNull BlockState updateShape(@NotNull BlockState pState, @NotNull Direction pDirection, @NotNull BlockState pNeighborState, @NotNull LevelAccessor pLevel, @NotNull BlockPos pCurrentPos, @NotNull BlockPos pNeighborPos) {
-        return migrateOnUpdate(pLevel.isClientSide(), stairs.updateShape(pState, pDirection, pNeighborState, pLevel, pCurrentPos, pNeighborPos));
+        return migrateOnUpdate(pLevel.isClientSide(), ICopycatWithWrappedBlock.unwrapForOperation(stairs, pState, state -> state.updateShape(pDirection, pNeighborState, pLevel, pCurrentPos, pNeighborPos)));
     }
 
     @Override
     public @NotNull BlockState rotate(@NotNull BlockState pState, @NotNull Rotation pRotation) {
-        return stairs.rotate(pState, pRotation);
+        return ICopycatWithWrappedBlock.unwrapForOperation(stairs, pState, state -> state.rotate(pRotation));
     }
 
     @Override
     public @NotNull BlockState mirror(@NotNull BlockState pState, @NotNull Mirror pMirror) {
-        return stairs.mirror(pState, pMirror);
+        return ICopycatWithWrappedBlock.unwrapForOperation(stairs, pState, state -> state.mirror(pMirror));
     }
 
     @Override
-    public boolean isPathfindable(@NotNull BlockState pState, @NotNull BlockGetter pLevel, @NotNull BlockPos pPos, @NotNull PathComputationType pType) {
-        return stairs.isPathfindable(pState, pLevel, pPos, pType);
+    protected boolean isPathfindable(@NotNull BlockState pState, @NotNull PathComputationType pPathComputationType) {
+        return ICopycatWithWrappedBlock.wrappedState(stairs, pState).isPathfindable(pPathComputationType);
     }
 
     @Override

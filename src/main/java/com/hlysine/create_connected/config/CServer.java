@@ -1,6 +1,7 @@
 package com.hlysine.create_connected.config;
 
 import net.createmod.catnip.config.ConfigBase;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Supplier;
 
@@ -25,7 +26,7 @@ public class CServer extends ConfigBase {
 
 
     @Override
-    public String getName() {
+    public @NotNull String getName() {
         return "server";
     }
 

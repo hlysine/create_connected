@@ -20,7 +20,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition.Builder;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.neoforged.common.util.ForgeSoundType;
+import net.neoforged.neoforge.common.util.DeferredSoundType;
 
 import javax.annotation.Nullable;
 
@@ -78,7 +78,7 @@ public class ItemSiloBlock extends Block implements IWrenchable, IBE<ItemSiloBlo
 
     // Vaults are less noisy when placed in batch
     public static final SoundType SILENCED_METAL =
-            new ForgeSoundType(0.1F, 1.5F, () -> SoundEvents.NETHERITE_BLOCK_BREAK, () -> SoundEvents.NETHERITE_BLOCK_STEP,
+            new DeferredSoundType(0.1F, 1.5F, () -> SoundEvents.NETHERITE_BLOCK_BREAK, () -> SoundEvents.NETHERITE_BLOCK_STEP,
                     () -> SoundEvents.NETHERITE_BLOCK_PLACE, () -> SoundEvents.NETHERITE_BLOCK_HIT,
                     () -> SoundEvents.NETHERITE_BLOCK_FALL);
 

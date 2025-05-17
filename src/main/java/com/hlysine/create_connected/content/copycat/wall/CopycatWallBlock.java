@@ -1,5 +1,6 @@
 package com.hlysine.create_connected.content.copycat.wall;
 
+import com.hlysine.create_connected.content.copycat.ICopycatWithWrappedBlock;
 import com.hlysine.create_connected.content.copycat.WaterloggedCopycatWrappedBlock;
 import com.simibubi.create.content.decoration.copycat.CopycatBlock;
 import net.createmod.catnip.data.Iterate;
@@ -27,7 +28,6 @@ import java.util.Arrays;
 import static net.minecraft.core.Direction.Axis;
 import static net.minecraft.world.level.block.WallBlock.*;
 
-@SuppressWarnings("deprecation")
 public class CopycatWallBlock extends WaterloggedCopycatWrappedBlock {
 
     public static WallBlock wall;
@@ -68,37 +68,37 @@ public class CopycatWallBlock extends WaterloggedCopycatWrappedBlock {
 
     @Override
     public @NotNull VoxelShape getShape(@NotNull BlockState pState, @NotNull BlockGetter pLevel, @NotNull BlockPos pPos, @NotNull CollisionContext pContext) {
-        return wall.getShape(copyState(pState, wall.defaultBlockState(), true), pLevel, pPos, pContext);
+        return ICopycatWithWrappedBlock.wrappedState(wall, pState).getShape(pLevel, pPos, pContext);
     }
 
     @Override
     public @NotNull VoxelShape getCollisionShape(@NotNull BlockState pState, @NotNull BlockGetter pLevel, @NotNull BlockPos pPos, @NotNull CollisionContext pContext) {
-        return wall.getCollisionShape(copyState(pState, wall.defaultBlockState(), true), pLevel, pPos, pContext);
+        return ICopycatWithWrappedBlock.wrappedState(wall, pState).getCollisionShape(pLevel, pPos, pContext);
     }
 
     @Override
-    public boolean isPathfindable(@NotNull BlockState pState, @NotNull BlockGetter pLevel, @NotNull BlockPos pPos, @NotNull PathComputationType pType) {
-        return wall.isPathfindable(pState, pLevel, pPos, pType);
+    protected boolean isPathfindable(@NotNull BlockState pState, @NotNull PathComputationType pPathComputationType) {
+        return ICopycatWithWrappedBlock.wrappedState(wall, pState).isPathfindable(pPathComputationType);
     }
 
     @Override
     public @NotNull BlockState updateShape(@NotNull BlockState pState, @NotNull Direction pDirection, @NotNull BlockState pNeighborState, @NotNull LevelAccessor pLevel, @NotNull BlockPos pCurrentPos, @NotNull BlockPos pNeighborPos) {
-        return migrateOnUpdate(pLevel.isClientSide(), wall.updateShape(pState, pDirection, pNeighborState, pLevel, pCurrentPos, pNeighborPos));
+        return migrateOnUpdate(pLevel.isClientSide(), ICopycatWithWrappedBlock.unwrapForOperation(wall, pState, state -> state.updateShape(pDirection, pNeighborState, pLevel, pCurrentPos, pNeighborPos)));
     }
 
     @Override
     public boolean propagatesSkylightDown(@NotNull BlockState pState, @NotNull BlockGetter pLevel, @NotNull BlockPos pPos) {
-        return wall.propagatesSkylightDown(pState, pLevel, pPos);
+        return ICopycatWithWrappedBlock.wrappedState(wall, pState).propagatesSkylightDown(pLevel, pPos);
     }
 
     @Override
     public @NotNull BlockState rotate(@NotNull BlockState pState, @NotNull Rotation pRotation) {
-        return wall.rotate(pState, pRotation);
+        return ICopycatWithWrappedBlock.unwrapForOperation(wall, pState, state -> state.rotate(pRotation));
     }
 
     @Override
     public @NotNull BlockState mirror(@NotNull BlockState pState, @NotNull Mirror pMirror) {
-        return wall.mirror(pState, pMirror);
+        return ICopycatWithWrappedBlock.unwrapForOperation(wall, pState, state -> state.mirror(pMirror));
     }
 
     @Override

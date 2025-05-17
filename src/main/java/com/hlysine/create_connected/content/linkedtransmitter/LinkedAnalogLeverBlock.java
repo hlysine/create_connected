@@ -11,11 +11,13 @@ import com.tterrag.registrate.util.nullness.NonNullSupplier;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -69,24 +71,22 @@ public class LinkedAnalogLeverBlock extends AnalogLeverBlock implements SpecialB
         return Shapes.or(getTransmitterShape(state), super.getShape(state, level, pos, context));
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public @NotNull List<ItemStack> getDrops(@NotNull BlockState state, LootParams.@NotNull Builder builder) {
-        return getBase().getDrops(state, builder);
+        return getBase().defaultBlockState().getDrops(builder);
     }
 
     @Override
-    public @NotNull InteractionResult use(@NotNull BlockState state,
-                                          @NotNull Level level,
-                                          @NotNull BlockPos pos,
-                                          @NotNull Player player,
-                                          @NotNull InteractionHand hand,
-                                          @NotNull BlockHitResult hit) {
+    public @NotNull InteractionResult useWithoutItem(@NotNull BlockState state,
+                                                     @NotNull Level level,
+                                                     @NotNull BlockPos pos,
+                                                     @NotNull Player player,
+                                                     @NotNull BlockHitResult hitResult) {
         if (player.isSpectator())
             return InteractionResult.PASS;
 
-        if (isHittingBase(state, level, pos, hit)) {
-            return super.use(state, level, pos, player, hand, hit);
+        if (isHittingBase(state, level, pos, hitResult)) {
+            return super.useWithoutItem(state, level, pos, player, hitResult);
         }
         if (player.isShiftKeyDown()) {
             if (!level.isClientSide())
@@ -101,8 +101,8 @@ public class LinkedAnalogLeverBlock extends AnalogLeverBlock implements SpecialB
     @Override
     public void onRemove(@NotNull BlockState state, @NotNull Level world, @NotNull BlockPos pos, @NotNull BlockState newState, boolean isMoving) {
         if (!state.is(newState.getBlock()) && !isMoving && getBlockEntityOptional(world, pos).map(be -> ((LinkedAnalogLeverBlockEntity) be).containsBase).orElse(false))
-            Block.popResource(world, pos, new ItemStack(CCItems.LINKED_TRANSMITTER));
-        getBase().onRemove(state, world, pos, newState, isMoving);
+            Block.popResource(world, pos, new ItemStack(CCItems.LINKED_TRANSMITTER.get()));
+        getBase().defaultBlockState().onRemove(world, pos, newState, isMoving);
     }
 
     @Override
@@ -115,7 +115,7 @@ public class LinkedAnalogLeverBlock extends AnalogLeverBlock implements SpecialB
     public InteractionResult onWrenched(BlockState state, UseOnContext context) {
         Player player = context.getPlayer();
         if (!player.isCreative()) {
-            player.getInventory().placeItemBackInInventory(new ItemStack(CCItems.LINKED_TRANSMITTER));
+            player.getInventory().placeItemBackInInventory(new ItemStack(CCItems.LINKED_TRANSMITTER.get()));
         }
         withBlockEntityDo(context.getLevel(), context.getClickedPos(), be -> ((LinkedAnalogLeverBlockEntity) be).containsBase = false);
         replaceWithBase(state, context.getLevel(), context.getClickedPos());
@@ -139,7 +139,11 @@ public class LinkedAnalogLeverBlock extends AnalogLeverBlock implements SpecialB
     }
 
     @Override
-    public ItemStack getCloneItemStack(BlockState state, HitResult target, BlockGetter world, BlockPos pos, Player player) {
+    public @NotNull ItemStack getCloneItemStack(@NotNull BlockState state,
+                                                @NotNull HitResult target,
+                                                @NotNull LevelReader world,
+                                                @NotNull BlockPos pos,
+                                                @NotNull Player player) {
         if (isHittingBase(state, world, pos, target))
             return getBase().getCloneItemStack(state, target, world, pos, player);
         return new ItemStack(CCItems.LINKED_TRANSMITTER.get());

@@ -20,9 +20,8 @@ public class MenuBlockInteractionBehaviour extends MovingInteractionBehaviour {
 
         Contraption contraption = contraptionEntity.getContraption();
         StructureTemplate.StructureBlockInfo info = contraption.getBlocks().get(localPos);
-        info.state().use(new TrackingContraptionWorld(player.level(), contraption, localPos),
+        info.state().useWithoutItem(new TrackingContraptionWorld(player.level(), contraption, localPos),
                 player,
-                activeHand,
                 new BlockHitResult(Vec3.atBottomCenterOf(localPos.above()), Direction.UP, localPos, false)
         );
         return true;

@@ -12,6 +12,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
@@ -48,20 +49,18 @@ public class CopycatBeamBlock extends MigratingWaterloggedCopycatBlock {
     }
 
     @Override
-    public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand,
-                                 BlockHitResult ray) {
-
+    protected @NotNull ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
         if (!player.isShiftKeyDown() && player.mayBuild()) {
             ItemStack heldItem = player.getItemInHand(hand);
             IPlacementHelper placementHelper = PlacementHelpers.get(placementHelperId);
             if (placementHelper.matchesItem(heldItem)) {
-                placementHelper.getOffset(player, world, state, pos, ray)
-                        .placeInWorld(world, (BlockItem) heldItem.getItem(), player, hand, ray);
-                return InteractionResult.SUCCESS;
+                placementHelper.getOffset(player, level, state, pos, hitResult)
+                        .placeInWorld(level, (BlockItem) heldItem.getItem(), player, hand, hitResult);
+                return ItemInteractionResult.SUCCESS;
             }
         }
 
-        return super.use(state, world, pos, player, hand, ray);
+        return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
     }
 
     @Override
@@ -101,9 +100,8 @@ public class CopycatBeamBlock extends MigratingWaterloggedCopycatBlock {
         }
     }
 
-    @SuppressWarnings("deprecation")
     @Override
-    public boolean isPathfindable(@NotNull BlockState pState, @NotNull BlockGetter pLevel, @NotNull BlockPos pPos, @NotNull PathComputationType pType) {
+    protected boolean isPathfindable(BlockState state, PathComputationType pathComputationType) {
         return false;
     }
 
@@ -130,7 +128,6 @@ public class CopycatBeamBlock extends MigratingWaterloggedCopycatBlock {
         super.createBlockStateDefinition(pBuilder.add(AXIS));
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public @NotNull VoxelShape getShape(BlockState pState, @NotNull BlockGetter pLevel, @NotNull BlockPos pPos, @NotNull CollisionContext pContext) {
         return CCShapes.CASING_8PX_CENTERED.get(pState.getValue(AXIS));
@@ -153,7 +150,6 @@ public class CopycatBeamBlock extends MigratingWaterloggedCopycatBlock {
         return false;
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public @NotNull BlockState rotate(@NotNull BlockState state, Rotation rot) {
         switch (rot) {

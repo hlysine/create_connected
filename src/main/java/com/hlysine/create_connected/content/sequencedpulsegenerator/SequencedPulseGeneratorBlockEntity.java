@@ -6,6 +6,7 @@ import com.hlysine.create_connected.datagen.advancements.CCAdvancements;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -183,21 +184,21 @@ public class SequencedPulseGeneratorBlockEntity extends SmartBlockEntity {
     }
 
     @Override
-    protected void write(CompoundTag nbt, boolean clientPacket) {
-        nbt.putInt("InstructionIndex", currentInstruction);
-        nbt.putBoolean("PrevPowered", poweredPreviously);
-        nbt.putInt("CurrentSignal", currentSignal);
-        nbt.put("Instructions", Instruction.serializeAll(instructions));
-        super.write(nbt, clientPacket);
+    protected void write(CompoundTag tag, HolderLookup.Provider registries, boolean clientPacket) {
+        tag.putInt("InstructionIndex", currentInstruction);
+        tag.putBoolean("PrevPowered", poweredPreviously);
+        tag.putInt("CurrentSignal", currentSignal);
+        tag.put("Instructions", Instruction.serializeAll(instructions));
+        super.write(tag, registries, clientPacket);
     }
 
     @Override
-    protected void read(CompoundTag nbt, boolean clientPacket) {
-        currentInstruction = nbt.getInt("InstructionIndex");
-        poweredPreviously = nbt.getBoolean("PrevPowered");
-        currentSignal = nbt.getInt("CurrentSignal");
-        ListTag list = nbt.getList("Instructions", Tag.TAG_COMPOUND);
+    protected void read(CompoundTag tag, HolderLookup.Provider registries, boolean clientPacket) {
+        currentInstruction = tag.getInt("InstructionIndex");
+        poweredPreviously = tag.getBoolean("PrevPowered");
+        currentSignal = tag.getInt("CurrentSignal");
+        ListTag list = tag.getList("Instructions", Tag.TAG_COMPOUND);
         instructions = Instruction.deserializeAll(list);
-        super.read(nbt, clientPacket);
+        super.read(tag, registries, clientPacket);
     }
 }

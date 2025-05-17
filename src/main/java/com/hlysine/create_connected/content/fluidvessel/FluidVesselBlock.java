@@ -24,6 +24,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -51,11 +52,10 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.neoforged.common.capabilities.ForgeCapabilities;
-import net.neoforged.common.util.ForgeSoundType;
-import net.neoforged.common.util.LazyOptional;
-import net.neoforged.fluids.FluidStack;
-import net.neoforged.fluids.capability.IFluidHandler;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.common.util.DeferredSoundType;
+import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 
 public class FluidVesselBlock extends Block implements IWrenchable, IBE<FluidVesselBlockEntity> {
 
@@ -166,50 +166,46 @@ public class FluidVesselBlock extends Block implements IWrenchable, IBE<FluidVes
     }
 
     @Override
-    public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand,
-                                 BlockHitResult ray) {
-        ItemStack heldItem = player.getItemInHand(hand);
-        boolean onClient = world.isClientSide;
+    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+        boolean onClient = level.isClientSide;
 
-        if (heldItem.isEmpty())
-            return InteractionResult.PASS;
+        if (stack.isEmpty())
+            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         if (!player.isCreative() && !creative)
-            return InteractionResult.PASS;
+            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
 
         FluidExchange exchange = null;
-        FluidVesselBlockEntity be = ConnectivityHandler.partAt(getBlockEntityType(), world, pos);
+        FluidVesselBlockEntity be = ConnectivityHandler.partAt(getBlockEntityType(), level, pos);
         if (be == null)
-            return InteractionResult.FAIL;
+            return ItemInteractionResult.FAIL;
 
-        LazyOptional<IFluidHandler> vesselCapability = be.getCapability(ForgeCapabilities.FLUID_HANDLER);
-        if (!vesselCapability.isPresent())
-            return InteractionResult.PASS;
-        IFluidHandler fluidVessel = vesselCapability.orElse(null);
-        FluidStack prevFluidInTank = fluidVessel.getFluidInTank(0)
+        IFluidHandler vesselCapability = level.getCapability(Capabilities.FluidHandler.BLOCK, be.getBlockPos(), null);
+        if (vesselCapability == null)
+            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        FluidStack prevFluidInVessel = vesselCapability.getFluidInTank(0)
                 .copy();
 
-        if (FluidHelper.tryEmptyItemIntoBE(world, player, hand, heldItem, be))
+        if (FluidHelper.tryEmptyItemIntoBE(level, player, hand, stack, be))
             exchange = FluidExchange.ITEM_TO_TANK;
-        else if (FluidHelper.tryFillItemFromBE(world, player, hand, heldItem, be))
+        else if (FluidHelper.tryFillItemFromBE(level, player, hand, stack, be))
             exchange = FluidExchange.TANK_TO_ITEM;
 
         if (exchange == null) {
-            if (GenericItemEmptying.canItemBeEmptied(world, heldItem)
-                    || GenericItemFilling.canItemBeFilled(world, heldItem))
-                return InteractionResult.SUCCESS;
-            return InteractionResult.PASS;
+            if (GenericItemEmptying.canItemBeEmptied(level, stack)
+                    || GenericItemFilling.canItemBeFilled(level, stack))
+                return ItemInteractionResult.SUCCESS;
+            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         }
 
         SoundEvent soundevent = null;
         BlockState fluidState = null;
-        FluidStack fluidInVessel = vesselCapability.map(fh -> fh.getFluidInTank(0))
-                .orElse(FluidStack.EMPTY);
+        FluidStack fluidInVessel = vesselCapability.getFluidInTank(0);
 
         if (exchange == FluidExchange.ITEM_TO_TANK) {
             if (creative && !onClient) {
-                FluidStack fluidInItem = GenericItemEmptying.emptyItem(world, heldItem, true)
+                FluidStack fluidInItem = GenericItemEmptying.emptyItem(level, stack, true)
                         .getFirst();
-                if (!fluidInItem.isEmpty() && fluidVessel instanceof CreativeFluidTankBlockEntity.CreativeSmartFluidTank creativeVessel)
+                if (!fluidInItem.isEmpty() && vesselCapability instanceof CreativeFluidTankBlockEntity.CreativeSmartFluidTank creativeVessel)
                     creativeVessel.setContainedFluid(fluidInItem);
             }
 
@@ -221,13 +217,13 @@ public class FluidVesselBlock extends Block implements IWrenchable, IBE<FluidVes
 
         if (exchange == FluidExchange.TANK_TO_ITEM) {
             if (creative && !onClient)
-                if (fluidVessel instanceof CreativeFluidTankBlockEntity.CreativeSmartFluidTank creativeVessel)
+                if (vesselCapability instanceof CreativeFluidTankBlockEntity.CreativeSmartFluidTank creativeVessel)
                     creativeVessel.setContainedFluid(FluidStack.EMPTY);
 
-            Fluid fluid = prevFluidInTank.getFluid();
+            Fluid fluid = prevFluidInVessel.getFluid();
             fluidState = fluid.defaultFluidState()
                     .createLegacyBlock();
-            soundevent = FluidHelper.getFillSound(prevFluidInTank);
+            soundevent = FluidHelper.getFillSound(prevFluidInVessel);
         }
 
         if (soundevent != null && !onClient) {
@@ -235,34 +231,34 @@ public class FluidVesselBlock extends Block implements IWrenchable, IBE<FluidVes
                     .clamp(1 - (1f * fluidInVessel.getAmount() / (FluidVesselBlockEntity.getCapacityMultiplier() * 16)), 0, 1);
             pitch /= 1.5f;
             pitch += .5f;
-            pitch += (world.random.nextFloat() - .5f) / 4f;
-            world.playSound(null, pos, soundevent, SoundSource.BLOCKS, .5f, pitch);
+            pitch += (level.random.nextFloat() - .5f) / 4f;
+            level.playSound(null, pos, soundevent, SoundSource.BLOCKS, .5f, pitch);
         }
 
-        if (!fluidInVessel.isFluidStackIdentical(prevFluidInTank)) {
+        if (!FluidStack.isSameFluidSameComponents(fluidInVessel, prevFluidInVessel)) {
             if (be instanceof FluidVesselBlockEntity) {
                 FluidVesselBlockEntity controllerBE = be.getControllerBE();
                 if (controllerBE != null) {
                     if (fluidState != null && onClient) {
                         BlockParticleOption blockParticleData =
                                 new BlockParticleOption(ParticleTypes.BLOCK, fluidState);
-                        float level = (float) fluidInVessel.getAmount() / fluidVessel.getTankCapacity(0);
+                        float fluidLevel = (float) fluidInVessel.getAmount() / vesselCapability.getTankCapacity(0);
 
                         boolean reversed = fluidInVessel.getFluid()
                                 .getFluidType()
                                 .isLighterThanAir();
                         if (reversed)
-                            level = 1 - level;
+                            fluidLevel = 1 - fluidLevel;
 
-                        Vec3 vec = ray.getLocation();
+                        Vec3 vec = hitResult.getLocation();
                         vec = new Vec3(vec.x, controllerBE.getBlockPos()
-                                .getY() + level * (controllerBE.getHeight() - .5f) + .25f, vec.z);
+                                .getY() + fluidLevel * (controllerBE.getHeight() - .5f) + .25f, vec.z);
                         Vec3 motion = player.position()
                                 .subtract(vec)
                                 .scale(1 / 20f);
                         vec = vec.add(motion);
-                        world.addParticle(blockParticleData, vec.x, vec.y, vec.z, motion.x, motion.y, motion.z);
-                        return InteractionResult.SUCCESS;
+                        level.addParticle(blockParticleData, vec.x, vec.y, vec.z, motion.x, motion.y, motion.z);
+                        return ItemInteractionResult.SUCCESS;
                     }
 
                     controllerBE.sendDataImmediately();
@@ -271,7 +267,7 @@ public class FluidVesselBlock extends Block implements IWrenchable, IBE<FluidVes
             }
         }
 
-        return InteractionResult.SUCCESS;
+        return ItemInteractionResult.SUCCESS;
     }
 
     @Override
@@ -358,7 +354,7 @@ public class FluidVesselBlock extends Block implements IWrenchable, IBE<FluidVes
 
     // Vessels are less noisy when placed in batch
     public static final SoundType SILENCED_METAL =
-            new ForgeSoundType(0.1F, 1.5F, () -> SoundEvents.METAL_BREAK, () -> SoundEvents.METAL_STEP,
+            new DeferredSoundType(0.1F, 1.5F, () -> SoundEvents.METAL_BREAK, () -> SoundEvents.METAL_STEP,
                     () -> SoundEvents.METAL_PLACE, () -> SoundEvents.METAL_HIT, () -> SoundEvents.METAL_FALL);
 
     @Override

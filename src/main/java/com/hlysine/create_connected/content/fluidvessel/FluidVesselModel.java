@@ -13,9 +13,9 @@ import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.client.model.data.ModelData;
-import net.neoforged.client.model.data.ModelData.Builder;
-import net.neoforged.client.model.data.ModelProperty;
+
+import net.neoforged.neoforge.client.model.data.ModelData;
+import net.neoforged.neoforge.client.model.data.ModelProperty;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -44,8 +44,8 @@ public class FluidVesselModel extends CTModel {
 	}
 
 	@Override
-	protected Builder gatherModelData(Builder builder, BlockAndTintGetter world, BlockPos pos, BlockState state,
-		ModelData blockEntityData) {
+	protected ModelData.Builder gatherModelData(ModelData.Builder builder, BlockAndTintGetter world, BlockPos pos, BlockState state,
+									  ModelData blockEntityData) {
 		super.gatherModelData(builder, world, pos, state, blockEntityData);
 		CullData cullData = new CullData();
 		Axis axis = state.getValue(FluidVesselBlock.AXIS);

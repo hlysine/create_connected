@@ -28,11 +28,10 @@ public class SixWayGearboxBlock extends RotatedPillarKineticBlock implements IBE
     }
 
     @Override
-    public PushReaction getPistonPushReaction(BlockState state) {
+    public PushReaction getPistonPushReaction(@NotNull BlockState state) {
         return PushReaction.PUSH_ONLY;
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public @NotNull List<ItemStack> getDrops(BlockState state, @NotNull LootParams.Builder builder) {
         if (state.getValue(AXIS).isVertical())
@@ -41,8 +40,11 @@ public class SixWayGearboxBlock extends RotatedPillarKineticBlock implements IBE
     }
 
     @Override
-    public ItemStack getCloneItemStack(BlockState state, HitResult target, BlockGetter world, BlockPos pos,
-                                       Player player) {
+    public @NotNull ItemStack getCloneItemStack(BlockState state,
+                                                @NotNull HitResult target,
+                                                @NotNull LevelReader world,
+                                                @NotNull BlockPos pos,
+                                                @NotNull Player player) {
         if (state.getValue(AXIS).isVertical())
             return super.getCloneItemStack(state, target, world, pos, player);
         return new ItemStack(CCItems.VERTICAL_SIX_WAY_GEARBOX.get());

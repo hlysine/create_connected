@@ -4,12 +4,14 @@ import com.simibubi.create.AllTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
+import org.jetbrains.annotations.NotNull;
 
-@SuppressWarnings("deprecation")
 public abstract class WaterloggedCopycatWrappedBlock extends MigratingWaterloggedCopycatBlock implements ICopycatWithWrappedBlock {
 
     public WaterloggedCopycatWrappedBlock(Properties properties) {
@@ -17,10 +19,19 @@ public abstract class WaterloggedCopycatWrappedBlock extends MigratingWaterlogge
     }
 
     @Override
-    public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
-        InteractionResult result = super.use(pState, pLevel, pPos, pPlayer, pHand, pHit);
-        if (result == InteractionResult.PASS && !pPlayer.getItemInHand(pHand).is(AllTags.AllItemTags.WRENCH.tag)) {
-            return getWrappedBlock().use(pState, pLevel, pPos, pPlayer, pHand, pHit);
+    protected @NotNull InteractionResult useWithoutItem(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos, @NotNull Player player, @NotNull BlockHitResult hitResult) {
+        InteractionResult result = super.useWithoutItem(state, level, pos, player, hitResult);
+        if (!result.consumesAction()) {
+            return ICopycatWithWrappedBlock.wrappedState(getWrappedBlock(), state).useWithoutItem(level, player, hitResult);
+        }
+        return result;
+    }
+
+    @Override
+    protected @NotNull ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+        ItemInteractionResult result = super.useItemOn(stack, state, level, pos, player, hand, hitResult);
+        if (!result.consumesAction() && !player.getItemInHand(hand).is(AllTags.AllItemTags.WRENCH.tag)) {
+            return ICopycatWithWrappedBlock.wrappedState(getWrappedBlock(), state).useItemOn(stack, level, player, hand, hitResult);
         }
         return result;
     }

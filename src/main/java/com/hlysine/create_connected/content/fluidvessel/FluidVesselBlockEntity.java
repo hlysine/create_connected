@@ -1,5 +1,7 @@
 package com.hlysine.create_connected.content.fluidvessel;
 
+import com.hlysine.create_connected.CCBlockEntityTypes;
+import com.simibubi.create.AllBlockEntityTypes;
 import com.simibubi.create.api.connectivity.ConnectivityHandler;
 import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.content.fluids.tank.FluidTankBlockEntity;
@@ -10,6 +12,7 @@ import net.createmod.catnip.animation.LerpedFloat;
 import net.createmod.catnip.nbt.NBTHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.network.chat.Component;
@@ -17,13 +20,13 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
-import net.neoforged.common.capabilities.ForgeCapabilities;
-import net.neoforged.common.util.LazyOptional;
-import net.neoforged.fluids.FluidStack;
-import net.neoforged.fluids.FluidType;
-import net.neoforged.fluids.capability.IFluidHandler;
-import net.neoforged.fluids.capability.IFluidHandler.FluidAction;
-import net.neoforged.fluids.capability.templates.FluidTank;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
+import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.FluidType;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction;
+import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -46,6 +49,18 @@ public class FluidVesselBlockEntity extends FluidTankBlockEntity implements IHav
         windowType = WindowType.SIDE_WIDE;
         boiler = new BoilerData();
         refreshCapability();
+    }
+
+    public static void registerCapabilities(RegisterCapabilitiesEvent event) {
+        event.registerBlockEntity(
+                Capabilities.FluidHandler.BLOCK,
+                CCBlockEntityTypes.FLUID_VESSEL.get(),
+                (be, context) -> {
+                    if (be.fluidCapability == null)
+                        be.refreshCapability();
+                    return be.fluidCapability;
+                }
+        );
     }
 
     @Override
@@ -322,14 +337,13 @@ public class FluidVesselBlockEntity extends FluidTankBlockEntity implements IHav
     }
 
     private void refreshCapability() {
-        LazyOptional<IFluidHandler> oldCap = fluidCapability;
-        fluidCapability = LazyOptional.of(this::handlerForCapability);
-        oldCap.invalidate();
+        fluidCapability = handlerForCapability();
+        invalidateCapabilities();
     }
 
     private IFluidHandler handlerForCapability() {
-        return isController() ? boiler.isActive() ? boiler.createHandler() : tankInventory
-                : getControllerBE() != null ? getControllerBE().handlerForCapability() : new FluidTank(0);
+        return isController() ? (boiler.isActive() ? boiler.createHandler() : tankInventory)
+                : ((getControllerBE() != null) ? getControllerBE().handlerForCapability() : new FluidTank(0));
     }
 
     @Override
@@ -367,12 +381,12 @@ public class FluidVesselBlockEntity extends FluidTankBlockEntity implements IHav
         if (controllerBE.boiler.addToGoggleTooltip(tooltip, isPlayerSneaking, controllerBE.getTotalTankSize()))
             return true;
         return containedFluidTooltip(tooltip, isPlayerSneaking,
-                controllerBE.getCapability(ForgeCapabilities.FLUID_HANDLER));
+                level.getCapability(Capabilities.FluidHandler.BLOCK, controllerBE.getBlockPos(), null));
     }
 
     @Override
-    protected void read(CompoundTag compound, boolean clientPacket) {
-        super.read(compound, clientPacket);
+    protected void read(CompoundTag compound, HolderLookup.Provider registries, boolean clientPacket) {
+        super.read(compound, registries, clientPacket);
 
         BlockPos controllerBefore = controller;
         int prevWidth = width;
@@ -381,13 +395,14 @@ public class FluidVesselBlockEntity extends FluidTankBlockEntity implements IHav
 
         updateConnectivity = compound.contains("Uninitialized");
         luminosity = compound.getInt("Luminosity");
-        controller = null;
-        lastKnownPos = null;
 
+        lastKnownPos = null;
         if (compound.contains("LastKnownPos"))
-            lastKnownPos = NbtUtils.readBlockPos(compound.getCompound("LastKnownPos"));
+            lastKnownPos = NBTHelper.readBlockPos(compound, "LastKnownPos");
+
+        controller = null;
         if (compound.contains("Controller"))
-            controller = NbtUtils.readBlockPos(compound.getCompound("Controller"));
+            controller = NBTHelper.readBlockPos(compound, "Controller");
 
         if (isController()) {
             window = compound.getBoolean("Window");
@@ -395,7 +410,8 @@ public class FluidVesselBlockEntity extends FluidTankBlockEntity implements IHav
             width = compound.getInt("Size");
             height = compound.getInt("Height");
             tankInventory.setCapacity(getTotalTankSize() * getCapacityMultiplier());
-            tankInventory.readFromNBT(compound.getCompound("TankContent"));
+
+            tankInventory.readFromNBT(registries, compound.getCompound("TankContent"));
             if (tankInventory.getSpace() < 0)
                 tankInventory.drain(-tankInventory.getSpace(), FluidAction.EXECUTE);
         }
@@ -437,7 +453,7 @@ public class FluidVesselBlockEntity extends FluidTankBlockEntity implements IHav
     }
 
     @Override
-    public void write(CompoundTag compound, boolean clientPacket) {
+    public void write(CompoundTag compound, HolderLookup.Provider registries, boolean clientPacket) {
         if (updateConnectivity)
             compound.putBoolean("Uninitialized", true);
         compound.put("Boiler", boiler.write());
@@ -448,12 +464,12 @@ public class FluidVesselBlockEntity extends FluidTankBlockEntity implements IHav
         if (isController()) {
             compound.putBoolean("Window", window);
             NBTHelper.writeEnum(compound, "WindowType", windowType);
-            compound.put("TankContent", tankInventory.writeToNBT(new CompoundTag()));
+            compound.put("TankContent", tankInventory.writeToNBT(registries, new CompoundTag()));
             compound.putInt("Size", width);
             compound.putInt("Height", height);
         }
         compound.putInt("Luminosity", luminosity);
-        super.write(compound, clientPacket);
+        super.write(compound, registries, clientPacket);
 
         if (!clientPacket)
             return;
