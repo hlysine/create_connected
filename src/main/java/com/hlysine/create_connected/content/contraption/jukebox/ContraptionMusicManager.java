@@ -5,22 +5,27 @@ import net.createmod.catnip.data.Pair;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.core.BlockPos;
-import net.minecraft.sounds.SoundEvent;
+import net.minecraft.core.Holder;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.item.RecordItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.JukeboxSong;
+import net.minecraft.world.item.JukeboxSongs;
 
 import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 public class ContraptionMusicManager {
     private static final Map<Pair<Integer, BlockPos>, SoundInstance> playingContraptionRecords = new HashMap<>();
 
-    public static void playContraptionMusic(@Nullable SoundEvent soundEvent,
+    public static void playContraptionMusic(@Nullable JukeboxSong song,
                                             AbstractContraptionEntity entity,
                                             BlockPos localPos,
                                             BlockPos worldPos,
-                                            @Nullable RecordItem recordItem,
+                                            @Nullable Item recordItem,
                                             boolean silent) {
         Pair<Integer, BlockPos> contraption = Pair.of(entity.getId(), localPos);
         SoundInstance soundInstance = playingContraptionRecords.get(contraption);
@@ -29,13 +34,13 @@ public class ContraptionMusicManager {
             playingContraptionRecords.remove(contraption);
         }
 
-        if (soundEvent != null) {
-            if (recordItem != null && !silent) {
-                Minecraft.getInstance().gui.setNowPlaying(recordItem.getDisplayName());
+        if (song != null) {
+            if (!silent) {
+                Minecraft.getInstance().gui.setNowPlaying(song.description());
             }
 
             SoundInstance newInstance = new ContraptionRecordSoundInstance(
-                    soundEvent,
+                    song.soundEvent().value(),
                     SoundSource.RECORDS,
                     4.0F,
                     1.0F,
@@ -49,6 +54,12 @@ public class ContraptionMusicManager {
             playingContraptionRecords.put(contraption, newInstance);
             Minecraft.getInstance().getSoundManager().play(newInstance);
         }
-        Minecraft.getInstance().levelRenderer.notifyNearbyEntities(Minecraft.getInstance().level, worldPos, soundEvent != null);
+        Minecraft.getInstance().levelRenderer.notifyNearbyEntities(Minecraft.getInstance().level, worldPos, song != null);
+    }
+
+    public static Optional<JukeboxSong> getSongFromItem(Item item, HolderLookup.Provider registries) {
+        if (!(item.components().has(DataComponents.JUKEBOX_PLAYABLE)))
+            return Optional.empty();
+        return item.components().get(DataComponents.JUKEBOX_PLAYABLE).song().unwrap(registries).map(Holder::value);
     }
 }

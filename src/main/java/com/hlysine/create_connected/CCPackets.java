@@ -12,7 +12,7 @@ import java.util.Locale;
 
 public enum CCPackets implements BasePacketPayload.PacketTypeProvider {
     CONFIGURE_SEQUENCER(ConfigureSequencedPulseGeneratorPacket.class, ConfigureSequencedPulseGeneratorPacket.STREAM_CODEC),
-    PLAY_CONTRAPTION_JUKEBOX(PlayContraptionJukeboxPacket.class, PlayContraptionJukeboxPacket::new);
+    PLAY_CONTRAPTION_JUKEBOX(PlayContraptionJukeboxPacket.class, PlayContraptionJukeboxPacket.STREAM_CODEC);
 
     private final CatnipPacketRegistry.PacketType<?> type;
 

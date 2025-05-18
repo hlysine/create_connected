@@ -6,8 +6,9 @@ import com.simibubi.create.content.contraptions.AbstractContraptionEntity;
 import com.simibubi.create.content.contraptions.Contraption;
 import net.createmod.catnip.levelWrappers.WrappedLevel;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.stats.Stats;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -16,7 +17,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.network.PacketDistributor;
+import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.atomic.AtomicReference;
@@ -37,12 +38,12 @@ public class JukeboxInteractionBehaviour extends MovingInteractionBehaviour {
         BlockState currentState = info.state();
 
         if (currentState.getValue(HAS_RECORD)) {
-            withTempBlockEntity(contraption, contraptionPos, currentState, JukeboxBlockEntity::popOutRecord, false);
+            withTempBlockEntity(contraption, contraptionPos, currentState, JukeboxBlockEntity::popOutTheItem, false);
         } else {
             ItemStack item = player.getItemInHand(activeHand);
-            if (item.is(ItemTags.MUSIC_DISCS)) {
+            if (item.getItem().components().has(DataComponents.JUKEBOX_PLAYABLE)) {
                 withTempBlockEntity(contraption, contraptionPos, currentState, be -> {
-                    be.setFirstItem(item.copy());
+                    be.setTheItem(item.copy());
                     be.getLevel().gameEvent(GameEvent.BLOCK_CHANGE, be.getBlockPos(), GameEvent.Context.of(player, currentState));
                     if (!player.isCreative())
                         item.shrink(1);
@@ -58,7 +59,7 @@ public class JukeboxInteractionBehaviour extends MovingInteractionBehaviour {
         AbstractContraptionEntity contraptionEntity = contraption.entity;
         BlockPos realPos = BlockPos.containing(contraptionEntity.toGlobalVector(Vec3.atCenterOf(contraptionPos), 1));
         JukeboxBlockEntity be = new JukeboxBlockEntity(realPos, currentState);
-        be.load(contraption.getBlocks().get(contraptionPos).nbt());
+        be.loadWithComponents(contraption.getBlocks().get(contraptionPos).nbt(), be.getLevel().registryAccess());
         be.setLevel(new WrappedLevel(contraptionEntity.level()) {
             @Override
             public boolean setBlock(BlockPos pos, BlockState newState, int flags) {
@@ -79,8 +80,8 @@ public class JukeboxInteractionBehaviour extends MovingInteractionBehaviour {
             @Override
             public void levelEvent(@Nullable Player player, int type, BlockPos pos, int data) {
                 if (type == 1010 || type == 1011)
-                    CCPackets.getChannel().send(
-                            PacketDistributor.DIMENSION.with(this::dimension),
+                    PacketDistributor.sendToPlayersInDimension(
+                            (ServerLevel) player.level(),
                             new PlayContraptionJukeboxPacket(dimension().location(),
                                     contraptionEntity.getId(),
                                     contraptionPos,
@@ -93,6 +94,6 @@ public class JukeboxInteractionBehaviour extends MovingInteractionBehaviour {
             }
         });
         action.accept(be);
-        setContraptionBlockData(contraptionEntity, contraptionPos, new StructureTemplate.StructureBlockInfo(contraptionPos, state.get(), be.saveWithoutMetadata()));
+        setContraptionBlockData(contraptionEntity, contraptionPos, new StructureTemplate.StructureBlockInfo(contraptionPos, state.get(), be.saveWithoutMetadata(be.getLevel().registryAccess())));
     }
 }

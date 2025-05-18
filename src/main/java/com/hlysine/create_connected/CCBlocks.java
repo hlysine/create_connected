@@ -73,6 +73,7 @@ import com.tterrag.registrate.providers.DataGenContext;
 import com.tterrag.registrate.providers.RegistrateBlockstateProvider;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import net.createmod.catnip.data.Iterate;
+import net.createmod.catnip.registry.RegisteredObjectsHelper;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Direction;
@@ -90,10 +91,9 @@ import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.predicates.ExplosionCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
-import net.neoforged.client.model.generators.ConfiguredModel;
-import net.neoforged.client.model.generators.ModelFile;
-import net.neoforged.common.Tags;
-import net.neoforged.registries.ForgeRegistries;
+import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
+import net.neoforged.neoforge.client.model.generators.ModelFile;
+import net.neoforged.neoforge.common.Tags;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -312,7 +312,7 @@ public class CCBlocks {
 
     static {
         BlockSetType.values().forEach(type -> {
-            Block button = ForgeRegistries.BLOCKS.getValue(new ResourceLocation(type.name() + "_button"));
+            Block button = RegisteredObjectsHelper.getBlock(ResourceLocation.withDefaultNamespace(type.name() + "_button"));
             if (button == null) return;
             if (!(button instanceof ButtonBlock buttonBlock))
                 return;
@@ -324,8 +324,8 @@ public class CCBlocks {
                     .transform(LinkedTransmitterItem.register())
                     .onRegister(PreciseItemUseOverrides::addBlock)
                     .blockstate(CCBlockStateGen.linkedButton(
-                            new ResourceLocation("block/" + namePath + "_button"),
-                            new ResourceLocation("block/" + namePath + "_button_pressed")
+                            ResourceLocation.withDefaultNamespace("block/" + namePath + "_button"),
+                            ResourceLocation.withDefaultNamespace("block/" + namePath + "_button_pressed")
                     ))
                     .register());
         });
@@ -338,8 +338,8 @@ public class CCBlocks {
             .transform(LinkedTransmitterItem.register())
             .onRegister(PreciseItemUseOverrides::addBlock)
             .blockstate(CCBlockStateGen.linkedLever(
-                    new ResourceLocation("block/lever"),
-                    new ResourceLocation("block/lever_on")
+                    ResourceLocation.withDefaultNamespace("block/lever"),
+                    ResourceLocation.withDefaultNamespace("block/lever_on")
             ))
             .register();
 
@@ -538,7 +538,7 @@ public class CCBlocks {
                 return BlockMovementChecks.CheckResult.PASS;
             }))
             .transform(displaySource(CCDisplaySources.BOILER_STATUS))
-            .transform(mountedFluidStorage(CCMountedStorageTypes.FLUID_TANK))
+            .transform(mountedFluidStorage(CCMountedStorageTypes.FLUID_VESSEL))
             .onRegister(movementBehaviour(new FluidTankMovementBehavior()))
             .addLayer(() -> RenderType::cutoutMipped)
             .item(FluidVesselItem::new)
@@ -655,7 +655,7 @@ public class CCBlocks {
                     .register();
 
     public static final BlockEntry<WrappedStairsBlock> WRAPPED_COPYCAT_STAIRS =
-            REGISTRATE.block("wrapped_copycat_stairs", p -> new WrappedStairsBlock(Blocks.STONE::defaultBlockState, p))
+            REGISTRATE.block("wrapped_copycat_stairs", p -> new WrappedStairsBlock(Blocks.STONE.defaultBlockState(), p))
                     .initialProperties(() -> Blocks.STONE_STAIRS)
                     .onRegister(b -> CopycatStairsBlock.stairs = b)
                     .tag(BlockTags.STAIRS)
@@ -714,7 +714,7 @@ public class CCBlocks {
                     .register();
 
     public static final BlockEntry<WrappedFenceGateBlock> WRAPPED_COPYCAT_FENCE_GATE =
-            REGISTRATE.block("wrapped_copycat_fence_gate", p -> new WrappedFenceGateBlock(p, WoodType.OAK))
+            REGISTRATE.block("wrapped_copycat_fence_gate", p -> new WrappedFenceGateBlock(WoodType.OAK, p))
                     .initialProperties(() -> Blocks.OAK_FENCE_GATE)
                     .onRegister(b -> CopycatFenceGateBlock.fenceGate = b)
                     .tag(BlockTags.FENCE_GATES, Tags.Blocks.FENCE_GATES, BlockTags.UNSTABLE_BOTTOM_CENTER, AllTags.AllBlockTags.MOVABLE_EMPTY_COLLIDER.tag)
