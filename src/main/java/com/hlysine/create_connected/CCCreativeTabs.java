@@ -7,7 +7,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -18,7 +18,6 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class CCCreativeTabs {
-    // Create a Deferred Register to hold CreativeModeTabs which will all be registered under the "create_connected" namespace
     private static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, CreateConnected.MODID);
 
     public static final List<ItemProviderEntry<?, ?>> ITEMS = List.of(
@@ -78,12 +77,16 @@ public class CCCreativeTabs {
 
     public static void hideItems(BuildCreativeModeTabContentsEvent event) {
         if (Objects.equals(event.getTabKey(), MAIN.getKey()) || Objects.equals(event.getTabKey(), CreativeModeTabs.SEARCH)) {
-            Set<Item> hiddenItems = ITEMS.stream()
+            Set<ItemStack> hiddenItems = ITEMS.stream()
                     .filter(x -> !FeatureToggle.isEnabled(x.getId()))
-                    .map(ItemProviderEntry::asItem)
+                    .map(entry -> event.getSearchEntries().stream().filter(stack -> stack.getItem() == entry.asItem()).findFirst()
+                            .orElse(event.getParentEntries().stream().filter(stack -> stack.getItem() == entry.asItem()).findFirst()
+                                    .orElse(null)))
+                    .filter(Objects::nonNull)
                     .collect(Collectors.toSet());
-            event.getParentEntries().removeIf(entry -> hiddenItems.contains(entry.getItem()));
-            event.getSearchEntries().removeIf(entry -> hiddenItems.contains(entry.getItem()));
+            for (ItemStack hiddenItem : hiddenItems) {
+                event.remove(hiddenItem, CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            }
         }
     }
 

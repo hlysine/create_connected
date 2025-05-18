@@ -78,9 +78,6 @@ public class CreateConnected {
 
     private void commonSetup(final FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
-            CCAdvancements.register();
-            CCTriggers.register();
-
             CCInteractionBehaviours.register();
             CCMovementBehaviours.register();
             CCMountedStorageTypes.register();

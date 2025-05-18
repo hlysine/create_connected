@@ -3,6 +3,7 @@ package com.hlysine.create_connected.config;
 import com.hlysine.create_connected.CreateConnected;
 import io.netty.buffer.ByteBuf;
 import net.createmod.catnip.config.ConfigBase;
+import net.createmod.catnip.platform.CatnipServices;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -13,7 +14,6 @@ import net.minecraft.server.network.ConfigurationTask;
 import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.network.configuration.ICustomConfigurationTask;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
-import net.neoforged.neoforge.network.handling.DirectionalPayloadHandler;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 import org.jetbrains.annotations.NotNull;
@@ -66,33 +66,35 @@ public abstract class SyncConfigBase extends ConfigBase {
     }
 
     public void syncToAllPlayers() {
-        CreateConnected.LOGGER.debug("Sync Config: Sending server config to all players on reload");
-        PacketDistributor.sendToAllPlayers(new SyncConfig(getSyncConfig()));
+        CatnipServices.PLATFORM.executeOnServerOnly(() -> () -> {
+            CreateConnected.LOGGER.debug("Sync Config: Sending server config to all players on reload");
+            PacketDistributor.sendToAllPlayers(new SyncConfig(getSyncConfig()));
+        });
     }
 
     private void syncToPlayer(ServerPlayer player) {
         if (player == null) return;
-        CreateConnected.LOGGER.debug("Sync Config: Sending server config to {}", player.getScoreboardName());
-        PacketDistributor.sendToPlayer(player, new SyncConfig(getSyncConfig()));
+        CatnipServices.PLATFORM.executeOnServerOnly(() -> () -> {
+            CreateConnected.LOGGER.debug("Sync Config: Sending server config to {}", player.getScoreboardName());
+            PacketDistributor.sendToPlayer(player, new SyncConfig(getSyncConfig()));
+        });
     }
 
     protected void registerAsSyncRoot(final RegisterPayloadHandlersEvent event, final String version) {
         final PayloadRegistrar registrar = event.registrar(version);
-        registrar.playBidirectional(
+        registrar.configurationToClient(
                 SyncConfig.TYPE,
                 SyncConfig.STREAM_CODEC,
-                new DirectionalPayloadHandler<>(
-                        this::handleClientData,
-                        this::handleServerData
-                )
+                this::handleData
+        );
+        registrar.playToClient(
+                SyncConfig.TYPE,
+                SyncConfig.STREAM_CODEC,
+                this::handleData
         );
     }
 
-    public void handleServerData(final SyncConfig data, final IPayloadContext context) {
-        // do nothing
-    }
-
-    public void handleClientData(final SyncConfig data, final IPayloadContext context) {
+    public void handleData(final SyncConfig data, final IPayloadContext context) {
         this.setSyncConfig(data.nbt());
         CreateConnected.LOGGER.debug("Sync Config: Received and applied server config {}", data.nbt().toString());
     }

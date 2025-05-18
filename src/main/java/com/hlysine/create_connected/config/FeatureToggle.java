@@ -6,12 +6,9 @@ import com.hlysine.create_connected.mixin.featuretoggle.CreativeModeTabsAccessor
 import com.tterrag.registrate.builders.Builder;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import com.tterrag.registrate.util.nullness.NonNullUnaryOperator;
+import net.createmod.catnip.platform.CatnipServices;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.fml.LogicalSide;
-import net.neoforged.fml.loading.FMLLoader;
-import net.neoforged.neoforge.common.util.LogicalSidedProvider;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -156,8 +153,7 @@ public class FeatureToggle {
     }
 
     static void refreshItemVisibility() {
-        if (FMLLoader.getDist() != Dist.CLIENT) return;
-        LogicalSidedProvider.WORKQUEUE.get(LogicalSide.CLIENT).executeBlocking(() -> {
+        CatnipServices.PLATFORM.executeOnClientOnly(() -> () -> {
             CreativeModeTab.ItemDisplayParameters cachedParameters = CreativeModeTabsAccessor.getCACHED_PARAMETERS();
             if (cachedParameters != null) {
                 CreativeModeTabsAccessor.callBuildAllTabContents(cachedParameters);

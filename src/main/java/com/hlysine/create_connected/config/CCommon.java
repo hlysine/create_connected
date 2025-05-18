@@ -31,7 +31,6 @@ public class CCommon extends SyncConfigBase {
         CCConfigs.common().registerAsSyncRoot(event, "2.0.0");
     }
 
-
     @SubscribeEvent
     public static void register(final RegisterConfigurationTasksEvent event) {
         event.register(new CommonSyncConfigTask(event.getListener()));
