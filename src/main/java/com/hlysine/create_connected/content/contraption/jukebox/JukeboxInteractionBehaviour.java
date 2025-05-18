@@ -1,6 +1,5 @@
 package com.hlysine.create_connected.content.contraption.jukebox;
 
-import com.hlysine.create_connected.CCPackets;
 import com.simibubi.create.api.behaviour.interaction.MovingInteractionBehaviour;
 import com.simibubi.create.content.contraptions.AbstractContraptionEntity;
 import com.simibubi.create.content.contraptions.Contraption;
@@ -59,7 +58,7 @@ public class JukeboxInteractionBehaviour extends MovingInteractionBehaviour {
         AbstractContraptionEntity contraptionEntity = contraption.entity;
         BlockPos realPos = BlockPos.containing(contraptionEntity.toGlobalVector(Vec3.atCenterOf(contraptionPos), 1));
         JukeboxBlockEntity be = new JukeboxBlockEntity(realPos, currentState);
-        be.loadWithComponents(contraption.getBlocks().get(contraptionPos).nbt(), be.getLevel().registryAccess());
+        be.loadWithComponents(contraption.getBlocks().get(contraptionPos).nbt(), contraptionEntity.level().registryAccess());
         be.setLevel(new WrappedLevel(contraptionEntity.level()) {
             @Override
             public boolean setBlock(BlockPos pos, BlockState newState, int flags) {
@@ -81,7 +80,7 @@ public class JukeboxInteractionBehaviour extends MovingInteractionBehaviour {
             public void levelEvent(@Nullable Player player, int type, BlockPos pos, int data) {
                 if (type == 1010 || type == 1011)
                     PacketDistributor.sendToPlayersInDimension(
-                            (ServerLevel) player.level(),
+                            (ServerLevel) contraptionEntity.level(),
                             new PlayContraptionJukeboxPacket(dimension().location(),
                                     contraptionEntity.getId(),
                                     contraptionPos,
@@ -94,6 +93,6 @@ public class JukeboxInteractionBehaviour extends MovingInteractionBehaviour {
             }
         });
         action.accept(be);
-        setContraptionBlockData(contraptionEntity, contraptionPos, new StructureTemplate.StructureBlockInfo(contraptionPos, state.get(), be.saveWithoutMetadata(be.getLevel().registryAccess())));
+        setContraptionBlockData(contraptionEntity, contraptionPos, new StructureTemplate.StructureBlockInfo(contraptionPos, state.get(), be.saveWithoutMetadata(contraptionEntity.level().registryAccess())));
     }
 }

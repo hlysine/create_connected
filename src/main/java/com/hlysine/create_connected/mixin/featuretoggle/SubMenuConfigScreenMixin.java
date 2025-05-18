@@ -23,7 +23,7 @@ public class SubMenuConfigScreenMixin {
     private void saveChangesAndRefresh(CallbackInfo ci) {
         if (ConfigScreen.modID != null && ConfigScreen.modID.equals(CreateConnected.MODID)) {
             if (EffectiveSide.get().isServer() || FMLEnvironment.dist == Dist.CLIENT && Minecraft.getInstance().hasSingleplayerServer())
-                CatnipServices.PLATFORM.executeOnServerOnly(() -> () -> CCConfigs.common().syncToAllPlayers());
+                CCConfigs.common().syncToAllPlayers();
         }
     }
 }

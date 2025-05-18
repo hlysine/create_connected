@@ -11,7 +11,6 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.JukeboxSong;
-import net.minecraft.world.item.JukeboxSongs;
 
 import javax.annotation.Nullable;
 import java.util.HashMap;
@@ -25,7 +24,6 @@ public class ContraptionMusicManager {
                                             AbstractContraptionEntity entity,
                                             BlockPos localPos,
                                             BlockPos worldPos,
-                                            @Nullable Item recordItem,
                                             boolean silent) {
         Pair<Integer, BlockPos> contraption = Pair.of(entity.getId(), localPos);
         SoundInstance soundInstance = playingContraptionRecords.get(contraption);
@@ -55,11 +53,5 @@ public class ContraptionMusicManager {
             Minecraft.getInstance().getSoundManager().play(newInstance);
         }
         Minecraft.getInstance().levelRenderer.notifyNearbyEntities(Minecraft.getInstance().level, worldPos, song != null);
-    }
-
-    public static Optional<JukeboxSong> getSongFromItem(Item item, HolderLookup.Provider registries) {
-        if (!(item.components().has(DataComponents.JUKEBOX_PLAYABLE)))
-            return Optional.empty();
-        return item.components().get(DataComponents.JUKEBOX_PLAYABLE).song().unwrap(registries).map(Holder::value);
     }
 }
