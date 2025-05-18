@@ -53,7 +53,7 @@ public record ItemIdAttribute(String word) implements ItemAttribute {
 
         @Override
         public List<ItemAttribute> getAllAttributes(ItemStack stack, Level level) {
-            String[] words = stack.getItem().toString().split("_");
+            String[] words = stack.getItem().toString().split("[_:]");
 
             List<ItemAttribute> attributes = new ArrayList<>();
             for (String word : words) {

@@ -44,9 +44,6 @@ public class CCTagGen {
     private static void genItemTags(RegistrateTagsProvider<Item> provIn) {
         TagGen.CreateTagsProvider<Item> prov = new TagGen.CreateTagsProvider<>(provIn, Item::builtInRegistryHolder);
 
-        prov.tag(ItemTags.CREEPER_DROP_MUSIC_DISCS)
-                .add(CCItems.MUSIC_DISC_ELEVATOR.get())
-                .add(CCItems.MUSIC_DISC_INTERLUDE.get());
         prov.tag(AllTags.AllItemTags.CONTRAPTION_CONTROLLED.tag)
                 .add(Items.JUKEBOX, Items.NOTE_BLOCK);
     }

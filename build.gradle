@@ -177,7 +177,7 @@ dependencies {
 
 //    implementation("maven.modrinth:create-garnished:${garnished_version}")
 //    runtimeOnly("maven.modrinth:create-dreams-and-desires:${dreams_desires_version}")
-    compileOnly("com.copycatsplus:copycats:${copycats_version}")
+    implementation("com.copycatsplus:copycats:${copycats_version}")
     runtimeOnly("maven.modrinth:additional-placements:${additional_placements_version}")
 
     implementation(jarJar("io.github.llamalad7:mixinextras-neoforge:${mixin_extras_version}"))
