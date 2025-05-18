@@ -16,7 +16,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.Property;
-import net.neoforged.fml.LogicalSide;
 import net.neoforged.neoforge.event.tick.LevelTickEvent;
 
 import java.util.*;
