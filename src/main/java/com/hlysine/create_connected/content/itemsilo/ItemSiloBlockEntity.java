@@ -1,6 +1,7 @@
 package com.hlysine.create_connected.content.itemsilo;
 
 import com.hlysine.create_connected.CCBlockEntityTypes;
+import com.hlysine.create_connected.CreateConnected;
 import com.simibubi.create.api.connectivity.ConnectivityHandler;
 import com.simibubi.create.api.packager.InventoryIdentifier;
 import com.simibubi.create.foundation.ICapabilityProvider;
@@ -22,6 +23,8 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.items.IItemHandler;
@@ -31,6 +34,7 @@ import net.neoforged.neoforge.items.wrapper.CombinedInvWrapper;
 
 import java.util.List;
 
+@EventBusSubscriber(modid = CreateConnected.MODID, bus = EventBusSubscriber.Bus.MOD)
 public class ItemSiloBlockEntity extends SmartBlockEntity implements IMultiBlockEntityContainer.Inventory {
 
     protected ICapabilityProvider<IItemHandler> itemCapability = null;
@@ -60,6 +64,7 @@ public class ItemSiloBlockEntity extends SmartBlockEntity implements IMultiBlock
         length = 1;
     }
 
+    @SubscribeEvent
     public static void registerCapabilities(RegisterCapabilitiesEvent event) {
         event.registerBlockEntity(
                 Capabilities.ItemHandler.BLOCK,
@@ -74,7 +79,8 @@ public class ItemSiloBlockEntity extends SmartBlockEntity implements IMultiBlock
     }
 
     @Override
-    public void addBehaviours(List<BlockEntityBehaviour> behaviours) {}
+    public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
+    }
 
     protected void updateConnectivity() {
         updateConnectivity = false;
@@ -297,7 +303,9 @@ public class ItemSiloBlockEntity extends SmartBlockEntity implements IMultiBlock
     }
 
     @Override
-    public void preventConnectivityUpdate() { updateConnectivity = false; }
+    public void preventConnectivityUpdate() {
+        updateConnectivity = false;
+    }
 
     @Override
     public void notifyMultiUpdated() {
@@ -311,7 +319,9 @@ public class ItemSiloBlockEntity extends SmartBlockEntity implements IMultiBlock
     }
 
     @Override
-    public Direction.Axis getMainConnectionAxis() { return getMainAxisOf(this); }
+    public Direction.Axis getMainConnectionAxis() {
+        return getMainAxisOf(this);
+    }
 
     @Override
     public int getMaxLength(Direction.Axis longAxis, int width) {
@@ -325,18 +335,28 @@ public class ItemSiloBlockEntity extends SmartBlockEntity implements IMultiBlock
     }
 
     @Override
-    public int getHeight() { return length; }
+    public int getHeight() {
+        return length;
+    }
 
     @Override
-    public int getWidth() { return radius; }
+    public int getWidth() {
+        return radius;
+    }
 
     @Override
-    public void setHeight(int height) { this.length = height; }
+    public void setHeight(int height) {
+        this.length = height;
+    }
 
     @Override
-    public void setWidth(int width) { this.radius = width; }
+    public void setWidth(int width) {
+        this.radius = width;
+    }
 
     @Override
-    public boolean hasInventory() { return true; }
+    public boolean hasInventory() {
+        return true;
+    }
 }
 

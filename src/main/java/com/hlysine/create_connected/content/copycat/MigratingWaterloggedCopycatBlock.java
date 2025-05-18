@@ -1,8 +1,10 @@
 package com.hlysine.create_connected.content.copycat;
 
+import com.hlysine.create_connected.CCBlockEntityTypes;
 import com.hlysine.create_connected.compat.CopycatsManager;
 import com.hlysine.create_connected.compat.Mods;
 import com.hlysine.create_connected.config.CCConfigs;
+import com.simibubi.create.content.decoration.copycat.CopycatBlockEntity;
 import com.simibubi.create.content.decoration.copycat.WaterloggedCopycatBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -12,6 +14,7 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.loot.LootParams;
 import org.jetbrains.annotations.NotNull;
@@ -19,7 +22,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-@SuppressWarnings("deprecation")
 public abstract class MigratingWaterloggedCopycatBlock extends WaterloggedCopycatBlock {
 
     public MigratingWaterloggedCopycatBlock(Properties pProperties) {
@@ -84,5 +86,10 @@ public abstract class MigratingWaterloggedCopycatBlock extends WaterloggedCopyca
             }
             return drops;
         }).orElse(drops);
+    }
+
+    @Override
+    public BlockEntityType<? extends CopycatBlockEntity> getBlockEntityType() {
+        return CCBlockEntityTypes.COPYCAT.get();
     }
 }

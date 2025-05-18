@@ -5,6 +5,7 @@ import com.simibubi.create.content.redstone.analogLever.AnalogLeverBlockEntity;
 import com.simibubi.create.content.redstone.link.LinkBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.ValueBoxTransform;
+import net.createmod.catnip.animation.LerpedFloat;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
@@ -60,14 +61,26 @@ public class LinkedAnalogLeverBlockEntity extends AnalogLeverBlockEntity {
         return ((AnalogLeverBlockEntityAccessor) this).getLastChange();
     }
 
+    private LerpedFloat getClientState() {
+        return ((AnalogLeverBlockEntityAccessor) this).getClientState();
+    }
+
     @Override
     public void tick() {
         int prevTick = lastChange();
         super.tick();
-        if (prevTick > 0 && lastChange() == 0) {
+        if (!level.isClientSide && prevTick > 0 && lastChange() == 0) {
             transmit(getState());
-            level.setBlockAndUpdate(getBlockPos(), getBlockState().setValue(BlockStateProperties.POWERED, getState() > 0));
         }
+        if (level.isClientSide && prevTick > 0 && lastChange() == 0) {
+            level.setBlock(worldPosition, getBlockState().setValue(BlockStateProperties.POWERED, getClientState().getValue() > 0.1), 0);
+        }
+    }
+
+    @Override
+    public void remove() {
+        super.remove();
+        transmit(0);
     }
 
     @Override

@@ -79,10 +79,10 @@ public class LinkedButtonBlock extends ButtonBlock implements IBE<LinkedTransmit
 
     @Override
     public @NotNull InteractionResult useWithoutItem(@NotNull BlockState state,
-                                          @NotNull Level level,
-                                          @NotNull BlockPos pos,
-                                          @NotNull Player player,
-                                          @NotNull BlockHitResult hit) {
+                                                     @NotNull Level level,
+                                                     @NotNull BlockPos pos,
+                                                     @NotNull Player player,
+                                                     @NotNull BlockHitResult hit) {
         if (player.isSpectator())
             return InteractionResult.PASS;
 
@@ -103,8 +103,10 @@ public class LinkedButtonBlock extends ButtonBlock implements IBE<LinkedTransmit
 
     @Override
     public void onRemove(@NotNull BlockState state, @NotNull Level world, @NotNull BlockPos pos, @NotNull BlockState newState, boolean isMoving) {
-        if (!state.is(newState.getBlock()) && !isMoving && getBlockEntityOptional(world, pos).map(be -> be.containsBase).orElse(false))
+        if (!state.is(newState.getBlock()) && !isMoving && getBlockEntityOptional(world, pos).map(be -> be.containsBase).orElse(false)) {
             Block.popResource(world, pos, new ItemStack(CCItems.LINKED_TRANSMITTER.get()));
+        }
+        withBlockEntityDo(world, pos, be -> be.transmit(0));
         base.defaultBlockState().onRemove(world, pos, newState, isMoving);
     }
 
@@ -138,6 +140,7 @@ public class LinkedButtonBlock extends ButtonBlock implements IBE<LinkedTransmit
 
     public void replaceWithBase(BlockState state, Level world, BlockPos pos) {
         AllSoundEvents.CONTROLLER_TAKE.playOnServer(world, pos);
+        withBlockEntityDo(world, pos, be -> be.transmit(0));
         world.setBlockAndUpdate(pos, base.defaultBlockState()
                 .setValue(FACING, state.getValue(FACING))
                 .setValue(FACE, state.getValue(FACE))

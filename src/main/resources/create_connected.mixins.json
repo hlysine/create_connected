@@ -22,6 +22,7 @@
     "copycat.fence.ValueBoxRendererMixin",
     "copycat.fencegate.BlockCanSurviveMixin",
     "copycat.fencegate.COMPATPathNodeDefaultsMixin",
+    "copycat.fencegate.FenceGateBlockAccessor",
     "copycat.fencegate.WalkNodeEvaluatorMixin",
     "copycat.slab.SeatMovementBehaviourMixin",
     "copycat.stairs.StairBlockMixin",

@@ -1,7 +1,7 @@
 package com.hlysine.create_connected.content.fluidvessel;
 
 import com.hlysine.create_connected.CCBlockEntityTypes;
-import com.simibubi.create.AllBlockEntityTypes;
+import com.hlysine.create_connected.CreateConnected;
 import com.simibubi.create.api.connectivity.ConnectivityHandler;
 import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.content.fluids.tank.FluidTankBlockEntity;
@@ -20,6 +20,8 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.fluids.FluidStack;
@@ -34,6 +36,7 @@ import java.util.List;
 import static com.hlysine.create_connected.content.fluidvessel.FluidVesselBlock.*;
 import static net.minecraft.core.Direction.Axis;
 
+@EventBusSubscriber(modid = CreateConnected.MODID, bus = EventBusSubscriber.Bus.MOD)
 public class FluidVesselBlockEntity extends FluidTankBlockEntity implements IHaveGoggleInformation, IMultiBlockEntityContainer.Fluid {
 
     private static final int MAX_SIZE = 3;
@@ -51,10 +54,20 @@ public class FluidVesselBlockEntity extends FluidTankBlockEntity implements IHav
         refreshCapability();
     }
 
+    @SubscribeEvent
     public static void registerCapabilities(RegisterCapabilitiesEvent event) {
         event.registerBlockEntity(
                 Capabilities.FluidHandler.BLOCK,
                 CCBlockEntityTypes.FLUID_VESSEL.get(),
+                (be, context) -> {
+                    if (be.fluidCapability == null)
+                        be.refreshCapability();
+                    return be.fluidCapability;
+                }
+        );
+        event.registerBlockEntity(
+                Capabilities.FluidHandler.BLOCK,
+                CCBlockEntityTypes.CREATIVE_FLUID_VESSEL.get(),
                 (be, context) -> {
                     if (be.fluidCapability == null)
                         be.refreshCapability();
@@ -336,12 +349,12 @@ public class FluidVesselBlockEntity extends FluidTankBlockEntity implements IHav
         sendData();
     }
 
-    private void refreshCapability() {
+    protected void refreshCapability() {
         fluidCapability = handlerForCapability();
         invalidateCapabilities();
     }
 
-    private IFluidHandler handlerForCapability() {
+    protected IFluidHandler handlerForCapability() {
         return isController() ? (boiler.isActive() ? boiler.createHandler() : tankInventory)
                 : ((getControllerBE() != null) ? getControllerBE().handlerForCapability() : new FluidTank(0));
     }
