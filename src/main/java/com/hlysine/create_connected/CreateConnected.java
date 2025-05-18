@@ -7,12 +7,16 @@ import com.hlysine.create_connected.datagen.CCDatagen;
 import com.hlysine.create_connected.datagen.advancements.CCAdvancements;
 import com.hlysine.create_connected.datagen.advancements.CCTriggers;
 import com.mojang.logging.LogUtils;
+import com.simibubi.create.api.registry.CreateBuiltInRegistries;
 import com.simibubi.create.api.registry.CreateRegistries;
+import com.simibubi.create.foundation.advancement.AllAdvancements;
+import com.simibubi.create.foundation.advancement.AllTriggers;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.foundation.item.ItemDescription;
 import com.simibubi.create.foundation.item.KineticStats;
 import com.simibubi.create.foundation.item.TooltipModifier;
 import net.createmod.catnip.lang.FontHelper;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
@@ -24,6 +28,7 @@ import net.neoforged.fml.ModLoadingContext;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.registries.NeoForgeRegistries;
 import net.neoforged.neoforge.registries.RegisterEvent;
 import org.slf4j.Logger;
 
@@ -52,10 +57,6 @@ public class CreateConnected {
         // Register the commonSetup method for mod loading
         modEventBus.addListener(this::commonSetup);
         modEventBus.addListener(this::onRegister);
-        CCCraftingConditions.register();
-
-        // Register ourselves for server and other game events we are interested in
-        NeoForge.EVENT_BUS.register(this);
 
         REGISTRATE.setCreativeTab(CCCreativeTabs.MAIN);
         CCSoundEvents.prepare();
@@ -64,6 +65,7 @@ public class CreateConnected {
         CCBlockEntityTypes.register();
         CCCreativeTabs.register(modEventBus);
         CCPackets.register();
+        CCCraftingConditions.register(modEventBus);
 
         CCConfigs.register(modContainer);
 
@@ -87,8 +89,12 @@ public class CreateConnected {
     }
 
     public void onRegister(final RegisterEvent event) {
-        if (event.getRegistryKey().equals(CreateRegistries.ITEM_ATTRIBUTE_TYPE))
+        if (event.getRegistry() == CreateBuiltInRegistries.ITEM_ATTRIBUTE_TYPE) {
             CCItemAttributes.register();
+        } else if (event.getRegistry() == BuiltInRegistries.TRIGGER_TYPES) {
+            CCAdvancements.register();
+            CCTriggers.register();
+        }
     }
 
     public static CreateRegistrate getRegistrate() {

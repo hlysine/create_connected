@@ -3,6 +3,7 @@ package com.hlysine.create_connected;
 import com.hlysine.create_connected.datagen.recipes.FeatureEnabledCondition;
 import com.hlysine.create_connected.datagen.recipes.FeatureEnabledInCopycatsCondition;
 import com.mojang.serialization.MapCodec;
+import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.common.conditions.ICondition;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
@@ -20,6 +21,7 @@ public class CCCraftingConditions {
     public static final Supplier<MapCodec<FeatureEnabledInCopycatsCondition>> FEATURE_ENABLED_IN_COPYCATS =
             CONDITION_CODECS.register("feature_enabled_in_copycats", () -> FeatureEnabledInCopycatsCondition.CODEC);
 
-    public static void register() {
+    public static void register(IEventBus modBus) {
+        CONDITION_CODECS.register(modBus);
     }
 }
