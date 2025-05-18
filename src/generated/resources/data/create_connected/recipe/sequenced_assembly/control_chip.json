@@ -1,0 +1,93 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "create:golden_sheet"
+  },
+  "loops": 3,
+  "results": [
+    {
+      "chance": 120.0,
+      "id": "create_connected:control_chip"
+    },
+    {
+      "chance": 8.0,
+      "id": "minecraft:redstone"
+    },
+    {
+      "chance": 8.0,
+      "id": "create:electron_tube"
+    },
+    {
+      "chance": 5.0,
+      "id": "create:golden_sheet"
+    },
+    {
+      "chance": 3.0,
+      "id": "minecraft:gold_nugget"
+    },
+    {
+      "chance": 2.0,
+      "id": "create:iron_sheet"
+    },
+    {
+      "chance": 2.0,
+      "id": "create:crushed_raw_gold"
+    },
+    {
+      "id": "minecraft:quartz"
+    },
+    {
+      "id": "minecraft:compass"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "create_connected:incomplete_control_chip"
+        },
+        {
+          "item": "create:electron_tube"
+        }
+      ],
+      "results": [
+        {
+          "id": "create_connected:incomplete_control_chip"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "create_connected:incomplete_control_chip"
+        },
+        {
+          "item": "minecraft:redstone"
+        }
+      ],
+      "results": [
+        {
+          "id": "create_connected:incomplete_control_chip"
+        }
+      ]
+    },
+    {
+      "type": "create:pressing",
+      "ingredients": [
+        {
+          "item": "create_connected:incomplete_control_chip"
+        }
+      ],
+      "results": [
+        {
+          "id": "create_connected:incomplete_control_chip"
+        }
+      ]
+    }
+  ],
+  "transitional_item": {
+    "id": "create_connected:incomplete_control_chip"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "create_connected:feature_enabled",
+      "tag": "create_connected:vertical_brass_gearbox"
+    },
+    {
+      "type": "create_connected:feature_enabled",
+      "tag": "create_connected:brass_gearbox"
+    }
+  ],
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "create_connected:vertical_brass_gearbox"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "create_connected:brass_gearbox"
+  }
+}

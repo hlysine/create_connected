@@ -1,0 +1,28 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "create_connected:feature_enabled",
+      "tag": "create_connected:centrifugal_clutch"
+    }
+  ],
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "create:andesite_casing"
+    },
+    {
+      "item": "create:shaft"
+    },
+    {
+      "item": "create:iron_sheet"
+    },
+    {
+      "item": "create:speedometer"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "create_connected:centrifugal_clutch"
+  }
+}

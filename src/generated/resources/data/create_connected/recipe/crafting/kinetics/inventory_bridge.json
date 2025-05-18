@@ -1,0 +1,22 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "create_connected:feature_enabled",
+      "tag": "create_connected:inventory_bridge"
+    }
+  ],
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "create_connected:inventory_access_port"
+    },
+    {
+      "item": "create_connected:inventory_access_port"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "create_connected:inventory_bridge"
+  }
+}

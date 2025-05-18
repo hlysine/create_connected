@@ -1,0 +1,30 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "create_connected:feature_enabled",
+      "tag": "create_connected:inventory_access_port"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "create:brass_casing"
+    },
+    "C": {
+      "item": "create:chute"
+    },
+    "E": {
+      "item": "create:electron_tube"
+    }
+  },
+  "pattern": [
+    "B",
+    "C",
+    "E"
+  ],
+  "result": {
+    "count": 2,
+    "id": "create_connected:inventory_access_port"
+  }
+}

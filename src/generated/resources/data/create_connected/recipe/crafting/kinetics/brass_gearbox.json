@@ -1,0 +1,27 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "create_connected:feature_enabled",
+      "tag": "create_connected:brass_gearbox"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "c": {
+      "item": "create:cogwheel"
+    },
+    "s": {
+      "item": "create:rotation_speed_controller"
+    }
+  },
+  "pattern": [
+    " c ",
+    "csc",
+    " c "
+  ],
+  "result": {
+    "count": 1,
+    "id": "create_connected:brass_gearbox"
+  }
+}

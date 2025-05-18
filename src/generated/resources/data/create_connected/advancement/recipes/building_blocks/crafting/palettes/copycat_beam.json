@@ -1,0 +1,45 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "create_connected:feature_enabled",
+      "tag": "create_connected:copycat_beam"
+    },
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "create_connected:feature_enabled_in_copycats",
+        "tag": "create_connected:copycat_beam"
+      }
+    }
+  ],
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_item": {
+      "conditions": {
+        "items": [
+          {
+            "items": "create:zinc_ingot"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "create_connected:crafting/palettes/copycat_beam"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_item"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "create_connected:crafting/palettes/copycat_beam"
+    ]
+  }
+}

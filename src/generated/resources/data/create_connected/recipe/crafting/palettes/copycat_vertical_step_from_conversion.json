@@ -1,0 +1,30 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "create_connected:feature_enabled",
+      "tag": "create:copycat_step"
+    },
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "create_connected:feature_enabled_in_copycats",
+        "tag": "create_connected:copycat_vertical_step"
+      }
+    },
+    {
+      "type": "create_connected:feature_enabled",
+      "tag": "create_connected:copycat_vertical_step"
+    }
+  ],
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "create:copycat_step"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "create_connected:copycat_vertical_step"
+  }
+}

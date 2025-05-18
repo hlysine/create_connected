@@ -1,0 +1,23 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "create_connected:feature_enabled",
+      "tag": "create:gearshift"
+    },
+    {
+      "type": "create_connected:feature_enabled",
+      "tag": "create_connected:inverted_gearshift"
+    }
+  ],
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "create:gearshift"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "create_connected:inverted_gearshift"
+  }
+}

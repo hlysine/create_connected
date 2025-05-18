@@ -1,0 +1,42 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "create_connected:feature_enabled",
+      "tag": "create_connected:vertical_six_way_gearbox"
+    },
+    {
+      "type": "create_connected:feature_enabled",
+      "tag": "create_connected:six_way_gearbox"
+    }
+  ],
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_item": {
+      "conditions": {
+        "items": [
+          {
+            "items": "create_connected:vertical_six_way_gearbox"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "create_connected:crafting/kinetics/six_way_gearbox_from_conversion"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_item"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "create_connected:crafting/kinetics/six_way_gearbox_from_conversion"
+    ]
+  }
+}

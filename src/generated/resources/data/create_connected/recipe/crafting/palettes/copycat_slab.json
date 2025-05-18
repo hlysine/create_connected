@@ -1,0 +1,23 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "create_connected:feature_enabled",
+      "tag": "create_connected:copycat_slab"
+    },
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "create_connected:feature_enabled_in_copycats",
+        "tag": "create_connected:copycat_slab"
+      }
+    }
+  ],
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "tag": "c:ingots/zinc"
+  },
+  "result": {
+    "count": 2,
+    "id": "create_connected:copycat_slab"
+  }
+}

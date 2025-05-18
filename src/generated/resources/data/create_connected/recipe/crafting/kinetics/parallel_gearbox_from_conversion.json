@@ -1,0 +1,23 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "create_connected:feature_enabled",
+      "tag": "create_connected:vertical_parallel_gearbox"
+    },
+    {
+      "type": "create_connected:feature_enabled",
+      "tag": "create_connected:parallel_gearbox"
+    }
+  ],
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "create_connected:vertical_parallel_gearbox"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "create_connected:parallel_gearbox"
+  }
+}

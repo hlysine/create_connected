@@ -1,0 +1,31 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "create_connected:feature_enabled",
+      "tag": "create_connected:copycat_box"
+    },
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "create_connected:feature_enabled_in_copycats",
+        "tag": "create_connected:copycat_box"
+      }
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "s": {
+      "item": "create_connected:copycat_board"
+    }
+  },
+  "pattern": [
+    "ss ",
+    "s s",
+    " ss"
+  ],
+  "result": {
+    "count": 1,
+    "id": "create_connected:copycat_box"
+  }
+}

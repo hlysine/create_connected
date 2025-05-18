@@ -1,0 +1,29 @@
+{
+  "parent": "create_connected:sequenced_pulse_generator",
+  "criteria": {
+    "0": {
+      "trigger": "create_connected:pulse_generator_infinite_loop_builtin"
+    }
+  },
+  "display": {
+    "description": {
+      "color": "#DBA213",
+      "translate": "advancement.create_connected.pulse_generator_infinite_loop.desc"
+    },
+    "frame": "goal",
+    "hidden": true,
+    "icon": {
+      "count": 1,
+      "id": "create_connected:incomplete_control_chip"
+    },
+    "title": {
+      "translate": "advancement.create_connected.pulse_generator_infinite_loop"
+    }
+  },
+  "requirements": [
+    [
+      "0"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

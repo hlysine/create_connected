@@ -1,0 +1,36 @@
+{
+  "parent": "create_connected:control_chip",
+  "criteria": {
+    "0": {
+      "conditions": {
+        "location": [
+          {
+            "block": "create_connected:sequenced_pulse_generator",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
+      },
+      "trigger": "minecraft:placed_block"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "color": "#DBA213",
+      "translate": "advancement.create_connected.sequenced_pulse_generator.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "create_connected:sequenced_pulse_generator"
+    },
+    "title": {
+      "translate": "advancement.create_connected.sequenced_pulse_generator"
+    }
+  },
+  "requirements": [
+    [
+      "0"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

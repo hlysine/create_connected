@@ -1,0 +1,23 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "create_connected:feature_enabled",
+      "tag": "create_connected:item_silo"
+    },
+    {
+      "type": "create_connected:feature_enabled",
+      "tag": "create:item_vault"
+    }
+  ],
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "create_connected:item_silo"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "create:item_vault"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "create_connected:feature_enabled",
+      "tag": "create_connected:sequenced_pulse_generator"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "create:brass_sheet"
+    },
+    "C": {
+      "item": "create_connected:control_chip"
+    },
+    "E": {
+      "item": "create:electron_tube"
+    },
+    "S": {
+      "tag": "c:stones"
+    },
+    "T": {
+      "item": "minecraft:redstone_torch"
+    }
+  },
+  "pattern": [
+    "EC ",
+    "EBT",
+    "SSS"
+  ],
+  "result": {
+    "count": 1,
+    "id": "create_connected:sequenced_pulse_generator"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "create_connected:feature_enabled",
+      "tag": "create_connected:empty_fan_catalyst"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "b": {
+      "item": "create:brass_ingot"
+    },
+    "i": {
+      "item": "minecraft:iron_bars"
+    }
+  },
+  "pattern": [
+    "bib",
+    "i i",
+    "bib"
+  ],
+  "result": {
+    "count": 1,
+    "id": "create_connected:empty_fan_catalyst"
+  }
+}

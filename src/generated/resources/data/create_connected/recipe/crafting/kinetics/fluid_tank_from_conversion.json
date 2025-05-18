@@ -1,0 +1,23 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "create_connected:feature_enabled",
+      "tag": "create_connected:fluid_vessel"
+    },
+    {
+      "type": "create_connected:feature_enabled",
+      "tag": "create:fluid_tank"
+    }
+  ],
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "create_connected:fluid_vessel"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "create:fluid_tank"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "create_connected:feature_enabled",
+      "tag": "create_connected:crank_wheel"
+    }
+  ],
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "create:hand_crank"
+    },
+    {
+      "item": "create:cogwheel"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "create_connected:crank_wheel"
+  }
+}

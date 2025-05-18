@@ -1,0 +1,23 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "create_connected:feature_enabled",
+      "tag": "create_connected:copycat_slab"
+    },
+    {
+      "type": "create_connected:feature_enabled_in_copycats",
+      "tag": "copycats:copycat_slab"
+    }
+  ],
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "create_connected:copycat_slab"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "copycats:copycat_slab"
+  }
+}

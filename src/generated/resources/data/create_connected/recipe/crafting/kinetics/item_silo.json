@@ -1,0 +1,25 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "create_connected:feature_enabled",
+      "tag": "create_connected:item_silo"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "create:iron_sheet"
+    },
+    "C": {
+      "tag": "c:barrels/wooden"
+    }
+  },
+  "pattern": [
+    "BCB"
+  ],
+  "result": {
+    "count": 1,
+    "id": "create_connected:item_silo"
+  }
+}

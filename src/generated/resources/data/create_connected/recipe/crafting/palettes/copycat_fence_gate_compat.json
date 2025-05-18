@@ -1,0 +1,23 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "create_connected:feature_enabled",
+      "tag": "create_connected:copycat_fence_gate"
+    },
+    {
+      "type": "create_connected:feature_enabled_in_copycats",
+      "tag": "copycats:copycat_fence_gate"
+    }
+  ],
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "create_connected:copycat_fence_gate"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "copycats:copycat_fence_gate"
+  }
+}
