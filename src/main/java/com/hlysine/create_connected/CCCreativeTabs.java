@@ -3,16 +3,17 @@ package com.hlysine.create_connected;
 import com.hlysine.create_connected.config.FeatureToggle;
 import com.simibubi.create.AllCreativeModeTabs;
 import com.tterrag.registrate.util.entry.ItemProviderEntry;
+import it.unimi.dsi.fastutil.objects.ObjectBidirectionalIterator;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.event.BuildCreativeModeTabContentsEvent;
-import net.neoforged.eventbus.api.IEventBus;
-import net.neoforged.registries.DeferredRegister;
-import net.neoforged.registries.RegistryObject;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
+import net.neoforged.neoforge.registries.DeferredHolder;
+import net.neoforged.neoforge.registries.DeferredRegister;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
@@ -22,7 +23,7 @@ public class CCCreativeTabs {
     // Create a Deferred Register to hold CreativeModeTabs which will all be registered under the "create_connected" namespace
     private static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, CreateConnected.MODID);
 
-    public static final List<ItemProviderEntry<?>> ITEMS = List.of(
+    public static final List<ItemProviderEntry<?, ?>> ITEMS = List.of(
             CCBlocks.ENCASED_CHAIN_COGWHEEL,
             CCBlocks.CRANK_WHEEL,
             CCBlocks.LARGE_CRANK_WHEEL,
@@ -70,7 +71,7 @@ public class CCCreativeTabs {
             CCItems.MUSIC_DISC_INTERLUDE
     );
 
-    public static final RegistryObject<CreativeModeTab> MAIN = CREATIVE_MODE_TABS.register("main", () -> CreativeModeTab.builder()
+    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> MAIN = CREATIVE_MODE_TABS.register("main", () -> CreativeModeTab.builder()
             .title(Component.translatable("itemGroup.create_connected.main"))
             .withTabsBefore(AllCreativeModeTabs.PALETTES_CREATIVE_TAB.getKey())
             .icon(CCBlocks.PARALLEL_GEARBOX::asStack)
@@ -83,11 +84,8 @@ public class CCCreativeTabs {
                     .filter(x -> !FeatureToggle.isEnabled(x.getId()))
                     .map(ItemProviderEntry::asItem)
                     .collect(Collectors.toSet());
-            for (Iterator<Map.Entry<ItemStack, CreativeModeTab.TabVisibility>> iterator = event.getEntries().iterator(); iterator.hasNext(); ) {
-                Map.Entry<ItemStack, CreativeModeTab.TabVisibility> entry = iterator.next();
-                if (hiddenItems.contains(entry.getKey().getItem()))
-                    iterator.remove();
-            }
+            event.getParentEntries().removeIf(entry -> hiddenItems.contains(entry.getItem()));
+            event.getSearchEntries().removeIf(entry -> hiddenItems.contains(entry.getItem()));
         }
     }
 
@@ -97,10 +95,10 @@ public class CCCreativeTabs {
     }
 
     private record DisplayItemsGenerator(
-            List<ItemProviderEntry<?>> items) implements CreativeModeTab.DisplayItemsGenerator {
+            List<ItemProviderEntry<?, ?>> items) implements CreativeModeTab.DisplayItemsGenerator {
         @Override
         public void accept(@NotNull CreativeModeTab.ItemDisplayParameters params, @NotNull CreativeModeTab.Output output) {
-            for (ItemProviderEntry<?> item : items) {
+            for (ItemProviderEntry<?, ?> item : items) {
                 if (FeatureToggle.isEnabled(item.getId())) {
                     output.accept(item);
                 }

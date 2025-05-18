@@ -1,50 +1,31 @@
 package com.hlysine.create_connected.datagen.recipes;
 
-import com.google.gson.JsonObject;
-import com.hlysine.create_connected.CreateConnected;
 import com.hlysine.create_connected.compat.CopycatsManager;
 import com.hlysine.create_connected.compat.Mods;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.GsonHelper;
-import net.neoforged.common.crafting.conditions.ICondition;
-import net.neoforged.common.crafting.conditions.IConditionSerializer;
+import net.neoforged.neoforge.common.conditions.ICondition;
+import org.jetbrains.annotations.NotNull;
 
-public class FeatureEnabledInCopycatsCondition implements ICondition {
-    private static final ResourceLocation NAME = CreateConnected.asResource("feature_enabled_in_copycats");
-    private final ResourceLocation feature;
-
-    public FeatureEnabledInCopycatsCondition(ResourceLocation feature) {
-        this.feature = feature;
-    }
+public record FeatureEnabledInCopycatsCondition(ResourceLocation feature) implements ICondition {
+    public static final MapCodec<FeatureEnabledInCopycatsCondition> CODEC = RecordCodecBuilder.mapCodec((builder) -> builder
+            .group(ResourceLocation.CODEC.fieldOf("tag").forGetter(FeatureEnabledInCopycatsCondition::feature))
+            .apply(builder, FeatureEnabledInCopycatsCondition::new)
+    );
 
     @Override
-    public ResourceLocation getID() {
-        return NAME;
-    }
-
-    @Override
-    public boolean test(IContext context) {
+    public boolean test(@NotNull IContext context) {
         return Mods.COPYCATS.runIfInstalled(() -> () -> CopycatsManager.isFeatureEnabled(feature)).orElse(false);
     }
 
-    public static class Serializer implements IConditionSerializer<FeatureEnabledInCopycatsCondition> {
-        public static final Serializer INSTANCE = new Serializer();
+    @Override
+    public @NotNull MapCodec<? extends ICondition> codec() {
+        return CODEC;
+    }
 
-        @Override
-        public void write(JsonObject json, FeatureEnabledInCopycatsCondition value) {
-            json.addProperty("feature", value.feature.toString());
-        }
-
-        @Override
-        public FeatureEnabledInCopycatsCondition read(JsonObject json) {
-            return new FeatureEnabledInCopycatsCondition(
-                    new ResourceLocation(GsonHelper.getAsString(json, "feature"))
-            );
-        }
-
-        @Override
-        public ResourceLocation getID() {
-            return NAME;
-        }
+    @Override
+    public String toString() {
+        return "feature_enabled_in_copycats(\"" + feature + "\")";
     }
 }

@@ -3,13 +3,15 @@ package com.hlysine.create_connected.datagen.recipes;
 import com.hlysine.create_connected.CCBlocks;
 import com.simibubi.create.AllItems;
 import com.simibubi.create.AllRecipeTypes;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
-import net.neoforged.common.crafting.conditions.ICondition;
+import net.neoforged.neoforge.common.conditions.ICondition;
 
+import java.util.concurrent.CompletableFuture;
 import java.util.function.Supplier;
 
 @SuppressWarnings("unused")
@@ -49,8 +51,8 @@ public class ItemApplicationRecipeGen extends ProcessingRecipeGen {
                 .output(output.get()));
     }
 
-    public ItemApplicationRecipeGen(PackOutput output) {
-        super(output);
+    public ItemApplicationRecipeGen(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
+        super(output, registries);
     }
 
     @Override

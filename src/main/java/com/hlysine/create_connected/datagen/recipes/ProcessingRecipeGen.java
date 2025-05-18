@@ -7,6 +7,8 @@ import com.simibubi.create.content.processing.recipe.ProcessingRecipeSerializer;
 import com.simibubi.create.foundation.data.recipe.CreateRecipeProvider;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 import net.createmod.catnip.platform.CatnipServices;
+import net.createmod.catnip.registry.RegisteredObjectsHelper;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
@@ -14,7 +16,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
-import net.neoforged.fluids.FluidType;
+import net.neoforged.neoforge.fluids.FluidType;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -30,10 +32,10 @@ public abstract class ProcessingRecipeGen extends CreateRecipeProvider {
     protected static final int BUCKET = FluidType.BUCKET_VOLUME;
     protected static final int BOTTLE = 250;
 
-    public static void registerAll(DataGenerator gen, PackOutput output) {
-        GENERATORS.add(new CuttingRecipeGen(output));
-        GENERATORS.add(new ItemApplicationRecipeGen(output));
-        GENERATORS.add(new FillingRecipeGen(output));
+    public static void registerAll(DataGenerator gen, PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
+        GENERATORS.add(new CuttingRecipeGen(output, registries));
+        GENERATORS.add(new ItemApplicationRecipeGen(output, registries));
+        GENERATORS.add(new FillingRecipeGen(output, registries));
 
         gen.addProvider(true, new DataProvider() {
 
@@ -51,8 +53,8 @@ public abstract class ProcessingRecipeGen extends CreateRecipeProvider {
         });
     }
 
-    public ProcessingRecipeGen(PackOutput generator) {
-        super(generator);
+    public ProcessingRecipeGen(PackOutput generator, CompletableFuture<HolderLookup.Provider> registries) {
+        super(generator, registries);
     }
 
     /**
@@ -66,7 +68,7 @@ public abstract class ProcessingRecipeGen extends CreateRecipeProvider {
             ItemLike itemLike = singleIngredient.get();
             transform
                     .apply(new ProcessingRecipeBuilder<>(serializer.getFactory(),
-                            new ResourceLocation(namespace, CatnipServices.REGISTRIES.getKeyOrThrow(itemLike.asItem())
+                            ResourceLocation.fromNamespaceAndPath(namespace, RegisteredObjectsHelper.getKeyOrThrow(itemLike.asItem())
                                     .getPath())).withItemIngredients(Ingredient.of(itemLike)))
                     .build(c);
         };
@@ -119,7 +121,7 @@ public abstract class ProcessingRecipeGen extends CreateRecipeProvider {
 
     protected Supplier<ResourceLocation> idWithSuffix(Supplier<ItemLike> item, String suffix) {
         return () -> {
-            ResourceLocation registryName = CatnipServices.REGISTRIES.getKeyOrThrow(item.get()
+            ResourceLocation registryName = RegisteredObjectsHelper.getKeyOrThrow(item.get()
                     .asItem());
             return CreateConnected.asResource(registryName.getPath() + suffix);
         };

@@ -1,49 +1,30 @@
 package com.hlysine.create_connected.datagen.recipes;
 
-import com.google.gson.JsonObject;
-import com.hlysine.create_connected.CreateConnected;
 import com.hlysine.create_connected.config.FeatureToggle;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.GsonHelper;
-import net.neoforged.common.crafting.conditions.ICondition;
-import net.neoforged.common.crafting.conditions.IConditionSerializer;
+import net.neoforged.neoforge.common.conditions.ICondition;
+import org.jetbrains.annotations.NotNull;
 
-public class FeatureEnabledCondition implements ICondition {
-    private static final ResourceLocation NAME = CreateConnected.asResource("feature_enabled");
-    private final ResourceLocation feature;
-
-    public FeatureEnabledCondition(ResourceLocation feature) {
-        this.feature = feature;
-    }
+public record FeatureEnabledCondition(ResourceLocation feature) implements ICondition {
+    public static final MapCodec<FeatureEnabledCondition> CODEC = RecordCodecBuilder.mapCodec((builder) -> builder
+            .group(ResourceLocation.CODEC.fieldOf("tag").forGetter(FeatureEnabledCondition::feature))
+            .apply(builder, FeatureEnabledCondition::new)
+    );
 
     @Override
-    public ResourceLocation getID() {
-        return NAME;
-    }
-
-    @Override
-    public boolean test(IContext context) {
+    public boolean test(@NotNull IContext context) {
         return FeatureToggle.isEnabled(feature);
     }
 
-    public static class Serializer implements IConditionSerializer<FeatureEnabledCondition> {
-        public static final Serializer INSTANCE = new Serializer();
+    @Override
+    public @NotNull MapCodec<? extends ICondition> codec() {
+        return CODEC;
+    }
 
-        @Override
-        public void write(JsonObject json, FeatureEnabledCondition value) {
-            json.addProperty("feature", value.feature.toString());
-        }
-
-        @Override
-        public FeatureEnabledCondition read(JsonObject json) {
-            return new FeatureEnabledCondition(
-                    new ResourceLocation(GsonHelper.getAsString(json, "feature"))
-            );
-        }
-
-        @Override
-        public ResourceLocation getID() {
-            return NAME;
-        }
+    @Override
+    public String toString() {
+        return "feature_enabled(\"" + feature + "\")";
     }
 }

@@ -15,7 +15,6 @@ import com.tterrag.registrate.util.entry.ItemEntry;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
-import net.minecraft.world.item.RecordItem;
 
 public class CCItems {
 

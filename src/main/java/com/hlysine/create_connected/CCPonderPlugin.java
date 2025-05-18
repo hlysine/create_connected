@@ -44,7 +44,7 @@ public class CCPonderPlugin implements PonderPlugin {
     }
 
     public static void register(PonderSceneRegistrationHelper<ResourceLocation> helper) {
-        PonderSceneRegistrationHelper<ItemProviderEntry<?>> SCENE_HELPER = helper.withKeyFunction(RegistryEntry::getId);
+        PonderSceneRegistrationHelper<ItemProviderEntry<?, ?>> SCENE_HELPER = helper.withKeyFunction(RegistryEntry::getId);
 
         SCENE_HELPER.forComponents(CCBlocks.ENCASED_CHAIN_COGWHEEL)
                 .addStoryBoard("chain_cogwheel", ChainCogwheelScenes::chainCogwheelAsRelay, AllCreatePonderTags.KINETIC_RELAYS);
@@ -68,7 +68,7 @@ public class CCPonderPlugin implements PonderPlugin {
     }
 
     public static void register(PonderTagRegistrationHelper<ResourceLocation> helper) {
-        PonderTagRegistrationHelper<RegistryEntry<?>> TAG_HELPER = helper.withKeyFunction(RegistryEntry::getId);
+        PonderTagRegistrationHelper<RegistryEntry<?, ?>> TAG_HELPER = helper.withKeyFunction(RegistryEntry::getId);
 
         TAG_HELPER.addToTag(AllCreatePonderTags.KINETIC_SOURCES)
                 .add(CCBlocks.CRANK_WHEEL);

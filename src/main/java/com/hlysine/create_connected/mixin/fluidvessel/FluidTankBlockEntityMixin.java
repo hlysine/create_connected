@@ -4,6 +4,7 @@ import com.hlysine.create_connected.content.fluidvessel.FluidVesselBlockEntity;
 import com.simibubi.create.content.fluids.tank.FluidTankBlockEntity;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -36,13 +37,13 @@ public abstract class FluidTankBlockEntityMixin extends SmartBlockEntity {
     @SuppressWarnings("UnreachableCode")
     @Inject(
             at = @At("HEAD"),
-            method = "read(Lnet/minecraft/nbt/CompoundTag;Z)V",
+            method = "read",
             cancellable = true
     )
-    private void read(CompoundTag compound, boolean clientPacket, CallbackInfo ci) {
+    private void read(CompoundTag compound, HolderLookup.Provider registries, boolean clientPacket, CallbackInfo ci) {
         FluidTankBlockEntity self = (FluidTankBlockEntity) (Object) this;
         if (self instanceof FluidVesselBlockEntity) {
-            super.read(compound, clientPacket);
+            super.read(compound, registries, clientPacket);
             ci.cancel();
         }
     }
@@ -50,13 +51,13 @@ public abstract class FluidTankBlockEntityMixin extends SmartBlockEntity {
     @SuppressWarnings("UnreachableCode")
     @Inject(
             at = @At("HEAD"),
-            method = "write(Lnet/minecraft/nbt/CompoundTag;Z)V",
+            method = "write",
             cancellable = true
     )
-    private void write(CompoundTag compound, boolean clientPacket, CallbackInfo ci) {
+    private void write(CompoundTag compound, HolderLookup.Provider registries, boolean clientPacket, CallbackInfo ci) {
         FluidTankBlockEntity self = (FluidTankBlockEntity) (Object) this;
         if (self instanceof FluidVesselBlockEntity) {
-            super.write(compound, clientPacket);
+            super.write(compound, registries, clientPacket);
             ci.cancel();
         }
     }

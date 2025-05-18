@@ -3,7 +3,10 @@ package com.hlysine.create_connected.datagen.recipes;
 import com.hlysine.create_connected.CCBlocks;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllRecipeTypes;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
+
+import java.util.concurrent.CompletableFuture;
 
 @SuppressWarnings("unused")
 public class CuttingRecipeGen extends ProcessingRecipeGen {
@@ -12,8 +15,8 @@ public class CuttingRecipeGen extends ProcessingRecipeGen {
             .withCondition(new FeatureEnabledCondition(CCBlocks.SHEAR_PIN.getId()))
             .output(CCBlocks.SHEAR_PIN.get()));
 
-    public CuttingRecipeGen(PackOutput output) {
-        super(output);
+    public CuttingRecipeGen(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
+        super(output, registries);
     }
 
     @Override

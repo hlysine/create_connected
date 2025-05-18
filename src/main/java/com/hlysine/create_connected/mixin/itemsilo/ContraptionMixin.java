@@ -3,6 +3,7 @@ package com.hlysine.create_connected.mixin.itemsilo;
 import com.google.common.collect.Multimap;
 import com.hlysine.create_connected.content.itemsilo.ItemSiloBlock;
 import com.simibubi.create.content.contraptions.Contraption;
+import net.createmod.catnip.nbt.NBTHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
@@ -61,8 +62,8 @@ public abstract class ContraptionMixin {
             if (!(entry.getValue().state().getBlock() instanceof ItemSiloBlock))
                 continue;
             if (!entry.getValue().nbt().contains("Length") && (
-                    blocks.get(NbtUtils.readBlockPos(entry.getValue().nbt().getCompound("Controller"))) == null ||
-                            !(blocks.get(NbtUtils.readBlockPos(entry.getValue().nbt().getCompound("Controller"))).state().getBlock() instanceof ItemSiloBlock))) {
+                    blocks.get(NBTHelper.readBlockPos(entry.getValue().nbt(), "Controller")) == null ||
+                            !(blocks.get(NBTHelper.readBlockPos(entry.getValue().nbt(), "Controller")).state().getBlock() instanceof ItemSiloBlock))) {
                 entry.getValue().nbt().put("Controller", NbtUtils.writeBlockPos(entry.getKey()));
                 entry.getValue().nbt().putInt("Length", 1);
                 entry.getValue().nbt().putInt("Size", 1);
@@ -81,7 +82,7 @@ public abstract class ContraptionMixin {
             if (!blocks.containsKey(entry.getKey()) || !(blocks.get(entry.getKey()).state().getBlock() instanceof ItemSiloBlock)) {
                 if (entry.getValue().nbt().contains("Controller")) {
                     iterator.remove();
-                    toBeReplaced.add(new AbstractMap.SimpleEntry<>(NbtUtils.readBlockPos(entry.getValue().nbt().getCompound("Controller")), entry.getValue()));
+                    toBeReplaced.add(new AbstractMap.SimpleEntry<>(NBTHelper.readBlockPos(entry.getValue().nbt(), "Controller"), entry.getValue()));
                 }
             }
         }

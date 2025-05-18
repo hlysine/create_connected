@@ -7,10 +7,12 @@ import com.simibubi.create.content.kinetics.deployer.DeployerApplicationRecipe;
 import com.simibubi.create.content.kinetics.press.PressingRecipe;
 import com.simibubi.create.content.processing.sequenced.SequencedAssemblyRecipeBuilder;
 import com.simibubi.create.foundation.data.recipe.CreateRecipeProvider;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.Items;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.concurrent.CompletableFuture;
 import java.util.function.UnaryOperator;
 
 public class SequencedAssemblyGen extends CreateRecipeProvider {
@@ -30,8 +32,8 @@ public class SequencedAssemblyGen extends CreateRecipeProvider {
             .addStep(DeployerApplicationRecipe::new, rb -> rb.require(Items.REDSTONE))
             .addStep(PressingRecipe::new, rb -> rb));
 
-    public SequencedAssemblyGen(PackOutput packOutput) {
-        super(packOutput);
+    public SequencedAssemblyGen(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
+        super(output, registries);
     }
 
     protected GeneratedRecipe create(String name, UnaryOperator<SequencedAssemblyRecipeBuilder> transform) {

@@ -40,7 +40,7 @@ public enum CCGuiTextures implements ScreenElement {
     }
 
     CCGuiTextures(String namespace, String location, int startX, int startY, int width, int height) {
-        this.location = new ResourceLocation(namespace, "textures/gui/" + location + ".png");
+        this.location = ResourceLocation.fromNamespaceAndPath(namespace, "textures/gui/" + location + ".png");
         this.width = width;
         this.height = height;
         this.startX = startX;

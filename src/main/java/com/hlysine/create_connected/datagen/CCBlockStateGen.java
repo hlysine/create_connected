@@ -15,9 +15,9 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.AttachFace;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.neoforged.client.model.generators.ConfiguredModel;
-import net.neoforged.client.model.generators.ModelFile;
-import net.neoforged.client.model.generators.MultiPartBlockStateBuilder;
+import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
+import net.neoforged.neoforge.client.model.generators.ModelFile;
+import net.neoforged.neoforge.client.model.generators.MultiPartBlockStateBuilder;
 import org.apache.commons.lang3.function.TriFunction;
 
 import java.util.HashMap;
@@ -108,8 +108,8 @@ public class CCBlockStateGen {
             Map<Boolean, ResourceLocation> baseOn = new HashMap<>();
             baseOn.put(false, p.modLoc("block/" + c.getName() + "_on"));
             baseOn.put(true, p.modLoc("block/" + c.getName() + "_on_reset"));
-            ResourceLocation torchOff = new ResourceLocation("block/redstone_torch_off");
-            ResourceLocation torchOn = new ResourceLocation("block/redstone_torch");
+            ResourceLocation torchOff = ResourceLocation.withDefaultNamespace("block/redstone_torch_off");
+            ResourceLocation torchOn = ResourceLocation.withDefaultNamespace("block/redstone_torch");
 
             Vector<ModelFile> models = new Vector<>(4);
             for (boolean isPowered : Iterate.falseAndTrue)

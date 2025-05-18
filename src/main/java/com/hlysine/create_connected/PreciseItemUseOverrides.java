@@ -2,6 +2,7 @@ package com.hlysine.create_connected;
 
 import com.simibubi.create.foundation.block.ItemUseOverrides;
 import net.createmod.catnip.platform.CatnipServices;
+import net.createmod.catnip.registry.RegisteredObjectsHelper;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 
@@ -13,7 +14,7 @@ public class PreciseItemUseOverrides {
     public static final Set<ResourceLocation> OVERRIDES = new HashSet<>();
 
     public static void addBlock(Block block) {
-        OVERRIDES.add(CatnipServices.REGISTRIES.getKeyOrThrow(block));
+        OVERRIDES.add(RegisteredObjectsHelper.getKeyOrThrow(block));
         ItemUseOverrides.addBlock(block);
     }
 }

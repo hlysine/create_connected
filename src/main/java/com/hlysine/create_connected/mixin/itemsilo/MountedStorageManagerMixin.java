@@ -5,6 +5,7 @@ import com.simibubi.create.api.contraption.storage.item.MountedItemStorage;
 import com.simibubi.create.content.contraptions.MountedStorageManager;
 import net.createmod.catnip.nbt.NBTHelper;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.nbt.Tag;
@@ -20,20 +21,20 @@ public abstract class MountedStorageManagerMixin {
     protected abstract void addStorage(MountedItemStorage storage, BlockPos pos);
 
     @Inject(
-            method = "readLegacy(Lnet/minecraft/nbt/CompoundTag;)V",
+            method = "readLegacy",
             at = @At(
                     value = "INVOKE",
                     target = "Lnet/createmod/catnip/nbt/NBTHelper;iterateCompoundList(Lnet/minecraft/nbt/ListTag;Ljava/util/function/Consumer;)V",
                     ordinal = 0
             )
     )
-    private void readLegacy(CompoundTag nbt, CallbackInfo ci) {
+    private void readLegacy(HolderLookup.Provider registries, CompoundTag nbt, CallbackInfo ci) {
         NBTHelper.iterateCompoundList(nbt.getList("Storage", Tag.TAG_COMPOUND), tag -> {
-            BlockPos pos = NbtUtils.readBlockPos(tag.getCompound("Pos"));
+            BlockPos pos = NBTHelper.readBlockPos(tag, "Pos");
             CompoundTag data = tag.getCompound("Data");
 
             if (data.contains("NoFuel")) {
-                addStorage(ItemSiloMountedStorage.fromLegacy(data), pos);
+                addStorage(ItemSiloMountedStorage.fromLegacy(registries, data), pos);
             }
         });
     }

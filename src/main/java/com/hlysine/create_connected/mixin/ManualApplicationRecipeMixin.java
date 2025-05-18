@@ -5,7 +5,7 @@ import com.simibubi.create.content.kinetics.deployer.ManualApplicationRecipe;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.event.entity.player.PlayerInteractEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -14,11 +14,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(value = ManualApplicationRecipe.class, remap = false)
 public class ManualApplicationRecipeMixin {
     @Inject(
-            method = "manualApplicationRecipesApplyInWorld(Lnet/minecraftforge/event/entity/player/PlayerInteractEvent$RightClickBlock;)V",
+            method = "manualApplicationRecipesApplyInWorld",
             at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;shrink(I)V"),
             remap = true
     )
-    private static void craftingRemainingItemOnApplication(PlayerInteractEvent.RightClickBlock event, CallbackInfo info) {
+    private static void craftingRemainingItemOnApplication(PlayerInteractEvent.RightClickBlock event, CallbackInfo ci) {
         if (!CServer.ApplicationRemainingItemFix.get()) return;
 
         ItemStack heldItem = event.getItemStack();

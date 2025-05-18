@@ -9,15 +9,18 @@ import com.hlysine.create_connected.datagen.advancements.CCAdvancements;
 import com.hlysine.create_connected.datagen.recipes.CCStandardRecipes;
 import com.hlysine.create_connected.datagen.recipes.ProcessingRecipeGen;
 import com.hlysine.create_connected.datagen.recipes.SequencedAssemblyGen;
+import com.simibubi.create.Create;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.foundation.utility.FilesHelper;
+import com.simibubi.create.infrastructure.data.GeneratedEntriesProvider;
 import com.tterrag.registrate.providers.ProviderType;
+import com.tterrag.registrate.providers.RegistrateDataProvider;
 import net.createmod.ponder.foundation.PonderIndex;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
-import net.neoforged.common.data.ExistingFileHelper;
-import net.neoforged.data.event.GatherDataEvent;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.data.event.GatherDataEvent;
 
 import java.util.Map.Entry;
 import java.util.concurrent.CompletableFuture;
@@ -25,9 +28,8 @@ import java.util.function.BiConsumer;
 
 public class CCDatagen {
 
-    private static final CreateRegistrate REGISTRATE = CreateConnected.getRegistrate();
-
     public static void gatherData(GatherDataEvent event) {
+        if (!event.getMods().contains(CreateConnected.MODID)) return;
         addExtraRegistrateData();
 
         DataGenerator generator = event.getGenerator();
@@ -35,22 +37,23 @@ public class CCDatagen {
         CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
         ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
 
-        if (event.includeClient()) {
-            generator.addProvider(true, CCSoundEvents.provider(generator));
-        }
+        generator.addProvider(true, CCSoundEvents.provider(generator));
+
+        generator.addProvider(event.includeServer(), new CCAdvancements(output, lookupProvider));
+        generator.addProvider(event.includeServer(), new CCStandardRecipes(output, lookupProvider));
+        generator.addProvider(event.includeServer(), new SequencedAssemblyGen(output, lookupProvider));
 
         if (event.includeServer()) {
-            generator.addProvider(true, new CCAdvancements(output));
-            generator.addProvider(true, new CCStandardRecipes(output));
-            generator.addProvider(true, new SequencedAssemblyGen(output));
-            ProcessingRecipeGen.registerAll(generator, output);
+            ProcessingRecipeGen.registerAll(generator, output, lookupProvider);
         }
+
+        event.getGenerator().addProvider(true, CreateConnected.getRegistrate().setDataProvider(new RegistrateDataProvider(CreateConnected.getRegistrate(), CreateConnected.MODID, event)));
     }
 
     private static void addExtraRegistrateData() {
         CCTagGen.addGenerators();
 
-        REGISTRATE.addDataGenerator(ProviderType.LANG, provider -> {
+        CreateConnected.getRegistrate().addDataGenerator(ProviderType.LANG, provider -> {
             BiConsumer<String, String> langConsumer = provider::add;
 
             provideDefaultLang("interface", langConsumer);

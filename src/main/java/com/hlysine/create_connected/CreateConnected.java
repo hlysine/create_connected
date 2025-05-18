@@ -13,17 +13,18 @@ import com.simibubi.create.foundation.item.ItemDescription;
 import com.simibubi.create.foundation.item.KineticStats;
 import com.simibubi.create.foundation.item.TooltipModifier;
 import net.createmod.catnip.lang.FontHelper;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.CreativeModeTab;
 import net.neoforged.api.distmarker.Dist;
-import net.neoforged.common.MinecraftForge;
-import net.neoforged.eventbus.api.EventPriority;
-import net.neoforged.eventbus.api.IEventBus;
-import net.neoforged.fml.DistExecutor;
+import net.neoforged.bus.api.EventPriority;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.ModLoadingContext;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.neoforged.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.neoforged.registries.RegisterEvent;
+import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.registries.RegisterEvent;
 import org.slf4j.Logger;
 
 // The value here should match an entry in the META-INF/mods.toml file
@@ -38,13 +39,14 @@ public class CreateConnected {
     private static final CreateRegistrate REGISTRATE = CreateRegistrate.create(MODID);
 
     static {
-        REGISTRATE.setTooltipModifierFactory(item -> new ItemDescription.Modifier(item, FontHelper.Palette.STANDARD_CREATE)
-                .andThen(TooltipModifier.mapNull(KineticStats.create(item))));
+        REGISTRATE
+                .defaultCreativeTab((ResourceKey<CreativeModeTab>) null)
+                .setTooltipModifierFactory(item -> new ItemDescription.Modifier(item, FontHelper.Palette.STANDARD_CREATE)
+                        .andThen(TooltipModifier.mapNull(KineticStats.create(item))));
     }
 
-    public CreateConnected() {
-        modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
-        IEventBus forgeEventBus = MinecraftForge.EVENT_BUS;
+    public CreateConnected(IEventBus eventBus, ModContainer modContainer) {
+        modEventBus = eventBus;
         REGISTRATE.registerEventListeners(modEventBus);
 
         // Register the commonSetup method for mod loading
@@ -53,7 +55,7 @@ public class CreateConnected {
         CCCraftingConditions.register();
 
         // Register ourselves for server and other game events we are interested in
-        MinecraftForge.EVENT_BUS.register(this);
+        NeoForge.EVENT_BUS.register(this);
 
         REGISTRATE.setCreativeTab(CCCreativeTabs.MAIN);
         CCSoundEvents.prepare();
@@ -61,17 +63,15 @@ public class CreateConnected {
         CCItems.register();
         CCBlockEntityTypes.register();
         CCCreativeTabs.register(modEventBus);
-        CCPackets.registerPackets();
+        CCPackets.register();
 
-        CCConfigs.register(ModLoadingContext.get());
-        CCConfigs.common().register();
+        CCConfigs.register(modContainer);
 
         if (Mods.COPYCATS.isLoaded())
-            forgeEventBus.addListener(CopycatsManager::onLevelTick);
+            NeoForge.EVENT_BUS.addListener(CopycatsManager::onLevelTick);
 
         modEventBus.addListener(EventPriority.LOWEST, CCDatagen::gatherData);
         modEventBus.addListener(CCSoundEvents::register);
-        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> CreateConnectedClient.onCtorClient(modEventBus, forgeEventBus));
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
@@ -96,6 +96,6 @@ public class CreateConnected {
     }
 
     public static ResourceLocation asResource(String path) {
-        return new ResourceLocation(MODID, path);
+        return ResourceLocation.fromNamespaceAndPath(MODID, path);
     }
 }

@@ -1,15 +1,14 @@
 package com.hlysine.create_connected;
 
-
 import net.createmod.ponder.foundation.PonderIndex;
 import net.neoforged.api.distmarker.Dist;
-import net.neoforged.eventbus.api.IEventBus;
+import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 
-@Mod.EventBusSubscriber(Dist.CLIENT)
+@Mod(value = CreateConnected.MODID, dist = Dist.CLIENT)
 public class CreateConnectedClient {
-    public static void onCtorClient(IEventBus modEventBus, IEventBus forgeEventBus) {
+    public CreateConnectedClient(IEventBus modEventBus) {
         CCPartialModels.register();
         modEventBus.addListener(CreateConnectedClient::init);
     }

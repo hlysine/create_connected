@@ -19,8 +19,8 @@ import org.spongepowered.asm.mixin.injection.At;
 @Mixin(ItemUseOverrides.class)
 public class ItemUseOverridesMixin {
     @WrapOperation(
-            method = "onBlockActivated(Lnet/minecraftforge/event/entity/player/PlayerInteractEvent$RightClickBlock;)V",
-            at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;use(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/InteractionHand;Lnet/minecraft/world/phys/BlockHitResult;)Lnet/minecraft/world/InteractionResult;")
+            method = "onBlockActivated",
+            at = @At(value = "INVOKE", target = "Lcom/simibubi/create/foundation/utility/BlockHelper;invokeUse(Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/InteractionHand;Lnet/minecraft/world/phys/BlockHitResult;)Lnet/minecraft/world/InteractionResult;")
     )
     private static InteractionResult preciseHitLocation(BlockState instance,
                                                         Level level,
@@ -30,7 +30,7 @@ public class ItemUseOverridesMixin {
                                                         Operation<InteractionResult> original,
                                                         @Local ResourceLocation id) {
         if (PreciseItemUseOverrides.OVERRIDES.contains(id)) {
-            HitResult hitResult = player.pick(player.getBlockReach(), 1, false);
+            HitResult hitResult = player.pick(player.blockInteractionRange(), 1, false);
             if (hitResult instanceof BlockHitResult blockHit) {
                 return original.call(instance, level, player, interactionHand, blockHit);
             }
