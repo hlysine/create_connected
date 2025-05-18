@@ -15,9 +15,9 @@ issueTrackerURL="https://github.com/hlysine/create_connected/issues"
     description='''${mod_description}'''
 
 [[dependencies.${mod_id}]]
-    modId="forge"
+    modId="neoforge"
     mandatory=true
-    versionRange="${forge_version_range}"
+    versionRange="${neoforge_version_range}"
     ordering="NONE"
     side="BOTH"
 
