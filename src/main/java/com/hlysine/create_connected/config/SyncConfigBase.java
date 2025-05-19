@@ -16,6 +16,7 @@ import net.neoforged.neoforge.network.configuration.ICustomConfigurationTask;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
+import net.neoforged.neoforge.server.ServerLifecycleHooks;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Consumer;
@@ -67,6 +68,7 @@ public abstract class SyncConfigBase extends ConfigBase {
 
     public void syncToAllPlayers() {
         CatnipServices.PLATFORM.executeOnServerOnly(() -> () -> {
+            if (ServerLifecycleHooks.getCurrentServer() == null) return;
             CreateConnected.LOGGER.debug("Sync Config: Sending server config to all players on reload");
             PacketDistributor.sendToAllPlayers(new SyncConfig(getSyncConfig()));
         });
