@@ -1,5 +1,6 @@
 package com.hlysine.create_connected.content.copycat.fence;
 
+import com.hlysine.create_connected.content.copycat.ICopycatWithWrappedBlock;
 import com.hlysine.create_connected.content.copycat.WaterloggedCopycatWrappedBlock;
 import com.simibubi.create.content.decoration.copycat.CopycatBlock;
 import net.createmod.catnip.data.Iterate;

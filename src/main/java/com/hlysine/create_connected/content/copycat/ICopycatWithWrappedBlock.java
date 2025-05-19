@@ -1,7 +1,9 @@
 package com.hlysine.create_connected.content.copycat;
 
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.Property;
 
 public interface ICopycatWithWrappedBlock {
     /**

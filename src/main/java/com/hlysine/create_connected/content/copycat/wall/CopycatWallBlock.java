@@ -1,5 +1,6 @@
 package com.hlysine.create_connected.content.copycat.wall;
 
+import com.hlysine.create_connected.content.copycat.ICopycatWithWrappedBlock;
 import com.hlysine.create_connected.content.copycat.WaterloggedCopycatWrappedBlock;
 import com.simibubi.create.content.decoration.copycat.CopycatBlock;
 import net.createmod.catnip.data.Iterate;
@@ -68,12 +69,12 @@ public class CopycatWallBlock extends WaterloggedCopycatWrappedBlock {
 
     @Override
     public @NotNull VoxelShape getShape(@NotNull BlockState pState, @NotNull BlockGetter pLevel, @NotNull BlockPos pPos, @NotNull CollisionContext pContext) {
-        return wall.getShape(copyState(pState, wall.defaultBlockState(), true), pLevel, pPos, pContext);
+        return wall.getShape(ICopycatWithWrappedBlock.copyState(pState, wall.defaultBlockState(), true), pLevel, pPos, pContext);
     }
 
     @Override
     public @NotNull VoxelShape getCollisionShape(@NotNull BlockState pState, @NotNull BlockGetter pLevel, @NotNull BlockPos pPos, @NotNull CollisionContext pContext) {
-        return wall.getCollisionShape(copyState(pState, wall.defaultBlockState(), true), pLevel, pPos, pContext);
+        return wall.getCollisionShape(ICopycatWithWrappedBlock.copyState(pState, wall.defaultBlockState(), true), pLevel, pPos, pContext);
     }
 
     @Override
