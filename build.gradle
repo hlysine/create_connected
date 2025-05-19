@@ -237,7 +237,6 @@ publishMods {
     changelog = "## NOTE: Create: Connected 1.0.0 or above only works with Create 6.0.0 or above!\n\nCheck out the detailed changelog at https://github.com/hlysine/create_connected/blob/main/CHANGELOG.md"
     type = STABLE
     file = jar.archiveFile
-    modLoaders.add("forge")
     modLoaders.add("neoforge")
 
     github {
