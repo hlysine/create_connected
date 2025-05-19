@@ -19,13 +19,9 @@ A Create mod add-on adding quality-of-life blocks that you wish existed in Creat
 > **Want reliable, immersive chunk-loading for your Create machines? Check
 out [Create: Power Loader](https://modrinth.com/mod/create-power-loader)**
 
-## Create 6 and Minecraft 1.21
+## Create: Connected now fully supports Create 6.0 on Minecraft 1.20.1 and 1.21.1
 
-**Minecraft 1.20.1: ✅ Available**
-
-**Minecraft 1.21.1: ⏳ Not started** (ETA Apr/May 2025)
-
-### **Please use Create: Connected v1.0.0 or above for Create 6. Support for Minecraft 1.21 will come soon**
+Support for Minecraft 1.19.2 and 1.18.2 has been dropped.
 
 ## What's new in 0.9
 
