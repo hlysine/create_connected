@@ -2,13 +2,13 @@ package com.hlysine.create_connected.config;
 
 import com.hlysine.create_connected.CreateConnected;
 import net.createmod.catnip.config.ConfigBase;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.fml.DistExecutor;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.NetworkEvent.Context;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.PacketDistributor;
@@ -17,6 +17,7 @@ import net.minecraftforge.server.ServerLifecycleHooks;
 
 import java.util.function.BiConsumer;
 import java.util.function.Function;
+import net.neoforged.neoforge.server.ServerLifecycleHooks;
 import java.util.function.Supplier;
 
 public abstract class SyncConfigBase extends ConfigBase {
@@ -100,7 +101,7 @@ public abstract class SyncConfigBase extends ConfigBase {
             CreateConnected.LOGGER.debug("Sync Config: Config sync skipped due to null server");
             return;
         }
-        CreateConnected.LOGGER.debug("Sync Config: Sending server config to all players on reload");
+            CreateConnected.LOGGER.debug("Sync Config: Sending server config to all players on reload");
         syncChannel.send(PacketDistributor.ALL.noArg(), this.messageSupplier.apply(getSyncConfig()));
     }
 
