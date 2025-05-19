@@ -49,6 +49,12 @@ public class InventoryBridgeBlockEntity extends SmartBlockEntity {
         powered = false;
     }
 
+    @Override
+    public void initialize() {
+        super.initialize();
+        updateConnectedInventory();
+    }
+
     @SubscribeEvent
     public static void registerCapabilities(RegisterCapabilitiesEvent event) {
         event.registerBlockEntity(
