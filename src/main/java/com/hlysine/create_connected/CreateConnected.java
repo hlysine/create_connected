@@ -1,5 +1,6 @@
 package com.hlysine.create_connected;
 
+import com.hlysine.create_connected.compat.AdditionalPlacementsCompat;
 import com.hlysine.create_connected.compat.CopycatsManager;
 import com.hlysine.create_connected.compat.Mods;
 import com.hlysine.create_connected.config.CCConfigs;
@@ -68,6 +69,8 @@ public class CreateConnected {
 
         modEventBus.addListener(EventPriority.LOWEST, CCDatagen::gatherData);
         modEventBus.addListener(CCSoundEvents::register);
+
+        Mods.ADDITIONAL_PLACEMENTS.executeIfInstalled(() -> AdditionalPlacementsCompat::register);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {

@@ -45,7 +45,7 @@ public interface ICopycatWithWrappedBlock {
     }
 
     static <T extends Comparable<T>> BlockState tryCopyProperty(BlockState state, BlockState newState, Property<T> property) {
-        if (state.hasProperty(property)) {
+        if (state.hasProperty(property) && newState.hasProperty(property)) {
             newState = newState.setValue(property, state.getValue(property));
         }
         return newState;

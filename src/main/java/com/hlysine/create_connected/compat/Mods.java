@@ -16,6 +16,7 @@ public enum Mods {
     COPYCATS("copycats"),
     DIAGONAL_FENCES("diagonalfences"),
     DREAMS_DESIRES("create_dd"),
+    ADDITIONAL_PLACEMENTS("additionalplacements"),
     GARNISHED("garnished");
 
     private final String id;
