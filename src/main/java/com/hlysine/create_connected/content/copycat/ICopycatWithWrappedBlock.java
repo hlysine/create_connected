@@ -2,6 +2,7 @@ package com.hlysine.create_connected.content.copycat;
 
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.Property;
 
 import java.util.function.Function;
@@ -29,6 +30,16 @@ public interface ICopycatWithWrappedBlock {
         BlockState newState = wrappedBlock.defaultBlockState();
         for (Property<?> property : newState.getProperties()) {
             newState = tryCopyProperty(state, newState, property);
+        }
+        return newState;
+    }
+
+    static BlockState copyState(BlockState source, BlockState destination, boolean includeWaterlogged) {
+        BlockState newState = destination;
+        for (Property<?> property : source.getProperties()) {
+            if (property == BlockStateProperties.WATERLOGGED && !includeWaterlogged)
+                continue;
+            newState = tryCopyProperty(source, newState, property);
         }
         return newState;
     }

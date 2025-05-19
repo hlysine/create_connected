@@ -57,7 +57,7 @@ public class CopycatFenceGateBlock extends WaterloggedCopycatWrappedBlock {
     public BlockState getStateForPlacement(@NotNull BlockPlaceContext pContext) {
         BlockState state = fenceGate.getStateForPlacement(pContext);
         if (state == null) return super.getStateForPlacement(pContext);
-        return copyState(state, super.getStateForPlacement(pContext), false);
+        return ICopycatWithWrappedBlock.copyState(state, super.getStateForPlacement(pContext), false);
     }
 
     @Override
@@ -139,15 +139,6 @@ public class CopycatFenceGateBlock extends WaterloggedCopycatWrappedBlock {
     @Override
     public boolean supportsExternalFaceHiding(BlockState state) {
         return true;
-    }
-
-    public static BlockState copyState(BlockState from, BlockState to, boolean includeWaterlogged) {
-        return to
-                .setValue(OPEN, from.getValue(OPEN))
-                .setValue(POWERED, from.getValue(POWERED))
-                .setValue(IN_WALL, from.getValue(IN_WALL))
-                .setValue(FACING, from.getValue(FACING))
-                .trySetValue(WATERLOGGED, includeWaterlogged ? from.getOptionalValue(WATERLOGGED).orElse(false) : to.getOptionalValue(WATERLOGGED).orElse(false));
     }
 }
 
