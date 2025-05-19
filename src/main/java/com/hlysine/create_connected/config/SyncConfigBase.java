@@ -17,7 +17,6 @@ import net.minecraftforge.server.ServerLifecycleHooks;
 
 import java.util.function.BiConsumer;
 import java.util.function.Function;
-import net.neoforged.neoforge.server.ServerLifecycleHooks;
 import java.util.function.Supplier;
 
 public abstract class SyncConfigBase extends ConfigBase {
