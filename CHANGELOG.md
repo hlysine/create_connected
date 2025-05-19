@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 1.0.2 - 2025-05-19
+
+### Added
+
+- **Support for Minecraft 1.21.1**
+
+### Fixed
+
+- Crash due to modification of fence gate properties by other mods (#97)
+- Stress configs not working due to incorrect mod ID (#106)
+- Inventory bridge and inventory access port losing connection on chunk unload (#111)
+
 ## 1.0.1 - 2025-04-09 [1.20 only]
 
 ### Fixed
@@ -14,7 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## 1.0.0 - 2025-04-08 [1.20 only]
 
-### **This version is not compatible with Create 0.5.1 or earlier**
+### **This version onward is not compatible with Create 0.5.1 or earlier**
 
 **Special thanks to @c0nnor263 for their contributions to this update**
 
