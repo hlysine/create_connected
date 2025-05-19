@@ -1,5 +1,6 @@
 package com.hlysine.create_connected;
 
+import com.hlysine.create_connected.compat.AdditionalPlacementsCompat;
 import com.hlysine.create_connected.compat.CopycatsManager;
 import com.hlysine.create_connected.compat.Mods;
 import com.hlysine.create_connected.config.CCConfigs;
@@ -13,8 +14,8 @@ import com.simibubi.create.foundation.item.ItemDescription;
 import com.simibubi.create.foundation.item.KineticStats;
 import com.simibubi.create.foundation.item.TooltipModifier;
 import net.createmod.catnip.lang.FontHelper;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -39,7 +40,7 @@ public class CreateConnected {
 
     static {
         REGISTRATE.setTooltipModifierFactory(item -> new ItemDescription.Modifier(item, FontHelper.Palette.STANDARD_CREATE)
-                .andThen(TooltipModifier.mapNull(KineticStats.create(item))));
+                        .andThen(TooltipModifier.mapNull(KineticStats.create(item))));
     }
 
     public CreateConnected() {
@@ -72,6 +73,8 @@ public class CreateConnected {
         modEventBus.addListener(EventPriority.LOWEST, CCDatagen::gatherData);
         modEventBus.addListener(CCSoundEvents::register);
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> CreateConnectedClient.onCtorClient(modEventBus, forgeEventBus));
+
+        Mods.ADDITIONAL_PLACEMENTS.executeIfInstalled(() -> AdditionalPlacementsCompat::register);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {

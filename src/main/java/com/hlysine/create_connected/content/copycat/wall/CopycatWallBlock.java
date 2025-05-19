@@ -58,7 +58,7 @@ public class CopycatWallBlock extends WaterloggedCopycatWrappedBlock {
     public BlockState getStateForPlacement(@NotNull BlockPlaceContext pContext) {
         BlockState state = wall.getStateForPlacement(pContext);
         if (state == null) return super.getStateForPlacement(pContext);
-        return copyState(state, super.getStateForPlacement(pContext), false);
+        return ICopycatWithWrappedBlock.copyState(state, super.getStateForPlacement(pContext), false);
     }
 
     @Override
@@ -226,16 +226,6 @@ public class CopycatWallBlock extends WaterloggedCopycatWrappedBlock {
             case EAST -> EAST_WALL;
             default -> throw new IllegalArgumentException("Vertical directions not supported");
         };
-    }
-
-    public static BlockState copyState(BlockState from, BlockState to, boolean includeWaterlogged) {
-        return to
-                .setValue(UP, from.getValue(UP))
-                .setValue(NORTH_WALL, from.getValue(NORTH_WALL))
-                .setValue(SOUTH_WALL, from.getValue(SOUTH_WALL))
-                .setValue(EAST_WALL, from.getValue(EAST_WALL))
-                .setValue(WEST_WALL, from.getValue(WEST_WALL))
-                .trySetValue(WATERLOGGED, includeWaterlogged ? from.getOptionalValue(WATERLOGGED).orElse(false) : to.getOptionalValue(WATERLOGGED).orElse(false));
     }
 }
 

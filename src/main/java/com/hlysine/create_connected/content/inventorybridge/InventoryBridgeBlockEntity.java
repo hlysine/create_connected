@@ -1,5 +1,4 @@
 package com.hlysine.create_connected.content.inventorybridge;
-
 import com.hlysine.create_connected.content.inventoryaccessport.WrappedItemHandler;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
@@ -17,8 +16,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.IItemHandler;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.function.Supplier;
@@ -42,6 +41,12 @@ public class InventoryBridgeBlockEntity extends SmartBlockEntity {
 
         itemCapability = LazyOptional.empty();
         powered = false;
+    }
+
+    @Override
+    public void initialize() {
+        super.initialize();
+        updateConnectedInventory();
     }
 
     @Override

@@ -67,7 +67,7 @@ public class CStress extends ConfigBase {
     public static <B extends Block, P> NonNullUnaryOperator<BlockBuilder<B, P>> setImpact(double value) {
         return builder -> {
             assertFromCC(builder);
-            ResourceLocation id = Create.asResource(builder.getName());
+            ResourceLocation id = CreateConnected.asResource(builder.getName());
             DEFAULT_IMPACTS.put(id, value);
             return builder;
         };
@@ -76,7 +76,7 @@ public class CStress extends ConfigBase {
     public static <B extends Block, P> NonNullUnaryOperator<BlockBuilder<B, P>> setCapacity(double value) {
         return builder -> {
             assertFromCC(builder);
-            ResourceLocation id = Create.asResource(builder.getName());
+            ResourceLocation id = CreateConnected.asResource(builder.getName());
             DEFAULT_CAPACITIES.put(id, value);
             return builder;
         };

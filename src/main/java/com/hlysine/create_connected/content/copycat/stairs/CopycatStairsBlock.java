@@ -53,7 +53,7 @@ public class CopycatStairsBlock extends WaterloggedCopycatWrappedBlock {
     public BlockState getStateForPlacement(@NotNull BlockPlaceContext pContext) {
         BlockState state = stairs.getStateForPlacement(pContext);
         if (state == null) return super.getStateForPlacement(pContext);
-        return copyState(state, super.getStateForPlacement(pContext), false);
+        return ICopycatWithWrappedBlock.copyState(state, super.getStateForPlacement(pContext), false);
     }
 
     @Override
@@ -296,14 +296,6 @@ public class CopycatStairsBlock extends WaterloggedCopycatWrappedBlock {
             }
         }
         return faceShape;
-    }
-
-    public static BlockState copyState(BlockState from, BlockState to, boolean includeWaterlogged) {
-        return to
-                .setValue(StairBlock.FACING, from.getValue(StairBlock.FACING))
-                .setValue(HALF, from.getValue(HALF))
-                .setValue(StairBlock.SHAPE, from.getValue(StairBlock.SHAPE))
-                .trySetValue(WATERLOGGED, includeWaterlogged ? from.getOptionalValue(WATERLOGGED).orElse(false) : to.getOptionalValue(WATERLOGGED).orElse(false));
     }
 
     private static class FaceShape {

@@ -1,17 +1,11 @@
 package com.hlysine.create_connected.content.copycat.fencegate;
 
+import com.hlysine.create_connected.content.copycat.IWrappedBlock;
 import net.minecraft.world.level.block.FenceGateBlock;
 import net.minecraft.world.level.block.state.properties.WoodType;
 
-public class WrappedFenceGateBlock extends FenceGateBlock {
+public class WrappedFenceGateBlock extends FenceGateBlock implements IWrappedBlock {
     public WrappedFenceGateBlock(Properties pProperties, WoodType pType) {
         super(pProperties, pType);
-    }
-
-    /**
-     * For compatibility with Additional Placements
-     */
-    public boolean generateAdditionalStates() {
-        return false;
     }
 }
