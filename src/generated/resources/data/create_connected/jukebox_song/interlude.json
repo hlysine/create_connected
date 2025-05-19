@@ -1,0 +1,10 @@
+{
+  "comparator_output": 14,
+  "description": {
+    "translate": "item.create_connected.music_disc_interlude.desc"
+  },
+  "length_in_seconds": 189.0,
+  "sound_event": {
+    "sound_id": "create_connected:interlude_music"
+  }
+}

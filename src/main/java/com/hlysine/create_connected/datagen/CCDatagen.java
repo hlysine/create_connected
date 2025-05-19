@@ -2,6 +2,7 @@ package com.hlysine.create_connected.datagen;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.hlysine.create_connected.CCJukeboxSongs;
 import com.hlysine.create_connected.CCPonderPlugin;
 import com.hlysine.create_connected.CCSoundEvents;
 import com.hlysine.create_connected.CreateConnected;
@@ -9,10 +10,7 @@ import com.hlysine.create_connected.datagen.advancements.CCAdvancements;
 import com.hlysine.create_connected.datagen.recipes.CCStandardRecipes;
 import com.hlysine.create_connected.datagen.recipes.ProcessingRecipeGen;
 import com.hlysine.create_connected.datagen.recipes.SequencedAssemblyGen;
-import com.simibubi.create.Create;
-import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.foundation.utility.FilesHelper;
-import com.simibubi.create.infrastructure.data.GeneratedEntriesProvider;
 import com.tterrag.registrate.providers.ProviderType;
 import com.tterrag.registrate.providers.RegistrateDataProvider;
 import net.createmod.ponder.foundation.PonderIndex;
@@ -42,6 +40,7 @@ public class CCDatagen {
         generator.addProvider(event.includeServer(), new CCAdvancements(output, lookupProvider));
         generator.addProvider(event.includeServer(), new CCStandardRecipes(output, lookupProvider));
         generator.addProvider(event.includeServer(), new SequencedAssemblyGen(output, lookupProvider));
+        generator.addProvider(event.includeServer(), CCJukeboxSongs.provider(output, lookupProvider, existingFileHelper));
 
         if (event.includeServer()) {
             ProcessingRecipeGen.registerAll(generator, output, lookupProvider);

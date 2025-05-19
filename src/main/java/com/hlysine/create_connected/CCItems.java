@@ -72,14 +72,14 @@ public class CCItems {
 
     public static final ItemEntry<Item> MUSIC_DISC_ELEVATOR =
             REGISTRATE.item("music_disc_elevator", Item::new)
-                    .properties(p -> p.stacksTo(1).rarity(Rarity.RARE).jukeboxPlayable(CCJukeboxSongs.ELEVATOR.getKey()))
+                    .properties(p -> p.stacksTo(1).rarity(Rarity.RARE).jukeboxPlayable(CCJukeboxSongs.ELEVATOR))
                     .tag(Tags.Items.MUSIC_DISCS, ItemTags.CREEPER_DROP_MUSIC_DISCS)
                     .lang("Music Disc")
                     .register();
 
     public static final ItemEntry<Item> MUSIC_DISC_INTERLUDE =
             REGISTRATE.item("music_disc_interlude", Item::new)
-                    .properties(p -> p.stacksTo(1).rarity(Rarity.RARE).jukeboxPlayable(CCJukeboxSongs.INTERLUDE.getKey()))
+                    .properties(p -> p.stacksTo(1).rarity(Rarity.RARE).jukeboxPlayable(CCJukeboxSongs.INTERLUDE))
                     .tag(Tags.Items.MUSIC_DISCS, ItemTags.CREEPER_DROP_MUSIC_DISCS)
                     .lang("Music Disc")
                     .register();

@@ -370,6 +370,7 @@ public class CCSoundEvents {
 
         protected List<ResourceLocation> variants;
         protected DeferredHolder<SoundEvent, SoundEvent> event;
+        protected Holder<SoundEvent> directEvent;
 
         public CustomSoundEntry(ResourceLocation id, List<ResourceLocation> variants, String subtitle,
                                 SoundSource category, int attenuationDistance) {
@@ -390,7 +391,10 @@ public class CCSoundEvents {
 
         @Override
         public Holder<SoundEvent> getMainEventHolder() {
-            return event;
+            if (directEvent == null) {
+                directEvent = Holder.direct(getMainEvent());
+            }
+            return directEvent;
         }
 
         @Override

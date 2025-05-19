@@ -60,7 +60,6 @@ public class CreateConnected {
         CCCreativeTabs.register(modEventBus);
         CCPackets.register();
         CCCraftingConditions.register(modEventBus);
-        CCJukeboxSongs.register(modEventBus);
 
         CCConfigs.register(modContainer);
 
