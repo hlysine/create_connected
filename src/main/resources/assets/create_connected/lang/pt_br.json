@@ -83,7 +83,7 @@
   "block.create_connected.freewheel_clutch": "Embreagem de Rotação Direcionada",
   "block.create_connected.freewheel_clutch.tooltip.summary": "Uma embreagem que só é _acoplada_ se força de entrada girar na _mesma direção_ a qual foi ajustada.",
   "block.create_connected.inventory_access_port": "Porta de Acesso ao Inventário",
-  "block.create_connected.inventory_bridge": "Ponte de Inventários",
+  "block.create_connected.inventory_bridge": "Ponte de Inventário",
   "block.create_connected.inverted_clutch": "Embreagem Invertida",
   "block.create_connected.inverted_gearshift": "Câmbio Invertido",
   "block.create_connected.item_silo": "Cofre de Itens Vertical",
