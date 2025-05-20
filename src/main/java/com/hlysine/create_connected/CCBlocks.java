@@ -312,7 +312,7 @@ public class CCBlocks {
 
     static {
         BlockSetType.values().forEach(type -> {
-            Block button = RegisteredObjectsHelper.getBlock(ResourceLocation.withDefaultNamespace(type.name() + "_button"));
+            Block button = RegisteredObjectsHelper.getBlock(ResourceLocation.parse(type.name() + "_button"));
             if (button == null) return;
             if (!(button instanceof ButtonBlock buttonBlock))
                 return;
