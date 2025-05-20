@@ -16,6 +16,9 @@ import com.hlysine.create_connected.content.inventorybridge.InventoryBridgeBlock
 import com.hlysine.create_connected.content.invertedclutch.InvertedClutchBlockEntity;
 import com.hlysine.create_connected.content.invertedgearshift.InvertedGearshiftBlockEntity;
 import com.hlysine.create_connected.content.itemsilo.ItemSiloBlockEntity;
+import com.hlysine.create_connected.content.kineticbattery.KineticBatteryBlockEntity;
+import com.hlysine.create_connected.content.kineticbattery.KineticBatteryRenderer;
+import com.hlysine.create_connected.content.kineticbattery.KineticBatteryVisual;
 import com.hlysine.create_connected.content.linkedtransmitter.LinkedAnalogLeverBlockEntity;
 import com.hlysine.create_connected.content.linkedtransmitter.LinkedAnalogLeverRenderer;
 import com.hlysine.create_connected.content.linkedtransmitter.LinkedTransmitterBlockEntity;
@@ -130,6 +133,13 @@ public class CCBlockEntityTypes {
             .visual(() -> SplitShaftVisual::new, false)
             .validBlocks(CCBlocks.BRAKE)
             .renderer(() -> SplitShaftRenderer::new)
+            .register();
+
+    public static final BlockEntityEntry<KineticBatteryBlockEntity> KINETIC_BATTERY = REGISTRATE
+            .blockEntity("kinetic_battery", KineticBatteryBlockEntity::new)
+            .visual(() -> KineticBatteryVisual::new, false)
+            .validBlocks(CCBlocks.KINETIC_BATTERY)
+            .renderer(() -> KineticBatteryRenderer::new)
             .register();
 
     public static final BlockEntityEntry<ItemSiloBlockEntity> ITEM_SILO = REGISTRATE

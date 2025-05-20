@@ -1,0 +1,6 @@
+{
+  "parent": "create_connected:block/kinetic_battery/block",
+  "textures": {
+    "level": "create_connected:block/kinetic_battery/level_3_discharge"
+  }
+}

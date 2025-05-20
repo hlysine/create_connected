@@ -45,6 +45,8 @@ import com.hlysine.create_connected.content.invertedgearshift.InvertedGearshiftB
 import com.hlysine.create_connected.content.itemsilo.ItemSiloBlock;
 import com.hlysine.create_connected.content.itemsilo.ItemSiloCTBehaviour;
 import com.hlysine.create_connected.content.itemsilo.ItemSiloItem;
+import com.hlysine.create_connected.content.kineticbattery.KineticBatteryBlock;
+import com.hlysine.create_connected.content.kineticbattery.KineticBatteryGenerator;
 import com.hlysine.create_connected.content.linkedtransmitter.LinkedAnalogLeverBlock;
 import com.hlysine.create_connected.content.linkedtransmitter.LinkedButtonBlock;
 import com.hlysine.create_connected.content.linkedtransmitter.LinkedLeverBlock;
@@ -274,7 +276,7 @@ public class CCBlocks {
 
     public static final BlockEntry<BrassGearboxBlock> BRASS_GEARBOX = REGISTRATE.block("brass_gearbox", BrassGearboxBlock::new)
             .initialProperties(SharedProperties::stone)
-            .properties(p -> p.noOcclusion().mapColor(MapColor.PODZOL))
+            .properties(p -> p.noOcclusion().mapColor(MapColor.TERRACOTTA_BROWN))
             .transform(CStress.setNoImpact())
             .transform(FeatureToggle.register(FeatureCategory.KINETIC))
             .transform(axeOrPickaxe())
@@ -294,6 +296,19 @@ public class CCBlocks {
             .transform(FeatureToggle.register(FeatureCategory.KINETIC))
             .transform(axeOrPickaxe())
             .blockstate((c, p) -> BlockStateGen.axisBlock(c, p, AssetLookup.forPowered(c, p)))
+            .item()
+            .transform(customItemModel())
+            .register();
+
+    public static final BlockEntry<KineticBatteryBlock> KINETIC_BATTERY = REGISTRATE.block("kinetic_battery", KineticBatteryBlock::new)
+            .initialProperties(SharedProperties::stone)
+            .properties(p -> p.noOcclusion().mapColor(MapColor.TERRACOTTA_BROWN))
+            .addLayer(() -> RenderType::cutoutMipped)
+            .transform(CStress.setCapacity(8.0))
+            .transform(CStress.setImpact(8.0))
+            .transform(FeatureToggle.register(FeatureCategory.KINETIC))
+            .transform(axeOrPickaxe())
+            .blockstate(new KineticBatteryGenerator()::generate)
             .item()
             .transform(customItemModel())
             .register();

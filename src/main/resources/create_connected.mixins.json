@@ -9,6 +9,7 @@
     "ItemUseOverridesMixin",
     "KineticBlockAdvancementMixin",
     "ManualApplicationRecipeMixin",
+    "RotationPropagatorMixin",
     "chaincogwheel.RotationPropagatorMixin",
     "compat.CopycatBlockEntityMixin",
     "compat.CopycatBlockMixin",

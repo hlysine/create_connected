@@ -88,6 +88,7 @@
   "block.create_connected.inverted_gearshift": "Inverted Gearshift",
   "block.create_connected.item_silo": "Item Silo",
   "block.create_connected.item_silo.tooltip.summary": "A _vertical_ item vault.",
+  "block.create_connected.kinetic_battery": "Kinetic Battery",
   "block.create_connected.large_crank_wheel": "Large Crank Wheel",
   "block.create_connected.linked_acacia_button": "Linked Acacia Button",
   "block.create_connected.linked_analog_lever": "Linked Analog Lever",

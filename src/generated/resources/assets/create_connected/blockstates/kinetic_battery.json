@@ -1,0 +1,316 @@
+{
+  "variants": {
+    "facing=down,level=0,powered=false": {
+      "model": "create_connected:block/kinetic_battery/block_0_charge",
+      "x": 180
+    },
+    "facing=down,level=0,powered=true": {
+      "model": "create_connected:block/kinetic_battery/block_0_discharge",
+      "x": 180
+    },
+    "facing=down,level=1,powered=false": {
+      "model": "create_connected:block/kinetic_battery/block_1_charge",
+      "x": 180
+    },
+    "facing=down,level=1,powered=true": {
+      "model": "create_connected:block/kinetic_battery/block_1_discharge",
+      "x": 180
+    },
+    "facing=down,level=2,powered=false": {
+      "model": "create_connected:block/kinetic_battery/block_2_charge",
+      "x": 180
+    },
+    "facing=down,level=2,powered=true": {
+      "model": "create_connected:block/kinetic_battery/block_2_discharge",
+      "x": 180
+    },
+    "facing=down,level=3,powered=false": {
+      "model": "create_connected:block/kinetic_battery/block_3_charge",
+      "x": 180
+    },
+    "facing=down,level=3,powered=true": {
+      "model": "create_connected:block/kinetic_battery/block_3_discharge",
+      "x": 180
+    },
+    "facing=down,level=4,powered=false": {
+      "model": "create_connected:block/kinetic_battery/block_4_charge",
+      "x": 180
+    },
+    "facing=down,level=4,powered=true": {
+      "model": "create_connected:block/kinetic_battery/block_4_discharge",
+      "x": 180
+    },
+    "facing=down,level=5,powered=false": {
+      "model": "create_connected:block/kinetic_battery/block_5_charge",
+      "x": 180
+    },
+    "facing=down,level=5,powered=true": {
+      "model": "create_connected:block/kinetic_battery/block_5_discharge",
+      "x": 180
+    },
+    "facing=east,level=0,powered=false": {
+      "model": "create_connected:block/kinetic_battery/block_0_charge",
+      "x": 90,
+      "y": 90
+    },
+    "facing=east,level=0,powered=true": {
+      "model": "create_connected:block/kinetic_battery/block_0_discharge",
+      "x": 90,
+      "y": 90
+    },
+    "facing=east,level=1,powered=false": {
+      "model": "create_connected:block/kinetic_battery/block_1_charge",
+      "x": 90,
+      "y": 90
+    },
+    "facing=east,level=1,powered=true": {
+      "model": "create_connected:block/kinetic_battery/block_1_discharge",
+      "x": 90,
+      "y": 90
+    },
+    "facing=east,level=2,powered=false": {
+      "model": "create_connected:block/kinetic_battery/block_2_charge",
+      "x": 90,
+      "y": 90
+    },
+    "facing=east,level=2,powered=true": {
+      "model": "create_connected:block/kinetic_battery/block_2_discharge",
+      "x": 90,
+      "y": 90
+    },
+    "facing=east,level=3,powered=false": {
+      "model": "create_connected:block/kinetic_battery/block_3_charge",
+      "x": 90,
+      "y": 90
+    },
+    "facing=east,level=3,powered=true": {
+      "model": "create_connected:block/kinetic_battery/block_3_discharge",
+      "x": 90,
+      "y": 90
+    },
+    "facing=east,level=4,powered=false": {
+      "model": "create_connected:block/kinetic_battery/block_4_charge",
+      "x": 90,
+      "y": 90
+    },
+    "facing=east,level=4,powered=true": {
+      "model": "create_connected:block/kinetic_battery/block_4_discharge",
+      "x": 90,
+      "y": 90
+    },
+    "facing=east,level=5,powered=false": {
+      "model": "create_connected:block/kinetic_battery/block_5_charge",
+      "x": 90,
+      "y": 90
+    },
+    "facing=east,level=5,powered=true": {
+      "model": "create_connected:block/kinetic_battery/block_5_discharge",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north,level=0,powered=false": {
+      "model": "create_connected:block/kinetic_battery/block_0_charge",
+      "x": 90
+    },
+    "facing=north,level=0,powered=true": {
+      "model": "create_connected:block/kinetic_battery/block_0_discharge",
+      "x": 90
+    },
+    "facing=north,level=1,powered=false": {
+      "model": "create_connected:block/kinetic_battery/block_1_charge",
+      "x": 90
+    },
+    "facing=north,level=1,powered=true": {
+      "model": "create_connected:block/kinetic_battery/block_1_discharge",
+      "x": 90
+    },
+    "facing=north,level=2,powered=false": {
+      "model": "create_connected:block/kinetic_battery/block_2_charge",
+      "x": 90
+    },
+    "facing=north,level=2,powered=true": {
+      "model": "create_connected:block/kinetic_battery/block_2_discharge",
+      "x": 90
+    },
+    "facing=north,level=3,powered=false": {
+      "model": "create_connected:block/kinetic_battery/block_3_charge",
+      "x": 90
+    },
+    "facing=north,level=3,powered=true": {
+      "model": "create_connected:block/kinetic_battery/block_3_discharge",
+      "x": 90
+    },
+    "facing=north,level=4,powered=false": {
+      "model": "create_connected:block/kinetic_battery/block_4_charge",
+      "x": 90
+    },
+    "facing=north,level=4,powered=true": {
+      "model": "create_connected:block/kinetic_battery/block_4_discharge",
+      "x": 90
+    },
+    "facing=north,level=5,powered=false": {
+      "model": "create_connected:block/kinetic_battery/block_5_charge",
+      "x": 90
+    },
+    "facing=north,level=5,powered=true": {
+      "model": "create_connected:block/kinetic_battery/block_5_discharge",
+      "x": 90
+    },
+    "facing=south,level=0,powered=false": {
+      "model": "create_connected:block/kinetic_battery/block_0_charge",
+      "x": 90,
+      "y": 180
+    },
+    "facing=south,level=0,powered=true": {
+      "model": "create_connected:block/kinetic_battery/block_0_discharge",
+      "x": 90,
+      "y": 180
+    },
+    "facing=south,level=1,powered=false": {
+      "model": "create_connected:block/kinetic_battery/block_1_charge",
+      "x": 90,
+      "y": 180
+    },
+    "facing=south,level=1,powered=true": {
+      "model": "create_connected:block/kinetic_battery/block_1_discharge",
+      "x": 90,
+      "y": 180
+    },
+    "facing=south,level=2,powered=false": {
+      "model": "create_connected:block/kinetic_battery/block_2_charge",
+      "x": 90,
+      "y": 180
+    },
+    "facing=south,level=2,powered=true": {
+      "model": "create_connected:block/kinetic_battery/block_2_discharge",
+      "x": 90,
+      "y": 180
+    },
+    "facing=south,level=3,powered=false": {
+      "model": "create_connected:block/kinetic_battery/block_3_charge",
+      "x": 90,
+      "y": 180
+    },
+    "facing=south,level=3,powered=true": {
+      "model": "create_connected:block/kinetic_battery/block_3_discharge",
+      "x": 90,
+      "y": 180
+    },
+    "facing=south,level=4,powered=false": {
+      "model": "create_connected:block/kinetic_battery/block_4_charge",
+      "x": 90,
+      "y": 180
+    },
+    "facing=south,level=4,powered=true": {
+      "model": "create_connected:block/kinetic_battery/block_4_discharge",
+      "x": 90,
+      "y": 180
+    },
+    "facing=south,level=5,powered=false": {
+      "model": "create_connected:block/kinetic_battery/block_5_charge",
+      "x": 90,
+      "y": 180
+    },
+    "facing=south,level=5,powered=true": {
+      "model": "create_connected:block/kinetic_battery/block_5_discharge",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up,level=0,powered=false": {
+      "model": "create_connected:block/kinetic_battery/block_0_charge"
+    },
+    "facing=up,level=0,powered=true": {
+      "model": "create_connected:block/kinetic_battery/block_0_discharge"
+    },
+    "facing=up,level=1,powered=false": {
+      "model": "create_connected:block/kinetic_battery/block_1_charge"
+    },
+    "facing=up,level=1,powered=true": {
+      "model": "create_connected:block/kinetic_battery/block_1_discharge"
+    },
+    "facing=up,level=2,powered=false": {
+      "model": "create_connected:block/kinetic_battery/block_2_charge"
+    },
+    "facing=up,level=2,powered=true": {
+      "model": "create_connected:block/kinetic_battery/block_2_discharge"
+    },
+    "facing=up,level=3,powered=false": {
+      "model": "create_connected:block/kinetic_battery/block_3_charge"
+    },
+    "facing=up,level=3,powered=true": {
+      "model": "create_connected:block/kinetic_battery/block_3_discharge"
+    },
+    "facing=up,level=4,powered=false": {
+      "model": "create_connected:block/kinetic_battery/block_4_charge"
+    },
+    "facing=up,level=4,powered=true": {
+      "model": "create_connected:block/kinetic_battery/block_4_discharge"
+    },
+    "facing=up,level=5,powered=false": {
+      "model": "create_connected:block/kinetic_battery/block_5_charge"
+    },
+    "facing=up,level=5,powered=true": {
+      "model": "create_connected:block/kinetic_battery/block_5_discharge"
+    },
+    "facing=west,level=0,powered=false": {
+      "model": "create_connected:block/kinetic_battery/block_0_charge",
+      "x": 90,
+      "y": 270
+    },
+    "facing=west,level=0,powered=true": {
+      "model": "create_connected:block/kinetic_battery/block_0_discharge",
+      "x": 90,
+      "y": 270
+    },
+    "facing=west,level=1,powered=false": {
+      "model": "create_connected:block/kinetic_battery/block_1_charge",
+      "x": 90,
+      "y": 270
+    },
+    "facing=west,level=1,powered=true": {
+      "model": "create_connected:block/kinetic_battery/block_1_discharge",
+      "x": 90,
+      "y": 270
+    },
+    "facing=west,level=2,powered=false": {
+      "model": "create_connected:block/kinetic_battery/block_2_charge",
+      "x": 90,
+      "y": 270
+    },
+    "facing=west,level=2,powered=true": {
+      "model": "create_connected:block/kinetic_battery/block_2_discharge",
+      "x": 90,
+      "y": 270
+    },
+    "facing=west,level=3,powered=false": {
+      "model": "create_connected:block/kinetic_battery/block_3_charge",
+      "x": 90,
+      "y": 270
+    },
+    "facing=west,level=3,powered=true": {
+      "model": "create_connected:block/kinetic_battery/block_3_discharge",
+      "x": 90,
+      "y": 270
+    },
+    "facing=west,level=4,powered=false": {
+      "model": "create_connected:block/kinetic_battery/block_4_charge",
+      "x": 90,
+      "y": 270
+    },
+    "facing=west,level=4,powered=true": {
+      "model": "create_connected:block/kinetic_battery/block_4_discharge",
+      "x": 90,
+      "y": 270
+    },
+    "facing=west,level=5,powered=false": {
+      "model": "create_connected:block/kinetic_battery/block_5_charge",
+      "x": 90,
+      "y": 270
+    },
+    "facing=west,level=5,powered=true": {
+      "model": "create_connected:block/kinetic_battery/block_5_discharge",
+      "x": 90,
+      "y": 270
+    }
+  }
+}
