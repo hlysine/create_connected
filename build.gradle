@@ -185,6 +185,8 @@ dependencies {
     implementation(fg.deobf("com.copycatsplus:copycats:${copycats_version}"))
     implementation(fg.deobf("maven.modrinth:additional-placements:${additional_placements_version}"))
 
+//    runtimeOnly("maven.modrinth:adorn:${adorn_version}")
+
 //    implementation fg.deobf("maven.modrinth:create-garnished:${garnished_version}")
 //    runtimeOnly fg.deobf("maven.modrinth:create-dreams-and-desires:${dreams_desires_version}")
     implementation fg.deobf("com.copycatsplus:copycats:${copycats_version}")
