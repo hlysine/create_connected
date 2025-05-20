@@ -180,7 +180,7 @@ dependencies {
     implementation("com.copycatsplus:copycats:${copycats_version}")
     implementation("maven.modrinth:additional-placements:${additional_placements_version}")
 
-    runtimeOnly("maven.modrinth:adorn:${adorn_version}")
+//    runtimeOnly("maven.modrinth:adorn:${adorn_version}")
 
     implementation(jarJar("io.github.llamalad7:mixinextras-neoforge:${mixin_extras_version}"))
 }
