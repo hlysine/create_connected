@@ -17,7 +17,7 @@ public class KineticBatteryBlockEntity extends GeneratingKineticBlockEntity impl
     public static final int DEFAULT_SPEED = 64;
     public static final float MAX_BATTERY_LEVEL = 64 * 8 * 20 * 5; // 5 seconds for debugging
     //    public static final float MAX_BATTERY_LEVEL = 128 * 3600 * 20; // 128 su-hours, expressed in su-ticks
-    private static final int SYNC_RATE = 0; // continuous sync for debugging
+    private static final int SYNC_RATE = 8; // continuous sync for debugging
 
     private float batteryLevel;
 
@@ -34,12 +34,12 @@ public class KineticBatteryBlockEntity extends GeneratingKineticBlockEntity impl
         updateGeneratedRotation();
     }
 
-    public int getCrudeBatteryLevel() {
+    public int getCrudeBatteryLevel(int totalLevels) {
         if (batteryLevel >= MAX_BATTERY_LEVEL)
-            return 5;
+            return totalLevels;
         if (batteryLevel <= 0)
             return 0;
-        return (int) Math.floor((batteryLevel / MAX_BATTERY_LEVEL) * 4) + 1;
+        return (int) Math.floor((batteryLevel / MAX_BATTERY_LEVEL) * (totalLevels - 1)) + 1;
     }
 
     @Override
@@ -73,7 +73,7 @@ public class KineticBatteryBlockEntity extends GeneratingKineticBlockEntity impl
             }
         }
         if (changed) {
-            int crudeLevel = getCrudeBatteryLevel();
+            int crudeLevel = getCrudeBatteryLevel(5);
             int oldLevel = getBlockState().getValue(LEVEL);
             if (oldLevel != crudeLevel) {
                 switchToBlockState(getLevel(), getBlockPos(), getBlockState().setValue(LEVEL, crudeLevel));

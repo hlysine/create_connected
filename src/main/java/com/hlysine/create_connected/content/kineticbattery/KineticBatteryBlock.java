@@ -17,6 +17,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import org.jetbrains.annotations.NotNull;
 
 public class KineticBatteryBlock extends DirectionalKineticBlock implements IBE<KineticBatteryBlockEntity> {
 
@@ -80,6 +81,16 @@ public class KineticBatteryBlock extends DirectionalKineticBlock implements IBE<
         if (previouslyPowered != worldIn.hasNeighborSignal(pos)) {
             KineticBlockEntity.switchToBlockState(worldIn, pos, state.cycle(POWERED));
         }
+    }
+
+    @Override
+    public boolean hasAnalogOutputSignal(@NotNull BlockState state) {
+        return true;
+    }
+
+    @Override
+    public int getAnalogOutputSignal(@NotNull BlockState state, @NotNull Level world, @NotNull BlockPos pos) {
+        return getBlockEntityOptional(world, pos).map(be -> be.getCrudeBatteryLevel(15)).orElse(0);
     }
 
     public static boolean isDischarging(BlockState state) {
