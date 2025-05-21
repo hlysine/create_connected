@@ -109,6 +109,8 @@ public class KineticBatteryScene {
         scene.idle(110);
 
         scene.world().hideSection(util.select().layers(1, 2).substract(rotation1).add(util.select().position(saw)), Direction.UP);
+        scene.idle(10);
+        scene.world().hideSection(rotation0, Direction.UP);
         scene.idle(20);
         scene.world().modifyBlock(battery, state -> state.setValue(KineticBatteryBlock.LEVEL, 5).setValue(KineticBatteryBlock.POWERED, false), false);
         scene.world().setKineticSpeed(util.select().position(battery), 0);
