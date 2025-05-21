@@ -218,6 +218,7 @@
   "create_connected.ponder.sequenced_pulse_generator.text_6": "A redstone comparator can be used to read the current progress",
   "create_connected.ponder.sequenced_pulse_generator.text_7": "Upon receiving a signal from its sides...",
   "create_connected.ponder.sequenced_pulse_generator.text_8": "...it will reset and terminate the sequence immediately",
+  "item.create_connected.charged_kinetic_battery": "Charged Kinetic Battery",
   "item.create_connected.control_chip": "Control Chip",
   "item.create_connected.copycat_box": "Copycat Box",
   "item.create_connected.copycat_box.tooltip.behaviour1": "Applies _held item_ as its _material_ if possible. _Click again_ to cycle _orientation_ or _powered_ state. Use a _Wrench_ to _reset_ the material.",

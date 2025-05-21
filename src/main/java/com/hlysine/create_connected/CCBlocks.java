@@ -309,6 +309,29 @@ public class CCBlocks {
             .transform(FeatureToggle.register(FeatureCategory.KINETIC))
             .transform(axeOrPickaxe())
             .blockstate(new KineticBatteryGenerator()::generate)
+            .loot((lt, block) -> {
+                LootTable.Builder builder = LootTable.lootTable();
+                builder.withPool(
+                        LootPool.lootPool()
+                                .setRolls(ConstantValue.exactly(1.0F))
+                                .when(ExplosionCondition.survivesExplosion())
+                                .when(LootItemBlockStatePropertyCondition
+                                        .hasBlockStateProperties(block)
+                                        .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(KineticBatteryBlock.LEVEL, 5)))
+                                .add(LootItem.lootTableItem(CCItems.CHARGED_KINETIC_BATTERY))
+                );
+                builder.withPool(
+                        LootPool.lootPool()
+                                .setRolls(ConstantValue.exactly(1.0F))
+                                .when(ExplosionCondition.survivesExplosion())
+                                .when(LootItemBlockStatePropertyCondition
+                                        .hasBlockStateProperties(block)
+                                        .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(KineticBatteryBlock.LEVEL, 5))
+                                        .invert())
+                                .add(LootItem.lootTableItem(block))
+                );
+                lt.add(block, builder);
+            })
             .item()
             .transform(customItemModel())
             .register();

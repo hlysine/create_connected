@@ -17,7 +17,7 @@ public class KineticBatteryBlockEntity extends GeneratingKineticBlockEntity impl
     public static final int DEFAULT_SPEED = 64;
     public static final float MAX_BATTERY_LEVEL = 64 * 8 * 20 * 5; // 5 seconds for debugging
     //    public static final float MAX_BATTERY_LEVEL = 128 * 3600 * 20; // 128 su-hours, expressed in su-ticks
-    private static final int SYNC_RATE = 8; // continuous sync for debugging
+    private static final int SYNC_RATE = 20;
 
     private float batteryLevel;
 
@@ -72,14 +72,29 @@ public class KineticBatteryBlockEntity extends GeneratingKineticBlockEntity impl
                 changed = true;
             }
         }
-        if (changed) {
-            int crudeLevel = getCrudeBatteryLevel(5);
-            int oldLevel = getBlockState().getValue(LEVEL);
-            if (oldLevel != crudeLevel) {
-                switchToBlockState(getLevel(), getBlockPos(), getBlockState().setValue(LEVEL, crudeLevel));
-            }
-            sendData();
+        if (changed)
+            updateLevel();
+    }
+
+    private void updateLevel() {
+        int crudeLevel = getCrudeBatteryLevel(5);
+        int oldLevel = getBlockState().getValue(LEVEL);
+        if (oldLevel != crudeLevel) {
+            switchToBlockState(getLevel(), getBlockPos(), getBlockState().setValue(LEVEL, crudeLevel));
         }
+        sendData();
+    }
+
+    public void setBatteryLevel(float batteryLevel) {
+        this.batteryLevel = batteryLevel;
+        updateLevel();
+        sendDataImmediately();
+    }
+
+    public void sendDataImmediately() {
+        syncCooldown = 0;
+        queuedSync = false;
+        sendData();
     }
 
     @Override

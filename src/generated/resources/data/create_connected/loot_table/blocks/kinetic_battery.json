@@ -6,6 +6,38 @@
       "conditions": [
         {
           "condition": "minecraft:survives_explosion"
+        },
+        {
+          "block": "create_connected:kinetic_battery",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "level": "5"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "create_connected:charged_kinetic_battery"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        },
+        {
+          "condition": "minecraft:inverted",
+          "term": {
+            "block": "create_connected:kinetic_battery",
+            "condition": "minecraft:block_state_property",
+            "properties": {
+              "level": "5"
+            }
+          }
         }
       ],
       "entries": [

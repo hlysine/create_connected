@@ -2,11 +2,14 @@ package com.hlysine.create_connected.content.kineticbattery;
 
 
 import com.hlysine.create_connected.CCBlockEntityTypes;
+import com.hlysine.create_connected.CCItems;
 import com.simibubi.create.content.kinetics.base.DirectionalKineticBlock;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
 import com.simibubi.create.foundation.block.IBE;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
@@ -17,7 +20,11 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.level.storage.loot.LootParams;
+import net.minecraft.world.phys.HitResult;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
 
 public class KineticBatteryBlock extends DirectionalKineticBlock implements IBE<KineticBatteryBlockEntity> {
 
@@ -91,6 +98,14 @@ public class KineticBatteryBlock extends DirectionalKineticBlock implements IBE<
     @Override
     public int getAnalogOutputSignal(@NotNull BlockState state, @NotNull Level world, @NotNull BlockPos pos) {
         return getBlockEntityOptional(world, pos).map(be -> be.getCrudeBatteryLevel(15)).orElse(0);
+    }
+
+    @Override
+    public ItemStack getCloneItemStack(BlockState state, HitResult target, LevelReader level, BlockPos pos, Player player) {
+        if (state.getValue(LEVEL) == 5) {
+            return CCItems.CHARGED_KINETIC_BATTERY.asStack();
+        }
+        return super.getCloneItemStack(state, target, level, pos, player);
     }
 
     public static boolean isDischarging(BlockState state) {
