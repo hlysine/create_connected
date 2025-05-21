@@ -1,14 +1,21 @@
 package com.hlysine.create_connected.content.kineticbattery;
 
+import com.hlysine.create_connected.ConnectedLang;
 import com.hlysine.create_connected.content.ISplitShaftBlockEntity;
 import com.simibubi.create.content.kinetics.base.GeneratingKineticBlockEntity;
+import joptsimple.internal.Strings;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import org.joml.Math;
+
+import java.util.List;
 
 import static com.hlysine.create_connected.content.kineticbattery.KineticBatteryBlock.*;
 
@@ -116,6 +123,13 @@ public class KineticBatteryBlockEntity extends GeneratingKineticBlockEntity impl
     }
 
     @Override
+    public float calculateAddedStressCapacity() {
+        if (!isDischarging(getBlockState()) || isCurrentStageComplete(getBlockState()))
+            return 0;
+        return super.calculateAddedStressCapacity();
+    }
+
+    @Override
     public float calculateStressApplied() {
         if (!isDischarging(getBlockState()) && !isCurrentStageComplete(getBlockState())) {
             return super.calculateStressApplied();
@@ -147,6 +161,62 @@ public class KineticBatteryBlockEntity extends GeneratingKineticBlockEntity impl
         super.write(compound, registries, clientPacket);
         compound.putFloat("batteryLevel", batteryLevel);
         compound.putBoolean("queuedSync", queuedSync);
+    }
+
+    @Override
+    public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
+        ConnectedLang.translate("battery.status", getBatteryStatusTextComponent().withStyle(ChatFormatting.GREEN))
+                .forGoggles(tooltip);
+        ConnectedLang.builder().add(ConnectedLang.translateDirect("battery.charge")
+                        .withStyle(ChatFormatting.GRAY)
+                        .append(" ")
+                        .append(barComponent(0, getCrudeBatteryLevel(20), 20)))
+                .forGoggles(tooltip);
+        ConnectedLang.number(batteryLevel / 3600 / 20)
+                .style(ChatFormatting.BLUE)
+                .add(ConnectedLang.text(" / ")
+                        .style(ChatFormatting.GRAY))
+                .add(ConnectedLang.number(MAX_BATTERY_LEVEL / 3600 / 20)
+                        .add(Component.literal(" "))
+                        .add(ConnectedLang.translate("generic.unit.su_hours"))
+                        .style(ChatFormatting.DARK_GRAY))
+                .forGoggles(tooltip, 1);
+
+
+        super.addToGoggleTooltip(tooltip, isPlayerSneaking);
+
+        return true;
+    }
+
+    public MutableComponent getBatteryStatusTextComponent() {
+        boolean complete = isCurrentStageComplete(getBlockState());
+        boolean discharging = isDischarging(getBlockState());
+
+        if (discharging && !complete) {
+            return ConnectedLang.translateDirect("battery.status.discharging");
+        } else if (!discharging && !complete) {
+            return ConnectedLang.translateDirect("battery.status.charging");
+        } else if (!discharging && complete) {
+            return ConnectedLang.translateDirect("battery.status.full");
+        } else {
+            return ConnectedLang.translateDirect("battery.status.empty");
+        }
+    }
+
+    private MutableComponent barComponent(int minValue, int level, int maxValue) {
+        return Component.empty()
+                .append(bars(java.lang.Math.max(0, minValue - 1), ChatFormatting.DARK_GREEN))
+                .append(bars(minValue > 0 ? 1 : 0, ChatFormatting.GREEN))
+                .append(bars(java.lang.Math.max(0, level - minValue), ChatFormatting.DARK_GREEN))
+                .append(bars(java.lang.Math.max(0, maxValue - level), ChatFormatting.DARK_RED))
+                .append(bars(java.lang.Math.max(0, java.lang.Math.min(18 - maxValue, ((maxValue / 5 + 1) * 5) - maxValue)),
+                        ChatFormatting.DARK_GRAY));
+
+    }
+
+    private MutableComponent bars(int level, ChatFormatting format) {
+        return Component.literal(Strings.repeat('|', level))
+                .withStyle(format);
     }
 }
 
