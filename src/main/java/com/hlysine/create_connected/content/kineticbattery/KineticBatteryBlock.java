@@ -20,11 +20,8 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
-import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.phys.HitResult;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.List;
 
 public class KineticBatteryBlock extends DirectionalKineticBlock implements IBE<KineticBatteryBlockEntity> {
 
@@ -48,11 +45,12 @@ public class KineticBatteryBlock extends DirectionalKineticBlock implements IBE<
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
-        BlockState stateForPlacement = super.getStateForPlacement(context);
-        if (stateForPlacement == null)
-            stateForPlacement = defaultBlockState();
-        return stateForPlacement
-                .setValue(FACING, context.getHorizontalDirection())
+        if (context.getPlayer() != null && context.getPlayer()
+                .isShiftKeyDown())
+            return super.getStateForPlacement(context);
+        Direction preferredDirection = getPreferredFacing(context);
+        return this.defaultBlockState()
+                .setValue(FACING, preferredDirection == null ? context.getNearestLookingDirection() : preferredDirection)
                 .setValue(POWERED, context.getLevel().hasNeighborSignal(context.getClickedPos()))
                 .setValue(LEVEL, 0);
     }
