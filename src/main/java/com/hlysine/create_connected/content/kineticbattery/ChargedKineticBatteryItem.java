@@ -36,7 +36,7 @@ public class ChargedKineticBatteryItem extends BlockItem {
         BlockEntity blockEntity = world.getBlockEntity(pos);
         if (!(blockEntity instanceof KineticBatteryBlockEntity batteryBE))
             return ret;
-        batteryBE.setBatteryLevel(KineticBatteryBlockEntity.MAX_BATTERY_LEVEL);
+        batteryBE.setBatteryLevel(KineticBatteryBlockEntity.getMaxBatteryLevel());
         return true;
     }
 

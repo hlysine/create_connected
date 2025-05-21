@@ -1,6 +1,8 @@
 package com.hlysine.create_connected.content.kineticbattery;
 
 import com.hlysine.create_connected.ConnectedLang;
+import com.hlysine.create_connected.config.CCConfigs;
+import com.hlysine.create_connected.config.CServer;
 import com.hlysine.create_connected.content.ISplitShaftBlockEntity;
 import com.simibubi.create.content.kinetics.base.GeneratingKineticBlockEntity;
 import joptsimple.internal.Strings;
@@ -21,12 +23,9 @@ import static com.hlysine.create_connected.content.kineticbattery.KineticBattery
 
 public class KineticBatteryBlockEntity extends GeneratingKineticBlockEntity implements ISplitShaftBlockEntity {
 
-    public static final int DEFAULT_SPEED = 64;
-    public static final float MAX_BATTERY_LEVEL = 64 * 8 * 20 * 5; // 5 seconds for debugging
-    //    public static final float MAX_BATTERY_LEVEL = 128 * 3600 * 20; // 128 su-hours, expressed in su-ticks
     private static final int SYNC_RATE = 20;
 
-    private float batteryLevel;
+    private double batteryLevel;
 
     private int syncCooldown;
     protected boolean queuedSync;
@@ -41,12 +40,20 @@ public class KineticBatteryBlockEntity extends GeneratingKineticBlockEntity impl
         updateGeneratedRotation();
     }
 
+    public static double getMaxBatteryLevel() {
+        return CServer.BatteryCapacity.get() * 3600 * 20;
+    }
+
+    public static int getDischargeRPM() {
+        return CServer.BatteryDischargeRPM.get();
+    }
+
     public int getCrudeBatteryLevel(int totalLevels) {
-        if (batteryLevel >= MAX_BATTERY_LEVEL)
+        if (batteryLevel >= getMaxBatteryLevel())
             return totalLevels;
         if (batteryLevel <= 0)
             return 0;
-        return (int) Math.floor((batteryLevel / MAX_BATTERY_LEVEL) * (totalLevels - 1)) + 1;
+        return (int) Math.floor((batteryLevel / getMaxBatteryLevel()) * (totalLevels - 1)) + 1;
     }
 
     @Override
@@ -71,11 +78,11 @@ public class KineticBatteryBlockEntity extends GeneratingKineticBlockEntity impl
                 changed = true;
             }
         } else {
-            if (batteryLevel < MAX_BATTERY_LEVEL && capacity > 0) {
+            if (batteryLevel < getMaxBatteryLevel() && capacity > 0) {
                 if (lastStressApplied == 0) {
                     calculateStressApplied();
                 }
-                batteryLevel = Math.min(batteryLevel + lastStressApplied * Math.abs(getTheoreticalSpeed()), MAX_BATTERY_LEVEL);
+                batteryLevel = Math.min(batteryLevel + lastStressApplied * Math.abs(getTheoreticalSpeed()), getMaxBatteryLevel());
                 changed = true;
             }
         }
@@ -92,7 +99,7 @@ public class KineticBatteryBlockEntity extends GeneratingKineticBlockEntity impl
         sendData();
     }
 
-    public void setBatteryLevel(float batteryLevel) {
+    public void setBatteryLevel(double batteryLevel) {
         this.batteryLevel = batteryLevel;
         updateLevel();
         sendDataImmediately();
@@ -119,7 +126,7 @@ public class KineticBatteryBlockEntity extends GeneratingKineticBlockEntity impl
     public float getGeneratedSpeed() {
         if (!isDischarging(getBlockState()) || isCurrentStageComplete(getBlockState()))
             return 0;
-        return convertToDirection(DEFAULT_SPEED, getBlockState().getValue(FACING));
+        return convertToDirection(getDischargeRPM(), getBlockState().getValue(FACING));
     }
 
     @Override
@@ -159,7 +166,7 @@ public class KineticBatteryBlockEntity extends GeneratingKineticBlockEntity impl
     @Override
     protected void write(CompoundTag compound, HolderLookup.Provider registries, boolean clientPacket) {
         super.write(compound, registries, clientPacket);
-        compound.putFloat("batteryLevel", batteryLevel);
+        compound.putDouble("batteryLevel", batteryLevel);
         compound.putBoolean("queuedSync", queuedSync);
     }
 
@@ -176,7 +183,7 @@ public class KineticBatteryBlockEntity extends GeneratingKineticBlockEntity impl
                 .style(ChatFormatting.BLUE)
                 .add(ConnectedLang.text(" / ")
                         .style(ChatFormatting.GRAY))
-                .add(ConnectedLang.number(MAX_BATTERY_LEVEL / 3600 / 20)
+                .add(ConnectedLang.number(getMaxBatteryLevel() / 3600 / 20)
                         .add(Component.literal(" "))
                         .add(ConnectedLang.translate("generic.unit.su_hours"))
                         .style(ChatFormatting.DARK_GRAY))

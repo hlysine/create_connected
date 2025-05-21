@@ -305,7 +305,7 @@ public class CCBlocks {
             .properties(p -> p.noOcclusion().mapColor(MapColor.TERRACOTTA_BROWN))
             .addLayer(() -> RenderType::cutoutMipped)
             .transform(CStress.setCapacity(8.0))
-            .transform(CStress.setImpact(8.0))
+            .transform(CStress.setImpact(16.0))
             .transform(FeatureToggle.register(FeatureCategory.KINETIC))
             .transform(axeOrPickaxe())
             .blockstate(new KineticBatteryGenerator()::generate)
