@@ -209,7 +209,7 @@
   "create_connected.ponder.parallel_gearbox.text_3": "Валы по углам поворачиваются в одном направлении",
   "create_connected.ponder.parallel_gearbox.text_4": "Прямые соединения будут реверсированны",
   "create_connected.ponder.sequenced_pulse_generator.header": "Контролем сигнала с помощью последовательного генератора импульса",
-  "create_connected.ponder.sequenced_pulse_generator.text_1": "П. Г. И. выводит сигналы, следуя указанной последовательности инструкций",
+  "create_connected.ponder.sequenced_pulse_generator.text_1": "ПГИ выводит сигналы, следуя указанной последовательности инструкций",
   "create_connected.ponder.sequenced_pulse_generator.text_2": "Кликните ПКМ, чтобы открыть интерфейс настройки",
   "create_connected.ponder.sequenced_pulse_generator.text_3": "При получении сигнала сзади...",
   "create_connected.ponder.sequenced_pulse_generator.text_4": "...он начнёт выполнять указанную последовательность",
