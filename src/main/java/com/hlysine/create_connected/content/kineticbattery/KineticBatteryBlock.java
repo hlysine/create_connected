@@ -3,6 +3,7 @@ package com.hlysine.create_connected.content.kineticbattery;
 
 import com.hlysine.create_connected.CCBlockEntityTypes;
 import com.simibubi.create.content.kinetics.base.DirectionalKineticBlock;
+import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
 import com.simibubi.create.foundation.block.IBE;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -62,12 +63,9 @@ public class KineticBatteryBlock extends DirectionalKineticBlock implements IBE<
     protected boolean areStatesKineticallyEquivalent(BlockState oldState, BlockState newState) {
         if (oldState.getValue(FACING) != newState.getValue(FACING))
             return false;
-        boolean powered = newState.getValue(POWERED);
-        if (oldState.getValue(POWERED) != powered)
+        if (isDischarging(oldState) != isDischarging(newState))
             return false;
-        if (powered && (oldState.getValue(LEVEL) == 0) != (newState.getValue(LEVEL) == 0))
-            return false;
-        if (!powered && (oldState.getValue(LEVEL) == 5) != (newState.getValue(LEVEL) == 5))
+        if (isCurrentStageComplete(oldState) != isCurrentStageComplete(newState))
             return false;
         return true;
     }
@@ -75,9 +73,24 @@ public class KineticBatteryBlock extends DirectionalKineticBlock implements IBE<
     @Override
     public void neighborChanged(BlockState state, Level worldIn, BlockPos pos, Block blockIn, BlockPos fromPos,
                                 boolean isMoving) {
+        if (worldIn.isClientSide)
+            return;
+
         boolean previouslyPowered = state.getValue(POWERED);
         if (previouslyPowered != worldIn.hasNeighborSignal(pos)) {
-            withBlockEntityDo(worldIn, pos, be -> be.setDischarging(!previouslyPowered));
+            KineticBlockEntity.switchToBlockState(worldIn, pos, state.cycle(POWERED));
+        }
+    }
+
+    public static boolean isDischarging(BlockState state) {
+        return state.getValue(POWERED);
+    }
+
+    public static boolean isCurrentStageComplete(BlockState state) {
+        if (isDischarging(state)) {
+            return state.getValue(LEVEL) == 0;
+        } else {
+            return state.getValue(LEVEL) == 5;
         }
     }
 

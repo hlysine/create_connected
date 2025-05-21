@@ -1,9 +1,6 @@
 package com.hlysine.create_connected.content.kineticbattery;
 
-
-import com.hlysine.create_connected.CCBlocks;
 import com.hlysine.create_connected.content.ISplitShaftBlockEntity;
-import com.simibubi.create.content.kinetics.RotationPropagator;
 import com.simibubi.create.content.kinetics.base.GeneratingKineticBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -19,13 +16,10 @@ public class KineticBatteryBlockEntity extends GeneratingKineticBlockEntity impl
 
     public static final int DEFAULT_SPEED = 64;
     public static final float MAX_BATTERY_LEVEL = 64 * 8 * 20 * 5; // 5 seconds for debugging
-    //    public static final float MAX_BATTERY_LEVEL = 86 * 3600 * 20; // 86 su-hours, expressed in su-ticks
-    private static final int SYNC_RATE = 8;
+    //    public static final float MAX_BATTERY_LEVEL = 128 * 3600 * 20; // 128 su-hours, expressed in su-ticks
+    private static final int SYNC_RATE = 0; // continuous sync for debugging
 
     private float batteryLevel;
-    private boolean discharging;
-
-    boolean reattachNextTick;
 
     private int syncCooldown;
     protected boolean queuedSync;
@@ -37,35 +31,7 @@ public class KineticBatteryBlockEntity extends GeneratingKineticBlockEntity impl
     @Override
     public void initialize() {
         super.initialize();
-        discharging = getLevel().hasNeighborSignal(getBlockPos());
         updateGeneratedRotation();
-    }
-
-    public void refreshKinetics() {
-        RotationPropagator.handleRemoved(getLevel(), getBlockPos(), this);
-        reattachNextTick = true;
-    }
-
-    public void setDischarging(boolean discharging) {
-        if (discharging == this.discharging) return;
-        this.discharging = discharging;
-        getLevel().setBlockAndUpdate(getBlockPos(), getBlockState()
-                .setValue(POWERED, discharging)
-                .setValue(LEVEL, getCrudeBatteryLevel())
-        );
-        refreshKinetics();
-    }
-
-    public boolean isDischarging() {
-        return discharging;
-    }
-
-    public boolean isCurrentStageComplete() {
-        if (isDischarging()) {
-            return batteryLevel <= 0;
-        } else {
-            return batteryLevel >= MAX_BATTERY_LEVEL;
-        }
     }
 
     public int getCrudeBatteryLevel() {
@@ -86,18 +52,10 @@ public class KineticBatteryBlockEntity extends GeneratingKineticBlockEntity impl
                 sendData();
         }
 
-        if (reattachNextTick) {
-            reattachNextTick = false;
-            this.updateGeneratedRotation();
-            RotationPropagator.handleAdded(getLevel(), getBlockPos(), this);
-            sendDataImmediately();
-            return;
-        }
-
         if (getSpeed() == 0 || !hasNetwork())
             return;
         boolean changed = false;
-        if (isDischarging()) {
+        if (isDischarging(getBlockState())) {
             if (batteryLevel > 0 && stress > 0) {
                 if (lastCapacityProvided == 0) {
                     calculateAddedStressCapacity();
@@ -118,13 +76,7 @@ public class KineticBatteryBlockEntity extends GeneratingKineticBlockEntity impl
             int crudeLevel = getCrudeBatteryLevel();
             int oldLevel = getBlockState().getValue(LEVEL);
             if (oldLevel != crudeLevel) {
-                getLevel().setBlockAndUpdate(getBlockPos(), getBlockState()
-                        .setValue(POWERED, discharging)
-                        .setValue(LEVEL, crudeLevel)
-                );
-                if (oldLevel == 0 || crudeLevel == 0 || oldLevel == 5 || crudeLevel == 5) {
-                    refreshKinetics();
-                }
+                switchToBlockState(getLevel(), getBlockPos(), getBlockState().setValue(LEVEL, crudeLevel));
             }
             sendData();
         }
@@ -141,22 +93,16 @@ public class KineticBatteryBlockEntity extends GeneratingKineticBlockEntity impl
         syncCooldown = SYNC_RATE;
     }
 
-    public void sendDataImmediately() {
-        syncCooldown = 0;
-        queuedSync = false;
-        sendData();
-    }
-
     @Override
     public float getGeneratedSpeed() {
-        if (!isDischarging() || isCurrentStageComplete())
+        if (!isDischarging(getBlockState()) || isCurrentStageComplete(getBlockState()))
             return 0;
         return convertToDirection(DEFAULT_SPEED, getBlockState().getValue(FACING));
     }
 
     @Override
     public float calculateStressApplied() {
-        if (!isDischarging() && !isCurrentStageComplete()) {
+        if (!isDischarging(getBlockState()) && !isCurrentStageComplete(getBlockState())) {
             return super.calculateStressApplied();
         } else {
             this.lastStressApplied = 0;
@@ -168,7 +114,7 @@ public class KineticBatteryBlockEntity extends GeneratingKineticBlockEntity impl
         if (face.getAxis() != getBlockState().getValue(FACING).getAxis())
             return 0;
         if (face != getBlockState().getValue(FACING)) {
-            if (!isCurrentStageComplete())
+            if (!isCurrentStageComplete(getBlockState()))
                 return 0;
         }
         return 1;
@@ -178,8 +124,6 @@ public class KineticBatteryBlockEntity extends GeneratingKineticBlockEntity impl
     protected void read(CompoundTag compound, HolderLookup.Provider registries, boolean clientPacket) {
         super.read(compound, registries, clientPacket);
         batteryLevel = compound.getFloat("batteryLevel");
-        discharging = compound.getBoolean("discharging");
-        reattachNextTick = compound.getBoolean("reattachNextTick");
         queuedSync = compound.getBoolean("queuedSync");
     }
 
@@ -187,8 +131,6 @@ public class KineticBatteryBlockEntity extends GeneratingKineticBlockEntity impl
     protected void write(CompoundTag compound, HolderLookup.Provider registries, boolean clientPacket) {
         super.write(compound, registries, clientPacket);
         compound.putFloat("batteryLevel", batteryLevel);
-        compound.putBoolean("discharging", discharging);
-        compound.putBoolean("reattachNextTick", reattachNextTick);
         compound.putBoolean("queuedSync", queuedSync);
     }
 }
