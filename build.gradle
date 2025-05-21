@@ -90,8 +90,6 @@ minecraft {
         data {
             workingDirectory project.file('run-data')
 
-            jvmArgs.removeAll { it.contains("AllowEnhancedClassRedefinition") }
-
             args '--mod', mod_id, '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/'), '--existing-mod', 'create'
         }
     }
