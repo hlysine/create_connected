@@ -133,6 +133,7 @@
   "create.item_attributes.stack_size": "%1$s oʇ sʞɔɐʇs",
   "create.item_attributes.stack_size.inverted": "%1$s oʇ ʞɔɐʇs ʇou sǝop",
   "create_connected.battery.charge": "ǝbɹɐɥƆ",
+  "create_connected.battery.rotation_direction": "ǝbɹɐɥɔsıp buıɹnp uoıʇɔǝɹıp uoıʇɐʇoᴚ",
   "create_connected.battery.status": "%1$s :snʇɐʇs ʎɹǝʇʇɐᗺ",
   "create_connected.battery.status.charging": "buıbɹɐɥƆ",
   "create_connected.battery.status.discharging": "buıbɹɐɥɔsıᗡ",

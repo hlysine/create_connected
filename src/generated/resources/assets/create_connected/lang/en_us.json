@@ -133,6 +133,7 @@
   "create.item_attributes.stack_size": "stacks to %1$s",
   "create.item_attributes.stack_size.inverted": "does not stack to %1$s",
   "create_connected.battery.charge": "Charge",
+  "create_connected.battery.rotation_direction": "Rotation direction during discharge",
   "create_connected.battery.status": "Battery status: %1$s",
   "create_connected.battery.status.charging": "Charging",
   "create_connected.battery.status.discharging": "Discharging",
