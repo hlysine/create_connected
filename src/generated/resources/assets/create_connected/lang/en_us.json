@@ -3,6 +3,8 @@
   "advancement.create_connected.brass_gearbox.desc": "Place down a Brass Gearbox",
   "advancement.create_connected.control_chip": "Precise Fabrication",
   "advancement.create_connected.control_chip.desc": "Assemble a Control Chip",
+  "advancement.create_connected.kinetic_battery": "Fully Charged",
+  "advancement.create_connected.kinetic_battery.desc": "Charge a Kinetic Battery to full",
   "advancement.create_connected.overpowered_brake_0": "Overpowered",
   "advancement.create_connected.overpowered_brake_0.desc": "Keep a network running at speed with a powered brake attached\n§7(Hidden Advancement)",
   "advancement.create_connected.overstress_clutch": "Circuit Breaker",

@@ -3,6 +3,8 @@ package com.hlysine.create_connected.content.kineticbattery;
 import com.hlysine.create_connected.ConnectedLang;
 import com.hlysine.create_connected.config.CServer;
 import com.hlysine.create_connected.content.ISplitShaftBlockEntity;
+import com.hlysine.create_connected.datagen.advancements.AdvancementBehaviour;
+import com.hlysine.create_connected.datagen.advancements.CCAdvancements;
 import com.simibubi.create.content.contraptions.bearing.WindmillBearingBlockEntity;
 import com.simibubi.create.content.kinetics.base.GeneratingKineticBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
@@ -51,6 +53,7 @@ public class KineticBatteryBlockEntity extends GeneratingKineticBlockEntity impl
             sendDataImmediately();
         });
         behaviours.add(movementDirection);
+        AdvancementBehaviour.registerAwardables(this, behaviours, CCAdvancements.KINETIC_BATTERY);
     }
 
     @Override
@@ -113,6 +116,9 @@ public class KineticBatteryBlockEntity extends GeneratingKineticBlockEntity impl
         int crudeLevel = getCrudeBatteryLevel(5);
         int oldLevel = getBlockState().getValue(LEVEL);
         if (oldLevel != crudeLevel) {
+            if (crudeLevel == 5) {
+                AdvancementBehaviour.tryAward(this, CCAdvancements.KINETIC_BATTERY);
+            }
             switchToBlockState(getLevel(), getBlockPos(), getBlockState().setValue(LEVEL, crudeLevel));
         }
         sendData();
