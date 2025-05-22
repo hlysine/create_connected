@@ -1,0 +1,41 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "create_connected:feature_enabled",
+          "feature": "create_connected:kinetic_battery"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "category": "misc",
+        "key": {
+          "a": {
+            "item": "create:copper_sheet"
+          },
+          "b": {
+            "item": "create:iron_sheet"
+          },
+          "c": {
+            "item": "create:brass_casing"
+          },
+          "e": {
+            "item": "create:electron_tube"
+          }
+        },
+        "pattern": [
+          " e ",
+          " c ",
+          "a b"
+        ],
+        "result": {
+          "count": 8,
+          "item": "create_connected:kinetic_battery"
+        },
+        "show_notification": true
+      }
+    }
+  ]
+}
