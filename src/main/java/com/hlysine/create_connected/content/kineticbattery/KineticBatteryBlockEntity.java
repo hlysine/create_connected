@@ -1,17 +1,13 @@
 package com.hlysine.create_connected.content.kineticbattery;
 
 import com.hlysine.create_connected.ConnectedLang;
-import com.hlysine.create_connected.config.CCConfigs;
 import com.hlysine.create_connected.config.CServer;
-import com.hlysine.create_connected.content.ClutchValueBox;
 import com.hlysine.create_connected.content.ISplitShaftBlockEntity;
 import com.simibubi.create.content.contraptions.bearing.WindmillBearingBlockEntity;
 import com.simibubi.create.content.kinetics.base.GeneratingKineticBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.scrollValue.ScrollOptionBehaviour;
-import com.simibubi.create.foundation.utility.CreateLang;
 import joptsimple.internal.Strings;
-import net.createmod.catnip.math.VecHelper;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -21,7 +17,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.Vec3;
 import org.joml.Math;
 
 import java.util.List;
@@ -31,6 +26,7 @@ import static com.hlysine.create_connected.content.kineticbattery.KineticBattery
 public class KineticBatteryBlockEntity extends GeneratingKineticBlockEntity implements ISplitShaftBlockEntity {
 
     private static final int SYNC_RATE = 20;
+    public static final double CHARGE_THRESHOlD = 3600 * 20;
 
     private double batteryLevel;
 
@@ -120,6 +116,10 @@ public class KineticBatteryBlockEntity extends GeneratingKineticBlockEntity impl
             switchToBlockState(getLevel(), getBlockPos(), getBlockState().setValue(LEVEL, crudeLevel));
         }
         sendData();
+    }
+
+    public double getBatteryLevel() {
+        return batteryLevel;
     }
 
     public void setBatteryLevel(double batteryLevel) {

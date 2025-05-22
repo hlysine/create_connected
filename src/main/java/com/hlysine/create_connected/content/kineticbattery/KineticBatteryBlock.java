@@ -2,25 +2,44 @@ package com.hlysine.create_connected.content.kineticbattery;
 
 
 import com.hlysine.create_connected.CCBlockEntityTypes;
+import com.hlysine.create_connected.CCBlocks;
 import com.hlysine.create_connected.CCItems;
+import com.simibubi.create.AllBlocks;
+import com.simibubi.create.AllItems;
 import com.simibubi.create.content.kinetics.base.DirectionalKineticBlock;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
+import com.simibubi.create.content.logistics.stockTicker.StockTickerBlockEntity;
+import com.simibubi.create.content.logistics.stockTicker.StockTickerInteractionHandler;
+import com.simibubi.create.content.processing.burner.BlazeBurnerBlock;
+import com.simibubi.create.content.processing.burner.BlazeBurnerBlockEntity;
 import com.simibubi.create.foundation.block.IBE;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.FlintAndSteelItem;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
+import net.neoforged.neoforge.common.util.FakePlayer;
 import org.jetbrains.annotations.NotNull;
 
 public class KineticBatteryBlock extends DirectionalKineticBlock implements IBE<KineticBatteryBlockEntity> {
@@ -55,6 +74,76 @@ public class KineticBatteryBlock extends DirectionalKineticBlock implements IBE<
                 .setValue(LEVEL, 0);
     }
 
+
+    @Override
+    protected @NotNull ItemInteractionResult useItemOn(@NotNull ItemStack stack,
+                                                       @NotNull BlockState state,
+                                                       @NotNull Level level,
+                                                       @NotNull BlockPos pos,
+                                                       Player player,
+                                                       @NotNull InteractionHand hand,
+                                                       @NotNull BlockHitResult hitResult) {
+        boolean doNotConsume = player.isCreative();
+        boolean forceInsert = !(player instanceof FakePlayer);
+
+        InteractionResultHolder<ItemStack> res =
+                tryInsert(state, level, pos, stack, doNotConsume, forceInsert, false);
+        ItemStack leftover = res.getObject();
+        if (!level.isClientSide && !doNotConsume && !leftover.isEmpty()) {
+            if (stack.isEmpty()) {
+                player.setItemInHand(hand, leftover);
+            } else if (!player.getInventory()
+                    .add(leftover)) {
+                player.drop(leftover, false);
+            }
+        }
+
+        return res.getResult() == InteractionResult.SUCCESS ? ItemInteractionResult.SUCCESS : ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+    }
+
+    public static InteractionResultHolder<ItemStack> tryInsert(BlockState state, Level world, BlockPos pos,
+                                                               ItemStack stack, boolean doNotConsume, boolean forceInsert, boolean simulate) {
+        if (stack.isEmpty())
+            return InteractionResultHolder.fail(ItemStack.EMPTY);
+        if (!state.hasBlockEntity())
+            return InteractionResultHolder.fail(ItemStack.EMPTY);
+
+        BlockEntity be = world.getBlockEntity(pos);
+        if (!(be instanceof KineticBatteryBlockEntity batteryBE))
+            return InteractionResultHolder.fail(ItemStack.EMPTY);
+
+        ItemStack returnedItem;
+        if (isDischarging(state)) {
+            if (!stack.is(CCItems.CHARGED_KINETIC_BATTERY))
+                return InteractionResultHolder.fail(ItemStack.EMPTY);
+            if (forceInsert && state.getValue(LEVEL) == 5)
+                return InteractionResultHolder.fail(ItemStack.EMPTY);
+            if (!forceInsert && batteryBE.getBatteryLevel() > KineticBatteryBlockEntity.CHARGE_THRESHOlD)
+                return InteractionResultHolder.fail(ItemStack.EMPTY);
+
+            if (!simulate)
+                batteryBE.setBatteryLevel(KineticBatteryBlockEntity.getMaxBatteryLevel());
+            returnedItem = CCBlocks.KINETIC_BATTERY.asStack();
+        } else {
+            if (!stack.is(CCBlocks.KINETIC_BATTERY.asItem()))
+                return InteractionResultHolder.fail(ItemStack.EMPTY);
+            if (state.getValue(LEVEL) < 5)
+                return InteractionResultHolder.fail(ItemStack.EMPTY);
+
+            if (!simulate)
+                batteryBE.setBatteryLevel(0);
+            returnedItem = CCItems.CHARGED_KINETIC_BATTERY.asStack();
+        }
+
+        if (!doNotConsume) {
+            if (!world.isClientSide) {
+                stack.shrink(1);
+            }
+            return InteractionResultHolder.success(returnedItem);
+        }
+        return InteractionResultHolder.success(ItemStack.EMPTY);
+    }
+
     @Override
     public Direction.Axis getRotationAxis(BlockState state) {
         return state.getValue(FACING).getAxis();
@@ -77,7 +166,7 @@ public class KineticBatteryBlock extends DirectionalKineticBlock implements IBE<
     }
 
     @Override
-    public void neighborChanged(BlockState state, Level worldIn, BlockPos pos, Block blockIn, BlockPos fromPos,
+    public void neighborChanged(@NotNull BlockState state, Level worldIn, @NotNull BlockPos pos, @NotNull Block blockIn, @NotNull BlockPos fromPos,
                                 boolean isMoving) {
         if (worldIn.isClientSide)
             return;
@@ -99,7 +188,7 @@ public class KineticBatteryBlock extends DirectionalKineticBlock implements IBE<
     }
 
     @Override
-    public ItemStack getCloneItemStack(BlockState state, HitResult target, LevelReader level, BlockPos pos, Player player) {
+    public @NotNull ItemStack getCloneItemStack(BlockState state, @NotNull HitResult target, @NotNull LevelReader level, @NotNull BlockPos pos, @NotNull Player player) {
         if (state.getValue(LEVEL) == 5) {
             return CCItems.CHARGED_KINETIC_BATTERY.asStack();
         }
