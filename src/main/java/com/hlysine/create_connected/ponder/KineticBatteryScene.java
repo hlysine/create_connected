@@ -8,6 +8,7 @@ import com.simibubi.create.AllItems;
 import com.simibubi.create.content.kinetics.chainDrive.ChainDriveBlock;
 import com.simibubi.create.content.kinetics.deployer.DeployerBlockEntity;
 import com.simibubi.create.content.kinetics.saw.SawBlock;
+import com.simibubi.create.content.redstone.thresholdSwitch.ThresholdSwitchBlock;
 import com.simibubi.create.foundation.ponder.CreateSceneBuilder;
 import net.createmod.catnip.math.Pointing;
 import net.createmod.ponder.api.scene.SceneBuilder;
@@ -107,8 +108,19 @@ public class KineticBatteryScene {
                 .attachKeyFrame()
                 .placeNearTarget()
                 .pointAt(util.vector().topOf(comparator.below()));
-
         scene.idle(110);
+
+        scene.world().hideSection(comparatorGroup, Direction.UP);
+        scene.idle(20);
+        scene.world().setBlock(comparator, AllBlocks.THRESHOLD_SWITCH.getDefaultState().setValue(ThresholdSwitchBlock.FACING, Direction.SOUTH).setValue(ThresholdSwitchBlock.LEVEL, 3), false);
+        scene.world().showSection(util.select().position(comparator), Direction.DOWN);
+        scene.idle(10);
+
+        scene.overlay().showText(80)
+                .text("Use a Threshold Switch for a more accurate reading")
+                .placeNearTarget()
+                .pointAt(util.vector().topOf(comparator));
+        scene.idle(90);
 
         scene.markAsFinished();
     }

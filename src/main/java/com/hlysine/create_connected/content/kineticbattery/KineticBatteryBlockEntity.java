@@ -7,6 +7,7 @@ import com.hlysine.create_connected.datagen.advancements.AdvancementBehaviour;
 import com.hlysine.create_connected.datagen.advancements.CCAdvancements;
 import com.simibubi.create.content.contraptions.bearing.WindmillBearingBlockEntity;
 import com.simibubi.create.content.kinetics.base.GeneratingKineticBlockEntity;
+import com.simibubi.create.content.redstone.thresholdSwitch.ThresholdSwitchObservable;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.scrollValue.ScrollOptionBehaviour;
 import joptsimple.internal.Strings;
@@ -25,7 +26,7 @@ import java.util.List;
 
 import static com.hlysine.create_connected.content.kineticbattery.KineticBatteryBlock.*;
 
-public class KineticBatteryBlockEntity extends GeneratingKineticBlockEntity implements ISplitShaftBlockEntity {
+public class KineticBatteryBlockEntity extends GeneratingKineticBlockEntity implements ISplitShaftBlockEntity, ThresholdSwitchObservable {
 
     private static final int SYNC_RATE = 20;
     public static final double CHARGE_THRESHOlD = 3600 * 20;
@@ -254,6 +255,29 @@ public class KineticBatteryBlockEntity extends GeneratingKineticBlockEntity impl
     private MutableComponent bars(int level, ChatFormatting format) {
         return Component.literal(Strings.repeat('|', level))
                 .withStyle(format);
+    }
+
+    @Override
+    public int getMaxValue() {
+        return (int) (getMaxBatteryLevel() / 3600.0 / 20.0);
+    }
+
+    @Override
+    public int getMinValue() {
+        return 0;
+    }
+
+    @Override
+    public int getCurrentValue() {
+        return (int) (batteryLevel / 3600.0 / 20.0);
+    }
+
+    @Override
+    public MutableComponent format(int value) {
+        return ConnectedLang.number(value)
+                .add(Component.literal(" "))
+                .add(ConnectedLang.translate("generic.unit.su_hours"))
+                .component();
     }
 }
 

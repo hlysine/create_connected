@@ -209,6 +209,7 @@
   "create_connected.ponder.kinetic_battery.text_2": "When unpowered, it consumes kinetic stress from the front to charge up",
   "create_connected.ponder.kinetic_battery.text_3": "When powered by redstone, it discharges by generating a fixed amount of stress units at a fixed speed",
   "create_connected.ponder.kinetic_battery.text_4": "A comparator can be used to read the current battery level",
+  "create_connected.ponder.kinetic_battery.text_5": "Use a Threshold Switch for a more accurate reading",
   "create_connected.ponder.kinetic_battery_automation.header": "Automating energy transfer",
   "create_connected.ponder.kinetic_battery_automation.text_1": "When the battery is fully charged...",
   "create_connected.ponder.kinetic_battery_automation.text_2": "the charge is retained in item form",
