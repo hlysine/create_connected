@@ -24,8 +24,8 @@ public class CServer extends ConfigBase {
     private final ConfigInt batteryDischargeRPM = i(64, 0, 256, "batteryDischargeRPM", Comments.batteryDischargeRPM);
     public static final Supplier<Integer> BatteryDischargeRPM = CCConfigs.safeGetter(() -> CCConfigs.server().batteryDischargeRPM.get(), 64);
 
-    private final ConfigFloat batteryCapacity = f(128, 0, 8192, "batteryCapacity", Comments.batteryCapacity);
-    public static final Supplier<Double> BatteryCapacity = CCConfigs.safeGetter(() -> CCConfigs.server().batteryCapacity.get(), 128.0);
+    private final ConfigFloat batteryCapacity = f(512, 0, 8192, "batteryCapacity", Comments.batteryCapacity);
+    public static final Supplier<Double> BatteryCapacity = CCConfigs.safeGetter(() -> CCConfigs.server().batteryCapacity.get(), 512.0);
 
     public final CStress stressValues = nested(0, CStress::new, Comments.stress);
     public final ConfigFloat brakeActiveStress = f(16384, Float.NEGATIVE_INFINITY, Float.POSITIVE_INFINITY, "brakeActiveStress", Comments.brakeActiveStress);
