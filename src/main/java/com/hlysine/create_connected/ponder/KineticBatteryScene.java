@@ -16,6 +16,7 @@ import net.createmod.ponder.api.scene.SceneBuildingUtil;
 import net.createmod.ponder.api.scene.Selection;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LeverBlock;
@@ -359,7 +360,7 @@ public class KineticBatteryScene {
         scene.idle(140);
         scene.world().modifyEntity(item, e -> e.remove(Entity.RemovalReason.DISCARDED));
 
-        scene.world().modifyBlockEntityNBT(util.select().position(deployer), DeployerBlockEntity.class, nbt -> nbt.put("HeldItem", CCItems.CHARGED_KINETIC_BATTERY.asStack().saveOptional(scene.world().getHolderLookupProvider())));
+        scene.world().modifyBlockEntityNBT(util.select().position(deployer), DeployerBlockEntity.class, nbt -> nbt.put("HeldItem", CCItems.CHARGED_KINETIC_BATTERY.asStack().save(new CompoundTag())));
         scene.world().showSection(deployerGroup, Direction.DOWN);
         scene.idle(10);
         scene.world().showSection(armGroup, Direction.DOWN);

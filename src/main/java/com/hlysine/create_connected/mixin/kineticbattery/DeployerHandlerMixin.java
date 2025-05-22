@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(DeployerHandler.class)
+@Mixin(value = DeployerHandler.class, remap = false)
 public class DeployerHandlerMixin {
     @Inject(
             method = "shouldActivate",
@@ -20,8 +20,8 @@ public class DeployerHandlerMixin {
             cancellable = true
     )
     private static void activateForBattery(ItemStack held, Level world, BlockPos targetPos, Direction facing, CallbackInfoReturnable<Boolean> cir) {
-        if (held.is(CCBlocks.KINETIC_BATTERY.asItem()) || held.is(CCItems.CHARGED_KINETIC_BATTERY))
-            if (world.getBlockState(targetPos).is(CCBlocks.KINETIC_BATTERY))
+        if (held.is(CCBlocks.KINETIC_BATTERY.asItem()) || held.is(CCItems.CHARGED_KINETIC_BATTERY.asItem()))
+            if (world.getBlockState(targetPos).is(CCBlocks.KINETIC_BATTERY.get()))
                 cir.setReturnValue(true);
 
     }

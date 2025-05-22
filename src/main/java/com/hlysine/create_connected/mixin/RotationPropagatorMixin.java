@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(RotationPropagator.class)
+@Mixin(value = RotationPropagator.class, remap = false)
 public class RotationPropagatorMixin {
     @Inject(
             method = "getAxisModifier",

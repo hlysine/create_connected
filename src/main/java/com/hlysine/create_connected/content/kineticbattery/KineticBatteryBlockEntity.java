@@ -188,15 +188,15 @@ public class KineticBatteryBlockEntity extends GeneratingKineticBlockEntity impl
     }
 
     @Override
-    protected void read(CompoundTag compound, HolderLookup.Provider registries, boolean clientPacket) {
-        super.read(compound, registries, clientPacket);
+    protected void read(CompoundTag compound, boolean clientPacket) {
+        super.read(compound, clientPacket);
         batteryLevel = compound.getFloat("batteryLevel");
         queuedSync = compound.getBoolean("queuedSync");
     }
 
     @Override
-    protected void write(CompoundTag compound, HolderLookup.Provider registries, boolean clientPacket) {
-        super.write(compound, registries, clientPacket);
+    protected void write(CompoundTag compound, boolean clientPacket) {
+        super.write(compound, clientPacket);
         compound.putDouble("batteryLevel", batteryLevel);
         compound.putBoolean("queuedSync", queuedSync);
     }

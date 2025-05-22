@@ -2,6 +2,8 @@ package com.hlysine.create_connected.datagen.recipes;
 
 import com.google.common.base.Supplier;
 import com.google.common.collect.ImmutableList;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.hlysine.create_connected.CCBlocks;
 import com.hlysine.create_connected.CCItems;
 import com.hlysine.create_connected.CreateConnected;
@@ -10,8 +12,10 @@ import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllItems;
 import com.simibubi.create.AllTags;
 import com.simibubi.create.foundation.data.recipe.CreateRecipeProvider;
+import com.tterrag.registrate.util.DataIngredient;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import com.tterrag.registrate.util.entry.ItemProviderEntry;
+import net.createmod.catnip.platform.CatnipServices;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.world.item.crafting.AbstractCookingRecipe;
 import net.minecraft.data.PackOutput;
@@ -34,6 +38,7 @@ import net.minecraft.world.level.block.Blocks;
 import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.function.UnaryOperator;
 
 @SuppressWarnings("unused")
