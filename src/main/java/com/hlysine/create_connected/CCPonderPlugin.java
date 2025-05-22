@@ -58,7 +58,8 @@ public class CCPonderPlugin implements PonderPlugin {
                 .addStoryBoard("parallel_gearbox", ParallelGearboxScenes::parallelGearbox, AllCreatePonderTags.KINETIC_RELAYS);
         SCENE_HELPER.forComponents(CCBlocks.KINETIC_BATTERY, CCItems.CHARGED_KINETIC_BATTERY)
                 .addStoryBoard("kinetic_battery", KineticBatteryScene::kineticBattery, AllCreatePonderTags.KINETIC_SOURCES, AllCreatePonderTags.KINETIC_APPLIANCES)
-                .addStoryBoard("kinetic_battery_chaining", KineticBatteryScene::kineticBatteryChaining, AllCreatePonderTags.KINETIC_SOURCES, AllCreatePonderTags.KINETIC_APPLIANCES);
+                .addStoryBoard("kinetic_battery_chaining", KineticBatteryScene::kineticBatteryChaining, AllCreatePonderTags.KINETIC_SOURCES, AllCreatePonderTags.KINETIC_APPLIANCES)
+                .addStoryBoard("kinetic_battery_automation", KineticBatteryScene::kineticBatteryAutomation, AllCreatePonderTags.KINETIC_SOURCES, AllCreatePonderTags.KINETIC_APPLIANCES);
         SCENE_HELPER.forComponents(CCBlocks.SEQUENCED_PULSE_GENERATOR)
                 .addStoryBoard("sequenced_pulse_generator", SequencedPulseGeneratorScenes::pulseGenerator, AllCreatePonderTags.REDSTONE);
         SCENE_HELPER.forComponents(CCItems.LINKED_TRANSMITTER)
