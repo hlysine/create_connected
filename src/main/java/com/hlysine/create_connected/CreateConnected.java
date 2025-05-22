@@ -61,6 +61,7 @@ public class CreateConnected {
         CCCreativeTabs.register(modEventBus);
         CCPackets.register();
         CCCraftingConditions.register(modEventBus);
+        CCArmInteractionPointTypes.register(modEventBus);
 
         CCConfigs.register(modContainer);
 

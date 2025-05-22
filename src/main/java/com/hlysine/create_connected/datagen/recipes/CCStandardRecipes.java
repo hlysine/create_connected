@@ -2,8 +2,6 @@ package com.hlysine.create_connected.datagen.recipes;
 
 import com.google.common.base.Supplier;
 import com.google.common.collect.ImmutableList;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 import com.hlysine.create_connected.CCBlocks;
 import com.hlysine.create_connected.CCItems;
 import com.hlysine.create_connected.CreateConnected;
@@ -15,12 +13,9 @@ import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllItems;
 import com.simibubi.create.AllTags;
 import com.simibubi.create.foundation.data.recipe.CreateRecipeProvider;
-import com.simibubi.create.foundation.data.recipe.StandardRecipeGen;
 import com.simibubi.create.foundation.mixin.accessor.MappedRegistryAccessor;
-import com.tterrag.registrate.util.DataIngredient;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import com.tterrag.registrate.util.entry.ItemProviderEntry;
-import net.createmod.catnip.platform.CatnipServices;
 import net.createmod.catnip.registry.RegisteredObjectsHelper;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.advancements.Advancement;
@@ -56,7 +51,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.UnaryOperator;
 
@@ -178,6 +172,19 @@ public class CCStandardRecipes extends CreateRecipeProvider {
                     .requires(AllBlocks.SHAFT)
                     .requires(Blocks.REDSTONE_WIRE)
                     .requires(Blocks.OBSIDIAN)
+            );
+
+    GeneratedRecipe KINETIC_BATTERY = create(CCBlocks.KINETIC_BATTERY).unlockedBy(AllItems.ELECTRON_TUBE::get)
+            .requiresResultFeature()
+            .returns(8)
+            .viaShaped(b -> b
+                    .define('e', AllItems.ELECTRON_TUBE)
+                    .define('c', AllBlocks.BRASS_CASING)
+                    .define('a', AllItems.COPPER_SHEET)
+                    .define('b', AllItems.IRON_SHEET)
+                    .pattern(" e ")
+                    .pattern(" c ")
+                    .pattern("a b")
             );
 
     GeneratedRecipe SEQUENCED_PULSE_GENERATOR = create(CCBlocks.SEQUENCED_PULSE_GENERATOR).unlockedBy(CCItems.CONTROL_CHIP::get)
