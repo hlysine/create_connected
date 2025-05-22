@@ -1,1 +1,23 @@
-{}
+{
+  "advancement.create_connected.brass_gearbox": "องค์กรที่จริงจัง",
+  "advancement.create_connected.brass_gearbox.desc": "วางกล่องเกียร์ทองเหลืองลง",
+  "advancement.create_connected.control_chip": "การผลิตที่แม่นยำ",
+  "advancement.create_connected.control_chip.desc": "ประกอบชิปควบคุม",
+  "advancement.create_connected.overpowered_brake_0": "พลังเกินตัว",
+  "advancement.create_connected.overpowered_brake_0.desc": "รักษาเครือข่ายให้ทำงานด้วยความเร็วด้วยเบรกไฟฟ้าที่ติดมาด้วย\n§7 (ความก้าวหน้าที่ซ่อนอยู่)",
+  "advancement.create_connected.overstress_clutch": "เบรกเกอร์",
+  "advancement.create_connected.overstress_clutch.desc": "กระตุ้นคลัตช์ที่ตึงเกินไป",
+  "advancement.create_connected.pulse_generator_infinite_loop": "วงจรอนันต์",
+  "advancement.create_connected.pulse_generator_infinite_loop.desc": "โอเวอร์โหลดเครื่องกำเนิดพัลส์แบบเรียงลำดับด้วยโปรแกรมที่มีข้อบกพร่อง\n§7 (การพัฒนาที่ซ่อนเร้น)",
+  "advancement.create_connected.root": "ยินดีต้อนรับสู่ Create: Connected",
+  "advancement.create_connected.root.desc": "แกดเจ็ตสำหรับทุกสถานการณ์",
+  "advancement.create_connected.sequenced_pulse_generator": "ความเหนือกว่าในการคำนวณ",
+  "advancement.create_connected.sequenced_pulse_generator.desc": "วางเครื่องกำเนิดพัลส์แบบเรียงลำดับลง",
+  "advancement.create_connected.shear_pin": "สแน็ป!",
+  "advancement.create_connected.shear_pin.desc": "เป่าหมุดเฉือน",
+  "block.create_connected.brake": "เบรค",
+  "block.create_connected.brake.tooltip.summary": "อุปกรณ์ที่สร้าง _ความเครียดมหาศาล_ เมื่อเปิดเครื่อง ทำให้เครือข่ายหยุดทำงานโดย _สร้างความเครียดเกิน_",
+  "block.create_connected.brass_gearbox": "กระปุกเกียร์ทองเหลือง",
+  "block.create_connected.brass_gearbox.tooltip.summary": "กล่องเกียร์ที่สามารถกำหนดทิศทางการหมุนทั้ง 4 ได้อย่างอิสระ",
+  "block.create_connected.copycat_beam.tooltip.condition1": "เมื่อคลิกขวา"
+}
