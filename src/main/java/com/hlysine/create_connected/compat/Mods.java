@@ -23,6 +23,7 @@ public enum Mods {
     COPYCATS("copycats"),
     DIAGONAL_FENCES("diagonalfences"),
     DREAMS_DESIRES("create_dd"),
+    HENRY("create_henry"),
     ADDITIONAL_PLACEMENTS("additionalplacements"),
     GARNISHED("garnished");
 

@@ -189,6 +189,7 @@ dependencies {
 
 //    implementation fg.deobf("maven.modrinth:create-garnished:${garnished_version}")
 //    runtimeOnly fg.deobf("maven.modrinth:create-dreams-and-desires:${dreams_desires_version}")
+    runtimeOnly fg.deobf("curse.maven:create-henry-1254589:6544073")
     implementation fg.deobf("com.copycatsplus:copycats:${copycats_version}")
     runtimeOnly fg.deobf("maven.modrinth:additional-placements:${additional_placements_version}")
 
@@ -303,3 +304,4 @@ wrapper {
     gradleVersion = '8.10'
     distributionType = Wrapper.DistributionType.BIN
 }
+
