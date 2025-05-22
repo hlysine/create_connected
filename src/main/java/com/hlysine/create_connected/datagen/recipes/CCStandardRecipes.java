@@ -2,8 +2,6 @@ package com.hlysine.create_connected.datagen.recipes;
 
 import com.google.common.base.Supplier;
 import com.google.common.collect.ImmutableList;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 import com.hlysine.create_connected.CCBlocks;
 import com.hlysine.create_connected.CCItems;
 import com.hlysine.create_connected.CreateConnected;
@@ -12,34 +10,30 @@ import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllItems;
 import com.simibubi.create.AllTags;
 import com.simibubi.create.foundation.data.recipe.CreateRecipeProvider;
-import com.tterrag.registrate.util.DataIngredient;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import com.tterrag.registrate.util.entry.ItemProviderEntry;
-import net.createmod.catnip.platform.CatnipServices;
 import net.minecraft.advancements.critereon.ItemPredicate;
-import net.minecraft.data.PackOutput;
-import net.minecraft.data.recipes.*;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.TagKey;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.AbstractCookingRecipe;
+import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.data.recipes.*;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.SimpleCraftingRecipeSerializer;
-import net.minecraft.world.level.ItemLike;
-import net.minecraft.world.level.block.Blocks;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.crafting.ConditionalRecipe;
 import net.minecraftforge.common.crafting.CraftingHelper;
+import net.minecraft.world.item.Item;
 import net.minecraftforge.common.crafting.conditions.ICondition;
 import net.minecraftforge.common.crafting.conditions.ModLoadedCondition;
+import net.minecraft.world.item.Items;
 import net.minecraftforge.common.crafting.conditions.NotCondition;
+import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.Blocks;
 import org.jetbrains.annotations.NotNull;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
 import java.util.function.UnaryOperator;
 
 @SuppressWarnings("unused")
@@ -160,6 +154,19 @@ public class CCStandardRecipes extends CreateRecipeProvider {
                     .requires(AllBlocks.SHAFT)
                     .requires(Blocks.REDSTONE_WIRE)
                     .requires(Blocks.OBSIDIAN)
+            );
+
+    GeneratedRecipe KINETIC_BATTERY = create(CCBlocks.KINETIC_BATTERY).unlockedBy(AllItems.ELECTRON_TUBE::get)
+            .requiresResultFeature()
+            .returns(8)
+            .viaShaped(b -> b
+                    .define('e', AllItems.ELECTRON_TUBE)
+                    .define('c', AllBlocks.BRASS_CASING)
+                    .define('a', AllItems.COPPER_SHEET)
+                    .define('b', AllItems.IRON_SHEET)
+                    .pattern(" e ")
+                    .pattern(" c ")
+                    .pattern("a b")
             );
 
     GeneratedRecipe SEQUENCED_PULSE_GENERATOR = create(CCBlocks.SEQUENCED_PULSE_GENERATOR).unlockedBy(CCItems.CONTROL_CHIP::get)
@@ -690,7 +697,6 @@ public class CCStandardRecipes extends CreateRecipeProvider {
 
         private final FinishedRecipe wrapped;
         private final ResourceLocation outputOverride;
-        private final List<ICondition> conditions;
 
         public ModdedCookingRecipeResult(FinishedRecipe wrapped, ResourceLocation outputOverride,
                                          List<ICondition> conditions) {
@@ -728,6 +734,7 @@ public class CCStandardRecipes extends CreateRecipeProvider {
             conditions.forEach(c -> conds.add(CraftingHelper.serialize(c)));
             object.add("conditions", conds);
         }
+        private final List<ICondition> conditions;
 
     }
-}
+    }

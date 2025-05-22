@@ -56,6 +56,10 @@ public class CCPonderPlugin implements PonderPlugin {
                 .addStoryBoard("inverted_gearshift", InvertedGearshiftScenes::invertedGearshift, AllCreatePonderTags.KINETIC_RELAYS);
         SCENE_HELPER.forComponents(CCBlocks.PARALLEL_GEARBOX, CCItems.VERTICAL_PARALLEL_GEARBOX)
                 .addStoryBoard("parallel_gearbox", ParallelGearboxScenes::parallelGearbox, AllCreatePonderTags.KINETIC_RELAYS);
+        SCENE_HELPER.forComponents(CCBlocks.KINETIC_BATTERY, CCItems.CHARGED_KINETIC_BATTERY)
+                .addStoryBoard("kinetic_battery", KineticBatteryScene::kineticBattery, AllCreatePonderTags.KINETIC_SOURCES, AllCreatePonderTags.KINETIC_APPLIANCES)
+                .addStoryBoard("kinetic_battery_chaining", KineticBatteryScene::kineticBatteryChaining, AllCreatePonderTags.KINETIC_SOURCES, AllCreatePonderTags.KINETIC_APPLIANCES)
+                .addStoryBoard("kinetic_battery_automation", KineticBatteryScene::kineticBatteryAutomation, AllCreatePonderTags.KINETIC_SOURCES, AllCreatePonderTags.KINETIC_APPLIANCES);
         SCENE_HELPER.forComponents(CCBlocks.SEQUENCED_PULSE_GENERATOR)
                 .addStoryBoard("sequenced_pulse_generator", SequencedPulseGeneratorScenes::pulseGenerator, AllCreatePonderTags.REDSTONE);
         SCENE_HELPER.forComponents(CCItems.LINKED_TRANSMITTER)
@@ -71,7 +75,10 @@ public class CCPonderPlugin implements PonderPlugin {
         PonderTagRegistrationHelper<RegistryEntry<?>> TAG_HELPER = helper.withKeyFunction(RegistryEntry::getId);
 
         TAG_HELPER.addToTag(AllCreatePonderTags.KINETIC_SOURCES)
-                .add(CCBlocks.CRANK_WHEEL);
+                .add(CCBlocks.CRANK_WHEEL)
+                .add(CCBlocks.KINETIC_BATTERY);
+        TAG_HELPER.addToTag(AllCreatePonderTags.KINETIC_APPLIANCES)
+                .add(CCBlocks.KINETIC_BATTERY);
         TAG_HELPER.addToTag(AllCreatePonderTags.KINETIC_RELAYS)
                 .add(CCBlocks.ENCASED_CHAIN_COGWHEEL)
                 .add(CCBlocks.INVERTED_CLUTCH)

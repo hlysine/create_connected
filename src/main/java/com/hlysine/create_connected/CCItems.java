@@ -5,6 +5,7 @@ import com.hlysine.create_connected.config.FeatureToggle;
 import com.hlysine.create_connected.content.brassgearbox.VerticalBrassGearboxItem;
 import com.hlysine.create_connected.content.copycat.board.CopycatBoxItem;
 import com.hlysine.create_connected.content.copycat.board.CopycatCatwalkItem;
+import com.hlysine.create_connected.content.kineticbattery.ChargedKineticBatteryItem;
 import com.hlysine.create_connected.content.linkedtransmitter.LinkedTransmitterItem;
 import com.hlysine.create_connected.content.parallelgearbox.VerticalParallelGearboxItem;
 import com.hlysine.create_connected.content.sixwaygearbox.VerticalSixWayGearboxItem;
@@ -50,6 +51,12 @@ public class CCItems {
             REGISTRATE.item("vertical_brass_gearbox", VerticalBrassGearboxItem::new)
                     .model(AssetLookup.customBlockItemModel("brass_gearbox", "item_vertical"))
                     .transform(FeatureToggle.registerDependent(CCBlocks.BRASS_GEARBOX))
+                    .register();
+
+    public static final ItemEntry<ChargedKineticBatteryItem> CHARGED_KINETIC_BATTERY =
+            REGISTRATE.item("charged_kinetic_battery", ChargedKineticBatteryItem::new)
+                    .model(AssetLookup.customBlockItemModel("kinetic_battery", "item_charged"))
+                    .transform(FeatureToggle.registerDependent(CCBlocks.KINETIC_BATTERY))
                     .register();
 
     public static final ItemEntry<LinkedTransmitterItem> LINKED_TRANSMITTER =

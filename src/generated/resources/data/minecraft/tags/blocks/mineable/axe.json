@@ -12,6 +12,7 @@
     "create_connected:freewheel_clutch",
     "create_connected:brass_gearbox",
     "create_connected:brake",
+    "create_connected:kinetic_battery",
     "create_connected:inventory_access_port",
     "create_connected:inventory_bridge",
     "create_connected:copycat_slab",

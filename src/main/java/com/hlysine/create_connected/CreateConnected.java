@@ -63,6 +63,7 @@ public class CreateConnected {
         CCBlockEntityTypes.register();
         CCCreativeTabs.register(modEventBus);
         CCPackets.registerPackets();
+		CCArmInteractionPointTypes.register(modEventBus);
 
         CCConfigs.register(ModLoadingContext.get());
         CCConfigs.common().register();

@@ -61,6 +61,11 @@ public class CCAdvancements implements DataProvider {
             .after(ROOT)
             .special(SECRET)),
 
+    KINETIC_BATTERY = create("kinetic_battery", b -> b.icon(CCBlocks.KINETIC_BATTERY)
+            .title("Fully Charged")
+            .description("Charge a Kinetic Battery to full")
+            .after(ROOT)),
+
     CONTROL_CHIP = create("control_chip", b -> b.icon(CCItems.CONTROL_CHIP)
             .title("Precise Fabrication")
             .description("Assemble a Control Chip")
