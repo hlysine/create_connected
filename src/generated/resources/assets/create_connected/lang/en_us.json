@@ -64,6 +64,7 @@
   "block.create_connected.crank_wheel": "Crank Wheel",
   "block.create_connected.creative_fluid_vessel": "Creative Fluid Vessel",
   "block.create_connected.cross_connector": "Cross Connector",
+  "block.create_connected.cross_connector.tooltip.summary": "Relay rotation in two directions _independently_.",
   "block.create_connected.empty_fan_catalyst": "Empty Fan Catalyst",
   "block.create_connected.empty_fan_catalyst.tooltip.summary": "_Insert_ material to catalyze _fan processing_.",
   "block.create_connected.encased_chain_cogwheel": "Encased Chain Cogwheel",
