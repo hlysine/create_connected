@@ -143,7 +143,7 @@
   "create_connected.battery.status.full": "Батарея заряжена",
   "create_connected.centrifugal_clutch.speed_threshold": "Порог скорости",
   "create_connected.display_source.boiler_status": "Статус котла",
-  "create_connected.generic.unit.su_hours": "су-часов",
+  "create_connected.generic.unit.su_hours": "su-час",
   "create_connected.gui.overstress_clutch.uncoupled": "Разорвано",
   "create_connected.gui.overstress_clutch.uncoupled_explanation": "Это сцепление _разорвало соединение_ из-за перегрузки. Исправьте сеть перед тем, как _сбросить_ его _ключом_ или _редстоун-импульсом_.",
   "create_connected.gui.sequenced_pulse_generator.instruction": "Инструкция",
