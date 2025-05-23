@@ -75,14 +75,12 @@ public class CrossConnectorBlock extends Block implements IWrenchable, IConnecti
     public BlockState getStateForPlacement(@NotNull BlockPlaceContext context) {
         Direction.Axis preferredAxis = getPreferredAxis(context);
         if (preferredAxis != null && (context.getPlayer() == null || !context.getPlayer().isShiftKeyDown())) {
-            List<Direction.Axis> axes = new ArrayList<>();
-            axes.add(Direction.Axis.X);
-            axes.add(Direction.Axis.Y);
-            axes.add(Direction.Axis.Z);
-            axes.remove(preferredAxis);
-            axes.remove(context.getNearestLookingDirection().getAxis());
+            Direction.Axis lookingAxis = context.getNearestLookingDirection().getAxis();
+            if (lookingAxis == preferredAxis)
+                return this.defaultBlockState()
+                        .setValue(AXIS, preferredAxis.isVertical() ? Direction.Axis.X : Direction.Axis.Y);
             return this.defaultBlockState()
-                    .setValue(AXIS, axes.getFirst());
+                    .setValue(AXIS, lookingAxis);
         }
         return this.defaultBlockState()
                 .setValue(AXIS, preferredAxis != null && context.getPlayer().isShiftKeyDown()
