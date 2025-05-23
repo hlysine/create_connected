@@ -1,0 +1,34 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "create_connected:feature_enabled",
+          "feature": "create_connected:cross_connector"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "category": "misc",
+        "key": {
+          "g": {
+            "item": "create:gearbox"
+          },
+          "s": {
+            "item": "create:shaft"
+          }
+        },
+        "pattern": [
+          " s ",
+          "sgs",
+          " s "
+        ],
+        "result": {
+          "item": "create_connected:cross_connector"
+        },
+        "show_notification": true
+      }
+    }
+  ]
+}
