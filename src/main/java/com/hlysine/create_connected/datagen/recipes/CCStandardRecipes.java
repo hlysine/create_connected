@@ -138,6 +138,16 @@ public class CCStandardRecipes extends CreateRecipeProvider {
     GeneratedRecipe BRASS_GEARBOX_CYCLE =
             conversionCycle(ImmutableList.of(CCBlocks.BRASS_GEARBOX, CCItems.VERTICAL_BRASS_GEARBOX));
 
+    GeneratedRecipe CROSS_CONNECTOR = create(CCBlocks.CROSS_CONNECTOR).unlockedBy(AllBlocks.GEARBOX::get)
+            .requiresResultFeature()
+            .viaShaped(b -> b
+                    .define('g', AllBlocks.GEARBOX)
+                    .define('s', AllBlocks.SHAFT)
+                    .pattern(" s ")
+                    .pattern("sgs")
+                    .pattern(" s ")
+            );
+
     GeneratedRecipe OVERSTRESS_CLUTCH = create(CCBlocks.OVERSTRESS_CLUTCH).unlockedBy(AllItems.ELECTRON_TUBE::get)
             .requiresResultFeature()
             .viaShapeless(b -> b
