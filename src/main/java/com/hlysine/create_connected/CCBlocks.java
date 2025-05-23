@@ -33,6 +33,7 @@ import com.hlysine.create_connected.content.copycat.wall.CopycatWallModel;
 import com.hlysine.create_connected.content.copycat.wall.WrappedWallBlock;
 import com.hlysine.create_connected.content.crankwheel.CrankWheelBlock;
 import com.hlysine.create_connected.content.crossconnector.CrossConnectorBlock;
+import com.hlysine.create_connected.content.crossconnector.EncasedCrossConnectorBlock;
 import com.hlysine.create_connected.content.fluidvessel.FluidVesselBlock;
 import com.hlysine.create_connected.content.fluidvessel.FluidVesselGenerator;
 import com.hlysine.create_connected.content.fluidvessel.FluidVesselItem;
@@ -67,9 +68,11 @@ import com.simibubi.create.api.contraption.BlockMovementChecks;
 import com.simibubi.create.api.contraption.storage.item.MountedItemStorageType;
 import com.simibubi.create.api.stress.BlockStressValues;
 import com.simibubi.create.content.decoration.encasing.EncasedCTBehaviour;
+import com.simibubi.create.content.decoration.encasing.EncasingRegistry;
 import com.simibubi.create.content.fluids.tank.FluidTankMovementBehavior;
 import com.simibubi.create.content.kinetics.chainDrive.ChainDriveGenerator;
 import com.simibubi.create.content.kinetics.simpleRelays.BracketedKineticBlockModel;
+import com.simibubi.create.content.kinetics.simpleRelays.encased.EncasedShaftBlock;
 import com.simibubi.create.foundation.block.ItemUseOverrides;
 import com.simibubi.create.foundation.data.*;
 import com.tterrag.registrate.providers.DataGenContext;
@@ -196,6 +199,25 @@ public class CCBlocks {
             .item()
             .transform(customItemModel())
             .register();
+
+
+    public static final BlockEntry<EncasedCrossConnectorBlock> ANDESITE_ENCASED_CROSS_CONNECTOR =
+            REGISTRATE.block("andesite_encased_cross_connector", p -> new EncasedCrossConnectorBlock(p, AllBlocks.ANDESITE_CASING::get))
+                    .properties(p -> p.mapColor(MapColor.PODZOL))
+                    .transform(CCBuilderTransformers.encasedCrossConnector("andesite", () -> AllSpriteShifts.ANDESITE_CASING))
+                    .transform(EncasingRegistry.addVariantTo(CCBlocks.CROSS_CONNECTOR))
+                    .transform(FeatureToggle.registerDependent(CCBlocks.CROSS_CONNECTOR, FeatureCategory.KINETIC))
+                    .transform(axeOrPickaxe())
+                    .register();
+
+    public static final BlockEntry<EncasedCrossConnectorBlock> BRASS_ENCASED_CROSS_CONNECTOR =
+            REGISTRATE.block("brass_encased_cross_connector", p -> new EncasedCrossConnectorBlock(p, AllBlocks.BRASS_CASING::get))
+                    .properties(p -> p.mapColor(MapColor.TERRACOTTA_BROWN))
+                    .transform(CCBuilderTransformers.encasedCrossConnector("brass", () -> AllSpriteShifts.BRASS_CASING))
+                    .transform(EncasingRegistry.addVariantTo(CCBlocks.CROSS_CONNECTOR))
+                    .transform(FeatureToggle.registerDependent(CCBlocks.CROSS_CONNECTOR, FeatureCategory.KINETIC))
+                    .transform(axeOrPickaxe())
+                    .register();
 
 
     public static final BlockEntry<OverstressClutchBlock> OVERSTRESS_CLUTCH = REGISTRATE.block("overstress_clutch", OverstressClutchBlock::new)

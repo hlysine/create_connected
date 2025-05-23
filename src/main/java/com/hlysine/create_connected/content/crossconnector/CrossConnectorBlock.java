@@ -2,6 +2,7 @@ package com.hlysine.create_connected.content.crossconnector;
 
 import com.hlysine.create_connected.CCShapes;
 import com.hlysine.create_connected.content.IConnectionForwardingBlock;
+import com.simibubi.create.content.decoration.encasing.EncasableBlock;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.content.kinetics.base.GeneratingKineticBlockEntity;
 import com.simibubi.create.content.kinetics.base.IRotate;
@@ -10,6 +11,10 @@ import net.createmod.catnip.data.Iterate;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -21,14 +26,12 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class CrossConnectorBlock extends Block implements IWrenchable, IConnectionForwardingBlock, IRotate {
+public class CrossConnectorBlock extends Block implements IWrenchable, IConnectionForwardingBlock, IRotate, EncasableBlock {
 
     public static final EnumProperty<Direction.Axis> AXIS = BlockStateProperties.AXIS;
 
@@ -90,6 +93,20 @@ public class CrossConnectorBlock extends Block implements IWrenchable, IConnecti
                 .setValue(AXIS, preferredAxis != null && context.getPlayer().isShiftKeyDown()
                         ? context.getClickedFace().getAxis()
                         : context.getNearestLookingDirection().getAxis());
+    }
+
+    @Override
+    protected @NotNull ItemInteractionResult useItemOn(@NotNull ItemStack stack,
+                                                       @NotNull BlockState state,
+                                                       @NotNull Level level,
+                                                       @NotNull BlockPos pos,
+                                                       Player player,
+                                                       @NotNull InteractionHand hand,
+                                                       @NotNull BlockHitResult hitResult) {
+        if (player.isShiftKeyDown() || !player.mayBuild())
+            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+
+        return tryEncase(state, level, pos, stack, player, hand, hitResult);
     }
 
     @Override
