@@ -1,0 +1,17 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "create_connected:block/cross_connector/block",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "create_connected:block/cross_connector/block"
+    },
+    "axis=z": {
+      "model": "create_connected:block/cross_connector/block",
+      "x": 90,
+      "y": 180
+    }
+  }
+}

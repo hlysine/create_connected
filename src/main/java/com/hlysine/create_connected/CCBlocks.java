@@ -32,6 +32,7 @@ import com.hlysine.create_connected.content.copycat.wall.CopycatWallBlock;
 import com.hlysine.create_connected.content.copycat.wall.CopycatWallModel;
 import com.hlysine.create_connected.content.copycat.wall.WrappedWallBlock;
 import com.hlysine.create_connected.content.crankwheel.CrankWheelBlock;
+import com.hlysine.create_connected.content.crossconnector.CrossConnectorBlock;
 import com.hlysine.create_connected.content.fluidvessel.FluidVesselBlock;
 import com.hlysine.create_connected.content.fluidvessel.FluidVesselGenerator;
 import com.hlysine.create_connected.content.fluidvessel.FluidVesselItem;
@@ -106,6 +107,7 @@ import static com.simibubi.create.api.behaviour.movement.MovementBehaviour.movem
 import static com.simibubi.create.api.contraption.storage.fluid.MountedFluidStorageType.mountedFluidStorage;
 import static com.simibubi.create.foundation.data.AssetLookup.partialBaseModel;
 import static com.simibubi.create.foundation.data.BlockStateGen.axisBlock;
+import static com.simibubi.create.foundation.data.BlockStateGen.axisBlockProvider;
 import static com.simibubi.create.foundation.data.CreateRegistrate.connectedTextures;
 import static com.simibubi.create.foundation.data.ModelGen.customItemModel;
 import static com.simibubi.create.foundation.data.TagGen.axeOrPickaxe;
@@ -179,6 +181,17 @@ public class CCBlocks {
             .transform(FeatureToggle.register(FeatureCategory.KINETIC))
             .transform(axeOrPickaxe())
             .lang("6-way Gearbox")
+            .blockstate((c, p) -> axisBlock(c, p, $ -> partialBaseModel(c, p), false))
+            .item()
+            .transform(customItemModel())
+            .register();
+
+    public static final BlockEntry<CrossConnectorBlock> CROSS_CONNECTOR = REGISTRATE.block("cross_connector", CrossConnectorBlock::new)
+            .initialProperties(SharedProperties::stone)
+            .properties(p -> p.noOcclusion().mapColor(MapColor.PODZOL))
+            .addLayer(() -> RenderType::cutoutMipped)
+            .transform(FeatureToggle.register(FeatureCategory.KINETIC))
+            .transform(axeOrPickaxe())
             .blockstate((c, p) -> axisBlock(c, p, $ -> partialBaseModel(c, p), false))
             .item()
             .transform(customItemModel())

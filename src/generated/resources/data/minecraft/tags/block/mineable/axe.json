@@ -5,6 +5,7 @@
     "create_connected:large_crank_wheel",
     "create_connected:parallel_gearbox",
     "create_connected:six_way_gearbox",
+    "create_connected:cross_connector",
     "create_connected:overstress_clutch",
     "create_connected:inverted_clutch",
     "create_connected:inverted_gearshift",
