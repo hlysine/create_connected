@@ -3,6 +3,7 @@
   "advancement.create_connected.brass_gearbox.desc": "황동 기어박스를 설치하세요",
   "advancement.create_connected.control_chip": "정밀공정",
   "advancement.create_connected.control_chip.desc": "제어 칩을 조립하세요",
+  "advancement.create_connected.kinetic_battery": "충전 완료",
   "advancement.create_connected.overpowered_brake_0": "어, 정지가 안 돼!",
   "advancement.create_connected.overpowered_brake_0.desc": "브레이크가 켜져있어도 동력이 돌아가게끔 해보세요\n§7(숨겨진 발전 과제)",
   "advancement.create_connected.overstress_clutch": "두꺼비집",
