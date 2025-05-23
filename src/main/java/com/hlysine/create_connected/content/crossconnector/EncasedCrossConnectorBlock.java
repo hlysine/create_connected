@@ -45,12 +45,12 @@ public class EncasedCrossConnectorBlock extends CrossConnectorBlock implements S
     }
 
     @Override
-    protected @NotNull VoxelShape getShape(BlockState state, @NotNull BlockGetter level, @NotNull BlockPos pos, @NotNull CollisionContext context) {
+    public @NotNull VoxelShape getShape(BlockState state, @NotNull BlockGetter level, @NotNull BlockPos pos, @NotNull CollisionContext context) {
         return Shapes.block();
     }
 
     @Override
-    public @NotNull ItemStack getCloneItemStack(@NotNull BlockState state, @NotNull HitResult target, @NotNull LevelReader level, @NotNull BlockPos pos, @NotNull Player player) {
+    public @NotNull ItemStack getCloneItemStack(@NotNull BlockState state, @NotNull HitResult target, @NotNull BlockGetter level, @NotNull BlockPos pos, @NotNull Player player) {
         if (target instanceof BlockHitResult)
             return ((BlockHitResult) target).getDirection()
                     .getAxis() == getRotationAxis(state) ? CCBlocks.CROSS_CONNECTOR.asStack() : getCasing().asItem().getDefaultInstance();
