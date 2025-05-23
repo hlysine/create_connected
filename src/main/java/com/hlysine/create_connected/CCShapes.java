@@ -17,6 +17,9 @@ public class CCShapes {
     public static final VoxelShaper CEILING_LINKED_TRANSMITTER = shape(0, 15, 2, 5, 16, 14).forHorizontal(Direction.SOUTH);
     public static final VoxelShaper CRANK_WHEEL = shape(5, 0, 5, 11, 6, 11).add(2, 6, 2, 14, 10, 14).forDirectional();
     public static final VoxelShaper LARGE_CRANK_WHEEL = shape(5, 0, 5, 11, 6, 11).add(0, 6, 0, 16, 10, 16).forDirectional();
+    public static final VoxelShaper CROSS_CONNECTOR = shape(4, 4, 0, 12, 12, 16)
+            .add(0, 4, 4, 16, 12, 12)
+            .forAxis();
 
     private static AllShapes.Builder shape(VoxelShape shape) {
         return new AllShapes.Builder(shape);
