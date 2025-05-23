@@ -32,6 +32,7 @@ public class CCCreativeTabs {
             CCItems.VERTICAL_SIX_WAY_GEARBOX,
             CCBlocks.BRASS_GEARBOX,
             CCItems.VERTICAL_BRASS_GEARBOX,
+            CCBlocks.CROSS_CONNECTOR,
             CCBlocks.SHEAR_PIN,
             CCBlocks.OVERSTRESS_CLUTCH,
             CCBlocks.CENTRIFUGAL_CLUTCH,
