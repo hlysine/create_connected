@@ -49,6 +49,9 @@ import com.hlysine.create_connected.content.itemsilo.ItemSiloCTBehaviour;
 import com.hlysine.create_connected.content.itemsilo.ItemSiloItem;
 import com.hlysine.create_connected.content.kineticbattery.KineticBatteryBlock;
 import com.hlysine.create_connected.content.kineticbattery.KineticBatteryGenerator;
+import com.hlysine.create_connected.content.kineticbridge.KineticBridgeBlock;
+import com.hlysine.create_connected.content.kineticbridge.KineticBridgeBlockItem;
+import com.hlysine.create_connected.content.kineticbridge.KineticBridgeDestinationBlock;
 import com.hlysine.create_connected.content.linkedtransmitter.LinkedAnalogLeverBlock;
 import com.hlysine.create_connected.content.linkedtransmitter.LinkedButtonBlock;
 import com.hlysine.create_connected.content.linkedtransmitter.LinkedLeverBlock;
@@ -307,6 +310,31 @@ public class CCBlocks {
             .blockstate((c, p) -> p.directionalBlock(c.get(), forBoolean(c, state -> state.getValue(FreewheelClutchBlock.UNCOUPLED), "uncoupled", p)))
             .item()
             .transform(customItemModel())
+            .register();
+
+
+    public static final BlockEntry<KineticBridgeBlock> KINETIC_BRIDGE = REGISTRATE.block("kinetic_bridge", KineticBridgeBlock::new)
+            .initialProperties(SharedProperties::stone)
+            .properties(p -> p.noOcclusion().mapColor(MapColor.TERRACOTTA_BROWN))
+            .addLayer(() -> RenderType::cutoutMipped)
+            .transform(FeatureToggle.register(FeatureCategory.KINETIC))
+            .transform(axeOrPickaxe())
+            .blockstate((c, p) -> p.directionalBlock(c.get(), $ -> partialBaseModel(c, p)))
+            .item(KineticBridgeBlockItem::new)
+            .transform(customItemModel())
+            .register();
+
+
+    public static final BlockEntry<KineticBridgeDestinationBlock> KINETIC_BRIDGE_DESTINATION = REGISTRATE.block("kinetic_bridge_destination", KineticBridgeDestinationBlock::new)
+            .initialProperties(SharedProperties::stone)
+            .properties(p -> p.noOcclusion().mapColor(MapColor.TERRACOTTA_BROWN))
+            .addLayer(() -> RenderType::cutoutMipped)
+            .transform(FeatureToggle.registerDependent(CCBlocks.KINETIC_BRIDGE, FeatureCategory.KINETIC))
+            .transform(axeOrPickaxe())
+            .blockstate((c, p) -> p.directionalBlock(c.get(),
+                    $ -> p.models().getExistingFile(p.modLoc("block/kinetic_bridge/block_destination"))
+            ))
+            .lang("Kinetic Bridge")
             .register();
 
     public static final BlockEntry<BrassGearboxBlock> BRASS_GEARBOX = REGISTRATE.block("brass_gearbox", BrassGearboxBlock::new)
