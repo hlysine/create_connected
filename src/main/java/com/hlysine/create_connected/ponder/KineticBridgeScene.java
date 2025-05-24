@@ -78,7 +78,7 @@ public class KineticBridgeScene {
                 .placeNearTarget()
                 .attachKeyFrame()
                 .pointAt(util.vector().topOf(bridgeSource));
-        scene.idle(100);
+        scene.idle(110);
 
         scene.world().setBlock(extraSaw, AllBlocks.MECHANICAL_SAW.getDefaultState().setValue(SawBlock.FACING, Direction.UP), false);
         scene.world().showSection(util.select().position(extraSaw), Direction.DOWN);
@@ -89,12 +89,12 @@ public class KineticBridgeScene {
         scene.world().setKineticSpeed(destNetwork.add(util.select().position(bridgeDest)), 0);
         scene.idle(20);
 
-        scene.overlay().showText(80)
+        scene.overlay().showText(90)
                 .text("When one network is overstressed, the other network is unaffected")
                 .placeNearTarget()
                 .attachKeyFrame()
                 .pointAt(util.vector().topOf(bridgeSource));
-        scene.idle(100);
+        scene.idle(110);
 
         scene.world().hideSection(util.select().position(extraSaw), Direction.UP);
         scene.idle(5);
