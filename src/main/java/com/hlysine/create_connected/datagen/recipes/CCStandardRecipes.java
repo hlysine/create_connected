@@ -184,6 +184,17 @@ public class CCStandardRecipes extends CreateRecipeProvider {
                     .requires(Blocks.OBSIDIAN)
             );
 
+    GeneratedRecipe KINETIC_BRIDGE = create(CCBlocks.KINETIC_BRIDGE).unlockedBy(AllBlocks.CLUTCH::get)
+            .requiresResultFeature()
+            .viaShaped(b -> b
+                    .define('c', AllBlocks.CLUTCH)
+                    .define('s', AllBlocks.SHAFT)
+                    .define('b', AllBlocks.BRASS_CASING)
+                    .pattern(" b ")
+                    .pattern("scs")
+                    .pattern(" b ")
+            );
+
     GeneratedRecipe KINETIC_BATTERY = create(CCBlocks.KINETIC_BATTERY).unlockedBy(AllItems.ELECTRON_TUBE::get)
             .requiresResultFeature()
             .returns(8)
