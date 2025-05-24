@@ -1,7 +1,10 @@
 package com.hlysine.create_connected.content.kineticbridge;
 
+import com.hlysine.create_connected.content.KineticHelper;
 import com.simibubi.create.content.kinetics.base.GeneratingKineticBlockEntity;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -12,6 +15,7 @@ import java.lang.ref.WeakReference;
 public class KineticBridgeDestinationBlockEntity extends GeneratingKineticBlockEntity {
 
     WeakReference<KineticBridgeBlockEntity> sourceBE = new WeakReference<>(null);
+    boolean updateKineticsNextTick = false;
 
     public KineticBridgeDestinationBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
@@ -32,6 +36,17 @@ public class KineticBridgeDestinationBlockEntity extends GeneratingKineticBlockE
         }
         sourceBE = new WeakReference<>(bridgeBE);
         return bridgeBE;
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+        if (!getLevel().isClientSide()) {
+            if (updateKineticsNextTick) {
+                KineticHelper.updateKineticBlock(this);
+                updateKineticsNextTick = false;
+            }
+        }
     }
 
     @Override
@@ -57,5 +72,17 @@ public class KineticBridgeDestinationBlockEntity extends GeneratingKineticBlockE
     @Override
     protected AABB createRenderBoundingBox() {
         return super.createRenderBoundingBox().inflate(1);
+    }
+
+    @Override
+    protected void write(CompoundTag compound, HolderLookup.Provider registries, boolean clientPacket) {
+        super.write(compound, registries, clientPacket);
+        compound.putBoolean("UpdateKineticNextTick", updateKineticsNextTick);
+    }
+
+    @Override
+    protected void read(CompoundTag compound, HolderLookup.Provider registries, boolean clientPacket) {
+        super.read(compound, registries, clientPacket);
+        updateKineticsNextTick = compound.getBoolean("UpdateKineticNextTick");
     }
 }

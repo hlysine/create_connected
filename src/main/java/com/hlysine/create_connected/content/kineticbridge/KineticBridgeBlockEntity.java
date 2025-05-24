@@ -17,6 +17,8 @@ import java.util.List;
 public class KineticBridgeBlockEntity extends KineticBlockEntity {
 
     public ScrollValueBehaviour stressMultiplier;
+    private float previousStress = 0;
+    private float previousSpeed = 0;
 
     public KineticBridgeBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
@@ -55,12 +57,17 @@ public class KineticBridgeBlockEntity extends KineticBlockEntity {
     public void updateDestinationKinetic() {
         if (getLevel() == null)
             return;
+        float newStress = calculateStressApplied();
+        if (getSpeed() == previousSpeed && newStress == previousStress)
+            return;
         BlockPos destinationPos = getBlockPos().relative(getBlockState().getValue(KineticBridgeBlock.FACING));
         BlockEntity be = getLevel().getBlockEntity(destinationPos);
         if (!(be instanceof KineticBridgeDestinationBlockEntity destinationBE)) {
             return;
         }
-        KineticHelper.updateKineticBlock(destinationBE);
+        destinationBE.updateKineticsNextTick = true;
+        previousSpeed = getSpeed();
+        previousStress = newStress;
     }
 
     @Override
