@@ -1,6 +1,7 @@
 {
 	"credit": "Made with Blockbench",
 	"parent": "block/block",
+	"ambientocclusion": false,
 	"textures": {
 		"1": "create:block/brass_gearbox",
 		"2": "create:block/cogwheel_axis",

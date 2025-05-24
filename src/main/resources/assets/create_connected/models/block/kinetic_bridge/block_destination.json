@@ -1,6 +1,8 @@
 {
 	"credit": "Made with Blockbench",
+	"render_type": "minecraft:cutout_mipped",
 	"parent": "block/block",
+	"ambientocclusion": false,
 	"textures": {
 		"1": "create:block/brass_gearbox",
 		"4": "create:block/funnel/brass_funnel_frame",
@@ -33,7 +35,7 @@
 			}
 		},
 		{
-			"from": [0.01, 8, 0.01],
+			"from": [0.01, 8.01, 0.01],
 			"to": [15.99, 0, 15.99],
 			"rotation": {"angle": 0, "axis": "z", "origin": [8, 8, 8]},
 			"faces": {
