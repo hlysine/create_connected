@@ -30,7 +30,7 @@ public class KineticBridgeBlockEntity extends KineticBlockEntity {
                 new KineticBatteryValueBox()
         );
         stressMultiplier.between(0, 2048);
-        stressMultiplier.value = 16;
+        stressMultiplier.value = 40;
         stressMultiplier.withCallback(i -> this.updateSelfKinetic());
         behaviours.add(stressMultiplier);
     }

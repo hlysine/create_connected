@@ -85,10 +85,12 @@ import net.createmod.catnip.data.Iterate;
 import net.createmod.catnip.registry.RegisteredObjectsHelper;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.Rarity;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
@@ -319,6 +321,18 @@ public class CCBlocks {
             .addLayer(() -> RenderType::cutoutMipped)
             .transform(FeatureToggle.register(FeatureCategory.KINETIC))
             .transform(axeOrPickaxe())
+            .onRegister(b -> BlockMovementChecks.registerAttachedCheck((state, world, pos, direction) -> {
+                if (!(state.getBlock() instanceof KineticBridgeBlock))
+                    return BlockMovementChecks.CheckResult.PASS;
+                if (state.getValue(KineticBridgeBlock.FACING) != direction)
+                    return BlockMovementChecks.CheckResult.PASS;
+                return BlockMovementChecks.CheckResult.SUCCESS;
+            }))
+            .onRegister(b -> BlockMovementChecks.registerBrittleCheck(state -> {
+                if (!(state.getBlock() instanceof KineticBridgeBlock))
+                    return BlockMovementChecks.CheckResult.PASS;
+                return BlockMovementChecks.CheckResult.SUCCESS;
+            }))
             .blockstate((c, p) -> p.directionalBlock(c.get(), $ -> partialBaseModel(c, p)))
             .item(KineticBridgeBlockItem::new)
             .transform(customItemModel())
@@ -331,6 +345,13 @@ public class CCBlocks {
             .addLayer(() -> RenderType::cutoutMipped)
             .transform(FeatureToggle.registerDependent(CCBlocks.KINETIC_BRIDGE, FeatureCategory.KINETIC))
             .transform(axeOrPickaxe())
+            .onRegister(b -> BlockMovementChecks.registerAttachedCheck((state, world, pos, direction) -> {
+                if (!(state.getBlock() instanceof KineticBridgeDestinationBlock))
+                    return BlockMovementChecks.CheckResult.PASS;
+                if (state.getValue(KineticBridgeDestinationBlock.FACING).getOpposite() != direction)
+                    return BlockMovementChecks.CheckResult.PASS;
+                return BlockMovementChecks.CheckResult.SUCCESS;
+            }))
             .blockstate((c, p) -> p.directionalBlock(c.get(),
                     $ -> p.models().getExistingFile(p.modLoc("block/kinetic_bridge/block_destination"))
             ))
