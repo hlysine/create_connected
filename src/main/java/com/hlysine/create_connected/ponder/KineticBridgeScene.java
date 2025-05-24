@@ -132,7 +132,7 @@ public class KineticBridgeScene {
         scene.world().setKineticSpeed(util.select().position(sourceExtraSaw), 18);
 
         scene.overlay().showText(120)
-                .text("Add an Overstress Clutch in front to free up the capacity consumed by an overstressed bridge")
+                .text("You may add an Overstress Clutch in front to free up the capacity consumed by an overstressed bridge")
                 .placeNearTarget()
                 .attachKeyFrame()
                 .pointAt(util.vector().topOf(sourceShaft));

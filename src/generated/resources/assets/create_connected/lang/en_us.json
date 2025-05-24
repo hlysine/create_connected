@@ -236,7 +236,7 @@
   "create_connected.ponder.kinetic_bridge.text_3": "The amount of stress capacity transferred can be changed via the value panel",
   "create_connected.ponder.kinetic_bridge.text_4": "When one network is overstressed, the other network is unaffected",
   "create_connected.ponder.kinetic_bridge.text_5": "However, when the source network is overstressed, the bridge is unable to transfer the consumed capacity",
-  "create_connected.ponder.kinetic_bridge.text_6": "Add an Overstress Clutch in front to free up the capacity consumed by an overstressed bridge",
+  "create_connected.ponder.kinetic_bridge.text_6": "You may add an Overstress Clutch in front to free up the capacity consumed by an overstressed bridge",
   "create_connected.ponder.linked_transmitter.header": "Using Linked Transmitters",
   "create_connected.ponder.linked_transmitter.text_1": "Right-click a redstone input with a Linked Transmitter to attach it to the input",
   "create_connected.ponder.linked_transmitter.text_2": "Linked Transmitters can transmit input signals wirelessly",
