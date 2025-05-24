@@ -10,6 +10,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
 
 import java.util.List;
 
@@ -27,7 +28,7 @@ public class KineticBridgeBlockEntity extends KineticBlockEntity {
         stressMultiplier = new StressImpactScrollValueBehaviour(
                 ConnectedLang.translateDirect("kinetic_bridge.stress_impact"),
                 this,
-                new KineticBatteryValueBox()
+                new KineticBatteryValueBox(8)
         );
         stressMultiplier.between(0, 2048);
         stressMultiplier.value = 40;
@@ -66,5 +67,10 @@ public class KineticBridgeBlockEntity extends KineticBlockEntity {
     public float calculateStressApplied() {
         this.lastStressApplied = StressImpactScrollValueBehaviour.convertValue(stressMultiplier.getValue());
         return this.lastStressApplied;
+    }
+
+    @Override
+    protected AABB createRenderBoundingBox() {
+        return super.createRenderBoundingBox().inflate(1);
     }
 }

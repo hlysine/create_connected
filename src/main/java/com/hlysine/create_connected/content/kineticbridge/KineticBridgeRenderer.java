@@ -1,5 +1,6 @@
 package com.hlysine.create_connected.content.kineticbridge;
 
+import com.hlysine.create_connected.CCPartialModels;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.simibubi.create.AllPartialModels;
@@ -38,7 +39,7 @@ public class KineticBridgeRenderer extends KineticBlockEntityRenderer<KineticBlo
         SuperByteBuffer shaftHalf =
                 CachedBuffers.partialFacing(AllPartialModels.SHAFT_HALF, be.getBlockState(), isDestination ? direction : direction.getOpposite());
         SuperByteBuffer fanInner =
-                CachedBuffers.partialFacing(AllPartialModels.ENCASED_FAN_INNER, be.getBlockState(), isDestination ? direction : direction.getOpposite());
+                CachedBuffers.partialFacing(isDestination ? CCPartialModels.KINETIC_BRIDGE_DESTINATION : CCPartialModels.KINETIC_BRIDGE_SOURCE, be.getBlockState(), isDestination ? direction : direction.getOpposite());
 
         standardKineticRotationTransform(shaftHalf, be, lightBehind).renderInto(ms, vb);
         standardKineticRotationTransform(fanInner, be, lightInFront).renderInto(ms, vb);

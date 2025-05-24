@@ -1,6 +1,7 @@
 package com.hlysine.create_connected.content.kineticbridge;
 
 
+import com.hlysine.create_connected.CCPartialModels;
 import com.simibubi.create.AllPartialModels;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntityVisual;
@@ -35,7 +36,7 @@ public class KineticBridgeVisual extends KineticBlockEntityVisual<KineticBlockEn
         opposite = direction.getOpposite();
         shaft = instancerProvider().instancer(AllInstanceTypes.ROTATING, Models.partial(AllPartialModels.SHAFT_HALF))
                 .createInstance();
-        coupling = instancerProvider().instancer(AllInstanceTypes.ROTATING, Models.partial(AllPartialModels.ENCASED_FAN_INNER))
+        coupling = instancerProvider().instancer(AllInstanceTypes.ROTATING, Models.partial(isDestination ? CCPartialModels.KINETIC_BRIDGE_DESTINATION : CCPartialModels.KINETIC_BRIDGE_SOURCE))
                 .createInstance();
 
         shaft.setup(blockEntity)

@@ -5,6 +5,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
 
 import java.lang.ref.WeakReference;
 
@@ -51,5 +52,10 @@ public class KineticBridgeDestinationBlockEntity extends GeneratingKineticBlockE
         }
         this.lastCapacityProvided = capacity;
         return capacity;
+    }
+
+    @Override
+    protected AABB createRenderBoundingBox() {
+        return super.createRenderBoundingBox().inflate(1);
     }
 }

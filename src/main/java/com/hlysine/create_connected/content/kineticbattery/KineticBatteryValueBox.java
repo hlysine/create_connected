@@ -1,7 +1,6 @@
 package com.hlysine.create_connected.content.kineticbattery;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.simibubi.create.content.kinetics.steamEngine.SteamEngineBlock;
 import com.simibubi.create.foundation.blockEntity.behaviour.ValueBoxTransform;
 
 import dev.engine_room.flywheel.lib.transform.TransformStack;
@@ -16,6 +15,12 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 
 public class KineticBatteryValueBox extends ValueBoxTransform.Sided {
+
+    private final double offset;
+
+    public KineticBatteryValueBox(double offset) {
+        this.offset = offset;
+    }
 
     @Override
     protected boolean isSideActive(BlockState state, Direction side) {
@@ -37,7 +42,7 @@ public class KineticBatteryValueBox extends ValueBoxTransform.Sided {
 
         float horizontalAngle = AngleHelper.horizontalAngle(batteryFacing);
         float verticalAngle = AngleHelper.verticalAngle(batteryFacing);
-        Vec3 local = VecHelper.voxelSpace(8, 15.5, 3);
+        Vec3 local = VecHelper.voxelSpace(8, 15.5, offset);
 
         local = VecHelper.rotateCentered(local, roll, Axis.Z);
         local = VecHelper.rotateCentered(local, horizontalAngle, Axis.Y);
