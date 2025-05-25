@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "create_connected:item/redstone_link_wildcard"
+  }
+}

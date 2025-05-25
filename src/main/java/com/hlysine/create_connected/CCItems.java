@@ -8,6 +8,7 @@ import com.hlysine.create_connected.content.copycat.board.CopycatCatwalkItem;
 import com.hlysine.create_connected.content.kineticbattery.ChargedKineticBatteryItem;
 import com.hlysine.create_connected.content.linkedtransmitter.LinkedTransmitterItem;
 import com.hlysine.create_connected.content.parallelgearbox.VerticalParallelGearboxItem;
+import com.hlysine.create_connected.content.redstonelinkwildcard.RedstoneLinkWildcardItem;
 import com.hlysine.create_connected.content.sixwaygearbox.VerticalSixWayGearboxItem;
 import com.simibubi.create.content.processing.sequenced.SequencedAssemblyItem;
 import com.simibubi.create.foundation.data.AssetLookup;
@@ -32,6 +33,10 @@ public class CCItems {
 
     public static final ItemEntry<SequencedAssemblyItem> INCOMPLETE_CONTROL_CHIP =
             REGISTRATE.item("incomplete_control_chip", SequencedAssemblyItem::new)
+                    .register();
+
+    public static final ItemEntry<RedstoneLinkWildcardItem> REDSTONE_LINK_WILDCARD =
+            REGISTRATE.item("redstone_link_wildcard", RedstoneLinkWildcardItem::new)
                     .register();
 
     public static final ItemEntry<VerticalParallelGearboxItem> VERTICAL_PARALLEL_GEARBOX =

@@ -48,6 +48,7 @@ public class CCCreativeTabs {
             CCBlocks.INVENTORY_BRIDGE,
             CCBlocks.SEQUENCED_PULSE_GENERATOR,
             CCItems.LINKED_TRANSMITTER,
+            CCItems.REDSTONE_LINK_WILDCARD,
             CCBlocks.EMPTY_FAN_CATALYST,
             CCBlocks.FAN_BLASTING_CATALYST,
             CCBlocks.FAN_SMOKING_CATALYST,
