@@ -56,7 +56,7 @@
   "item.create_connected.copycat_catwalk.tooltip.summary": "_Copycat boards_ pre-assembled into a catwalk for convenient placement.",
   "item.create_connected.music_disc_elevator.desc": "Kevin MacLeod - Casa Bossa Nova",
   "item.create_connected.music_disc_interlude.desc": "Kevin MacLeod - Local Forecast - Elevator",
-  "item.create_connected.redstone_link_wildcard.tooltip.summary": "Allow Redstone Links to match any frequency on the slot it is placed in.",
+  "item.create_connected.redstone_link_wildcard.tooltip.summary": "Allow Redstone Links to match any frequency for the slot it is placed in.",
   "item.create_connected.vertical_brass_gearbox.tooltip.summary": "A gearbox where the rotation direction of all 4 sides are _independently configurable_.",
   "item.create_connected.vertical_six_way_gearbox.tooltip.summary": "A gearbox with shafts on _all 6 sides_. Top and bottom spin at _half speed_."
 }
