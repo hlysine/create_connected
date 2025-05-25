@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Set;
 
-@Mixin(RedstoneLinkNetworkHandler.class)
+@Mixin(value = RedstoneLinkNetworkHandler.class, remap = false)
 public class RedstoneLinkNetworkHandlerMixin {
     @Inject(
             method = "updateNetworkOf",

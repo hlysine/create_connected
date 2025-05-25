@@ -13,13 +13,13 @@ import net.createmod.catnip.levelWrappers.WorldHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.LevelAccessor;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.event.level.LevelEvent;
+import net.minecraftforge.event.level.LevelEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 
 import java.util.*;
 
-@EventBusSubscriber(modid = CreateConnected.MODID)
+@Mod.EventBusSubscriber(modid = CreateConnected.MODID)
 public class LinkWildcardNetworkHandler {
     static final Map<LevelAccessor, Map<Couple<Frequency>, Set<Couple<Frequency>>>> wildcard_connections =
             new IdentityHashMap<>();

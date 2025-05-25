@@ -9,10 +9,8 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraft.server.level.ServerPlayer;
-import net.neoforged.neoforge.common.NeoForge;
 import net.minecraftforge.network.NetworkEvent.Context;
 import net.minecraftforge.network.NetworkRegistry;
-import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.simple.SimpleChannel;
 import net.minecraftforge.server.ServerLifecycleHooks;
@@ -80,8 +78,6 @@ public abstract class SyncConfigBase extends ConfigBase {
         );
         this.messageSupplier = messageSupplier;
         MinecraftForge.EVENT_BUS.addListener(this::syncToPlayer);
-    }
-        });
     }
 
     @Override

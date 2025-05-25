@@ -60,7 +60,7 @@ public class KineticBridgeDestinationBlock extends DirectionalKineticBlock imple
     }
 
     @Override
-    public ItemStack getCloneItemStack(BlockState state, HitResult target, LevelReader level, BlockPos pos, Player player) {
+    public ItemStack getCloneItemStack(BlockState state, HitResult target, BlockGetter level, BlockPos pos, Player player) {
         return CCBlocks.KINETIC_BRIDGE.asStack();
     }
 
@@ -86,14 +86,14 @@ public class KineticBridgeDestinationBlock extends DirectionalKineticBlock imple
             pLevel.destroyBlock(getSource(pPos, pState), true);
     }
 
-    public BlockState playerWillDestroy(Level pLevel, BlockPos pPos, BlockState pState, Player pPlayer) {
+    public void playerWillDestroy(Level pLevel, BlockPos pPos, BlockState pState, Player pPlayer) {
         if (stillValid(pLevel, pPos, pState)) {
             BlockPos sourcePos = getSource(pPos, pState);
             pLevel.destroyBlockProgress(sourcePos.hashCode(), sourcePos, -1);
             if (!pLevel.isClientSide() && pPlayer.isCreative())
                 pLevel.destroyBlock(sourcePos, false);
         }
-        return super.playerWillDestroy(pLevel, pPos, pState, pPlayer);
+        super.playerWillDestroy(pLevel, pPos, pState, pPlayer);
     }
 
     @Override
