@@ -38,6 +38,7 @@ public class CCCreativeTabs {
             CCBlocks.CENTRIFUGAL_CLUTCH,
             CCBlocks.FREEWHEEL_CLUTCH,
             CCBlocks.BRAKE,
+            CCBlocks.KINETIC_BRIDGE,
             CCBlocks.KINETIC_BATTERY,
             CCItems.CHARGED_KINETIC_BATTERY,
             CCBlocks.ITEM_SILO,

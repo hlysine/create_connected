@@ -48,7 +48,7 @@ public class KineticBatteryBlockEntity extends GeneratingKineticBlockEntity impl
         movementDirection = new ScrollOptionBehaviour<>(WindmillBearingBlockEntity.RotationDirection.class,
                 ConnectedLang.translateDirect("battery.rotation_direction"),
                 this,
-                new KineticBatteryValueBox());
+                new KineticBatteryValueBox(3));
         movementDirection.withCallback(i -> {
             updateGeneratedRotation();
             sendDataImmediately();

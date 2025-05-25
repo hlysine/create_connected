@@ -49,6 +49,9 @@ import com.hlysine.create_connected.content.itemsilo.ItemSiloCTBehaviour;
 import com.hlysine.create_connected.content.itemsilo.ItemSiloItem;
 import com.hlysine.create_connected.content.kineticbattery.KineticBatteryBlock;
 import com.hlysine.create_connected.content.kineticbattery.KineticBatteryGenerator;
+import com.hlysine.create_connected.content.kineticbridge.KineticBridgeBlock;
+import com.hlysine.create_connected.content.kineticbridge.KineticBridgeBlockItem;
+import com.hlysine.create_connected.content.kineticbridge.KineticBridgeDestinationBlock;
 import com.hlysine.create_connected.content.linkedtransmitter.LinkedAnalogLeverBlock;
 import com.hlysine.create_connected.content.linkedtransmitter.LinkedButtonBlock;
 import com.hlysine.create_connected.content.linkedtransmitter.LinkedLeverBlock;
@@ -82,10 +85,12 @@ import net.createmod.catnip.data.Iterate;
 import net.createmod.catnip.registry.RegisteredObjectsHelper;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.Rarity;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
@@ -307,6 +312,50 @@ public class CCBlocks {
             .blockstate((c, p) -> p.directionalBlock(c.get(), forBoolean(c, state -> state.getValue(FreewheelClutchBlock.UNCOUPLED), "uncoupled", p)))
             .item()
             .transform(customItemModel())
+            .register();
+
+
+    public static final BlockEntry<KineticBridgeBlock> KINETIC_BRIDGE = REGISTRATE.block("kinetic_bridge", KineticBridgeBlock::new)
+            .initialProperties(SharedProperties::stone)
+            .properties(p -> p.noOcclusion().mapColor(MapColor.TERRACOTTA_BROWN))
+            .addLayer(() -> RenderType::cutoutMipped)
+            .transform(FeatureToggle.register(FeatureCategory.KINETIC))
+            .transform(axeOrPickaxe())
+            .onRegister(b -> BlockMovementChecks.registerAttachedCheck((state, world, pos, direction) -> {
+                if (!(state.getBlock() instanceof KineticBridgeBlock))
+                    return BlockMovementChecks.CheckResult.PASS;
+                if (state.getValue(KineticBridgeBlock.FACING) != direction)
+                    return BlockMovementChecks.CheckResult.PASS;
+                return BlockMovementChecks.CheckResult.SUCCESS;
+            }))
+            .onRegister(b -> BlockMovementChecks.registerBrittleCheck(state -> {
+                if (!(state.getBlock() instanceof KineticBridgeBlock))
+                    return BlockMovementChecks.CheckResult.PASS;
+                return BlockMovementChecks.CheckResult.SUCCESS;
+            }))
+            .blockstate((c, p) -> p.directionalBlock(c.get(), $ -> partialBaseModel(c, p)))
+            .item(KineticBridgeBlockItem::new)
+            .transform(customItemModel())
+            .register();
+
+
+    public static final BlockEntry<KineticBridgeDestinationBlock> KINETIC_BRIDGE_DESTINATION = REGISTRATE.block("kinetic_bridge_destination", KineticBridgeDestinationBlock::new)
+            .initialProperties(SharedProperties::stone)
+            .properties(p -> p.noOcclusion().mapColor(MapColor.TERRACOTTA_BROWN))
+            .addLayer(() -> RenderType::cutoutMipped)
+            .transform(FeatureToggle.registerDependent(CCBlocks.KINETIC_BRIDGE, FeatureCategory.KINETIC))
+            .transform(axeOrPickaxe())
+            .onRegister(b -> BlockMovementChecks.registerAttachedCheck((state, world, pos, direction) -> {
+                if (!(state.getBlock() instanceof KineticBridgeDestinationBlock))
+                    return BlockMovementChecks.CheckResult.PASS;
+                if (state.getValue(KineticBridgeDestinationBlock.FACING).getOpposite() != direction)
+                    return BlockMovementChecks.CheckResult.PASS;
+                return BlockMovementChecks.CheckResult.SUCCESS;
+            }))
+            .blockstate((c, p) -> p.directionalBlock(c.get(),
+                    $ -> p.models().getExistingFile(p.modLoc("block/kinetic_bridge/block_destination"))
+            ))
+            .lang("Kinetic Bridge")
             .register();
 
     public static final BlockEntry<BrassGearboxBlock> BRASS_GEARBOX = REGISTRATE.block("brass_gearbox", BrassGearboxBlock::new)

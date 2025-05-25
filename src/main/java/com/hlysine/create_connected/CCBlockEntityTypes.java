@@ -19,6 +19,7 @@ import com.hlysine.create_connected.content.itemsilo.ItemSiloBlockEntity;
 import com.hlysine.create_connected.content.kineticbattery.KineticBatteryBlockEntity;
 import com.hlysine.create_connected.content.kineticbattery.KineticBatteryRenderer;
 import com.hlysine.create_connected.content.kineticbattery.KineticBatteryVisual;
+import com.hlysine.create_connected.content.kineticbridge.*;
 import com.hlysine.create_connected.content.linkedtransmitter.LinkedAnalogLeverBlockEntity;
 import com.hlysine.create_connected.content.linkedtransmitter.LinkedAnalogLeverRenderer;
 import com.hlysine.create_connected.content.linkedtransmitter.LinkedTransmitterBlockEntity;
@@ -45,6 +46,7 @@ import com.simibubi.create.content.redstone.analogLever.AnalogLeverVisual;
 import com.simibubi.create.foundation.blockEntity.renderer.SmartBlockEntityRenderer;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
+import dev.engine_room.flywheel.api.visualization.VisualizationContext;
 
 public class CCBlockEntityTypes {
     private static final CreateRegistrate REGISTRATE = CreateConnected.getRegistrate();
@@ -119,6 +121,20 @@ public class CCBlockEntityTypes {
             .visual(() -> SplitShaftVisual::new, false)
             .validBlocks(CCBlocks.FREEWHEEL_CLUTCH)
             .renderer(() -> SplitShaftRenderer::new)
+            .register();
+
+    public static final BlockEntityEntry<KineticBridgeBlockEntity> KINETIC_BRIDGE = REGISTRATE
+            .blockEntity("kinetic_bridge", KineticBridgeBlockEntity::new)
+            .visual(() -> (ctx, blockEntity, partialTick) -> new KineticBridgeVisual(ctx, blockEntity, partialTick, false), false)
+            .validBlocks(CCBlocks.KINETIC_BRIDGE)
+            .renderer(() -> ctx -> new KineticBridgeRenderer(ctx, false))
+            .register();
+
+    public static final BlockEntityEntry<KineticBridgeDestinationBlockEntity> KINETIC_BRIDGE_DESTINATION = REGISTRATE
+            .blockEntity("kinetic_bridge_destination", KineticBridgeDestinationBlockEntity::new)
+            .visual(() -> (ctx, blockEntity, partialTick) -> new KineticBridgeVisual(ctx, blockEntity, partialTick, true), false)
+            .validBlocks(CCBlocks.KINETIC_BRIDGE_DESTINATION)
+            .renderer(() -> ctx -> new KineticBridgeRenderer(ctx, true))
             .register();
 
     public static final BlockEntityEntry<BrassGearboxBlockEntity> BRASS_GEARBOX = REGISTRATE
