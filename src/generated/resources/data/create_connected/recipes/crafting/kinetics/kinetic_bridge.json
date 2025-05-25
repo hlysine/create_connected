@@ -5,7 +5,7 @@
       "conditions": [
         {
           "type": "create_connected:feature_enabled",
-          "feature": "create_connected:kinetic_battery"
+          "feature": "create_connected:kinetic_bridge"
         }
       ],
       "recipe": {
@@ -15,24 +15,20 @@
           "b": {
             "item": "create:brass_casing"
           },
-          "i": {
-            "item": "create:iron_sheet"
+          "c": {
+            "item": "create:clutch"
           },
-          "p": {
-            "item": "create:precision_mechanism"
-          },
-          "r": {
-            "item": "minecraft:redstone"
+          "s": {
+            "item": "create:shaft"
           }
         },
         "pattern": [
-          " p ",
           " b ",
-          "iri"
+          "scs",
+          " b "
         ],
         "result": {
-          "count": 8,
-          "item": "create_connected:kinetic_battery"
+          "item": "create_connected:kinetic_bridge"
         },
         "show_notification": true
       }

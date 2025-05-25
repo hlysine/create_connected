@@ -1,0 +1,28 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "create_connected:feature_enabled",
+          "feature": "create_connected:redstone_link_wildcard"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shapeless",
+        "category": "misc",
+        "ingredients": [
+          {
+            "item": "create:transmitter"
+          },
+          {
+            "item": "create:crafter_slot_cover"
+          }
+        ],
+        "result": {
+          "item": "create_connected:redstone_link_wildcard"
+        }
+      }
+    }
+  ]
+}
