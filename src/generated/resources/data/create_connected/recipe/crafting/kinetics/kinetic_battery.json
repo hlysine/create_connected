@@ -8,23 +8,23 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "a": {
-      "item": "create:copper_sheet"
-    },
     "b": {
-      "item": "create:iron_sheet"
-    },
-    "c": {
       "item": "create:brass_casing"
     },
-    "e": {
-      "item": "create:electron_tube"
+    "i": {
+      "item": "create:iron_sheet"
+    },
+    "p": {
+      "item": "create:precision_mechanism"
+    },
+    "r": {
+      "item": "minecraft:redstone"
     }
   },
   "pattern": [
-    " e ",
-    " c ",
-    "a b"
+    " p ",
+    " b ",
+    "iri"
   ],
   "result": {
     "count": 8,
