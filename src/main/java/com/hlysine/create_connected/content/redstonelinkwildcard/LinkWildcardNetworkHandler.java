@@ -7,6 +7,8 @@ import com.simibubi.create.content.redstone.link.RedstoneLinkNetworkHandler;
 import com.simibubi.create.content.redstone.link.RedstoneLinkNetworkHandler.Frequency;
 import net.createmod.catnip.data.Couple;
 import net.createmod.catnip.levelWrappers.WorldHelper;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.LevelAccessor;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -22,18 +24,18 @@ public class LinkWildcardNetworkHandler {
     @SubscribeEvent
     public static void onLoadWorld(LevelEvent.Load event) {
         wildcard_connections.put(event.getLevel(), new HashMap<>());
-        CreateConnected.LOGGER.debug("Prepared Redstone Network Wildcards for {}", WorldHelper.getDimensionID(event.getLevel()));
+        CreateConnected.LOGGER.debug("Link-Wildcard: Prepared Redstone Network Wildcards for {}", WorldHelper.getDimensionID(event.getLevel()));
     }
 
     @SubscribeEvent
     public static void onUnloadWorld(LevelEvent.Unload event) {
         wildcard_connections.remove(event.getLevel());
-        CreateConnected.LOGGER.debug("Removed Redstone Network Wildcards for {}", WorldHelper.getDimensionID(event.getLevel()));
+        CreateConnected.LOGGER.debug("Link-Wildcard: Removed Redstone Network Wildcards for {}", WorldHelper.getDimensionID(event.getLevel()));
     }
 
     public static Map<Couple<Frequency>, Set<Couple<Frequency>>> wildcardsIn(LevelAccessor world) {
         if (!wildcard_connections.containsKey(world)) {
-            CreateConnected.LOGGER.warn("Tried to Access unprepared network wildcards of {}", WorldHelper.getDimensionID(world));
+            CreateConnected.LOGGER.warn("Link-Wildcard: Tried to Access unprepared network wildcards of {}", WorldHelper.getDimensionID(world));
             return new HashMap<>();
         }
         return wildcard_connections.get(world);
@@ -68,14 +70,17 @@ public class LinkWildcardNetworkHandler {
         }
     }
 
-    public static void addToNetwork(RedstoneLinkNetworkHandler handler, LevelAccessor world, Couple<Frequency> key) {
+    public static void addToNetwork(RedstoneLinkNetworkHandler handler, LevelAccessor world, IRedstoneLinkable actor) {
+        Couple<Frequency> key = actor.getNetworkKey();
         Map<Couple<Frequency>, Set<Couple<Frequency>>> wildcards = wildcardsIn(world);
+//        CreateConnected.LOGGER.debug("Link-Wildcard: Adding {}", keyToString(key));
         if (!wildcards.containsKey(key)) {
             HashSet<Couple<Frequency>> connections = new LinkedHashSet<>();
             Map<Couple<Frequency>, Set<IRedstoneLinkable>> networks = handler.networksIn(world);
             for (Couple<Frequency> otherKey : networks.keySet()) {
                 if (!otherKey.equals(key) && test(key, otherKey)) {
                     connections.add(otherKey);
+//                    CreateConnected.LOGGER.debug("Link-Wildcard: - Connected to {}", keyToString(otherKey));
                 }
             }
             wildcards.put(key, connections);
@@ -83,23 +88,62 @@ public class LinkWildcardNetworkHandler {
         for (Map.Entry<Couple<Frequency>, Set<Couple<Frequency>>> entry : wildcards.entrySet()) {
             if (!entry.getKey().equals(key) && test(entry.getKey(), key)) {
                 entry.getValue().add(key);
+//                CreateConnected.LOGGER.debug("Link-Wildcard: - Adding connection to {}", keyToString(entry.getKey()));
             }
         }
     }
 
-    public static void removeFromNetwork(RedstoneLinkNetworkHandler handler, LevelAccessor world, Couple<Frequency> key) {
+    public static void removeFromNetwork(RedstoneLinkNetworkHandler handler, LevelAccessor world, IRedstoneLinkable actor) {
+        Couple<Frequency> key = actor.getNetworkKey();
         Map<Couple<Frequency>, Set<IRedstoneLinkable>> networks = handler.networksIn(world);
         if (networks.containsKey(key) && !networks.get(key).isEmpty())
             return;
+//        CreateConnected.LOGGER.debug("Link-Wildcard: Removing {}", keyToString(key));
         Map<Couple<Frequency>, Set<Couple<Frequency>>> wildcards = wildcardsIn(world);
         wildcards.remove(key);
-        for (Iterator<Map.Entry<Couple<Frequency>, Set<Couple<Frequency>>>> iterator = wildcards.entrySet().iterator(); iterator.hasNext(); ) {
-            Map.Entry<Couple<Frequency>, Set<Couple<Frequency>>> entry = iterator.next();
-            entry.getValue().remove(key);
-            if (entry.getValue().isEmpty()) {
-                iterator.remove();
+        for (Map.Entry<Couple<Frequency>, Set<Couple<Frequency>>> entry : wildcards.entrySet()) {
+            if (entry.getValue().remove(key)) {
+//                CreateConnected.LOGGER.debug("Link-Wildcard: - Removing connection to {}", keyToString(entry.getKey()));
+                handler.updateNetworkOf(world, new IRedstoneLinkable() {
+                    @Override
+                    public int getTransmittedStrength() {
+                        return 0;
+                    }
+
+                    @Override
+                    public void setReceivedStrength(int power) {
+
+                    }
+
+                    @Override
+                    public boolean isListening() {
+                        return false;
+                    }
+
+                    @Override
+                    public boolean isAlive() {
+                        return true;
+                    }
+
+                    @Override
+                    public Couple<Frequency> getNetworkKey() {
+                        return entry.getKey();
+                    }
+
+                    @Override
+                    public BlockPos getLocation() {
+                        return actor.getLocation();
+                    }
+                });
             }
         }
+    }
+
+    private static String keyToString(Couple<Frequency> key) {
+        return String.format("%s + %s",
+                BuiltInRegistries.ITEM.getKey(key.getFirst().getStack().getItem()),
+                BuiltInRegistries.ITEM.getKey(key.getSecond().getStack().getItem())
+        );
     }
 
     private static boolean test(Couple<Frequency> transmitter, Couple<Frequency> receiver) {

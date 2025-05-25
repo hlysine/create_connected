@@ -33,7 +33,7 @@ public class RedstoneLinkNetworkHandlerMixin {
             at = @At(value = "INVOKE", target = "Lcom/simibubi/create/content/redstone/link/RedstoneLinkNetworkHandler;updateNetworkOf(Lnet/minecraft/world/level/LevelAccessor;Lcom/simibubi/create/content/redstone/link/IRedstoneLinkable;)V")
     )
     private void addToNetwork(LevelAccessor world, IRedstoneLinkable actor, CallbackInfo ci) {
-        LinkWildcardNetworkHandler.addToNetwork((RedstoneLinkNetworkHandler) (Object) this, world, actor.getNetworkKey());
+        LinkWildcardNetworkHandler.addToNetwork((RedstoneLinkNetworkHandler) (Object) this, world, actor);
     }
 
     @Inject(
@@ -41,6 +41,6 @@ public class RedstoneLinkNetworkHandlerMixin {
             at = @At(value = "INVOKE", target = "Ljava/util/Set;isEmpty()Z", shift = At.Shift.AFTER)
     )
     private void removeFromNetwork(LevelAccessor world, IRedstoneLinkable actor, CallbackInfo ci) {
-        LinkWildcardNetworkHandler.removeFromNetwork((RedstoneLinkNetworkHandler) (Object) this, world, actor.getNetworkKey());
+        LinkWildcardNetworkHandler.removeFromNetwork((RedstoneLinkNetworkHandler) (Object) this, world, actor);
     }
 }
