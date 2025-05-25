@@ -1,7 +1,10 @@
 package com.hlysine.create_connected.content.redstonelinkwildcard;
 
 import com.google.common.collect.Sets;
+import com.hlysine.create_connected.CCItems;
 import com.hlysine.create_connected.CreateConnected;
+import com.hlysine.create_connected.config.CServer;
+import com.hlysine.create_connected.config.FeatureToggle;
 import com.simibubi.create.content.redstone.link.IRedstoneLinkable;
 import com.simibubi.create.content.redstone.link.RedstoneLinkNetworkHandler;
 import com.simibubi.create.content.redstone.link.RedstoneLinkNetworkHandler.Frequency;
@@ -41,46 +44,37 @@ public class LinkWildcardNetworkHandler {
         return wildcard_connections.get(world);
     }
 
-    public static Set<IRedstoneLinkable> getNetworkOf(RedstoneLinkNetworkHandler handler, LevelAccessor world, IRedstoneLinkable actor) {
+    public static void updateWildcardNetworkOf(RedstoneLinkNetworkHandler handler, LevelAccessor world, IRedstoneLinkable actor, int power) {
+        if (!FeatureToggle.isEnabled(CCItems.REDSTONE_LINK_WILDCARD.getId()))
+            return;
+
         Map<Couple<Frequency>, Set<IRedstoneLinkable>> networksInWorld = handler.networksIn(world);
         Couple<Frequency> key = actor.getNetworkKey();
-        if (!networksInWorld.containsKey(key))
-            networksInWorld.put(key, new LinkedHashSet<>());
-        Set<IRedstoneLinkable> set = networksInWorld.get(key);
-        set.removeIf(other -> !other.isAlive());
         Map<Couple<Frequency>, Set<Couple<Frequency>>> wildcards = wildcardsIn(world);
         if (wildcards.containsKey(key)) {
             Set<Couple<Frequency>> connections = wildcards.get(key);
             for (Couple<Frequency> connection : connections) {
-                Set<IRedstoneLinkable> set2 = networksInWorld.getOrDefault(connection, Collections.emptySet());
-                set2.removeIf(other -> !other.isAlive());
-                set = concatSetView(set, set2);
+                Set<IRedstoneLinkable> set = networksInWorld.getOrDefault(connection, Collections.emptySet());
+                set.removeIf(other -> !other.isAlive());
+                for (IRedstoneLinkable other : set) {
+                    if (other != actor && other.isListening() && RedstoneLinkNetworkHandler.withinRange(actor, other))
+                        other.setReceivedStrength(power);
+                }
             }
-        }
-        return set;
-    }
-
-    private static Set<IRedstoneLinkable> concatSetView(Set<IRedstoneLinkable> set1, Set<IRedstoneLinkable> set2) {
-        if (set1.isEmpty()) {
-            return set2;
-        } else if (set2.isEmpty()) {
-            return set1;
-        } else {
-            return Sets.union(set1, set2);
         }
     }
 
     public static void addToNetwork(RedstoneLinkNetworkHandler handler, LevelAccessor world, IRedstoneLinkable actor) {
         Couple<Frequency> key = actor.getNetworkKey();
         Map<Couple<Frequency>, Set<Couple<Frequency>>> wildcards = wildcardsIn(world);
-//        CreateConnected.LOGGER.debug("Link-Wildcard: Adding {}", keyToString(key));
+        CreateConnected.LOGGER.debug("Link-Wildcard: Adding {}", keyToString(key));
         if (!wildcards.containsKey(key)) {
             HashSet<Couple<Frequency>> connections = new LinkedHashSet<>();
             Map<Couple<Frequency>, Set<IRedstoneLinkable>> networks = handler.networksIn(world);
             for (Couple<Frequency> otherKey : networks.keySet()) {
                 if (!otherKey.equals(key) && test(key, otherKey)) {
                     connections.add(otherKey);
-//                    CreateConnected.LOGGER.debug("Link-Wildcard: - Connected to {}", keyToString(otherKey));
+                    CreateConnected.LOGGER.debug("Link-Wildcard: - Connected to {}", keyToString(otherKey));
                 }
             }
             wildcards.put(key, connections);
@@ -88,7 +82,7 @@ public class LinkWildcardNetworkHandler {
         for (Map.Entry<Couple<Frequency>, Set<Couple<Frequency>>> entry : wildcards.entrySet()) {
             if (!entry.getKey().equals(key) && test(entry.getKey(), key)) {
                 entry.getValue().add(key);
-//                CreateConnected.LOGGER.debug("Link-Wildcard: - Adding connection to {}", keyToString(entry.getKey()));
+                CreateConnected.LOGGER.debug("Link-Wildcard: - Adding connection to {}", keyToString(entry.getKey()));
             }
         }
     }
@@ -98,12 +92,12 @@ public class LinkWildcardNetworkHandler {
         Map<Couple<Frequency>, Set<IRedstoneLinkable>> networks = handler.networksIn(world);
         if (networks.containsKey(key) && !networks.get(key).isEmpty())
             return;
-//        CreateConnected.LOGGER.debug("Link-Wildcard: Removing {}", keyToString(key));
+        CreateConnected.LOGGER.debug("Link-Wildcard: Removing {}", keyToString(key));
         Map<Couple<Frequency>, Set<Couple<Frequency>>> wildcards = wildcardsIn(world);
         wildcards.remove(key);
         for (Map.Entry<Couple<Frequency>, Set<Couple<Frequency>>> entry : wildcards.entrySet()) {
             if (entry.getValue().remove(key)) {
-//                CreateConnected.LOGGER.debug("Link-Wildcard: - Removing connection to {}", keyToString(entry.getKey()));
+                CreateConnected.LOGGER.debug("Link-Wildcard: - Removing connection to {}", keyToString(entry.getKey()));
                 handler.updateNetworkOf(world, new IRedstoneLinkable() {
                     @Override
                     public int getTransmittedStrength() {
@@ -147,6 +141,10 @@ public class LinkWildcardNetworkHandler {
     }
 
     private static boolean test(Couple<Frequency> transmitter, Couple<Frequency> receiver) {
+        if (!CServer.AllowDualWildcardLink.get() && transmitter.getFirst().getStack().getItem() instanceof ILinkWildcard && transmitter.getSecond().getStack().getItem() instanceof ILinkWildcard)
+            return false;
+        if (!CServer.AllowDualWildcardLink.get() && receiver.getFirst().getStack().getItem() instanceof ILinkWildcard && receiver.getSecond().getStack().getItem() instanceof ILinkWildcard)
+            return false;
         return wildcardTransmit(transmitter.getFirst(), receiver.getFirst()) && wildcardTransmit(transmitter.getSecond(), receiver.getSecond()) ||
                 wildcardReceive(transmitter.getFirst(), receiver.getFirst()) && wildcardReceive(transmitter.getSecond(), receiver.getSecond());
     }

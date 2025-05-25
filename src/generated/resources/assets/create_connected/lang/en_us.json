@@ -290,6 +290,7 @@
   "item.create_connected.music_disc_interlude": "Music Disc",
   "item.create_connected.music_disc_interlude.desc": "Kevin MacLeod - Local Forecast - Elevator",
   "item.create_connected.redstone_link_wildcard": "Redstone Link Wildcard",
+  "item.create_connected.redstone_link_wildcard.tooltip.summary": "Allow Redstone Links to match any frequency on the slot it is placed in.",
   "item.create_connected.vertical_brass_gearbox": "Vertical Brass Gearbox",
   "item.create_connected.vertical_brass_gearbox.tooltip.summary": "A gearbox where the rotation direction of all 4 sides are _independently configurable_.",
   "item.create_connected.vertical_parallel_gearbox": "Vertical Parallel Gearbox",

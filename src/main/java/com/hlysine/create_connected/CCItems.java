@@ -37,6 +37,7 @@ public class CCItems {
 
     public static final ItemEntry<RedstoneLinkWildcardItem> REDSTONE_LINK_WILDCARD =
             REGISTRATE.item("redstone_link_wildcard", RedstoneLinkWildcardItem::new)
+                    .transform(FeatureToggle.register(FeatureCategory.REDSTONE))
                     .register();
 
     public static final ItemEntry<VerticalParallelGearboxItem> VERTICAL_PARALLEL_GEARBOX =

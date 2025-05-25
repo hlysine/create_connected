@@ -27,6 +27,9 @@ public class CServer extends ConfigBase {
     private final ConfigFloat batteryCapacity = f(512, 0, 8192, "batteryCapacity", Comments.batteryCapacity);
     public static final Supplier<Double> BatteryCapacity = CCConfigs.safeGetter(() -> CCConfigs.server().batteryCapacity.get(), 512.0);
 
+    private final ConfigBool allowDualWildcardLink = b(false, "allowDualWildcardLink", Comments.allowDualWildcardLink);
+    public static final Supplier<Boolean> AllowDualWildcardLink = CCConfigs.safeGetter(() -> CCConfigs.server().allowDualWildcardLink.get(), false);
+
     public final CStress stressValues = nested(0, CStress::new, Comments.stress);
     public final ConfigFloat brakeActiveStress = f(16384, Float.NEGATIVE_INFINITY, Float.POSITIVE_INFINITY, "brakeActiveStress", Comments.brakeActiveStress);
 
@@ -46,5 +49,6 @@ public class CServer extends ConfigBase {
         static String vesselMaxLevel = "Limit the max boiler level achievable with a Fluid Vessel";
         static String batteryDischargeRPM = "RPM of a Kinetic Battery when discharging";
         static String batteryCapacity = "Max capacity of a Kinetic Battery in su-hours";
+        static String allowDualWildcardLink = "Allow Redstone Links to have wildcards in both slots [restart required]";
     }
 }

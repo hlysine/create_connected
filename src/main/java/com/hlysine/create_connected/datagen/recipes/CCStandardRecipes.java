@@ -223,6 +223,13 @@ public class CCStandardRecipes extends CreateRecipeProvider {
 
     GeneratedRecipe LINKED_TRANSMITTER_CYCLE = conversionCycle(ImmutableList.of(CCItems.LINKED_TRANSMITTER, AllBlocks.REDSTONE_LINK));
 
+    GeneratedRecipe REDSTONE_LINK_WILDCARD = create(CCItems.REDSTONE_LINK_WILDCARD).unlockedBy(AllItems.TRANSMITTER::get)
+            .requiresResultFeature()
+            .viaShapeless(b -> b
+                    .requires(AllItems.TRANSMITTER)
+                    .requires(AllItems.CRAFTER_SLOT_COVER)
+            );
+
     GeneratedRecipe ITEM_SILO = create(CCBlocks.ITEM_SILO).unlockedByTag(() -> Tags.Items.BARRELS_WOODEN)
             .requiresResultFeature()
             .viaShaped(b -> b

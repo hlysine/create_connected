@@ -1,8 +1,7 @@
 package com.hlysine.create_connected.mixin.redstonelinkwildcard;
 
 import com.hlysine.create_connected.content.redstonelinkwildcard.LinkWildcardNetworkHandler;
-import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
-import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import com.llamalad7.mixinextras.sugar.Local;
 import com.simibubi.create.content.redstone.link.IRedstoneLinkable;
 import com.simibubi.create.content.redstone.link.RedstoneLinkNetworkHandler;
 import net.minecraft.world.level.LevelAccessor;
@@ -15,17 +14,12 @@ import java.util.Set;
 
 @Mixin(RedstoneLinkNetworkHandler.class)
 public class RedstoneLinkNetworkHandlerMixin {
-    @WrapOperation(
+    @Inject(
             method = "updateNetworkOf",
-            at = @At(value = "INVOKE", target = "Lcom/simibubi/create/content/redstone/link/RedstoneLinkNetworkHandler;getNetworkOf(Lnet/minecraft/world/level/LevelAccessor;Lcom/simibubi/create/content/redstone/link/IRedstoneLinkable;)Ljava/util/Set;")
+            at = @At("RETURN")
     )
-    private Set<IRedstoneLinkable> updateNetworkOf(RedstoneLinkNetworkHandler instance, LevelAccessor world, IRedstoneLinkable actor, Operation<Set<IRedstoneLinkable>> original) {
-        Set<IRedstoneLinkable> result = LinkWildcardNetworkHandler.getNetworkOf(instance, world, actor);
-        if (result != null) {
-            return result;
-        } else {
-            return original.call(instance, world, actor);
-        }
+    private void updateNetworkOf(LevelAccessor world, IRedstoneLinkable actor, CallbackInfo ci, @Local(ordinal = 0) int power) {
+        LinkWildcardNetworkHandler.updateWildcardNetworkOf((RedstoneLinkNetworkHandler) (Object) this, world, actor, power);
     }
 
     @Inject(
