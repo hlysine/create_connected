@@ -67,14 +67,14 @@ public class LinkWildcardNetworkHandler {
     public static void addToNetwork(RedstoneLinkNetworkHandler handler, LevelAccessor world, IRedstoneLinkable actor) {
         Couple<Frequency> key = actor.getNetworkKey();
         Map<Couple<Frequency>, Set<Couple<Frequency>>> wildcards = wildcardsIn(world);
-        CreateConnected.LOGGER.debug("Link-Wildcard: Adding {}", keyToString(key));
+//        CreateConnected.LOGGER.debug("Link-Wildcard: Adding {}", keyToString(key));
         if (!wildcards.containsKey(key)) {
             HashSet<Couple<Frequency>> connections = new LinkedHashSet<>();
             Map<Couple<Frequency>, Set<IRedstoneLinkable>> networks = handler.networksIn(world);
             for (Couple<Frequency> otherKey : networks.keySet()) {
                 if (!otherKey.equals(key) && test(key, otherKey)) {
                     connections.add(otherKey);
-                    CreateConnected.LOGGER.debug("Link-Wildcard: - Connected to {}", keyToString(otherKey));
+//                    CreateConnected.LOGGER.debug("Link-Wildcard: - Connected to {}", keyToString(otherKey));
                 }
             }
             wildcards.put(key, connections);
@@ -82,7 +82,7 @@ public class LinkWildcardNetworkHandler {
         for (Map.Entry<Couple<Frequency>, Set<Couple<Frequency>>> entry : wildcards.entrySet()) {
             if (!entry.getKey().equals(key) && test(entry.getKey(), key)) {
                 entry.getValue().add(key);
-                CreateConnected.LOGGER.debug("Link-Wildcard: - Adding connection to {}", keyToString(entry.getKey()));
+//                CreateConnected.LOGGER.debug("Link-Wildcard: - Adding connection to {}", keyToString(entry.getKey()));
             }
         }
     }
@@ -92,12 +92,12 @@ public class LinkWildcardNetworkHandler {
         Map<Couple<Frequency>, Set<IRedstoneLinkable>> networks = handler.networksIn(world);
         if (networks.containsKey(key) && !networks.get(key).isEmpty())
             return;
-        CreateConnected.LOGGER.debug("Link-Wildcard: Removing {}", keyToString(key));
+//        CreateConnected.LOGGER.debug("Link-Wildcard: Removing {}", keyToString(key));
         Map<Couple<Frequency>, Set<Couple<Frequency>>> wildcards = wildcardsIn(world);
         wildcards.remove(key);
         for (Map.Entry<Couple<Frequency>, Set<Couple<Frequency>>> entry : wildcards.entrySet()) {
             if (entry.getValue().remove(key)) {
-                CreateConnected.LOGGER.debug("Link-Wildcard: - Removing connection to {}", keyToString(entry.getKey()));
+//                CreateConnected.LOGGER.debug("Link-Wildcard: - Removing connection to {}", keyToString(entry.getKey()));
                 handler.updateNetworkOf(world, new IRedstoneLinkable() {
                     @Override
                     public int getTransmittedStrength() {
