@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "create_connected:block/kinetic_bridge/block",
+      "x": 180
+    },
+    "facing=east": {
+      "model": "create_connected:block/kinetic_bridge/block",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north": {
+      "model": "create_connected:block/kinetic_bridge/block",
+      "x": 90
+    },
+    "facing=south": {
+      "model": "create_connected:block/kinetic_bridge/block",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up": {
+      "model": "create_connected:block/kinetic_bridge/block"
+    },
+    "facing=west": {
+      "model": "create_connected:block/kinetic_bridge/block",
+      "x": 90,
+      "y": 270
+    }
+  }
+}

@@ -44,6 +44,7 @@
     "nestedschematics.FilesHelperMixin",
     "nestedschematics.SchematicExportMixin",
     "nestedschematics.ServerSchematicLoaderMixin",
+    "redstonelinkwildcard.RedstoneLinkNetworkHandlerMixin",
     "sequencedgearshift.AbstractSimiScreenAccessor",
     "sequencedgearshift.InstructionAccessor",
     "sequencedgearshift.InstructionMixin",

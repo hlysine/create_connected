@@ -2,6 +2,7 @@ package com.hlysine.create_connected.content.crossconnector;
 
 import com.hlysine.create_connected.CCShapes;
 import com.hlysine.create_connected.content.IConnectionForwardingBlock;
+import com.hlysine.create_connected.content.KineticHelper;
 import com.simibubi.create.content.decoration.encasing.EncasableBlock;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.content.kinetics.base.GeneratingKineticBlockEntity;
@@ -129,15 +130,7 @@ public class CrossConnectorBlock extends Block implements IWrenchable, IConnecti
                 }
                 BlockEntity neighbourTE = level.getBlockEntity(neighborPos);
                 if (neighbourTE instanceof KineticBlockEntity kineticTE) {
-                    if (kineticTE.hasNetwork())
-                        kineticTE.getOrCreateNetwork().remove(kineticTE);
-                    kineticTE.detachKinetics();
-                    kineticTE.removeSource();
-                    BlockState neighborState = level.getBlockState(neighborPos);
-                    level.markAndNotifyBlock(neighborPos, level.getChunkAt(neighborPos), neighborState, neighborState, 3, 512);
-                    if (neighbourTE instanceof GeneratingKineticBlockEntity generatingBlockEntity) {
-                        generatingBlockEntity.reActivateSource = true;
-                    }
+                    KineticHelper.updateKineticBlock(kineticTE);
                 }
             }
         }

@@ -9,6 +9,7 @@ import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.runtime.IIngredientManager;
 import mezz.jei.api.runtime.IJeiRuntime;
+import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 
@@ -32,7 +33,7 @@ public class CreateConnectedJEI implements IModPlugin {
     }
 
     public static void refreshItemList() {
-        if (MANAGER != null) {
+        if (MANAGER != null && Minecraft.getInstance().level != null) {
             MANAGER.removeIngredientsAtRuntime(
                     VanillaTypes.ITEM_STACK,
                     CCCreativeTabs.ITEMS.stream()

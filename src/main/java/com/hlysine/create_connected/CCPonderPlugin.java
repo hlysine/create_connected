@@ -56,6 +56,8 @@ public class CCPonderPlugin implements PonderPlugin {
                 .addStoryBoard("inverted_gearshift", InvertedGearshiftScenes::invertedGearshift, AllCreatePonderTags.KINETIC_RELAYS);
         SCENE_HELPER.forComponents(CCBlocks.PARALLEL_GEARBOX, CCItems.VERTICAL_PARALLEL_GEARBOX)
                 .addStoryBoard("parallel_gearbox", ParallelGearboxScenes::parallelGearbox, AllCreatePonderTags.KINETIC_RELAYS);
+        SCENE_HELPER.forComponents(CCBlocks.KINETIC_BRIDGE, CCBlocks.KINETIC_BRIDGE_DESTINATION)
+                .addStoryBoard("kinetic_bridge", KineticBridgeScene::kineticBridge, AllCreatePonderTags.KINETIC_RELAYS);
         SCENE_HELPER.forComponents(CCBlocks.KINETIC_BATTERY, CCItems.CHARGED_KINETIC_BATTERY)
                 .addStoryBoard("kinetic_battery", KineticBatteryScene::kineticBattery, AllCreatePonderTags.KINETIC_SOURCES, AllCreatePonderTags.KINETIC_APPLIANCES)
                 .addStoryBoard("kinetic_battery_chaining", KineticBatteryScene::kineticBatteryChaining, AllCreatePonderTags.KINETIC_SOURCES, AllCreatePonderTags.KINETIC_APPLIANCES)
@@ -83,7 +85,8 @@ public class CCPonderPlugin implements PonderPlugin {
                 .add(CCBlocks.ENCASED_CHAIN_COGWHEEL)
                 .add(CCBlocks.INVERTED_CLUTCH)
                 .add(CCBlocks.INVERTED_GEARSHIFT)
-                .add(CCBlocks.PARALLEL_GEARBOX);
+                .add(CCBlocks.PARALLEL_GEARBOX)
+                .add(CCBlocks.KINETIC_BRIDGE);
         TAG_HELPER.addToTag(AllCreatePonderTags.REDSTONE)
                 .add(CCBlocks.SEQUENCED_PULSE_GENERATOR)
                 .add(CCItems.LINKED_TRANSMITTER);

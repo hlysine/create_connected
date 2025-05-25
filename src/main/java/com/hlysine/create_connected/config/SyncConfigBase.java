@@ -9,8 +9,10 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraft.server.level.ServerPlayer;
+import net.neoforged.neoforge.common.NeoForge;
 import net.minecraftforge.network.NetworkEvent.Context;
 import net.minecraftforge.network.NetworkRegistry;
+import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.simple.SimpleChannel;
 import net.minecraftforge.server.ServerLifecycleHooks;
@@ -79,6 +81,8 @@ public abstract class SyncConfigBase extends ConfigBase {
         this.messageSupplier = messageSupplier;
         MinecraftForge.EVENT_BUS.addListener(this::syncToPlayer);
     }
+        });
+    }
 
     @Override
     public void onLoad() {
@@ -104,7 +108,7 @@ public abstract class SyncConfigBase extends ConfigBase {
         syncChannel.send(PacketDistributor.ALL.noArg(), this.messageSupplier.apply(getSyncConfig()));
     }
 
-    private void syncToPlayer(PlayerEvent.PlayerLoggedInEvent event) {
+    public void syncToPlayer(PlayerEvent.PlayerLoggedInEvent event) {
         ServerPlayer player = (ServerPlayer) event.getEntity();
         if (player == null) return;
         CreateConnected.LOGGER.debug("Sync Config: Sending server config to " + player.getScoreboardName());

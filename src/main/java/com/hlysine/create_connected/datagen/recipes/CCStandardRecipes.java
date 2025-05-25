@@ -171,17 +171,28 @@ public class CCStandardRecipes extends CreateRecipeProvider {
                     .requires(Blocks.OBSIDIAN)
             );
 
+    GeneratedRecipe KINETIC_BRIDGE = create(CCBlocks.KINETIC_BRIDGE).unlockedBy(AllBlocks.CLUTCH::get)
+            .requiresResultFeature()
+            .viaShaped(b -> b
+                    .define('c', AllBlocks.CLUTCH)
+                    .define('s', AllBlocks.SHAFT)
+                    .define('b', AllBlocks.BRASS_CASING)
+                    .pattern(" b ")
+                    .pattern("scs")
+                    .pattern(" b ")
+            );
+
     GeneratedRecipe KINETIC_BATTERY = create(CCBlocks.KINETIC_BATTERY).unlockedBy(AllItems.ELECTRON_TUBE::get)
             .requiresResultFeature()
             .returns(8)
             .viaShaped(b -> b
-                    .define('e', AllItems.ELECTRON_TUBE)
-                    .define('c', AllBlocks.BRASS_CASING)
-                    .define('a', AllItems.COPPER_SHEET)
-                    .define('b', AllItems.IRON_SHEET)
-                    .pattern(" e ")
-                    .pattern(" c ")
-                    .pattern("a b")
+                    .define('p', AllItems.PRECISION_MECHANISM)
+                    .define('b', AllBlocks.BRASS_CASING)
+                    .define('r', Blocks.REDSTONE_WIRE)
+                    .define('i', AllItems.IRON_SHEET)
+                    .pattern(" p ")
+                    .pattern(" b ")
+                    .pattern("iri")
             );
 
     GeneratedRecipe SEQUENCED_PULSE_GENERATOR = create(CCBlocks.SEQUENCED_PULSE_GENERATOR).unlockedBy(CCItems.CONTROL_CHIP::get)
@@ -198,6 +209,13 @@ public class CCStandardRecipes extends CreateRecipeProvider {
             );
 
     GeneratedRecipe LINKED_TRANSMITTER_CYCLE = conversionCycle(ImmutableList.of(CCItems.LINKED_TRANSMITTER, AllBlocks.REDSTONE_LINK));
+
+    GeneratedRecipe REDSTONE_LINK_WILDCARD = create(CCItems.REDSTONE_LINK_WILDCARD).unlockedBy(AllItems.TRANSMITTER::get)
+            .requiresResultFeature()
+            .viaShapeless(b -> b
+                    .requires(AllItems.TRANSMITTER)
+                    .requires(AllItems.CRAFTER_SLOT_COVER)
+            );
 
     GeneratedRecipe ITEM_SILO = create(CCBlocks.ITEM_SILO).unlockedByTag(() -> Tags.Items.BARRELS_WOODEN)
             .requiresResultFeature()
