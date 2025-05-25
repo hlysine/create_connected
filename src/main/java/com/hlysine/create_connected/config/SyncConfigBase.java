@@ -11,6 +11,8 @@ import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.network.protocol.configuration.ServerConfigurationPacketListener;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.network.ConfigurationTask;
+import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.network.configuration.ICustomConfigurationTask;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
@@ -74,7 +76,7 @@ public abstract class SyncConfigBase extends ConfigBase {
         });
     }
 
-    private void syncToPlayer(ServerPlayer player) {
+    public void syncToPlayer(ServerPlayer player) {
         if (player == null) return;
         CatnipServices.PLATFORM.executeOnServerOnly(() -> () -> {
             CreateConnected.LOGGER.debug("Sync Config: Sending server config to {}", player.getScoreboardName());
@@ -94,6 +96,11 @@ public abstract class SyncConfigBase extends ConfigBase {
                 SyncConfig.STREAM_CODEC,
                 this::handleData
         );
+        NeoForge.EVENT_BUS.addListener((PlayerEvent.PlayerLoggedInEvent e) -> {
+            if (e.getEntity() instanceof ServerPlayer serverPlayer) {
+                syncToPlayer(serverPlayer);
+            }
+        });
     }
 
     public void handleData(final SyncConfig data, final IPayloadContext context) {
