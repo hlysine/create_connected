@@ -22,10 +22,12 @@ public class KineticBridgeScene {
         scene.title("kinetic_bridge", "Relaying rotational force using a Kinetic Bridge");
         scene.configureBasePlate(0, 0, 7);
 
+        BlockPos waterWheel = util.grid().at(5, 2, 7);
         Selection waterWheelGroup = util.select().fromTo(0, 0, 7, 6, 3, 7);
         Selection rotationSpeedController = util.select().fromTo(5, 1, 6, 5, 2, 6);
         Selection sourceGroup = util.select().fromTo(1, 1, 6, 4, 1, 6);
         Selection sourceNetwork = util.select().fromTo(1, 1, 5, 5, 2, 7);
+        BlockPos sourceSaw = util.grid().at(3, 1, 6);
         BlockPos sourceExtraSaw = util.grid().at(2, 1, 6);
         BlockPos sourceShaft = util.grid().at(1, 1, 5);
         BlockPos bridgeSource = util.grid().at(1, 1, 4);
@@ -113,13 +115,57 @@ public class KineticBridgeScene {
         scene.world().setKineticSpeed(util.select().everywhere(), 0);
         scene.idle(20);
 
-        scene.overlay().showText(120)
-                .text("However, when the source network is overstressed, the bridge is unable to transfer the consumed capacity")
+        scene.overlay().showText(70)
+                .text("However, when the source network is overstressed...")
                 .colored(PonderPalette.RED)
                 .placeNearTarget()
                 .attachKeyFrame()
                 .pointAt(util.vector().topOf(bridgeDest));
-        scene.idle(140);
+        scene.idle(90);
+
+        scene.overlay().showText(110)
+                .text("256 su")
+                .colored(PonderPalette.BLUE)
+                .placeNearTarget()
+                .pointAt(util.vector().topOf(waterWheel));
+        scene.idle(10);
+        scene.overlay().showText(100)
+                .text("72 su")
+                .colored(PonderPalette.RED)
+                .placeNearTarget()
+                .pointAt(util.vector().topOf(sourceSaw));
+        scene.idle(10);
+        scene.overlay().showText(90)
+                .text("72 su")
+                .colored(PonderPalette.RED)
+                .placeNearTarget()
+                .pointAt(util.vector().topOf(sourceExtraSaw));
+        scene.idle(10);
+        scene.overlay().showText(80)
+                .text("144 su")
+                .colored(PonderPalette.RED)
+                .placeNearTarget()
+                .pointAt(util.vector().topOf(bridgeSource));
+        scene.idle(10);
+        scene.overlay().showText(70)
+                .text("72+72+144 su > 256 su")
+                .colored(PonderPalette.RED)
+                .independent(130);
+        scene.idle(90);
+
+        scene.overlay().showText(70)
+                .text("the bridge is unable to transfer stress capacity...")
+                .colored(PonderPalette.RED)
+                .placeNearTarget()
+                .pointAt(util.vector().topOf(bridgeDest));
+        scene.idle(90);
+
+        scene.overlay().showText(70)
+                .text("but it still tries to consume the full amount")
+                .colored(PonderPalette.RED)
+                .placeNearTarget()
+                .pointAt(util.vector().topOf(bridgeDest));
+        scene.idle(90);
 
         scene.world().hideSection(util.select().position(sourceShaft), Direction.UP);
         scene.idle(20);
@@ -137,6 +183,37 @@ public class KineticBridgeScene {
                 .attachKeyFrame()
                 .pointAt(util.vector().topOf(sourceShaft));
         scene.idle(140);
+
+        scene.overlay().showText(110)
+                .text("256 su")
+                .colored(PonderPalette.BLUE)
+                .placeNearTarget()
+                .pointAt(util.vector().topOf(waterWheel));
+        scene.idle(10);
+        scene.overlay().showText(100)
+                .text("72 su")
+                .colored(PonderPalette.RED)
+                .placeNearTarget()
+                .pointAt(util.vector().topOf(sourceSaw));
+        scene.idle(10);
+        scene.overlay().showText(90)
+                .text("72 su")
+                .colored(PonderPalette.RED)
+                .placeNearTarget()
+                .pointAt(util.vector().topOf(sourceExtraSaw));
+        scene.idle(10);
+        scene.overlay().showText(80)
+                .text("0 su")
+                .colored(PonderPalette.RED)
+                .placeNearTarget()
+                .pointAt(util.vector().topOf(bridgeSource));
+        scene.idle(10);
+        scene.overlay().showText(70)
+                .text("72+72+0 su < 256 su")
+                .colored(PonderPalette.BLUE)
+                .independent(130);
+        scene.idle(90);
+
         scene.markAsFinished();
     }
 }
