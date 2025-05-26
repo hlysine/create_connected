@@ -106,17 +106,20 @@ public class LinkWildcardNetworkHandler {
             }
         }
 
-        for (IRedstoneLinkable other : network) {
-            if (other != actor && other.isListening() && withinRange(actor, other))
-                other.setReceivedStrength(power.get());
-        }
-        for (Couple<Frequency> wildcard : wildcards) {
-            Set<IRedstoneLinkable> wildcardNetwork = networksInWorld.get(wildcard);
-            for (IRedstoneLinkable other : wildcardNetwork) {
+        if (network != null && !network.isEmpty())
+            for (IRedstoneLinkable other : network) {
                 if (other != actor && other.isListening() && withinRange(actor, other))
                     other.setReceivedStrength(power.get());
             }
-        }
+        if (wildcards != null && !wildcards.isEmpty())
+            for (Couple<Frequency> wildcard : wildcards) {
+                Set<IRedstoneLinkable> wildcardNetwork = networksInWorld.get(wildcard);
+                if (wildcardNetwork != null && !wildcardNetwork.isEmpty())
+                    for (IRedstoneLinkable other : wildcardNetwork) {
+                        if (other != actor && other.isListening() && withinRange(actor, other))
+                            other.setReceivedStrength(power.get());
+                    }
+            }
     }
 
     public static void addToNetwork(RedstoneLinkNetworkHandler handler, LevelAccessor world, IRedstoneLinkable actor) {
