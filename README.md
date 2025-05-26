@@ -23,24 +23,27 @@ out [Create: Power Loader](https://modrinth.com/mod/create-power-loader)**
 
 Support for Minecraft 1.19.2 and 1.18.2 has been dropped.
 
-## What's new in 0.9
+## What's new in 1.1
 
-![inventory_access_port](https://github.com/user-attachments/assets/11f8bc2b-3c63-4aa4-a068-f581e114a4a0) **Inventory Access Port**
+![kinetic_bridge](https://github.com/user-attachments/assets/c4996f1a-ca28-4164-886a-a872073fc80c) **Kinetic Bridge**
 
-Attach to any inventory to expand its surface area. Great for access in tight spaces and smart setups with threshold switches.
+Transfer stress capacity from one network to another while keeping the networks separate. Guarantees that the source network will not be affected when the destination network is overstressed.
 
-![inventory_bridge](https://github.com/user-attachments/assets/a92555a4-4f27-441a-8128-4c03edccdb85) **Inventory Bridge**
+![kinetic_battery](https://github.com/user-attachments/assets/02d33d98-ac20-4629-8993-149fe1123d24) ![charged_kinetic_battery](https://github.com/user-attachments/assets/33b5ac7d-7e27-44b1-ada9-b70a21324be6) **Kinetic Battery**
 
-Provides an interface to access two inventories simultaneously. Also comes with filter slots to quickly sort incoming items.
+Stores kinetic stress for later use. Retains charge in item form to enable long-distance energy transport. Battery capacity, RPM at discharge and stress impact values are all configurable.
 
-![fan_sanding_catalyst](https://github.com/user-attachments/assets/0689fddd-f698-4b72-80e8-19a3f9833440) ![fan_seething_catalyst](https://github.com/user-attachments/assets/8e15a9e4-a173-40de-9240-990beaefc43e) **Fan Sanding/Seething Catalyst**
+![cross_connector](https://github.com/user-attachments/assets/e099e1aa-7e06-43e7-a33a-a906dd706336) **Cross Connector**
 
-More bulk processing compatibility with Create: Dreams and Desires. Only appears when Create: Dreams and Desires is installed.
+Relays rotation in two directions independently.
 
-**Note for 1.18 and 1.19 users**
+![redstone_link_wildcard](https://github.com/user-attachments/assets/6c81752e-1024-4685-84d1-c3947e6d26b6) **Redstone Link Wildcard**
 
-Create has dropped support for 1.18 and 1.19 since 0.5.1g. As a result, backporting to 1.18 and 1.19 is no longer
-a priority for Create: Connected. Depending on circumstances, updates will be delayed and new features may not be backported.
+Assign this item to a redstone link frequency slot to match any item in that slot, including air.
+
+![fan_freezing_catalyst](https://github.com/user-attachments/assets/5fb53ff5-6bf2-4005-9caf-68df3c9df1a1) ![fan_sanding_catalyst](https://github.com/user-attachments/assets/5cb15a91-de17-47fb-91af-a065080f116d) ![fan_ending_catalyst](https://github.com/user-attachments/assets/ebacf2c6-2639-45da-a635-ba421c332e92) ![fan_enriched_catalyst](https://github.com/user-attachments/assets/0d44f0d4-416d-4294-8407-25eb5bc3039a) **More Fan Catalysts**
+
+Fan catalysts now support Create: Nuclear, Create: Dragons Plus and Create: Henry.
 
 ## Features
 
@@ -74,7 +77,8 @@ Find this mod on [**Modrinth**](https://modrinth.com/mod/create-connected) or
 | Create   | Create: Connected |
 |----------|-------------------|
 | 0.5.1e   | 0.0.2             |
-| 0.5.1f/g | 0.0.3 - latest    |
+| 0.5.1f/g | 0.0.3 - 0.959     |
+| 6.0.0+   | 1.0.0 - latest    |
 
 ## Compatibility
 
