@@ -1,5 +1,5 @@
 {
-  "type": "create:item_application",
+  "type": "create:filling",
   "conditions": [
     {
       "type": "create_connected:feature_enabled",
@@ -7,7 +7,7 @@
     },
     {
       "type": "forge:mod_loaded",
-      "modid": "create_dd"
+      "modid": "create_dragons_plus"
     }
   ],
   "ingredients": [
@@ -15,12 +15,13 @@
       "item": "create_connected:empty_fan_catalyst"
     },
     {
-      "item": "create:blaze_cake"
+      "amount": 1000,
+      "fluidTag": "create_dragons_plus:fan_processing_catalysts/ending"
     }
   ],
   "results": [
     {
-      "item": "create_connected:fan_seething_catalyst"
+      "item": "create_connected:fan_ending_catalyst"
     }
   ]
 }

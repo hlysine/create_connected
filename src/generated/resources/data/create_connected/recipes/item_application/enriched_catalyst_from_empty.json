@@ -7,7 +7,7 @@
     },
     {
       "type": "forge:mod_loaded",
-      "modid": "create_dd"
+      "modid": "createnuclear"
     }
   ],
   "ingredients": [
@@ -15,12 +15,12 @@
       "item": "create_connected:empty_fan_catalyst"
     },
     {
-      "item": "create:blaze_cake"
+      "item": "createnuclear:enriched_soul_soil"
     }
   ],
   "results": [
     {
-      "item": "create_connected:fan_seething_catalyst"
+      "item": "create_connected:fan_enriched_catalyst"
     }
   ]
 }

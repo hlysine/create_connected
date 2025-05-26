@@ -7,7 +7,7 @@
     },
     {
       "type": "forge:mod_loaded",
-      "modid": "create_dd"
+      "modid": "create_dragons_plus"
     }
   ],
   "ingredients": [
@@ -15,12 +15,12 @@
       "item": "create_connected:empty_fan_catalyst"
     },
     {
-      "item": "create:blaze_cake"
+      "item": "create_dragons_plus:dragon_breath_bucket"
     }
   ],
   "results": [
     {
-      "item": "create_connected:fan_seething_catalyst"
+      "item": "create_connected:fan_ending_catalyst"
     }
   ]
 }

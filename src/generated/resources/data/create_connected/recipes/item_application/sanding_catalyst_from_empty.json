@@ -4,6 +4,19 @@
     {
       "type": "create_connected:feature_enabled",
       "feature": "create_connected:empty_fan_catalyst"
+    },
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "create_dd"
+        },
+        {
+          "type": "forge:mod_loaded",
+          "modid": "create_dragons_plus"
+        }
+      ]
     }
   ],
   "ingredients": [
