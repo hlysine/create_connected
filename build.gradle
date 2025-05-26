@@ -199,12 +199,6 @@ dependencies {
 
 //    runtimeOnly("maven.modrinth:adorn:${adorn_version}")
 
-//    implementation fg.deobf("maven.modrinth:create-garnished:${garnished_version}")
-//    runtimeOnly fg.deobf("maven.modrinth:create-dreams-and-desires:${dreams_desires_version}")
-    runtimeOnly fg.deobf("curse.maven:create-henry-1254589:6544073")
-    implementation fg.deobf("com.copycatsplus:copycats:${copycats_version}")
-    runtimeOnly fg.deobf("maven.modrinth:additional-placements:${additional_placements_version}")
-
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 }
 
