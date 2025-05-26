@@ -2,6 +2,7 @@ package com.hlysine.create_connected;
 
 import com.hlysine.create_connected.compat.Mods;
 import net.createmod.catnip.lang.Lang;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.ItemTags;
@@ -12,6 +13,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
+
+import java.util.Collections;
 
 import static com.hlysine.create_connected.CCTags.NameSpace.*;
 
@@ -140,9 +143,9 @@ public class CCTags {
         }
 
         Fluids(NameSpace namespace, String path, boolean optional, boolean alwaysDatagen) {
-            ResourceLocation id = ResourceLocation.fromNamespaceAndPath(namespace.id, path == null ? Lang.asId(name()) : path);
+            ResourceLocation id = new ResourceLocation(namespace.id, path == null ? Lang.asId(name()) : path);
             if (optional) {
-                tag = optionalTag(BuiltInRegistries.FLUID, id);
+                tag = optionalTag(ForgeRegistries.FLUIDS, id);
             } else {
                 tag = FluidTags.create(id);
             }

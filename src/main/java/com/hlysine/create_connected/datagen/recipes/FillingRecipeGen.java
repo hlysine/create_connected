@@ -7,7 +7,7 @@ import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.foundation.fluid.FluidIngredient;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.material.Fluids;
-import net.neoforged.neoforge.common.conditions.ModLoadedCondition;
+import net.minecraftforge.common.crafting.conditions.ModLoadedCondition;
 
 @SuppressWarnings("unused")
 public class FillingRecipeGen extends ProcessingRecipeGen {
@@ -22,7 +22,7 @@ public class FillingRecipeGen extends ProcessingRecipeGen {
             .withCondition(new FeatureEnabledCondition(CCBlocks.EMPTY_FAN_CATALYST.getId()))
             .output(CCBlocks.FAN_SPLASHING_CATALYST));
 
-    GeneratedRecipe FAN_ENDING_CATALYST = create("fan_ending_catalyst", b -> b.require(new FluidIngredient.FluidTagIngredient(CCTags.Fluids.FAN_PROCESSING_CATALYSTS_ENDING.tag, 1000))
+    GeneratedRecipe FAN_ENDING_CATALYST = create("fan_ending_catalyst", b -> b.require(FluidIngredient.fromTag(CCTags.Fluids.FAN_PROCESSING_CATALYSTS_ENDING.tag, 1000))
             .require(CCBlocks.EMPTY_FAN_CATALYST)
             .withCondition(new FeatureEnabledCondition(CCBlocks.EMPTY_FAN_CATALYST.getId()))
             .withCondition(new ModLoadedCondition(Mods.DRAGONS_PLUS.id()))

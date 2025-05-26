@@ -10,8 +10,8 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.crafting.conditions.ICondition;
-import net.neoforged.neoforge.common.conditions.ModLoadedCondition;
-import net.neoforged.neoforge.common.conditions.OrCondition;
+import net.minecraftforge.common.crafting.conditions.ModLoadedCondition;
+import net.minecraftforge.common.crafting.conditions.OrCondition;
 
 import java.util.List;
 import java.util.function.Supplier;
@@ -29,25 +29,25 @@ public class ItemApplicationRecipeGen extends ProcessingRecipeGen {
             "haunting_catalyst", Items.SOUL_SAND, CCBlocks.FAN_HAUNTING_CATALYST::asItem);
     GeneratedRecipe FREEZING_CATALYST = fanCatalystFromEmpty(
             "freezing_catalyst", Items.POWDER_SNOW_BUCKET, CCBlocks.FAN_FREEZING_CATALYST::asItem,
-            new OrCondition(List.of(
+            new OrCondition(
                     new ModLoadedCondition(Mods.DREAMS_DESIRES.id()),
                     new ModLoadedCondition(Mods.GARNISHED.id()),
                     new ModLoadedCondition(Mods.DRAGONS_PLUS.id())
-            )));
+            ));
     GeneratedRecipe SEETHING_CATALYST = fanCatalystFromEmpty(
             "seething_catalyst", AllItems.BLAZE_CAKE, CCBlocks.FAN_SEETHING_CATALYST::asItem,
             new ModLoadedCondition(Mods.DREAMS_DESIRES.id()));
     GeneratedRecipe SANDING_CATALYST = fanCatalystFromEmpty(
             "sanding_catalyst", Blocks.SAND, CCBlocks.FAN_SANDING_CATALYST::asItem,
-            new OrCondition(List.of(
+            new OrCondition(
                     new ModLoadedCondition(Mods.DREAMS_DESIRES.id()),
                     new ModLoadedCondition(Mods.DRAGONS_PLUS.id())
-            )));
+            ));
     GeneratedRecipe ENRICHED_CATALYST = fanCatalystFromEmpty(
-            "enriched_catalyst", new SimpleDatagenIngredient(Mods.NUCLEAR, "enriched_soul_soil").toVanilla(), CCBlocks.FAN_ENRICHED_CATALYST::asItem,
+            "enriched_catalyst", new SimpleDatagenIngredient(Mods.NUCLEAR, "enriched_soul_soil"), CCBlocks.FAN_ENRICHED_CATALYST::asItem,
             new ModLoadedCondition(Mods.NUCLEAR.id()));
     GeneratedRecipe ENDING_CATALYST = fanCatalystFromEmpty(
-            "ending_catalyst", new SimpleDatagenIngredient(Mods.DRAGONS_PLUS, "dragon_breath_bucket").toVanilla(), CCBlocks.FAN_ENDING_CATALYST::asItem,
+            "ending_catalyst", new SimpleDatagenIngredient(Mods.DRAGONS_PLUS, "dragon_breath_bucket"), CCBlocks.FAN_ENDING_CATALYST::asItem,
             new ModLoadedCondition(Mods.DRAGONS_PLUS.id()));
 
     protected GeneratedRecipe fanCatalystFromEmpty(String type, ItemLike ingredient, Supplier<ItemLike> output) {
