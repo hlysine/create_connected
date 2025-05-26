@@ -18,7 +18,8 @@ public enum Mods {
     DREAMS_DESIRES("create_dd"),
     NUCLEAR("createnuclear"),
     ADDITIONAL_PLACEMENTS("additionalplacements"),
-    GARNISHED("garnished");
+    GARNISHED("garnished"),
+    DRAGONS_PLUS("create_dragons_plus");
 
     private final String id;
 

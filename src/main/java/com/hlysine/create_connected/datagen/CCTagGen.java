@@ -41,6 +41,12 @@ public class CCTagGen {
                 .add(CCBlocks.FAN_FREEZING_CATALYST.get());
         prov.tag(BlockTags.create(Mods.NUCLEAR.rl("fan_processing_catalysts/enriched")))
                 .add(CCBlocks.FAN_ENRICHED_CATALYST.get());
+        prov.tag(BlockTags.create(Mods.DRAGONS_PLUS.rl("passive_block_freezers")))
+                .add(CCBlocks.FAN_FREEZING_CATALYST.get());
+        prov.tag(BlockTags.create(Mods.DRAGONS_PLUS.rl("fan_processing_catalysts/sanding")))
+                .add(CCBlocks.FAN_SANDING_CATALYST.get());
+        prov.tag(BlockTags.create(Mods.DRAGONS_PLUS.rl("fan_processing_catalysts/ending")))
+                .add(CCBlocks.FAN_ENDING_CATALYST.get());
     }
 
     private static void genItemTags(RegistrateTagsProvider<Item> provIn) {

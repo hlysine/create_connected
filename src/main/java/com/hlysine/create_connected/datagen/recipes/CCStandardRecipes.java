@@ -288,6 +288,7 @@ public class CCStandardRecipes extends CreateRecipeProvider {
     GeneratedRecipe EMPTY_CATALYST_FROM_SEETHING = clearFanCatalyst("seething", CCBlocks.FAN_SEETHING_CATALYST);
     GeneratedRecipe EMPTY_CATALYST_FROM_SANDING = clearFanCatalyst("sanding", CCBlocks.FAN_SANDING_CATALYST);
     GeneratedRecipe EMPTY_CATALYST_FROM_ENRICHED = clearFanCatalyst("enriched", CCBlocks.FAN_ENRICHED_CATALYST);
+    GeneratedRecipe EMPTY_CATALYST_FROM_ENDING = clearFanCatalyst("ending", CCBlocks.FAN_ENDING_CATALYST);
 
     private final Marker PALETTES = enterFolder("palettes");
 

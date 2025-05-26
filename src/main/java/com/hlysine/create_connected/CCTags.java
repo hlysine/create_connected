@@ -1,16 +1,18 @@
 package com.hlysine.create_connected;
 
+import com.hlysine.create_connected.compat.Mods;
+import net.createmod.catnip.lang.Lang;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluid;
-
-import java.util.Collections;
+import net.minecraft.world.level.material.FluidState;
 
 import static com.hlysine.create_connected.CCTags.NameSpace.*;
 
@@ -38,7 +40,8 @@ public class CCTags {
     public enum NameSpace {
 
         MOD(CreateConnected.MODID, false, true),
-        COPYCATS("copycats");
+        COPYCATS(Mods.COPYCATS.id()),
+        DRAGONS_PLUS(Mods.DRAGONS_PLUS.id());
 
         public final String id;
         public final boolean optionalDefault;
@@ -106,6 +109,54 @@ public class CCTags {
 
         public boolean matches(ItemStack stack) {
             return stack.is(tag);
+        }
+
+        private static void init() {
+        }
+
+    }
+
+
+    public enum Fluids {
+
+        FAN_PROCESSING_CATALYSTS_ENDING(DRAGONS_PLUS, "fan_processing_catalysts/ending");
+
+        public final TagKey<Fluid> tag;
+        public final boolean alwaysDatagen;
+
+        Fluids() {
+            this(MOD);
+        }
+
+        Fluids(NameSpace namespace) {
+            this(namespace, namespace.optionalDefault, namespace.alwaysDatagenDefault);
+        }
+
+        Fluids(NameSpace namespace, String path) {
+            this(namespace, path, namespace.optionalDefault, namespace.alwaysDatagenDefault);
+        }
+
+        Fluids(NameSpace namespace, boolean optional, boolean alwaysDatagen) {
+            this(namespace, null, optional, alwaysDatagen);
+        }
+
+        Fluids(NameSpace namespace, String path, boolean optional, boolean alwaysDatagen) {
+            ResourceLocation id = ResourceLocation.fromNamespaceAndPath(namespace.id, path == null ? Lang.asId(name()) : path);
+            if (optional) {
+                tag = optionalTag(BuiltInRegistries.FLUID, id);
+            } else {
+                tag = FluidTags.create(id);
+            }
+            this.alwaysDatagen = alwaysDatagen;
+        }
+
+        @SuppressWarnings("deprecation")
+        public boolean matches(Fluid fluid) {
+            return fluid.is(tag);
+        }
+
+        public boolean matches(FluidState state) {
+            return state.is(tag);
         }
 
         private static void init() {

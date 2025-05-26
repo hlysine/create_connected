@@ -28,6 +28,7 @@
     "create_connected:fan_seething_catalyst",
     "create_connected:fan_sanding_catalyst",
     "create_connected:fan_enriched_catalyst",
+    "create_connected:fan_ending_catalyst",
     "create_connected:item_silo",
     "create_connected:fluid_vessel",
     "create_connected:creative_fluid_vessel",

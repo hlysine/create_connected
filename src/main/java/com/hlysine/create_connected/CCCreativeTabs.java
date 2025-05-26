@@ -58,6 +58,7 @@ public class CCCreativeTabs {
             CCBlocks.FAN_FREEZING_CATALYST,
             CCBlocks.FAN_SANDING_CATALYST,
             CCBlocks.FAN_ENRICHED_CATALYST,
+            CCBlocks.FAN_ENDING_CATALYST,
             CCBlocks.COPYCAT_BLOCK,
             CCBlocks.COPYCAT_SLAB,
             CCBlocks.COPYCAT_BEAM,
