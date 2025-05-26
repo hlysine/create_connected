@@ -6,7 +6,7 @@
     },
     {
       "type": "neoforge:mod_loaded",
-      "modid": "create_dd"
+      "modid": "createnuclear"
     }
   ],
   "type": "create:item_application",
@@ -15,12 +15,17 @@
       "item": "create_connected:empty_fan_catalyst"
     },
     {
-      "item": "create:blaze_cake"
+      "type": "neoforge:compound",
+      "ingredients": [
+        {
+          "item": "createnuclear:enriched_soul_soil"
+        }
+      ]
     }
   ],
   "results": [
     {
-      "id": "create_connected:fan_seething_catalyst"
+      "id": "create_connected:fan_enriched_catalyst"
     }
   ]
 }

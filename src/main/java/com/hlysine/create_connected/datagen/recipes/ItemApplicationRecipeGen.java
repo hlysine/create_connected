@@ -1,6 +1,7 @@
 package com.hlysine.create_connected.datagen.recipes;
 
 import com.hlysine.create_connected.CCBlocks;
+import com.hlysine.create_connected.compat.Mods;
 import com.simibubi.create.AllItems;
 import com.simibubi.create.AllRecipeTypes;
 import net.minecraft.core.HolderLookup;
@@ -10,7 +11,10 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.conditions.ICondition;
+import net.neoforged.neoforge.common.conditions.ModLoadedCondition;
+import net.neoforged.neoforge.common.conditions.OrCondition;
 
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Supplier;
 
@@ -26,14 +30,27 @@ public class ItemApplicationRecipeGen extends ProcessingRecipeGen {
     GeneratedRecipe HAUNTING_CATALYST = fanCatalystFromEmpty(
             "haunting_catalyst", Items.SOUL_SAND, CCBlocks.FAN_HAUNTING_CATALYST::asItem);
     GeneratedRecipe FREEZING_CATALYST = fanCatalystFromEmpty(
-            "freezing_catalyst", Items.POWDER_SNOW_BUCKET, CCBlocks.FAN_FREEZING_CATALYST::asItem);
+            "freezing_catalyst", Items.POWDER_SNOW_BUCKET, CCBlocks.FAN_FREEZING_CATALYST::asItem,
+            new OrCondition(List.of(
+                    new ModLoadedCondition(Mods.DREAMS_DESIRES.id()),
+                    new ModLoadedCondition(Mods.GARNISHED.id())
+            )));
     GeneratedRecipe SEETHING_CATALYST = fanCatalystFromEmpty(
-            "seething_catalyst", AllItems.BLAZE_CAKE, CCBlocks.FAN_SEETHING_CATALYST::asItem);
+            "seething_catalyst", AllItems.BLAZE_CAKE, CCBlocks.FAN_SEETHING_CATALYST::asItem,
+            new ModLoadedCondition(Mods.DREAMS_DESIRES.id()));
     GeneratedRecipe SANDING_CATALYST = fanCatalystFromEmpty(
-            "sanding_catalyst", Blocks.SAND, CCBlocks.FAN_SANDING_CATALYST::asItem);
+            "sanding_catalyst", Blocks.SAND, CCBlocks.FAN_SANDING_CATALYST::asItem,
+            new ModLoadedCondition(Mods.DREAMS_DESIRES.id()));
+    GeneratedRecipe ENRICHED_CATALYST = fanCatalystFromEmpty(
+            "enriched_catalyst", new SimpleDatagenIngredient(Mods.NUCLEAR, "enriched_soul_soil").toVanilla(), CCBlocks.FAN_ENRICHED_CATALYST::asItem,
+            new ModLoadedCondition(Mods.NUCLEAR.id()));
 
     protected GeneratedRecipe fanCatalystFromEmpty(String type, ItemLike ingredient, Supplier<ItemLike> output) {
         return fanCatalystFromEmpty(type, Ingredient.of(ingredient), output);
+    }
+
+    protected GeneratedRecipe fanCatalystFromEmpty(String type, ItemLike ingredient, Supplier<ItemLike> output, ICondition condition) {
+        return fanCatalystFromEmpty(type, Ingredient.of(ingredient), output, condition);
     }
 
     protected GeneratedRecipe fanCatalystFromEmpty(String type, Ingredient ingredient, Supplier<ItemLike> output) {

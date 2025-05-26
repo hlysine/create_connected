@@ -70,6 +70,7 @@
   "block.create_connected.encased_chain_cogwheel": "Encased Chain Cogwheel",
   "block.create_connected.fan_blasting_catalyst": "Fan Blasting Catalyst",
   "block.create_connected.fan_blasting_catalyst.tooltip.summary": "Dedicated _bulk blasting_ device. Content of the catalyst does not interact with the environment.",
+  "block.create_connected.fan_enriched_catalyst": "Fan Enriched Catalyst",
   "block.create_connected.fan_freezing_catalyst": "Fan Freezing Catalyst",
   "block.create_connected.fan_freezing_catalyst.tooltip.summary": "Dedicated _bulk freezing_ device for compatible mods. Content of the catalyst does not interact with the environment.",
   "block.create_connected.fan_haunting_catalyst": "Fan Haunting Catalyst",

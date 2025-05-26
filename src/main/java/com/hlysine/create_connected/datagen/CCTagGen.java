@@ -39,6 +39,8 @@ public class CCTagGen {
                 .add(CCBlocks.FAN_SANDING_CATALYST.get());
         prov.tag(BlockTags.create(Mods.GARNISHED.rl("fan_processing_catalysts/freezing")))
                 .add(CCBlocks.FAN_FREEZING_CATALYST.get());
+        prov.tag(BlockTags.create(Mods.NUCLEAR.rl("fan_processing_catalysts/enriched")))
+                .add(CCBlocks.FAN_ENRICHED_CATALYST.get());
     }
 
     private static void genItemTags(RegistrateTagsProvider<Item> provIn) {

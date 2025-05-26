@@ -7,6 +7,7 @@
     "create_connected:fan_haunting_catalyst",
     "create_connected:fan_freezing_catalyst",
     "create_connected:fan_seething_catalyst",
-    "create_connected:fan_sanding_catalyst"
+    "create_connected:fan_sanding_catalyst",
+    "create_connected:fan_enriched_catalyst"
   ]
 }

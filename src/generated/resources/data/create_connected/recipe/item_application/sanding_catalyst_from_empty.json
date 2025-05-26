@@ -3,6 +3,10 @@
     {
       "type": "create_connected:feature_enabled",
       "tag": "create_connected:empty_fan_catalyst"
+    },
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "create_dd"
     }
   ],
   "type": "create:item_application",
