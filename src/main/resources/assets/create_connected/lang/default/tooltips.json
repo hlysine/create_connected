@@ -32,6 +32,8 @@
   "block.create_connected.cross_connector.tooltip.summary": "Relay rotation in two directions _independently_.",
   "block.create_connected.empty_fan_catalyst.tooltip.summary": "_Insert_ material to catalyze _fan processing_.",
   "block.create_connected.fan_blasting_catalyst.tooltip.summary": "Dedicated _bulk blasting_ device. Content of the catalyst does not interact with the environment.",
+  "block.create_connected.fan_ending_catalyst.tooltip.summary": "Dedicated _bulk ending_ device for compatible mods. Content of the catalyst does not interact with the environment.",
+  "block.create_connected.fan_enriched_catalyst.tooltip.summary": "Dedicated _bulk enriched_ device for compatible mods. Content of the catalyst does not interact with the environment.",
   "block.create_connected.fan_freezing_catalyst.tooltip.summary": "Dedicated _bulk freezing_ device for compatible mods. Content of the catalyst does not interact with the environment.",
   "block.create_connected.fan_haunting_catalyst.tooltip.summary": "Dedicated _bulk haunting_ device. Content of the catalyst does not interact with the environment.",
   "block.create_connected.fan_sanding_catalyst.tooltip.summary": "Dedicated _bulk sanding_ device for compatible mods. Content of the catalyst does not interact with the environment.",
