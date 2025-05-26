@@ -1,7 +1,6 @@
 package com.hlysine.create_connected.mixin.redstonelinkwildcard;
 
 import com.hlysine.create_connected.content.redstonelinkwildcard.LinkWildcardNetworkHandler;
-import com.llamalad7.mixinextras.sugar.Local;
 import com.simibubi.create.content.redstone.link.IRedstoneLinkable;
 import com.simibubi.create.content.redstone.link.RedstoneLinkNetworkHandler;
 import net.minecraft.world.level.LevelAccessor;
@@ -10,16 +9,16 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.util.Set;
-
 @Mixin(value = RedstoneLinkNetworkHandler.class, remap = false)
 public class RedstoneLinkNetworkHandlerMixin {
     @Inject(
             method = "updateNetworkOf",
-            at = @At("RETURN")
+            at = @At("HEAD"),
+            cancellable = true
     )
-    private void updateNetworkOf(LevelAccessor world, IRedstoneLinkable actor, CallbackInfo ci, @Local(ordinal = 0) int power) {
-        LinkWildcardNetworkHandler.updateWildcardNetworkOf((RedstoneLinkNetworkHandler) (Object) this, world, actor, power);
+    private void updateNetworkOf(LevelAccessor world, IRedstoneLinkable actor, CallbackInfo ci) {
+        if (LinkWildcardNetworkHandler.updateNetworkOf((RedstoneLinkNetworkHandler) (Object) this, world, actor))
+            ci.cancel();
     }
 
     @Inject(

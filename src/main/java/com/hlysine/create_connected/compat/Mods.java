@@ -11,6 +11,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
 import java.util.List;
+
 import java.util.Optional;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
@@ -23,9 +24,11 @@ public enum Mods {
     COPYCATS("copycats"),
     DIAGONAL_FENCES("diagonalfences"),
     DREAMS_DESIRES("create_dd"),
+    NUCLEAR("createnuclear"),
     HENRY("create_henry"),
     ADDITIONAL_PLACEMENTS("additionalplacements"),
-    GARNISHED("garnished");
+    GARNISHED("garnished"),
+    DRAGONS_PLUS("create_dragons_plus");
 
     private final String id;
 
@@ -60,7 +63,7 @@ public enum Mods {
             @Override
             public @NotNull Collection<ItemStack> getItems() {
                 return List.of();
-            }
+    }
 
             @Override
             public @NotNull JsonObject serialize() {

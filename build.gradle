@@ -131,6 +131,16 @@ repositories {
         name = "realrobotixCopycats"
         url = "https://maven.realrobotix.me/copycats"
     }
+    maven {
+        // Conditional Mixin
+        name = "ConditionalMixin"
+        url 'https://maven.fallenbreath.me/releases'
+    }
+    maven {
+        // Create: Dragons Plus
+        name = "DragonsPlusMinecraft"
+        url "https://maven.dragons.plus/releases"
+    }
     exclusiveContent {
         forRepository {
             maven {
@@ -182,6 +192,7 @@ dependencies {
 
 //    implementation("maven.modrinth:create-garnished:${garnished_version}")
 //    runtimeOnly("maven.modrinth:create-dreams-and-desires:${dreams_desires_version}")
+//    runtimeOnly("plus.dragons.createdragonsplus:create-dragons-plus-${minecraft_version}:${create_dragons_plus_version}")
     implementation(fg.deobf("com.copycatsplus:copycats:${copycats_version}"))
     implementation(fg.deobf("maven.modrinth:additional-placements:${additional_placements_version}"))
 
