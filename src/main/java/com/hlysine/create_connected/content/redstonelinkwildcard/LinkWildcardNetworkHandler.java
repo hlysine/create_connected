@@ -92,10 +92,11 @@ public class LinkWildcardNetworkHandler {
         };
 
         updatePower.accept(network);
-        for (Couple<Frequency> wildcard : wildcards) {
-            Set<IRedstoneLinkable> wildcardNetwork = networksInWorld.get(wildcard);
-            updatePower.accept(wildcardNetwork);
-        }
+        if (wildcards != null)
+            for (Couple<Frequency> wildcard : wildcards) {
+                Set<IRedstoneLinkable> wildcardNetwork = networksInWorld.get(wildcard);
+                updatePower.accept(wildcardNetwork);
+            }
 
         if (actor instanceof LinkBehaviour linkBehaviour) {
             // fix one-to-one loading order problem
