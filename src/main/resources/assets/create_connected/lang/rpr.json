@@ -289,6 +289,8 @@
   "item.create_connected.music_disc_elevator.desc": "Кевинъ Маклеодъ - Casa Bossa Nova",
   "item.create_connected.music_disc_interlude": "Пластинка",
   "item.create_connected.music_disc_interlude.desc": "Кевинъ Маклеодъ - Local Forecast - Elevator",
+  "item.create_connected.redstone_link_wildcard": "Заглушка частоты редстоунового передатчика сигнала",
+  "item.create_connected.redstone_link_wildcard.tooltip.summary": "Подстановочный элемент, заменяющий любой предмет в слоте передатчика.",
   "item.create_connected.vertical_brass_gearbox": "Вертикальная латунная коробка передачъ",
   "item.create_connected.vertical_brass_gearbox.tooltip.summary": "Коробка передачъ съ _независимо настраиваемыми_ четырьмя направленіями каждаго выхода.",
   "item.create_connected.vertical_parallel_gearbox": "Вертикальная параллельная коробка передачъ",
