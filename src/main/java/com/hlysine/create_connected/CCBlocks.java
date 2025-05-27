@@ -700,7 +700,7 @@ public class CCBlocks {
             .addLayer(() -> RenderType::cutoutMipped)
             .transform(pickaxeOnly())
             .transform(FeatureToggle.registerDependent(CCBlocks.EMPTY_FAN_CATALYST))
-            .transform(FeatureToggle.addCondition(() -> false)) // No mods support bulk withering in 1.21.1
+            .transform(FeatureToggle.addCondition(Mods.HENRY::isLoaded))
             .blockstate((c, p) -> p.simpleBlock(c.getEntry(), AssetLookup.partialBaseModel(c, p)))
             .tag(AllTags.AllBlockTags.FAN_TRANSPARENT.tag)
             .item()

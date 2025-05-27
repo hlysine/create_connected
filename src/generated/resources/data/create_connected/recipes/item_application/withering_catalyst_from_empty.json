@@ -1,0 +1,26 @@
+{
+  "type": "create:item_application",
+  "conditions": [
+    {
+      "type": "create_connected:feature_enabled",
+      "feature": "create_connected:empty_fan_catalyst"
+    },
+    {
+      "type": "forge:mod_loaded",
+      "modid": "create_henry"
+    }
+  ],
+  "ingredients": [
+    {
+      "item": "create_connected:empty_fan_catalyst"
+    },
+    {
+      "item": "minecraft:wither_rose"
+    }
+  ],
+  "results": [
+    {
+      "item": "create_connected:fan_withering_catalyst"
+    }
+  ]
+}

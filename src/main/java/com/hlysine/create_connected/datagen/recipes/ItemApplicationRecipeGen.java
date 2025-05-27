@@ -10,7 +10,6 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.crafting.conditions.ICondition;
-import net.neoforged.neoforge.common.conditions.FalseCondition;
 import net.minecraftforge.common.crafting.conditions.ModLoadedCondition;
 import net.minecraftforge.common.crafting.conditions.OrCondition;
 
@@ -52,10 +51,13 @@ public class ItemApplicationRecipeGen extends ProcessingRecipeGen {
             new ModLoadedCondition(Mods.DRAGONS_PLUS.id()));
     GeneratedRecipe ENDING_CATALYST_DRAGON_HEAD = fanCatalystFromEmpty(
             "ending_catalyst_dragon_head", Blocks.DRAGON_HEAD, CCBlocks.FAN_ENDING_CATALYST_DRAGON_HEAD::asItem,
-            new ModLoadedCondition(Mods.DRAGONS_PLUS.id()));
+            new OrCondition(
+                    new ModLoadedCondition(Mods.DRAGONS_PLUS.id()),
+                    new ModLoadedCondition(Mods.HENRY.id())
+            ));
     GeneratedRecipe WITHERING_CATALYST = fanCatalystFromEmpty(
             "withering_catalyst", Items.WITHER_ROSE, CCBlocks.FAN_WITHERING_CATALYST::asItem,
-            FalseCondition.INSTANCE);
+            new ModLoadedCondition(Mods.HENRY.id()));
 
     protected GeneratedRecipe fanCatalystFromEmpty(String type, ItemLike ingredient, Supplier<ItemLike> output) {
         return fanCatalystFromEmpty(type, Ingredient.of(ingredient), output);
