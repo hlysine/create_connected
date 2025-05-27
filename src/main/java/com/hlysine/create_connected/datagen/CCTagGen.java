@@ -46,7 +46,9 @@ public class CCTagGen {
         prov.tag(BlockTags.create(Mods.DRAGONS_PLUS.rl("fan_processing_catalysts/sanding")))
                 .add(CCBlocks.FAN_SANDING_CATALYST.get());
         prov.tag(BlockTags.create(Mods.DRAGONS_PLUS.rl("fan_processing_catalysts/ending")))
-                .add(CCBlocks.FAN_ENDING_CATALYST.get());
+                .add(CCBlocks.FAN_ENDING_CATALYST_DRAGONS_BREATH.get());
+        prov.tag(BlockTags.create(Mods.DRAGONS_PLUS.rl("fan_processing_catalysts/ending")))
+                .add(CCBlocks.FAN_ENDING_CATALYST_DRAGON_HEAD.get());
 
         // ----- Henry equivalents -----
         prov.tag(BlockTags.create(Mods.HENRY.rl("fan_processing_catalysts/freezing")))

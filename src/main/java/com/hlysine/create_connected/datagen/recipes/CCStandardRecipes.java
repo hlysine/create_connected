@@ -8,6 +8,7 @@ import com.hlysine.create_connected.CCBlocks;
 import com.hlysine.create_connected.CCItems;
 import com.hlysine.create_connected.CreateConnected;
 import com.hlysine.create_connected.compat.CopycatsManager;
+import com.hlysine.create_connected.compat.Mods;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllItems;
 import com.simibubi.create.AllTags;
@@ -16,29 +17,29 @@ import com.tterrag.registrate.util.DataIngredient;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import com.tterrag.registrate.util.entry.ItemProviderEntry;
 import net.createmod.catnip.platform.CatnipServices;
-import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.world.item.crafting.AbstractCookingRecipe;
-import net.minecraft.data.PackOutput;
+import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.data.recipes.*;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.SimpleCraftingRecipeSerializer;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.TagKey;
+import net.minecraft.data.PackOutput;
+import net.minecraft.data.recipes.*;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.crafting.ConditionalRecipe;
 import net.minecraftforge.common.crafting.CraftingHelper;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.common.crafting.conditions.ICondition;
 import net.minecraftforge.common.crafting.conditions.ModLoadedCondition;
-import net.minecraft.world.item.Items;
 import net.minecraftforge.common.crafting.conditions.NotCondition;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
+import java.util.function.Consumer;
 import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
 import java.util.function.UnaryOperator;
 
 @SuppressWarnings("unused")
@@ -275,7 +276,18 @@ public class CCStandardRecipes extends CreateRecipeProvider {
     GeneratedRecipe EMPTY_CATALYST_FROM_SEETHING = clearFanCatalyst("seething", CCBlocks.FAN_SEETHING_CATALYST);
     GeneratedRecipe EMPTY_CATALYST_FROM_SANDING = clearFanCatalyst("sanding", CCBlocks.FAN_SANDING_CATALYST);
     GeneratedRecipe EMPTY_CATALYST_FROM_ENRICHED = clearFanCatalyst("enriched", CCBlocks.FAN_ENRICHED_CATALYST);
-    GeneratedRecipe EMPTY_CATALYST_FROM_ENDING = clearFanCatalyst("ending", CCBlocks.FAN_ENDING_CATALYST);
+    GeneratedRecipe EMPTY_CATALYST_FROM_ENDING_DRAGONS_BREATH = clearFanCatalyst("ending_dragons_breath", CCBlocks.FAN_ENDING_CATALYST_DRAGONS_BREATH);
+    GeneratedRecipe EMPTY_CATALYST_FROM_ENDING_DRAGON_HEAD = clearFanCatalyst("ending_dragon_head", CCBlocks.FAN_ENDING_CATALYST_DRAGON_HEAD);
+
+    GeneratedRecipe FAN_ENDING_CATALYST_DRAGONS_BREATH_FROM_BOTTLE = create(CCBlocks.FAN_ENDING_CATALYST_DRAGONS_BREATH).withSuffix("_from_bottle").unlockedBy(CCBlocks.EMPTY_FAN_CATALYST::get)
+            .requiresFeature(CCBlocks.EMPTY_FAN_CATALYST)
+            .viaShaped(b -> b
+                    .define('c', CCBlocks.EMPTY_FAN_CATALYST)
+                    .define('d', Items.DRAGON_BREATH)
+                    .pattern(" d ")
+                    .pattern("dcd")
+                    .pattern(" d ")
+            );
 
     private final Marker PALETTES = enterFolder("palettes");
 
@@ -733,13 +745,6 @@ public class CCStandardRecipes extends CreateRecipeProvider {
         private final FinishedRecipe wrapped;
         private final ResourceLocation outputOverride;
 
-        public ModdedCookingRecipeResult(FinishedRecipe wrapped, ResourceLocation outputOverride,
-                                         List<ICondition> conditions) {
-            this.wrapped = wrapped;
-            this.outputOverride = outputOverride;
-            this.conditions = conditions;
-        }
-
         @Override
         public @NotNull ResourceLocation getId() {
             return wrapped.getId();
@@ -770,6 +775,13 @@ public class CCStandardRecipes extends CreateRecipeProvider {
             object.add("conditions", conds);
         }
         private final List<ICondition> conditions;
+
+        public ModdedCookingRecipeResult(FinishedRecipe wrapped, ResourceLocation outputOverride,
+                                         List<ICondition> conditions) {
+            this.wrapped = wrapped;
+            this.outputOverride = outputOverride;
+            this.conditions = conditions;
+        }
 
     }
     }

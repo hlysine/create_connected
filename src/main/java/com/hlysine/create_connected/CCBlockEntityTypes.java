@@ -7,6 +7,8 @@ import com.hlysine.create_connected.content.brassgearbox.BrassGearboxVisual;
 import com.hlysine.create_connected.content.centrifugalclutch.CentrifugalClutchBlockEntity;
 import com.hlysine.create_connected.content.crankwheel.CrankWheelBlockEntity;
 import com.hlysine.create_connected.content.crankwheel.CrankWheelVisual;
+import com.hlysine.create_connected.content.fancatalyst.FanEndingCatalystDragonHeadBlockEntity;
+import com.hlysine.create_connected.content.fancatalyst.FanEndingCatalystDragonHeadRenderer;
 import com.hlysine.create_connected.content.fluidvessel.CreativeFluidVesselBlockEntity;
 import com.hlysine.create_connected.content.fluidvessel.FluidVesselBlockEntity;
 import com.hlysine.create_connected.content.fluidvessel.FluidVesselRenderer;
@@ -222,6 +224,12 @@ public class CCBlockEntityTypes {
                             CCBlocks.COPYCAT_BOARD
                     )
                     .register();
+
+    public static final BlockEntityEntry<FanEndingCatalystDragonHeadBlockEntity> FAN_ENDING_CATALYST_DRAGON_HEAD = REGISTRATE
+            .blockEntity("fan_ending_catalyst_dragon_head", FanEndingCatalystDragonHeadBlockEntity::new)
+            .validBlocks(CCBlocks.FAN_ENDING_CATALYST_DRAGON_HEAD)
+            .renderer(() -> FanEndingCatalystDragonHeadRenderer::new)
+            .register();
 
 
     public static void register() {

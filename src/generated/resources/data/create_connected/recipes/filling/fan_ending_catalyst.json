@@ -21,7 +21,11 @@
   ],
   "results": [
     {
+<<<<<<<< HEAD:src/generated/resources/data/create_connected/recipes/filling/fan_ending_catalyst.json
       "item": "create_connected:fan_ending_catalyst"
+========
+      "id": "create_connected:fan_ending_catalyst_dragons_breath"
+>>>>>>>> main:src/generated/resources/data/create_connected/recipes/filling/fan_ending_catalyst_dragons_breath.json
     }
   ]
 }

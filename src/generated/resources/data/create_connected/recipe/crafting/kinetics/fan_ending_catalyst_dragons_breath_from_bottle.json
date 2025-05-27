@@ -1,0 +1,27 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "create_connected:feature_enabled",
+      "tag": "create_connected:empty_fan_catalyst"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "c": {
+      "item": "create_connected:empty_fan_catalyst"
+    },
+    "d": {
+      "item": "minecraft:dragon_breath"
+    }
+  },
+  "pattern": [
+    " d ",
+    "dcd",
+    " d "
+  ],
+  "result": {
+    "count": 1,
+    "id": "create_connected:fan_ending_catalyst_dragons_breath"
+  }
+}

@@ -5,7 +5,27 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 1.1.0 - 2025-05-26
+
+### Added
+
+- **Kinetic Bridge**
+  - Transfer stress capacity from one network to another while keeping the networks separate
+- **Kinetic Battery**
+  - Stores kinetic stress for later use. Retains charge in item form to enable long-distance energy transport
+- **Redstone Link Wildcard**
+  - Allows a redstone link frequency slot to match any item, including air
+- **Cross Connector**
+  - Relays rotation in two directions independently
+- **Catalyst compatibilities for Create: Dragons Plus, Create: Nuclear and Create: Henry**
+  - Enables bulk freezing, sanding, ending and enriched for the compatible mods
+
+### Fixed
+
+- JEI errors due to config sync trying to update JEI listing too early
+
 ## 1.0.3 - 2025-05-20
+
 ### Fixed
 
 - Crash due to invalid resource location when handling modded buttons for linked transmitters (#115)
