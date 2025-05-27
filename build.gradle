@@ -193,7 +193,7 @@ dependencies {
 //    implementation("maven.modrinth:create-garnished:${garnished_version}")
 //    runtimeOnly("maven.modrinth:create-dreams-and-desires:${dreams_desires_version}")
 //    runtimeOnly("plus.dragons.createdragonsplus:create-dragons-plus-${minecraft_version}:${create_dragons_plus_version}")
-    runtimeOnly("maven.modrinth:create-henry:${create_henry_version}")
+//    runtimeOnly("maven.modrinth:create-henry:${create_henry_version}")
     implementation(fg.deobf("com.copycatsplus:copycats:${copycats_version}"))
     implementation(fg.deobf("maven.modrinth:additional-placements:${additional_placements_version}"))
 

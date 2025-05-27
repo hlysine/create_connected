@@ -36,8 +36,11 @@ import net.minecraftforge.common.crafting.conditions.NotCondition;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
+
 import java.util.function.Consumer;
+
 import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.UnaryOperator;
@@ -774,6 +777,7 @@ public class CCStandardRecipes extends CreateRecipeProvider {
             conditions.forEach(c -> conds.add(CraftingHelper.serialize(c)));
             object.add("conditions", conds);
         }
+
         private final List<ICondition> conditions;
 
         public ModdedCookingRecipeResult(FinishedRecipe wrapped, ResourceLocation outputOverride,
@@ -784,4 +788,4 @@ public class CCStandardRecipes extends CreateRecipeProvider {
         }
 
     }
-    }
+}

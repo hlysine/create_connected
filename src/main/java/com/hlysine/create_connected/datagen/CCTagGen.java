@@ -46,8 +46,7 @@ public class CCTagGen {
         prov.tag(BlockTags.create(Mods.DRAGONS_PLUS.rl("fan_processing_catalysts/sanding")))
                 .add(CCBlocks.FAN_SANDING_CATALYST.get());
         prov.tag(BlockTags.create(Mods.DRAGONS_PLUS.rl("fan_processing_catalysts/ending")))
-                .add(CCBlocks.FAN_ENDING_CATALYST_DRAGONS_BREATH.get());
-        prov.tag(BlockTags.create(Mods.DRAGONS_PLUS.rl("fan_processing_catalysts/ending")))
+                .add(CCBlocks.FAN_ENDING_CATALYST_DRAGONS_BREATH.get())
                 .add(CCBlocks.FAN_ENDING_CATALYST_DRAGON_HEAD.get());
 
         // ----- Henry equivalents -----
@@ -57,12 +56,18 @@ public class CCTagGen {
                 .add(CCBlocks.FAN_SEETHING_CATALYST.get());
         prov.tag(BlockTags.create(Mods.HENRY.rl("fan_processing_catalysts/sanding")))
                 .add(CCBlocks.FAN_SANDING_CATALYST.get());
+        prov.tag(BlockTags.create(Mods.HENRY.rl("fan_processing_catalysts/ending")))
+                .add(CCBlocks.FAN_ENDING_CATALYST_DRAGON_HEAD.get())
+                .add(CCBlocks.FAN_ENDING_CATALYST_DRAGONS_BREATH.get());
         prov.tag(BlockTags.create(Mods.HENRY.rl("fan_processing_catalysts_freezing")))
                 .add(CCBlocks.FAN_FREEZING_CATALYST.get());
         prov.tag(BlockTags.create(Mods.HENRY.rl("fan_processing_catalysts_superheating")))
                 .add(CCBlocks.FAN_SEETHING_CATALYST.get());
         prov.tag(BlockTags.create(Mods.HENRY.rl("fan_processing_catalysts_sanding")))
                 .add(CCBlocks.FAN_SANDING_CATALYST.get());
+        prov.tag(BlockTags.create(Mods.HENRY.rl("fan_processing_catalysts_ending")))
+                .add(CCBlocks.FAN_ENDING_CATALYST_DRAGON_HEAD.get())
+                .add(CCBlocks.FAN_ENDING_CATALYST_DRAGONS_BREATH.get());
     }
 
     private static void genItemTags(RegistrateTagsProvider<Item> provIn) {

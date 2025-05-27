@@ -18,7 +18,7 @@
           },
           "has_the_recipe": {
             "conditions": {
-              "recipe": "create_connected:crafting/kinetics/empty_fan_catalyst_from_ending"
+              "recipe": "create_connected:crafting/kinetics/fan_ending_catalyst_dragons_breath_from_bottle"
             },
             "trigger": "minecraft:recipe_unlocked"
           }
@@ -31,7 +31,7 @@
         ],
         "rewards": {
           "recipes": [
-            "create_connected:crafting/kinetics/empty_fan_catalyst_from_ending"
+            "create_connected:crafting/kinetics/fan_ending_catalyst_dragons_breath_from_bottle"
           ]
         },
         "sends_telemetry_event": false

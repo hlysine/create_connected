@@ -1,6 +1,7 @@
 package com.hlysine.create_connected.content.fancatalyst;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.simibubi.create.foundation.blockEntity.renderer.SafeBlockEntityRenderer;
 import net.minecraft.client.model.SkullModelBase;
 import net.minecraft.client.model.dragon.DragonHeadModel;
@@ -34,7 +35,7 @@ public class FanEndingCatalystDragonHeadRenderer extends SafeBlockEntityRenderer
         ms.translate(0.5F, 0.25F, 0.5F);
         ms.scale(-0.5F, -0.5F, 0.5F);
         skullModel.setupAnim(0, animationTick, 0.0F);
-        skullModel.renderToBuffer(ms, bufferSource.getBuffer(getRenderType()), light, OverlayTexture.NO_OVERLAY);
+        skullModel.renderToBuffer(ms, bufferSource.getBuffer(getRenderType()), light, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
         ms.popPose();
     }
 }
