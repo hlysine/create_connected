@@ -283,16 +283,6 @@ public class CCStandardRecipes extends CreateRecipeProvider {
     GeneratedRecipe EMPTY_CATALYST_FROM_ENDING_DRAGON_HEAD = clearFanCatalyst("ending_dragon_head", CCBlocks.FAN_ENDING_CATALYST_DRAGON_HEAD);
     GeneratedRecipe EMPTY_CATALYST_FROM_WITHERING = clearFanCatalyst("withering", CCBlocks.FAN_WITHERING_CATALYST);
 
-    GeneratedRecipe FAN_ENDING_CATALYST_DRAGONS_BREATH_FROM_BOTTLE = create(CCBlocks.FAN_ENDING_CATALYST_DRAGONS_BREATH).withSuffix("_from_bottle").unlockedBy(CCBlocks.EMPTY_FAN_CATALYST::get)
-            .requiresFeature(CCBlocks.EMPTY_FAN_CATALYST)
-            .viaShaped(b -> b
-                    .define('c', CCBlocks.EMPTY_FAN_CATALYST)
-                    .define('d', Items.DRAGON_BREATH)
-                    .pattern(" d ")
-                    .pattern("dcd")
-                    .pattern(" d ")
-            );
-
     private final Marker PALETTES = enterFolder("palettes");
 
     GeneratedRecipe COPYCAT_SLAB = copycat(CCBlocks.COPYCAT_SLAB, 2);
