@@ -281,6 +281,7 @@ public class CCStandardRecipes extends CreateRecipeProvider {
     GeneratedRecipe EMPTY_CATALYST_FROM_ENRICHED = clearFanCatalyst("enriched", CCBlocks.FAN_ENRICHED_CATALYST);
     GeneratedRecipe EMPTY_CATALYST_FROM_ENDING_DRAGONS_BREATH = clearFanCatalyst("ending_dragons_breath", CCBlocks.FAN_ENDING_CATALYST_DRAGONS_BREATH);
     GeneratedRecipe EMPTY_CATALYST_FROM_ENDING_DRAGON_HEAD = clearFanCatalyst("ending_dragon_head", CCBlocks.FAN_ENDING_CATALYST_DRAGON_HEAD);
+    GeneratedRecipe EMPTY_CATALYST_FROM_WITHERING = clearFanCatalyst("withering", CCBlocks.FAN_WITHERING_CATALYST);
 
     GeneratedRecipe FAN_ENDING_CATALYST_DRAGONS_BREATH_FROM_BOTTLE = create(CCBlocks.FAN_ENDING_CATALYST_DRAGONS_BREATH).withSuffix("_from_bottle").unlockedBy(CCBlocks.EMPTY_FAN_CATALYST::get)
             .requiresFeature(CCBlocks.EMPTY_FAN_CATALYST)

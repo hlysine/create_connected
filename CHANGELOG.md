@@ -18,7 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Cross Connector**
   - Relays rotation in two directions independently
 - **Catalyst compatibilities for Create: Dragons Plus, Create: Nuclear and Create: Henry**
-  - Enables bulk freezing, sanding, ending and enriched for the compatible mods
+  - Enables bulk freezing, sanding, ending, enriched and withering for the compatible mods
 
 ### Fixed
 
