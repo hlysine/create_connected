@@ -34,6 +34,7 @@ import com.hlysine.create_connected.content.copycat.wall.WrappedWallBlock;
 import com.hlysine.create_connected.content.crankwheel.CrankWheelBlock;
 import com.hlysine.create_connected.content.crossconnector.CrossConnectorBlock;
 import com.hlysine.create_connected.content.crossconnector.EncasedCrossConnectorBlock;
+import com.hlysine.create_connected.content.fancatalyst.FanEndingCatalystDragonHeadBlock;
 import com.hlysine.create_connected.content.fluidvessel.FluidVesselBlock;
 import com.hlysine.create_connected.content.fluidvessel.FluidVesselGenerator;
 import com.hlysine.create_connected.content.fluidvessel.FluidVesselItem;
@@ -645,7 +646,7 @@ public class CCBlocks {
             .transform(customItemModel())
             .register();
 
-    public static final BlockEntry<WrenchableBlock> FAN_ENDING_CATALYST = REGISTRATE.block("fan_ending_catalyst", WrenchableBlock::new)
+    public static final BlockEntry<WrenchableBlock> FAN_ENDING_CATALYST_DRAGONS_BREATH = REGISTRATE.block("fan_ending_catalyst_dragons_breath", WrenchableBlock::new)
             .initialProperties(() -> Blocks.IRON_BLOCK)
             .properties(p -> p
                     .mapColor(MapColor.TERRACOTTA_YELLOW)
@@ -660,8 +661,31 @@ public class CCBlocks {
             .transform(FeatureToggle.addCondition(Mods.DRAGONS_PLUS::isLoaded))
             .blockstate((c, p) -> p.simpleBlock(c.getEntry(), AssetLookup.partialBaseModel(c, p)))
             .tag(AllTags.AllBlockTags.FAN_TRANSPARENT.tag)
+            .lang("Fan Ending Catalyst with Dragon's Breath")
             .item()
             .transform(customItemModel())
+            .lang("Fan Ending Catalyst with Dragon's Breath")
+            .register();
+
+    public static final BlockEntry<FanEndingCatalystDragonHeadBlock> FAN_ENDING_CATALYST_DRAGON_HEAD = REGISTRATE.block("fan_ending_catalyst_dragon_head", FanEndingCatalystDragonHeadBlock::new)
+            .initialProperties(() -> Blocks.IRON_BLOCK)
+            .properties(p -> p
+                    .mapColor(MapColor.TERRACOTTA_YELLOW)
+                    .requiresCorrectToolForDrops()
+                    .noOcclusion()
+                    .lightLevel(s -> 0)
+                    .isRedstoneConductor((state, level, pos) -> false)
+            )
+            .addLayer(() -> RenderType::cutoutMipped)
+            .transform(pickaxeOnly())
+            .transform(FeatureToggle.registerDependent(CCBlocks.EMPTY_FAN_CATALYST))
+            .transform(FeatureToggle.addCondition(Mods.DRAGONS_PLUS::isLoaded))
+            .blockstate((c, p) -> p.simpleBlock(c.getEntry(), p.models().getExistingFile(p.modLoc("block/empty_fan_catalyst/block"))))
+            .tag(AllTags.AllBlockTags.FAN_TRANSPARENT.tag)
+            .lang("Fan Ending Catalyst with Dragon Head")
+            .item()
+            .transform(customItemModel())
+            .lang("Fan Ending Catalyst with Dragon Head")
             .register();
 
     public static final BlockEntry<ItemSiloBlock> ITEM_SILO = REGISTRATE.block("item_silo", ItemSiloBlock::new)

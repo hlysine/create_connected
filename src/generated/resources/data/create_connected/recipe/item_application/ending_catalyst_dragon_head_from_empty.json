@@ -9,20 +9,18 @@
       "modid": "create_dragons_plus"
     }
   ],
-  "type": "create:filling",
+  "type": "create:item_application",
   "ingredients": [
     {
       "item": "create_connected:empty_fan_catalyst"
     },
     {
-      "type": "fluid_tag",
-      "amount": 1000,
-      "fluid_tag": "create_dragons_plus:fan_processing_catalysts/ending"
+      "item": "minecraft:dragon_head"
     }
   ],
   "results": [
     {
-      "id": "create_connected:fan_ending_catalyst"
+      "id": "create_connected:fan_ending_catalyst_dragon_head"
     }
   ]
 }

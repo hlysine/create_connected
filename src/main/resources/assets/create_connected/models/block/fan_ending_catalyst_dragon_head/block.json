@@ -1,0 +1,15 @@
+{
+  "parent": "minecraft:block/block",
+  "loader": "neoforge:composite",
+  "textures": {
+    "particle": "create:block/funnel/brass_funnel_frame"
+  },
+  "children": {
+    "frame": {
+      "parent": "create_connected:block/empty_fan_catalyst/block"
+    },
+    "dragon_head": {
+      "parent": "create_connected:block/fan_ending_catalyst_dragon_head/dragon_head"
+    }
+  }
+}

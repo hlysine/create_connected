@@ -6,6 +6,7 @@ import com.hlysine.create_connected.CCBlocks;
 import com.hlysine.create_connected.CCItems;
 import com.hlysine.create_connected.CreateConnected;
 import com.hlysine.create_connected.compat.CopycatsManager;
+import com.hlysine.create_connected.compat.Mods;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -288,7 +289,18 @@ public class CCStandardRecipes extends CreateRecipeProvider {
     GeneratedRecipe EMPTY_CATALYST_FROM_SEETHING = clearFanCatalyst("seething", CCBlocks.FAN_SEETHING_CATALYST);
     GeneratedRecipe EMPTY_CATALYST_FROM_SANDING = clearFanCatalyst("sanding", CCBlocks.FAN_SANDING_CATALYST);
     GeneratedRecipe EMPTY_CATALYST_FROM_ENRICHED = clearFanCatalyst("enriched", CCBlocks.FAN_ENRICHED_CATALYST);
-    GeneratedRecipe EMPTY_CATALYST_FROM_ENDING = clearFanCatalyst("ending", CCBlocks.FAN_ENDING_CATALYST);
+    GeneratedRecipe EMPTY_CATALYST_FROM_ENDING_DRAGONS_BREATH = clearFanCatalyst("ending_dragons_breath", CCBlocks.FAN_ENDING_CATALYST_DRAGONS_BREATH);
+    GeneratedRecipe EMPTY_CATALYST_FROM_ENDING_DRAGON_HEAD = clearFanCatalyst("ending_dragon_head", CCBlocks.FAN_ENDING_CATALYST_DRAGON_HEAD);
+
+    GeneratedRecipe FAN_ENDING_CATALYST_DRAGONS_BREATH_FROM_BOTTLE = create(CCBlocks.FAN_ENDING_CATALYST_DRAGONS_BREATH).withSuffix("_from_bottle").unlockedBy(CCBlocks.EMPTY_FAN_CATALYST::get)
+            .requiresFeature(CCBlocks.EMPTY_FAN_CATALYST)
+            .viaShaped(b -> b
+                    .define('c', CCBlocks.EMPTY_FAN_CATALYST)
+                    .define('d', Items.DRAGON_BREATH)
+                    .pattern(" d ")
+                    .pattern("dcd")
+                    .pattern(" d ")
+            );
 
     private final Marker PALETTES = enterFolder("palettes");
 

@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "create_connected:fan_ending_catalyst"
+          "name": "create_connected:fan_ending_catalyst_dragons_breath"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "create_connected:blocks/fan_ending_catalyst"
+  "random_sequence": "create_connected:blocks/fan_ending_catalyst_dragons_breath"
 }

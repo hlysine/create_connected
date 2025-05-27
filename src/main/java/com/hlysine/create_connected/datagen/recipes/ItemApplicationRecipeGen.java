@@ -48,8 +48,11 @@ public class ItemApplicationRecipeGen extends ProcessingRecipeGen {
     GeneratedRecipe ENRICHED_CATALYST = fanCatalystFromEmpty(
             "enriched_catalyst", new SimpleDatagenIngredient(Mods.NUCLEAR, "enriched_soul_soil").toVanilla(), CCBlocks.FAN_ENRICHED_CATALYST::asItem,
             new ModLoadedCondition(Mods.NUCLEAR.id()));
-    GeneratedRecipe ENDING_CATALYST = fanCatalystFromEmpty(
-            "ending_catalyst", new SimpleDatagenIngredient(Mods.DRAGONS_PLUS, "dragon_breath_bucket").toVanilla(), CCBlocks.FAN_ENDING_CATALYST::asItem,
+    GeneratedRecipe ENDING_CATALYST_DRAGONS_BREATH = fanCatalystFromEmpty(
+            "ending_catalyst_dragons_breath", new SimpleDatagenIngredient(Mods.DRAGONS_PLUS, "dragon_breath_bucket").toVanilla(), CCBlocks.FAN_ENDING_CATALYST_DRAGONS_BREATH::asItem,
+            new ModLoadedCondition(Mods.DRAGONS_PLUS.id()));
+    GeneratedRecipe ENDING_CATALYST_DRAGON_HEAD = fanCatalystFromEmpty(
+            "ending_catalyst_dragon_head", Blocks.DRAGON_HEAD, CCBlocks.FAN_ENDING_CATALYST_DRAGON_HEAD::asItem,
             new ModLoadedCondition(Mods.DRAGONS_PLUS.id()));
 
     protected GeneratedRecipe fanCatalystFromEmpty(String type, ItemLike ingredient, Supplier<ItemLike> output) {
