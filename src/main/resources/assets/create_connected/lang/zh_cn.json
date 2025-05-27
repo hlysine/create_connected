@@ -89,7 +89,6 @@
   "block.create_connected.fan_splashing_catalyst": "鼓风机洗涤触媒",
   "block.create_connected.fan_splashing_catalyst.tooltip.summary": "_洗涤_专用设备，触媒的内容不与环境发生反应。",
   "block.create_connected.fan_withering_catalyst": "鼓风机凋零触媒",
-  "block.create_connected.fan_withering_catalyst.tooltip.summary": "_凋零_专用设备，触媒的内容不与环境发生反应。",
   "block.create_connected.fluid_vessel": "横向流体储罐",
   "block.create_connected.fluid_vessel.tooltip.behaviour1": "_切换_观察窗形状。",
   "block.create_connected.fluid_vessel.tooltip.condition1": "手持扳手右击时",
