@@ -41,7 +41,7 @@ Relays rotation in two directions independently.
 
 Assign this item to a redstone link frequency slot to match any item in that slot, including air.
 
-![fan_freezing_catalyst](https://github.com/user-attachments/assets/5fb53ff5-6bf2-4005-9caf-68df3c9df1a1) ![fan_sanding_catalyst](https://github.com/user-attachments/assets/5cb15a91-de17-47fb-91af-a065080f116d) ![fan_ending_catalyst](https://github.com/user-attachments/assets/ebacf2c6-2639-45da-a635-ba421c332e92) ![fan_enriched_catalyst](https://github.com/user-attachments/assets/0d44f0d4-416d-4294-8407-25eb5bc3039a) **More Fan Catalysts**
+![fan_freezing_catalyst](https://github.com/user-attachments/assets/5fb53ff5-6bf2-4005-9caf-68df3c9df1a1) ![fan_sanding_catalyst](https://github.com/user-attachments/assets/5cb15a91-de17-47fb-91af-a065080f116d) ![fan_ending_catalyst_dragons_breath](https://github.com/user-attachments/assets/ebacf2c6-2639-45da-a635-ba421c332e92) ![fan_ending_catalyst_dragon_head](https://github.com/user-attachments/assets/4c3105e7-5897-4755-9e00-7fca7bdc1763) ![fan_enriched_catalyst](https://github.com/user-attachments/assets/0d44f0d4-416d-4294-8407-25eb5bc3039a) **More Fan Catalysts**
 
 Fan catalysts now support Create: Nuclear, Create: Dragons Plus and Create: Henry.
 
