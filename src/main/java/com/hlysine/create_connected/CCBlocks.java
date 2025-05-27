@@ -658,7 +658,7 @@ public class CCBlocks {
             .addLayer(() -> RenderType::cutoutMipped)
             .transform(pickaxeOnly())
             .transform(FeatureToggle.registerDependent(CCBlocks.EMPTY_FAN_CATALYST))
-            .transform(FeatureToggle.addCondition(() -> Mods.DRAGONS_PLUS.isLoaded() || Mods.HENRY.isLoaded()))
+            .transform(FeatureToggle.addCondition(Mods.DRAGONS_PLUS::isLoaded))
             .blockstate((c, p) -> p.simpleBlock(c.getEntry(), AssetLookup.partialBaseModel(c, p)))
             .tag(AllTags.AllBlockTags.FAN_TRANSPARENT.tag)
             .lang("Fan Ending Catalyst with Dragon's Breath")
