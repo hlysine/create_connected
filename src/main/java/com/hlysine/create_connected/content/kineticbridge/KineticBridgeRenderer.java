@@ -20,9 +20,17 @@ public class KineticBridgeRenderer extends KineticBlockEntityRenderer<KineticBlo
 
     private final boolean isDestination;
 
-    public KineticBridgeRenderer(BlockEntityRendererProvider.Context context, boolean isDestination) {
+    private KineticBridgeRenderer(BlockEntityRendererProvider.Context context, boolean isDestination) {
         super(context);
         this.isDestination = isDestination;
+    }
+
+    public static KineticBridgeRenderer source(BlockEntityRendererProvider.Context ctx) {
+        return new KineticBridgeRenderer(ctx, false);
+    }
+
+    public static KineticBridgeRenderer destination(BlockEntityRendererProvider.Context ctx) {
+        return new KineticBridgeRenderer(ctx, true);
     }
 
     @Override

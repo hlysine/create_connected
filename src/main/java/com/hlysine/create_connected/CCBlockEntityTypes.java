@@ -38,7 +38,6 @@ import com.hlysine.create_connected.content.sixwaygearbox.SixWayGearboxVisual;
 import com.simibubi.create.content.decoration.copycat.CopycatBlockEntity;
 import com.simibubi.create.content.kinetics.crank.HandCrankRenderer;
 import com.simibubi.create.content.kinetics.simpleRelays.BracketedKineticBlockEntityRenderer;
-import com.simibubi.create.content.kinetics.simpleRelays.BracketedKineticBlockEntityVisual;
 import com.simibubi.create.content.kinetics.simpleRelays.SimpleKineticBlockEntity;
 import com.simibubi.create.content.kinetics.simpleRelays.encased.EncasedCogRenderer;
 import com.simibubi.create.content.kinetics.simpleRelays.encased.EncasedCogVisual;
@@ -48,7 +47,6 @@ import com.simibubi.create.content.redstone.analogLever.AnalogLeverVisual;
 import com.simibubi.create.foundation.blockEntity.renderer.SmartBlockEntityRenderer;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
-import dev.engine_room.flywheel.api.visualization.VisualizationContext;
 
 public class CCBlockEntityTypes {
     private static final CreateRegistrate REGISTRATE = CreateConnected.getRegistrate();
@@ -129,14 +127,14 @@ public class CCBlockEntityTypes {
             .blockEntity("kinetic_bridge", KineticBridgeBlockEntity::new)
             .visual(() -> (ctx, blockEntity, partialTick) -> new KineticBridgeVisual(ctx, blockEntity, partialTick, false), false)
             .validBlocks(CCBlocks.KINETIC_BRIDGE)
-            .renderer(() -> ctx -> new KineticBridgeRenderer(ctx, false))
+            .renderer(() -> KineticBridgeRenderer::source)
             .register();
 
     public static final BlockEntityEntry<KineticBridgeDestinationBlockEntity> KINETIC_BRIDGE_DESTINATION = REGISTRATE
             .blockEntity("kinetic_bridge_destination", KineticBridgeDestinationBlockEntity::new)
             .visual(() -> (ctx, blockEntity, partialTick) -> new KineticBridgeVisual(ctx, blockEntity, partialTick, true), false)
             .validBlocks(CCBlocks.KINETIC_BRIDGE_DESTINATION)
-            .renderer(() -> ctx -> new KineticBridgeRenderer(ctx, true))
+            .renderer(() -> KineticBridgeRenderer::destination)
             .register();
 
     public static final BlockEntityEntry<BrassGearboxBlockEntity> BRASS_GEARBOX = REGISTRATE
