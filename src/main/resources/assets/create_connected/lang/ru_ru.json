@@ -180,7 +180,7 @@
   "create_connected.gui.sequenced_pulse_generator.signal": "Уровень сигнала",
   "create_connected.gui.sequenced_pulse_generator.title": "Послед. генератор импульса",
   "create_connected.kinetic_bridge.not_enough_space": "Уберите мешающие для размещения блоки",
-  "create_connected.kinetic_bridge.stress_impact": "Проводимая нагрузка в ЕН на об/мин",
+  "create_connected.kinetic_bridge.stress_impact_short": "Проводимая нагрузка в ЕН на об/мин",
   "create_connected.overstress_clutch.uncouple_delay": "Задержка разрыва",
   "create_connected.ponder.chain_cogwheel_relay.header": "Передачей силы вращения с помощью цепных шестерней в корпусе",
   "create_connected.ponder.chain_cogwheel_relay.text_1": "Цепные шестерни - это цепные приводы с дополнительными шестернями",
