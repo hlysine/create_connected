@@ -89,6 +89,7 @@
   "block.create_connected.fan_splashing_catalyst": "Fan Washing Catalyst",
   "block.create_connected.fan_splashing_catalyst.tooltip.summary": "Dedicated _bulk washing_ device. Content of the catalyst does not interact with the environment.",
   "block.create_connected.fan_withering_catalyst": "Fan Withering Catalyst",
+  "block.create_connected.fan_withering_catalyst.tooltip.summary": "Dedicated _bulk withering_ device for compatible mods. Content of the catalyst does not interact with the environment.",
   "block.create_connected.fluid_vessel": "Fluid Vessel",
   "block.create_connected.fluid_vessel.tooltip.behaviour1": "_Cycle_ window shapes.",
   "block.create_connected.fluid_vessel.tooltip.condition1": "When R-Clicked with Wrench",
