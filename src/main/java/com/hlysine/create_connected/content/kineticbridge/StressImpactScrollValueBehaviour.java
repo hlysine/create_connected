@@ -32,7 +32,7 @@ public class StressImpactScrollValueBehaviour extends ScrollValueBehaviour {
 
     @Override
     public ValueSettingsBoard createBoard(Player player, BlockHitResult hitResult) {
-        ImmutableList<Component> rows = ImmutableList.of(ConnectedLang.translateDirect("kinetic_bridge.stress_impact"));
+        ImmutableList<Component> rows = ImmutableList.of(ConnectedLang.translateDirect("kinetic_bridge.stress_impact_short"));
         ValueSettingsFormatter formatter = new ValueSettingsFormatter(this::formatSettings);
         return new ValueSettingsBoard(label, 160, 10, rows, formatter);
     }
