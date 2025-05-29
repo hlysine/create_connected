@@ -176,7 +176,7 @@
   "create_connected.gui.sequenced_pulse_generator.signal": "Signalstärke",
   "create_connected.gui.sequenced_pulse_generator.title": "Sequenzierter Impulsgenerator",
   "create_connected.kinetic_bridge.not_enough_space": "Entferne Blöcke für Platzierung",
-  "create_connected.kinetic_bridge.stress_impact": "Auslastungkapazität",
+  "create_connected.kinetic_bridge.stress_impact_short": "Auslastungkapazität",
   "create_connected.overstress_clutch.uncouple_delay": "Entkupplungs-Verzögerung",
   "create_connected.ponder.chain_cogwheel_relay.header": "Rotationskraft mit Kettenrädern übertragen",
   "create_connected.ponder.chain_cogwheel_relay.text_1": "Ummantelte Kettenzahnriemen sind Ummantelte Kettenriemen mit zusätzlichem Zahnrad",
