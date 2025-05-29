@@ -180,7 +180,7 @@
   "create_connected.gui.sequenced_pulse_generator.signal": "信号强度",
   "create_connected.gui.sequenced_pulse_generator.title": "可编程脉冲生成器",
   "create_connected.kinetic_bridge.not_enough_space": "清理阻挡的方块以便放置",
-  "create_connected.kinetic_bridge.stress_impact": "每 RPM 应力影响",
+  "create_connected.kinetic_bridge.stress_impact": "应力影响",
   "create_connected.kinetic_bridge.stress_impact_short": "应力影响",
   "create_connected.overstress_clutch.uncouple_delay": "解耦延迟",
   "create_connected.ponder.chain_cogwheel_relay.header": "使用链式齿轮箱传递旋转力",
