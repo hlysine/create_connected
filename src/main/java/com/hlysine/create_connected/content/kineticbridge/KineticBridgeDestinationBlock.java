@@ -96,7 +96,8 @@ public class KineticBridgeDestinationBlock extends DirectionalKineticBlock imple
         if (stillValid(pLevel, pPos, pState)) {
             BlockPos sourcePos = getSource(pPos, pState);
             if (!pLevel.getBlockState(sourcePos).is(CCBlocks.KINETIC_BRIDGE.get())) {
-                return super.playerWillDestroy(pLevel, pPos, pState, pPlayer);
+                super.playerWillDestroy(pLevel, pPos, pState, pPlayer);
+                return;
             }
             pLevel.destroyBlockProgress(sourcePos.hashCode(), sourcePos, -1);
             if (!pLevel.isClientSide() && pPlayer.isCreative())
