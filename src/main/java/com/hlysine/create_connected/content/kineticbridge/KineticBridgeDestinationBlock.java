@@ -71,6 +71,8 @@ public class KineticBridgeDestinationBlock extends DirectionalKineticBlock imple
 
         if (stillValid(level, clickedPos, state)) {
             BlockPos sourcePos = getSource(clickedPos, state);
+            if (!context.getLevel().getBlockState(sourcePos).is(CCBlocks.KINETIC_BRIDGE.get()))
+                return super.onSneakWrenched(state, context);
             context = new UseOnContext(level, context.getPlayer(), context.getHand(), context.getItemInHand(),
                     new BlockHitResult(context.getClickLocation(), context.getClickedFace(), sourcePos,
                             context.isInside()));
@@ -82,13 +84,20 @@ public class KineticBridgeDestinationBlock extends DirectionalKineticBlock imple
 
     @Override
     public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
-        if (stillValid(pLevel, pPos, pState))
-            pLevel.destroyBlock(getSource(pPos, pState), true);
+        if (stillValid(pLevel, pPos, pState)) {
+            BlockPos sourcePos = getSource(pPos, pState);
+            if (!pLevel.getBlockState(sourcePos).is(CCBlocks.KINETIC_BRIDGE.get()))
+                return;
+            pLevel.destroyBlock(sourcePos, true);
+        }
     }
 
     public BlockState playerWillDestroy(Level pLevel, BlockPos pPos, BlockState pState, Player pPlayer) {
         if (stillValid(pLevel, pPos, pState)) {
             BlockPos sourcePos = getSource(pPos, pState);
+            if (!pLevel.getBlockState(sourcePos).is(CCBlocks.KINETIC_BRIDGE.get())) {
+                return super.playerWillDestroy(pLevel, pPos, pState, pPlayer);
+            }
             pLevel.destroyBlockProgress(sourcePos.hashCode(), sourcePos, -1);
             if (!pLevel.isClientSide() && pPlayer.isCreative())
                 pLevel.destroyBlock(sourcePos, false);
@@ -100,9 +109,10 @@ public class KineticBridgeDestinationBlock extends DirectionalKineticBlock imple
     public BlockState updateShape(BlockState pState, Direction pFacing, BlockState pFacingState, LevelAccessor pLevel,
                                   BlockPos pCurrentPos, BlockPos pFacingPos) {
         if (stillValid(pLevel, pCurrentPos, pState)) {
-            BlockPos masterPos = getSource(pCurrentPos, pState);
-            if (!pLevel.getBlockTicks().hasScheduledTick(masterPos, CCBlocks.KINETIC_BRIDGE.get()))
-                pLevel.scheduleTick(masterPos, CCBlocks.KINETIC_BRIDGE.get(), 1);
+            BlockPos sourcePos = getSource(pCurrentPos, pState);
+            if (pLevel.getBlockState(sourcePos).is(CCBlocks.KINETIC_BRIDGE.get()))
+                if (!pLevel.getBlockTicks().hasScheduledTick(sourcePos, CCBlocks.KINETIC_BRIDGE.get()))
+                    pLevel.scheduleTick(sourcePos, CCBlocks.KINETIC_BRIDGE.get(), 1);
             return pState;
         }
         if (!(pLevel instanceof Level level) || level.isClientSide())
@@ -113,7 +123,7 @@ public class KineticBridgeDestinationBlock extends DirectionalKineticBlock imple
     }
 
     public static BlockPos getSource(BlockPos pos, BlockState state) {
-        Direction direction = state.getValue(FACING);
+        Direction direction = state.getOptionalValue(FACING).orElse(Direction.NORTH);
         return pos.relative(direction.getOpposite());
     }
 
