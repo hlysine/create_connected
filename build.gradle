@@ -283,7 +283,7 @@ publishMods {
     github {
         accessToken = secrets.GITHUB_TOKEN
         repository = "hlysine/create_connected"
-        commitish = "main"
+        commitish = "mc1.20.1/main"
     }
 
     modrinth {
