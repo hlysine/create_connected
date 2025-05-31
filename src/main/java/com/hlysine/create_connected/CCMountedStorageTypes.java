@@ -1,5 +1,6 @@
 package com.hlysine.create_connected;
 
+import com.hlysine.create_connected.content.fluidvessel.FluidVesselMountedStorageType;
 import com.hlysine.create_connected.content.itemsilo.ItemSiloMountedStorageType;
 import com.simibubi.create.api.contraption.storage.fluid.MountedFluidStorageType;
 import com.simibubi.create.api.contraption.storage.item.MountedItemStorageType;
@@ -13,7 +14,7 @@ public class CCMountedStorageTypes {
     private static final CreateRegistrate REGISTRATE = CreateConnected.getRegistrate();
 
     public static final RegistryEntry<MountedItemStorageType<?>, ItemSiloMountedStorageType> SILO = simpleItem("silo", ItemSiloMountedStorageType::new);
-    public static final RegistryEntry<MountedFluidStorageType<?>, FluidTankMountedStorageType> FLUID_VESSEL = simpleFluid("fluid_vessel", FluidTankMountedStorageType::new);
+    public static final RegistryEntry<MountedFluidStorageType<?>, FluidVesselMountedStorageType> FLUID_VESSEL = simpleFluid("fluid_vessel", FluidVesselMountedStorageType::new);
 
     private static <T extends MountedItemStorageType<?>> RegistryEntry<MountedItemStorageType<?>, T> simpleItem(String name, Supplier<T> supplier) {
         return REGISTRATE.mountedItemStorage(name, supplier).register();
