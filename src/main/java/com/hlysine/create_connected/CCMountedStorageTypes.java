@@ -14,8 +14,7 @@ public class CCMountedStorageTypes {
     private static final CreateRegistrate REGISTRATE = CreateConnected.getRegistrate();
 
     public static final RegistryEntry<ItemSiloMountedStorageType> SILO = simpleItem("silo", ItemSiloMountedStorageType::new);
-    public static final RegistryEntry<MountedFluidStorageType<?>, FluidVesselMountedStorageType> FLUID_VESSEL = simpleFluid("fluid_vessel", FluidVesselMountedStorageType::new);
-    public static final RegistryEntry<FluidTankMountedStorageType> FLUID_TANK = simpleFluid("fluid_tank", FluidTankMountedStorageType::new);
+    public static final RegistryEntry<FluidVesselMountedStorageType> FLUID_VESSEL = simpleFluid("fluid_vessel", FluidVesselMountedStorageType::new);
 
     private static <T extends MountedItemStorageType<?>> RegistryEntry<T> simpleItem(String name, Supplier<T> supplier) {
         return REGISTRATE.mountedItemStorage(name, supplier).register();

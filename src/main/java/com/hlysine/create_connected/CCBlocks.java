@@ -741,7 +741,7 @@ public class CCBlocks {
                 return BlockMovementChecks.CheckResult.PASS;
             }))
             .transform(displaySource(CCDisplaySources.BOILER_STATUS))
-            .transform(mountedFluidStorage(CCMountedStorageTypes.FLUID_TANK))
+            .transform(mountedFluidStorage(CCMountedStorageTypes.FLUID_VESSEL))
             .onRegister(movementBehaviour(new FluidTankMovementBehavior()))
             .addLayer(() -> RenderType::cutoutMipped)
             .item(FluidVesselItem::new)

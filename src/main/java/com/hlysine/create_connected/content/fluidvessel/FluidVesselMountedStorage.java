@@ -2,7 +2,7 @@ package com.hlysine.create_connected.content.fluidvessel;
 
 
 import com.hlysine.create_connected.CCMountedStorageTypes;
-import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.simibubi.create.api.contraption.storage.SyncedMountedStorage;
 import com.simibubi.create.api.contraption.storage.fluid.MountedFluidStorageType;
@@ -11,20 +11,19 @@ import com.simibubi.create.content.contraptions.Contraption;
 import com.simibubi.create.content.fluids.tank.FluidTankBlockEntity;
 import net.createmod.catnip.animation.LerpedFloat;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.ExtraCodecs;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.fluids.FluidStack;
-import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.capability.templates.FluidTank;
 import org.jetbrains.annotations.Nullable;
 
 public class FluidVesselMountedStorage extends WrapperMountedFluidStorage<FluidVesselMountedStorage.Handler> implements SyncedMountedStorage {
-    public static final MapCodec<FluidVesselMountedStorage> CODEC = RecordCodecBuilder.mapCodec(i -> i.group(
+    public static final Codec<FluidVesselMountedStorage> CODEC = RecordCodecBuilder.create(i -> i.group(
             ExtraCodecs.NON_NEGATIVE_INT.fieldOf("capacity").forGetter(FluidVesselMountedStorage::getCapacity),
-            FluidStack.OPTIONAL_CODEC.fieldOf("fluid").forGetter(FluidVesselMountedStorage::getFluid)
+            FluidStack.CODEC.fieldOf("fluid").forGetter(FluidVesselMountedStorage::getFluid)
     ).apply(i, FluidVesselMountedStorage::new));
 
     private boolean dirty;
@@ -86,9 +85,9 @@ public class FluidVesselMountedStorage extends WrapperMountedFluidStorage<FluidV
         return new FluidVesselMountedStorage(inventory.getCapacity(), inventory.getFluid().copy());
     }
 
-    public static FluidVesselMountedStorage fromLegacy(HolderLookup.Provider registries, CompoundTag nbt) {
+    public static FluidVesselMountedStorage fromLegacy(CompoundTag nbt) {
         int capacity = nbt.getInt("Capacity");
-        FluidStack fluid = FluidStack.parseOptional(registries, nbt);
+        FluidStack fluid = FluidStack.loadFluidStackFromNBT(nbt);
         return new FluidVesselMountedStorage(capacity, fluid);
     }
 
@@ -106,4 +105,3 @@ public class FluidVesselMountedStorage extends WrapperMountedFluidStorage<FluidV
         }
     }
 }
-
