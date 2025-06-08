@@ -108,7 +108,10 @@ public class CopycatFenceBlock extends WaterloggedCopycatWrappedBlock {
 
     @Override
     public boolean isIgnoredConnectivitySide(BlockAndTintGetter reader, BlockState state, Direction face,
-                                             BlockPos fromPos, BlockPos toPos) {
+                                             @Nullable BlockPos fromPos, @Nullable BlockPos toPos) {
+        if (fromPos == null || toPos == null)
+            return true;
+
         BlockState toState = reader.getBlockState(toPos);
         if (!toState.is(this)) return true;
         return !canConnectTexturesToward(reader, toPos, fromPos, toState);

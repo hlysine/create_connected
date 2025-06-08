@@ -109,7 +109,7 @@ public class CopycatFenceGateBlock extends WaterloggedCopycatWrappedBlock {
 
     @Override
     public boolean isIgnoredConnectivitySide(BlockAndTintGetter reader, BlockState state, Direction face,
-                                             BlockPos fromPos, BlockPos toPos) {
+                                             @Nullable BlockPos fromPos, @Nullable BlockPos toPos) {
         return true;
     }
 
