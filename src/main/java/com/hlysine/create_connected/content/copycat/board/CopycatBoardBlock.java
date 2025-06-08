@@ -34,6 +34,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 import java.util.function.Function;
@@ -67,7 +68,11 @@ public class CopycatBoardBlock extends MigratingWaterloggedCopycatBlock implemen
     }
 
     @Override
-    public boolean isIgnoredConnectivitySide(BlockAndTintGetter reader, BlockState state, Direction face, BlockPos fromPos, BlockPos toPos) {
+    public boolean isIgnoredConnectivitySide(BlockAndTintGetter reader, BlockState state, Direction face,
+                                             @Nullable BlockPos fromPos, @Nullable BlockPos toPos) {
+        if (fromPos == null || toPos == null)
+            return true;
+
         return !reader.getBlockState(toPos).is(this);
     }
 

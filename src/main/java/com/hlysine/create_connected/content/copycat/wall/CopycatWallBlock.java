@@ -103,7 +103,10 @@ public class CopycatWallBlock extends WaterloggedCopycatWrappedBlock {
 
     @Override
     public boolean isIgnoredConnectivitySide(BlockAndTintGetter reader, BlockState state, Direction face,
-                                             BlockPos fromPos, BlockPos toPos) {
+                                             @Nullable BlockPos fromPos, @Nullable BlockPos toPos) {
+        if (fromPos == null || toPos == null)
+            return true;
+
         BlockState toState = reader.getBlockState(toPos);
         if (!toState.is(this) || !state.is(this)) return true;
 

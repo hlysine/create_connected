@@ -124,7 +124,10 @@ public class CopycatStairsBlock extends WaterloggedCopycatWrappedBlock {
 
     @Override
     public boolean isIgnoredConnectivitySide(BlockAndTintGetter reader, BlockState state, Direction face,
-                                             BlockPos fromPos, BlockPos toPos) {
+                                             @Nullable BlockPos fromPos, @Nullable BlockPos toPos) {
+        if (fromPos == null || toPos == null)
+            return true;
+
         boolean flipped = state.getValue(HALF) == Half.TOP;
         Direction facing = state.getValue(StairBlock.FACING);
         BlockState toState = reader.getBlockState(toPos);
