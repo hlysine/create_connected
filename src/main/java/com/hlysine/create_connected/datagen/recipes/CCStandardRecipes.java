@@ -6,14 +6,13 @@ import com.hlysine.create_connected.CCBlocks;
 import com.hlysine.create_connected.CCItems;
 import com.hlysine.create_connected.CreateConnected;
 import com.hlysine.create_connected.compat.CopycatsManager;
-import com.hlysine.create_connected.compat.Mods;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllItems;
 import com.simibubi.create.AllTags;
-import com.simibubi.create.foundation.data.recipe.CreateRecipeProvider;
+import com.simibubi.create.api.data.recipe.BaseRecipeProvider;
 import com.simibubi.create.foundation.mixin.accessor.MappedRegistryAccessor;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import com.tterrag.registrate.util.entry.ItemProviderEntry;
@@ -56,7 +55,7 @@ import java.util.function.Function;
 import java.util.function.UnaryOperator;
 
 @SuppressWarnings("unused")
-public class CCStandardRecipes extends CreateRecipeProvider {
+public class CCStandardRecipes extends BaseRecipeProvider {
     private final Marker KINETICS = enterFolder("kinetics");
 
     GeneratedRecipe ENCASED_CHAIN_COGWHEEL = create(CCBlocks.ENCASED_CHAIN_COGWHEEL).unlockedBy(AllBlocks.ENCASED_CHAIN_DRIVE::get)
@@ -710,7 +709,7 @@ public class CCStandardRecipes extends CreateRecipeProvider {
     }
 
     public CCStandardRecipes(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
-        super(output, registries);
+        super(output, registries, CreateConnected.MODID);
     }
 
     @ParametersAreNonnullByDefault

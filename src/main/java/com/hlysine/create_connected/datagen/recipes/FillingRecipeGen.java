@@ -2,6 +2,7 @@ package com.hlysine.create_connected.datagen.recipes;
 
 import com.hlysine.create_connected.CCBlocks;
 import com.hlysine.create_connected.CCTags;
+import com.hlysine.create_connected.CreateConnected;
 import com.hlysine.create_connected.compat.Mods;
 import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.foundation.fluid.FluidIngredient;
@@ -13,7 +14,7 @@ import net.neoforged.neoforge.common.conditions.ModLoadedCondition;
 import java.util.concurrent.CompletableFuture;
 
 @SuppressWarnings("unused")
-public class FillingRecipeGen extends ProcessingRecipeGen {
+public class FillingRecipeGen extends com.simibubi.create.api.data.recipe.FillingRecipeGen {
 
     GeneratedRecipe FAN_BLASTING_CATALYST = create("fan_blasting_catalyst", b -> b.require(Fluids.LAVA, 1000)
             .require(CCBlocks.EMPTY_FAN_CATALYST)
@@ -32,13 +33,7 @@ public class FillingRecipeGen extends ProcessingRecipeGen {
             .output(CCBlocks.FAN_ENDING_CATALYST_DRAGONS_BREATH));
 
     public FillingRecipeGen(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
-        super(output, registries);
+        super(output, registries, CreateConnected.MODID);
     }
-
-    @Override
-    protected AllRecipeTypes getRecipeType() {
-        return AllRecipeTypes.FILLING;
-    }
-
 }
 

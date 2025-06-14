@@ -1,6 +1,7 @@
 package com.hlysine.create_connected.datagen.recipes;
 
 import com.hlysine.create_connected.CCBlocks;
+import com.hlysine.create_connected.CreateConnected;
 import com.hlysine.create_connected.compat.Mods;
 import com.simibubi.create.AllItems;
 import com.simibubi.create.AllRecipeTypes;
@@ -20,7 +21,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.function.Supplier;
 
 @SuppressWarnings("unused")
-public class ItemApplicationRecipeGen extends ProcessingRecipeGen {
+public class ItemApplicationRecipeGen extends com.simibubi.create.api.data.recipe.ItemApplicationRecipeGen {
 
     GeneratedRecipe BLASTING_CATALYST = fanCatalystFromEmpty(
             "blasting_catalyst", Items.LAVA_BUCKET, CCBlocks.FAN_BLASTING_CATALYST::asItem);
@@ -83,12 +84,6 @@ public class ItemApplicationRecipeGen extends ProcessingRecipeGen {
     }
 
     public ItemApplicationRecipeGen(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
-        super(output, registries);
+        super(output, registries, CreateConnected.MODID);
     }
-
-    @Override
-    protected AllRecipeTypes getRecipeType() {
-        return AllRecipeTypes.ITEM_APPLICATION;
-    }
-
 }

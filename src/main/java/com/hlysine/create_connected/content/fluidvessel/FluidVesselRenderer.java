@@ -8,6 +8,7 @@ import com.simibubi.create.foundation.fluid.FluidRenderer;
 import dev.engine_room.flywheel.lib.transform.TransformStack;
 import net.createmod.catnip.animation.LerpedFloat;
 import net.createmod.catnip.data.Iterate;
+import net.createmod.catnip.platform.NeoForgeCatnipServices;
 import net.createmod.catnip.render.CachedBuffers;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -75,8 +76,16 @@ public class FluidVesselRenderer extends SafeBlockEntityRenderer<FluidVesselBloc
 
         ms.pushPose();
         ms.translate(0, clampedLevel - totalHeight, 0);
-        FluidRenderer.renderFluidBox(fluidStack.getFluid(), fluidStack.getAmount(), xMin, yMin, zMin, xMax, yMax, zMax,
-                buffer, ms, light, false, true, fluidStack.getComponentsPatch());
+        NeoForgeCatnipServices.FLUID_RENDERER.renderFluidBox(
+                fluidStack,
+                xMin, yMin, zMin,
+                xMax, yMax, zMax,
+                buffer,
+                ms,
+                light,
+                false,
+                true
+        );
         ms.popPose();
     }
 

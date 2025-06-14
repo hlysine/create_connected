@@ -8,11 +8,10 @@ import com.hlysine.create_connected.CCSoundEvents;
 import com.hlysine.create_connected.CreateConnected;
 import com.hlysine.create_connected.datagen.advancements.CCAdvancements;
 import com.hlysine.create_connected.datagen.recipes.CCStandardRecipes;
-import com.hlysine.create_connected.datagen.recipes.ProcessingRecipeGen;
+import com.hlysine.create_connected.datagen.recipes.CreateConnectedProcessingRecipeGen;
 import com.hlysine.create_connected.datagen.recipes.SequencedAssemblyGen;
 import com.simibubi.create.foundation.utility.FilesHelper;
 import com.tterrag.registrate.providers.ProviderType;
-import com.tterrag.registrate.providers.RegistrateDataProvider;
 import net.createmod.ponder.foundation.PonderIndex;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
@@ -25,10 +24,13 @@ import java.util.concurrent.CompletableFuture;
 import java.util.function.BiConsumer;
 
 public class CCDatagen {
+    public static void gatherDataHighPriority(GatherDataEvent event) {
+        if (event.getMods().contains(CreateConnected.MODID))
+            addExtraRegistrateData();
+    }
 
     public static void gatherData(GatherDataEvent event) {
         if (!event.getMods().contains(CreateConnected.MODID)) return;
-        addExtraRegistrateData();
 
         DataGenerator generator = event.getGenerator();
         PackOutput output = generator.getPackOutput();
@@ -43,10 +45,8 @@ public class CCDatagen {
         generator.addProvider(event.includeServer(), CCJukeboxSongs.provider(output, lookupProvider, existingFileHelper));
 
         if (event.includeServer()) {
-            ProcessingRecipeGen.registerAll(generator, output, lookupProvider);
+            CreateConnectedProcessingRecipeGen.registerAllProcessing(generator, output, lookupProvider);
         }
-
-        event.getGenerator().addProvider(true, CreateConnected.getRegistrate().setDataProvider(new RegistrateDataProvider(CreateConnected.getRegistrate(), CreateConnected.MODID, event)));
     }
 
     private static void addExtraRegistrateData() {

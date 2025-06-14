@@ -68,6 +68,7 @@ public class CreateConnected {
         if (Mods.COPYCATS.isLoaded())
             NeoForge.EVENT_BUS.addListener(CopycatsManager::onLevelTick);
 
+        modEventBus.addListener(EventPriority.HIGHEST, CCDatagen::gatherDataHighPriority);
         modEventBus.addListener(EventPriority.LOWEST, CCDatagen::gatherData);
         modEventBus.addListener(CCSoundEvents::register);
 
