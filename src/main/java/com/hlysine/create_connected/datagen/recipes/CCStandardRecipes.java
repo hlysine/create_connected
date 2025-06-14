@@ -8,23 +8,22 @@ import com.hlysine.create_connected.CCBlocks;
 import com.hlysine.create_connected.CCItems;
 import com.hlysine.create_connected.CreateConnected;
 import com.hlysine.create_connected.compat.CopycatsManager;
-import com.hlysine.create_connected.compat.Mods;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllItems;
 import com.simibubi.create.AllTags;
-import com.simibubi.create.foundation.data.recipe.CreateRecipeProvider;
+import com.simibubi.create.api.data.recipe.BaseRecipeProvider;
 import com.tterrag.registrate.util.DataIngredient;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import com.tterrag.registrate.util.entry.ItemProviderEntry;
 import net.createmod.catnip.platform.CatnipServices;
 import net.minecraft.world.item.crafting.AbstractCookingRecipe;
-import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.world.item.crafting.SimpleCraftingRecipeSerializer;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.recipes.*;
 import net.minecraftforge.common.Tags;
+import net.minecraft.data.recipes.*;
 import net.minecraftforge.common.crafting.ConditionalRecipe;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraft.resources.ResourceLocation;
@@ -35,18 +34,16 @@ import net.minecraftforge.common.crafting.conditions.ModLoadedCondition;
 import net.minecraftforge.common.crafting.conditions.NotCondition;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
-import net.minecraft.world.level.block.Blocks;
 
 import java.util.function.Consumer;
-
+import net.minecraft.world.level.block.Blocks;
 import org.jetbrains.annotations.NotNull;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.UnaryOperator;
 
 @SuppressWarnings("unused")
-public class CCStandardRecipes extends CreateRecipeProvider {
+public class CCStandardRecipes extends BaseRecipeProvider {
     private final Marker KINETICS = enterFolder("kinetics");
 
     GeneratedRecipe ENCASED_CHAIN_COGWHEEL = create(CCBlocks.ENCASED_CHAIN_COGWHEEL).unlockedBy(AllBlocks.ENCASED_CHAIN_DRIVE::get)
@@ -740,11 +737,6 @@ public class CCStandardRecipes extends CreateRecipeProvider {
         private final ResourceLocation outputOverride;
 
         @Override
-        public @NotNull ResourceLocation getId() {
-            return wrapped.getId();
-        }
-
-        @Override
         public @NotNull RecipeSerializer<?> getType() {
             return wrapped.getType();
         }
@@ -778,5 +770,10 @@ public class CCStandardRecipes extends CreateRecipeProvider {
             this.conditions = conditions;
         }
 
+        @Override
+        public @NotNull ResourceLocation getId() {
+            return wrapped.getId();
+        }
+
     }
-}
+    }

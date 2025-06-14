@@ -2,6 +2,7 @@ package com.hlysine.create_connected.content.kineticbattery;
 
 import com.hlysine.create_connected.CCBlocks;
 import com.simibubi.create.content.kinetics.mechanicalArm.AllArmInteractionPointTypes;
+import com.simibubi.create.content.kinetics.mechanicalArm.ArmBlockEntity;
 import com.simibubi.create.content.kinetics.mechanicalArm.ArmInteractionPoint;
 import com.simibubi.create.content.kinetics.mechanicalArm.ArmInteractionPointType;
 import net.minecraft.core.BlockPos;
@@ -17,7 +18,7 @@ public class KineticBatteryInteractionPoint extends AllArmInteractionPointTypes.
     }
 
     @Override
-    public ItemStack insert(ItemStack stack, boolean simulate) {
+    public ItemStack insert(ArmBlockEntity armBlockEntity, ItemStack stack, boolean simulate) {
         ItemStack input = stack.copy();
         InteractionResultHolder<ItemStack> res =
                 KineticBatteryBlock.tryInsert(cachedState, level, pos, input, false, false, simulate);

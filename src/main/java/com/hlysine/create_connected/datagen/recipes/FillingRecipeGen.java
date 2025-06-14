@@ -2,6 +2,7 @@ package com.hlysine.create_connected.datagen.recipes;
 
 import com.hlysine.create_connected.CCBlocks;
 import com.hlysine.create_connected.CCTags;
+import com.hlysine.create_connected.CreateConnected;
 import com.hlysine.create_connected.compat.Mods;
 import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.foundation.fluid.FluidIngredient;
@@ -10,7 +11,7 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.crafting.conditions.ModLoadedCondition;
 
 @SuppressWarnings("unused")
-public class FillingRecipeGen extends ProcessingRecipeGen {
+public class FillingRecipeGen extends com.simibubi.create.api.data.recipe.FillingRecipeGen {
 
     GeneratedRecipe FAN_BLASTING_CATALYST = create("fan_blasting_catalyst", b -> b.require(Fluids.LAVA, 1000)
             .require(CCBlocks.EMPTY_FAN_CATALYST)
@@ -29,13 +30,7 @@ public class FillingRecipeGen extends ProcessingRecipeGen {
             .output(CCBlocks.FAN_ENDING_CATALYST_DRAGONS_BREATH));
 
     public FillingRecipeGen(PackOutput output) {
-        super(output);
+        super(output, CreateConnected.MODID);
     }
-
-    @Override
-    protected AllRecipeTypes getRecipeType() {
-        return AllRecipeTypes.FILLING;
-    }
-
 }
 

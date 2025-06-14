@@ -74,11 +74,12 @@ Find this mod on [**Modrinth**](https://modrinth.com/mod/create-connected) or
 
 **Supported Create versions:**
 
-| Create   | Create: Connected |
-|----------|-------------------|
-| 0.5.1e   | 0.0.2             |
-| 0.5.1f/g | 0.0.3 - 0.9.5     |
-| 6.0.0+   | 1.0.0 - latest    |
+| Create          | Create: Connected |
+|-----------------|-------------------|
+| 0.5.1e          | 0.0.2             |
+| 0.5.1f - 0.5.1j | 0.0.3 - 0.9.5     |
+| 6.0.0 - 6.0.5   | 1.0.0 - 1.1.4     |
+| 6.0.6+          | 1.1.5 - latest    |
 
 ## Compatibility
 

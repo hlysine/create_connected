@@ -7,7 +7,7 @@ import com.hlysine.create_connected.CCSoundEvents;
 import com.hlysine.create_connected.CreateConnected;
 import com.hlysine.create_connected.datagen.advancements.CCAdvancements;
 import com.hlysine.create_connected.datagen.recipes.CCStandardRecipes;
-import com.hlysine.create_connected.datagen.recipes.ProcessingRecipeGen;
+import com.hlysine.create_connected.datagen.recipes.CreateConnectedProcessingRecipeGen;
 import com.hlysine.create_connected.datagen.recipes.SequencedAssemblyGen;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.foundation.utility.FilesHelper;
@@ -15,9 +15,9 @@ import com.tterrag.registrate.providers.ProviderType;
 import net.createmod.ponder.foundation.PonderIndex;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.PackOutput;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.data.event.GatherDataEvent;
+import net.minecraft.data.PackOutput;
 
 import java.util.Map.Entry;
 import java.util.concurrent.CompletableFuture;
@@ -26,9 +26,12 @@ import java.util.function.BiConsumer;
 public class CCDatagen {
 
     private static final CreateRegistrate REGISTRATE = CreateConnected.getRegistrate();
+    public static void gatherDataHighPriority(GatherDataEvent event) {
+        if (event.getMods().contains(CreateConnected.MODID))
+            addExtraRegistrateData();
+    }
 
     public static void gatherData(GatherDataEvent event) {
-        addExtraRegistrateData();
 
         DataGenerator generator = event.getGenerator();
         PackOutput output = generator.getPackOutput();
@@ -36,14 +39,14 @@ public class CCDatagen {
         ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
 
         if (event.includeClient()) {
-            generator.addProvider(true, CCSoundEvents.provider(generator));
+        generator.addProvider(true, CCSoundEvents.provider(generator));
         }
 
         if (event.includeServer()) {
             generator.addProvider(true, new CCAdvancements(output));
             generator.addProvider(true, new CCStandardRecipes(output));
             generator.addProvider(true, new SequencedAssemblyGen(output));
-            ProcessingRecipeGen.registerAll(generator, output);
+            CreateConnectedProcessingRecipeGen.registerAllProcessing(generator, output, lookupProvider);
         }
     }
 
