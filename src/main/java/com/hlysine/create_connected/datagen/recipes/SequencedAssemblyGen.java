@@ -30,7 +30,7 @@ public class SequencedAssemblyGen extends SequencedAssemblyRecipeGen {
             .addStep(DeployerApplicationRecipe::new, rb -> rb.require(Items.REDSTONE))
             .addStep(PressingRecipe::new, rb -> rb));
 
-    public SequencedAssemblyGen(PackOutput packOutput) {
+    public SequencedAssemblyGen(PackOutput output) {
         super(output, CreateConnected.MODID);
     }
 }

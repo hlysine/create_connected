@@ -11,6 +11,7 @@ import com.hlysine.create_connected.compat.CopycatsManager;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllItems;
 import com.simibubi.create.AllTags;
+import com.simibubi.create.Create;
 import com.simibubi.create.api.data.recipe.BaseRecipeProvider;
 import com.tterrag.registrate.util.DataIngredient;
 import com.tterrag.registrate.util.entry.BlockEntry;
@@ -727,8 +728,8 @@ public class CCStandardRecipes extends BaseRecipeProvider {
         return "Create: Connected's Standard Recipes";
     }
 
-    public CCStandardRecipes(PackOutput p_i48262_1_) {
-        super(p_i48262_1_);
+    public CCStandardRecipes(PackOutput output) {
+        super(output, CreateConnected.MODID);
     }
 
     private static class ModdedCookingRecipeResult implements FinishedRecipe {

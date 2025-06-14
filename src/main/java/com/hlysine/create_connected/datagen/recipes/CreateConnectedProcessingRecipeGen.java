@@ -12,12 +12,12 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 public final class CreateConnectedProcessingRecipeGen {
-    public static void registerAllProcessing(DataGenerator gen, PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
-        final List<ProcessingRecipeGen<?, ?, ?>> GENERATORS = new ArrayList<>();
+    public static void registerAllProcessing(DataGenerator gen, PackOutput output) {
+        final List<ProcessingRecipeGen> GENERATORS = new ArrayList<>();
 
-        GENERATORS.add(new CuttingRecipeGen(output, registries));
-        GENERATORS.add(new FillingRecipeGen(output, registries));
-        GENERATORS.add(new ItemApplicationRecipeGen(output, registries));
+        GENERATORS.add(new CuttingRecipeGen(output));
+        GENERATORS.add(new FillingRecipeGen(output));
+        GENERATORS.add(new ItemApplicationRecipeGen(output));
 
         gen.addProvider(true, new DataProvider() {
 

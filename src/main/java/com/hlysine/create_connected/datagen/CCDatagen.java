@@ -26,12 +26,9 @@ import java.util.function.BiConsumer;
 public class CCDatagen {
 
     private static final CreateRegistrate REGISTRATE = CreateConnected.getRegistrate();
-    public static void gatherDataHighPriority(GatherDataEvent event) {
-        if (event.getMods().contains(CreateConnected.MODID))
-            addExtraRegistrateData();
-    }
 
     public static void gatherData(GatherDataEvent event) {
+        addExtraRegistrateData();
 
         DataGenerator generator = event.getGenerator();
         PackOutput output = generator.getPackOutput();
@@ -39,14 +36,14 @@ public class CCDatagen {
         ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
 
         if (event.includeClient()) {
-        generator.addProvider(true, CCSoundEvents.provider(generator));
+            generator.addProvider(true, CCSoundEvents.provider(generator));
         }
 
         if (event.includeServer()) {
             generator.addProvider(true, new CCAdvancements(output));
             generator.addProvider(true, new CCStandardRecipes(output));
             generator.addProvider(true, new SequencedAssemblyGen(output));
-            CreateConnectedProcessingRecipeGen.registerAllProcessing(generator, output, lookupProvider);
+            CreateConnectedProcessingRecipeGen.registerAllProcessing(generator, output);
         }
     }
 
