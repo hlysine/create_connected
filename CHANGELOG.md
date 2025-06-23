@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 1.1.6 - 2025-06-23
+
+### Fixed
+
+- Incompatibility with Create: Steam n Rails due to both mods registering the same set of interaction behaviors
+
 ## 1.1.5 - 2025-06-14
 
 **NOTE: This version is only compatible with Create 6.0.6 and later**
