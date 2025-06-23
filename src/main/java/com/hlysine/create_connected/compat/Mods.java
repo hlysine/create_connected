@@ -28,7 +28,8 @@ public enum Mods {
     HENRY("create_henry"),
     ADDITIONAL_PLACEMENTS("additionalplacements"),
     GARNISHED("garnished"),
-    DRAGONS_PLUS("create_dragons_plus");
+    DRAGONS_PLUS("create_dragons_plus"),
+    STEAM_N_RAILS("railways");
 
     private final String id;
 

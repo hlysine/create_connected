@@ -1,5 +1,6 @@
 package com.hlysine.create_connected.mixin.contraption;
 
+import com.hlysine.create_connected.compat.ModMixin;
 import com.hlysine.create_connected.content.contraption.menu.TrackingContainerLevelAccess;
 import com.hlysine.create_connected.content.contraption.menu.TrackingContraptionWorld;
 import net.minecraft.core.BlockPos;
@@ -12,6 +13,7 @@ import org.spongepowered.asm.mixin.Overwrite;
 import java.util.Optional;
 import java.util.function.BiFunction;
 
+@ModMixin(mods = {"railways"}, applyIfPresent = false)
 @Mixin(ContainerLevelAccess.class)
 public interface ContainerLevelAccessMixin {
     /**
