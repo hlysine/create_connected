@@ -1,5 +1,6 @@
 package com.hlysine.create_connected.mixin.contraption;
 
+import com.hlysine.create_connected.compat.ModMixin;
 import com.hlysine.create_connected.content.contraption.menu.TrackingContainerLevelAccess;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ContainerLevelAccess;
@@ -11,6 +12,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+@ModMixin(mods = {"railways"}, applyIfPresent = false)
 @Mixin(ItemCombinerMenu.class)
 public class ItemCombinerMenuMixin {
     @Shadow
