@@ -223,6 +223,7 @@
   "create_connected.ponder.kinetic_battery_chaining.text_4": "Pozwala to na łańcuch baterii przedłużyć czas rozładowania",
   "create_connected.ponder.kinetic_battery_chaining.text_5": "Aby zwiększyć całkowitą wydajność naprężeń, podłącz baterie równolegle",
   "create_connected.ponder.kinetic_bridge.text_6": "256 jo",
+  "create_connected.ponder.kinetic_bridge.text_7": "72 jo",
   "create_connected.ponder.linked_transmitter.header": "Używanie Połączonych nadajników",
   "create_connected.ponder.linked_transmitter.text_1": "Kliknij prawym przyciskiem myszy na wejście redstone z Połączonym nadajnikiem, aby przyczepić go do wejścia",
   "create_connected.ponder.linked_transmitter.text_2": "Połączone nadajniki mogą zdalnie przesyłać sygnały wejść",
