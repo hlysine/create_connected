@@ -91,6 +91,8 @@
   "block.create_connected.item_silo": "Silos na Przedmioty",
   "block.create_connected.item_silo.tooltip.summary": "_Pionowy_ kontener na przedmioty.",
   "block.create_connected.kinetic_battery": "Bateria kinetyczna",
+  "block.create_connected.kinetic_bridge": "Most Kinetyczny",
+  "block.create_connected.kinetic_bridge_destination": "Most Kinetyczny",
   "block.create_connected.large_crank_wheel": "Duże koło korbowe",
   "block.create_connected.linked_acacia_button": "Połączony Akacjowy przycisk",
   "block.create_connected.linked_analog_lever": "Połączona analogowa dźwignia",
