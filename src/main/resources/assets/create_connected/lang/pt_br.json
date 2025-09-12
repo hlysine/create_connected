@@ -1,10 +1,10 @@
 {
   "advancement.create_connected.brass_gearbox": "Organização Séria",
-  "advancement.create_connected.brass_gearbox.desc": "Coloque para baixo uma Caixa de Transmissão de Latão",
+  "advancement.create_connected.brass_gearbox.desc": "Coloque uma Caixa de Transmissão de Latão",
   "advancement.create_connected.control_chip": "Fabricação Precisa",
-  "advancement.create_connected.control_chip.desc": "Monte um Circuito de Controle",
+  "advancement.create_connected.control_chip.desc": "Montagem de um chip de controle",
   "advancement.create_connected.kinetic_battery": "Totalmente Carregado",
-  "advancement.create_connected.kinetic_battery.desc": "Carregue uma Bateria Cinética por completo",
+  "advancement.create_connected.kinetic_battery.desc": "Carregar uma Bateria Cinética para cheio",
   "advancement.create_connected.overpowered_brake_0": "Sobrecarregado",
   "advancement.create_connected.overpowered_brake_0.desc": "Mantenha uma rede funcionando em alta velocidade com um freio energizado conectado\n§7(Hidden Advancement)",
   "advancement.create_connected.overstress_clutch": "Disjuntor",
