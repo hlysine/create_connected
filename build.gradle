@@ -102,8 +102,8 @@ repositories {
         url = "https://maven.createmod.net"
     }
     maven {
-        // Old repo for Registrate
-        url = "https://maven.tterrag.com"
+        // Registrate
+        url = "https://maven.ithundxr.dev/snapshots"
     }
     maven {
         // Registrate
