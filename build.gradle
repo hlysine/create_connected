@@ -196,7 +196,7 @@ dependencies {
 //    runtimeOnly("maven.modrinth:create-henry:${create_henry_version}")
     implementation(fg.deobf("com.copycatsplus:copycats:${copycats_version}"))
     implementation(fg.deobf("maven.modrinth:additional-placements:${additional_placements_version}"))
-    runtimeOnly("maven.modrinth:create-steam-n-rails:${steam_n_rails_version}")
+//    runtimeOnly("maven.modrinth:create-steam-n-rails:${steam_n_rails_version}")
 
 //    runtimeOnly("maven.modrinth:adorn:${adorn_version}")
 

@@ -66,7 +66,7 @@ public class FluidVesselMountedStorage extends WrapperMountedFluidStorage<FluidV
 
     @Override
     public void afterSync(Contraption contraption, BlockPos localPos) {
-        BlockEntity be = contraption.presentBlockEntities.get(localPos);
+        BlockEntity be = contraption.getBlockEntityClientSide(localPos);
         if (!(be instanceof FluidTankBlockEntity tank))
             return;
 
