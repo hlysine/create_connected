@@ -7,12 +7,12 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.simibubi.create.content.schematics.ServerSchematicLoader;
+import com.simibubi.create.foundation.utility.CreatePaths;
 import com.simibubi.create.foundation.utility.FilesHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -21,9 +21,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.io.IOException;
+import java.io.OutputStream;
 import java.nio.file.Files;
+import java.nio.file.OpenOption;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -31,9 +32,6 @@ import java.util.stream.Stream;
 
 @Mixin(value = ServerSchematicLoader.class, remap = false)
 public abstract class ServerSchematicLoaderMixin {
-
-    @Shadow
-    public abstract String getSchematicPath();
 
     @Unique
     private void deleteEmptyFolders(Path rootPath, Path pathToDelete) throws IOException {
@@ -72,8 +70,8 @@ public abstract class ServerSchematicLoaderMixin {
             method = "handleNewUpload(Lnet/minecraft/server/level/ServerPlayer;Ljava/lang/String;JLnet/minecraft/core/BlockPos;)V"
     )
     private long countNestedFiles(long original,
-                                  @Local(ordinal = 1) String playerPath) throws IOException {
-        try (Stream<Path> list = Files.walk(Paths.get(playerPath))) {
+                                  @Local(ordinal = 1) Path playerPath) throws IOException {
+        try (Stream<Path> list = Files.walk(playerPath)) {
             return list.filter(x -> !Files.isDirectory(x)).count();
         }
     }
@@ -103,17 +101,13 @@ public abstract class ServerSchematicLoaderMixin {
         return result;
     }
 
-    @Inject(
+    @WrapOperation(
             at = @At(value = "INVOKE", target = "Ljava/nio/file/Files;newOutputStream(Ljava/nio/file/Path;[Ljava/nio/file/OpenOption;)Ljava/io/OutputStream;"),
             method = "handleNewUpload(Lnet/minecraft/server/level/ServerPlayer;Ljava/lang/String;JLnet/minecraft/core/BlockPos;)V"
     )
-    private void createNestedFolders(ServerPlayer player,
-                                     String schematic,
-                                     long size,
-                                     BlockPos pos,
-                                     CallbackInfo ci,
-                                     @Local(ordinal = 1) Path uploadPath) {
-        FilesHelper.createFolderIfMissing(uploadPath.getParent().toString());
+    private OutputStream createNestedFolders(Path path, OpenOption[] options, Operation<OutputStream> original) {
+        FilesHelper.createFolderIfMissing(path.getParent());
+        return original.call(path, options);
     }
 
     @Inject(
@@ -122,7 +116,7 @@ public abstract class ServerSchematicLoaderMixin {
     )
     private void deleteEmptyFolders(String playerSchematicId,
                                     CallbackInfo ci) throws IOException {
-        deleteEmptyFolders(Path.of(getSchematicPath()), Path.of(getSchematicPath(), playerSchematicId));
+        deleteEmptyFolders(CreatePaths.UPLOADED_SCHEMATICS_DIR, CreatePaths.UPLOADED_SCHEMATICS_DIR.resolve(playerSchematicId));
     }
 
     @Inject(
@@ -136,7 +130,7 @@ public abstract class ServerSchematicLoaderMixin {
                                  BlockPos pos,
                                  BlockPos bounds,
                                  CallbackInfo ci,
-                                 @Local(ordinal = 3) String playerSchematicId) {
+                                 @Local(ordinal = 2) String playerSchematicId) {
         Path schematicPath = Path.of(schematic);
         if (schematicPath.getNameCount() - 1 > CServer.SchematicsNestingDepth.get()) {
             CreateConnected.LOGGER.warn("Attempted Instant Schematic with too many nested folders: " + playerSchematicId);
@@ -164,7 +158,7 @@ public abstract class ServerSchematicLoaderMixin {
                                     @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
                                     @Local(ordinal = 0) Optional<Path> oldest) throws IOException {
         if (oldest.isPresent()) {
-            deleteEmptyFolders(Path.of(getSchematicPath()), oldest.get());
+            deleteEmptyFolders(CreatePaths.UPLOADED_SCHEMATICS_DIR, oldest.get());
         }
     }
 }
