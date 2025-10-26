@@ -104,8 +104,8 @@ repositories {
         url = "https://maven.createmod.net"
     }
     maven {
-        // Registrate
-        url = "https://maven.tterrag.com"
+        // Old repo for Registrate
+        url = "https://maven.ithundxr.dev/mirror"
     }
     maven {
         // ForgeConfigAPIPort

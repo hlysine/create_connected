@@ -27,6 +27,6 @@ public class SchematicExportMixin {
                                             BlockPos second,
                                             CallbackInfoReturnable<SchematicExport.SchematicExportResult> cir,
                                             @Local(ordinal = 1) Path file) {
-        FilesHelper.createFolderIfMissing(file.getParent().toString());
+        FilesHelper.createFolderIfMissing(file.getParent());
     }
 }

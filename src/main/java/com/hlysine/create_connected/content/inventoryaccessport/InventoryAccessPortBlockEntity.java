@@ -54,6 +54,7 @@ public class InventoryAccessPortBlockEntity extends SmartBlockEntity {
     public void updateConnectedInventory() {
         observedInventory.findNewCapability();
         boolean previouslyPowered = powered;
+        assert level != null;
         powered = level.hasNeighborSignal(worldPosition);
         if (powered != previouslyPowered) {
             notifyUpdate();
