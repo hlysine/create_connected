@@ -10,6 +10,7 @@ import net.minecraft.core.Direction.Axis;
 import net.minecraft.core.Vec3i;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -20,10 +21,11 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.neoforged.neoforge.capabilities.BlockCapability;
 import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.common.extensions.IBlockExtension;
 import net.neoforged.neoforge.items.IItemHandler;
 import org.jetbrains.annotations.NotNull;
 
-public class InventoryAccessPortBlock extends DirectedDirectionalBlock implements IBE<InventoryAccessPortBlockEntity>, IWrenchable {
+public class InventoryAccessPortBlock extends DirectedDirectionalBlock implements IBE<InventoryAccessPortBlockEntity>, IWrenchable, IBlockExtension {
 
     public static BooleanProperty ATTACHED = BlockStateProperties.ATTACHED;
 
@@ -73,15 +75,9 @@ public class InventoryAccessPortBlock extends DirectedDirectionalBlock implement
     }
 
     @Override
-    public void neighborChanged(@NotNull BlockState pState, @NotNull Level pLevel, @NotNull BlockPos pPos, @NotNull Block pBlock, @NotNull BlockPos pFromPos, boolean pIsMoving) {
-        withBlockEntityDo(pLevel, pPos, InventoryAccessPortBlockEntity::updateConnectedInventory);
-        super.neighborChanged(pState, pLevel, pPos, pBlock, pFromPos, pIsMoving);
-        Vec3i diff = pFromPos.subtract(pPos);
-        Direction fromSide = Direction.fromDelta(diff.getX(), diff.getY(), diff.getZ());
-        if (fromSide == null)
-            pLevel.updateNeighborsAt(pPos, this);
-        else
-            pLevel.updateNeighborsAtExceptFromFacing(pPos, this, fromSide);
+    public void onNeighborChange(@NotNull BlockState state, @NotNull LevelReader level, @NotNull BlockPos pos, @NotNull BlockPos neighbor) {
+        super.onNeighborChange(state, level, pos, neighbor);
+        withBlockEntityDo(level, pos, InventoryAccessPortBlockEntity::updateConnectedInventory);
     }
 
     @Override
