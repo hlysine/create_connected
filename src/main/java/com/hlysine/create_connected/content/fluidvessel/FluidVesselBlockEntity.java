@@ -36,7 +36,7 @@ import java.util.List;
 import static com.hlysine.create_connected.content.fluidvessel.FluidVesselBlock.*;
 import static net.minecraft.core.Direction.Axis;
 
-@EventBusSubscriber(modid = CreateConnected.MODID, bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = CreateConnected.MODID)
 public class FluidVesselBlockEntity extends FluidTankBlockEntity implements IHaveGoggleInformation, IMultiBlockEntityContainer.Fluid {
 
     private static final int MAX_SIZE = 3;

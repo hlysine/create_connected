@@ -30,7 +30,7 @@ import java.util.function.Supplier;
 import static com.hlysine.create_connected.content.inventorybridge.InventoryBridgeBlock.ATTACHED_NEGATIVE;
 import static com.hlysine.create_connected.content.inventorybridge.InventoryBridgeBlock.ATTACHED_POSITIVE;
 
-@EventBusSubscriber(modid = CreateConnected.MODID, bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = CreateConnected.MODID)
 public class InventoryBridgeBlockEntity extends SmartBlockEntity {
     protected IItemHandler itemCapability;
     private InvManipulationBehaviour negativeInventory;

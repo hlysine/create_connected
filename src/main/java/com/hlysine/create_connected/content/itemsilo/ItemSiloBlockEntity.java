@@ -34,7 +34,7 @@ import net.neoforged.neoforge.items.wrapper.CombinedInvWrapper;
 
 import java.util.List;
 
-@EventBusSubscriber(modid = CreateConnected.MODID, bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = CreateConnected.MODID)
 public class ItemSiloBlockEntity extends SmartBlockEntity implements IMultiBlockEntityContainer.Inventory {
 
     protected ICapabilityProvider<IItemHandler> itemCapability = null;

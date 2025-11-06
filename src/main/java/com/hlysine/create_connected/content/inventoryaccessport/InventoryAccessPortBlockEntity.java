@@ -26,7 +26,7 @@ import java.util.function.Supplier;
 
 import static com.hlysine.create_connected.content.inventoryaccessport.InventoryAccessPortBlock.ATTACHED;
 
-@EventBusSubscriber(modid = CreateConnected.MODID, bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = CreateConnected.MODID)
 public class InventoryAccessPortBlockEntity extends SmartBlockEntity {
     protected IItemHandler itemCapability;
     private InvManipulationBehaviour observedInventory;

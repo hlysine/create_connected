@@ -446,11 +446,12 @@ public class CCStandardRecipes extends BaseRecipeProvider {
                     .viaShapeless(b -> b
                             .requires(result)
                     );
+
         return create(result)
                 .unlockedBy(AllItems.ZINC_INGOT::get)
                 .requiresResultFeature()
                 .disabledInCopycats()
-                .viaStonecutting(Ingredient.of(AllTags.commonItemTag("ingots/zinc")), resultCount);
+                .viaStonecutting(Ingredient.of(TagKey.create(BuiltInRegistries.ITEM.key(), ResourceLocation.fromNamespaceAndPath("c", "ingots/zinc"))), resultCount);
     }
 
     protected static class Marker {
