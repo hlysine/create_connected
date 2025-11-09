@@ -1,5 +1,4 @@
 package com.hlysine.create_connected.config;
-
 import com.simibubi.create.api.stress.BlockStressValues;
 import net.createmod.catnip.config.ConfigBase;
 import net.minecraftforge.common.ForgeConfigSpec;

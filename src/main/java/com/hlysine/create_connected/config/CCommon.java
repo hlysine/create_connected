@@ -1,8 +1,5 @@
 package com.hlysine.create_connected.config;
 
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.FriendlyByteBuf;
-
 public class CCommon extends SyncConfigBase {
     private static final String VERSION = "1.0.0";
 

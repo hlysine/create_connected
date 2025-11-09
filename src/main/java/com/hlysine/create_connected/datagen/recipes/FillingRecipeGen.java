@@ -4,10 +4,10 @@ import com.hlysine.create_connected.CCBlocks;
 import com.hlysine.create_connected.CCTags;
 import com.hlysine.create_connected.CreateConnected;
 import com.hlysine.create_connected.compat.Mods;
-import com.simibubi.create.foundation.fluid.FluidIngredient;
+import com.simibubi.create.foundation.fluid.FluidIngredientOld;
 import net.minecraft.data.PackOutput;
-import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.crafting.conditions.ModLoadedCondition;
+import net.minecraft.world.level.material.Fluids;
 
 @SuppressWarnings("unused")
 public class FillingRecipeGen extends com.simibubi.create.api.data.recipe.FillingRecipeGen {

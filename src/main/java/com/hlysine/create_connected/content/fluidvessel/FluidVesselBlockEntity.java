@@ -1,5 +1,4 @@
 package com.hlysine.create_connected.content.fluidvessel;
-
 import com.simibubi.create.api.connectivity.ConnectivityHandler;
 import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.content.fluids.tank.FluidTankBlockEntity;

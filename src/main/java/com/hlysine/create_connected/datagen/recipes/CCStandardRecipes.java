@@ -22,8 +22,8 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.world.item.crafting.SimpleCraftingRecipeSerializer;
-import net.minecraft.data.PackOutput;
 import net.minecraftforge.common.Tags;
+import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraftforge.common.crafting.ConditionalRecipe;
 import net.minecraftforge.common.crafting.CraftingHelper;
@@ -435,6 +435,7 @@ public class CCStandardRecipes extends BaseRecipeProvider {
                     .viaShapeless(b -> b
                             .requires(result)
                     );
+
         return create(result)
                 .unlockedBy(AllItems.ZINC_INGOT::get)
                 .requiresResultFeature()
@@ -738,11 +739,6 @@ public class CCStandardRecipes extends BaseRecipeProvider {
         private final ResourceLocation outputOverride;
 
         @Override
-        public @NotNull RecipeSerializer<?> getType() {
-            return wrapped.getType();
-        }
-
-        @Override
         public JsonObject serializeAdvancement() {
             return wrapped.serializeAdvancement();
         }
@@ -774,6 +770,11 @@ public class CCStandardRecipes extends BaseRecipeProvider {
         @Override
         public @NotNull ResourceLocation getId() {
             return wrapped.getId();
+        }
+
+        @Override
+        public @NotNull RecipeSerializer<?> getType() {
+            return wrapped.getType();
         }
 
     }
