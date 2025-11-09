@@ -4,7 +4,7 @@ import com.hlysine.create_connected.CCBlocks;
 import com.hlysine.create_connected.CCTags;
 import com.hlysine.create_connected.CreateConnected;
 import com.hlysine.create_connected.compat.Mods;
-import com.simibubi.create.foundation.fluid.FluidIngredientOld;
+import com.simibubi.create.foundation.fluid.FluidIngredient;
 import net.minecraft.data.PackOutput;
 import net.minecraftforge.common.crafting.conditions.ModLoadedCondition;
 import net.minecraft.world.level.material.Fluids;
