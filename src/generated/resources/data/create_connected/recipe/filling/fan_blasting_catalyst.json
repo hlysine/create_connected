@@ -11,7 +11,7 @@
       "item": "create_connected:empty_fan_catalyst"
     },
     {
-      "type": "fluid_stack",
+      "type": "neoforge:single",
       "amount": 1000,
       "fluid": "minecraft:lava"
     }

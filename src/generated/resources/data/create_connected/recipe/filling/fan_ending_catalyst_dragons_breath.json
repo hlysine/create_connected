@@ -15,9 +15,9 @@
       "item": "create_connected:empty_fan_catalyst"
     },
     {
-      "type": "fluid_tag",
+      "type": "neoforge:tag",
       "amount": 1000,
-      "fluid_tag": "create_dragons_plus:fan_processing_catalysts/ending"
+      "tag": "create_dragons_plus:fan_processing_catalysts/ending"
     }
   ],
   "results": [
