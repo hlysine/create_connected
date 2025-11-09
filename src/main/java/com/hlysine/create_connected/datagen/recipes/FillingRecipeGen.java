@@ -4,8 +4,7 @@ import com.hlysine.create_connected.CCBlocks;
 import com.hlysine.create_connected.CCTags;
 import com.hlysine.create_connected.CreateConnected;
 import com.hlysine.create_connected.compat.Mods;
-import com.simibubi.create.AllRecipeTypes;
-import com.simibubi.create.foundation.fluid.FluidIngredient;
+import com.simibubi.create.foundation.fluid.FluidIngredientOld;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.material.Fluids;
@@ -26,7 +25,7 @@ public class FillingRecipeGen extends com.simibubi.create.api.data.recipe.Fillin
             .withCondition(new FeatureEnabledCondition(CCBlocks.EMPTY_FAN_CATALYST.getId()))
             .output(CCBlocks.FAN_SPLASHING_CATALYST));
 
-    GeneratedRecipe FAN_ENDING_CATALYST_DRAGONS_BREATH = create("fan_ending_catalyst_dragons_breath", b -> b.require(new FluidIngredient.FluidTagIngredient(CCTags.Fluids.FAN_PROCESSING_CATALYSTS_ENDING.tag, 1000))
+    GeneratedRecipe FAN_ENDING_CATALYST_DRAGONS_BREATH = create("fan_ending_catalyst_dragons_breath", b -> b.require(CCTags.Fluids.FAN_PROCESSING_CATALYSTS_ENDING.tag, 1000)
             .require(CCBlocks.EMPTY_FAN_CATALYST)
             .withCondition(new FeatureEnabledCondition(CCBlocks.EMPTY_FAN_CATALYST.getId()))
             .withCondition(new ModLoadedCondition(Mods.DRAGONS_PLUS.id()))

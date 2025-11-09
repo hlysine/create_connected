@@ -10,6 +10,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
+import net.neoforged.neoforge.common.Tags;
 import org.jetbrains.annotations.NotNull;
 
 public abstract class WaterloggedCopycatWrappedBlock extends MigratingWaterloggedCopycatBlock implements ICopycatWithWrappedBlock {
@@ -30,7 +31,7 @@ public abstract class WaterloggedCopycatWrappedBlock extends MigratingWaterlogge
     @Override
     protected @NotNull ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
         ItemInteractionResult result = super.useItemOn(stack, state, level, pos, player, hand, hitResult);
-        if (!result.consumesAction() && !player.getItemInHand(hand).is(AllTags.AllItemTags.WRENCH.tag)) {
+        if (!result.consumesAction() && !player.getItemInHand(hand).is(Tags.Items.TOOLS_WRENCH)) {
             return ICopycatWithWrappedBlock.wrappedState(getWrappedBlock(), state).useItemOn(stack, level, player, hand, hitResult);
         }
         return result;

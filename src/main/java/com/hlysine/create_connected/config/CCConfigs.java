@@ -16,7 +16,7 @@ import java.util.Map;
 import java.util.function.Supplier;
 
 @SuppressWarnings("unused")
-@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, modid = CreateConnected.MODID)
+@EventBusSubscriber(modid = CreateConnected.MODID)
 public class CCConfigs {
 
     private static final Map<ModConfig.Type, ConfigBase> CONFIGS = new EnumMap<>(ModConfig.Type.class);
