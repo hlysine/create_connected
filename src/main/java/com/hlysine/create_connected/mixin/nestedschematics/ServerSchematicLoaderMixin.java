@@ -85,9 +85,9 @@ public abstract class ServerSchematicLoaderMixin {
             method = "handleNewUpload(Lnet/minecraft/server/level/ServerPlayer;Ljava/lang/String;JLnet/minecraft/core/BlockPos;)V"
     )
     private Stream<Path> listNestedFiles(Stream<Path> original,
-                                         @Local(ordinal = 1) String playerPath) throws IOException {
+                                         @Local(ordinal = 1) Path playerPath) throws IOException {
         original.close();
-        return Files.walk(Path.of(playerPath));
+        return Files.walk(playerPath);
     }
 
     @WrapOperation(
