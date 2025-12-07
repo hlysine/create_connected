@@ -165,6 +165,7 @@
   "create_connected.gui.sequenced_pulse_generator.instruction.wait_for.target": "État cible",
   "create_connected.gui.sequenced_pulse_generator.signal": "Force du signal",
   "create_connected.gui.sequenced_pulse_generator.title": "Générateur d'impulsion séquencé",
+  "create_connected.kinetic_bridge.stress_impact_short": "Impact du stress",
   "create_connected.overstress_clutch.uncouple_delay": "Dé-coupler le délai",
   "create_connected.ponder.chain_cogwheel_relay.header": "Relayer la force de rotation avec des chaînes-roues dentées",
   "create_connected.ponder.chain_cogwheel_relay.text_1": "Les Cogwheels sont des chaînes-moteurs avec une roue dentée supplémentaire",
