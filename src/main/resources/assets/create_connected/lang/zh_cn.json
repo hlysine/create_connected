@@ -63,7 +63,7 @@
   "block.create_connected.copycat_wall.tooltip.summary": "将任意的_完整方块_转换为装饰墙。",
   "block.create_connected.crank_wheel": "曲柄轮",
   "block.create_connected.creative_fluid_vessel": "横向创造流体储罐",
-  "block.create_connected.cross_connector": "交叉传动节",
+  "block.create_connected.cross_connector": "交叉传动箱",
   "block.create_connected.cross_connector.tooltip.summary": "在两个方向上_独立_传递旋转。",
   "block.create_connected.empty_fan_catalyst": "空鼓风机触媒",
   "block.create_connected.empty_fan_catalyst.tooltip.summary": "_放入_材料以改变_鼓风机的加工方式_。",
