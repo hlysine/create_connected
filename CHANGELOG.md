@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 1.1.11 - 2026-01-30
+
+### Changed
+
+- Updated textures for the Control Chip and Sequenced Pulse Generator (thanks @ThatB0i)
+
+### Fixed
+
+- Linked Transmitters being able to delete blocks due to a client desync (#199, thanks @PopSlime)
+- Kinetic Bridge with infinite output due to corrupt NBT (#200, thanks @PopSlime)
+- Kinetic Battery with infinite output due to state desync from schematics (#201, thanks @PopSlime)
+
 ## 1.1.10 - 2025-11-23
 
 ### Fixed
