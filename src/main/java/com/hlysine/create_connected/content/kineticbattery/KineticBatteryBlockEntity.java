@@ -60,6 +60,7 @@ public class KineticBatteryBlockEntity extends GeneratingKineticBlockEntity impl
     @Override
     public void initialize() {
         super.initialize();
+        updateLevel();
         updateGeneratedRotation();
     }
 

@@ -140,7 +140,6 @@ public class CopycatsManager {
                         for (Iterator<BlockPos> iterator = list.iterator(); iterator.hasNext(); ) {
                             BlockPos pos = iterator.next();
                             if (!level.isLoaded(pos)) {
-                                iterator.remove();
                                 continue;
                             }
                             BlockState state = level.getBlockState(pos);
@@ -152,9 +151,9 @@ public class CopycatsManager {
                             BlockEntity be = level.getBlockEntity(pos);
                             if (be != null)
                                 level.setBlockEntity(be);
-                            iterator.remove();
                         }
                     }
+                    migrationQueue.remove(level);
                 }
             }
         }

@@ -23,10 +23,12 @@ public class StressImpactScrollValueBehaviour extends ScrollValueBehaviour {
     }
 
     public static float convertValue(int value) {
-        if (value < 40) {
-            return (float) Math.pow(2, Math.abs(value / 10.0));
+        int absoluteValue = Math.abs(value);
+        double result = Math.pow(2, absoluteValue / 10.0);
+        if (absoluteValue < 40) {
+            return (float) result;
         } else {
-            return (int) Math.pow(2, Math.abs(value / 10.0));
+            return (int) result;
         }
     }
 

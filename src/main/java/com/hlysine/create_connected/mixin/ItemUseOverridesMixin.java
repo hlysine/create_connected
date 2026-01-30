@@ -5,6 +5,7 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.simibubi.create.foundation.block.ItemUseOverrides;
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -29,11 +30,15 @@ public class ItemUseOverridesMixin {
                                                         BlockHitResult blockHitResult,
                                                         Operation<InteractionResult> original,
                                                         @Local ResourceLocation id) {
+        // Raytracing here must only be done client-sided
+        // If it is done server-sided as well, an unexpected block may be selected because of de-synced rotation (#56)
+        if (player instanceof LocalPlayer) {
         if (PreciseItemUseOverrides.OVERRIDES.contains(id)) {
             HitResult hitResult = player.pick(player.getBlockReach(), 1, false);
             if (hitResult instanceof BlockHitResult blockHit) {
                 return original.call(instance, level, player, interactionHand, blockHit);
             }
+        }
         }
         return original.call(instance, level, player, interactionHand, blockHitResult);
     }
