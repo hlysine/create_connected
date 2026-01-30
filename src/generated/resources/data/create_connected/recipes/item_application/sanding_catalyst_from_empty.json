@@ -14,6 +14,10 @@
         },
         {
           "type": "forge:mod_loaded",
+          "modid": "create_henry"
+        },
+        {
+          "type": "forge:mod_loaded",
           "modid": "create_dragons_plus"
         }
       ]

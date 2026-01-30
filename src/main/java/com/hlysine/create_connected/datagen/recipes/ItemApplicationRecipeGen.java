@@ -32,16 +32,21 @@ public class ItemApplicationRecipeGen extends com.simibubi.create.api.data.recip
             "freezing_catalyst", Items.POWDER_SNOW_BUCKET, CCBlocks.FAN_FREEZING_CATALYST::asItem,
             new OrCondition(
                     new ModLoadedCondition(Mods.DREAMS_DESIRES.id()),
+                    new ModLoadedCondition(Mods.HENRY.id()),
                     new ModLoadedCondition(Mods.GARNISHED.id()),
                     new ModLoadedCondition(Mods.DRAGONS_PLUS.id())
             ));
     GeneratedRecipe SEETHING_CATALYST = fanCatalystFromEmpty(
             "seething_catalyst", AllItems.BLAZE_CAKE, CCBlocks.FAN_SEETHING_CATALYST::asItem,
-            new ModLoadedCondition(Mods.DREAMS_DESIRES.id()));
+            new OrCondition(
+                    new ModLoadedCondition(Mods.DREAMS_DESIRES.id()),
+                    new ModLoadedCondition(Mods.HENRY.id())
+            ));
     GeneratedRecipe SANDING_CATALYST = fanCatalystFromEmpty(
             "sanding_catalyst", Blocks.SAND, CCBlocks.FAN_SANDING_CATALYST::asItem,
             new OrCondition(
                     new ModLoadedCondition(Mods.DREAMS_DESIRES.id()),
+                    new ModLoadedCondition(Mods.HENRY.id()),
                     new ModLoadedCondition(Mods.DRAGONS_PLUS.id())
             ));
     GeneratedRecipe ENRICHED_CATALYST = fanCatalystFromEmpty(

@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Linked Transmitters being able to delete blocks due to a client desync (#199, thanks @PopSlime)
 - Kinetic Bridge with infinite output due to corrupt NBT (#200, thanks @PopSlime)
 - Kinetic Battery with infinite output due to state desync from schematics (#201, thanks @PopSlime)
+- Compat recipes for Create: Henry not working
 
 ## 1.1.10 - 2025-11-23
 
