@@ -90,7 +90,7 @@ public class KineticBridgeBlock extends DirectionalKineticBlock implements IBE<K
                 .setValue(KineticBridgeDestinationBlock.FACING, facing);
         if (!occupiedState.equals(requiredStructure)) {
             if (!occupiedState.canBeReplaced()) {
-                pLevel.destroyBlock(pPos, false);
+                pLevel.destroyBlock(pPos, true);
                 return;
             }
             pLevel.setBlockAndUpdate(destinationPos, requiredStructure);
