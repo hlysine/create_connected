@@ -4,7 +4,6 @@ import com.hlysine.create_connected.CCBlockEntityTypes;
 import com.hlysine.create_connected.CCBlocks;
 import com.simibubi.create.content.kinetics.base.DirectionalKineticBlock;
 import com.simibubi.create.foundation.block.IBE;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Axis;
@@ -63,6 +62,22 @@ public class KineticBridgeBlock extends DirectionalKineticBlock implements IBE<K
         super.onPlace(state, level, pos, oldState, isMoving);
         if (!level.getBlockTicks().hasScheduledTick(pos, this))
             level.scheduleTick(pos, this, 1);
+    }
+
+    @Override
+    public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
+        if (!pNewState.is(this)) {
+            Direction facing = pState.getValue(FACING);
+            BlockPos destinationPos = pPos.relative(facing);
+
+            BlockState occupiedState = pLevel.getBlockState(destinationPos);
+            BlockState requiredStructure = CCBlocks.KINETIC_BRIDGE_DESTINATION.getDefaultState()
+                    .setValue(KineticBridgeDestinationBlock.FACING, facing);
+            if (occupiedState.equals(requiredStructure)) {
+                pLevel.destroyBlock(destinationPos, false);
+            }
+        }
+        super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
     }
 
     @Override
