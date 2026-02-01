@@ -32,7 +32,7 @@ public class ItemUseOverridesMixin {
                                                         @Local ResourceLocation id) {
         // Raytracing here must only be done client-sided
         // If it is done server-sided as well, an unexpected block may be selected because of de-synced rotation (#56)
-        if (player instanceof LocalPlayer) {
+        if (level.isClientSide()) {
             if (PreciseItemUseOverrides.OVERRIDES.contains(id)) {
                 HitResult hitResult = player.pick(player.blockInteractionRange(), 1, false);
                 if (hitResult instanceof BlockHitResult blockHit) {
