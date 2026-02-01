@@ -23,7 +23,7 @@ public enum Mods {
     JEI("jei"),
     COPYCATS("copycats"),
     DIAGONAL_FENCES("diagonalfences"),
-    DREAMS_DESIRES("create_dd"),
+    DREAMS_DESIRES("dndesires"),
     NUCLEAR("createnuclear"),
     HENRY("create_henry"),
     ADDITIONAL_PLACEMENTS("additionalplacements"),

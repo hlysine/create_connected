@@ -86,10 +86,11 @@ public class KineticBridgeDestinationBlock extends DirectionalKineticBlock imple
     public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
         if (stillValid(pLevel, pPos, pState)) {
             BlockPos sourcePos = getSource(pPos, pState);
-            if (!pLevel.getBlockState(sourcePos).is(CCBlocks.KINETIC_BRIDGE.get()))
-                return;
-            pLevel.destroyBlock(sourcePos, true);
+            if (pLevel.getBlockState(sourcePos).is(CCBlocks.KINETIC_BRIDGE.get())) {
+                pLevel.destroyBlock(sourcePos, true);
+            }
         }
+        super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
     }
 
     public void playerWillDestroy(Level pLevel, BlockPos pPos, BlockState pState, Player pPlayer) {

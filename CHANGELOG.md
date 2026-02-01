@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 1.1.12 - 2026-02-01
+
+### Fixed
+
+- Compatibility with Create: Dreams and Desires due to changed mod ID (#202, thanks @Entropy159)
+- Crash on dedicated servers due to LocalPlayer check
+- Detached Kinetic Bridge having infinite output due to schematics (#203, thanks @PopSlime)
+
 ## 1.1.11 - 2026-01-30
 
 ### Changed
