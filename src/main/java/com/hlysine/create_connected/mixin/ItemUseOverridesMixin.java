@@ -29,13 +29,12 @@ public class ItemUseOverridesMixin {
                                                         BlockHitResult blockHitResult,
                                                         Operation<InteractionResult> original,
                                                         @Local ResourceLocation id) {
-            if (PreciseItemUseOverrides.OVERRIDES.contains(id)) {
+        if (PreciseItemUseOverrides.OVERRIDES.contains(id)) {
             HitResult preciseHitResult = player.pick(player.getBlockReach(), 1, false);
-                if (preciseHitResult instanceof BlockHitResult preciseBlockHitResult) {
-				if (preciseBlockHitResult.getBlockPos().equals(blockHitResult.getBlockPos())) {
-                    return original.call(instance, level, player, interactionHand, blockHit);
+            if (preciseHitResult instanceof BlockHitResult preciseBlockHitResult) {
+                if (preciseBlockHitResult.getBlockPos().equals(blockHitResult.getBlockPos())) {
+                    return original.call(instance, level, player, interactionHand, preciseBlockHitResult);
                 }
-				}
             }
         }
         return original.call(instance, level, player, interactionHand, blockHitResult);
