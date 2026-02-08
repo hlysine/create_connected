@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(value = RedstoneLinkNetworkHandler.class, remap = false)
+@Mixin(value = RedstoneLinkNetworkHandler.class, remap = false, priority = 2000)
 public class RedstoneLinkNetworkHandlerMixin {
     @Inject(
             method = "updateNetworkOf",
