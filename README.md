@@ -16,12 +16,10 @@ A Create mod add-on adding quality-of-life blocks that you wish existed in Creat
 
 [![Create: Addon Hub server](https://discordapp.com/api/guilds/891929048895356948/widget.png?style=banner2)](https://discord.gg/3AvrppcgG3)
 
+[![Available for Forge](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/supported/forge_vector.svg)](https://modrinth.com/mod/create-connected/) [![Available for Fabric](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/supported/fabric_vector.svg)](https://modrinth.com/mod/create-connected-fabric)
+
 > **Want reliable, immersive chunk-loading for your Create machines? Check
 out [Create: Power Loader](https://modrinth.com/mod/create-power-loader)**
-
-## Create: Connected now fully supports Create 6.0 on Minecraft 1.20.1 and 1.21.1
-
-Support for Minecraft 1.19.2 and 1.18.2 has been dropped.
 
 ## What's new in 1.1
 
