@@ -16,7 +16,9 @@ A Create mod add-on adding quality-of-life blocks that you wish existed in Creat
 
 [![Create: Addon Hub server](https://discordapp.com/api/guilds/891929048895356948/widget.png?style=banner2)](https://discord.gg/3AvrppcgG3)
 
-[![Available for Forge](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/supported/forge_vector.svg)](https://modrinth.com/mod/create-connected/) [![Available for Fabric](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/supported/fabric_vector.svg)](https://modrinth.com/mod/create-connected-fabric)
+This is the Forge/NeoForge version of the mod.
+
+[![Static Badge](https://img.shields.io/badge/click_here_for_fabric_version-informational?style=for-the-badge)](https://modrinth.com/mod/create-connected-fabric)
 
 > **Want reliable, immersive chunk-loading for your Create machines? Check
 out [Create: Power Loader](https://modrinth.com/mod/create-power-loader)**
