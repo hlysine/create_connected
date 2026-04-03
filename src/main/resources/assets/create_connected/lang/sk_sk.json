@@ -131,6 +131,8 @@
   "create.item_attributes.max_damage.inverted": "nemá maximálnu trvanlivosť %1$s",
   "create.item_attributes.stack_size": "zásobníky na %1$s",
   "create.item_attributes.stack_size.inverted": "nezhromažďuje sa do %1$s",
+  "create_connected.battery.status.empty": "Prázdny",
+  "create_connected.battery.status.full": "Plný",
   "create_connected.centrifugal_clutch.speed_threshold": "Rýchlostný prah",
   "create_connected.display_source.boiler_status": "Stav kotla",
   "create_connected.gui.overstress_clutch.uncoupled": "Stav odpojeného kotla",
