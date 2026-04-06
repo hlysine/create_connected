@@ -1,9 +1,12 @@
 package com.hlysine.create_connected.mixin.sequencedgearshift;
 
 import com.hlysine.create_connected.CCSequencerInstructions;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.simibubi.create.content.kinetics.transmission.sequencer.Instruction;
 import com.simibubi.create.content.kinetics.transmission.sequencer.SequencedGearshiftScreen;
 import com.simibubi.create.content.kinetics.transmission.sequencer.SequencerInstructions;
+import com.simibubi.create.foundation.blockEntity.behaviour.scrollValue.ScrollValueBehaviour;
 import com.simibubi.create.foundation.gui.widget.ScrollInput;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -12,6 +15,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Vector;
+import java.util.function.Function;
 
 @Mixin(value = SequencedGearshiftScreen.class, remap = false)
 public class SequencedGearshiftScreenMixin {
@@ -20,16 +24,16 @@ public class SequencedGearshiftScreenMixin {
     @Shadow
     private Vector<Vector<ScrollInput>> inputs;
 
-    @Inject(
+    @WrapOperation(
             method = "updateParamsOfRow(I)V",
             at = @At(
                     value = "INVOKE",
-                    target = "Lcom/simibubi/create/foundation/gui/widget/ScrollInput;standardStep()Ljava/util/function/Function;",
-                    shift = At.Shift.BY,
-                    by = 2
+                    target = "Lcom/simibubi/create/foundation/gui/widget/ScrollInput;withStepFunction(Ljava/util/function/Function;)Lcom/simibubi/create/foundation/gui/widget/ScrollInput;",
+                    ordinal = 1
             )
     )
-    public void updateParamsOfRow(int row, CallbackInfo ci) {
+    public ScrollInput updateParamsOfRow(ScrollInput instance, Function<ScrollValueBehaviour.StepContext, Integer> step, Operation<ScrollInput> original, int row) {
+        ScrollInput toReturn = original.call(instance, step);
         if (((InstructionAccessor) instructions.get(row)).getInstruction() == CCSequencerInstructions.TURN_TIME) {
             Vector<ScrollInput> rowInputs = inputs.get(row);
             ScrollInput value = rowInputs.get(1);
@@ -42,6 +46,7 @@ public class SequencedGearshiftScreenMixin {
                 return context.shift ? 100 : 20;
             });
         }
+        return toReturn;
     }
 
     @Inject(
