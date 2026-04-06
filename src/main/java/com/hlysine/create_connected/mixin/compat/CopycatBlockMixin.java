@@ -3,12 +3,14 @@ package com.hlysine.create_connected.mixin.compat;
 import com.copycatsplus.copycats.content.copycat.board.CopycatBoardBlock;
 import com.copycatsplus.copycats.content.copycat.slab.CopycatSlabBlock;
 import com.hlysine.create_connected.compat.CopycatsManager;
+import com.hlysine.create_connected.compat.ModMixin;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
+@ModMixin(mods = {"copycats"})
 @Mixin({CopycatSlabBlock.class, CopycatBoardBlock.class})
 public class CopycatBlockMixin {
     @Redirect(

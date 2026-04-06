@@ -1,6 +1,7 @@
 package com.hlysine.create_connected.mixin.compat;
 
 import com.hlysine.create_connected.compat.CopycatsManager;
+import com.hlysine.create_connected.compat.ModMixin;
 import com.hlysine.create_connected.compat.Mods;
 import com.hlysine.create_connected.config.CCConfigs;
 import com.simibubi.create.content.decoration.copycat.CopycatBlockEntity;
@@ -12,6 +13,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
 
+@ModMixin(mods = {"copycats"})
 @Mixin(CopycatBlockEntity.class)
 public abstract class CopycatBlockEntityMixin extends SmartBlockEntity {
     public CopycatBlockEntityMixin(BlockEntityType<?> type, BlockPos pos, BlockState state) {
