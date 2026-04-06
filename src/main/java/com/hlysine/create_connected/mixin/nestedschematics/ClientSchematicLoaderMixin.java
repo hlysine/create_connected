@@ -3,6 +3,7 @@ package com.hlysine.create_connected.mixin.nestedschematics;
 import com.hlysine.create_connected.config.CServer;
 import com.simibubi.create.content.schematics.client.ClientSchematicLoader;
 import net.minecraft.network.chat.Component;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -18,6 +19,7 @@ import java.util.List;
 
 @Mixin(value = ClientSchematicLoader.class, remap = false)
 public class ClientSchematicLoaderMixin {
+    @Final
     @Shadow
     private List<Component> availableSchematics;
 
@@ -31,11 +33,10 @@ public class ClientSchematicLoaderMixin {
 
     @Unique
     private void cc$searchInSubfolder(String folder, int depth) {
-        try {
-            boolean canRecurse = depth < CServer.SchematicsNestingDepth.get();
-            Path base = Path.of("schematics/");
-            Files.list(Path.of(folder))
-                    .forEach(path -> {
+        boolean canRecurse = depth < CServer.SchematicsNestingDepth.get();
+        Path base = Path.of("schematics/");
+        try(var files = Files.list(Path.of(folder))) {
+            files.forEach(path -> {
                         if (Files.isDirectory(path)) {
                             if (canRecurse && (depth != 0 || !path.getFileName().toString().equals("uploaded")))
                                 cc$searchInSubfolder(path.toString(), depth + 1);
