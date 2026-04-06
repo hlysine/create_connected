@@ -1,4 +1,6 @@
 {
+	"loader": "create_connected:gated_model_loader",
+	"required_modid": "create_dragons_plus",
 	"credit": "Made with Blockbench",
 	"parent": "minecraft:block/block",
 	"textures": {
