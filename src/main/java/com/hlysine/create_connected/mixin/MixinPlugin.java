@@ -6,17 +6,20 @@ import net.neoforged.fml.loading.FMLLoader;
 import org.objectweb.asm.Type;
 import org.objectweb.asm.tree.AnnotationNode;
 import org.objectweb.asm.tree.ClassNode;
+import org.spongepowered.asm.mixin.Pseudo;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
+import org.spongepowered.asm.service.IClassBytecodeProvider;
 import org.spongepowered.asm.service.MixinService;
 import org.spongepowered.asm.util.Annotations;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 public class MixinPlugin implements IMixinConfigPlugin {
-    private boolean isFrameworkInstalled;
+    private boolean isFrameworkInstalled; // this makes sure that forge's helpful mods not found screen shows up
 
     @Override
     public void onLoad(String mixinPackage) {
@@ -36,23 +39,45 @@ public class MixinPlugin implements IMixinConfigPlugin {
 
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
-        try {
-            List<AnnotationNode> annotationNodes = MixinService.getService().getBytecodeProvider().getClassNode(mixinClassName).visibleAnnotations;
-            if (annotationNodes == null) return true;
+        String modMixin = Type.getDescriptor(ModMixin.class);
+        String pseudo = Type.getDescriptor(Pseudo.class);
+        IClassBytecodeProvider bytecodeProvider = MixinService.getService().getBytecodeProvider();
 
-            boolean shouldApply = true;
-            for (AnnotationNode node : annotationNodes) {
-                if (node.desc.equals(Type.getDescriptor(ModMixin.class))) {
-                    List<String> mods = Annotations.getValue(node, "mods", true);
-                    boolean applyIfPresent = Annotations.getValue(node, "applyIfPresent", Boolean.TRUE);
-                    boolean anyModsLoaded = anyModsLoaded(mods);
-                    shouldApply = anyModsLoaded == applyIfPresent;
-                }
-            }
-            return shouldApply;
+        ClassNode mixinClass;
+        ClassNode targetClass = null;
+        try {
+            mixinClass = bytecodeProvider.getClassNode(mixinClassName);
+        } catch (ClassNotFoundException | IOException ignored) {
+            return isFrameworkInstalled;
+        }
+        try {
+            targetClass = bytecodeProvider.getClassNode(targetClassName);
         } catch (ClassNotFoundException | IOException ignored) {
         }
-        return isFrameworkInstalled; // this makes sure that forge's helpful mods not found screen shows up
+
+        List<AnnotationNode> annotations = new ArrayList<>();
+        {
+            if (mixinClass.invisibleAnnotations != null) {
+                annotations.addAll(mixinClass.invisibleAnnotations);
+            }
+            if (mixinClass.visibleAnnotations != null) {
+                annotations.addAll(mixinClass.visibleAnnotations);
+            }
+        }
+
+        for (AnnotationNode node : annotations) {
+            if (node.desc.equals(modMixin)) {
+                List<String> mods = Annotations.getValue(node, "mods", true);
+                boolean applyIfPresent = Annotations.getValue(node, "applyIfPresent", Boolean.TRUE);
+                boolean anyModsLoaded = anyModsLoaded(mods);
+                return anyModsLoaded == applyIfPresent;
+            }
+
+            if (node.desc.equals(pseudo)) {
+                return targetClass != null;
+            }
+        }
+        return true;
     }
 
     private static boolean anyModsLoaded(List<String> mods) {

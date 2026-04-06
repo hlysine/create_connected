@@ -9,7 +9,7 @@ import java.lang.annotation.Target;
  * Conditionally enable/disable a mixin based on the presence of other mods.
  */
 @Target(ElementType.TYPE)
-@Retention(RetentionPolicy.RUNTIME)
+@Retention(RetentionPolicy.CLASS)
 public @interface ModMixin {
     
     String[] mods();
