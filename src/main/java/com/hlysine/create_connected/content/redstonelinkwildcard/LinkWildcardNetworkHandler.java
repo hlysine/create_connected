@@ -8,10 +8,13 @@ import com.simibubi.create.content.redstone.link.IRedstoneLinkable;
 import com.simibubi.create.content.redstone.link.LinkBehaviour;
 import com.simibubi.create.content.redstone.link.RedstoneLinkNetworkHandler;
 import com.simibubi.create.content.redstone.link.RedstoneLinkNetworkHandler.Frequency;
+import com.simibubi.create.infrastructure.config.AllConfigs;
+
 import net.createmod.catnip.data.Couple;
 import net.createmod.catnip.levelWrappers.WorldHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -22,6 +25,12 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
 
 import static com.simibubi.create.content.redstone.link.RedstoneLinkNetworkHandler.withinRange;
+
+import org.joml.Vector3d;
+
+import dev.ryanhcode.sable.companion.SableCompanion;
+import dev.ryanhcode.sable.companion.SubLevelAccess;
+import dev.ryanhcode.sable.companion.math.JOMLConversion;
 
 @EventBusSubscriber(modid = CreateConnected.MODID)
 public class LinkWildcardNetworkHandler {
@@ -100,7 +109,7 @@ public class LinkWildcardNetworkHandler {
                 if (actor.isListening())
                     continue;
 
-                if (!withinRange(actor, other))
+                if (!withinRange(actor, other, world))
                     continue;
 
                 if (power.get() < 15)
@@ -125,7 +134,7 @@ public class LinkWildcardNetworkHandler {
 
         if (network != null && !network.isEmpty())
             for (IRedstoneLinkable other : network) {
-                if (other != actor && other.isListening() && withinRange(actor, other))
+                if (other != actor && other.isListening() && withinRange(actor, other, world))
                     other.setReceivedStrength(power.get());
             }
     }
@@ -235,5 +244,29 @@ public class LinkWildcardNetworkHandler {
         } else {
             return transmitter.equals(receiver);
         }
+    }
+
+    // Implement a custom range check for compatibility with sable. Modified version of dev.ryanhcode.sable.neoforge.mixin.compatibility.create.redstone_links.RedstoneLinkNetworkHandlerMixin.sable$projectComparisons
+    private static boolean withinRange(IRedstoneLinkable from, IRedstoneLinkable to, LevelAccessor levelAccessor) {
+        final Level level = (Level) levelAccessor;
+
+        if (from == to) return true;
+
+        final Vector3d fromPos = JOMLConversion.atCenterOf(from.getLocation());
+        final Vector3d toPos = JOMLConversion.atCenterOf(to.getLocation());
+
+        final SableCompanion helper = SableCompanion.INSTANCE;
+        final SubLevelAccess fromSublevel = helper.getContaining(level, fromPos);
+        if (fromSublevel != null) {
+            fromSublevel.logicalPose().transformPosition(fromPos);
+        }
+
+        final SubLevelAccess toSublevel = helper.getContaining(level, toPos);
+        if (toSublevel != null) {
+            toSublevel.logicalPose().transformPosition(toPos);
+        }
+
+        final int linkRange = AllConfigs.server().logistics.linkRange.get();
+        return fromPos.distanceSquared(toPos) < linkRange * linkRange;
     }
 }

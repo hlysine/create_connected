@@ -143,6 +143,11 @@ repositories {
         name = "DragonsPlusMinecraft"
         url "https://maven.dragons.plus/releases"
     }
+    maven {
+        // Sable + Create: Aeronautics
+        name = "RyanHCode Maven"
+        url = "https://maven.ryanhcode.dev/releases"
+    }
     exclusiveContent {
         forRepository {
             maven {
@@ -176,7 +181,7 @@ dependencies {
     implementation "net.neoforged:neoforge:${neoforge_version}"
 
     implementation("com.simibubi.create:create-${minecraft_version}:${create_version}:slim") { transitive = false }
-    implementation("net.createmod.ponder:Ponder-NeoForge-${minecraft_version}:${ponder_version}")
+    implementation("net.createmod.ponder:ponder-neoforge:${ponder_version}+mc${minecraft_version}")
     compileOnly("dev.engine-room.flywheel:flywheel-neoforge-api-${flywheel_minecraft_version}:${flywheel_version}")
     runtimeOnly("dev.engine-room.flywheel:flywheel-neoforge-${flywheel_minecraft_version}:${flywheel_version}")
     implementation("com.tterrag.registrate:Registrate:${registrate_version}")
@@ -195,6 +200,14 @@ dependencies {
 //    runtimeOnly("maven.modrinth:adorn:${adorn_version}")
 
     implementation(jarJar("io.github.llamalad7:mixinextras-neoforge:${mixin_extras_version}"))
+
+    // Sable compatibility
+    runtimeOnly("dev.ryanhcode.sable:sable-neoforge-${minecraft_version}:${sable_version}")
+    jarJar(api("dev.ryanhcode.sable-companion:sable-companion-common-${minecraft_version}:[${sable_companion_version},)")) {
+        version {
+            prefer sable_companion_version
+        }
+    }
 }
 
 // Expands all declared replace properties in the specified resource targets.
