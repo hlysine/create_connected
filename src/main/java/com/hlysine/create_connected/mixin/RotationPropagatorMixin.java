@@ -33,15 +33,18 @@ public abstract class RotationPropagatorMixin {
 
     @Inject(
             method = "getPotentialNeighbourLocations",
-            at = @At("RETURN"),
-            cancellable = true
+            at = @At("RETURN")
     )
     private static void forwardConnection(KineticBlockEntity be, CallbackInfoReturnable<List<BlockPos>> cir) {
-        List<BlockPos> positions = new ArrayList<>(cir.getReturnValue());
+        List<BlockPos> originalPositions = cir.getReturnValue();
+        List<BlockPos> positions = new ArrayList<>(originalPositions);
         for (int i = 0; i < positions.size(); i++) {
             BlockPos sourcePos = be.getBlockPos();
             BlockPos neighborPos = positions.get(i);
-            while (sourcePos != neighborPos && be.getLevel().getBlockState(neighborPos).getBlock() instanceof IConnectionForwardingBlock forwardingBlock) {
+            if (neighborPos.getClass() != BlockPos.class)
+                continue;
+
+            while (!sourcePos.equals(neighborPos) && be.getLevel().getBlockState(neighborPos).getBlock() instanceof IConnectionForwardingBlock forwardingBlock) {
                 BlockPos tempSource = sourcePos;
                 sourcePos = neighborPos;
                 neighborPos = forwardingBlock.forwardConnection(be.getLevel(), tempSource, be.getLevel().getBlockState(tempSource), neighborPos);
@@ -49,6 +52,7 @@ public abstract class RotationPropagatorMixin {
 
             positions.set(i, neighborPos);
         }
-        cir.setReturnValue(positions);
+        originalPositions.clear();
+        originalPositions.addAll(positions);
     }
 }
