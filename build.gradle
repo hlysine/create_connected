@@ -2,7 +2,7 @@ plugins {
     id 'idea'
     id 'java-library'
     id 'maven-publish'
-    id 'net.neoforged.moddev' version '2.0.86'
+    id 'net.neoforged.moddev' version '2.0.141'
     id 'me.modmuss50.mod-publish-plugin' version '0.4.5'
 }
 
@@ -172,6 +172,13 @@ repositories {
     }
 }
 
+configurations {
+    localCompile
+    compileClasspath {
+        extendsFrom(localCompile)
+    }
+}
+
 dependencies {
     implementation "net.neoforged:neoforge:${neoforge_version}"
 
@@ -188,7 +195,7 @@ dependencies {
 //    implementation("maven.modrinth:create-garnished:${garnished_version}")
 //    runtimeOnly("maven.modrinth:create-dreams-and-desires:${dreams_desires_version}")
 //    runtimeOnly("plus.dragons.createdragonsplus:create-dragons-plus-${minecraft_version}:${create_dragons_plus_version}")
-    implementation("com.copycatsplus:copycats:${copycats_version}")
+    implementation("com.copycatsplus:copycats:${copycats_version}") { transitive = false }
     implementation("maven.modrinth:additional-placements:${additional_placements_version}")
 //    runtimeOnly("maven.modrinth:create-steam-n-rails:${steam_n_rails_version}")
 
@@ -219,7 +226,7 @@ processResources {
     inputs.properties replaceProperties
 
     filesMatching(['META-INF/neoforge.mods.toml', 'pack.mcmeta']) {
-        expand replaceProperties + [project: project]
+        expand replaceProperties
     }
 }
 
