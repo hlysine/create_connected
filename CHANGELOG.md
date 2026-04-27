@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 1.1.14 - 2026-04-27
+
+### Fixed
+
+- Cross connector compatibility with Create: Aeronautics - no longer interferes with the swivel bearing (thanks @KIN-4096)
+- Redstone link wildcard compatibility with Sable - now works across physics contraptions (thanks @electicsteve)
+- Ponder entry for Kinetic Bridge
+
 ## 1.1.13 - 2026-02-08
 
 ### Fixed
