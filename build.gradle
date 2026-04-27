@@ -210,6 +210,12 @@ dependencies {
 
     // Sable compatibility
     runtimeOnly("dev.ryanhcode.sable:sable-neoforge-${minecraft_version}:${sable_version}")
+    runtimeOnly("dev.simulated_team.simulated:simulated-neoforge-${minecraft_version}:${simulated_version}") {
+        transitive = false
+    }
+    runtimeOnly("dev.eriksonn.aeronautics:aeronautics-neoforge-${minecraft_version}:${aeronautics_version}") {
+        transitive = false
+    }
     jarJar(api("dev.ryanhcode.sable-companion:sable-companion-common-${minecraft_version}:[${sable_companion_version},)")) {
         version {
             prefer sable_companion_version
