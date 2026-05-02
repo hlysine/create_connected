@@ -14,6 +14,7 @@ import dev.engine_room.flywheel.lib.model.Models;
 import dev.engine_room.flywheel.lib.visual.SimpleDynamicVisual;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import org.joml.Math;
 import org.joml.Quaternionf;
 
 import java.util.function.Consumer;
@@ -48,7 +49,7 @@ public class CrankWheelVisual extends KineticBlockEntityVisual<CrankWheelBlockEn
 
     private void rotateCrank(float pt) {
         var facing = blockState.getValue(BlockStateProperties.FACING);
-        float angle = blockEntity.getIndependentAngle(pt);
+        float angle = Math.toRadians(blockEntity.getIndependentAngle(pt));
 
         crank.setIdentityTransform()
                 .translate(getVisualPosition())
