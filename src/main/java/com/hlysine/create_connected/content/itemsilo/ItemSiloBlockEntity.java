@@ -9,6 +9,7 @@ import com.simibubi.create.foundation.blockEntity.IMultiBlockEntityContainer;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.inventory.VersionedInventoryWrapper;
+import com.simibubi.create.foundation.mixin.accessor.ItemStackHandlerAccessor;
 import com.simibubi.create.infrastructure.config.AllConfigs;
 import net.createmod.catnip.nbt.NBTHelper;
 import net.minecraft.core.BlockPos;
@@ -17,6 +18,7 @@ import net.minecraft.core.Direction.Axis;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
+import net.minecraft.world.Clearable;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -35,7 +37,7 @@ import net.neoforged.neoforge.items.wrapper.CombinedInvWrapper;
 import java.util.List;
 
 @EventBusSubscriber(modid = CreateConnected.MODID)
-public class ItemSiloBlockEntity extends SmartBlockEntity implements IMultiBlockEntityContainer.Inventory {
+public class ItemSiloBlockEntity extends SmartBlockEntity implements IMultiBlockEntityContainer.Inventory, Clearable {
 
     protected ICapabilityProvider<IItemHandler> itemCapability = null;
     protected InventoryIdentifier invId;
@@ -357,6 +359,11 @@ public class ItemSiloBlockEntity extends SmartBlockEntity implements IMultiBlock
     @Override
     public boolean hasInventory() {
         return true;
+    }
+
+    @Override
+    public void clearContent() {
+        ((ItemStackHandlerAccessor) inventory).create$getStacks().clear();
     }
 }
 
