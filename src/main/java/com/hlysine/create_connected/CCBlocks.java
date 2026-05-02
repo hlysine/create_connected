@@ -67,6 +67,7 @@ import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllSpriteShifts;
 import com.simibubi.create.AllTags;
 import com.simibubi.create.Create;
+import com.simibubi.create.api.behaviour.display.DisplaySource;
 import com.simibubi.create.api.connectivity.ConnectivityHandler;
 import com.simibubi.create.api.contraption.BlockMovementChecks;
 import com.simibubi.create.api.contraption.storage.item.MountedItemStorageType;
@@ -76,7 +77,6 @@ import com.simibubi.create.content.decoration.encasing.EncasingRegistry;
 import com.simibubi.create.content.fluids.tank.FluidTankMovementBehavior;
 import com.simibubi.create.content.kinetics.chainDrive.ChainDriveGenerator;
 import com.simibubi.create.content.kinetics.simpleRelays.BracketedKineticBlockModel;
-import com.simibubi.create.content.kinetics.simpleRelays.encased.EncasedShaftBlock;
 import com.simibubi.create.foundation.block.ItemUseOverrides;
 import com.simibubi.create.foundation.data.*;
 import com.tterrag.registrate.providers.DataGenContext;
@@ -86,12 +86,10 @@ import net.createmod.catnip.data.Iterate;
 import net.createmod.catnip.registry.RegisteredObjectsHelper;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.Rarity;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
@@ -116,7 +114,6 @@ import static com.simibubi.create.api.behaviour.movement.MovementBehaviour.movem
 import static com.simibubi.create.api.contraption.storage.fluid.MountedFluidStorageType.mountedFluidStorage;
 import static com.simibubi.create.foundation.data.AssetLookup.partialBaseModel;
 import static com.simibubi.create.foundation.data.BlockStateGen.axisBlock;
-import static com.simibubi.create.foundation.data.BlockStateGen.axisBlockProvider;
 import static com.simibubi.create.foundation.data.CreateRegistrate.connectedTextures;
 import static com.simibubi.create.foundation.data.ModelGen.customItemModel;
 import static com.simibubi.create.foundation.data.TagGen.axeOrPickaxe;
@@ -392,6 +389,7 @@ public class CCBlocks {
             .transform(CStress.setCapacity(32.0))
             .transform(CStress.setImpact(64.0))
             .transform(FeatureToggle.register(FeatureCategory.KINETIC))
+            .transform(DisplaySource.displaySource(CCDisplaySources.KINETIC_BATTERY))
             .transform(axeOrPickaxe())
             .blockstate(new KineticBatteryGenerator()::generate)
             .loot((lt, block) -> {
