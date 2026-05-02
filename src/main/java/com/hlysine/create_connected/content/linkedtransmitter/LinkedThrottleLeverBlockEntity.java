@@ -1,11 +1,9 @@
 package com.hlysine.create_connected.content.linkedtransmitter;
 
-import com.hlysine.create_connected.mixin.linkedtransmitter.AnalogLeverBlockEntityAccessor;
-import com.simibubi.create.content.redstone.analogLever.AnalogLeverBlockEntity;
 import com.simibubi.create.content.redstone.link.LinkBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.ValueBoxTransform;
-import net.createmod.catnip.animation.LerpedFloat;
+import dev.simulated_team.simulated.content.blocks.throttle_lever.ThrottleLeverBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
@@ -16,7 +14,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.List;
 
-public class LinkedAnalogLeverBlockEntity extends AnalogLeverBlockEntity {
+public class LinkedThrottleLeverBlockEntity extends ThrottleLeverBlockEntity {
 
     private int transmittedSignal;
     /**
@@ -25,7 +23,7 @@ public class LinkedAnalogLeverBlockEntity extends AnalogLeverBlockEntity {
     public boolean containsBase = true;
     private LinkBehaviour link;
 
-    public LinkedAnalogLeverBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
+    public LinkedThrottleLeverBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
     }
 
@@ -59,11 +57,7 @@ public class LinkedAnalogLeverBlockEntity extends AnalogLeverBlockEntity {
     }
 
     private int lastChange() {
-        return ((AnalogLeverBlockEntityAccessor) this).getLastChange();
-    }
-
-    private LerpedFloat getClientState() {
-        return ((AnalogLeverBlockEntityAccessor) this).getClientState();
+        return this.lastChange;
     }
 
     @Override
@@ -75,7 +69,7 @@ public class LinkedAnalogLeverBlockEntity extends AnalogLeverBlockEntity {
         }
         if (level.isClientSide && prevTick > 0 && lastChange() == 0) {
             // todo: desync between server and client, but setblock on server resets BE
-            level.setBlock(worldPosition, getBlockState().setValue(BlockStateProperties.POWERED, getClientState().getValue() > 0.1), 0);
+            level.setBlock(worldPosition, getBlockState().setValue(BlockStateProperties.POWERED, getState() > 0), 0);
         }
     }
 

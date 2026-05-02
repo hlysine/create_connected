@@ -9,9 +9,7 @@ import com.simibubi.create.content.redstone.analogLever.AnalogLeverBlock;
 import com.simibubi.create.content.schematics.requirement.ItemRequirement;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
@@ -88,14 +86,7 @@ public class LinkedAnalogLeverBlock extends AnalogLeverBlock implements SpecialB
         if (isHittingBase(state, level, pos, hitResult)) {
             return super.useWithoutItem(state, level, pos, player, hitResult);
         }
-        if (player.isShiftKeyDown()) {
-            if (!level.isClientSide())
-                level.setBlockAndUpdate(pos, state.cycle(LOCKED));
-            return InteractionResult.SUCCESS;
-        }
-        if (state.getValue(LOCKED))
-            return InteractionResult.CONSUME;
-        return InteractionResult.PASS;
+        return LinkedTransmitterBlock.super.useTransmitter(state, level, pos, player, true);
     }
 
     @Override

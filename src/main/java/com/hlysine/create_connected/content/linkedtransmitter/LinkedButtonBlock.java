@@ -91,14 +91,7 @@ public class LinkedButtonBlock extends ButtonBlock implements IBE<LinkedTransmit
                 return super.useWithoutItem(state, level, pos, player, hit);
             return InteractionResult.CONSUME;
         }
-        if (player.isShiftKeyDown()) {
-            if (!level.isClientSide())
-                level.setBlockAndUpdate(pos, state.cycle(LOCKED));
-            return InteractionResult.SUCCESS;
-        }
-        if (state.getValue(LOCKED))
-            return InteractionResult.CONSUME;
-        return InteractionResult.PASS;
+        return LinkedTransmitterBlock.super.useTransmitter(state, level, pos, player, false);
     }
 
     @Override

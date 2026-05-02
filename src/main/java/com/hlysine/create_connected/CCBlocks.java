@@ -1,6 +1,7 @@
 package com.hlysine.create_connected;
 
 import com.hlysine.create_connected.compat.Mods;
+import com.hlysine.create_connected.compat.SimCompatRegistry;
 import com.hlysine.create_connected.config.CStress;
 import com.hlysine.create_connected.config.FeatureCategory;
 import com.hlysine.create_connected.config.FeatureToggle;
@@ -53,10 +54,7 @@ import com.hlysine.create_connected.content.kineticbattery.KineticBatteryGenerat
 import com.hlysine.create_connected.content.kineticbridge.KineticBridgeBlock;
 import com.hlysine.create_connected.content.kineticbridge.KineticBridgeBlockItem;
 import com.hlysine.create_connected.content.kineticbridge.KineticBridgeDestinationBlock;
-import com.hlysine.create_connected.content.linkedtransmitter.LinkedAnalogLeverBlock;
-import com.hlysine.create_connected.content.linkedtransmitter.LinkedButtonBlock;
-import com.hlysine.create_connected.content.linkedtransmitter.LinkedLeverBlock;
-import com.hlysine.create_connected.content.linkedtransmitter.LinkedTransmitterItem;
+import com.hlysine.create_connected.content.linkedtransmitter.*;
 import com.hlysine.create_connected.content.overstressclutch.OverstressClutchBlock;
 import com.hlysine.create_connected.content.parallelgearbox.ParallelGearboxBlock;
 import com.hlysine.create_connected.content.sequencedpulsegenerator.SequencedPulseGeneratorBlock;
@@ -82,6 +80,8 @@ import com.simibubi.create.foundation.data.*;
 import com.tterrag.registrate.providers.DataGenContext;
 import com.tterrag.registrate.providers.RegistrateBlockstateProvider;
 import com.tterrag.registrate.util.entry.BlockEntry;
+import dev.simulated_team.simulated.Simulated;
+import dev.simulated_team.simulated.index.SimBlocks;
 import net.createmod.catnip.data.Iterate;
 import net.createmod.catnip.registry.RegisteredObjectsHelper;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
@@ -470,8 +470,7 @@ public class CCBlocks {
             .tag(AllTags.AllBlockTags.SAFE_NBT.tag)
             .transform(LinkedTransmitterItem.register())
             .onRegister(PreciseItemUseOverrides::addBlock)
-            .blockstate(CCBlockStateGen.linkedLever(
-                    Create.asResource("block/analog_lever/block"),
+            .blockstate(CCBlockStateGen.linkedLeverNoPower(
                     Create.asResource("block/analog_lever/block")
             ))
             .register();
@@ -948,6 +947,7 @@ public class CCBlocks {
                     .register();
 
     public static void register() {
+        Mods.SIMULATED.executeIfInstalled(() -> SimCompatRegistry::register);
     }
 
     private static Function<BlockState, ModelFile> forBoolean(DataGenContext<?, ?> ctx,

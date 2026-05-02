@@ -120,6 +120,7 @@
   "block.create_connected.linked_polished_blackstone_button": "Linked Polished Blackstone Button",
   "block.create_connected.linked_spruce_button": "Linked Spruce Button",
   "block.create_connected.linked_stone_button": "Linked Stone Button",
+  "block.create_connected.linked_throttle_lever": "Linked Throttle Lever",
   "block.create_connected.linked_warped_button": "Linked Warped Button",
   "block.create_connected.overstress_clutch": "Overstress Clutch",
   "block.create_connected.overstress_clutch.tooltip.behaviour1": "_Reset_ to coupled state.",

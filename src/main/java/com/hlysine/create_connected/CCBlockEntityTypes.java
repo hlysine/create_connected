@@ -22,9 +22,7 @@ import com.hlysine.create_connected.content.kineticbattery.KineticBatteryBlockEn
 import com.hlysine.create_connected.content.kineticbattery.KineticBatteryRenderer;
 import com.hlysine.create_connected.content.kineticbattery.KineticBatteryVisual;
 import com.hlysine.create_connected.content.kineticbridge.*;
-import com.hlysine.create_connected.content.linkedtransmitter.LinkedAnalogLeverBlockEntity;
-import com.hlysine.create_connected.content.linkedtransmitter.LinkedAnalogLeverRenderer;
-import com.hlysine.create_connected.content.linkedtransmitter.LinkedTransmitterBlockEntity;
+import com.hlysine.create_connected.content.linkedtransmitter.*;
 import com.hlysine.create_connected.content.overstressclutch.OverstressClutchBlockEntity;
 import com.hlysine.create_connected.content.parallelgearbox.ParallelGearboxBlockEntity;
 import com.hlysine.create_connected.content.parallelgearbox.ParallelGearboxRenderer;
@@ -47,6 +45,7 @@ import com.simibubi.create.content.redstone.analogLever.AnalogLeverVisual;
 import com.simibubi.create.foundation.blockEntity.renderer.SmartBlockEntityRenderer;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
+import dev.simulated_team.simulated.content.blocks.throttle_lever.ThrottleLeverVisual;
 
 public class CCBlockEntityTypes {
     private static final CreateRegistrate REGISTRATE = CreateConnected.getRegistrate();
