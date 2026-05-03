@@ -39,16 +39,10 @@ public interface LinkedTransmitterBlock {
     default @NotNull InteractionResult useTransmitter(@NotNull BlockState state,
                                                       @NotNull Level level,
                                                       @NotNull BlockPos pos,
-                                                      @NotNull Player player,
-                                                      boolean disableLocking) {
+                                                      @NotNull Player player) {
         if (player.isShiftKeyDown()) {
             if (!level.isClientSide()) {
-                // todo: temporary measure because linked analog and throttle levers cannot keep their NBTs across locking
-                if (disableLocking && state.getValue(BlockStateProperties.LOCKED)) {
-                    level.setBlock(pos, state.setValue(BlockStateProperties.LOCKED, false), Block.UPDATE_ALL);
-                } else if (!disableLocking) {
-                    level.setBlock(pos, state.cycle(BlockStateProperties.LOCKED), Block.UPDATE_ALL);
-                }
+                level.setBlock(pos, state.cycle(BlockStateProperties.LOCKED), Block.UPDATE_CLIENTS);
             }
             return InteractionResult.SUCCESS;
         }

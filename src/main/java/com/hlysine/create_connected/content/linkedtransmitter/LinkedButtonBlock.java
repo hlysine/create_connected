@@ -91,7 +91,7 @@ public class LinkedButtonBlock extends ButtonBlock implements IBE<LinkedTransmit
                 return super.useWithoutItem(state, level, pos, player, hit);
             return InteractionResult.CONSUME;
         }
-        return LinkedTransmitterBlock.super.useTransmitter(state, level, pos, player, false);
+        return LinkedTransmitterBlock.super.useTransmitter(state, level, pos, player);
     }
 
     @Override

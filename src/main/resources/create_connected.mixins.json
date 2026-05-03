@@ -42,6 +42,7 @@
     "kineticbattery.DeployerHandlerMixin",
     "linkedtransmitter.AnalogLeverBlockEntityAccessor",
     "linkedtransmitter.AnalogLeverBlockMixin",
+    "linkedtransmitter.ThrottleLeverBlockMixin",
     "nestedschematics.FilesHelperMixin",
     "nestedschematics.SchematicExportMixin",
     "nestedschematics.ServerSchematicLoaderMixin",

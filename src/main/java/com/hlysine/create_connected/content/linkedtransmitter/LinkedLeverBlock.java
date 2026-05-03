@@ -91,7 +91,7 @@ public class LinkedLeverBlock extends LeverBlock implements IBE<LinkedTransmitte
                 return super.useWithoutItem(state, level, pos, player, hit);
             return InteractionResult.CONSUME;
         }
-        return LinkedTransmitterBlock.super.useTransmitter(state, level, pos, player, false);
+        return LinkedTransmitterBlock.super.useTransmitter(state, level, pos, player);
     }
 
     @Override

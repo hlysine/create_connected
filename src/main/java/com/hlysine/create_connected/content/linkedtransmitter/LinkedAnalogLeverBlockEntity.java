@@ -9,6 +9,7 @@ import net.createmod.catnip.animation.LerpedFloat;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -55,7 +56,6 @@ public class LinkedAnalogLeverBlockEntity extends AnalogLeverBlockEntity {
         transmittedSignal = strength;
         if (link != null)
             link.notifySignalChange();
-        sendData();
     }
 
     private int lastChange() {
@@ -70,19 +70,11 @@ public class LinkedAnalogLeverBlockEntity extends AnalogLeverBlockEntity {
     public void tick() {
         int prevTick = lastChange();
         super.tick();
-        if (!level.isClientSide && prevTick > 0 && lastChange() == 0) {
-            transmit(getState());
+        if (prevTick > 0 && lastChange() == 0) {
+            if (!level.isClientSide)
+                transmit(getState());
+            level.setBlock(worldPosition, getBlockState().setValue(BlockStateProperties.POWERED, getClientState().getValue() > 0.1), Block.UPDATE_ALL);
         }
-        if (level.isClientSide && prevTick > 0 && lastChange() == 0) {
-            // todo: desync between server and client, but setblock on server resets BE
-            level.setBlock(worldPosition, getBlockState().setValue(BlockStateProperties.POWERED, getClientState().getValue() > 0.1), 0);
-        }
-    }
-
-    @Override
-    public void remove() {
-        super.remove();
-        transmit(0);
     }
 
     @Override

@@ -86,7 +86,7 @@ public class LinkedAnalogLeverBlock extends AnalogLeverBlock implements SpecialB
         if (isHittingBase(state, level, pos, hitResult)) {
             return super.useWithoutItem(state, level, pos, player, hitResult);
         }
-        return LinkedTransmitterBlock.super.useTransmitter(state, level, pos, player, true);
+        return LinkedTransmitterBlock.super.useTransmitter(state, level, pos, player);
     }
 
     @Override
