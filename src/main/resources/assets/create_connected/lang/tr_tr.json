@@ -70,6 +70,8 @@
   "block.create_connected.encased_chain_cogwheel": "Kapalı Zincir Dişli Çark",
   "block.create_connected.fan_blasting_catalyst": "Fan Patlatma Katalizörü",
   "block.create_connected.fan_blasting_catalyst.tooltip.summary": "Özel _toplu patlatma_ cihazı. Katalizörün içeriği çevre ile etkileşime girmez.",
+  "block.create_connected.fan_enriched_catalyst": "Fan Zenginleştirme Katalizörü",
+  "block.create_connected.fan_enriched_catalyst.tooltip.summary": "Uyumlu modlar için özel _toplu zenginleştirme_ cihazı. Katalizörün içeriği çevre ile etkileşime girmez.",
   "block.create_connected.fan_freezing_catalyst": "Fan Dondurma Katalizörü",
   "block.create_connected.fan_freezing_catalyst.tooltip.summary": "Uyumlu modlar için özel _toplu dondurma_ cihazı. Katalizörün içeriği çevre ile etkileşime girmez.",
   "block.create_connected.fan_haunting_catalyst": "Hayranları Rahatsız Eden Katalizör",
