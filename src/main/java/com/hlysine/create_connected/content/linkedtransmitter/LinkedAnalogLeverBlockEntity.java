@@ -7,8 +7,6 @@ import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour
 import com.simibubi.create.foundation.blockEntity.behaviour.ValueBoxTransform;
 import net.createmod.catnip.animation.LerpedFloat;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -18,8 +16,6 @@ import org.apache.commons.lang3.tuple.Pair;
 import java.util.List;
 
 public class LinkedAnalogLeverBlockEntity extends AnalogLeverBlockEntity {
-
-    private int transmittedSignal;
     /**
      * set to false if the module item is already returned to player via wrenching
      */
@@ -31,7 +27,7 @@ public class LinkedAnalogLeverBlockEntity extends AnalogLeverBlockEntity {
     }
 
     @Override
-    public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
+    public void addBehavioursDeferred(List<BlockEntityBehaviour> behaviours) {
         createLink();
         behaviours.add(link);
     }
@@ -39,21 +35,16 @@ public class LinkedAnalogLeverBlockEntity extends AnalogLeverBlockEntity {
     @Override
     public void initialize() {
         super.initialize();
-        transmit(getState());
+        transmit();
     }
 
     protected void createLink() {
         Pair<ValueBoxTransform, ValueBoxTransform> slots =
                 ValueBoxTransform.Dual.makeSlots(LinkedTransmitterFrequencySlot::new);
-        link = LinkBehaviour.transmitter(this, slots, this::getSignal);
+        link = LinkBehaviour.transmitter(this, slots, this::getState);
     }
 
-    public int getSignal() {
-        return transmittedSignal;
-    }
-
-    public void transmit(int strength) {
-        transmittedSignal = strength;
+    public void transmit() {
         if (link != null)
             link.notifySignalChange();
     }
@@ -72,21 +63,8 @@ public class LinkedAnalogLeverBlockEntity extends AnalogLeverBlockEntity {
         super.tick();
         if (prevTick > 0 && lastChange() == 0) {
             if (!level.isClientSide)
-                transmit(getState());
+                transmit();
             level.setBlock(worldPosition, getBlockState().setValue(BlockStateProperties.POWERED, getClientState().getValue() > 0.1), Block.UPDATE_ALL);
         }
-    }
-
-    @Override
-    public void write(CompoundTag compound, HolderLookup.Provider registries, boolean clientPacket) {
-        compound.putInt("Transmit", transmittedSignal);
-        super.write(compound, registries, clientPacket);
-    }
-
-    @Override
-    protected void read(CompoundTag compound, HolderLookup.Provider registries, boolean clientPacket) {
-        super.read(compound, registries, clientPacket);
-        if (level == null || level.isClientSide || !link.newPosition)
-            transmittedSignal = compound.getInt("Transmit");
     }
 }
