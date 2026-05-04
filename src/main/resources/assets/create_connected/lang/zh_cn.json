@@ -120,6 +120,7 @@
   "block.create_connected.linked_polished_blackstone_button": "无线磨制黑石按钮",
   "block.create_connected.linked_spruce_button": "无线云杉木按钮",
   "block.create_connected.linked_stone_button": "无线石头按钮",
+  "block.create_connected.linked_throttle_lever": "无线油门拉杆",
   "block.create_connected.linked_warped_button": "无线诡异木按钮",
   "block.create_connected.overstress_clutch": "过应力离合器",
   "block.create_connected.overstress_clutch.tooltip.behaviour1": "_重置_至耦合状态。",
