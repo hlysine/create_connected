@@ -94,7 +94,7 @@ public class KineticBatteryBlockEntity extends GeneratingKineticBlockEntity impl
             return;
         boolean changed = false;
         if (isDischarging(getBlockState())) {
-            if (batteryLevel > 0 && stress > 0) {
+            if (batteryLevel > 0) {
                 if (lastCapacityProvided == 0) {
                     calculateAddedStressCapacity();
                 }
