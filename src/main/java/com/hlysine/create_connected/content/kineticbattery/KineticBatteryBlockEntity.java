@@ -98,7 +98,7 @@ public class KineticBatteryBlockEntity extends GeneratingKineticBlockEntity impl
                 if (lastCapacityProvided == 0) {
                     calculateAddedStressCapacity();
                 }
-                batteryLevel = Math.min(Math.max(batteryLevel - lastCapacityProvided * Math.abs(getGeneratedSpeed()), 0), CServer.BatteryMinDischarge.get());
+                batteryLevel = Math.max(batteryLevel - Math.max(lastCapacityProvided * Math.abs(getGeneratedSpeed()), CServer.BatteryMinDischarge.get()), 0);
                 changed = true;
             }
         } else {
