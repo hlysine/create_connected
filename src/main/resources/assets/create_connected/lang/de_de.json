@@ -120,6 +120,7 @@
   "block.create_connected.linked_polished_blackstone_button": "Verknüpfter Polierter Schwarzsteinknopf",
   "block.create_connected.linked_spruce_button": "Verknüpfter Fichtenknopf",
   "block.create_connected.linked_stone_button": "Verknüpfter Steinknopf",
+  "block.create_connected.linked_throttle_lever": "Verknüpfter Schubhebel",
   "block.create_connected.linked_warped_button": "Verknüpfter Wirrknopf",
   "block.create_connected.overstress_clutch": "Überlastungskupplung",
   "block.create_connected.overstress_clutch.tooltip.behaviour1": "_Zurücksetzen_ auf gekoppelten Zustand.",
