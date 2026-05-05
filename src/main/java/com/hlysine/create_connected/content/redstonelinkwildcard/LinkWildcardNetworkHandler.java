@@ -252,8 +252,10 @@ public class LinkWildcardNetworkHandler {
 
         if (from == to) return true;
 
-        final Vector3d fromPos = JOMLConversion.atCenterOf(from.getLocation());
-        final Vector3d toPos = JOMLConversion.atCenterOf(to.getLocation());
+        final BlockPos fromLocation = from.getLocation();
+        final Vector3d fromPos = new Vector3d(fromLocation.getX(), fromLocation.getY(), fromLocation.getZ());
+        final BlockPos toLocation = to.getLocation();
+        final Vector3d toPos = new Vector3d(toLocation.getX(), toLocation.getY(), toLocation.getZ());
 
         final SableCompanion helper = SableCompanion.INSTANCE;
         final SubLevelAccess fromSublevel = helper.getContaining(level, fromPos);
