@@ -3,6 +3,10 @@
     {
       "type": "create_connected:feature_enabled",
       "tag": "create_connected:empty_fan_catalyst"
+    },
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "createnetherindustry"
     }
   ],
   "type": "create:item_application",
@@ -11,12 +15,17 @@
       "item": "create_connected:empty_fan_catalyst"
     },
     {
-      "item": "twilightforest:exanimate_essence"
+      "type": "neoforge:compound",
+      "ingredients": [
+        {
+          "item": "createnetherindustry:mysterious_ancient_mechanism"
+        }
+      ]
     }
   ],
   "results": [
     {
-      "id": "create_connected:fan_glooming_catalyst"
+      "id": "create_connected:fan_soul_stripping_catalyst"
     }
   ]
 }

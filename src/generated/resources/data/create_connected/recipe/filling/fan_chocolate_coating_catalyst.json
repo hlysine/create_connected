@@ -3,20 +3,26 @@
     {
       "type": "create_connected:feature_enabled",
       "tag": "create_connected:empty_fan_catalyst"
+    },
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "create_more_catalysts"
     }
   ],
-  "type": "create:item_application",
+  "type": "create:filling",
   "ingredients": [
     {
       "item": "create_connected:empty_fan_catalyst"
     },
     {
-      "item": "create_shimmer:shimmer_bucket"
+      "type": "neoforge:single",
+      "amount": 1000,
+      "fluid": "create:chocolate"
     }
   ],
   "results": [
     {
-      "id": "create_connected:fan_transmutation_catalyst"
+      "id": "create_connected:fan_chocolate_coating_catalyst"
     }
   ]
 }

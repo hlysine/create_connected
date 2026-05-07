@@ -5,6 +5,7 @@
 		"0": "create:block/funnel/brass_funnel_frame",
 		"1": "create_connected:block/fan_catalyst_core",
 		"2": "twilightforest:block/deadrock",
+		"particle": "create:block/funnel/brass_funnel_frame",
 		"fire": "create_shimmer:block/ominous_campfire_fire"
 	},
 	"elements": [
