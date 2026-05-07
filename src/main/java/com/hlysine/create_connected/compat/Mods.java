@@ -20,7 +20,11 @@ public enum Mods {
     ADDITIONAL_PLACEMENTS("additionalplacements"),
     GARNISHED("garnished"),
     DRAGONS_PLUS("create_dragons_plus"),
-    STEAM_N_RAILS("railways");
+    STEAM_N_RAILS("railways"),
+    MORE_CATALYSTS("create_more_catalysts"),
+    SHIMMER("create_shimmer"),
+    NETHER_INDUSTRY("createnetherindustry"),
+    TWILIGHT_FOREST("twilightforest");
 
     private final String id;
 
