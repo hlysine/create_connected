@@ -48,6 +48,24 @@ public class CCTagGen {
         prov.tag(BlockTags.create(Mods.DRAGONS_PLUS.rl("fan_processing_catalysts/ending")))
                 .add(CCBlocks.FAN_ENDING_CATALYST_DRAGONS_BREATH.get())
                 .add(CCBlocks.FAN_ENDING_CATALYST_DRAGON_HEAD.get());
+        prov.tag(BlockTags.create(Mods.MORE_CATALYSTS.rl("fan_catalysts/chocolate_coating")))
+                .add(CCBlocks.FAN_CHOCOLATE_COATING_CATALYST.get());
+        prov.tag(BlockTags.create(Mods.MORE_CATALYSTS.rl("fan_catalysts/honey_coating")))
+                .add(CCBlocks.FAN_HONEY_COATING_CATALYST.get());
+        prov.tag(BlockTags.create(Mods.MORE_CATALYSTS.rl("fan_catalysts/exploding")))
+                .add(CCBlocks.FAN_EXPLODING_CATALYST.get());
+        prov.tag(BlockTags.create(Mods.MORE_CATALYSTS.rl("fan_catalysts/resonance")))
+                .add(CCBlocks.FAN_RESONANCE_CATALYST.get());
+        prov.tag(BlockTags.create(Mods.MORE_CATALYSTS.rl("fan_catalysts/sculking")))
+                .add(CCBlocks.FAN_SCULKING_CATALYST.get());
+        prov.tag(BlockTags.create(Mods.MORE_CATALYSTS.rl("fan_catalysts/purifying")))
+                .add(CCBlocks.FAN_PURIFYING_CATALYST.get());
+        prov.tag(BlockTags.create(Mods.SHIMMER.rl("fan_transmutation_catalysts")))
+                .add(CCBlocks.FAN_TRANSMUTATION_CATALYST.get());
+        prov.tag(BlockTags.create(Mods.SHIMMER.rl("fan_glooming_catalysts")))
+                .add(CCBlocks.FAN_GLOOMING_CATALYST.get());
+        prov.tag(BlockTags.create(Mods.NETHER_INDUSTRY.rl("fan_soul_stripping_catalysts")))
+                .add(CCBlocks.FAN_SOUL_STRIPPING_CATALYST.get());
     }
 
     private static void genItemTags(RegistrateTagsProvider<Item> provIn) {
