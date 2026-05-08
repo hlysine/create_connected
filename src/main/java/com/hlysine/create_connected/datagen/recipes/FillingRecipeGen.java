@@ -44,7 +44,7 @@ public class FillingRecipeGen extends com.simibubi.create.api.data.recipe.Fillin
             .withCondition(new ModLoadedCondition(Mods.MORE_CATALYSTS.id()))
             .output(CCBlocks.FAN_HONEY_COATING_CATALYST));
 
-    /*
+    /*  Already added the recipe manually
     GeneratedRecipe FAN_TRANSMUTATION_CATALYST = create("fan_transmutation_catalyst", b -> b.require(//needs create_shimmer:shimmer//, 1000)
             .require(CCBlocks.EMPTY_FAN_CATALYST)
             .withCondition(new FeatureEnabledCondition(CCBlocks.EMPTY_FAN_CATALYST.getId()))
