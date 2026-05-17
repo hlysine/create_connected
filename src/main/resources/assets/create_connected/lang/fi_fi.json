@@ -1,1 +1,8 @@
-{}
+{
+  "advancement.create_connected.brass_gearbox": "Vakava järjestö",
+  "advancement.create_connected.brass_gearbox.desc": "Laita messinkinen vaihdelaatikko alas",
+  "advancement.create_connected.control_chip": "Tarkkuusvalmistus",
+  "advancement.create_connected.control_chip.desc": "Kokoa ohjaussiru",
+  "advancement.create_connected.kinetic_battery": "Täysin ladattu",
+  "advancement.create_connected.kinetic_battery.desc": "Lataa kineettinen akku täyteen"
+}
