@@ -30,7 +30,7 @@
   "block.create_connected.copycat_beam.tooltip.condition1": "Wenn R-Klick",
   "block.create_connected.copycat_beam.tooltip.summary": "_Wandelt jeden _vollen Block_ in einen dekorativen Balken.",
   "block.create_connected.copycat_block": "Copycat Block",
-  "block.create_connected.copycat_block.tooltip.behaviour1": "Nutzt _gehaltenes Item_ als _Material_ wenn möglich, _Clicke erneut_ um _Orientierung_ oder _Redstone_ Status zu wechseln. Benutze _Schraubenschlüssel_ um das Material zurückzusetzen.",
+  "block.create_connected.copycat_block.tooltip.behaviour1": "Nutzt _gehaltenes Item_ als _Material_ wenn möglich, _klicke erneut_ um _Orientierung_ oder _Redstone_ Status zu wechseln. Benutze _Schraubenschlüssel_, um das Material zurückzusetzen.",
   "block.create_connected.copycat_block.tooltip.condition1": "Wenn R-Klick",
   "block.create_connected.copycat_block.tooltip.summary": "_Wandelt jeden _vollen Block_ in einen dekorativen Klon.",
   "block.create_connected.copycat_board": "Copycat Brett",
