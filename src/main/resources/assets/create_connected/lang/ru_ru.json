@@ -120,7 +120,6 @@
   "block.create_connected.linked_polished_blackstone_button": "Привязанная кнопка из полированного чернита",
   "block.create_connected.linked_spruce_button": "Привязанная еловая кнопка",
   "block.create_connected.linked_stone_button": "Привязанная каменная кнопка",
-  "block.create_connected.linked_throttle_lever": "Рычаг дроссельной заслонки",
   "block.create_connected.linked_warped_button": "Привязанная искажённая кнопка",
   "block.create_connected.overstress_clutch": "Предохраняющее сцепление",
   "block.create_connected.overstress_clutch.tooltip.behaviour1": "_Возвращает_ сцепление в исходное состояние.",
