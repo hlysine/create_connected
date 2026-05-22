@@ -37,6 +37,8 @@
     "fluidvessel.SteamEngineBlockEntityMixin",
     "fluidvessel.SteamEngineBlockMixin",
     "fluidvessel.WhistleBlockMixin",
+    "inventoryaccess.PackagerBlockEntityMixin",
+    "inventoryaccess.PackagerBlockMixin",
     "itemsilo.ContraptionMixin",
     "itemsilo.MountedStorageManagerMixin",
     "kineticbattery.DeployerHandlerMixin",

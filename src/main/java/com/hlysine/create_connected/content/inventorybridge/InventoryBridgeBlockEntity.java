@@ -23,6 +23,7 @@ import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.items.IItemHandler;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.function.Supplier;
@@ -97,6 +98,16 @@ public class InventoryBridgeBlockEntity extends SmartBlockEntity {
 
     public boolean isAttachedPositive() {
         return !powered && positiveInventory.hasInventory() && !(positiveInventory.getInventory() instanceof WrappedItemHandler);
+    }
+
+    public @Nullable BlockState getNegativeAttachedBlock() {
+        if (!isAttachedNegative()) return null;
+        return level.getBlockState(negativeInventory.getTarget().getConnectedPos());
+    }
+
+    public @Nullable BlockState getPositiveAttachedBlock() {
+        if (!isAttachedPositive()) return null;
+        return level.getBlockState(positiveInventory.getTarget().getConnectedPos());
     }
 
     public void updateConnectedInventory() {
