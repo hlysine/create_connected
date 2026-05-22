@@ -5,7 +5,6 @@ import com.simibubi.create.content.redstone.analogLever.AnalogLeverBlockEntity;
 import com.simibubi.create.content.redstone.link.LinkBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.ValueBoxTransform;
-import net.createmod.catnip.animation.LerpedFloat;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -51,10 +50,6 @@ public class LinkedAnalogLeverBlockEntity extends AnalogLeverBlockEntity {
 
     private int lastChange() {
         return ((AnalogLeverBlockEntityAccessor) this).getLastChange();
-    }
-
-    private LerpedFloat getClientState() {
-        return ((AnalogLeverBlockEntityAccessor) this).getClientState();
     }
 
     @Override
