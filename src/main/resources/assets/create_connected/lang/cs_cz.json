@@ -260,7 +260,6 @@
   "item.create_connected.music_disc_interlude": "Gramofonová deska",
   "item.create_connected.music_disc_interlude.desc": "Kevin MacLeod - Local Forecast - Elevator",
   "item.create_connected.vertical_brass_gearbox": "Svislá mosazná převodovka",
-  "item.create_connected.vertical_brass_gearbox.tooltip.summary": "Převodovka, u které lze _nezávisle_ nastavit směr otáčení všech 4 stran.",
   "item.create_connected.vertical_parallel_gearbox": "Svislá paralelní převodovka",
   "item.create_connected.vertical_six_way_gearbox": "Svislá šestistupňová převodovka",
   "item.create_connected.vertical_six_way_gearbox.tooltip.summary": "Převodovka s hřídeli na _všech 6 stranách_. Horní a dolní se otáčí _poloviční rychlostí_.",
