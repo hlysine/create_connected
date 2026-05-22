@@ -298,7 +298,6 @@
   "item.create_connected.redstone_link_wildcard": "レッドストーンリンクワイルドカード",
   "item.create_connected.redstone_link_wildcard.tooltip.summary": "設置されたスロットにおいて、レッドストーンリンクが任意の周波数にマッチすることを許可する。",
   "item.create_connected.vertical_brass_gearbox": "垂直真鍮ギアボックス",
-  "item.create_connected.vertical_brass_gearbox.tooltip.summary": "4面すべての回転方向を_個別に設定できる_ギアボックス。",
   "item.create_connected.vertical_parallel_gearbox": "垂直並列ギアボックス",
   "item.create_connected.vertical_six_way_gearbox": "垂直6方向ギアボックス",
   "item.create_connected.vertical_six_way_gearbox.tooltip.summary": "_6面すべて_にシャフトが付いたギアボックス。上部と下部のシャフトは_半分の速度_で回転する。",
