@@ -260,7 +260,6 @@
   "item.create_connected.music_disc_interlude": "Đĩa nhạc",
   "item.create_connected.music_disc_interlude.desc": "Kevin MacLeod - Dự báo địa phương - Thang máy",
   "item.create_connected.vertical_brass_gearbox": "Hộp số đồng thau thẳng đứng",
-  "item.create_connected.vertical_brass_gearbox.tooltip.summary": "Một hộp số mà hướng quay của cả 4 mặt đều có thể cấu hình độc lập.",
   "item.create_connected.vertical_parallel_gearbox": "Hộp số song song đứng",
   "item.create_connected.vertical_six_way_gearbox.tooltip.summary": "Hộp số có trục ở cả 6 mặt. Phần trên và phần dưới quay với một nửa tốc độ."
 }
