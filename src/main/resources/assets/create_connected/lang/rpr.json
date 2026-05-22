@@ -304,7 +304,6 @@
   "item.create_connected.redstone_link_wildcard": "Заглушка частоты редстоунового передатчика сигнала",
   "item.create_connected.redstone_link_wildcard.tooltip.summary": "Подстановочный элементъ, замѣняющій любой предметъ въ слотѣ передатчика.",
   "item.create_connected.vertical_brass_gearbox": "Вертикальная латунная коробка передачъ",
-  "item.create_connected.vertical_brass_gearbox.tooltip.summary": "Коробка передачъ съ _независимо настраиваемыми_ четырьмя направленіями каждаго выхода.",
   "item.create_connected.vertical_parallel_gearbox": "Вертикальная параллельная коробка передачъ",
   "item.create_connected.vertical_six_way_gearbox": "Вертикальная шестисторонняя коробка передачъ",
   "item.create_connected.vertical_six_way_gearbox.tooltip.summary": "Коробка передачъ съ выходами на _всѣхъ шести сторонахъ_. Верхній и нижній вращаются _въ два раза медленнее_.",
