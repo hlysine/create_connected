@@ -304,7 +304,6 @@
   "item.create_connected.redstone_link_wildcard": "Заглушка частоты редстоунового передатчика сигнала",
   "item.create_connected.redstone_link_wildcard.tooltip.summary": "Подстановочный элемент, заменяющий любой предмет в слоте передатчика.",
   "item.create_connected.vertical_brass_gearbox": "Вертикальная латунная угловая передача",
-  "item.create_connected.vertical_brass_gearbox.tooltip.summary": "Угловая передача с _независимо настраиваемыми_ направлениями каждого выхода.",
   "item.create_connected.vertical_parallel_gearbox": "Вертикальная параллельная угловая передача",
   "item.create_connected.vertical_six_way_gearbox": "Вертикальная шестисторонняя угловая передача",
   "item.create_connected.vertical_six_way_gearbox.tooltip.summary": "Угловая передача с выходами на _всех 6 сторонах_. Верхний и нижний вращаются _в два раза медленнее_.",
