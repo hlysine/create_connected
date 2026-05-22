@@ -206,8 +206,6 @@ dependencies {
 
 //    runtimeOnly("maven.modrinth:adorn:${adorn_version}")
 
-    implementation(jarJar("io.github.llamalad7:mixinextras-neoforge:${mixin_extras_version}"))
-
     // Sable compatibility
     implementation("dev.ryanhcode.sable:sable-neoforge-${minecraft_version}:${sable_version}")
     implementation("dev.simulated_team.simulated:simulated-neoforge-${minecraft_version}:${simulated_version}") {
