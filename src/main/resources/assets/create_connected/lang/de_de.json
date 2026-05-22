@@ -304,7 +304,6 @@
   "item.create_connected.redstone_link_wildcard": "Redstone-Verbindung Platzhalter",
   "item.create_connected.redstone_link_wildcard.tooltip.summary": "Erlaube Redstone-Verbindungen beliebig viele Frequenzen für den Slot, in dem er platziert ist.",
   "item.create_connected.vertical_brass_gearbox": "Vertikales Messinggetriebe",
-  "item.create_connected.vertical_brass_gearbox.tooltip.summary": "Ein Getriebe, bei dem die Drehrichtung aller 4 Seiten unabhängig voneinander konfigurierbar sind.",
   "item.create_connected.vertical_parallel_gearbox": "Vertikales paralleles Getriebe",
   "item.create_connected.vertical_six_way_gearbox": "Vertikales 6-Wege-Getriebe",
   "item.create_connected.vertical_six_way_gearbox.tooltip.summary": "Ein Getriebe mit Schaften auf _allen 6 Seiten_. Unten und oben drehen sich mit der _Hälfte der Geschwindigkeit_.",
