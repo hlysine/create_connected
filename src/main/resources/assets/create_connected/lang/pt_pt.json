@@ -258,7 +258,6 @@
   "item.create_connected.music_disc_interlude": "Disco de música",
   "item.create_connected.music_disc_interlude.desc": "Kevin MacLeod - Previsão local - Elevador",
   "item.create_connected.vertical_brass_gearbox": "Caixa de Latão Vertical",
-  "item.create_connected.vertical_brass_gearbox.tooltip.summary": "Uma engrenagem onde a direção de rotação de todos os 4 lados são _independentemente configuráveis_.",
   "item.create_connected.vertical_parallel_gearbox": "Caixa de Engrenagem Paralela Vertical",
   "item.create_connected.vertical_six_way_gearbox": "Equipamento Vertical de 6 viaturas",
   "item.create_connected.vertical_six_way_gearbox.tooltip.summary": "Uma caixa de engrenagem com eixos em _todos os 6 lados_. Giro superior e inferior a _metade_."
