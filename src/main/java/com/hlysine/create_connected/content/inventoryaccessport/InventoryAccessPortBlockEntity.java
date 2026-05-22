@@ -20,6 +20,7 @@ import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.items.IItemHandler;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.function.Supplier;
@@ -67,6 +68,11 @@ public class InventoryAccessPortBlockEntity extends SmartBlockEntity {
 
     public boolean isAttached() {
         return !powered && observedInventory.hasInventory() && !(observedInventory.getInventory() instanceof WrappedItemHandler);
+    }
+
+    public @Nullable BlockState getAttachedBlock() {
+        if (!isAttached()) return null;
+        return level.getBlockState(observedInventory.getTarget().getConnectedPos());
     }
 
     public void updateConnectedInventory() {

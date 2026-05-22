@@ -1,5 +1,6 @@
 {
   "block.create_connected.brake.tooltip.summary": "A device that produces _immense stress_ when powered, halting the network by _overstressing_ it.",
+  "block.create_connected.brass_chute.tooltip.summary": "An improved chute for high throughput item transport. Moves up to _64 items_ at a time.",
   "block.create_connected.brass_gearbox.tooltip.summary": "A gearbox where the rotation direction of all 4 sides are _independently configurable_.",
   "block.create_connected.centrifugal_clutch.tooltip.summary": "A clutch that is only _coupled_ if the input RPM is _faster_ than a configurable threshold.",
   "block.create_connected.copycat_beam.tooltip.behaviour1": "Applies _held item_ as its _material_ if possible. _Click again_ to cycle _orientation_ or _powered_ state. Use a _Wrench_ to _reset_ the material.",
@@ -61,6 +62,6 @@
   "item.create_connected.music_disc_elevator.desc": "Kevin MacLeod - Casa Bossa Nova",
   "item.create_connected.music_disc_interlude.desc": "Kevin MacLeod - Local Forecast - Elevator",
   "item.create_connected.redstone_link_wildcard.tooltip.summary": "Allow Redstone Links to match any frequency for the slot it is placed in.",
-  "item.create_connected.vertical_brass_gearbox.tooltip.summary": "A gearbox where the rotation direction of all 4 sides are _independently configurable_.",
+  "item.create_connected.vertical_brass_gearbox.tooltip.summary": "A gearbox where the rotation direction of all 4 sides are _independently configurable_ with a wrench.",
   "item.create_connected.vertical_six_way_gearbox.tooltip.summary": "A gearbox with shafts on _all 6 sides_. Top and bottom spin at _half speed_."
 }

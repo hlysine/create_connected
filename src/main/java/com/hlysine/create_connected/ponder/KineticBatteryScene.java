@@ -100,6 +100,16 @@ public class KineticBatteryScene {
         scene.effects().indicateSuccess(battery);
         scene.idle(75);
 
+        scene.world().hideSection(util.select().position(saw), Direction.UP);
+        scene.idle(10);
+
+        scene.overlay().showText(120)
+                .text("If the network has zero stress impact, the battery enters power saving mode and only consumes a tiny amount of stress units")
+                .attachKeyFrame()
+                .placeNearTarget()
+                .pointAt(util.vector().topOf(battery));
+        scene.idle(110);
+
         scene.world().showSection(comparatorGroup, Direction.DOWN);
         scene.idle(20);
 

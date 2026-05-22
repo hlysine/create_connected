@@ -1,11 +1,12 @@
 package com.hlysine.create_connected.content.linkedtransmitter;
 
-import com.hlysine.create_connected.mixin.linkedtransmitter.AnalogLeverBlockEntityAccessor;
-import com.simibubi.create.content.redstone.analogLever.AnalogLeverBlockEntity;
 import com.simibubi.create.content.redstone.link.LinkBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.ValueBoxTransform;
+import dev.simulated_team.simulated.content.blocks.throttle_lever.ThrottleLeverBlockEntity;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -14,14 +15,14 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.List;
 
-public class LinkedAnalogLeverBlockEntity extends AnalogLeverBlockEntity {
+public class LinkedThrottleLeverBlockEntity extends ThrottleLeverBlockEntity {
     /**
      * set to false if the module item is already returned to player via wrenching
      */
     public boolean containsBase = true;
     private LinkBehaviour link;
 
-    public LinkedAnalogLeverBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
+    public LinkedThrottleLeverBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
     }
 
@@ -48,19 +49,10 @@ public class LinkedAnalogLeverBlockEntity extends AnalogLeverBlockEntity {
             link.notifySignalChange();
     }
 
-    private int lastChange() {
-        return ((AnalogLeverBlockEntityAccessor) this).getLastChange();
-    }
-
     @Override
-    public void tick() {
-        int prevTick = lastChange();
-        super.tick();
-        if (prevTick > 0 && lastChange() == 0) {
-            if (!level.isClientSide) {
-                transmit();
-                level.setBlock(worldPosition, getBlockState().setValue(BlockStateProperties.POWERED, getState() > 0), Block.UPDATE_ALL);
-            }
-        }
+    public void setSignal(int signal) {
+        super.setSignal(signal);
+        transmit();
+        level.setBlock(worldPosition, getBlockState().setValue(BlockStateProperties.POWERED, getState() > 0), Block.UPDATE_ALL);
     }
 }

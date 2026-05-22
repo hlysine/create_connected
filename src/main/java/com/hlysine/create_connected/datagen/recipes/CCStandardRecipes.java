@@ -11,7 +11,6 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllItems;
-import com.simibubi.create.AllTags;
 import com.simibubi.create.api.data.recipe.BaseRecipeProvider;
 import com.simibubi.create.foundation.mixin.accessor.MappedRegistryAccessor;
 import com.tterrag.registrate.util.entry.BlockEntry;
@@ -268,6 +267,13 @@ public class CCStandardRecipes extends BaseRecipeProvider {
             .viaShapeless(b -> b
                     .requires(CCBlocks.INVENTORY_ACCESS_PORT)
                     .requires(CCBlocks.INVENTORY_ACCESS_PORT)
+            );
+
+    GeneratedRecipe BRASS_CHUTE = create(CCBlocks.BRASS_CHUTE).unlockedBy(AllItems.BRASS_SHEET::get)
+            .requiresResultFeature()
+            .viaShapeless(b -> b
+                    .requires(AllBlocks.CHUTE)
+                    .requires(AllItems.BRASS_SHEET)
             );
 
     GeneratedRecipe EMPTY_FAN_CATALYST = create(CCBlocks.EMPTY_FAN_CATALYST).unlockedBy(AllBlocks.BRASS_BLOCK::get)

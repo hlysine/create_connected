@@ -5,6 +5,30 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 1.1.16 - 2026-05-06
+
+### Fixed
+
+- Incorrect discharge calculation for Kinetic Batteries
+
+## 1.1.15 - 2026-05-05
+
+### Added
+
+- Kinetic Batteries now support display links
+- Linked Transmitters can now be attached to Throttle Levers from Create: Aeronautics
+
+### Changed
+
+- **Kinetic Batteries now have a minimum su consumption of 1**
+  - They will now run out of charge after 512 hours if they are used to power structures that have no stress impact
+
+### Fixed
+
+- Item duplication when an Item Silo is assembled into a physics contraption
+- Mip level 4 not supported due to incorrect texture size for the Fluid Vessel
+- Crank wheel handle rotating at incorrect speed
+
 ## 1.1.14 - 2026-04-27
 
 ### Fixed

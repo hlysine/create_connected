@@ -1,11 +1,13 @@
 package com.hlysine.create_connected;
 
 import com.hlysine.create_connected.compat.Mods;
+import com.hlysine.create_connected.compat.SimCompatRegistry;
 import com.hlysine.create_connected.config.CStress;
 import com.hlysine.create_connected.config.FeatureCategory;
 import com.hlysine.create_connected.config.FeatureToggle;
 import com.hlysine.create_connected.content.WrenchableBlock;
 import com.hlysine.create_connected.content.brake.BrakeBlock;
+import com.hlysine.create_connected.content.brasschute.BrassChuteBlock;
 import com.hlysine.create_connected.content.brassgearbox.BrassGearboxBlock;
 import com.hlysine.create_connected.content.centrifugalclutch.CentrifugalClutchBlock;
 import com.hlysine.create_connected.content.chaincogwheel.ChainCogwheelBlock;
@@ -77,7 +79,10 @@ import com.simibubi.create.content.decoration.encasing.EncasingRegistry;
 import com.simibubi.create.content.fluids.tank.FluidTankMovementBehavior;
 import com.simibubi.create.content.kinetics.chainDrive.ChainDriveGenerator;
 import com.simibubi.create.content.kinetics.simpleRelays.BracketedKineticBlockModel;
+import com.simibubi.create.content.logistics.chute.ChuteGenerator;
+import com.simibubi.create.content.logistics.chute.ChuteItem;
 import com.simibubi.create.foundation.block.ItemUseOverrides;
+import com.simibubi.create.foundation.block.render.ReducedDestroyEffects;
 import com.simibubi.create.foundation.data.*;
 import com.tterrag.registrate.providers.DataGenContext;
 import com.tterrag.registrate.providers.RegistrateBlockstateProvider;
@@ -470,8 +475,7 @@ public class CCBlocks {
             .tag(AllTags.AllBlockTags.SAFE_NBT.tag)
             .transform(LinkedTransmitterItem.register())
             .onRegister(PreciseItemUseOverrides::addBlock)
-            .blockstate(CCBlockStateGen.linkedLever(
-                    Create.asResource("block/analog_lever/block"),
+            .blockstate(CCBlockStateGen.linkedLeverNoPower(
                     Create.asResource("block/analog_lever/block")
             ))
             .register();
@@ -969,6 +973,20 @@ public class CCBlocks {
                     .transform(customItemModel())
                     .register();
 
+    public static final BlockEntry<BrassChuteBlock> BRASS_CHUTE = REGISTRATE.block("brass_chute", BrassChuteBlock::new)
+            .initialProperties(SharedProperties::softMetal)
+            .properties(p -> p.mapColor(MapColor.TERRACOTTA_YELLOW)
+                    .sound(SoundType.NETHERITE_BLOCK)
+                    .noOcclusion()
+                    .isSuffocating((state, level, pos) -> false))
+            .transform(pickaxeOnly())
+            .addLayer(() -> RenderType::cutoutMipped)
+            .clientExtension(() -> () -> new ReducedDestroyEffects())
+            .blockstate(new ChuteGenerator()::generate)
+            .item(ChuteItem::new)
+            .transform(customItemModel("_", "block"))
+            .register();
+
     public static final BlockEntry<CopycatSlabBlock> COPYCAT_SLAB =
             REGISTRATE.block("copycat_slab", CopycatSlabBlock::new)
                     .transform(BuilderTransformers.copycat())
@@ -1115,6 +1133,7 @@ public class CCBlocks {
                     .register();
 
     public static void register() {
+        Mods.SIMULATED.executeIfInstalled(() -> SimCompatRegistry::register);
     }
 
     private static Function<BlockState, ModelFile> forBoolean(DataGenContext<?, ?> ctx,

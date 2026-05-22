@@ -2,29 +2,27 @@ package com.hlysine.create_connected.content.brassgearbox;
 
 import com.hlysine.create_connected.CCBlockEntityTypes;
 import com.hlysine.create_connected.CCItems;
-import com.simibubi.create.AllItems;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
 import com.simibubi.create.content.kinetics.base.RotatedPillarKineticBlock;
 import com.simibubi.create.foundation.block.IBE;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Axis;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
+import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Mirror;
+import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.level.storage.loot.LootParams;
-import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import org.jetbrains.annotations.NotNull;
 
@@ -83,15 +81,11 @@ public class BrassGearboxBlock extends RotatedPillarKineticBlock implements IBE<
     }
 
     @Override
-    protected @NotNull InteractionResult useWithoutItem(BlockState state,
-                                                        @NotNull Level level,
-                                                        @NotNull BlockPos pos,
-                                                        @NotNull Player player,
-                                                        @NotNull BlockHitResult hitResult) {
+    public InteractionResult onWrenched(BlockState state, UseOnContext context) {
         if (state.getBlock() != this) return InteractionResult.PASS;
-        int face = getFaceId(hitResult.getDirection(), state.getValue(AXIS));
+        int face = getFaceId(context.getClickedFace(), state.getValue(AXIS));
         if (face == 0) return InteractionResult.PASS;
-        KineticBlockEntity.switchToBlockState(level, pos, setFaceFlipped(face, state, !isFaceFlipped(face, state)));
+        KineticBlockEntity.switchToBlockState(context.getLevel(), context.getClickedPos(), setFaceFlipped(face, state, !isFaceFlipped(face, state)));
         return InteractionResult.SUCCESS;
     }
 
@@ -123,6 +117,80 @@ public class BrassGearboxBlock extends RotatedPillarKineticBlock implements IBE<
     @Override
     public BlockEntityType<? extends BrassGearboxBlockEntity> getBlockEntityType() {
         return CCBlockEntityTypes.BRASS_GEARBOX.get();
+    }
+
+    @Override
+    public @NotNull BlockState rotate(BlockState state, Rotation rot) {
+        BlockState newState = super.rotate(state, rot);
+        Axis axis = state.getValue(AXIS);
+        Axis newAxis = newState.getValue(AXIS);
+
+        // For each old face direction, determine its new face direction after rotation,
+        // then carry the flip state over.
+        List<Direction> directions = new ArrayList<>(DIRECTIONS);
+        directions.removeIf(d -> d.getAxis() == axis);
+
+        // Start with all flips false, then assign from old state
+        boolean[] newFlips = new boolean[5]; // 1-indexed, [0] unused
+
+        for (Direction oldDir : directions) {
+            int oldFaceId = getFaceId(oldDir, axis);
+            boolean flipped = isFaceFlipped(oldFaceId, state);
+
+            Direction newDir = rot.rotate(oldDir);
+            int newFaceId = getFaceId(newDir, newAxis);
+
+            if (newFaceId != 0) {
+                newFlips[newFaceId] = flipped;
+            }
+        }
+
+        newState = newState
+                .setValue(FACE_1_FLIPPED, newFlips[1])
+                .setValue(FACE_2_FLIPPED, newFlips[2])
+                .setValue(FACE_3_FLIPPED, newFlips[3])
+                .setValue(FACE_4_FLIPPED, newFlips[4]);
+
+        return newState;
+    }
+
+    @Override
+    public BlockState mirror(BlockState state, Mirror mirror) {
+        BlockState newState = super.mirror(state, mirror);
+        Axis axis = state.getValue(AXIS);
+        Axis newAxis = newState.getValue(AXIS);
+
+        List<Direction> directions = new ArrayList<>(DIRECTIONS);
+        directions.removeIf(d -> d.getAxis() == axis);
+
+        boolean[] newFlips = new boolean[5];
+
+        for (Direction oldDir : directions) {
+            int oldFaceId = getFaceId(oldDir, axis);
+            boolean flipped = isFaceFlipped(oldFaceId, state);
+
+            Direction newDir = mirror.mirror(oldDir);
+            int newFaceId = getFaceId(newDir, newAxis);
+
+            if (newFaceId != 0) {
+                boolean mirrorReversesThisFace = axis == getMirrorAxis(mirror);
+                newFlips[newFaceId] = flipped ^ mirrorReversesThisFace;
+            }
+        }
+
+        return newState
+                .setValue(FACE_1_FLIPPED, newFlips[1])
+                .setValue(FACE_2_FLIPPED, newFlips[2])
+                .setValue(FACE_3_FLIPPED, newFlips[3])
+                .setValue(FACE_4_FLIPPED, newFlips[4]);
+    }
+
+    private static Axis getMirrorAxis(Mirror mirror) {
+        return switch (mirror) {
+            case LEFT_RIGHT -> Axis.Z;
+            case FRONT_BACK -> Axis.X;
+            default -> null; // Mirror.NONE
+        };
     }
 
     private static final List<Direction> DIRECTIONS = Direction.stream().toList();

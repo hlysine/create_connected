@@ -9,7 +9,8 @@ import com.simibubi.create.content.redstone.link.LinkBehaviour;
 import com.simibubi.create.content.redstone.link.RedstoneLinkNetworkHandler;
 import com.simibubi.create.content.redstone.link.RedstoneLinkNetworkHandler.Frequency;
 import com.simibubi.create.infrastructure.config.AllConfigs;
-
+import dev.ryanhcode.sable.companion.SableCompanion;
+import dev.ryanhcode.sable.companion.SubLevelAccess;
 import net.createmod.catnip.data.Couple;
 import net.createmod.catnip.levelWrappers.WorldHelper;
 import net.minecraft.core.BlockPos;
@@ -19,18 +20,11 @@ import net.minecraft.world.level.LevelAccessor;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.level.LevelEvent;
+import org.joml.Vector3d;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
-
-import static com.simibubi.create.content.redstone.link.RedstoneLinkNetworkHandler.withinRange;
-
-import org.joml.Vector3d;
-
-import dev.ryanhcode.sable.companion.SableCompanion;
-import dev.ryanhcode.sable.companion.SubLevelAccess;
-import dev.ryanhcode.sable.companion.math.JOMLConversion;
 
 @EventBusSubscriber(modid = CreateConnected.MODID)
 public class LinkWildcardNetworkHandler {
@@ -106,7 +100,7 @@ public class LinkWildcardNetworkHandler {
                     continue;
                 }
 
-                if (actor.isListening())
+                if (other.isListening())
                     continue;
 
                 if (!withinRange(actor, other, world))
@@ -252,8 +246,10 @@ public class LinkWildcardNetworkHandler {
 
         if (from == to) return true;
 
-        final Vector3d fromPos = JOMLConversion.atCenterOf(from.getLocation());
-        final Vector3d toPos = JOMLConversion.atCenterOf(to.getLocation());
+        final BlockPos fromLocation = from.getLocation();
+        final Vector3d fromPos = new Vector3d(fromLocation.getX(), fromLocation.getY(), fromLocation.getZ());
+        final BlockPos toLocation = to.getLocation();
+        final Vector3d toPos = new Vector3d(toLocation.getX(), toLocation.getY(), toLocation.getZ());
 
         final SableCompanion helper = SableCompanion.INSTANCE;
         final SubLevelAccess fromSublevel = helper.getContaining(level, fromPos);

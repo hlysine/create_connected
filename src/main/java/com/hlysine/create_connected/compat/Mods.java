@@ -24,7 +24,8 @@ public enum Mods {
     MORE_CATALYSTS("create_more_catalysts"),
     SHIMMER("create_shimmer"),
     NETHER_INDUSTRY("createnetherindustry"),
-    TWILIGHT_FOREST("twilightforest");
+    TWILIGHT_FOREST("twilightforest"),
+    SIMULATED("simulated");
 
     private final String id;
 

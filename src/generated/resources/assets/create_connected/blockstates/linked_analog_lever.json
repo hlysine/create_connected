@@ -26,16 +26,6 @@
     },
     {
       "apply": {
-        "model": "create:block/analog_lever/block"
-      },
-      "when": {
-        "face": "floor",
-        "facing": "north",
-        "powered": "true"
-      }
-    },
-    {
-      "apply": {
         "model": "create_connected:block/linked_transmitter/block_powered",
         "y": 180
       },
@@ -52,8 +42,7 @@
       },
       "when": {
         "face": "floor",
-        "facing": "north",
-        "powered": "false"
+        "facing": "north"
       }
     },
     {
@@ -94,17 +83,6 @@
     },
     {
       "apply": {
-        "model": "create:block/analog_lever/block",
-        "y": 180
-      },
-      "when": {
-        "face": "floor",
-        "facing": "south",
-        "powered": "true"
-      }
-    },
-    {
-      "apply": {
         "model": "create_connected:block/linked_transmitter/block_powered",
         "y": 360
       },
@@ -122,8 +100,7 @@
       },
       "when": {
         "face": "floor",
-        "facing": "south",
-        "powered": "false"
+        "facing": "south"
       }
     },
     {
@@ -164,17 +141,6 @@
     },
     {
       "apply": {
-        "model": "create:block/analog_lever/block",
-        "y": 270
-      },
-      "when": {
-        "face": "floor",
-        "facing": "west",
-        "powered": "true"
-      }
-    },
-    {
-      "apply": {
         "model": "create_connected:block/linked_transmitter/block_powered",
         "y": 450
       },
@@ -192,8 +158,7 @@
       },
       "when": {
         "face": "floor",
-        "facing": "west",
-        "powered": "false"
+        "facing": "west"
       }
     },
     {
@@ -234,17 +199,6 @@
     },
     {
       "apply": {
-        "model": "create:block/analog_lever/block",
-        "y": 90
-      },
-      "when": {
-        "face": "floor",
-        "facing": "east",
-        "powered": "true"
-      }
-    },
-    {
-      "apply": {
         "model": "create_connected:block/linked_transmitter/block_powered",
         "y": 270
       },
@@ -262,8 +216,7 @@
       },
       "when": {
         "face": "floor",
-        "facing": "east",
-        "powered": "false"
+        "facing": "east"
       }
     },
     {
@@ -304,17 +257,6 @@
     },
     {
       "apply": {
-        "model": "create:block/analog_lever/block",
-        "x": 90
-      },
-      "when": {
-        "face": "wall",
-        "facing": "north",
-        "powered": "true"
-      }
-    },
-    {
-      "apply": {
         "model": "create_connected:block/linked_transmitter/block_powered_vertical",
         "x": 90
       },
@@ -332,8 +274,7 @@
       },
       "when": {
         "face": "wall",
-        "facing": "north",
-        "powered": "false"
+        "facing": "north"
       }
     },
     {
@@ -376,18 +317,6 @@
     },
     {
       "apply": {
-        "model": "create:block/analog_lever/block",
-        "x": 90,
-        "y": 180
-      },
-      "when": {
-        "face": "wall",
-        "facing": "south",
-        "powered": "true"
-      }
-    },
-    {
-      "apply": {
         "model": "create_connected:block/linked_transmitter/block_powered_vertical",
         "x": 90,
         "y": 180
@@ -407,8 +336,7 @@
       },
       "when": {
         "face": "wall",
-        "facing": "south",
-        "powered": "false"
+        "facing": "south"
       }
     },
     {
@@ -452,18 +380,6 @@
     },
     {
       "apply": {
-        "model": "create:block/analog_lever/block",
-        "x": 90,
-        "y": 270
-      },
-      "when": {
-        "face": "wall",
-        "facing": "west",
-        "powered": "true"
-      }
-    },
-    {
-      "apply": {
         "model": "create_connected:block/linked_transmitter/block_powered_vertical",
         "x": 90,
         "y": 270
@@ -483,8 +399,7 @@
       },
       "when": {
         "face": "wall",
-        "facing": "west",
-        "powered": "false"
+        "facing": "west"
       }
     },
     {
@@ -528,18 +443,6 @@
     },
     {
       "apply": {
-        "model": "create:block/analog_lever/block",
-        "x": 90,
-        "y": 90
-      },
-      "when": {
-        "face": "wall",
-        "facing": "east",
-        "powered": "true"
-      }
-    },
-    {
-      "apply": {
         "model": "create_connected:block/linked_transmitter/block_powered_vertical",
         "x": 90,
         "y": 90
@@ -559,8 +462,7 @@
       },
       "when": {
         "face": "wall",
-        "facing": "east",
-        "powered": "false"
+        "facing": "east"
       }
     },
     {
@@ -604,18 +506,6 @@
     },
     {
       "apply": {
-        "model": "create:block/analog_lever/block",
-        "x": 180,
-        "y": 180
-      },
-      "when": {
-        "face": "ceiling",
-        "facing": "north",
-        "powered": "true"
-      }
-    },
-    {
-      "apply": {
         "model": "create_connected:block/linked_transmitter/block_powered",
         "x": 180,
         "y": 180
@@ -635,8 +525,7 @@
       },
       "when": {
         "face": "ceiling",
-        "facing": "north",
-        "powered": "false"
+        "facing": "north"
       }
     },
     {
@@ -678,17 +567,6 @@
     },
     {
       "apply": {
-        "model": "create:block/analog_lever/block",
-        "x": 180
-      },
-      "when": {
-        "face": "ceiling",
-        "facing": "south",
-        "powered": "true"
-      }
-    },
-    {
-      "apply": {
         "model": "create_connected:block/linked_transmitter/block_powered",
         "x": 180
       },
@@ -706,8 +584,7 @@
       },
       "when": {
         "face": "ceiling",
-        "facing": "south",
-        "powered": "false"
+        "facing": "south"
       }
     },
     {
@@ -750,18 +627,6 @@
     },
     {
       "apply": {
-        "model": "create:block/analog_lever/block",
-        "x": 180,
-        "y": 90
-      },
-      "when": {
-        "face": "ceiling",
-        "facing": "west",
-        "powered": "true"
-      }
-    },
-    {
-      "apply": {
         "model": "create_connected:block/linked_transmitter/block_powered",
         "x": 180,
         "y": 90
@@ -781,8 +646,7 @@
       },
       "when": {
         "face": "ceiling",
-        "facing": "west",
-        "powered": "false"
+        "facing": "west"
       }
     },
     {
@@ -826,18 +690,6 @@
     },
     {
       "apply": {
-        "model": "create:block/analog_lever/block",
-        "x": 180,
-        "y": 270
-      },
-      "when": {
-        "face": "ceiling",
-        "facing": "east",
-        "powered": "true"
-      }
-    },
-    {
-      "apply": {
         "model": "create_connected:block/linked_transmitter/block_powered",
         "x": 180,
         "y": 270
@@ -857,8 +709,7 @@
       },
       "when": {
         "face": "ceiling",
-        "facing": "east",
-        "powered": "false"
+        "facing": "east"
       }
     },
     {

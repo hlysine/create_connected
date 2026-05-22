@@ -11,6 +11,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
@@ -91,14 +92,18 @@ public class LinkedLeverBlock extends LeverBlock implements IBE<LinkedTransmitte
                 return super.useWithoutItem(state, level, pos, player, hit);
             return InteractionResult.CONSUME;
         }
-        if (player.isShiftKeyDown()) {
-            if (!level.isClientSide())
-                level.setBlockAndUpdate(pos, state.cycle(LOCKED));
-            return InteractionResult.SUCCESS;
-        }
-        if (state.getValue(LOCKED))
-            return InteractionResult.CONSUME;
-        return InteractionResult.PASS;
+        return LinkedTransmitterBlock.super.useTransmitter(state, level, pos, player);
+    }
+
+    @Override
+    public @NotNull ItemInteractionResult useItemOn(@NotNull ItemStack stack,
+                                                    @NotNull BlockState state,
+                                                    @NotNull Level level,
+                                                    @NotNull BlockPos pos,
+                                                    @NotNull Player player,
+                                                    @NotNull InteractionHand hand,
+                                                    @NotNull BlockHitResult hitResult) {
+        return LinkedTransmitterBlock.super.useWax(stack, state, level, pos, player, hand, hitResult);
     }
 
     @Override

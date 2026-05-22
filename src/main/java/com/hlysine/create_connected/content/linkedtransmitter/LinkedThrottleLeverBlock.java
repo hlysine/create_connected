@@ -1,14 +1,14 @@
 package com.hlysine.create_connected.content.linkedtransmitter;
 
-import com.hlysine.create_connected.CCBlockEntityTypes;
 import com.hlysine.create_connected.CCItems;
+import com.hlysine.create_connected.compat.SimCompatRegistry;
 import com.simibubi.create.AllSoundEvents;
 import com.simibubi.create.api.schematic.requirement.SpecialBlockItemRequirement;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.content.schematics.requirement.ItemRequirement;
-import com.simibubi.create.foundation.block.IBE;
+import com.tterrag.registrate.util.nullness.NonNullSupplier;
+import dev.simulated_team.simulated.content.blocks.throttle_lever.ThrottleLeverBlock;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
@@ -19,7 +19,6 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.ButtonBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -33,25 +32,25 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class LinkedButtonBlock extends ButtonBlock implements IBE<LinkedTransmitterBlockEntity>, SpecialBlockItemRequirement, IWrenchable, LinkedTransmitterBlock {
+public class LinkedThrottleLeverBlock extends ThrottleLeverBlock implements SpecialBlockItemRequirement, IWrenchable, LinkedTransmitterBlock {
     public static BooleanProperty LOCKED = BlockStateProperties.LOCKED;
 
-    private final ButtonBlock base;
+    public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
+    private final NonNullSupplier<ThrottleLeverBlock> baseSupplier;
 
-    public LinkedButtonBlock(Properties pProperties, ButtonBlock base) {
-        super(base.type, base.ticksToStayPressed, pProperties);
-        this.base = base;
-        registerDefaultState(defaultBlockState().setValue(LOCKED, false));
+    public LinkedThrottleLeverBlock(Properties pProperties, NonNullSupplier<ThrottleLeverBlock> baseSupplier) {
+        super(pProperties);
+        registerDefaultState(defaultBlockState().setValue(POWERED, false).setValue(LOCKED, false));
+        this.baseSupplier = baseSupplier;
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
-        super.createBlockStateDefinition(pBuilder.add(LOCKED));
+        super.createBlockStateDefinition(pBuilder.add(POWERED, LOCKED));
     }
 
     @Override
@@ -61,7 +60,7 @@ public class LinkedButtonBlock extends ButtonBlock implements IBE<LinkedTransmit
 
     @Override
     public Block getBase() {
-        return base;
+        return baseSupplier.get();
     }
 
     @Override
@@ -69,13 +68,12 @@ public class LinkedButtonBlock extends ButtonBlock implements IBE<LinkedTransmit
                                         @NotNull BlockGetter level,
                                         @NotNull BlockPos pos,
                                         @NotNull CollisionContext context) {
-        Direction facing = state.getValue(ButtonBlock.FACING);
         return Shapes.or(getTransmitterShape(state), super.getShape(state, level, pos, context));
     }
 
     @Override
     public @NotNull List<ItemStack> getDrops(@NotNull BlockState state, LootParams.@NotNull Builder builder) {
-        return base.defaultBlockState().getDrops(builder);
+        return getBase().defaultBlockState().getDrops(builder);
     }
 
     @Override
@@ -83,14 +81,12 @@ public class LinkedButtonBlock extends ButtonBlock implements IBE<LinkedTransmit
                                                      @NotNull Level level,
                                                      @NotNull BlockPos pos,
                                                      @NotNull Player player,
-                                                     @NotNull BlockHitResult hit) {
+                                                     @NotNull BlockHitResult hitResult) {
         if (player.isSpectator())
             return InteractionResult.PASS;
 
-        if (isHittingBase(state, level, pos, hit)) {
-            if (!player.isShiftKeyDown())
-                return super.useWithoutItem(state, level, pos, player, hit);
-            return InteractionResult.CONSUME;
+        if (isHittingBase(state, level, pos, hitResult)) {
+            return super.useWithoutItem(state, level, pos, player, hitResult);
         }
         return LinkedTransmitterBlock.super.useTransmitter(state, level, pos, player);
     }
@@ -108,17 +104,15 @@ public class LinkedButtonBlock extends ButtonBlock implements IBE<LinkedTransmit
 
     @Override
     public void onRemove(@NotNull BlockState state, @NotNull Level world, @NotNull BlockPos pos, @NotNull BlockState newState, boolean isMoving) {
-        if (!state.is(newState.getBlock()) && !isMoving && getBlockEntityOptional(world, pos).map(be -> be.containsBase).orElse(false)) {
+        if (!state.is(newState.getBlock()) && !isMoving && getBlockEntityOptional(world, pos).map(be -> ((LinkedThrottleLeverBlockEntity) be).containsBase).orElse(false))
             Block.popResource(world, pos, new ItemStack(CCItems.LINKED_TRANSMITTER.get()));
-        }
-        withBlockEntityDo(world, pos, be -> be.transmit(0));
-        base.defaultBlockState().onRemove(world, pos, newState, isMoving);
+        getBase().defaultBlockState().onRemove(world, pos, newState, isMoving);
     }
 
     @Override
     public InteractionResult onSneakWrenched(BlockState state, UseOnContext context) {
         onWrenched(state, context);
-        return IWrenchable.super.onSneakWrenched(state, context);
+        return super.onSneakWrenched(state, context);
     }
 
     @Override
@@ -127,7 +121,7 @@ public class LinkedButtonBlock extends ButtonBlock implements IBE<LinkedTransmit
         if (!player.isCreative()) {
             player.getInventory().placeItemBackInInventory(new ItemStack(CCItems.LINKED_TRANSMITTER.get()));
         }
-        withBlockEntityDo(context.getLevel(), context.getClickedPos(), be -> be.containsBase = false);
+        withBlockEntityDo(context.getLevel(), context.getClickedPos(), be -> ((LinkedThrottleLeverBlockEntity) be).containsBase = false);
         replaceWithBase(state, context.getLevel(), context.getClickedPos());
         return InteractionResult.SUCCESS;
     }
@@ -137,42 +131,18 @@ public class LinkedButtonBlock extends ButtonBlock implements IBE<LinkedTransmit
         world.setBlockAndUpdate(pos, defaultBlockState()
                 .setValue(FACING, baseState.getValue(FACING))
                 .setValue(FACE, baseState.getValue(FACE))
-                .setValue(POWERED, baseState.getValue(POWERED))
+                .setValue(ThrottleLeverBlock.INVERTED, baseState.getValue(ThrottleLeverBlock.INVERTED))
         );
         AllSoundEvents.CONTROLLER_PUT.playOnServer(world, pos);
-        checkPressed(world.getBlockState(pos), world, pos);
     }
 
     public void replaceWithBase(BlockState state, Level world, BlockPos pos) {
         AllSoundEvents.CONTROLLER_TAKE.playOnServer(world, pos);
-        withBlockEntityDo(world, pos, be -> be.transmit(0));
-        world.setBlockAndUpdate(pos, base.defaultBlockState()
+        world.setBlockAndUpdate(pos, getBase().defaultBlockState()
                 .setValue(FACING, state.getValue(FACING))
                 .setValue(FACE, state.getValue(FACE))
-                .setValue(POWERED, state.getValue(POWERED)));
-        super.checkPressed(world.getBlockState(pos), world, pos);
-    }
-
-    @Override
-    protected void checkPressed(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos) {
-        super.checkPressed(state, level, pos);
-        updateTransmittedSignal(level, pos);
-    }
-
-    @Override
-    public void press(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos, @Nullable Player player) {
-        super.press(state, level, pos, player);
-        updateTransmittedSignal(level, pos);
-    }
-
-    public void updateTransmittedSignal(Level worldIn, BlockPos pos) {
-        if (worldIn.isClientSide)
-            return;
-
-        BlockState state = worldIn.getBlockState(pos);
-        int power = state.getSignal(worldIn, pos, state.getValue(FACING));
-
-        withBlockEntityDo(worldIn, pos, be -> be.transmit(power));
+                .setValue(ThrottleLeverBlock.INVERTED, state.getValue(ThrottleLeverBlock.INVERTED))
+        );
     }
 
     @Override
@@ -182,25 +152,20 @@ public class LinkedButtonBlock extends ButtonBlock implements IBE<LinkedTransmit
                                                 @NotNull BlockPos pos,
                                                 @NotNull Player player) {
         if (isHittingBase(state, world, pos, target))
-            return base.getCloneItemStack(state, target, world, pos, player);
+            return getBase().getCloneItemStack(state, target, world, pos, player);
         return new ItemStack(CCItems.LINKED_TRANSMITTER.get());
     }
 
     @Override
     public ItemRequirement getRequiredItems(BlockState state, BlockEntity be) {
         ArrayList<ItemStack> requiredItems = new ArrayList<>();
-        requiredItems.add(new ItemStack(base));
+        requiredItems.add(new ItemStack(getBase()));
         requiredItems.add(new ItemStack(CCItems.LINKED_TRANSMITTER.get()));
         return new ItemRequirement(ItemRequirement.ItemUseType.CONSUME, requiredItems);
     }
 
     @Override
-    public Class<LinkedTransmitterBlockEntity> getBlockEntityClass() {
-        return LinkedTransmitterBlockEntity.class;
-    }
-
-    @Override
-    public BlockEntityType<? extends LinkedTransmitterBlockEntity> getBlockEntityType() {
-        return CCBlockEntityTypes.LINKED_TRANSMITTER.get();
+    public BlockEntityType<? extends LinkedThrottleLeverBlockEntity> getBlockEntityType() {
+        return SimCompatRegistry.LINKED_THROTTLE_LEVER_ENTITY.get();
     }
 }

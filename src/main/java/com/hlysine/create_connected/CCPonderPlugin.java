@@ -1,7 +1,9 @@
 package com.hlysine.create_connected;
 
 import com.hlysine.create_connected.ponder.*;
+import com.simibubi.create.Create;
 import com.simibubi.create.infrastructure.ponder.AllCreatePonderTags;
+import com.simibubi.create.infrastructure.ponder.scenes.ChuteScenes;
 import com.tterrag.registrate.util.entry.ItemProviderEntry;
 import com.tterrag.registrate.util.entry.RegistryEntry;
 import net.createmod.ponder.api.level.PonderLevel;
@@ -71,6 +73,9 @@ public class CCPonderPlugin implements PonderPlugin {
         SCENE_HELPER.forComponents(CCBlocks.INVENTORY_BRIDGE)
                 .addStoryBoard("inventory_bridge", InventoryBridgeScenes::inventoryBridge, AllCreatePonderTags.LOGISTICS)
                 .addStoryBoard("inventory_bridge_filter", InventoryBridgeScenes::filtering, AllCreatePonderTags.LOGISTICS);
+        SCENE_HELPER.forComponents(CCBlocks.BRASS_CHUTE)
+                .addStoryBoard(Create.asResource("chute/downward"), ChuteScenes::downward, AllCreatePonderTags.LOGISTICS)
+                .addStoryBoard(Create.asResource("chute/upward"), ChuteScenes::upward);
     }
 
     public static void register(PonderTagRegistrationHelper<ResourceLocation> helper) {
