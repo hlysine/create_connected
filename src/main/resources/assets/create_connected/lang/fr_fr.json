@@ -302,7 +302,6 @@
   "item.create_connected.redstone_link_wildcard": "Joker de liaison de redstone",
   "item.create_connected.redstone_link_wildcard.tooltip.summary": "Permet aux liaisons de redstone de correspondre à n'importe quelle fréquence pour l'emplacement dans lequel ils sont placés.",
   "item.create_connected.vertical_brass_gearbox": "Boîte à roues dentées vertical de laiton",
-  "item.create_connected.vertical_brass_gearbox.tooltip.summary": "Une boîte à roues dentées où la direction de rotation des 4 côtés est _configurable_ de manière _indépendante_.",
   "item.create_connected.vertical_parallel_gearbox": "Boîte à roues dentées parallèle verticale",
   "item.create_connected.vertical_six_way_gearbox": "Boîte à roues dentées à 6 voies verticales",
   "item.create_connected.vertical_six_way_gearbox.tooltip.summary": "Une boîte à roues dentées avec des rotors sur _tous les 6 côtés_. Tournant de haut en bas à _demi vitesse_.",
