@@ -219,12 +219,9 @@
   "create_connected.ponder.kinetic_battery_automation.text_4": "Batarya tam dolu iken, boşaltmak için boş bir batarya ile sağ tıklayın",
   "create_connected.ponder.linked_transmitter.header": "Bağlantılı Vericileri Kullanma",
   "create_connected.ponder.linked_transmitter.text_1": "Bağlantılı Vericiye sahip bir redstone girişine sağ tıklayarak onu girişe bağlayın",
+  "create_connected.ponder.linked_transmitter.text_10": "Vericiyi girişten ayırmak için bir anahtarla vericiye sağ tıklayın",
   "create_connected.ponder.linked_transmitter.text_2": "Bağlantılı Vericiler giriş sinyallerini kablosuz olarak iletebilir",
   "create_connected.ponder.linked_transmitter.text_3": "Alıcılar, vericilerin redstone gücünü 128 blok içinde yayar",
-  "create_connected.ponder.linked_transmitter.text_4": "Öğeleri iki yuvaya yerleştirmek bir Frekans belirleyebilir",
-  "create_connected.ponder.linked_transmitter.text_5": "Yalnızca eşleşen Frekanslara sahip bağlantılar iletişim kuracaktır",
   "create_connected.ponder.linked_transmitter.text_6": "Yanlış tıklamaları önlemek için...",
-  "create_connected.ponder.linked_transmitter.text_7": "...frekans yuvalarını kilitlemek için gizlice ilerlerken vericiye sağ tıklayın",
-  "create_connected.ponder.linked_transmitter.text_8": "Bağlantılı Vericiler düğmeler ve analog kollar üzerinde de çalışır",
-  "create_connected.ponder.linked_transmitter.text_9": "Vericiyi girişten ayırmak için bir anahtarla vericiye sağ tıklayın"
+  "create_connected.ponder.linked_transmitter.text_9": "Bağlantılı Vericiler düğmeler ve analog kollar üzerinde de çalışır"
 }
