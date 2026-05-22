@@ -252,7 +252,6 @@
   "item.create_connected.music_disc_interlude": "Disco Musicale di Green Hill",
   "item.create_connected.music_disc_interlude.desc": "Kevin MacLeod - Previsioni Locali - Ascensore",
   "item.create_connected.vertical_brass_gearbox": "Cambio In Ottone Verticale",
-  "item.create_connected.vertical_brass_gearbox.tooltip.summary": "Un riduttore in cui la direzione di rotazione di tutti e 4 i lati è _configurabile in modo indipendente.",
   "item.create_connected.vertical_parallel_gearbox": "Cambio Parallelo Verticale",
   "item.create_connected.vertical_six_way_gearbox": "Cambio Verticale A 6 Vie",
   "item.create_connected.vertical_six_way_gearbox.tooltip.summary": "Un cambio con alberi su _tutti i 6 lati_. Rotazione superiore e inferiore a _metà velocità_.",
