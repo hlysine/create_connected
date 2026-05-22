@@ -5,11 +5,11 @@ import com.hlysine.create_connected.CCTags;
 import com.hlysine.create_connected.CreateConnected;
 import com.hlysine.create_connected.compat.Mods;
 import com.simibubi.create.AllFluids;
-import com.simibubi.create.foundation.fluid.FluidIngredientOld;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.material.Fluids;
 import net.neoforged.neoforge.common.conditions.ModLoadedCondition;
+import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -44,13 +44,11 @@ public class FillingRecipeGen extends com.simibubi.create.api.data.recipe.Fillin
             .withCondition(new ModLoadedCondition(Mods.MORE_CATALYSTS.id()))
             .output(CCBlocks.FAN_HONEY_COATING_CATALYST));
 
-    /*  Already added the recipe manually
-    GeneratedRecipe FAN_TRANSMUTATION_CATALYST = create("fan_transmutation_catalyst", b -> b.require(//needs create_shimmer:shimmer//, 1000)
+    GeneratedRecipe FAN_TRANSMUTATION_CATALYST = create("fan_transmutation_catalyst", b -> b.require(new SizedFluidIngredient(new SimpleFluidIngredient(Mods.SHIMMER, "shimmer"), 1000))
             .require(CCBlocks.EMPTY_FAN_CATALYST)
             .withCondition(new FeatureEnabledCondition(CCBlocks.EMPTY_FAN_CATALYST.getId()))
             .withCondition(new ModLoadedCondition(Mods.SHIMMER.id()))
             .output(CCBlocks.FAN_TRANSMUTATION_CATALYST));
-    //*/
 
     public FillingRecipeGen(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
         super(output, registries, CreateConnected.MODID);

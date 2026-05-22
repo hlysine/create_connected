@@ -5,7 +5,6 @@ import com.hlysine.create_connected.CreateConnected;
 import com.hlysine.create_connected.compat.Mods;
 import com.simibubi.create.AllFluids;
 import com.simibubi.create.AllItems;
-import com.simibubi.create.AllRecipeTypes;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.Items;
