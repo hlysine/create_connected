@@ -310,7 +310,6 @@
   "item.create_connected.redstone_link_wildcard": "无线红石通配板",
   "item.create_connected.redstone_link_wildcard.tooltip.summary": "使无线红石信号终端在该物品所放置的槽位匹配任意频率。",
   "item.create_connected.vertical_brass_gearbox": "黄铜竖直十字齿轮箱",
-  "item.create_connected.vertical_brass_gearbox.tooltip.summary": "四个面均可_独立配置_旋转方向的齿轮箱。",
   "item.create_connected.vertical_parallel_gearbox": "竖直平行齿轮箱",
   "item.create_connected.vertical_six_way_gearbox": "竖直六向齿轮箱",
   "item.create_connected.vertical_six_way_gearbox.tooltip.summary": "_六个面_都有轴的齿轮箱。顶部和底部以_半速_旋转。",
