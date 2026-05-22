@@ -298,7 +298,6 @@
   "item.create_connected.redstone_link_wildcard": "無線紅石通配板",
   "item.create_connected.redstone_link_wildcard.tooltip.summary": "使無線紅石鏈路在該物品所處的槽位匹配任意頻率。",
   "item.create_connected.vertical_brass_gearbox": "立式黃銅變速箱",
-  "item.create_connected.vertical_brass_gearbox.tooltip.summary": "變速箱所有 4 個側面的旋轉方向均可獨立配置。",
   "item.create_connected.vertical_parallel_gearbox": "直立式並聯齒輪箱",
   "item.create_connected.vertical_six_way_gearbox": "垂直六向變速箱",
   "item.create_connected.vertical_six_way_gearbox.tooltip.summary": "6 面均有軸的變速箱。頂部和底部以半速旋轉。",
