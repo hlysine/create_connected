@@ -298,7 +298,6 @@
   "item.create_connected.redstone_link_wildcard": "Заглушка частаты рэдстоунового перадатчыка сігналу",
   "item.create_connected.redstone_link_wildcard.tooltip.summary": "Падстаноўцы элемент, які замяняе любы прадмет у слоце перадатчыка.",
   "item.create_connected.vertical_brass_gearbox": "Вертыкальны латуневы рэдуктар",
-  "item.create_connected.vertical_brass_gearbox.tooltip.summary": "Скрынка перадач, у якой кірунак кручэння ўсіх 4 бакоў _ наладжваецца незалежна _.",
   "item.create_connected.vertical_parallel_gearbox": "Вертыкальны паралельны рэдуктар",
   "item.create_connected.vertical_six_way_gearbox": "Вертыкальная 6-ступеністая скрынка перадач",
   "item.create_connected.vertical_six_way_gearbox.tooltip.summary": "Скрынка перадач з валамі з усіх 6 бакоў. Верх і ніз круцяцца на палавіннай хуткасці.",
