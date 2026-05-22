@@ -260,7 +260,6 @@
   "item.create_connected.music_disc_interlude": "Musik disk",
   "item.create_connected.music_disc_interlude.desc": "Kevin MacLeod - Lokal Prognose - Elevator",
   "item.create_connected.vertical_brass_gearbox": "Lodret Messing Gearkasse",
-  "item.create_connected.vertical_brass_gearbox.tooltip.summary": "En gearkasse, hvor rotationsretningen af alle 4 sider er _uafhængigt konfigurerbar_.",
   "item.create_connected.vertical_parallel_gearbox": "Lodret Parallel Gearkasse",
   "item.create_connected.vertical_six_way_gearbox": "Lodret 6-vejs Gearkasse",
   "item.create_connected.vertical_six_way_gearbox.tooltip.summary": "En gearkasse med aksler på _all 6 sides_. Top og nederste spin ved _halv speed_."
