@@ -1,0 +1,22 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "create_connected:feature_enabled",
+      "tag": "create_connected:empty_fan_catalyst"
+    }
+  ],
+  "type": "create:item_application",
+  "ingredients": [
+    {
+      "item": "create_connected:empty_fan_catalyst"
+    },
+    {
+      "item": "create_shimmer:shimmer_bucket"
+    }
+  ],
+  "results": [
+    {
+      "id": "create_connected:fan_transmutation_catalyst"
+    }
+  ]
+}
