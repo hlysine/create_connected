@@ -298,7 +298,6 @@
   "item.create_connected.redstone_link_wildcard": "Comodín de enlace Redstone",
   "item.create_connected.redstone_link_wildcard.tooltip.summary": "Permite que los Enlaces de Redstone coincida con cualquier frecuencia para la ranura en la que se colocan.",
   "item.create_connected.vertical_brass_gearbox": "Caja de transmisión vertical de latón",
-  "item.create_connected.vertical_brass_gearbox.tooltip.summary": "Una caja de transmisión donde la dirección de la rotación de los 4 lados se pueden _configurar independientemente_.",
   "item.create_connected.vertical_parallel_gearbox": "Caja de transmisión vertical paralela",
   "item.create_connected.vertical_six_way_gearbox": "Caja de transmisión vertical 6-lados",
   "item.create_connected.vertical_six_way_gearbox.tooltip.summary": "Una caja de transmisión con ejes en _todos los 6 lados_. Arriba y abajo giran a la _mitad de velocidad_.",
