@@ -7,6 +7,7 @@ import com.hlysine.create_connected.config.FeatureCategory;
 import com.hlysine.create_connected.config.FeatureToggle;
 import com.hlysine.create_connected.content.WrenchableBlock;
 import com.hlysine.create_connected.content.brake.BrakeBlock;
+import com.hlysine.create_connected.content.brasschute.BrassChuteBlock;
 import com.hlysine.create_connected.content.brassgearbox.BrassGearboxBlock;
 import com.hlysine.create_connected.content.centrifugalclutch.CentrifugalClutchBlock;
 import com.hlysine.create_connected.content.chaincogwheel.ChainCogwheelBlock;
@@ -54,7 +55,10 @@ import com.hlysine.create_connected.content.kineticbattery.KineticBatteryGenerat
 import com.hlysine.create_connected.content.kineticbridge.KineticBridgeBlock;
 import com.hlysine.create_connected.content.kineticbridge.KineticBridgeBlockItem;
 import com.hlysine.create_connected.content.kineticbridge.KineticBridgeDestinationBlock;
-import com.hlysine.create_connected.content.linkedtransmitter.*;
+import com.hlysine.create_connected.content.linkedtransmitter.LinkedAnalogLeverBlock;
+import com.hlysine.create_connected.content.linkedtransmitter.LinkedButtonBlock;
+import com.hlysine.create_connected.content.linkedtransmitter.LinkedLeverBlock;
+import com.hlysine.create_connected.content.linkedtransmitter.LinkedTransmitterItem;
 import com.hlysine.create_connected.content.overstressclutch.OverstressClutchBlock;
 import com.hlysine.create_connected.content.parallelgearbox.ParallelGearboxBlock;
 import com.hlysine.create_connected.content.sequencedpulsegenerator.SequencedPulseGeneratorBlock;
@@ -75,13 +79,14 @@ import com.simibubi.create.content.decoration.encasing.EncasingRegistry;
 import com.simibubi.create.content.fluids.tank.FluidTankMovementBehavior;
 import com.simibubi.create.content.kinetics.chainDrive.ChainDriveGenerator;
 import com.simibubi.create.content.kinetics.simpleRelays.BracketedKineticBlockModel;
+import com.simibubi.create.content.logistics.chute.ChuteGenerator;
+import com.simibubi.create.content.logistics.chute.ChuteItem;
 import com.simibubi.create.foundation.block.ItemUseOverrides;
+import com.simibubi.create.foundation.block.render.ReducedDestroyEffects;
 import com.simibubi.create.foundation.data.*;
 import com.tterrag.registrate.providers.DataGenContext;
 import com.tterrag.registrate.providers.RegistrateBlockstateProvider;
 import com.tterrag.registrate.util.entry.BlockEntry;
-import dev.simulated_team.simulated.Simulated;
-import dev.simulated_team.simulated.index.SimBlocks;
 import net.createmod.catnip.data.Iterate;
 import net.createmod.catnip.registry.RegisteredObjectsHelper;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
@@ -800,6 +805,20 @@ public class CCBlocks {
                     .item()
                     .transform(customItemModel())
                     .register();
+
+    public static final BlockEntry<BrassChuteBlock> BRASS_CHUTE = REGISTRATE.block("brass_chute", BrassChuteBlock::new)
+            .initialProperties(SharedProperties::softMetal)
+            .properties(p -> p.mapColor(MapColor.TERRACOTTA_YELLOW)
+                    .sound(SoundType.NETHERITE_BLOCK)
+                    .noOcclusion()
+                    .isSuffocating((state, level, pos) -> false))
+            .transform(pickaxeOnly())
+            .addLayer(() -> RenderType::cutoutMipped)
+            .clientExtension(() -> () -> new ReducedDestroyEffects())
+            .blockstate(new ChuteGenerator()::generate)
+            .item(ChuteItem::new)
+            .transform(customItemModel("_", "block"))
+            .register();
 
     public static final BlockEntry<CopycatSlabBlock> COPYCAT_SLAB =
             REGISTRATE.block("copycat_slab", CopycatSlabBlock::new)

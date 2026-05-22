@@ -1,0 +1,22 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "create_connected:feature_enabled",
+      "tag": "create_connected:brass_chute"
+    }
+  ],
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "create:chute"
+    },
+    {
+      "item": "create:brass_sheet"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "create_connected:brass_chute"
+  }
+}

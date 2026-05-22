@@ -1,6 +1,7 @@
 package com.hlysine.create_connected;
 
 import com.hlysine.create_connected.content.brake.BrakeBlockEntity;
+import com.hlysine.create_connected.content.brasschute.BrassChuteBlockEntity;
 import com.hlysine.create_connected.content.brassgearbox.BrassGearboxBlockEntity;
 import com.hlysine.create_connected.content.brassgearbox.BrassGearboxRenderer;
 import com.hlysine.create_connected.content.brassgearbox.BrassGearboxVisual;
@@ -21,8 +22,13 @@ import com.hlysine.create_connected.content.itemsilo.ItemSiloBlockEntity;
 import com.hlysine.create_connected.content.kineticbattery.KineticBatteryBlockEntity;
 import com.hlysine.create_connected.content.kineticbattery.KineticBatteryRenderer;
 import com.hlysine.create_connected.content.kineticbattery.KineticBatteryVisual;
-import com.hlysine.create_connected.content.kineticbridge.*;
-import com.hlysine.create_connected.content.linkedtransmitter.*;
+import com.hlysine.create_connected.content.kineticbridge.KineticBridgeBlockEntity;
+import com.hlysine.create_connected.content.kineticbridge.KineticBridgeDestinationBlockEntity;
+import com.hlysine.create_connected.content.kineticbridge.KineticBridgeRenderer;
+import com.hlysine.create_connected.content.kineticbridge.KineticBridgeVisual;
+import com.hlysine.create_connected.content.linkedtransmitter.LinkedAnalogLeverBlockEntity;
+import com.hlysine.create_connected.content.linkedtransmitter.LinkedAnalogLeverRenderer;
+import com.hlysine.create_connected.content.linkedtransmitter.LinkedTransmitterBlockEntity;
 import com.hlysine.create_connected.content.overstressclutch.OverstressClutchBlockEntity;
 import com.hlysine.create_connected.content.parallelgearbox.ParallelGearboxBlockEntity;
 import com.hlysine.create_connected.content.parallelgearbox.ParallelGearboxRenderer;
@@ -41,11 +47,11 @@ import com.simibubi.create.content.kinetics.simpleRelays.encased.EncasedCogRende
 import com.simibubi.create.content.kinetics.simpleRelays.encased.EncasedCogVisual;
 import com.simibubi.create.content.kinetics.transmission.SplitShaftRenderer;
 import com.simibubi.create.content.kinetics.transmission.SplitShaftVisual;
+import com.simibubi.create.content.logistics.chute.ChuteRenderer;
 import com.simibubi.create.content.redstone.analogLever.AnalogLeverVisual;
 import com.simibubi.create.foundation.blockEntity.renderer.SmartBlockEntityRenderer;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
-import dev.simulated_team.simulated.content.blocks.throttle_lever.ThrottleLeverVisual;
 
 public class CCBlockEntityTypes {
     private static final CreateRegistrate REGISTRATE = CreateConnected.getRegistrate();
@@ -205,6 +211,12 @@ public class CCBlockEntityTypes {
             .visual(() -> AnalogLeverVisual::new)
             .validBlocks(CCBlocks.LINKED_ANALOG_LEVER)
             .renderer(() -> LinkedAnalogLeverRenderer::new)
+            .register();
+
+    public static final BlockEntityEntry<BrassChuteBlockEntity> BRASS_CHUTE = REGISTRATE
+            .blockEntity("brass_chute", BrassChuteBlockEntity::new)
+            .validBlocks(CCBlocks.BRASS_CHUTE)
+            .renderer(() -> ChuteRenderer::new)
             .register();
 
     public static final BlockEntityEntry<CopycatBlockEntity> COPYCAT =
