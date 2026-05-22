@@ -304,7 +304,6 @@
   "item.create_connected.redstone_link_wildcard": "레드스톤 링크 와일드카드",
   "item.create_connected.redstone_link_wildcard.tooltip.summary": "레드스톤 링크가 배치된 슬롯의 모든 주파수와 일치하도록 허용합니다.",
   "item.create_connected.vertical_brass_gearbox": "수직 황동 기어박스",
-  "item.create_connected.vertical_brass_gearbox.tooltip.summary": "4면의 축 회전 방향을 _독립적으로 설정_할 수 있는 기어박스입니다.",
   "item.create_connected.vertical_parallel_gearbox": "수직 동방향 기어박스",
   "item.create_connected.vertical_six_way_gearbox": "수직 6방향 기어박스",
   "item.create_connected.vertical_six_way_gearbox.tooltip.summary": "_6면 모두_에 축이 있는 기어박스입니다. 위쪽과 아래쪽의 축은 _절반의 속도_로 회전합니다.",
