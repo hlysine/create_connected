@@ -257,7 +257,6 @@
   "item.create_connected.music_disc_interlude": "Musik skiva",
   "item.create_connected.music_disc_interlude.desc": "Kevin MacLeod - lokal prognos - Hiss",
   "item.create_connected.vertical_brass_gearbox": "Vertikal mässing växellåda",
-  "item.create_connected.vertical_brass_gearbox.tooltip.summary": "En växellåda där rotationsriktningen på alla 4 sidor är _oberoende konfigurerbar_.",
   "item.create_connected.vertical_parallel_gearbox": "Vertikal parallell växellåda",
   "item.create_connected.vertical_six_way_gearbox": "Vertikal 6-vägs växellåda",
   "item.create_connected.vertical_six_way_gearbox.tooltip.summary": "En växellåda med axlar på _alla 6 sidor_. Topp och botten snurr vid _halv hastighet_.",
