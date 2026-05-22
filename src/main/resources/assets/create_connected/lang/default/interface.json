@@ -17,6 +17,7 @@
   "create_connected.battery.status": "Battery status: %1$s",
   "create_connected.battery.status.charging": "Charging",
   "create_connected.battery.status.discharging": "Discharging",
+  "create_connected.battery.status.power_saving": "Discharging (power saving)",
   "create_connected.battery.status.empty": "Empty",
   "create_connected.battery.status.full": "Full",
   "create_connected.centrifugal_clutch.speed_threshold": "Speed Threshold",
