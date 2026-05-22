@@ -149,6 +149,7 @@
   "create_connected.battery.status.full": "Tam dolu",
   "create_connected.centrifugal_clutch.speed_threshold": "Hız Eşiği",
   "create_connected.display_source.boiler_status": "Kazan Durumu",
+  "create_connected.display_source.kinetic_battery.progress_bar": "İlerleme Çubuğu",
   "create_connected.generic.unit.su_hours": "su saatleri",
   "create_connected.gui.overstress_clutch.uncoupled": "Bağlantısız",
   "create_connected.gui.overstress_clutch.uncoupled_explanation": "Bu kavrama stres nedeniyle _bağlantısı kesilmiş_. Bu kavramayı _sıfırlamadan_ önce ağı bir _anahtar_ veya _redstone darbesi_ ile onarın.",
