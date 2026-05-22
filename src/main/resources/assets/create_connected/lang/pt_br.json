@@ -304,7 +304,6 @@
   "item.create_connected.redstone_link_wildcard": "Link de Redstone Curinga",
   "item.create_connected.redstone_link_wildcard.tooltip.summary": "Permite que Links de Redstone correspondam a qualquer slot de frequência que for colocado.",
   "item.create_connected.vertical_brass_gearbox": "Caixa de Transmissão Vertical de Latão",
-  "item.create_connected.vertical_brass_gearbox.tooltip.summary": "Uma Caixa de Transmissão onde as 4 saídas são _configuráveis de forma independente_.",
   "item.create_connected.vertical_parallel_gearbox": "Caixa de Transmissão Paralela Vertical",
   "item.create_connected.vertical_six_way_gearbox": "Caixa de Transmissão de 6 Eixos Vertical",
   "item.create_connected.vertical_six_way_gearbox.tooltip.summary": "Uma Caixa de Transmissão com _6 saídas_. As saídas laterais têm _metade da velocidade_.",
