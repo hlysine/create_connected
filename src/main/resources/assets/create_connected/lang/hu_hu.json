@@ -232,7 +232,6 @@
   "item.create_connected.music_disc_elevator": "Zenei lemez",
   "item.create_connected.music_disc_interlude": "Zenei lemez",
   "item.create_connected.vertical_brass_gearbox": "Függőleges sárgaréz sebességváltó",
-  "item.create_connected.vertical_brass_gearbox.tooltip.summary": "Olyan sebességváltó, ahol mind a 4 oldal forgásiránya függetlenül konfigurálható.",
   "item.create_connected.vertical_parallel_gearbox": "Függőleges párhuzamos sebességváltó",
   "item.create_connected.vertical_six_way_gearbox": "Függőleges 6 utas sebességváltó",
   "item.create_connected.vertical_six_way_gearbox.tooltip.summary": "Egy sebességváltó, amelynek mind a hat oldalán tengelyek vannak. Felül és alul fél sebességgel forog."
