@@ -9,7 +9,9 @@ import com.simibubi.create.content.redstone.analogLever.AnalogLeverBlock;
 import com.simibubi.create.content.schematics.requirement.ItemRequirement;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
@@ -87,6 +89,17 @@ public class LinkedAnalogLeverBlock extends AnalogLeverBlock implements SpecialB
             return super.useWithoutItem(state, level, pos, player, hitResult);
         }
         return LinkedTransmitterBlock.super.useTransmitter(state, level, pos, player);
+    }
+
+    @Override
+    public @NotNull ItemInteractionResult useItemOn(@NotNull ItemStack stack,
+                                                    @NotNull BlockState state,
+                                                    @NotNull Level level,
+                                                    @NotNull BlockPos pos,
+                                                    @NotNull Player player,
+                                                    @NotNull InteractionHand hand,
+                                                    @NotNull BlockHitResult hitResult) {
+        return LinkedTransmitterBlock.super.useWax(stack, state, level, pos, player, hand, hitResult);
     }
 
     @Override
