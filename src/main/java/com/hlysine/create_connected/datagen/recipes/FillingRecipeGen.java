@@ -4,6 +4,7 @@ import com.hlysine.create_connected.CCBlocks;
 import com.hlysine.create_connected.CCTags;
 import com.hlysine.create_connected.CreateConnected;
 import com.hlysine.create_connected.compat.Mods;
+import com.simibubi.create.AllFluids;
 import com.simibubi.create.foundation.fluid.FluidIngredientOld;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
@@ -30,6 +31,26 @@ public class FillingRecipeGen extends com.simibubi.create.api.data.recipe.Fillin
             .withCondition(new FeatureEnabledCondition(CCBlocks.EMPTY_FAN_CATALYST.getId()))
             .withCondition(new ModLoadedCondition(Mods.DRAGONS_PLUS.id()))
             .output(CCBlocks.FAN_ENDING_CATALYST_DRAGONS_BREATH));
+
+    GeneratedRecipe FAN_CHOCOLATE_COATING_CATALYST = create("fan_chocolate_coating_catalyst", b -> b.require(AllFluids.CHOCOLATE.get(), 1000)
+            .require(CCBlocks.EMPTY_FAN_CATALYST)
+            .withCondition(new FeatureEnabledCondition(CCBlocks.EMPTY_FAN_CATALYST.getId()))
+            .withCondition(new ModLoadedCondition(Mods.MORE_CATALYSTS.id()))
+            .output(CCBlocks.FAN_CHOCOLATE_COATING_CATALYST));
+
+    GeneratedRecipe FAN_HONEY_COATING_CATALYST = create("fan_honey_coating_catalyst", b -> b.require(AllFluids.HONEY.get(), 1000)
+            .require(CCBlocks.EMPTY_FAN_CATALYST)
+            .withCondition(new FeatureEnabledCondition(CCBlocks.EMPTY_FAN_CATALYST.getId()))
+            .withCondition(new ModLoadedCondition(Mods.MORE_CATALYSTS.id()))
+            .output(CCBlocks.FAN_HONEY_COATING_CATALYST));
+
+    /*  Already added the recipe manually
+    GeneratedRecipe FAN_TRANSMUTATION_CATALYST = create("fan_transmutation_catalyst", b -> b.require(//needs create_shimmer:shimmer//, 1000)
+            .require(CCBlocks.EMPTY_FAN_CATALYST)
+            .withCondition(new FeatureEnabledCondition(CCBlocks.EMPTY_FAN_CATALYST.getId()))
+            .withCondition(new ModLoadedCondition(Mods.SHIMMER.id()))
+            .output(CCBlocks.FAN_TRANSMUTATION_CATALYST));
+    //*/
 
     public FillingRecipeGen(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
         super(output, registries, CreateConnected.MODID);

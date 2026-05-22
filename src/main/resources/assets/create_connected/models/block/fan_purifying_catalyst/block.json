@@ -95,8 +95,8 @@
 			}
 		},
         {   "__comment": "Obsidian base",
-            "from": [ 2, 0.1, 2 ],
-            "to": [ 14, 3, 14 ],
+            "from": [ 2.2, 0.1, 2.2 ],
+            "to": [ 13.8, 3, 13.8 ],
             "faces": {
                 "down":  { "uv": [ 2,  2, 14, 14 ], "texture": "#obsidian" },
                 "up":    { "uv": [ 2,  2, 14, 14 ], "texture": "#obsidian" },

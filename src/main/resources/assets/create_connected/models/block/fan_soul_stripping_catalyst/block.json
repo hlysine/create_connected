@@ -5,7 +5,7 @@
 		"0": "create:block/funnel/brass_funnel_frame",
 		"1": "create_connected:block/fan_catalyst_core",
 		"particle": "create:block/funnel/brass_funnel_frame",
-		"content": "kubejs:block/mysterious_ancient_mechanism"
+		"content": "createnetherindustry:block/soul_stripping_block"
 	},
 	"elements": [
 		{
@@ -97,12 +97,12 @@
 			"from": [2.1, 2.1, 2.1],
 			"to": [13.9, 13.9, 13.9],
 			"faces": {
-				"north": {"uv": [2.1, 2.1, 13.9, 13.9], "texture": "#content"},
-				"east": {"uv": [2.1, 2.1, 13.9, 13.9], "texture": "#content"},
-				"south": {"uv": [2.1, 2.1, 13.9, 13.9], "texture": "#content"},
-				"west": {"uv": [2.1, 2.1, 13.9, 13.9], "texture": "#content"},
-				"up": {"uv": [2.1, 2.1, 13.9, 13.9], "texture": "#content"},
-				"down": {"uv": [2.1, 2.1, 13.9, 13.9], "texture": "#content"}
+				"north": {"uv": [0, 4.25, 3.5, 7.75], "texture": "#content"},
+				"east": {"uv": [0, 4.25, 3.5, 7.75], "texture": "#content"},
+				"south": {"uv": [0, 4.25, 3.5, 7.75], "texture": "#content"},
+				"west": {"uv": [0, 4.25, 3.5, 7.75], "texture": "#content"},
+				"up": {"uv": [0, 4.25, 3.5, 7.75], "texture": "#content"},
+				"down": {"uv": [0, 4.25, 3.5, 7.75], "texture": "#content"}
 			}
 		}
 	]

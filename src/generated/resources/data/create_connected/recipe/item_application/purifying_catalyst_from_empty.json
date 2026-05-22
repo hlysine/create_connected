@@ -1,0 +1,26 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "create_connected:feature_enabled",
+      "tag": "create_connected:empty_fan_catalyst"
+    },
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "create_more_catalysts"
+    }
+  ],
+  "type": "create:item_application",
+  "ingredients": [
+    {
+      "item": "create_connected:empty_fan_catalyst"
+    },
+    {
+      "item": "minecraft:beacon"
+    }
+  ],
+  "results": [
+    {
+      "id": "create_connected:fan_purifying_catalyst"
+    }
+  ]
+}
