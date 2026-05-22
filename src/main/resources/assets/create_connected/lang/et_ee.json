@@ -229,7 +229,6 @@
   "item.create_connected.music_disc_interlude": "Muusikaplaat",
   "item.create_connected.music_disc_interlude.desc": "Kevin MacLeod - Kohalik prognoos - Elevator",
   "item.create_connected.vertical_brass_gearbox": "Vertikaalne messingist käigukast",
-  "item.create_connected.vertical_brass_gearbox.tooltip.summary": "Käigukast, mille kõigi nelja külje pöörlemissuund on sõltumatult konfigureeritav.",
   "item.create_connected.vertical_parallel_gearbox": "Vertikaalne paralleelkäigukast",
   "item.create_connected.vertical_six_way_gearbox": "Vertikaalne 6-käiguline käigukast",
   "item.create_connected.vertical_six_way_gearbox.tooltip.summary": "Käigukast, millel on võllid kõigil kuuel küljel. Ülemine ja alumine osa pöörlevad poole kiirusega."
