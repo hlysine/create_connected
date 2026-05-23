@@ -81,6 +81,7 @@ public class CreateConnected {
             CCMovementBehaviours.register();
             CCMountedStorageTypes.register();
             CCDisplaySources.register();
+            CCDisplayTargets.register();
         });
     }
 

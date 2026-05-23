@@ -47,6 +47,7 @@ public class CCCreativeTabs {
             CCBlocks.INVENTORY_ACCESS_PORT,
             CCBlocks.INVENTORY_BRIDGE,
             CCBlocks.BRASS_CHUTE,
+            CCBlocks.DASHBOARD,
             CCBlocks.SEQUENCED_PULSE_GENERATOR,
             CCItems.LINKED_TRANSMITTER,
             CCItems.REDSTONE_LINK_WILDCARD,

@@ -20,6 +20,7 @@
     "create_connected:kinetic_battery",
     "create_connected:inventory_access_port",
     "create_connected:inventory_bridge",
+    "create_connected:dashboard",
     "create_connected:copycat_slab",
     "create_connected:copycat_block",
     "create_connected:copycat_beam",

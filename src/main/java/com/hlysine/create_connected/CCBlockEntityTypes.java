@@ -8,6 +8,8 @@ import com.hlysine.create_connected.content.brassgearbox.BrassGearboxVisual;
 import com.hlysine.create_connected.content.centrifugalclutch.CentrifugalClutchBlockEntity;
 import com.hlysine.create_connected.content.crankwheel.CrankWheelBlockEntity;
 import com.hlysine.create_connected.content.crankwheel.CrankWheelVisual;
+import com.hlysine.create_connected.content.dashboard.DashboardBlockEntity;
+import com.hlysine.create_connected.content.dashboard.DashboardRenderer;
 import com.hlysine.create_connected.content.fancatalyst.FanEndingCatalystDragonHeadBlockEntity;
 import com.hlysine.create_connected.content.fancatalyst.FanEndingCatalystDragonHeadRenderer;
 import com.hlysine.create_connected.content.fluidvessel.CreativeFluidVesselBlockEntity;
@@ -218,6 +220,12 @@ public class CCBlockEntityTypes {
             .validBlocks(CCBlocks.BRASS_CHUTE)
             .renderer(() -> ChuteRenderer::new)
             .register();
+
+    public static final BlockEntityEntry<DashboardBlockEntity> DASHBOARD =
+            REGISTRATE.blockEntity("dashboard", DashboardBlockEntity::new)
+                    .validBlocks(CCBlocks.DASHBOARD)
+                    .renderer(() -> DashboardRenderer::new)
+                    .register();
 
     public static final BlockEntityEntry<CopycatBlockEntity> COPYCAT =
             REGISTRATE.blockEntity("copycat", CopycatBlockEntity::new)
