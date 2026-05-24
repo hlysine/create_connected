@@ -276,6 +276,15 @@ public class CCStandardRecipes extends BaseRecipeProvider {
                     .requires(AllItems.BRASS_SHEET)
             );
 
+    GeneratedRecipe DASHBOARD = create(CCBlocks.DASHBOARD).unlockedBy(AllBlocks.DISPLAY_BOARD::get)
+            .requiresResultFeature()
+            .viaShaped(b -> b
+                    .define('B', AllBlocks.DISPLAY_BOARD)
+                    .define('C', AllBlocks.BRASS_CASING)
+                    .pattern("B")
+                    .pattern("C")
+            );
+
     GeneratedRecipe EMPTY_FAN_CATALYST = create(CCBlocks.EMPTY_FAN_CATALYST).unlockedBy(AllBlocks.BRASS_BLOCK::get)
             .requiresResultFeature()
             .viaShaped(b -> b

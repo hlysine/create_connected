@@ -1,0 +1,26 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "create_connected:feature_enabled",
+      "tag": "create_connected:dashboard"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "create:display_board"
+    },
+    "C": {
+      "item": "create:brass_casing"
+    }
+  },
+  "pattern": [
+    "B",
+    "C"
+  ],
+  "result": {
+    "count": 1,
+    "id": "create_connected:dashboard"
+  }
+}
