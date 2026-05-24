@@ -15,6 +15,7 @@ import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.level.block.entity.SignText;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 
@@ -37,7 +38,7 @@ public class DashboardRenderer extends SafeBlockEntityRenderer<DashboardBlockEnt
 
         final int lineHeight = be.getTextLineHeight();
         final int maxWidth = be.getMaxTextLineWidth();
-        final int midpoint = 4 * lineHeight / 2;
+        final int midpoint = SignText.LINES * lineHeight / 2;
 
         final BlockState state = be.getBlockState();
         final Direction facing = state.getValue(DashboardBlock.FACING);
@@ -52,7 +53,7 @@ public class DashboardRenderer extends SafeBlockEntityRenderer<DashboardBlockEnt
         ps.mulPose(Axis.XP.rotationDegrees(-66.80141f));
         ps.translate(0, 3.5/16f, 0.15/16f);
 
-        float scale = 0.015625f * 0.6666667f;
+        float scale = 0.015625f * 0.52f;
         ps.scale(scale, -scale, scale);
 
         FormattedCharSequence[] sequences = be.text.getRenderMessages(Minecraft.getInstance().isTextFilteringEnabled(), (line) -> {
@@ -71,7 +72,7 @@ public class DashboardRenderer extends SafeBlockEntityRenderer<DashboardBlockEnt
             glowing = false;
         }
 
-        for (int i = 0; i < 4; ++i) {
+        for (int i = 0; i < SignText.LINES; ++i) {
             FormattedCharSequence sequence = sequences[i];
             float f = (float) (-font.width(sequence) / 2);
             if (glowing) {

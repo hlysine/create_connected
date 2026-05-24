@@ -51,6 +51,18 @@ public class DashboardBlockEntity extends SmartBlockEntity {
         notifyUpdate();
     }
 
+    public void setLine(int line, Component text) {
+        this.setText(this.getText().setMessage(line, text));
+    }
+
+    public void clearText() {
+        SignText text = this.getText();
+        for (int i = 0; i < SignText.LINES; i++) {
+            text = text.setMessage(i, Component.empty());
+        }
+        this.setText(text);
+    }
+
     public int getMaxTextLineWidth() {
         return 90;
     }
@@ -68,7 +80,7 @@ public class DashboardBlockEntity extends SmartBlockEntity {
     private @Nullable Component getStatusLine() {
         MutableComponent status = Component.empty();
         boolean needSpacer = false;
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < SignText.LINES; i++) {
             Component line = this.text.getMessage(i, false);
             if (line.getString().isEmpty()) continue;
             if (needSpacer)
