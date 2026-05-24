@@ -76,6 +76,8 @@ public class CCPonderPlugin implements PonderPlugin {
         SCENE_HELPER.forComponents(CCBlocks.BRASS_CHUTE)
                 .addStoryBoard(Create.asResource("chute/downward"), ChuteScenes::downward, AllCreatePonderTags.LOGISTICS)
                 .addStoryBoard(Create.asResource("chute/upward"), ChuteScenes::upward);
+        SCENE_HELPER.forComponents(CCBlocks.DASHBOARD)
+                .addStoryBoard("dashboard", DashboardScenes::dashboard, AllCreatePonderTags.DISPLAY_TARGETS);
     }
 
     public static void register(PonderTagRegistrationHelper<ResourceLocation> helper) {
@@ -98,5 +100,7 @@ public class CCPonderPlugin implements PonderPlugin {
         TAG_HELPER.addToTag(AllCreatePonderTags.LOGISTICS)
                 .add(CCBlocks.INVENTORY_ACCESS_PORT)
                 .add(CCBlocks.INVENTORY_BRIDGE);
+        TAG_HELPER.addToTag(AllCreatePonderTags.DISPLAY_TARGETS)
+                .add(CCBlocks.DASHBOARD);
     }
 }
