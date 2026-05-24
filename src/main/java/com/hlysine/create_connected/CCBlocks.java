@@ -446,6 +446,7 @@ public class CCBlocks {
                     .block("linked_" + namePath + "_button", properties -> new LinkedButtonBlock(properties, buttonBlock))
                     .initialProperties(() -> buttonBlock)
                     .tag(AllTags.AllBlockTags.SAFE_NBT.tag)
+                    .addLayer(() -> RenderType::cutoutMipped)
                     .transform(LinkedTransmitterItem.register())
                     .onRegister(PreciseItemUseOverrides::addBlock)
                     .blockstate(CCBlockStateGen.linkedButton(
@@ -460,6 +461,7 @@ public class CCBlocks {
             .block("linked_lever", properties -> new LinkedLeverBlock(properties, (LeverBlock) Blocks.LEVER))
             .initialProperties(() -> Blocks.LEVER)
             .tag(AllTags.AllBlockTags.SAFE_NBT.tag)
+            .addLayer(() -> RenderType::cutoutMipped)
             .transform(LinkedTransmitterItem.register())
             .onRegister(PreciseItemUseOverrides::addBlock)
             .blockstate(CCBlockStateGen.linkedLever(
@@ -472,6 +474,7 @@ public class CCBlocks {
             .block("linked_analog_lever", properties -> new LinkedAnalogLeverBlock(properties, AllBlocks.ANALOG_LEVER))
             .initialProperties(() -> Blocks.LEVER)
             .tag(AllTags.AllBlockTags.SAFE_NBT.tag)
+            .addLayer(() -> RenderType::cutoutMipped)
             .transform(LinkedTransmitterItem.register())
             .onRegister(PreciseItemUseOverrides::addBlock)
             .blockstate(CCBlockStateGen.linkedLeverNoPower(
