@@ -1,10 +1,10 @@
 package com.hlysine.create_connected.content.dashboard;
 
 import com.hlysine.create_connected.CCBlockEntityTypes;
+import com.hlysine.create_connected.ConnectedLang;
 import com.mojang.serialization.MapCodec;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllShapes;
-import com.simibubi.create.content.contraptions.actors.seat.SeatBlock;
 import com.simibubi.create.content.equipment.clipboard.ClipboardEntry;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.foundation.block.IBE;
@@ -15,12 +15,14 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.SignApplicator;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -53,7 +55,8 @@ public class DashboardBlock extends HorizontalDirectionalBlock implements IWrenc
 
     public DashboardBlock(Properties properties) {
         super(properties);
-        registerDefaultState(defaultBlockState().setValue(OPEN, false)
+        registerDefaultState(defaultBlockState()
+                .setValue(OPEN, true)
                 .setValue(WATERLOGGED, false));
     }
 
@@ -116,16 +119,25 @@ public class DashboardBlock extends HorizontalDirectionalBlock implements IWrenc
             return success.booleanValue() ? ItemInteractionResult.SUCCESS : ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         }
 
-        return ItemInteractionResult.SUCCESS;
+        return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+    }
+
+    @Override
+    public InteractionResult onWrenched(BlockState state, UseOnContext context) {
+        if (state.getBlock() != this) return InteractionResult.PASS;
+        BlockState newState = state.cycle(OPEN);
+        context.getLevel().setBlock(context.getClickedPos(), newState, Block.UPDATE_ALL);
+        if (context.getPlayer() != null) {
+            ConnectedLang.translate(newState.getValue(OPEN) ? "dashboard.activate_hud" : "dashboard.deactivate_hud")
+                    .sendStatus(context.getPlayer());
+        }
+        return InteractionResult.SUCCESS;
     }
 
     @Override
     public BlockState updateShape(BlockState pState, Direction pDirection, BlockState pNeighborState,
                                   LevelAccessor pLevel, BlockPos pCurrentPos, BlockPos pNeighborPos) {
         updateWater(pLevel, pState, pCurrentPos);
-        if (pDirection == pState.getValue(FACING)) {
-            return pState.setValue(OPEN, pNeighborState.getBlock() instanceof SeatBlock);
-        }
         return pState;
     }
 
@@ -143,11 +155,6 @@ public class DashboardBlock extends HorizontalDirectionalBlock implements IWrenc
         state = state.setValue(FACING, horizontalDirection.getOpposite());
         if (player != null && player.isShiftKeyDown())
             state = state.setValue(FACING, horizontalDirection);
-
-        BlockPos target = pContext.getClickedPos().relative(state.getValue(FACING));
-        if (pContext.getLevel().getBlockState(target).getBlock() instanceof SeatBlock) {
-            state = state.setValue(OPEN, true);
-        }
 
         return state;
     }

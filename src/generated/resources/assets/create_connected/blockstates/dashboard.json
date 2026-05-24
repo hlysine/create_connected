@@ -9,11 +9,11 @@
       "y": 90
     },
     "facing=east,open=true,waterlogged=false": {
-      "model": "create_connected:block/dashboard/block",
+      "model": "create_connected:block/dashboard/block_open",
       "y": 90
     },
     "facing=east,open=true,waterlogged=true": {
-      "model": "create_connected:block/dashboard/block",
+      "model": "create_connected:block/dashboard/block_open",
       "y": 90
     },
     "facing=north,open=false,waterlogged=false": {
@@ -23,10 +23,10 @@
       "model": "create_connected:block/dashboard/block"
     },
     "facing=north,open=true,waterlogged=false": {
-      "model": "create_connected:block/dashboard/block"
+      "model": "create_connected:block/dashboard/block_open"
     },
     "facing=north,open=true,waterlogged=true": {
-      "model": "create_connected:block/dashboard/block"
+      "model": "create_connected:block/dashboard/block_open"
     },
     "facing=south,open=false,waterlogged=false": {
       "model": "create_connected:block/dashboard/block",
@@ -37,11 +37,11 @@
       "y": 180
     },
     "facing=south,open=true,waterlogged=false": {
-      "model": "create_connected:block/dashboard/block",
+      "model": "create_connected:block/dashboard/block_open",
       "y": 180
     },
     "facing=south,open=true,waterlogged=true": {
-      "model": "create_connected:block/dashboard/block",
+      "model": "create_connected:block/dashboard/block_open",
       "y": 180
     },
     "facing=west,open=false,waterlogged=false": {
@@ -53,11 +53,11 @@
       "y": 270
     },
     "facing=west,open=true,waterlogged=false": {
-      "model": "create_connected:block/dashboard/block",
+      "model": "create_connected:block/dashboard/block_open",
       "y": 270
     },
     "facing=west,open=true,waterlogged=true": {
-      "model": "create_connected:block/dashboard/block",
+      "model": "create_connected:block/dashboard/block_open",
       "y": 270
     }
   }

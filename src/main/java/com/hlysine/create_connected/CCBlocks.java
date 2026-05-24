@@ -993,7 +993,11 @@ public class CCBlocks {
                     .addLayer(() -> RenderType::cutoutMipped)
                     .transform(axeOrPickaxe())
                     .transform(displayTarget(CCDisplayTargets.DASHBOARD))
-                    .blockstate((c, p) -> p.horizontalBlock(c.get(), s -> AssetLookup.partialBaseModel(c, p)))
+                    .blockstate((c, p) -> p.horizontalBlock(c.get(), s -> {
+                        if (s.getValue(DashboardBlock.OPEN))
+                            return AssetLookup.partialBaseModel(c, p, "open");
+                        return AssetLookup.partialBaseModel(c, p);
+                    }))
                     .item()
                     .transform(customItemModel("_", "block"))
                     .register();
