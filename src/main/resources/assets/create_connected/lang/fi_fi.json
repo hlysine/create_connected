@@ -5,6 +5,9 @@
   "advancement.create_connected.control_chip.desc": "Kokoa ohjaussiru",
   "advancement.create_connected.kinetic_battery": "Täysin ladattu",
   "advancement.create_connected.kinetic_battery.desc": "Lataa kineettinen akku täyteen",
+  "create_connected.gui.sequenced_pulse_generator.instruction.loop_if.param": "Kohteen tila",
+  "create_connected.gui.sequenced_pulse_generator.instruction.output.param": "Kesto",
+  "create_connected.gui.sequenced_pulse_generator.instruction.wait_for.param": "Kohteen tila",
   "create_connected.ponder.linked_transmitter.text_10": "Napsauta hiiren kakkospainikkeella lähetin avaimella irrottaaksesi sen syötteestä",
   "create_connected.ponder.linked_transmitter.text_9": "Linkitetyt lähettimet toimivat myös painikkeilla ja analogisilla vivuilla"
 }
