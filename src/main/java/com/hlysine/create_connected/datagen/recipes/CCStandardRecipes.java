@@ -271,9 +271,13 @@ public class CCStandardRecipes extends BaseRecipeProvider {
 
     GeneratedRecipe BRASS_CHUTE = create(CCBlocks.BRASS_CHUTE).unlockedBy(AllItems.BRASS_SHEET::get)
             .requiresResultFeature()
-            .viaShapeless(b -> b
-                    .requires(AllBlocks.CHUTE)
-                    .requires(AllItems.BRASS_SHEET)
+            .returns(4)
+            .viaShaped(b -> b
+                    .define('S', AllItems.BRASS_SHEET)
+                    .define('I', AllItems.BRASS_INGOT)
+                    .pattern("S")
+                    .pattern("I")
+                    .pattern("S")
             );
 
     GeneratedRecipe DASHBOARD = create(CCBlocks.DASHBOARD).unlockedBy(AllBlocks.DISPLAY_BOARD::get)

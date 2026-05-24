@@ -5,18 +5,23 @@
       "tag": "create_connected:brass_chute"
     }
   ],
-  "type": "minecraft:crafting_shapeless",
+  "type": "minecraft:crafting_shaped",
   "category": "misc",
-  "ingredients": [
-    {
-      "item": "create:chute"
+  "key": {
+    "I": {
+      "item": "create:brass_ingot"
     },
-    {
+    "S": {
       "item": "create:brass_sheet"
     }
+  },
+  "pattern": [
+    "S",
+    "I",
+    "S"
   ],
   "result": {
-    "count": 1,
+    "count": 4,
     "id": "create_connected:brass_chute"
   }
 }
