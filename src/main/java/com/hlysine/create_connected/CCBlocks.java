@@ -982,6 +982,7 @@ public class CCBlocks {
                     .noOcclusion()
                     .isSuffocating((state, level, pos) -> false))
             .transform(pickaxeOnly())
+            .transform(FeatureToggle.register(FeatureCategory.LOGISTICS))
             .addLayer(() -> RenderType::cutoutMipped)
             .clientExtension(() -> () -> new ReducedDestroyEffects())
             .blockstate(new ChuteGenerator()::generate)
@@ -995,6 +996,7 @@ public class CCBlocks {
                     .properties(p -> p.mapColor(MapColor.PODZOL))
                     .addLayer(() -> RenderType::cutoutMipped)
                     .transform(axeOrPickaxe())
+                    .transform(FeatureToggle.register(FeatureCategory.KINETIC))
                     .transform(displayTarget(CCDisplayTargets.DASHBOARD))
                     .blockstate((c, p) -> p.horizontalBlock(c.get(), s -> {
                         if (s.getValue(DashboardBlock.OPEN))
