@@ -15,11 +15,6 @@ public class EndInstruction extends Instruction {
     }
 
     @Override
-    public InstructionResult onInputChange(SequencedPulseGeneratorBlockEntity be) {
-        return InstructionResult.terminate();
-    }
-
-    @Override
     public void writeState(CompoundTag nbt) {
 
     }

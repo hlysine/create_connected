@@ -32,7 +32,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.ticks.TickPriority;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
@@ -69,38 +68,14 @@ public class SequencedPulseGeneratorBlock extends AbstractDiodeBlock implements 
     }
 
     @Override
-    protected void checkTickOnNeighbor(@NotNull Level pLevel, @NotNull BlockPos pPos, @NotNull BlockState pState) {
-        if (!this.isLocked(pLevel, pPos, pState)) {
-            boolean prevPower = pState.getValue(POWERED);
-            boolean currPower = shouldTurnOn(pLevel, pPos, pState);
-            boolean prevSide = pState.getValue(POWERED_SIDE);
-            boolean currSide = getAlternateSignal(pLevel, pPos, pState) > 0;
-            if ((prevPower != currPower || prevSide != currSide) && !pLevel.getBlockTicks().willTickThisTick(pPos, this)) {
-                TickPriority tickpriority = TickPriority.HIGH;
-                if (this.shouldPrioritize(pLevel, pPos, pState)) {
-                    tickpriority = TickPriority.EXTREMELY_HIGH;
-                } else if (prevPower || prevSide) {
-                    tickpriority = TickPriority.VERY_HIGH;
-                }
-                pLevel.scheduleTick(pPos, this, this.getDelay(pState), tickpriority);
-            }
-        }
-
-    }
-
-    @Override
-    public void updateNeighborsInFront(@NotNull Level pLevel, @NotNull BlockPos pPos, @NotNull BlockState pState) {
-        super.updateNeighborsInFront(pLevel, pPos, pState);
-    }
-
-    @Override
-    public void tick(@NotNull BlockState state, @NotNull ServerLevel worldIn, @NotNull BlockPos pos, @NotNull RandomSource r) {
-        if (!this.isLocked(worldIn, pos, state)) {
-            int input = getInputSignal(worldIn, pos, state);
+    protected void checkTickOnNeighbor(@NotNull Level level, @NotNull BlockPos pos, @NotNull BlockState state) {
+        super.checkTickOnNeighbor(level, pos, state);
+        if (!this.isLocked(level, pos, state)) {
+            int input = getInputSignal(level, pos, state);
             boolean prevPower = state.getValue(POWERED);
             boolean currPower = input > 0;
             boolean prevSide = state.getValue(POWERED_SIDE);
-            boolean currSide = getAlternateSignal(worldIn, pos, state) > 0;
+            boolean currSide = getAlternateSignal(level, pos, state) > 0;
             BlockState oldState = state;
 
             if (prevPower != currPower)
@@ -109,14 +84,18 @@ public class SequencedPulseGeneratorBlock extends AbstractDiodeBlock implements 
                 state = state.cycle(POWERED_SIDE);
 
             if (oldState != state)
-                worldIn.setBlock(pos, state, 2);
+                level.setBlock(pos, state, 2);
 
             if (currSide) {
-                withBlockEntityDo(worldIn, pos, SequencedPulseGeneratorBlockEntity::reset);
+                withBlockEntityDo(level, pos, SequencedPulseGeneratorBlockEntity::reset);
                 return;
             }
-            withBlockEntityDo(worldIn, pos, spg -> spg.onRedstoneUpdate(input));
+            withBlockEntityDo(level, pos, spg -> spg.onRedstoneUpdate(input));
         }
+    }
+
+    @Override
+    public void tick(@NotNull BlockState state, @NotNull ServerLevel worldIn, @NotNull BlockPos pos, @NotNull RandomSource r) {
     }
 
     @Override

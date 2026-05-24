@@ -25,7 +25,7 @@ public class WaitForInstruction extends Instruction {
     }
 
     @Override
-    public InstructionResult onInputChange(SequencedPulseGeneratorBlockEntity be) {
+    public InstructionResult tick(SequencedPulseGeneratorBlockEntity be) {
         if (be.getPreviousInput() == 0 && be.getCurrentInput() > 0 && getValue() == 1)
             return InstructionResult.next(true);
         if (be.getPreviousInput() > 0 && be.getCurrentInput() == 0 && getValue() == 0)

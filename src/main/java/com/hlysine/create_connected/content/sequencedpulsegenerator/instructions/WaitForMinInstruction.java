@@ -14,7 +14,7 @@ public class WaitForMinInstruction extends Instruction {
                         0,
                         15,
                         null,
-                        2,
+                        5,
                         1,
                         null),
                 true,
@@ -25,7 +25,7 @@ public class WaitForMinInstruction extends Instruction {
     }
 
     @Override
-    public InstructionResult onInputChange(SequencedPulseGeneratorBlockEntity be) {
+    public InstructionResult tick(SequencedPulseGeneratorBlockEntity be) {
         if (be.getPreviousInput() < getValue() && be.getCurrentInput() >= getValue())
             return InstructionResult.next(true);
         return InstructionResult.incomplete();

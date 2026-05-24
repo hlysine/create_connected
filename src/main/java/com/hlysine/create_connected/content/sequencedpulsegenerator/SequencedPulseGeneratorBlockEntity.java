@@ -12,13 +12,13 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
 import java.util.Vector;
-import java.util.function.Function;
 
 import static com.hlysine.create_connected.content.sequencedpulsegenerator.SequencedPulseGeneratorBlock.POWERING;
 import static net.minecraft.world.level.block.DiodeBlock.POWERED;
@@ -87,18 +87,13 @@ public class SequencedPulseGeneratorBlockEntity extends SmartBlockEntity {
                 : null;
     }
 
-    private void executeInstruction(Function<Instruction, Function<SequencedPulseGeneratorBlockEntity, InstructionResult>> instructionEvent, boolean allowImmediate) {
-        executeInstruction(instructionEvent, allowImmediate, 0);
-    }
-
     private void applySignal() {
-        if (getBlockState().getValue(POWERING) != (currentSignal > 0)) {
-            level.setBlock(getBlockPos(), getBlockState().setValue(POWERING, currentSignal > 0), 2);
-        }
-        ((SequencedPulseGeneratorBlock) getBlockState().getBlock()).updateNeighborsInFront(level, getBlockPos(), getBlockState());
+        level.setBlock(getBlockPos(), getBlockState().setValue(POWERING, currentSignal > 0), Block.UPDATE_ALL);
+        level.updateNeighborsAt(this.worldPosition, this.getBlockState().getBlock());
+        level.updateNeighborsAt(this.worldPosition.relative(this.getBlockState().getValue(SequencedPulseGeneratorBlock.FACING).getOpposite()), this.getBlockState().getBlock());
     }
 
-    private void executeInstruction(Function<Instruction, Function<SequencedPulseGeneratorBlockEntity, InstructionResult>> instructionEvent, boolean allowImmediate, int recursionDepth) {
+    private void executeInstruction(boolean allowImmediate, int recursionDepth) {
         Instruction instruction = getCurrentInstruction();
         if (instruction == null) {
             currentInstruction = -1;
@@ -108,7 +103,7 @@ public class SequencedPulseGeneratorBlockEntity extends SmartBlockEntity {
             }
             return;
         }
-        InstructionResult result = instructionEvent.apply(instruction).apply(this);
+        InstructionResult result = instruction.tick(this);
         int prevSignal = currentSignal;
         currentSignal = instruction.transformOutput(this, instruction.getSignal());
         if (prevSignal != currentSignal) {
@@ -117,7 +112,7 @@ public class SequencedPulseGeneratorBlockEntity extends SmartBlockEntity {
         currentInstruction = result.getNextInstruction(currentInstruction);
         if (result.isImmediate() && allowImmediate) {
             if (recursionDepth < MAX_RECURSION_DEPTH) {
-                executeInstruction(instructionEvent, true, recursionDepth + 1);
+                executeInstruction(true, recursionDepth + 1);
             } else {
                 infiniteLoopCounter++;
                 if (level.getRandom().nextFloat() < PARTICLE_DENSITY) {
@@ -146,7 +141,8 @@ public class SequencedPulseGeneratorBlockEntity extends SmartBlockEntity {
         if (level.isClientSide)
             return;
 
-        executeInstruction(i -> i::tick, true);
+        executeInstruction(true, 0);
+        previousInput = currentInput;
     }
 
     private void resetAllInstructions() {
@@ -158,9 +154,6 @@ public class SequencedPulseGeneratorBlockEntity extends SmartBlockEntity {
     public void onRedstoneUpdate(int input) {
         this.currentInput = input;
         if (currentInput == previousInput) return;
-        if (!isIdle())
-            executeInstruction(i -> i::onInputChange, false);
-        previousInput = currentInput;
         if (!isIdle() || currentInput == 0)
             return;
         if (!level.hasNeighborSignal(worldPosition)) {
@@ -168,10 +161,9 @@ public class SequencedPulseGeneratorBlockEntity extends SmartBlockEntity {
             return;
         }
         currentInstruction = 0;
-
         resetAllInstructions();
-
-        executeInstruction(i -> i::tick, true);
+        executeInstruction(true, 0);
+        previousInput = currentInput;
     }
 
     public void reset() {
@@ -187,6 +179,7 @@ public class SequencedPulseGeneratorBlockEntity extends SmartBlockEntity {
     protected void write(CompoundTag tag, HolderLookup.Provider registries, boolean clientPacket) {
         tag.putInt("InstructionIndex", currentInstruction);
         tag.putInt("PrevInput", previousInput);
+        tag.putInt("CurrentInput", currentInput);
         tag.putInt("CurrentSignal", currentSignal);
         tag.put("Instructions", Instruction.serializeAll(instructions));
         super.write(tag, registries, clientPacket);
@@ -196,6 +189,7 @@ public class SequencedPulseGeneratorBlockEntity extends SmartBlockEntity {
     protected void read(CompoundTag tag, HolderLookup.Provider registries, boolean clientPacket) {
         currentInstruction = tag.getInt("InstructionIndex");
         previousInput = tag.getInt("PrevInput");
+        currentInput = tag.getInt("CurrentInput");
         currentSignal = tag.getInt("CurrentSignal");
         ListTag list = tag.getList("Instructions", Tag.TAG_COMPOUND);
         instructions = Instruction.deserializeAll(list);

@@ -2,18 +2,14 @@ package com.hlysine.create_connected.content.sequencedpulsegenerator;
 
 import com.hlysine.create_connected.CCPackets;
 import com.hlysine.create_connected.content.sequencedpulsegenerator.instructions.Instruction;
-import com.simibubi.create.content.kinetics.chainConveyor.ChainConveyorConnectionPacket;
 import com.simibubi.create.foundation.networking.BlockEntityConfigurationPacket;
 import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.item.ItemStack;
 
 public class ConfigureSequencedPulseGeneratorPacket extends BlockEntityConfigurationPacket<SequencedPulseGeneratorBlockEntity> {
     public static final StreamCodec<RegistryFriendlyByteBuf, ConfigureSequencedPulseGeneratorPacket> STREAM_CODEC = StreamCodec.composite(
@@ -43,6 +39,6 @@ public class ConfigureSequencedPulseGeneratorPacket extends BlockEntityConfigura
     protected void applySettings(ServerPlayer player, SequencedPulseGeneratorBlockEntity be) {
         be.currentInstruction = -1;
         be.instructions = Instruction.deserializeAll(instructions);
-        be.sendData();
+        be.reset();
     }
 }
