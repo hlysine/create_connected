@@ -4,31 +4,31 @@ import com.hlysine.create_connected.CCGuiTextures;
 import com.hlysine.create_connected.content.sequencedpulsegenerator.SequencedPulseGeneratorBlockEntity;
 import net.minecraft.nbt.CompoundTag;
 
-public class LoopIfInstruction extends Instruction {
+public class WaitForExactInstruction extends Instruction {
 
-    public LoopIfInstruction(int target) {
+    public WaitForExactInstruction(int target, int signal) {
         super(
-                "loop_if",
-                CCGuiTextures.SEQUENCER_DELAY,
+                "wait_for_exact",
+                CCGuiTextures.SEQUENCER_INSTRUCTION,
                 new ParameterConfig("target",
                         0,
-                        1,
+                        15,
                         null,
+                        2,
                         1,
-                        1,
-                        ParameterConfig.booleanFormat),
-                false,
+                        null),
+                true,
                 false
         );
         setValue(target);
+        setSignal(signal);
     }
 
     @Override
-    public InstructionResult tick(SequencedPulseGeneratorBlockEntity be) {
-        if ((be.getCurrentInput() > 0) == (getValue() == 1)) {
-            return InstructionResult.backToTop(true);
-        }
-        return InstructionResult.next(true);
+    public InstructionResult onInputChange(SequencedPulseGeneratorBlockEntity be) {
+        if (be.getPreviousInput() != getValue() && be.getCurrentInput() == getValue())
+            return InstructionResult.next(true);
+        return InstructionResult.incomplete();
     }
 
     @Override
@@ -41,6 +41,6 @@ public class LoopIfInstruction extends Instruction {
 
     @Override
     public Instruction copy() {
-        return new LoopIfInstruction(getValue());
+        return new WaitForExactInstruction(getValue(), getSignal());
     }
 }

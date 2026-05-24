@@ -15,12 +15,7 @@ public class EndInstruction extends Instruction {
     }
 
     @Override
-    public InstructionResult onRisingEdge(SequencedPulseGeneratorBlockEntity be) {
-        return InstructionResult.terminate();
-    }
-
-    @Override
-    public InstructionResult onFallingEdge(SequencedPulseGeneratorBlockEntity be) {
+    public InstructionResult onInputChange(SequencedPulseGeneratorBlockEntity be) {
         return InstructionResult.terminate();
     }
 

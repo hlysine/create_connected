@@ -62,12 +62,12 @@ public abstract class Instruction {
         return InstructionResult.incomplete();
     }
 
-    public InstructionResult onRisingEdge(SequencedPulseGeneratorBlockEntity be) {
+    public InstructionResult onInputChange(SequencedPulseGeneratorBlockEntity be) {
         return InstructionResult.incomplete();
     }
 
-    public InstructionResult onFallingEdge(SequencedPulseGeneratorBlockEntity be) {
-        return InstructionResult.incomplete();
+    public int transformOutput(SequencedPulseGeneratorBlockEntity be, int signal) {
+        return signal;
     }
 
     public int getValue() {

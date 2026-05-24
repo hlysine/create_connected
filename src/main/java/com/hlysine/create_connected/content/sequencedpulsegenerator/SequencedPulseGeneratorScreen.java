@@ -2,7 +2,6 @@ package com.hlysine.create_connected.content.sequencedpulsegenerator;
 
 import com.hlysine.create_connected.CCBlocks;
 import com.hlysine.create_connected.CCGuiTextures;
-import com.hlysine.create_connected.CCPackets;
 import com.hlysine.create_connected.ConnectedLang;
 import com.hlysine.create_connected.content.sequencedpulsegenerator.instructions.EndInstruction;
 import com.hlysine.create_connected.content.sequencedpulsegenerator.instructions.Instruction;
@@ -74,20 +73,20 @@ public class SequencedPulseGeneratorScreen extends AbstractSimiScreen {
         Instruction instruction = instructions.get(row);
 
         ScrollInput type =
-                new SelectionScrollInput(x, y + rowHeight * row, 50, 18)
+                new SelectionScrollInput(x, y + rowHeight * row, 139, 18)
                         .forOptions(Instruction.getOptions())
                         .calling(state -> instructionUpdated(row, state))
                         .setState(instruction.getOrdinal())
                         .titled(ConnectedLang.translateDirect("gui.sequenced_pulse_generator.instruction"));
         ScrollInput value =
-                new ScrollInput(x + 58, y + rowHeight * row, 28, 18)
+                new ScrollInput(x + 141, y + rowHeight * row, 28, 18)
                         .calling(state -> instructions.get(row).setValue(state));
         ScrollInput signal =
-                new ScrollInput(x + 88, y + rowHeight * row, 28, 18)
+                new ScrollInput(x + 171, y + rowHeight * row, 28, 18)
                         .withRange(0, 16)
                         .setState(instruction.getSignal())
                         .calling(state -> instructions.get(row).setSignal(state))
-                        .titled(ConnectedLang.translateDirect("gui.sequenced_pulse_generator.signal"));
+                        .titled(ConnectedLang.translateDirect("gui.sequenced_pulse_generator.output_signal"));
 
         rowInputs.add(type);
         rowInputs.add(value);
@@ -153,10 +152,10 @@ public class SequencedPulseGeneratorScreen extends AbstractSimiScreen {
                 Function<Integer, String> formatter = instruction.parameter.formatter();
                 String text = formatter == null ? String.valueOf(instruction.getValue()) : formatter.apply(instruction.getValue());
                 int stringWidth = font.width(text);
-                label(graphics, 90 + (12 - stringWidth / 2), yOffset - 1, Component.literal(text));
+                label(graphics, 173 + (12 - stringWidth / 2), yOffset - 1, Component.literal(text));
             }
             if (instruction.hasSignal)
-                label(graphics, 127, yOffset - 1, Component.literal(String.valueOf(instruction.getSignal())));
+                label(graphics, 210, yOffset - 1, Component.literal(String.valueOf(instruction.getSignal())));
         }
 
         graphics.drawString(font, title, x + (background.width - 8) / 2 - font.width(title) / 2, y + 4, 0x592424, false);

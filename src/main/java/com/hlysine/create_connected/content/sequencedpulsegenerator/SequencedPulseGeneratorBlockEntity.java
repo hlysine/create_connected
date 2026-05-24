@@ -32,6 +32,9 @@ public class SequencedPulseGeneratorBlockEntity extends SmartBlockEntity {
     static {
         Instruction.register(new OutputInstruction(10, 15));
         Instruction.register(new WaitForInstruction(1, 0));
+        Instruction.register(new WaitForMinInstruction(7, 0));
+        Instruction.register(new WaitForMaxInstruction(7, 0));
+        Instruction.register(new WaitForExactInstruction(7, 0));
         Instruction.register(new LoopForInstruction(3));
         Instruction.register(new LoopIfInstruction(1));
         Instruction.register(new LoopInstruction());
@@ -41,8 +44,8 @@ public class SequencedPulseGeneratorBlockEntity extends SmartBlockEntity {
     Vector<Instruction> instructions;
     int currentInstruction;
     int currentSignal;
-    boolean poweredPreviously;
-    boolean isPowered;
+    int previousInput;
+    int currentInput;
     int infiniteLoopCounter;
 
     public SequencedPulseGeneratorBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
@@ -50,7 +53,7 @@ public class SequencedPulseGeneratorBlockEntity extends SmartBlockEntity {
         instructions = Instruction.createDefault();
         currentInstruction = -1;
         currentSignal = 0;
-        poweredPreviously = false;
+        previousInput = 0;
         infiniteLoopCounter = 0;
     }
 
@@ -67,15 +70,15 @@ public class SequencedPulseGeneratorBlockEntity extends SmartBlockEntity {
         return currentSignal;
     }
 
-    public boolean isPoweredPreviously() {
-        return poweredPreviously;
+    public int getPreviousInput() {
+        return previousInput;
     }
 
     /**
      * More reliable than checking block state because that may not be updated yet
      */
-    public boolean isPowered() {
-        return isPowered;
+    public int getCurrentInput() {
+        return currentInput;
     }
 
     public Instruction getCurrentInstruction() {
@@ -107,7 +110,7 @@ public class SequencedPulseGeneratorBlockEntity extends SmartBlockEntity {
         }
         InstructionResult result = instructionEvent.apply(instruction).apply(this);
         int prevSignal = currentSignal;
-        currentSignal = instruction.getSignal();
+        currentSignal = instruction.transformOutput(this, instruction.getSignal());
         if (prevSignal != currentSignal) {
             applySignal();
         }
@@ -143,7 +146,6 @@ public class SequencedPulseGeneratorBlockEntity extends SmartBlockEntity {
         if (level.isClientSide)
             return;
 
-        isPowered = getBlockState().getValue(POWERED);
         executeInstruction(i -> i::tick, true);
     }
 
@@ -153,15 +155,13 @@ public class SequencedPulseGeneratorBlockEntity extends SmartBlockEntity {
         instructions = newInstructions;
     }
 
-    public void onRedstoneUpdate(boolean isPowered) {
-        this.isPowered = isPowered;
-        if (isPowered == poweredPreviously) return;
-        if (!poweredPreviously && isPowered && !isIdle())
-            executeInstruction(i -> i::onRisingEdge, false);
-        if (poweredPreviously && !isPowered && !isIdle())
-            executeInstruction(i -> i::onFallingEdge, false);
-        poweredPreviously = isPowered;
-        if (!isIdle() || !isPowered)
+    public void onRedstoneUpdate(int input) {
+        this.currentInput = input;
+        if (currentInput == previousInput) return;
+        if (!isIdle())
+            executeInstruction(i -> i::onInputChange, false);
+        previousInput = currentInput;
+        if (!isIdle() || currentInput == 0)
             return;
         if (!level.hasNeighborSignal(worldPosition)) {
             level.setBlock(worldPosition, getBlockState().setValue(POWERED, false), 3);
@@ -186,7 +186,7 @@ public class SequencedPulseGeneratorBlockEntity extends SmartBlockEntity {
     @Override
     protected void write(CompoundTag tag, HolderLookup.Provider registries, boolean clientPacket) {
         tag.putInt("InstructionIndex", currentInstruction);
-        tag.putBoolean("PrevPowered", poweredPreviously);
+        tag.putInt("PrevInput", previousInput);
         tag.putInt("CurrentSignal", currentSignal);
         tag.put("Instructions", Instruction.serializeAll(instructions));
         super.write(tag, registries, clientPacket);
@@ -195,7 +195,7 @@ public class SequencedPulseGeneratorBlockEntity extends SmartBlockEntity {
     @Override
     protected void read(CompoundTag tag, HolderLookup.Provider registries, boolean clientPacket) {
         currentInstruction = tag.getInt("InstructionIndex");
-        poweredPreviously = tag.getBoolean("PrevPowered");
+        previousInput = tag.getInt("PrevInput");
         currentSignal = tag.getInt("CurrentSignal");
         ListTag list = tag.getList("Instructions", Tag.TAG_COMPOUND);
         instructions = Instruction.deserializeAll(list);

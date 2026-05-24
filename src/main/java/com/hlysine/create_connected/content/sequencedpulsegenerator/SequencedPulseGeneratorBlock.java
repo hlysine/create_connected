@@ -4,7 +4,6 @@ import com.hlysine.create_connected.CCBlockEntityTypes;
 import com.hlysine.create_connected.datagen.advancements.AdvancementBehaviour;
 import com.mojang.serialization.MapCodec;
 import com.simibubi.create.AllItems;
-import com.simibubi.create.content.kinetics.base.KineticBlock;
 import com.simibubi.create.content.redstone.diodes.AbstractDiodeBlock;
 import com.simibubi.create.content.redstone.diodes.BrassDiodeBlock;
 import com.simibubi.create.content.redstone.diodes.PoweredLatchBlock;
@@ -97,8 +96,9 @@ public class SequencedPulseGeneratorBlock extends AbstractDiodeBlock implements 
     @Override
     public void tick(@NotNull BlockState state, @NotNull ServerLevel worldIn, @NotNull BlockPos pos, @NotNull RandomSource r) {
         if (!this.isLocked(worldIn, pos, state)) {
+            int input = getInputSignal(worldIn, pos, state);
             boolean prevPower = state.getValue(POWERED);
-            boolean currPower = shouldTurnOn(worldIn, pos, state);
+            boolean currPower = input > 0;
             boolean prevSide = state.getValue(POWERED_SIDE);
             boolean currSide = getAlternateSignal(worldIn, pos, state) > 0;
             BlockState oldState = state;
@@ -115,7 +115,7 @@ public class SequencedPulseGeneratorBlock extends AbstractDiodeBlock implements 
                 withBlockEntityDo(worldIn, pos, SequencedPulseGeneratorBlockEntity::reset);
                 return;
             }
-            withBlockEntityDo(worldIn, pos, spg -> spg.onRedstoneUpdate(currPower));
+            withBlockEntityDo(worldIn, pos, spg -> spg.onRedstoneUpdate(input));
         }
     }
 

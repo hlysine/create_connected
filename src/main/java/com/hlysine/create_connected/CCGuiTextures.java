@@ -11,12 +11,12 @@ import net.neoforged.api.distmarker.OnlyIn;
 
 public enum CCGuiTextures implements ScreenElement {
 
-    SEQUENCER("sequencer", 173, 205),
-    SEQUENCER_INSTRUCTION("sequencer", 0, 16, 162, 22),
-    SEQUENCER_DELAY("sequencer", 0, 104, 162, 22),
-    SEQUENCER_END("sequencer", 0, 126, 162, 22),
-    SEQUENCER_EMPTY("sequencer", 0, 148, 162, 22),
-    SEQUENCER_AWAIT("sequencer", 0, 206, 162, 22),
+    SEQUENCER("sequencer", 256, 205),
+    SEQUENCER_INSTRUCTION("sequencer", 0, 16, 237, 22),
+    SEQUENCER_DELAY("sequencer", 0, 104, 237, 22),
+    SEQUENCER_END("sequencer", 0, 126, 237, 22),
+    SEQUENCER_EMPTY("sequencer", 0, 148, 237, 22),
+    SEQUENCER_AWAIT("sequencer", 0, 206, 237, 22),
     ;
 
     public static final int FONT_COLOR = 0x575F7A;
