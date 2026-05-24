@@ -11,23 +11,24 @@ public class LoopForInstruction extends Instruction {
         super(
                 "loop_for",
                 CCGuiTextures.SEQUENCER_DELAY,
-                new ParameterConfig("count",
+                new ParameterConfig(
                         1,
                         100,
                         null,
                         10,
                         3,
-                        null),
+                        null
+                ),
                 false,
                 false
         );
-        setValue(target);
+        setParam(target);
     }
 
     @Override
     public InstructionResult tick(SequencedPulseGeneratorBlockEntity be) {
         progress++;
-        if (progress >= getValue()) {
+        if (progress >= getParam()) {
             progress = 0;
             return InstructionResult.next(true);
         }
@@ -46,6 +47,6 @@ public class LoopForInstruction extends Instruction {
 
     @Override
     public Instruction copy() {
-        return new LoopForInstruction(getValue());
+        return new LoopForInstruction(getParam());
     }
 }

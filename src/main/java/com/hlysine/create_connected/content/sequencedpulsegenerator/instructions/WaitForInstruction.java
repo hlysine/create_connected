@@ -10,25 +10,26 @@ public class WaitForInstruction extends Instruction {
         super(
                 "wait_for",
                 CCGuiTextures.SEQUENCER_INSTRUCTION,
-                new ParameterConfig("target",
+                new ParameterConfig(
                         0,
                         1,
                         null,
                         1,
                         1,
-                        ParameterConfig.booleanFormat),
+                        ParameterConfig.booleanFormat
+                ),
                 true,
                 false
         );
-        setValue(target);
+        setParam(target);
         setSignal(signal);
     }
 
     @Override
     public InstructionResult tick(SequencedPulseGeneratorBlockEntity be) {
-        if (be.getPreviousInput() == 0 && be.getCurrentInput() > 0 && getValue() == 1)
+        if (be.getPreviousInput() == 0 && be.getCurrentInput() > 0 && getParam() == 1)
             return InstructionResult.next(true);
-        if (be.getPreviousInput() > 0 && be.getCurrentInput() == 0 && getValue() == 0)
+        if (be.getPreviousInput() > 0 && be.getCurrentInput() == 0 && getParam() == 0)
             return InstructionResult.next(true);
         return InstructionResult.incomplete();
     }
@@ -43,6 +44,6 @@ public class WaitForInstruction extends Instruction {
 
     @Override
     public Instruction copy() {
-        return new WaitForInstruction(getValue(), getSignal());
+        return new WaitForInstruction(getParam(), getSignal());
     }
 }

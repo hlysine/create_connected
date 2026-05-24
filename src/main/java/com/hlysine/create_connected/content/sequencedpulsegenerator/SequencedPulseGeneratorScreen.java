@@ -80,13 +80,12 @@ public class SequencedPulseGeneratorScreen extends AbstractSimiScreen {
                         .titled(ConnectedLang.translateDirect("gui.sequenced_pulse_generator.instruction"));
         ScrollInput value =
                 new ScrollInput(x + 141, y + rowHeight * row, 28, 18)
-                        .calling(state -> instructions.get(row).setValue(state));
+                        .calling(state -> instructions.get(row).setParam(state));
         ScrollInput signal =
                 new ScrollInput(x + 171, y + rowHeight * row, 28, 18)
                         .withRange(0, 16)
                         .setState(instruction.getSignal())
-                        .calling(state -> instructions.get(row).setSignal(state))
-                        .titled(ConnectedLang.translateDirect("gui.sequenced_pulse_generator.output_signal"));
+                        .calling(state -> instructions.get(row).setSignal(state));
 
         rowInputs.add(type);
         rowInputs.add(value);
@@ -99,27 +98,30 @@ public class SequencedPulseGeneratorScreen extends AbstractSimiScreen {
     public void updateParamsOfRow(int row) {
         Instruction instruction = instructions.get(row);
         Vector<ScrollInput> rowInputs = inputs.get(row);
-        boolean hasValue = instruction.parameter != null;
+        boolean hasParam = instruction.paramConfig != null;
         boolean hasSignal = instruction.hasSignal;
 
-        ScrollInput value = rowInputs.get(1);
-        value.active = value.visible = hasValue;
-        if (hasValue) {
-            value.withRange(instruction.parameter.minValue(), instruction.parameter.maxValue() + 1)
-                    .titled(ConnectedLang.translateDirect(instruction.getParameterLangKey()))
-                    .withShiftStep(instruction.parameter.shiftStepValue())
-                    .setState(instruction.getValue())
+        ScrollInput param = rowInputs.get(1);
+        param.active = param.visible = hasParam;
+        if (hasParam) {
+            param.withRange(instruction.paramConfig.minValue(), instruction.paramConfig.maxValue() + 1)
+                    .titled(ConnectedLang.translateDirect(instruction.getParamLangKey()))
+                    .withShiftStep(instruction.paramConfig.shiftStepValue())
+                    .setState(instruction.getParam())
                     .onChanged();
-            if (instruction.parameter.stepFunction() != null) {
-                value.withStepFunction(instruction.parameter.stepFunction());
+            if (instruction.paramConfig.stepFunction() != null) {
+                param.withStepFunction(instruction.paramConfig.stepFunction());
             } else
-                value.withStepFunction(value.standardStep());
+                param.withStepFunction(param.standardStep());
         }
 
         ScrollInput signal = rowInputs.get(2);
         signal.active = signal.visible = hasSignal;
-        if (hasSignal)
-            signal.setState(instruction.getSignal());
+        if (hasSignal) {
+            signal.titled(ConnectedLang.translateDirect(instruction.getSignalLangKey()))
+                    .setState(instruction.getSignal())
+                    .onChanged();
+        }
     }
 
     @Override
@@ -148,11 +150,11 @@ public class SequencedPulseGeneratorScreen extends AbstractSimiScreen {
             instruction.getBackground().render(graphics, x, y + 16 + yOffset);
 
             label(graphics, 36, yOffset - 1, ConnectedLang.translateDirect(instruction.getLangKey()));
-            if (instruction.parameter != null) {
-                Function<Integer, String> formatter = instruction.parameter.formatter();
-                String text = formatter == null ? String.valueOf(instruction.getValue()) : formatter.apply(instruction.getValue());
+            if (instruction.paramConfig != null) {
+                Function<Integer, Component> formatter = instruction.paramConfig.formatter();
+                Component text = formatter == null ? Component.literal(String.valueOf(instruction.getParam())) : formatter.apply(instruction.getParam());
                 int stringWidth = font.width(text);
-                label(graphics, 173 + (12 - stringWidth / 2), yOffset - 1, Component.literal(text));
+                label(graphics, 173 + (12 - stringWidth / 2), yOffset - 1, text);
             }
             if (instruction.hasSignal)
                 label(graphics, 210, yOffset - 1, Component.literal(String.valueOf(instruction.getSignal())));

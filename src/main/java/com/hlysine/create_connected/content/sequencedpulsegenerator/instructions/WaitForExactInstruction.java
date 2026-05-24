@@ -10,23 +10,24 @@ public class WaitForExactInstruction extends Instruction {
         super(
                 "wait_for_exact",
                 CCGuiTextures.SEQUENCER_INSTRUCTION,
-                new ParameterConfig("target",
+                new ParameterConfig(
                         0,
                         15,
                         null,
                         5,
                         1,
-                        null),
+                        null
+                ),
                 true,
                 false
         );
-        setValue(target);
+        setParam(target);
         setSignal(signal);
     }
 
     @Override
     public InstructionResult tick(SequencedPulseGeneratorBlockEntity be) {
-        if (be.getPreviousInput() != getValue() && be.getCurrentInput() == getValue())
+        if (be.getPreviousInput() != getParam() && be.getCurrentInput() == getParam())
             return InstructionResult.next(true);
         return InstructionResult.incomplete();
     }
@@ -41,6 +42,6 @@ public class WaitForExactInstruction extends Instruction {
 
     @Override
     public Instruction copy() {
-        return new WaitForExactInstruction(getValue(), getSignal());
+        return new WaitForExactInstruction(getParam(), getSignal());
     }
 }

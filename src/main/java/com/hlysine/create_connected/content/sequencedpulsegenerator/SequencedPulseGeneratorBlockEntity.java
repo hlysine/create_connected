@@ -31,12 +31,16 @@ public class SequencedPulseGeneratorBlockEntity extends SmartBlockEntity {
 
     static {
         Instruction.register(new OutputInstruction(10, 15));
+        Instruction.register(new TransformInstruction(2, 15));
         Instruction.register(new WaitForInstruction(1, 0));
-        Instruction.register(new WaitForMinInstruction(7, 0));
+        Instruction.register(new WaitForMinInstruction(8, 0));
         Instruction.register(new WaitForMaxInstruction(7, 0));
         Instruction.register(new WaitForExactInstruction(7, 0));
         Instruction.register(new LoopForInstruction(3));
         Instruction.register(new LoopIfInstruction(1));
+        Instruction.register(new LoopIfMinInstruction(8));
+        Instruction.register(new LoopIfMaxInstruction(7));
+        Instruction.register(new LoopIfExactInstruction(7));
         Instruction.register(new LoopInstruction());
         Instruction.register(new EndInstruction());
     }

@@ -87,7 +87,8 @@ public class SequencedPulseGeneratorBlock extends AbstractDiodeBlock implements 
                 level.setBlock(pos, state, 2);
 
             if (currSide) {
-                withBlockEntityDo(level, pos, SequencedPulseGeneratorBlockEntity::reset);
+                if (!prevSide)
+                    withBlockEntityDo(level, pos, SequencedPulseGeneratorBlockEntity::reset);
                 return;
             }
             withBlockEntityDo(level, pos, spg -> spg.onRedstoneUpdate(input));

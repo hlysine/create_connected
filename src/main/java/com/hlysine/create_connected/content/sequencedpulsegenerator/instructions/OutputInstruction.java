@@ -11,26 +11,27 @@ public class OutputInstruction extends Instruction {
         super(
                 "output",
                 CCGuiTextures.SEQUENCER_INSTRUCTION,
-                new ParameterConfig("duration",
+                new ParameterConfig(
                         1,
                         600,
                         ParameterConfig.timeStep,
                         20,
                         10,
-                        ParameterConfig.timeFormat),
+                        ParameterConfig.timeFormat
+                ),
                 true,
                 false
         );
-        setValue(duration);
+        setParam(duration);
         setSignal(signal);
     }
 
     @Override
     public InstructionResult tick(SequencedPulseGeneratorBlockEntity be) {
         progress++;
-        if (progress >= getValue()) {
+        if (progress >= getParam()) {
             progress = 0;
-            return InstructionResult.next(getValue() <= 0);
+            return InstructionResult.next(getParam() <= 0);
         }
         return InstructionResult.incomplete();
     }
@@ -47,6 +48,6 @@ public class OutputInstruction extends Instruction {
 
     @Override
     public Instruction copy() {
-        return new OutputInstruction(getValue(), getSignal());
+        return new OutputInstruction(getParam(), getSignal());
     }
 }
