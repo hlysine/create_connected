@@ -175,6 +175,8 @@
   "create_connected.gui.sequenced_pulse_generator.instruction.loop_if.param": "Zielstatus",
   "create_connected.gui.sequenced_pulse_generator.instruction.output": "Ausgabe",
   "create_connected.gui.sequenced_pulse_generator.instruction.output.descriptive": "Ausgabe für Dauer",
+  "create_connected.gui.sequenced_pulse_generator.instruction.output.param": "Dauer",
+  "create_connected.gui.sequenced_pulse_generator.instruction.wait_for.param": "Zielstatus",
   "create_connected.gui.sequenced_pulse_generator.title": "Sequenzierter Impulsgenerator",
   "create_connected.kinetic_bridge.not_enough_space": "Entferne Blöcke für Platzierung",
   "create_connected.kinetic_bridge.stress_impact": "Auslastungskapazität pro UPM",
