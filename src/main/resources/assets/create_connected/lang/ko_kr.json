@@ -176,6 +176,7 @@
   "create_connected.gui.sequenced_pulse_generator.instruction.output": "출력",
   "create_connected.gui.sequenced_pulse_generator.instruction.output.descriptive": "일정 시간 동안 출력",
   "create_connected.gui.sequenced_pulse_generator.instruction.output.param": "회전 시간",
+  "create_connected.gui.sequenced_pulse_generator.instruction.wait_for.param": "목표 상태",
   "create_connected.gui.sequenced_pulse_generator.title": "순서 지정형 펄스 생성기",
   "create_connected.kinetic_bridge.not_enough_space": "배치를 위해 블록 치우기",
   "create_connected.kinetic_bridge.stress_impact": "회전수(RPM) 당 스트레스 충격",
