@@ -1,4 +1,7 @@
 {
+  "create_connected.gui.sequenced_pulse_generator.instruction.loop_if.param": "Мақсатты күй",
+  "create_connected.gui.sequenced_pulse_generator.instruction.output.param": "Ұзақтық",
+  "create_connected.gui.sequenced_pulse_generator.instruction.wait_for.param": "Мақсатты күй",
   "create_connected.ponder.linked_transmitter.text_10": "Таратқышты кірістен ажырату үшін оны кілтпен тінтуірдің оң жақ түймешігімен басыңыз",
   "create_connected.ponder.linked_transmitter.text_9": "Байланыстырылған таратқыштар түймелер мен аналогтық тетіктерде де жұмыс істейді"
 }
