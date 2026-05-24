@@ -1004,7 +1004,7 @@ public class CCBlocks {
                         return AssetLookup.partialBaseModel(c, p);
                     }))
                     .item()
-                    .transform(customItemModel("_", "block"))
+                    .transform(customItemModel("_", "block_open"))
                     .register();
 
     public static final BlockEntry<CopycatSlabBlock> COPYCAT_SLAB =
