@@ -1,7 +1,6 @@
 package com.hlysine.create_connected.content.dashboard;
 
 import com.hlysine.create_connected.CCBlockEntityTypes;
-import com.hlysine.create_connected.ConnectedLang;
 import com.mojang.serialization.MapCodec;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllShapes;
@@ -128,8 +127,7 @@ public class DashboardBlock extends HorizontalDirectionalBlock implements IWrenc
         BlockState newState = state.cycle(OPEN);
         context.getLevel().setBlock(context.getClickedPos(), newState, Block.UPDATE_ALL);
         if (context.getPlayer() != null) {
-            ConnectedLang.translate(newState.getValue(OPEN) ? "dashboard.activate_hud" : "dashboard.deactivate_hud")
-                    .sendStatus(context.getPlayer());
+            DashboardBlockEntity.displayOpenStatus(context.getPlayer(), newState.getValue(OPEN));
         }
         return InteractionResult.SUCCESS;
     }
