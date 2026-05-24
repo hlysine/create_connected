@@ -2,6 +2,7 @@ package com.hlysine.create_connected.content.sequencedpulsegenerator.instruction
 
 import com.hlysine.create_connected.CCGuiTextures;
 import com.hlysine.create_connected.ConnectedLang;
+import com.hlysine.create_connected.CreateConnected;
 import com.hlysine.create_connected.content.sequencedpulsegenerator.SequencedPulseGeneratorBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.scrollValue.ScrollValueBehaviour;
 import net.minecraft.client.resources.language.I18n;
@@ -165,14 +166,14 @@ public abstract class Instruction {
 
     public String getParamLangKey() {
         String key = getLangKey() + ".param";
-        if (I18n.exists(key))
+        if (I18n.exists(CreateConnected.MODID + "." + key))
             return key;
         return "gui.sequenced_pulse_generator.param";
     }
 
     public String getSignalLangKey() {
         String key = getLangKey() + ".signal";
-        if (I18n.exists(key))
+        if (I18n.exists(CreateConnected.MODID + "." + key))
             return key;
         return "gui.sequenced_pulse_generator.signal";
     }
