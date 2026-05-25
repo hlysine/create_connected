@@ -24,6 +24,7 @@
   "block.create_connected.brass_gearbox": "Латунная угловая передача",
   "block.create_connected.brass_gearbox.tooltip.summary": "Угловая передача с _независимо настраиваемыми_ направлениями каждого выхода.",
   "block.create_connected.centrifugal_clutch": "Центробежное сцепление",
+  "block.create_connected.centrifugal_clutch.tooltip.summary": "Сцепление, _срабатывающее_, если скорость входящего вращения _ниже_ настраиваемого порога.",
   "block.create_connected.copycat_beam": "Заполняемая балка",
   "block.create_connected.copycat_beam.tooltip.behaviour1": "Применяет _предмет в руке_ как его _материал_, если это возможно. _Кликните снова_, чтобы изменить _ориентацию_ или _состояние_. Используйте гаечный ключ для демонтажа установленного материала.",
   "block.create_connected.copycat_beam.tooltip.condition1": "ПКМ с блоком в руке",
