@@ -207,11 +207,16 @@ public abstract class Instruction {
                 ? ConnectedLang.translate("gui.sequenced_pulse_generator.on").component()
                 : ConnectedLang.translate("gui.sequenced_pulse_generator.off").component();
         public static final Function<Integer, Component> transformFormat = value -> Component.literal(switch (value) {
-            case 0 -> "+C";
-            case 1 -> "-C";
-            case 2 -> "C-";
-            case 3 -> "×C";
-            case 4 -> "÷C";
+            case 0 -> "I+C";
+            case 1 -> "I-C";
+            case 2 -> "C-I";
+            case 3 -> "I×C";
+            case 4 -> "I÷C";
+            case 5 -> "I&C";
+            case 6 -> "I|C";
+            case 7 -> "I^C";
+            case 8 -> "I<<C";
+            case 9 -> "I>>C";
             default -> Integer.toString(value);
         });
     }

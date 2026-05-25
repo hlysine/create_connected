@@ -215,7 +215,7 @@
   "create_connected.gui.sequenced_pulse_generator.instruction.output.param": "Duration",
   "create_connected.gui.sequenced_pulse_generator.instruction.transform": "Transform until change",
   "create_connected.gui.sequenced_pulse_generator.instruction.transform.descriptive": "Transform input until signal change",
-  "create_connected.gui.sequenced_pulse_generator.instruction.transform.param": "Transform type",
+  "create_connected.gui.sequenced_pulse_generator.instruction.transform.param": "Formula (I=Input, C=Constant)",
   "create_connected.gui.sequenced_pulse_generator.instruction.transform.signal": "Constant (C)",
   "create_connected.gui.sequenced_pulse_generator.instruction.wait_for": "Output until state",
   "create_connected.gui.sequenced_pulse_generator.instruction.wait_for.descriptive": "Output until target state",

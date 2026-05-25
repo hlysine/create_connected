@@ -13,10 +13,10 @@ public class TransformInstruction extends Instruction {
                 CCGuiTextures.SEQUENCER_INSTRUCTION,
                 new ParameterConfig(
                         0,
-                        4,
+                        9,
                         null,
                         1,
-                        0,
+                        2,
                         ParameterConfig.transformFormat
                 ),
                 true,
@@ -45,6 +45,11 @@ public class TransformInstruction extends Instruction {
             case 2 -> getSignal() - be.getCurrentInput();
             case 3 -> (long) be.getCurrentInput() * getSignal();
             case 4 -> getSignal() == 0 ? 0 : be.getCurrentInput() / getSignal();
+            case 5 -> be.getCurrentInput() & getSignal();
+            case 6 -> be.getCurrentInput() | getSignal();
+            case 7 -> be.getCurrentInput() ^ getSignal();
+            case 8 -> ((long) be.getCurrentInput() << getSignal()) & 15;
+            case 9 -> ((long) be.getCurrentInput() >> getSignal()) & 15;
             default -> signal;
         }, 0, 15);
     }
