@@ -24,7 +24,6 @@
   "block.create_connected.brass_gearbox": "Boite à roues dentées en laiton",
   "block.create_connected.brass_gearbox.tooltip.summary": "Une boîte à roue dentée où la direction de rotation des 4 côtés est _configurable_ de manière _indépendante_.",
   "block.create_connected.centrifugal_clutch": "Embrayage centrifuge",
-  "block.create_connected.centrifugal_clutch.tooltip.summary": "Un embrayage qui n'est _couplé_ que si les tr/min d'entrée est _plus rapide_ qu'un seuil configurable.",
   "block.create_connected.copycat_beam": "Imitation poutre",
   "block.create_connected.copycat_beam.tooltip.behaviour1": "Applique _le bloc tenu_ comme _matériau_ si possible. _Cliquer à nouveau_ pour modifier l'état _d'orientation_ ou _d'alimentation_. Utiliser une _clé_ pour _réinitialiser_ le matériau.",
   "block.create_connected.copycat_beam.tooltip.condition1": "En cas de clic droit",
