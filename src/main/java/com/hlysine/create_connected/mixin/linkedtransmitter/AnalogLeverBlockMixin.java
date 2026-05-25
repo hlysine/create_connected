@@ -13,7 +13,6 @@ import net.minecraft.world.phys.BlockHitResult;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(AnalogLeverBlock.class)
@@ -34,15 +33,5 @@ public class AnalogLeverBlockMixin {
             cir.setReturnValue(InteractionResult.PASS);
             cir.cancel();
         }
-    }
-
-    @Inject(
-            cancellable = true,
-            at = @At("HEAD"),
-            method = "onRemove"
-    )
-    private void onRemove(BlockState state, Level worldIn, BlockPos pos, BlockState newState, boolean isMoving, CallbackInfo ci) {
-        if (state.getBlock() instanceof AnalogLeverBlock && newState.getBlock() instanceof AnalogLeverBlock)
-            ci.cancel();
     }
 }

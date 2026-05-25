@@ -62,6 +62,5 @@ public class LinkedAnalogLeverBlockEntity extends AnalogLeverBlockEntity {
                 level.setBlock(worldPosition, getBlockState().setValue(BlockStateProperties.POWERED, getState() > 0), Block.UPDATE_ALL);
             }
         }
-
     }
 }
