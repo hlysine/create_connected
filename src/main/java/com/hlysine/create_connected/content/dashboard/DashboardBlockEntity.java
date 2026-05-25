@@ -7,7 +7,6 @@ import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import net.createmod.catnip.annotations.ClientOnly;
 import net.createmod.catnip.data.Iterate;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
@@ -126,7 +125,7 @@ public class DashboardBlockEntity extends SmartBlockEntity {
         if (seatPos == null)
             return false;
 
-        Player player = Minecraft.getInstance().player;
+        Player player = ClientPlayerAccess.getPlayer();
         if (player == null)
             return false;
         if (!player.isPassenger())
@@ -157,7 +156,7 @@ public class DashboardBlockEntity extends SmartBlockEntity {
         if (getLevel().isClientSide()) {
             boolean success = displayStatus();
             if (!success && wasDisplaying) {
-                Player player = Minecraft.getInstance().player;
+                Player player = ClientPlayerAccess.getPlayer();
                 if (player != null) {
                     if (!getBlockState().getValue(DashboardBlock.OPEN))
                         displayOpenStatus(player, false); // avoid flickering on wrench by displaying the open status instead of empty
