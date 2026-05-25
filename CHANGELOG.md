@@ -32,6 +32,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Inventory access ports and inventory bridges can no longer be used to bypass restriction between packagers and
   portable storage interfaces
 - Retextured the Redstone Link Wildcard (thanks @ThatB0i)
+- Updated usage and license information in the readme and license files
 
 ### Fixed
 

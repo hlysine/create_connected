@@ -91,16 +91,7 @@ glitches due to Extended Cogwheels treating Connected components as cogwheels.
 
 ## Usage
 
-**In modpacks:**
-
-- You can include this mod in any modpacks.
-- You can make any modifications to the mod with the goal of distributing it in a modpack.
-
-**In other cases:**
-
-- You can use this mod however you like as long as you obtain the mod via its Modrinth or CurseForge page.
-- You can make any modifications to the mod, but you cannot redistribute it unless you have modified a substantial
-  portion of the mod's code. Changes to resource packs/data packs/mod metadata do not count as code modification.
+Please refer to [the license](LICENSE). Additional terms apply as detailed at the end of the license file.
 
 This mod is open to suggestions, so if you have made any modification to the mod, please leave an issue/PR so I can
 consider adding your use case to the mod.
