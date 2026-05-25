@@ -20,7 +20,6 @@
   "block.create_connected.brass_gearbox": "กระปุกเกียร์ทองเหลือง",
   "block.create_connected.brass_gearbox.tooltip.summary": "กล่องเกียร์ที่สามารถกำหนดทิศทางการหมุนทั้ง 4 ได้อย่างอิสระ",
   "block.create_connected.centrifugal_clutch": "คลัตช์แรงเหวี่ยง",
-  "block.create_connected.centrifugal_clutch.tooltip.summary": "คลัตช์ที่เชื่อมโยงกันเฉพาะในกรณีที่ RPM อินพุตเร็วกว่าเกณฑ์ที่กำหนดค่าได้",
   "block.create_connected.copycat_beam": "เลียนแบบบีม",
   "block.create_connected.copycat_beam.tooltip.behaviour1": "ใช้รายการที่ถือไว้เป็นวัสดุหากเป็นไปได้ คลิกอีกครั้งเพื่อเปลี่ยนทิศทางหรือสถานะเปิดเครื่อง ใช้ประแจเพื่อรีเซ็ตวัสดุ",
   "block.create_connected.copycat_beam.tooltip.condition1": "เมื่อคลิกขวา",
