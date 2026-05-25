@@ -7,10 +7,9 @@ import com.simibubi.create.content.redstone.displayLink.source.PercentOrProgress
 import com.simibubi.create.foundation.gui.ModularGuiLineBuilder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.util.Mth;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class KineticBatteryDisplaySource extends PercentOrProgressBarDisplaySource {
 

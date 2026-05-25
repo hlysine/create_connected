@@ -1,13 +1,15 @@
 package com.hlysine.create_connected.datagen;
 
-import com.hlysine.create_connected.registries.CCBlocks;
 import com.hlysine.create_connected.CreateConnected;
 import com.hlysine.create_connected.compat.Mods;
+import com.hlysine.create_connected.registries.CCBlocks;
+import com.hlysine.create_connected.registries.CCItems;
 import com.simibubi.create.AllTags;
 import com.simibubi.create.foundation.data.TagGen;
 import com.tterrag.registrate.providers.ProviderType;
 import com.tterrag.registrate.providers.RegistrateTagsProvider;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;

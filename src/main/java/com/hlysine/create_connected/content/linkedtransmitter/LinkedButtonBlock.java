@@ -10,7 +10,6 @@ import com.simibubi.create.foundation.block.IBE;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
@@ -85,23 +84,16 @@ public class LinkedButtonBlock extends ButtonBlock implements IBE<LinkedTransmit
         if (player.isSpectator())
             return InteractionResult.PASS;
 
+        InteractionResult result = LinkedTransmitterBlock.super.useWax(state, level, pos, player, hand, hit);
+        if (result.consumesAction())
+            return result;
+
         if (isHittingBase(state, level, pos, hit)) {
             if (!player.isShiftKeyDown())
                 return super.use(state, level, pos, player, hand, hit);
             return InteractionResult.CONSUME;
         }
         return LinkedTransmitterBlock.super.useTransmitter(state, level, pos, player);
-    }
-
-    @Override
-    public @NotNull ItemInteractionResult useItemOn(@NotNull ItemStack stack,
-                                                    @NotNull BlockState state,
-                                                    @NotNull Level level,
-                                                    @NotNull BlockPos pos,
-                                                    @NotNull Player player,
-                                                    @NotNull InteractionHand hand,
-                                                    @NotNull BlockHitResult hitResult) {
-        return LinkedTransmitterBlock.super.useWax(stack, state, level, pos, player, hand, hitResult);
     }
 
     @Override

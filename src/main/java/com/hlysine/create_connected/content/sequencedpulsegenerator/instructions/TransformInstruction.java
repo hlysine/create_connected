@@ -39,19 +39,19 @@ public class TransformInstruction extends Instruction {
 
     @Override
     public int transformOutput(SequencedPulseGeneratorBlockEntity be, int signal) {
-        return Math.clamp(switch (getParam()) {
+        return Math.max(0, Math.min(15, (switch (getParam()) {
             case 0 -> be.getCurrentInput() + getSignal();
             case 1 -> be.getCurrentInput() - getSignal();
             case 2 -> getSignal() - be.getCurrentInput();
-            case 3 -> (long) be.getCurrentInput() * getSignal();
+            case 3 -> be.getCurrentInput() * getSignal();
             case 4 -> getSignal() == 0 ? 0 : be.getCurrentInput() / getSignal();
             case 5 -> be.getCurrentInput() & getSignal();
             case 6 -> be.getCurrentInput() | getSignal();
             case 7 -> be.getCurrentInput() ^ getSignal();
-            case 8 -> ((long) be.getCurrentInput() << getSignal()) & 15;
-            case 9 -> ((long) be.getCurrentInput() >> getSignal()) & 15;
+            case 8 -> (be.getCurrentInput() << getSignal()) & 15;
+            case 9 -> (be.getCurrentInput() >> getSignal()) & 15;
             default -> signal;
-        }, 0, 15);
+        })));
     }
 
     @Override

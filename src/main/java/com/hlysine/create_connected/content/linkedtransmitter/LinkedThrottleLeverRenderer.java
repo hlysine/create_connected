@@ -1,3 +1,4 @@
+/*
 package com.hlysine.create_connected.content.linkedtransmitter;
 
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -20,4 +21,4 @@ public class LinkedThrottleLeverRenderer extends ThrottleLeverRenderer {
         LinkRenderer.renderOnBlockEntity(be, partialTicks, ms, buffer, light, overlay);
     }
 }
-
+*/

@@ -1,6 +1,6 @@
 package com.hlysine.create_connected.content.contraption.jukebox;
 
-import com.hlysine.create_connected.CCPackets;
+import com.hlysine.create_connected.registries.CCPackets;
 import com.simibubi.create.api.behaviour.interaction.MovingInteractionBehaviour;
 import com.simibubi.create.content.contraptions.AbstractContraptionEntity;
 import com.simibubi.create.content.contraptions.Contraption;

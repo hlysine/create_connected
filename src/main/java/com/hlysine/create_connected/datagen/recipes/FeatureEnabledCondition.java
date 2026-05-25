@@ -37,7 +37,7 @@ public class FeatureEnabledCondition implements ICondition {
         @Override
         public FeatureEnabledCondition read(JsonObject json) {
             return new FeatureEnabledCondition(
-                    new ResourceLocation(GsonHelper.getAsString(json, "feature"))
+                    ResourceLocation.parse(GsonHelper.getAsString(json, "feature"))
             );
         }
 

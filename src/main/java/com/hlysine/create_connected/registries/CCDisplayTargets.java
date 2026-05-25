@@ -11,9 +11,9 @@ import java.util.function.Supplier;
 public class CCDisplayTargets {
     private static final CreateRegistrate REGISTRATE = CreateConnected.getRegistrate();
 
-    public static final RegistryEntry<DisplayTarget, DashboardDisplayTarget> DASHBOARD = simple("dashboard", DashboardDisplayTarget::new);
+    public static final RegistryEntry<DashboardDisplayTarget> DASHBOARD = simple("dashboard", DashboardDisplayTarget::new);
 
-    private static <T extends DisplayTarget> RegistryEntry<DisplayTarget, T> simple(String name, Supplier<T> supplier) {
+    private static <T extends DisplayTarget> RegistryEntry<T> simple(String name, Supplier<T> supplier) {
         return REGISTRATE.displayTarget(name, supplier).register();
     }
 

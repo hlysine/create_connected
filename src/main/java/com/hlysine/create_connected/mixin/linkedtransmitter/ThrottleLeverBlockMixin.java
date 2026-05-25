@@ -1,3 +1,4 @@
+/*
 package com.hlysine.create_connected.mixin.linkedtransmitter;
 
 import dev.simulated_team.simulated.content.blocks.throttle_lever.ThrottleLeverBlock;
@@ -21,3 +22,4 @@ public abstract class ThrottleLeverBlockMixin {
             ci.cancel();
     }
 }
+ */

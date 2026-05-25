@@ -38,7 +38,7 @@ public class FeatureEnabledInCopycatsCondition implements ICondition {
         @Override
         public FeatureEnabledInCopycatsCondition read(JsonObject json) {
             return new FeatureEnabledInCopycatsCondition(
-                    new ResourceLocation(GsonHelper.getAsString(json, "feature"))
+                    ResourceLocation.parse(GsonHelper.getAsString(json, "feature"))
             );
         }
 

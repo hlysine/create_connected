@@ -1,11 +1,11 @@
 package com.hlysine.create_connected.content.shearpin;
 
 import com.google.common.base.Predicates;
-import com.hlysine.create_connected.registries.CCBlockEntityTypes;
-import com.hlysine.create_connected.registries.CCBlocks;
 import com.hlysine.create_connected.content.AbstractBEShaftBlock;
 import com.hlysine.create_connected.datagen.advancements.AdvancementBehaviour;
 import com.hlysine.create_connected.datagen.advancements.CCAdvancements;
+import com.hlysine.create_connected.registries.CCBlockEntityTypes;
+import com.hlysine.create_connected.registries.CCBlocks;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllShapes;
 import com.simibubi.create.content.kinetics.simpleRelays.AbstractSimpleShaftBlock;
@@ -21,6 +21,7 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;

@@ -1,18 +1,14 @@
 package com.hlysine.create_connected.content.dashboard;
 
 import com.hlysine.create_connected.ConnectedLang;
-import com.mojang.serialization.DataResult;
-import com.mojang.serialization.DynamicOps;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import net.createmod.catnip.annotations.ClientOnly;
 import net.createmod.catnip.data.Iterate;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtOps;
-import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.entity.player.Player;
@@ -87,7 +83,7 @@ public class DashboardBlockEntity extends SmartBlockEntity {
             if (line.getString().isEmpty()) continue;
             if (needSpacer)
                 status.append("   ");
-            status.append(line).withColor(this.text.getColor().getTextColor());
+            status.append(line).withStyle(s -> s.withColor(this.text.getColor().getTextColor()));
             needSpacer = true;
         }
         if (!needSpacer)
@@ -169,20 +165,20 @@ public class DashboardBlockEntity extends SmartBlockEntity {
     }
 
     @Override
-    public void write(CompoundTag tag, HolderLookup.Provider registries, boolean clientPacket) {
-        super.write(tag, registries, clientPacket);
-        DynamicOps<Tag> ops = registries.createSerializationContext(NbtOps.INSTANCE);
-        DataResult<Tag> result = SignText.DIRECT_CODEC.encodeStart(ops, this.text);
-        result.result().ifPresent((tagResult) -> tag.put("text", tagResult));
+    public void write(CompoundTag tag, boolean clientPacket) {
+        super.write(tag, clientPacket);
+        SignText.DIRECT_CODEC.encodeStart(NbtOps.INSTANCE, this.text).result().ifPresent((result) -> {
+            tag.put("text", result);
+        });
     }
 
     @Override
-    protected void read(CompoundTag tag, HolderLookup.Provider registries, boolean clientPacket) {
-        super.read(tag, registries, clientPacket);
-        DynamicOps<Tag> ops = registries.createSerializationContext(NbtOps.INSTANCE);
+    protected void read(CompoundTag tag, boolean clientPacket) {
+        super.read(tag, clientPacket);
         if (tag.contains("text")) {
-            DataResult<SignText> result = SignText.DIRECT_CODEC.parse(ops, tag.getCompound("text"));
-            result.result().ifPresent((signText) -> this.text = signText);
+            SignText.DIRECT_CODEC.parse(NbtOps.INSTANCE, tag.getCompound("text")).result().ifPresent((result) -> {
+                this.text = result;
+            });
         }
     }
 }

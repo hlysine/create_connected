@@ -1,3 +1,4 @@
+/*
 package com.hlysine.create_connected.content.linkedtransmitter;
 
 import com.hlysine.create_connected.registries.CCItems;
@@ -169,3 +170,4 @@ public class LinkedThrottleLeverBlock extends ThrottleLeverBlock implements Spec
         return SimCompatRegistry.LINKED_THROTTLE_LEVER_ENTITY.get();
     }
 }
+*/

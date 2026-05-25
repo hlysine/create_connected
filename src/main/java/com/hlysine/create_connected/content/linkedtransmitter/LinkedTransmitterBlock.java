@@ -10,8 +10,6 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.ItemInteractionResult;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -56,7 +54,9 @@ public interface LinkedTransmitterBlock {
         return InteractionResult.PASS;
     }
 
-    default ItemInteractionResult useWax(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+    default InteractionResult useWax(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+        ItemStack stack = player.getItemInHand(hand);
+        
         if (stack.is(Items.HONEYCOMB) && !state.getValue(BlockStateProperties.LOCKED)) {
             if (player instanceof ServerPlayer serverPlayer) {
                 CriteriaTriggers.ITEM_USED_ON_BLOCK.trigger(serverPlayer, pos, stack);
@@ -67,7 +67,7 @@ public interface LinkedTransmitterBlock {
             level.setBlock(pos, newState, Block.UPDATE_KNOWN_SHAPE | Block.UPDATE_ALL);
             level.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(player, newState));
             level.levelEvent(player, 3003, pos, 0);
-            return ItemInteractionResult.sidedSuccess(level.isClientSide);
+            return InteractionResult.sidedSuccess(level.isClientSide);
         }
         if (stack.is(ItemTags.AXES) && state.getValue(BlockStateProperties.LOCKED)) {
             level.playSound(player, pos, SoundEvents.AXE_WAX_OFF, SoundSource.BLOCKS, 1.0F, 1.0F);
@@ -79,11 +79,13 @@ public interface LinkedTransmitterBlock {
             level.setBlock(pos, newState, Block.UPDATE_KNOWN_SHAPE | Block.UPDATE_ALL);
             level.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(player, newState));
             if (player != null && !player.isCreative()) {
-                stack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
+                stack.hurtAndBreak(1, player, (p) -> {
+                    p.broadcastBreakEvent(hand);
+                });
             }
 
-            return ItemInteractionResult.sidedSuccess(level.isClientSide);
+            return InteractionResult.sidedSuccess(level.isClientSide);
         }
-        return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        return InteractionResult.PASS;
     }
 }

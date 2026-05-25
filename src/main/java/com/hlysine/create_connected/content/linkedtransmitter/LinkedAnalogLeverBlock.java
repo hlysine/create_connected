@@ -85,21 +85,14 @@ public class LinkedAnalogLeverBlock extends AnalogLeverBlock implements SpecialB
         if (player.isSpectator())
             return InteractionResult.PASS;
 
+        InteractionResult result = LinkedTransmitterBlock.super.useWax(state, level, pos, player, hand, hit);
+        if (result.consumesAction())
+            return result;
+
         if (isHittingBase(state, level, pos, hit)) {
             return super.use(state, level, pos, player, hand, hit);
         }
         return LinkedTransmitterBlock.super.useTransmitter(state, level, pos, player);
-    }
-
-    @Override
-    public @NotNull ItemInteractionResult useItemOn(@NotNull ItemStack stack,
-                                                    @NotNull BlockState state,
-                                                    @NotNull Level level,
-                                                    @NotNull BlockPos pos,
-                                                    @NotNull Player player,
-                                                    @NotNull InteractionHand hand,
-                                                    @NotNull BlockHitResult hitResult) {
-        return LinkedTransmitterBlock.super.useWax(stack, state, level, pos, player, hand, hitResult);
     }
 
     @Override

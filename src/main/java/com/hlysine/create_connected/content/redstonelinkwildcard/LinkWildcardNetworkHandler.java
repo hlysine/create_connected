@@ -9,8 +9,6 @@ import com.simibubi.create.content.redstone.link.LinkBehaviour;
 import com.simibubi.create.content.redstone.link.RedstoneLinkNetworkHandler;
 import com.simibubi.create.content.redstone.link.RedstoneLinkNetworkHandler.Frequency;
 import com.simibubi.create.infrastructure.config.AllConfigs;
-import dev.ryanhcode.sable.companion.SableCompanion;
-import dev.ryanhcode.sable.companion.SubLevelAccess;
 import net.createmod.catnip.data.Couple;
 import net.createmod.catnip.levelWrappers.WorldHelper;
 import net.minecraft.core.BlockPos;
@@ -251,6 +249,7 @@ public class LinkWildcardNetworkHandler {
         final BlockPos toLocation = to.getLocation();
         final Vector3d toPos = new Vector3d(toLocation.getX(), toLocation.getY(), toLocation.getZ());
 
+        /*
         final SableCompanion helper = SableCompanion.INSTANCE;
         final SubLevelAccess fromSublevel = helper.getContaining(level, fromPos);
         if (fromSublevel != null) {
@@ -261,6 +260,7 @@ public class LinkWildcardNetworkHandler {
         if (toSublevel != null) {
             toSublevel.logicalPose().transformPosition(toPos);
         }
+        */
 
         final int linkRange = AllConfigs.server().logistics.linkRange.get();
         return fromPos.distanceSquared(toPos) < linkRange * linkRange;

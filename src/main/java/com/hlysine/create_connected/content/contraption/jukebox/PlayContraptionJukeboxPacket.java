@@ -1,16 +1,16 @@
 package com.hlysine.create_connected.content.contraption.jukebox;
 
-import com.hlysine.create_connected.registries.CCPackets;
-import com.simibubi.create.foundation.networking.SimplePacketBase;
 import com.simibubi.create.content.contraptions.AbstractContraptionEntity;
+import com.simibubi.create.foundation.networking.SimplePacketBase;
 import net.minecraft.client.Minecraft;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.item.RecordItem;
-import net.minecraftforge.network.NetworkEvent;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.RecordItem;
+import net.minecraftforge.network.NetworkEvent;
 
 public class PlayContraptionJukeboxPacket extends SimplePacketBase {
 

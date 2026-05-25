@@ -8,9 +8,9 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
-import net.minecraft.client.renderer.blockentity.SignRenderer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.util.FastColor;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
@@ -68,7 +68,7 @@ public class DashboardRenderer extends SafeBlockEntityRenderer<DashboardBlockEnt
             glowing = isOutlineVisible(be.getBlockPos(), textColor);
             packedLight = 15728880;
         } else {
-            textColor = SignRenderer.getDarkColor(be.text);
+            textColor = getDarkColor(be.text);
             glowing = false;
         }
 
@@ -98,6 +98,19 @@ public class DashboardRenderer extends SafeBlockEntityRenderer<DashboardBlockEnt
                 final Entity entity = minecraft.getCameraEntity();
                 return entity != null && entity.distanceToSqr(Vec3.atCenterOf(blockPos)) < (double) OUTLINE_RENDER_DISTANCE;
             }
+        }
+    }
+
+    static int getDarkColor(SignText pSignText) {
+        int i = pSignText.getColor().getTextColor();
+        if (i == DyeColor.BLACK.getTextColor() && pSignText.hasGlowingText()) {
+            return -988212;
+        } else {
+            double d0 = 0.4D;
+            int j = (int)((double) FastColor.ARGB32.red(i) * 0.4D);
+            int k = (int)((double)FastColor.ARGB32.green(i) * 0.4D);
+            int l = (int)((double)FastColor.ARGB32.blue(i) * 0.4D);
+            return FastColor.ARGB32.color(0, j, k, l);
         }
     }
 }

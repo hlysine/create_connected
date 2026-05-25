@@ -3,43 +3,43 @@ package com.hlysine.create_connected.datagen.recipes;
 import com.google.common.base.Supplier;
 import com.google.common.collect.ImmutableList;
 import com.google.gson.JsonArray;
-import com.hlysine.create_connected.registries.CCBlocks;
 import com.google.gson.JsonObject;
-import com.hlysine.create_connected.registries.CCItems;
 import com.hlysine.create_connected.CreateConnected;
 import com.hlysine.create_connected.compat.CopycatsManager;
+import com.hlysine.create_connected.registries.CCBlocks;
+import com.hlysine.create_connected.registries.CCItems;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllItems;
-import com.simibubi.create.Create;
+import com.simibubi.create.AllTags;
 import com.simibubi.create.api.data.recipe.BaseRecipeProvider;
 import com.tterrag.registrate.util.DataIngredient;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import com.tterrag.registrate.util.entry.ItemProviderEntry;
 import net.createmod.catnip.platform.CatnipServices;
-import net.minecraft.world.item.crafting.AbstractCookingRecipe;
-import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.advancements.critereon.ItemPredicate;
-import net.minecraft.world.item.crafting.SimpleCraftingRecipeSerializer;
-import net.minecraftforge.common.Tags;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
-import net.minecraftforge.common.crafting.ConditionalRecipe;
-import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.AbstractCookingRecipe;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.SimpleCraftingRecipeSerializer;
+import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraftforge.common.Tags;
+import net.minecraftforge.common.crafting.ConditionalRecipe;
+import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.crafting.conditions.ICondition;
 import net.minecraftforge.common.crafting.conditions.ModLoadedCondition;
 import net.minecraftforge.common.crafting.conditions.NotCondition;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.level.ItemLike;
-
-import java.util.function.Consumer;
-import net.minecraft.world.level.block.Blocks;
 import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.function.UnaryOperator;
 
 @SuppressWarnings("unused")
@@ -305,10 +305,11 @@ public class CCStandardRecipes extends BaseRecipeProvider {
     GeneratedRecipe EMPTY_CATALYST_FROM_RESONANCE = clearFanCatalyst("resonance", CCBlocks.FAN_RESONANCE_CATALYST);
     GeneratedRecipe EMPTY_CATALYST_FROM_SCULKING = clearFanCatalyst("sculking", CCBlocks.FAN_SCULKING_CATALYST);
     GeneratedRecipe EMPTY_CATALYST_FROM_PURIFYING = clearFanCatalyst("purifying", CCBlocks.FAN_PURIFYING_CATALYST);
+    /*
     GeneratedRecipe EMPTY_CATALYST_FROM_TRANSMUTATION = clearFanCatalyst("transmutation", CCBlocks.FAN_TRANSMUTATION_CATALYST);
     GeneratedRecipe EMPTY_CATALYST_FROM_GLOOMING = clearFanCatalyst("glooming", CCBlocks.FAN_GLOOMING_CATALYST);
     GeneratedRecipe EMPTY_CATALYST_FROM_SOUL_STRIPPING = clearFanCatalyst("soul_stripping", CCBlocks.FAN_SOUL_STRIPPING_CATALYST);
-
+     */
     private final Marker PALETTES = enterFolder("palettes");
 
     GeneratedRecipe COPYCAT_SLAB = copycat(CCBlocks.COPYCAT_SLAB, 2);

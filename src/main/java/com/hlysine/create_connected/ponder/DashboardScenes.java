@@ -3,9 +3,7 @@ package com.hlysine.create_connected.ponder;
 import com.hlysine.create_connected.content.dashboard.DashboardBlock;
 import com.hlysine.create_connected.content.dashboard.DashboardBlockEntity;
 import com.simibubi.create.AllBlocks;
-import com.simibubi.create.AllDataComponents;
 import com.simibubi.create.AllItems;
-import com.simibubi.create.content.equipment.clipboard.ClipboardContent;
 import com.simibubi.create.content.equipment.clipboard.ClipboardOverrides;
 import com.simibubi.create.foundation.ponder.CreateSceneBuilder;
 import net.createmod.catnip.math.Pointing;
@@ -56,7 +54,7 @@ public class DashboardScenes {
 
         Vec3 target = util.vector().topOf(boardPos);
         ItemStack clipboard = AllBlocks.CLIPBOARD.asStack();
-        clipboard.set(AllDataComponents.CLIPBOARD_CONTENT, ClipboardContent.EMPTY.setType(ClipboardOverrides.ClipboardType.WRITTEN));
+        ClipboardOverrides.switchTo(ClipboardOverrides.ClipboardType.WRITTEN, clipboard);
         scene.overlay().showControls(target, Pointing.RIGHT, 40).withItem(clipboard)
                 .rightClick();
         scene.idle(6);

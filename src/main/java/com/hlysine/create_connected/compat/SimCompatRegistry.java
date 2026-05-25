@@ -1,3 +1,4 @@
+/*
 package com.hlysine.create_connected.compat;
 
 import com.hlysine.create_connected.CreateConnected;
@@ -39,3 +40,4 @@ public class SimCompatRegistry {
     public static void register() {
     }
 }
+*/

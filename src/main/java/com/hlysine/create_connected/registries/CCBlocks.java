@@ -2,7 +2,6 @@ package com.hlysine.create_connected.registries;
 
 import com.hlysine.create_connected.CreateConnected;
 import com.hlysine.create_connected.compat.Mods;
-import com.hlysine.create_connected.compat.SimCompatRegistry;
 import com.hlysine.create_connected.config.CStress;
 import com.hlysine.create_connected.config.FeatureCategory;
 import com.hlysine.create_connected.config.FeatureToggle;
@@ -985,7 +984,6 @@ public class CCBlocks {
             .transform(pickaxeOnly())
             .transform(FeatureToggle.register(FeatureCategory.LOGISTICS))
             .addLayer(() -> RenderType::cutoutMipped)
-            .clientExtension(() -> () -> new ReducedDestroyEffects())
             .blockstate(new ChuteGenerator()::generate)
             .item(ChuteItem::new)
             .transform(customItemModel("_", "block"))
@@ -1154,7 +1152,7 @@ public class CCBlocks {
                     .register();
 
     public static void register() {
-        Mods.SIMULATED.executeIfInstalled(() -> SimCompatRegistry::register);
+//        Mods.SIMULATED.executeIfInstalled(() -> SimCompatRegistry::register);
     }
 
     private static Function<BlockState, ModelFile> forBoolean(DataGenContext<?, ?> ctx,

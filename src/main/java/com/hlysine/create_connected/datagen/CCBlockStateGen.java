@@ -9,7 +9,6 @@ import com.tterrag.registrate.providers.RegistrateBlockstateProvider;
 import com.tterrag.registrate.util.nullness.NonNullBiConsumer;
 import com.tterrag.registrate.util.nullness.NonNullFunction;
 import net.createmod.catnip.data.Iterate;
-import net.minecraft.client.model.dragon.DragonHeadModel;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
@@ -17,7 +16,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.AttachFace;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
-import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.client.model.generators.MultiPartBlockStateBuilder;
 import org.apache.commons.lang3.function.TriFunction;
@@ -177,8 +175,8 @@ public class CCBlockStateGen {
             Map<Boolean, ResourceLocation> baseOn = new HashMap<>();
             baseOn.put(false, p.modLoc("block/" + c.getName() + "_on"));
             baseOn.put(true, p.modLoc("block/" + c.getName() + "_on_reset"));
-            ResourceLocation torchOff = new ResourceLocation("block/redstone_torch_off");
-            ResourceLocation torchOn = new ResourceLocation("block/redstone_torch");
+            ResourceLocation torchOff = ResourceLocation.parse("block/redstone_torch_off");
+            ResourceLocation torchOn = ResourceLocation.parse("block/redstone_torch");
 
             Vector<ModelFile> models = new Vector<>(4);
             for (boolean isPowered : Iterate.falseAndTrue)

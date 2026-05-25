@@ -9,7 +9,6 @@ import com.simibubi.create.foundation.fluid.FluidIngredient;
 import net.minecraft.data.PackOutput;
 import net.minecraftforge.common.crafting.conditions.ModLoadedCondition;
 import net.minecraft.world.level.material.Fluids;
-import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 
 @SuppressWarnings("unused")
 public class FillingRecipeGen extends com.simibubi.create.api.data.recipe.FillingRecipeGen {
@@ -42,11 +41,13 @@ public class FillingRecipeGen extends com.simibubi.create.api.data.recipe.Fillin
             .withCondition(new ModLoadedCondition(Mods.MORE_CATALYSTS.id()))
             .output(CCBlocks.FAN_HONEY_COATING_CATALYST));
 
+    /*
     GeneratedRecipe FAN_TRANSMUTATION_CATALYST = create("fan_transmutation_catalyst", b -> b.require(new SizedFluidIngredient(new SimpleFluidIngredient(Mods.SHIMMER, "shimmer"), 1000))
             .require(CCBlocks.EMPTY_FAN_CATALYST)
             .withCondition(new FeatureEnabledCondition(CCBlocks.EMPTY_FAN_CATALYST.getId()))
             .withCondition(new ModLoadedCondition(Mods.SHIMMER.id()))
             .output(CCBlocks.FAN_TRANSMUTATION_CATALYST));
+     */
 
     public FillingRecipeGen(PackOutput output) {
         super(output, CreateConnected.MODID);

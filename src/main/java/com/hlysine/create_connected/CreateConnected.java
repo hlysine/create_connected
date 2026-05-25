@@ -15,13 +15,12 @@ import com.simibubi.create.foundation.item.ItemDescription;
 import com.simibubi.create.foundation.item.KineticStats;
 import com.simibubi.create.foundation.item.TooltipModifier;
 import net.createmod.catnip.lang.FontHelper;
-import net.minecraftforge.api.distmarker.Dist;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
-import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -44,8 +43,8 @@ public class CreateConnected {
                         .andThen(TooltipModifier.mapNull(KineticStats.create(item))));
     }
 
-    public CreateConnected() {
-        modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+    public CreateConnected(FMLJavaModLoadingContext context) {
+        modEventBus = context.getModEventBus();
         IEventBus forgeEventBus = MinecraftForge.EVENT_BUS;
         REGISTRATE.registerEventListeners(modEventBus);
 
@@ -66,7 +65,7 @@ public class CreateConnected {
         CCPackets.registerPackets();
 		CCArmInteractionPointTypes.register(modEventBus);
 
-        CCConfigs.register(ModLoadingContext.get());
+        CCConfigs.register(context);
         CCConfigs.common().register();
 
         if (Mods.COPYCATS.isLoaded())
@@ -102,6 +101,6 @@ public class CreateConnected {
     }
 
     public static ResourceLocation asResource(String path) {
-        return new ResourceLocation(MODID, path);
+        return ResourceLocation.fromNamespaceAndPath(MODID, path);
     }
 }

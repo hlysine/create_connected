@@ -33,8 +33,8 @@ public enum Mods {
     MORE_CATALYSTS("create_more_catalysts"),
     SHIMMER("create_shimmer"),
     NETHER_INDUSTRY("createnetherindustry"),
-    TWILIGHT_FOREST("twilightforest"),
-    SIMULATED("simulated");
+    TWILIGHT_FOREST("twilightforest");
+//    SIMULATED("simulated");
 
     private final String id;
 
@@ -50,7 +50,7 @@ public enum Mods {
     }
 
     public ResourceLocation rl(String path) {
-        return new ResourceLocation(id, path);
+        return ResourceLocation.fromNamespaceAndPath(id, path);
     }
 
     public Item getItem(String id) {

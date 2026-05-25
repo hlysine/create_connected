@@ -1,10 +1,11 @@
 package com.hlysine.create_connected.content.sequencedpulsegenerator;
 
-import com.hlysine.create_connected.registries.CCBlocks;
-import com.hlysine.create_connected.registries.CCGuiTextures;
 import com.hlysine.create_connected.ConnectedLang;
 import com.hlysine.create_connected.content.sequencedpulsegenerator.instructions.EndInstruction;
 import com.hlysine.create_connected.content.sequencedpulsegenerator.instructions.Instruction;
+import com.hlysine.create_connected.registries.CCBlocks;
+import com.hlysine.create_connected.registries.CCGuiTextures;
+import com.hlysine.create_connected.registries.CCPackets;
 import com.simibubi.create.foundation.gui.AllIcons;
 import com.simibubi.create.foundation.gui.widget.IconButton;
 import com.simibubi.create.foundation.gui.widget.ScrollInput;

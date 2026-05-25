@@ -1,8 +1,8 @@
 package com.hlysine.create_connected.datagen.recipes;
 
-import com.hlysine.create_connected.registries.CCBlocks;
 import com.hlysine.create_connected.CreateConnected;
 import com.hlysine.create_connected.compat.Mods;
+import com.hlysine.create_connected.registries.CCBlocks;
 import com.simibubi.create.AllFluids;
 import com.simibubi.create.AllItems;
 import net.minecraft.data.PackOutput;
@@ -14,7 +14,6 @@ import net.minecraftforge.common.crafting.conditions.ICondition;
 import net.minecraftforge.common.crafting.conditions.ModLoadedCondition;
 import net.minecraftforge.common.crafting.conditions.OrCondition;
 
-import java.util.List;
 import java.util.function.Supplier;
 
 @SuppressWarnings("unused")
@@ -82,15 +81,17 @@ public class ItemApplicationRecipeGen extends com.simibubi.create.api.data.recip
     GeneratedRecipe PURIFYING_CATALYST = fanCatalystFromEmpty(
             "purifying_catalyst", Blocks.BEACON, CCBlocks.FAN_PURIFYING_CATALYST::asItem,
             new ModLoadedCondition(Mods.MORE_CATALYSTS.id()));
+    /*
     GeneratedRecipe TRANSMUTATION_CATALYST = fanCatalystFromEmpty(
-            "transmutation_catalyst", new SimpleDatagenIngredient(Mods.SHIMMER, "shimmer_bucket").toVanilla(), CCBlocks.FAN_TRANSMUTATION_CATALYST::asItem,
+            "transmutation_catalyst", new SimpleDatagenIngredient(Mods.SHIMMER, "shimmer_bucket"), CCBlocks.FAN_TRANSMUTATION_CATALYST::asItem,
             new ModLoadedCondition(Mods.SHIMMER.id()));
     GeneratedRecipe GLOOMING_CATALYST = fanCatalystFromEmpty(
-            "glooming_catalyst", new SimpleDatagenIngredient(Mods.TWILIGHT_FOREST, "exanimate_essence").toVanilla(), CCBlocks.FAN_GLOOMING_CATALYST::asItem,
+            "glooming_catalyst", new SimpleDatagenIngredient(Mods.TWILIGHT_FOREST, "exanimate_essence"), CCBlocks.FAN_GLOOMING_CATALYST::asItem,
             new ModLoadedCondition(Mods.SHIMMER.id()));
     GeneratedRecipe SOUL_STRIPPING_CATALYST = fanCatalystFromEmpty(
-            "soul_stripping_catalyst", new SimpleDatagenIngredient(Mods.NETHER_INDUSTRY, "mysterious_ancient_mechanism").toVanilla(), CCBlocks.FAN_SOUL_STRIPPING_CATALYST::asItem,
+            "soul_stripping_catalyst", new SimpleDatagenIngredient(Mods.NETHER_INDUSTRY, "mysterious_ancient_mechanism"), CCBlocks.FAN_SOUL_STRIPPING_CATALYST::asItem,
             new ModLoadedCondition(Mods.NETHER_INDUSTRY.id()));
+     */
 
     protected GeneratedRecipe fanCatalystFromEmpty(String type, ItemLike ingredient, Supplier<ItemLike> output) {
         return fanCatalystFromEmpty(type, Ingredient.of(ingredient), output);

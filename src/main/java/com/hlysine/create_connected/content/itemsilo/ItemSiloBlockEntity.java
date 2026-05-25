@@ -1,5 +1,6 @@
 package com.hlysine.create_connected.content.itemsilo;
 
+import com.hlysine.create_connected.mixin.itemsilo.ItemStackHandlerAccessor;
 import com.hlysine.create_connected.registries.CCBlockEntityTypes;
 import com.simibubi.create.api.connectivity.ConnectivityHandler;
 import com.simibubi.create.api.packager.InventoryIdentifier;
@@ -7,7 +8,6 @@ import com.simibubi.create.foundation.blockEntity.IMultiBlockEntityContainer;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.inventory.VersionedInventoryWrapper;
-import com.simibubi.create.foundation.mixin.accessor.ItemStackHandlerAccessor;
 import com.simibubi.create.infrastructure.config.AllConfigs;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -327,7 +327,7 @@ public class ItemSiloBlockEntity extends SmartBlockEntity implements IMultiBlock
 
     @Override
     public void clearContent() {
-        ((ItemStackHandlerAccessor) inventory).create$getStacks().clear();
+        ((ItemStackHandlerAccessor) inventory).getStacks().clear();
     }
 }
 
