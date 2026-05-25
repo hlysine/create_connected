@@ -23,40 +23,42 @@ This is the Forge/NeoForge version of the mod.
 > **Want reliable, immersive chunk-loading for your Create machines? Check
 out [Create: Power Loader](https://modrinth.com/mod/create-power-loader)**
 
-## What's new in 1.1
+## What's new in 1.2
 
-![kinetic_bridge](https://github.com/user-attachments/assets/c4996f1a-ca28-4164-886a-a872073fc80c) **Kinetic Bridge**
+![dashboard](https://github.com/user-attachments/assets/44317627-5d24-494d-a923-44167c6f10c4) **Dashboard**
 
-Transfer stress capacity from one network to another while keeping the networks separate. Guarantees that the source network will not be affected when the destination network is overstressed.
+A mini-display that can send info to the HUD of players sitting in front. Perfect for controlling your vehicle while in
+contraption camera.
 
-![kinetic_battery](https://github.com/user-attachments/assets/02d33d98-ac20-4629-8993-149fe1123d24) ![charged_kinetic_battery](https://github.com/user-attachments/assets/33b5ac7d-7e27-44b1-ada9-b70a21324be6) **Kinetic Battery**
+![brass_chute](https://github.com/user-attachments/assets/1526ec68-aedb-4d43-a7bc-79fe2af4a27c) **Brass Chute**
 
-Stores kinetic stress for later use. Retains charge in item form to enable long-distance energy transport. Battery capacity, RPM at discharge and stress impact values are all configurable.
+The middle ground between a regular chute and a smart chute. Supports diagonal item transport and extracts 64 items at a time.
 
-![cross_connector](https://github.com/user-attachments/assets/e099e1aa-7e06-43e7-a33a-a906dd706336) **Cross Connector**
+![empty_fan_catalyst](https://github.com/hlysine/create_connected/assets/25472513/871b1ee6-33c6-4102-80ed-3670641a8d33) **Even more catalysts**
 
-Relays rotation in two directions independently.
+For Create: More Catalysts, Create: Shimmer and Create: Nether Industry. (Thanks HgTlPbBi-4 and JustAGuy4447 for implementation)
 
-![redstone_link_wildcard](https://github.com/user-attachments/assets/6c81752e-1024-4685-84d1-c3947e6d26b6) **Redstone Link Wildcard**
+![sequenced_pulse_generator](https://github.com/user-attachments/assets/20c675f8-7275-47f4-ab45-d0fb3b3150b5) **Reworked Sequenced Pulse Generator**
 
-Assign this item to a redstone link frequency slot to match any item in that slot, including air.
+Faster reaction time and more instructions. Perform signal strength comparison, simple arithmetics and bitwise operations on the input signal.
 
-![fan_freezing_catalyst](https://github.com/user-attachments/assets/5fb53ff5-6bf2-4005-9caf-68df3c9df1a1) ![fan_sanding_catalyst](https://github.com/user-attachments/assets/5cb15a91-de17-47fb-91af-a065080f116d) ![fan_ending_catalyst_dragons_breath](https://github.com/user-attachments/assets/ebacf2c6-2639-45da-a635-ba421c332e92) ![fan_ending_catalyst_dragon_head](https://github.com/user-attachments/assets/4c3105e7-5897-4755-9e00-7fca7bdc1763) ![fan_enriched_catalyst](https://github.com/user-attachments/assets/0d44f0d4-416d-4294-8407-25eb5bc3039a) ![fan_withering_catalyst](https://github.com/user-attachments/assets/0c75b5b0-aa4b-4d74-baea-dc125bcebe79) **More Fan Catalysts**
-
-Fan catalysts now support Create: Nuclear, Create: Dragons Plus and Create: Henry.
+[...and more changes and fixes](https://github.com/hlysine/create_connected/blob/main/CHANGELOG.md)
 
 ## Features
 
 ### New Blocks and Items
 
-Clutches and gearboxes for your Create machines, diodes and transmitters for your redstone circuits, and rotated vaults and tanks for better logistics!
-A complete package for all your technical Create needs. Visit [the GitHub wiki](https://github.com/hlysine/create_connected/wiki/New-Features) for a complete list.
+Clutches and gearboxes for your Create machines, diodes and transmitters for your redstone circuits, and rotated vaults
+and tanks for better logistics!
+A complete package for all your technical Create needs.
+Visit [the GitHub wiki](https://github.com/hlysine/create_connected/wiki/New-Features) for a complete list.
 
 [![All features](https://cdn.modrinth.com/data/Vg5TIO6d/images/897c4d67eae94a366c49782ddb1654c5a6e383c5.png)](https://github.com/hlysine/create_connected/wiki/New-Features)
 
 ### Feature toggle
 
-Don't like certain features? You can disable them in the configs. Think a horizontal tank is too OP? You can nerf it in the configs. This mod is highly customizable to fit your modpack's needs.
+Don't like certain features? You can disable them in the configs. Think a horizontal tank is too OP? You can nerf it in
+the configs. This mod is highly customizable to fit your modpack's needs.
 
 [![Feature Toggle System](https://cdn.modrinth.com/data/Vg5TIO6d/images/d74a9a1a353caee83b0d5dc69c60305a14699d3a.png)](https://github.com/hlysine/create_connected/wiki/Configs)
 
@@ -110,7 +112,8 @@ at [the contributing guide](https://github.com/hlysine/create_connected/blob/mai
 
 ## Support
 
-The best way to support my work is to simply download this mod on [**Modrinth**](https://modrinth.com/mod/create-connected).
+The best way to support my work is to simply download this mod on [**Modrinth
+**](https://modrinth.com/mod/create-connected).
 Enjoy a smoother download experience and support open source software with a single click.
 
 If you would like to offer more direct support, you
