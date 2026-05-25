@@ -1,5 +1,6 @@
-package com.hlysine.create_connected;
+package com.hlysine.create_connected.registries;
 
+import com.hlysine.create_connected.CreateConnected;
 import com.hlysine.create_connected.content.contraption.jukebox.PlayContraptionJukeboxPacket;
 import com.hlysine.create_connected.content.sequencedpulsegenerator.ConfigureSequencedPulseGeneratorPacket;
 import net.createmod.catnip.net.base.BasePacketPayload;

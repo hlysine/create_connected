@@ -1,30 +1,19 @@
 package com.hlysine.create_connected.content.kineticbattery;
 
 
-import com.hlysine.create_connected.CCBlockEntityTypes;
-import com.hlysine.create_connected.CCBlocks;
-import com.hlysine.create_connected.CCItems;
-import com.simibubi.create.AllBlocks;
-import com.simibubi.create.AllItems;
+import com.hlysine.create_connected.registries.CCBlockEntityTypes;
+import com.hlysine.create_connected.registries.CCBlocks;
+import com.hlysine.create_connected.registries.CCItems;
 import com.simibubi.create.content.kinetics.base.DirectionalKineticBlock;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
-import com.simibubi.create.content.logistics.stockTicker.StockTickerBlockEntity;
-import com.simibubi.create.content.logistics.stockTicker.StockTickerInteractionHandler;
-import com.simibubi.create.content.processing.burner.BlazeBurnerBlock;
-import com.simibubi.create.content.processing.burner.BlazeBurnerBlockEntity;
 import com.simibubi.create.foundation.block.IBE;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.ItemInteractionResult;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.FlintAndSteelItem;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;

@@ -1,10 +1,9 @@
 package com.hlysine.create_connected.content.copycat;
 
-import com.hlysine.create_connected.CCBlockEntityTypes;
+import com.hlysine.create_connected.registries.CCBlockEntityTypes;
 import com.hlysine.create_connected.compat.CopycatsManager;
 import com.hlysine.create_connected.compat.Mods;
 import com.hlysine.create_connected.config.CCConfigs;
-import com.simibubi.create.AllBlockEntityTypes;
 import com.simibubi.create.content.decoration.copycat.CopycatBlock;
 import com.simibubi.create.content.decoration.copycat.CopycatBlockEntity;
 import net.minecraft.core.BlockPos;

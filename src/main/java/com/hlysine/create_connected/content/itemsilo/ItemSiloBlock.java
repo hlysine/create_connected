@@ -1,7 +1,7 @@
 package com.hlysine.create_connected.content.itemsilo;
 
-import com.hlysine.create_connected.CCBlockEntityTypes;
-import com.hlysine.create_connected.CCBlocks;
+import com.hlysine.create_connected.registries.CCBlockEntityTypes;
+import com.hlysine.create_connected.registries.CCBlocks;
 import com.simibubi.create.api.connectivity.ConnectivityHandler;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.content.logistics.vault.ItemVaultBlock;

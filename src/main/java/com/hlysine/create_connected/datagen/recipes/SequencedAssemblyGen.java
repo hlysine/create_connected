@@ -1,20 +1,16 @@
 package com.hlysine.create_connected.datagen.recipes;
 
-import com.hlysine.create_connected.CCItems;
+import com.hlysine.create_connected.registries.CCItems;
 import com.hlysine.create_connected.CreateConnected;
 import com.simibubi.create.AllItems;
 import com.simibubi.create.api.data.recipe.SequencedAssemblyRecipeGen;
 import com.simibubi.create.content.kinetics.deployer.DeployerApplicationRecipe;
 import com.simibubi.create.content.kinetics.press.PressingRecipe;
-import com.simibubi.create.content.processing.sequenced.SequencedAssemblyRecipeBuilder;
-import com.simibubi.create.foundation.data.recipe.CreateRecipeProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.Items;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.CompletableFuture;
-import java.util.function.UnaryOperator;
 
 public class SequencedAssemblyGen extends SequencedAssemblyRecipeGen {
     GeneratedRecipe CONTROL_CHIP = create("control_chip", b -> b.require(AllItems.GOLDEN_SHEET)

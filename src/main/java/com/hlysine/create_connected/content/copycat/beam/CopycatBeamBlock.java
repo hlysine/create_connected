@@ -1,7 +1,7 @@
 package com.hlysine.create_connected.content.copycat.beam;
 
-import com.hlysine.create_connected.CCBlocks;
-import com.hlysine.create_connected.CCShapes;
+import com.hlysine.create_connected.registries.CCBlocks;
+import com.hlysine.create_connected.registries.CCShapes;
 import com.hlysine.create_connected.content.copycat.MigratingWaterloggedCopycatBlock;
 import com.simibubi.create.foundation.placement.PoleHelper;
 import net.createmod.catnip.placement.IPlacementHelper;
@@ -11,7 +11,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;

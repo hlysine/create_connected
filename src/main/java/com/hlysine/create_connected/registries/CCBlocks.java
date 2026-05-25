@@ -1,5 +1,6 @@
-package com.hlysine.create_connected;
+package com.hlysine.create_connected.registries;
 
+import com.hlysine.create_connected.CreateConnected;
 import com.hlysine.create_connected.compat.Mods;
 import com.hlysine.create_connected.compat.SimCompatRegistry;
 import com.hlysine.create_connected.config.CStress;

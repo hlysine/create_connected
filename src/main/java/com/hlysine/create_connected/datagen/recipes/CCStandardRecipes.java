@@ -2,8 +2,8 @@ package com.hlysine.create_connected.datagen.recipes;
 
 import com.google.common.base.Supplier;
 import com.google.common.collect.ImmutableList;
-import com.hlysine.create_connected.CCBlocks;
-import com.hlysine.create_connected.CCItems;
+import com.hlysine.create_connected.registries.CCBlocks;
+import com.hlysine.create_connected.registries.CCItems;
 import com.hlysine.create_connected.CreateConnected;
 import com.hlysine.create_connected.compat.CopycatsManager;
 import com.mojang.serialization.Codec;

@@ -1,7 +1,6 @@
-package com.hlysine.create_connected;
+package com.hlysine.create_connected.registries;
 
 import com.simibubi.create.foundation.block.ItemUseOverrides;
-import net.createmod.catnip.platform.CatnipServices;
 import net.createmod.catnip.registry.RegisteredObjectsHelper;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;

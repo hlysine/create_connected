@@ -1,10 +1,10 @@
-package com.hlysine.create_connected;
+package com.hlysine.create_connected.registries;
 
+import com.hlysine.create_connected.CreateConnected;
 import com.hlysine.create_connected.content.attributefilter.ItemDamageAttribute;
 import com.hlysine.create_connected.content.attributefilter.ItemIdAttribute;
 import com.hlysine.create_connected.content.attributefilter.ItemStackCountAttribute;
 import com.simibubi.create.api.registry.CreateBuiltInRegistries;
-import com.simibubi.create.content.logistics.item.filter.attribute.ItemAttribute;
 import com.simibubi.create.content.logistics.item.filter.attribute.ItemAttributeType;
 import net.minecraft.core.Registry;
 

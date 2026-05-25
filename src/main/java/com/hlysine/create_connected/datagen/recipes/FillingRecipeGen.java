@@ -1,7 +1,7 @@
 package com.hlysine.create_connected.datagen.recipes;
 
-import com.hlysine.create_connected.CCBlocks;
-import com.hlysine.create_connected.CCTags;
+import com.hlysine.create_connected.registries.CCBlocks;
+import com.hlysine.create_connected.registries.CCTags;
 import com.hlysine.create_connected.CreateConnected;
 import com.hlysine.create_connected.compat.Mods;
 import com.simibubi.create.AllFluids;

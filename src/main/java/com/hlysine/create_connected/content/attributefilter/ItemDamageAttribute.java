@@ -1,6 +1,6 @@
 package com.hlysine.create_connected.content.attributefilter;
 
-import com.hlysine.create_connected.CCItemAttributes;
+import com.hlysine.create_connected.registries.CCItemAttributes;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.simibubi.create.content.logistics.item.filter.attribute.ItemAttribute;

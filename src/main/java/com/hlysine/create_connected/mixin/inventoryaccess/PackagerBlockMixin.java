@@ -1,6 +1,6 @@
 package com.hlysine.create_connected.mixin.inventoryaccess;
 
-import com.hlysine.create_connected.CCBlocks;
+import com.hlysine.create_connected.registries.CCBlocks;
 import com.hlysine.create_connected.content.inventoryaccessport.InventoryAccessPortBlockEntity;
 import com.hlysine.create_connected.content.inventorybridge.InventoryBridgeBlockEntity;
 import com.simibubi.create.AllBlocks;

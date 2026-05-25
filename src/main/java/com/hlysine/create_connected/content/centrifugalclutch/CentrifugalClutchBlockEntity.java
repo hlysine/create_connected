@@ -1,6 +1,6 @@
 package com.hlysine.create_connected.content.centrifugalclutch;
 
-import com.hlysine.create_connected.CCBlocks;
+import com.hlysine.create_connected.registries.CCBlocks;
 import com.hlysine.create_connected.ConnectedLang;
 import com.hlysine.create_connected.content.ClutchValueBox;
 import com.hlysine.create_connected.content.RotationScrollValueBehaviour;

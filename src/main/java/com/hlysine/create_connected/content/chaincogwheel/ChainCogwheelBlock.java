@@ -1,6 +1,6 @@
 package com.hlysine.create_connected.content.chaincogwheel;
 
-import com.hlysine.create_connected.CCBlockEntityTypes;
+import com.hlysine.create_connected.registries.CCBlockEntityTypes;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
 import com.simibubi.create.content.kinetics.chainDrive.ChainDriveBlock;
 import com.simibubi.create.content.kinetics.simpleRelays.ICogWheel;

@@ -1,5 +1,6 @@
-package com.hlysine.create_connected;
+package com.hlysine.create_connected.registries;
 
+import com.hlysine.create_connected.CreateConnected;
 import com.hlysine.create_connected.ponder.*;
 import com.simibubi.create.Create;
 import com.simibubi.create.infrastructure.ponder.AllCreatePonderTags;

@@ -1,7 +1,7 @@
 package com.hlysine.create_connected.content.copycat.board;
 
 import com.google.common.collect.ImmutableMap;
-import com.hlysine.create_connected.CCShapes;
+import com.hlysine.create_connected.registries.CCShapes;
 import com.hlysine.create_connected.content.copycat.MigratingWaterloggedCopycatBlock;
 import com.simibubi.create.api.schematic.requirement.SpecialBlockItemRequirement;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;

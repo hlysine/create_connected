@@ -1,4 +1,4 @@
-package com.hlysine.create_connected;
+package com.hlysine.create_connected.registries;
 
 import net.minecraft.client.color.block.BlockColor;
 import net.minecraft.client.color.item.ItemColor;

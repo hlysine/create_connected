@@ -1,9 +1,8 @@
 package com.hlysine.create_connected.datagen.recipes;
 
-import com.hlysine.create_connected.CCBlocks;
+import com.hlysine.create_connected.registries.CCBlocks;
 import com.hlysine.create_connected.CreateConnected;
 import com.simibubi.create.AllBlocks;
-import com.simibubi.create.AllRecipeTypes;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 

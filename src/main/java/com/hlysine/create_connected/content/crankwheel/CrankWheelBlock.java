@@ -1,7 +1,7 @@
 package com.hlysine.create_connected.content.crankwheel;
 
-import com.hlysine.create_connected.CCBlockEntityTypes;
-import com.hlysine.create_connected.CCShapes;
+import com.hlysine.create_connected.registries.CCBlockEntityTypes;
+import com.hlysine.create_connected.registries.CCShapes;
 import com.simibubi.create.content.kinetics.crank.HandCrankBlock;
 import com.simibubi.create.content.kinetics.simpleRelays.CogWheelBlock;
 import com.simibubi.create.content.kinetics.simpleRelays.ICogWheel;

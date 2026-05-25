@@ -1,6 +1,6 @@
 package com.hlysine.create_connected.content.inventoryaccessport;
 
-import com.hlysine.create_connected.CCBlockEntityTypes;
+import com.hlysine.create_connected.registries.CCBlockEntityTypes;
 import com.hlysine.create_connected.CreateConnected;
 import com.simibubi.create.content.redstone.DirectedDirectionalBlock;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;

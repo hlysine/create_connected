@@ -1,6 +1,6 @@
 package com.hlysine.create_connected.content.brasschute;
 
-import com.hlysine.create_connected.CCBlockEntityTypes;
+import com.hlysine.create_connected.registries.CCBlockEntityTypes;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.content.logistics.chute.ChuteBlock;
 import com.simibubi.create.content.logistics.chute.ChuteBlockEntity;

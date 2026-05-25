@@ -1,5 +1,6 @@
-package com.hlysine.create_connected;
+package com.hlysine.create_connected.registries;
 
+import com.hlysine.create_connected.CreateConnected;
 import com.hlysine.create_connected.content.kineticbattery.KineticBatteryDisplaySource;
 import com.simibubi.create.api.behaviour.display.DisplaySource;
 import com.simibubi.create.content.redstone.displayLink.source.BoilerDisplaySource;

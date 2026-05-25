@@ -1,6 +1,6 @@
 package com.hlysine.create_connected.content.sequencedpulsegenerator;
 
-import com.hlysine.create_connected.CCBlockEntityTypes;
+import com.hlysine.create_connected.registries.CCBlockEntityTypes;
 import com.hlysine.create_connected.datagen.advancements.AdvancementBehaviour;
 import com.mojang.serialization.MapCodec;
 import com.simibubi.create.AllItems;

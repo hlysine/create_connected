@@ -1,7 +1,7 @@
 package com.hlysine.create_connected.compat;
 
 import com.hlysine.create_connected.CreateConnected;
-import com.hlysine.create_connected.PreciseItemUseOverrides;
+import com.hlysine.create_connected.registries.PreciseItemUseOverrides;
 import com.hlysine.create_connected.content.linkedtransmitter.*;
 import com.hlysine.create_connected.datagen.CCBlockStateGen;
 import com.simibubi.create.AllTags;

@@ -1,5 +1,6 @@
-package com.hlysine.create_connected;
+package com.hlysine.create_connected.registries;
 
+import com.hlysine.create_connected.CreateConnected;
 import com.hlysine.create_connected.content.brake.BrakeBlockEntity;
 import com.hlysine.create_connected.content.brasschute.BrassChuteBlockEntity;
 import com.hlysine.create_connected.content.brassgearbox.BrassGearboxBlockEntity;

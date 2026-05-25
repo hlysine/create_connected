@@ -1,5 +1,6 @@
-package com.hlysine.create_connected;
+package com.hlysine.create_connected.registries;
 
+import com.hlysine.create_connected.CreateConnected;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.createmod.catnip.gui.UIRenderHelper;
 import net.createmod.catnip.gui.element.ScreenElement;

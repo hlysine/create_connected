@@ -1,7 +1,8 @@
-package com.hlysine.create_connected;
+package com.hlysine.create_connected.registries;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.hlysine.create_connected.CreateConnected;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Vec3i;
 import net.minecraft.core.registries.Registries;

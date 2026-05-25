@@ -1,6 +1,6 @@
 package com.hlysine.create_connected.ponder;
 
-import com.hlysine.create_connected.CCBlocks;
+import com.hlysine.create_connected.registries.CCBlocks;
 import com.hlysine.create_connected.content.inventoryaccessport.InventoryAccessPortBlock;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.content.redstone.thresholdSwitch.ThresholdSwitchBlock;

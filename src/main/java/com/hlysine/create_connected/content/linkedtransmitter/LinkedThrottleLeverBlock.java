@@ -1,6 +1,6 @@
 package com.hlysine.create_connected.content.linkedtransmitter;
 
-import com.hlysine.create_connected.CCItems;
+import com.hlysine.create_connected.registries.CCItems;
 import com.hlysine.create_connected.compat.SimCompatRegistry;
 import com.simibubi.create.AllSoundEvents;
 import com.simibubi.create.api.schematic.requirement.SpecialBlockItemRequirement;

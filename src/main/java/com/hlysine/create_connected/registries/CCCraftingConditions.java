@@ -1,5 +1,6 @@
-package com.hlysine.create_connected;
+package com.hlysine.create_connected.registries;
 
+import com.hlysine.create_connected.CreateConnected;
 import com.hlysine.create_connected.datagen.recipes.FeatureEnabledCondition;
 import com.hlysine.create_connected.datagen.recipes.FeatureEnabledInCopycatsCondition;
 import com.mojang.serialization.MapCodec;

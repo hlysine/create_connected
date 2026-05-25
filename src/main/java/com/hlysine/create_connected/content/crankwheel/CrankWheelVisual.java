@@ -1,6 +1,6 @@
 package com.hlysine.create_connected.content.crankwheel;
 
-import com.hlysine.create_connected.CCPartialModels;
+import com.hlysine.create_connected.registries.CCPartialModels;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntityVisual;
 import com.simibubi.create.content.kinetics.base.RotatingInstance;
 import com.simibubi.create.content.kinetics.simpleRelays.ICogWheel;

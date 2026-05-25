@@ -1,5 +1,6 @@
-package com.hlysine.create_connected;
+package com.hlysine.create_connected.registries;
 
+import com.hlysine.create_connected.CreateConnected;
 import com.hlysine.create_connected.content.dashboard.DashboardDisplayTarget;
 import com.simibubi.create.api.behaviour.display.DisplayTarget;
 import com.simibubi.create.foundation.data.CreateRegistrate;

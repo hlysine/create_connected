@@ -1,4 +1,4 @@
-package com.hlysine.create_connected;
+package com.hlysine.create_connected.registries;
 
 import com.hlysine.create_connected.content.crossconnector.EncasedCrossConnectorBlock;
 import com.simibubi.create.content.decoration.encasing.EncasedCTBehaviour;

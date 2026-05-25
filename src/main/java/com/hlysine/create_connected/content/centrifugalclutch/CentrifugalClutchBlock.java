@@ -1,6 +1,6 @@
 package com.hlysine.create_connected.content.centrifugalclutch;
 
-import com.hlysine.create_connected.CCBlockEntityTypes;
+import com.hlysine.create_connected.registries.CCBlockEntityTypes;
 import com.hlysine.create_connected.content.CCBlockStateProperties;
 import com.simibubi.create.content.kinetics.RotationPropagator;
 import com.simibubi.create.content.kinetics.base.DirectionalKineticBlock;

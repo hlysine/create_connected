@@ -1,10 +1,10 @@
-package com.hlysine.create_connected;
+package com.hlysine.create_connected.registries;
 
+import com.hlysine.create_connected.CreateConnected;
 import com.hlysine.create_connected.content.fluidvessel.FluidVesselMountedStorageType;
 import com.hlysine.create_connected.content.itemsilo.ItemSiloMountedStorageType;
 import com.simibubi.create.api.contraption.storage.fluid.MountedFluidStorageType;
 import com.simibubi.create.api.contraption.storage.item.MountedItemStorageType;
-import com.simibubi.create.content.fluids.tank.storage.FluidTankMountedStorageType;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.util.entry.RegistryEntry;
 

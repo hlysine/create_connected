@@ -1,5 +1,6 @@
-package com.hlysine.create_connected;
+package com.hlysine.create_connected.registries;
 
+import com.hlysine.create_connected.CreateConnected;
 import com.hlysine.create_connected.config.FeatureToggle;
 import com.simibubi.create.AllCreativeModeTabs;
 import com.tterrag.registrate.util.entry.ItemProviderEntry;

@@ -1,6 +1,6 @@
 package com.hlysine.create_connected.content.sequencedpulsegenerator.instructions;
 
-import com.hlysine.create_connected.CCGuiTextures;
+import com.hlysine.create_connected.registries.CCGuiTextures;
 import com.hlysine.create_connected.content.sequencedpulsegenerator.SequencedPulseGeneratorBlockEntity;
 import net.minecraft.nbt.CompoundTag;
 

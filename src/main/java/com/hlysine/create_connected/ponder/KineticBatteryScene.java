@@ -1,7 +1,7 @@
 package com.hlysine.create_connected.ponder;
 
-import com.hlysine.create_connected.CCBlocks;
-import com.hlysine.create_connected.CCItems;
+import com.hlysine.create_connected.registries.CCBlocks;
+import com.hlysine.create_connected.registries.CCItems;
 import com.hlysine.create_connected.content.kineticbattery.KineticBatteryBlock;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllItems;

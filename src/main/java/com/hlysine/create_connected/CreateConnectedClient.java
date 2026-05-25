@@ -1,5 +1,7 @@
 package com.hlysine.create_connected;
 
+import com.hlysine.create_connected.registries.CCPartialModels;
+import com.hlysine.create_connected.registries.CCPonderPlugin;
 import net.createmod.ponder.foundation.PonderIndex;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;

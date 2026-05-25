@@ -1,27 +1,23 @@
 package com.hlysine.create_connected.content.contraption.jukebox;
 
-import com.hlysine.create_connected.CCPackets;
+import com.hlysine.create_connected.registries.CCPackets;
 import com.mojang.datafixers.util.Function7;
 import com.simibubi.create.content.contraptions.AbstractContraptionEntity;
 import net.createmod.catnip.net.base.ClientboundPacketPayload;
-import net.createmod.catnip.registry.RegisteredObjectsHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.JukeboxSong;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import net.neoforged.neoforge.registries.NeoForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;

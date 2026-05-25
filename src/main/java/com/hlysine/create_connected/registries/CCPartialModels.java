@@ -1,5 +1,6 @@
-package com.hlysine.create_connected;
+package com.hlysine.create_connected.registries;
 
+import com.hlysine.create_connected.CreateConnected;
 import dev.engine_room.flywheel.lib.model.baked.PartialModel;
 
 public class CCPartialModels {

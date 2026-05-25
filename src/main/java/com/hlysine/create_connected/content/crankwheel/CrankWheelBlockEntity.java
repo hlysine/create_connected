@@ -1,6 +1,6 @@
 package com.hlysine.create_connected.content.crankwheel;
 
-import com.hlysine.create_connected.CCPartialModels;
+import com.hlysine.create_connected.registries.CCPartialModels;
 import com.simibubi.create.AllSoundEvents;
 import com.simibubi.create.content.kinetics.base.IRotate;
 import com.simibubi.create.content.kinetics.crank.HandCrankBlock;

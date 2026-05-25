@@ -1,7 +1,7 @@
 package com.hlysine.create_connected.content.sequencedpulsegenerator;
 
-import com.hlysine.create_connected.CCBlocks;
-import com.hlysine.create_connected.CCGuiTextures;
+import com.hlysine.create_connected.registries.CCBlocks;
+import com.hlysine.create_connected.registries.CCGuiTextures;
 import com.hlysine.create_connected.ConnectedLang;
 import com.hlysine.create_connected.content.sequencedpulsegenerator.instructions.EndInstruction;
 import com.hlysine.create_connected.content.sequencedpulsegenerator.instructions.Instruction;

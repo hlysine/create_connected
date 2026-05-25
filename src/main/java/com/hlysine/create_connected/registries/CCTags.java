@@ -1,5 +1,7 @@
-package com.hlysine.create_connected;
+package com.hlysine.create_connected.registries;
 
+import com.hlysine.create_connected.ConnectedLang;
+import com.hlysine.create_connected.CreateConnected;
 import com.hlysine.create_connected.compat.Mods;
 import net.createmod.catnip.lang.Lang;
 import net.minecraft.core.Registry;
@@ -14,7 +16,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
 
-import static com.hlysine.create_connected.CCTags.NameSpace.*;
+import static com.hlysine.create_connected.registries.CCTags.NameSpace.*;
 
 public class CCTags {
     public static <T> TagKey<T> optionalTag(Registry<T> registry, ResourceLocation id) {

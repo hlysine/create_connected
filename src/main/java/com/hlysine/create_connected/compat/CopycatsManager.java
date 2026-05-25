@@ -1,7 +1,7 @@
 package com.hlysine.create_connected.compat;
 
-import com.hlysine.create_connected.CCBlocks;
-import com.hlysine.create_connected.CCItems;
+import com.hlysine.create_connected.registries.CCBlocks;
+import com.hlysine.create_connected.registries.CCItems;
 import com.hlysine.create_connected.CreateConnected;
 import com.hlysine.create_connected.config.CCConfigs;
 import com.tterrag.registrate.util.entry.BlockEntry;

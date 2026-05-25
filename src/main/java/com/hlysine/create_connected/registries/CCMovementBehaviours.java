@@ -1,4 +1,4 @@
-package com.hlysine.create_connected;
+package com.hlysine.create_connected.registries;
 
 import com.hlysine.create_connected.content.contraption.jukebox.JukeboxMovementBehaviour;
 import com.hlysine.create_connected.content.contraption.noteblock.NoteBlockMovementBehaviour;

@@ -1,4 +1,4 @@
-package com.hlysine.create_connected;
+package com.hlysine.create_connected.registries;
 
 import com.simibubi.create.AllShapes;
 import net.createmod.catnip.math.VoxelShaper;

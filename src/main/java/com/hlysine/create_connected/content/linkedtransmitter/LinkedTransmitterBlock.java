@@ -1,6 +1,6 @@
 package com.hlysine.create_connected.content.linkedtransmitter;
 
-import com.hlysine.create_connected.CCShapes;
+import com.hlysine.create_connected.registries.CCShapes;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

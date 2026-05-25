@@ -1,6 +1,6 @@
 package com.hlysine.create_connected.content.itemsilo;
 
-import com.hlysine.create_connected.CCBlockEntityTypes;
+import com.hlysine.create_connected.registries.CCBlockEntityTypes;
 import com.simibubi.create.api.connectivity.ConnectivityHandler;
 import com.simibubi.create.content.equipment.symmetryWand.SymmetryWandItem;
 import com.simibubi.create.foundation.block.IBE;

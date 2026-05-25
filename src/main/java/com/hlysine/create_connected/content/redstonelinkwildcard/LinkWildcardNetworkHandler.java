@@ -1,6 +1,6 @@
 package com.hlysine.create_connected.content.redstonelinkwildcard;
 
-import com.hlysine.create_connected.CCItems;
+import com.hlysine.create_connected.registries.CCItems;
 import com.hlysine.create_connected.CreateConnected;
 import com.hlysine.create_connected.config.CServer;
 import com.hlysine.create_connected.config.FeatureToggle;

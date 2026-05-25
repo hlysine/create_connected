@@ -1,6 +1,6 @@
 package com.hlysine.create_connected.content.itemsilo;
 
-import com.hlysine.create_connected.CCMountedStorageTypes;
+import com.hlysine.create_connected.registries.CCMountedStorageTypes;
 import com.mojang.serialization.MapCodec;
 import com.simibubi.create.api.contraption.storage.item.MountedItemStorageType;
 import com.simibubi.create.api.contraption.storage.item.WrapperMountedItemStorage;
