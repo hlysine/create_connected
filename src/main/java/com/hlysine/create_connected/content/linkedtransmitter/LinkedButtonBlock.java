@@ -8,7 +8,6 @@ import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.content.schematics.requirement.ItemRequirement;
 import com.simibubi.create.foundation.block.IBE;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
@@ -69,7 +68,6 @@ public class LinkedButtonBlock extends ButtonBlock implements IBE<LinkedTransmit
                                         @NotNull BlockGetter level,
                                         @NotNull BlockPos pos,
                                         @NotNull CollisionContext context) {
-        Direction facing = state.getValue(ButtonBlock.FACING);
         return Shapes.or(getTransmitterShape(state), super.getShape(state, level, pos, context));
     }
 
