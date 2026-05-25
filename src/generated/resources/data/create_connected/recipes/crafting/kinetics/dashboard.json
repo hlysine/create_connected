@@ -1,0 +1,33 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "create_connected:feature_enabled",
+          "feature": "create_connected:dashboard"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "category": "misc",
+        "key": {
+          "B": {
+            "item": "create:display_board"
+          },
+          "C": {
+            "item": "create:brass_casing"
+          }
+        },
+        "pattern": [
+          "B",
+          "C"
+        ],
+        "result": {
+          "item": "create_connected:dashboard"
+        },
+        "show_notification": true
+      }
+    }
+  ]
+}

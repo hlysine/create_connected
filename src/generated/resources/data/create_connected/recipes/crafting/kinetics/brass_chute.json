@@ -1,0 +1,35 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "create_connected:feature_enabled",
+          "feature": "create_connected:brass_chute"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "category": "misc",
+        "key": {
+          "I": {
+            "item": "create:brass_ingot"
+          },
+          "S": {
+            "item": "create:brass_sheet"
+          }
+        },
+        "pattern": [
+          "S",
+          "I",
+          "S"
+        ],
+        "result": {
+          "count": 4,
+          "item": "create_connected:brass_chute"
+        },
+        "show_notification": true
+      }
+    }
+  ]
+}

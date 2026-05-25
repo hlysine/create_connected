@@ -1,15 +1,15 @@
 {
-  "neoforge:conditions": [
+  "type": "create:item_application",
+  "conditions": [
     {
       "type": "create_connected:feature_enabled",
-      "tag": "create_connected:empty_fan_catalyst"
+      "feature": "create_connected:empty_fan_catalyst"
     },
     {
-      "type": "neoforge:mod_loaded",
+      "type": "forge:mod_loaded",
       "modid": "create_more_catalysts"
     }
   ],
-  "type": "create:item_application",
   "ingredients": [
     {
       "item": "create_connected:empty_fan_catalyst"
@@ -20,7 +20,7 @@
   ],
   "results": [
     {
-      "id": "create_connected:fan_exploding_catalyst"
+      "item": "create_connected:fan_exploding_catalyst"
     }
   ]
 }
