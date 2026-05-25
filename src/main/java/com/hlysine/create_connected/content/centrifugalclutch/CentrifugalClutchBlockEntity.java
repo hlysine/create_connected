@@ -41,7 +41,7 @@ public class CentrifugalClutchBlockEntity extends SplitShaftBlockEntity {
                 this,
                 new ClutchValueBox()
         );
-        speedThreshold.between(0, MAX_SPEED);
+        speedThreshold.between(-MAX_SPEED, MAX_SPEED);
         speedThreshold.value = DEFAULT_SPEED;
         speedThreshold.withCallback(i -> this.onKineticUpdate());
         behaviours.add(speedThreshold);
@@ -55,7 +55,11 @@ public class CentrifugalClutchBlockEntity extends SplitShaftBlockEntity {
 
     private void onKineticUpdate() {
         boolean coupled = !getBlockState().getValue(UNCOUPLED);
-        boolean thresholdReached = Mth.abs(getSpeed()) >= Mth.abs(speedThreshold.getValue()) && Mth.abs(getSpeed()) > 0;
+        boolean thresholdReached = Mth.abs(getSpeed()) > 0;
+        if (speedThreshold.getValue() < 0)
+            thresholdReached = thresholdReached && Mth.abs(getSpeed()) <= Mth.abs(speedThreshold.getValue());
+        else
+            thresholdReached = thresholdReached && Mth.abs(getSpeed()) >= Mth.abs(speedThreshold.getValue());
         if (coupled != thresholdReached && !isOverStressed()) {
             if (level != null) {
                 level.setBlockAndUpdate(getBlockPos(), getBlockState().cycle(UNCOUPLED));

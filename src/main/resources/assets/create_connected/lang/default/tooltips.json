@@ -2,7 +2,7 @@
   "block.create_connected.brake.tooltip.summary": "A device that produces _immense stress_ when powered, halting the network by _overstressing_ it.",
   "block.create_connected.brass_chute.tooltip.summary": "An improved chute for high throughput item transport. Moves up to _64 items_ at a time.",
   "block.create_connected.brass_gearbox.tooltip.summary": "A gearbox where the rotation direction of all 4 sides are _independently configurable_.",
-  "block.create_connected.centrifugal_clutch.tooltip.summary": "A clutch that is only _coupled_ if the input RPM is _faster_ than a configurable threshold.",
+  "block.create_connected.centrifugal_clutch.tooltip.summary": "A clutch that is only _coupled_ if the _input RPM_ meets a configurable threshold.",
   "block.create_connected.copycat_beam.tooltip.behaviour1": "Applies _held item_ as its _material_ if possible. _Click again_ to cycle _orientation_ or _powered_ state. Use a _Wrench_ to _reset_ the material.",
   "block.create_connected.copycat_beam.tooltip.condition1": "When R-Clicked",
   "block.create_connected.copycat_beam.tooltip.summary": "_Converts_ any _full block_ into a decorative beam.",
