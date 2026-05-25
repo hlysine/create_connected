@@ -16,5 +16,10 @@
   "block.create_connected.item_silo.tooltip.summary": "Et _vertikalt_ gjenstandshvelv.",
   "block.create_connected.overstress_clutch": "Overbelastningskobling",
   "block.create_connected.overstress_clutch.tooltip.condition1": "Når høyreklikket med skiftenøkkel",
-  "block.create_connected.parallel_gearbox": "Parallell girkasse"
+  "block.create_connected.parallel_gearbox": "Parallell girkasse",
+  "create_connected.gui.sequenced_pulse_generator.instruction.loop_if.param": "Målets tilstand",
+  "create_connected.gui.sequenced_pulse_generator.instruction.output.param": "Tidslengd",
+  "create_connected.gui.sequenced_pulse_generator.instruction.wait_for.param": "Målets tilstand",
+  "create_connected.ponder.linked_transmitter.text_10": "Høyreklikk på senderen med en momentnøkkel for å koble den fra inngangen",
+  "create_connected.ponder.linked_transmitter.text_9": "Sammenkoblede Senderne fungerer også på knapper og analoge spaker"
 }
