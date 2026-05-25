@@ -20,7 +20,6 @@
   "block.create_connected.brass_gearbox": "Sárgaréz-fogaskerékház",
   "block.create_connected.brass_gearbox.tooltip.summary": "Egy fogaskerékház, amely mind a négy oldalának forgási iránya _külön-külön_ állítható.",
   "block.create_connected.centrifugal_clutch": "Centrifugakuplung",
-  "block.create_connected.centrifugal_clutch.tooltip.summary": "Egy kuplung, ami csak akkor kapcsolt, ha a bemeneti sebesség nagyobb a beállított határnál.",
   "block.create_connected.copycat_beam": "Imitátor-oszlop",
   "block.create_connected.copycat_beam.tooltip.behaviour1": "Felveszi a _kézben tartott tárgy kinézetét_, ha lehetséges. _Kattints újra_ az _elforgatások_ vagy _redstone-állapotok_ közti váltáshoz. _Csavarkulccsal visszaállíthatod_ a kinézetet.",
   "block.create_connected.copycat_beam.tooltip.condition1": "Jobb kattintáskor",
