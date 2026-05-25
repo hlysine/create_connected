@@ -22,6 +22,7 @@
   "block.create_connected.brass_gearbox": "Caixa de Latão",
   "block.create_connected.brass_gearbox.tooltip.summary": "Uma engrenagem onde a direção de rotação de todos os 4 lados são _independentemente configuráveis_.",
   "block.create_connected.centrifugal_clutch": "Flauta centrífuga",
+  "block.create_connected.centrifugal_clutch.tooltip.summary": "Uma bagunça que só é _associada_ se o RPM de entrada for _mais rápido_ do que um limite configurável.",
   "block.create_connected.copycat_beam": "Imitador de Feixe",
   "block.create_connected.copycat_beam.tooltip.behaviour1": "Se possível, aplica o _item segurado_ como seu _material_. _Clique novamente_ para alternar a _orientação_ ou _estado energizado_. Use uma _Chave Inglesa_ para _redefinir_ o material.",
   "block.create_connected.copycat_beam.tooltip.condition1": "Quando usado o Clique Direito",
