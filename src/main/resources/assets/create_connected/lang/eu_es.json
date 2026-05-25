@@ -22,7 +22,6 @@
   "block.create_connected.brass_gearbox": "Letoizko engranaje-kutxa",
   "block.create_connected.brass_gearbox.tooltip.summary": "Engranaje-kutxa non 4 aldeen biraketa-noranzkoa _ modu independentean konfigura daitekeena _.",
   "block.create_connected.centrifugal_clutch": "Enbrage zentrifugoa",
-  "block.create_connected.centrifugal_clutch.tooltip.summary": "Sarrerako RPM-a konfigura daitekeen atalase bat baino _azkarragoa_ bada soilik _akoplatuta_ dagoen enbragea.",
   "block.create_connected.copycat_beam": "Kopiatu",
   "block.create_connected.copycat_beam.tooltip.behaviour1": "Ahal bada, _euskarritako elementua_ bere _material gisa aplikatzen du. _Egin klik berriro_ _orientazioa_ edo _elektriko_egoera itzultzeko. Erabili _ Giltza _ materiala berrezartzeko.",
   "block.create_connected.copycat_beam.tooltip.condition1": "Eskuineko botoiarekin klik egitean",
