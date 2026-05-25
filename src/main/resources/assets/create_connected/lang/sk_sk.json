@@ -24,7 +24,6 @@
   "block.create_connected.brass_gearbox": "Mosadzná prevodovka",
   "block.create_connected.brass_gearbox.tooltip.summary": "Prevodovka, kde smer otáčania všetkých 4 strán je _ nezávisle konfigurovateľný_.",
   "block.create_connected.centrifugal_clutch": "Odstredivá spojka",
-  "block.create_connected.centrifugal_clutch.tooltip.summary": "Spojka, ktorá je _spojená_ iba vtedy, ak sú vstupné otáčky _rýchlejšie_ ako konfigurovateľná prahová hodnota.",
   "block.create_connected.copycat_beam": "Imitačný stĺp",
   "block.create_connected.copycat_beam.tooltip.behaviour1": "Ak je to možné, použije _podržanú položku_ ako svoj _materiál_. _Opätovným kliknutím_ prepnete _orientáciu_ alebo _napájaný_ stav. Použite _ kľúč _ na _ resetovanie _ materiálu.",
   "block.create_connected.copycat_beam.tooltip.condition1": "Pri pravom kliknutí",
