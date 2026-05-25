@@ -1,6 +1,6 @@
 package com.hlysine.create_connected.content.sequencedpulsegenerator.instructions;
 
-import com.hlysine.create_connected.CCGuiTextures;
+import com.hlysine.create_connected.registries.CCGuiTextures;
 import com.hlysine.create_connected.content.sequencedpulsegenerator.SequencedPulseGeneratorBlockEntity;
 import net.minecraft.nbt.CompoundTag;
 
@@ -10,22 +10,23 @@ public class LoopIfInstruction extends Instruction {
         super(
                 "loop_if",
                 CCGuiTextures.SEQUENCER_DELAY,
-                new ParameterConfig("target",
+                new ParameterConfig(
                         0,
                         1,
                         null,
                         1,
                         1,
-                        ParameterConfig.booleanFormat),
+                        ParameterConfig.booleanFormat
+                ),
                 false,
                 false
         );
-        setValue(target);
+        setParam(target);
     }
 
     @Override
     public InstructionResult tick(SequencedPulseGeneratorBlockEntity be) {
-        if (be.isPowered() == (getValue() == 1)) {
+        if ((be.getCurrentInput() > 0) == (getParam() == 1)) {
             return InstructionResult.backToTop(true);
         }
         return InstructionResult.next(true);
@@ -41,6 +42,6 @@ public class LoopIfInstruction extends Instruction {
 
     @Override
     public Instruction copy() {
-        return new LoopIfInstruction(getValue());
+        return new LoopIfInstruction(getParam());
     }
 }

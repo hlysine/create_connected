@@ -1,6 +1,6 @@
 package com.hlysine.create_connected.content.shearpin;
 
-import com.hlysine.create_connected.CCPartialModels;
+import com.hlysine.create_connected.registries.CCPartialModels;
 import com.simibubi.create.content.kinetics.base.SingleAxisRotatingVisual;
 import dev.engine_room.flywheel.api.visualization.VisualizationContext;
 import dev.engine_room.flywheel.lib.model.Models;

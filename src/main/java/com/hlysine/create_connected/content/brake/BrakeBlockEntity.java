@@ -1,6 +1,6 @@
 package com.hlysine.create_connected.content.brake;
 
-import com.hlysine.create_connected.CCBlocks;
+import com.hlysine.create_connected.registries.CCBlocks;
 import com.hlysine.create_connected.config.CCConfigs;
 import com.hlysine.create_connected.datagen.advancements.AdvancementBehaviour;
 import com.hlysine.create_connected.datagen.advancements.CCAdvancements;

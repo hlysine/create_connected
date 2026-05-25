@@ -1,18 +1,20 @@
 package com.hlysine.create_connected.content.itemsilo;
 
-import com.hlysine.create_connected.CCBlockEntityTypes;
+import com.hlysine.create_connected.registries.CCBlockEntityTypes;
 import com.simibubi.create.api.connectivity.ConnectivityHandler;
 import com.simibubi.create.api.packager.InventoryIdentifier;
 import com.simibubi.create.foundation.blockEntity.IMultiBlockEntityContainer;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.inventory.VersionedInventoryWrapper;
+import com.simibubi.create.foundation.mixin.accessor.ItemStackHandlerAccessor;
 import com.simibubi.create.infrastructure.config.AllConfigs;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Axis;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
+import net.minecraft.world.Clearable;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -28,7 +30,7 @@ import net.minecraftforge.items.wrapper.CombinedInvWrapper;
 
 import java.util.List;
 
-public class ItemSiloBlockEntity extends SmartBlockEntity implements IMultiBlockEntityContainer.Inventory {
+public class ItemSiloBlockEntity extends SmartBlockEntity implements IMultiBlockEntityContainer.Inventory, Clearable {
 
     protected LazyOptional<IItemHandler> itemCapability;
     protected InventoryIdentifier invId;
@@ -322,5 +324,10 @@ public class ItemSiloBlockEntity extends SmartBlockEntity implements IMultiBlock
 
     @Override
     public boolean hasInventory() { return true; }
+
+    @Override
+    public void clearContent() {
+        ((ItemStackHandlerAccessor) inventory).create$getStacks().clear();
+    }
 }
 

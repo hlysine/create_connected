@@ -100,6 +100,9 @@ public class KineticBatteryBlockEntity extends GeneratingKineticBlockEntity impl
                 }
                 batteryLevel = Math.max(batteryLevel - lastCapacityProvided * Math.abs(getGeneratedSpeed()), 0);
                 changed = true;
+            } else if (batteryLevel > 0) {
+                batteryLevel = Math.max(batteryLevel - CServer.BatteryMinDischarge.get(), 0);
+                changed = true;
             }
         } else {
             if (batteryLevel < getMaxBatteryLevel() && capacity > 0) {
@@ -231,8 +234,10 @@ public class KineticBatteryBlockEntity extends GeneratingKineticBlockEntity impl
         boolean complete = isCurrentStageComplete(getBlockState());
         boolean discharging = isDischarging(getBlockState());
 
-        if (discharging && !complete) {
+        if (discharging && !complete && stress > 0) {
             return ConnectedLang.translateDirect("battery.status.discharging");
+        } else if (discharging && !complete) {
+            return ConnectedLang.translateDirect("battery.status.power_saving");
         } else if (!discharging && !complete) {
             return ConnectedLang.translateDirect("battery.status.charging");
         } else if (!discharging && complete) {

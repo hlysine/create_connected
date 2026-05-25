@@ -1,6 +1,7 @@
 package com.hlysine.create_connected;
 
-
+import com.hlysine.create_connected.registries.CCPartialModels;
+import com.hlysine.create_connected.registries.CCPonderPlugin;
 import net.createmod.ponder.foundation.PonderIndex;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.IEventBus;

@@ -1,6 +1,6 @@
 package com.hlysine.create_connected.content.crankwheel;
 
-import com.hlysine.create_connected.CCPartialModels;
+import com.hlysine.create_connected.registries.CCPartialModels;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntityVisual;
 import com.simibubi.create.content.kinetics.base.RotatingInstance;
 import com.simibubi.create.content.kinetics.simpleRelays.ICogWheel;
@@ -14,6 +14,7 @@ import dev.engine_room.flywheel.lib.model.Models;
 import dev.engine_room.flywheel.lib.visual.SimpleDynamicVisual;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import org.joml.Math;
 import org.joml.Quaternionf;
 
 import java.util.function.Consumer;
@@ -48,7 +49,7 @@ public class CrankWheelVisual extends KineticBlockEntityVisual<CrankWheelBlockEn
 
     private void rotateCrank(float pt) {
         var facing = blockState.getValue(BlockStateProperties.FACING);
-        float angle = blockEntity.getIndependentAngle(pt);
+        float angle = Math.toRadians(blockEntity.getIndependentAngle(pt));
 
         crank.setIdentityTransform()
                 .translate(getVisualPosition())

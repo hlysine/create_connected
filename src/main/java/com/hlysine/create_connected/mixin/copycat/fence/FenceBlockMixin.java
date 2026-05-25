@@ -1,6 +1,6 @@
 package com.hlysine.create_connected.mixin.copycat.fence;
 
-import com.hlysine.create_connected.CCBlocks;
+import com.hlysine.create_connected.registries.CCBlocks;
 import com.hlysine.create_connected.content.copycat.ICopycatWithWrappedBlock;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.BlockTags;

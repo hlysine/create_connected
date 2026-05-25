@@ -7,6 +7,7 @@ import com.hlysine.create_connected.config.CCConfigs;
 import com.hlysine.create_connected.datagen.CCDatagen;
 import com.hlysine.create_connected.datagen.advancements.CCAdvancements;
 import com.hlysine.create_connected.datagen.advancements.CCTriggers;
+import com.hlysine.create_connected.registries.*;
 import com.mojang.logging.LogUtils;
 import com.simibubi.create.api.registry.CreateRegistries;
 import com.simibubi.create.foundation.data.CreateRegistrate;
@@ -87,6 +88,7 @@ public class CreateConnected {
             CCMovementBehaviours.register();
             CCMountedStorageTypes.register();
             CCDisplaySources.register();
+            CCDisplayTargets.register();
         });
     }
 

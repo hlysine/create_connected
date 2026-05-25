@@ -3,14 +3,13 @@ package com.hlysine.create_connected.datagen.recipes;
 import com.google.common.base.Supplier;
 import com.google.common.collect.ImmutableList;
 import com.google.gson.JsonArray;
+import com.hlysine.create_connected.registries.CCBlocks;
 import com.google.gson.JsonObject;
-import com.hlysine.create_connected.CCBlocks;
-import com.hlysine.create_connected.CCItems;
+import com.hlysine.create_connected.registries.CCItems;
 import com.hlysine.create_connected.CreateConnected;
 import com.hlysine.create_connected.compat.CopycatsManager;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllItems;
-import com.simibubi.create.AllTags;
 import com.simibubi.create.Create;
 import com.simibubi.create.api.data.recipe.BaseRecipeProvider;
 import com.tterrag.registrate.util.DataIngredient;
@@ -259,6 +258,26 @@ public class CCStandardRecipes extends BaseRecipeProvider {
                     .requires(CCBlocks.INVENTORY_ACCESS_PORT)
             );
 
+    GeneratedRecipe BRASS_CHUTE = create(CCBlocks.BRASS_CHUTE).unlockedBy(AllItems.BRASS_SHEET::get)
+            .requiresResultFeature()
+            .returns(4)
+            .viaShaped(b -> b
+                    .define('S', AllItems.BRASS_SHEET)
+                    .define('I', AllItems.BRASS_INGOT)
+                    .pattern("S")
+                    .pattern("I")
+                    .pattern("S")
+            );
+
+    GeneratedRecipe DASHBOARD = create(CCBlocks.DASHBOARD).unlockedBy(AllBlocks.DISPLAY_BOARD::get)
+            .requiresResultFeature()
+            .viaShaped(b -> b
+                    .define('B', AllBlocks.DISPLAY_BOARD)
+                    .define('C', AllBlocks.BRASS_CASING)
+                    .pattern("B")
+                    .pattern("C")
+            );
+
     GeneratedRecipe EMPTY_FAN_CATALYST = create(CCBlocks.EMPTY_FAN_CATALYST).unlockedBy(AllBlocks.BRASS_BLOCK::get)
             .requiresResultFeature()
             .viaShaped(b -> b
@@ -280,6 +299,15 @@ public class CCStandardRecipes extends BaseRecipeProvider {
     GeneratedRecipe EMPTY_CATALYST_FROM_ENDING_DRAGONS_BREATH = clearFanCatalyst("ending_dragons_breath", CCBlocks.FAN_ENDING_CATALYST_DRAGONS_BREATH);
     GeneratedRecipe EMPTY_CATALYST_FROM_ENDING_DRAGON_HEAD = clearFanCatalyst("ending_dragon_head", CCBlocks.FAN_ENDING_CATALYST_DRAGON_HEAD);
     GeneratedRecipe EMPTY_CATALYST_FROM_WITHERING = clearFanCatalyst("withering", CCBlocks.FAN_WITHERING_CATALYST);
+    GeneratedRecipe EMPTY_CATALYST_FROM_CHOCOLATE_COATING = clearFanCatalyst("chocolate_coating", CCBlocks.FAN_CHOCOLATE_COATING_CATALYST);
+    GeneratedRecipe EMPTY_CATALYST_FROM_HONEY_COATING = clearFanCatalyst("honey_coating", CCBlocks.FAN_HONEY_COATING_CATALYST);
+    GeneratedRecipe EMPTY_CATALYST_FROM_EXPLODING = clearFanCatalyst("exploding", CCBlocks.FAN_EXPLODING_CATALYST);
+    GeneratedRecipe EMPTY_CATALYST_FROM_RESONANCE = clearFanCatalyst("resonance", CCBlocks.FAN_RESONANCE_CATALYST);
+    GeneratedRecipe EMPTY_CATALYST_FROM_SCULKING = clearFanCatalyst("sculking", CCBlocks.FAN_SCULKING_CATALYST);
+    GeneratedRecipe EMPTY_CATALYST_FROM_PURIFYING = clearFanCatalyst("purifying", CCBlocks.FAN_PURIFYING_CATALYST);
+    GeneratedRecipe EMPTY_CATALYST_FROM_TRANSMUTATION = clearFanCatalyst("transmutation", CCBlocks.FAN_TRANSMUTATION_CATALYST);
+    GeneratedRecipe EMPTY_CATALYST_FROM_GLOOMING = clearFanCatalyst("glooming", CCBlocks.FAN_GLOOMING_CATALYST);
+    GeneratedRecipe EMPTY_CATALYST_FROM_SOUL_STRIPPING = clearFanCatalyst("soul_stripping", CCBlocks.FAN_SOUL_STRIPPING_CATALYST);
 
     private final Marker PALETTES = enterFolder("palettes");
 
@@ -739,11 +767,6 @@ public class CCStandardRecipes extends BaseRecipeProvider {
         private final ResourceLocation outputOverride;
 
         @Override
-        public JsonObject serializeAdvancement() {
-            return wrapped.serializeAdvancement();
-        }
-
-        @Override
         public ResourceLocation getAdvancementId() {
             return wrapped.getAdvancementId();
         }
@@ -775,6 +798,11 @@ public class CCStandardRecipes extends BaseRecipeProvider {
         @Override
         public @NotNull RecipeSerializer<?> getType() {
             return wrapped.getType();
+        }
+
+        @Override
+        public JsonObject serializeAdvancement() {
+            return wrapped.serializeAdvancement();
         }
 
     }

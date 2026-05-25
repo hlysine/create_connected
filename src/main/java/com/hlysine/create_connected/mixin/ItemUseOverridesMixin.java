@@ -1,6 +1,6 @@
 package com.hlysine.create_connected.mixin;
 
-import com.hlysine.create_connected.PreciseItemUseOverrides;
+import com.hlysine.create_connected.registries.PreciseItemUseOverrides;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;

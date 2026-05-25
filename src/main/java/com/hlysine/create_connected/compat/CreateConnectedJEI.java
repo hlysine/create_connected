@@ -1,6 +1,6 @@
 package com.hlysine.create_connected.compat;
 
-import com.hlysine.create_connected.CCCreativeTabs;
+import com.hlysine.create_connected.registries.CCCreativeTabs;
 import com.hlysine.create_connected.CreateConnected;
 import com.hlysine.create_connected.config.FeatureToggle;
 import com.tterrag.registrate.util.entry.ItemProviderEntry;

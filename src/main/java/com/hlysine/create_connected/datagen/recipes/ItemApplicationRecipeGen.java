@@ -1,10 +1,10 @@
 package com.hlysine.create_connected.datagen.recipes;
 
-import com.hlysine.create_connected.CCBlocks;
+import com.hlysine.create_connected.registries.CCBlocks;
 import com.hlysine.create_connected.CreateConnected;
 import com.hlysine.create_connected.compat.Mods;
+import com.simibubi.create.AllFluids;
 import com.simibubi.create.AllItems;
-import com.simibubi.create.AllRecipeTypes;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -64,6 +64,33 @@ public class ItemApplicationRecipeGen extends com.simibubi.create.api.data.recip
     GeneratedRecipe WITHERING_CATALYST = fanCatalystFromEmpty(
             "withering_catalyst", Items.WITHER_ROSE, CCBlocks.FAN_WITHERING_CATALYST::asItem,
             new ModLoadedCondition(Mods.HENRY.id()));
+    GeneratedRecipe CHOCOLATE_COATING_CATALYST = fanCatalystFromEmpty(
+            "chocolate_coating_catalyst", AllFluids.CHOCOLATE.getBucket().get(), CCBlocks.FAN_CHOCOLATE_COATING_CATALYST::asItem,
+            new ModLoadedCondition(Mods.MORE_CATALYSTS.id()));
+    GeneratedRecipe HONEY_COATING_CATALYST = fanCatalystFromEmpty(
+            "honey_coating_catalyst", AllFluids.HONEY.getBucket().get(), CCBlocks.FAN_HONEY_COATING_CATALYST::asItem,
+            new ModLoadedCondition(Mods.MORE_CATALYSTS.id()));
+    GeneratedRecipe EXPLODING_CATALYST = fanCatalystFromEmpty(
+            "exploding_catalyst", Blocks.CREEPER_HEAD, CCBlocks.FAN_EXPLODING_CATALYST::asItem,
+            new ModLoadedCondition(Mods.MORE_CATALYSTS.id()));
+    GeneratedRecipe RESONANCE_CATALYST = fanCatalystFromEmpty(
+            "resonance_catalyst", Items.AMETHYST_CLUSTER, CCBlocks.FAN_RESONANCE_CATALYST::asItem,
+            new ModLoadedCondition(Mods.MORE_CATALYSTS.id()));
+    GeneratedRecipe SCULKING_CATALYST = fanCatalystFromEmpty(
+            "sculking_catalyst", Blocks.SCULK_CATALYST, CCBlocks.FAN_SCULKING_CATALYST::asItem,
+            new ModLoadedCondition(Mods.MORE_CATALYSTS.id()));
+    GeneratedRecipe PURIFYING_CATALYST = fanCatalystFromEmpty(
+            "purifying_catalyst", Blocks.BEACON, CCBlocks.FAN_PURIFYING_CATALYST::asItem,
+            new ModLoadedCondition(Mods.MORE_CATALYSTS.id()));
+    GeneratedRecipe TRANSMUTATION_CATALYST = fanCatalystFromEmpty(
+            "transmutation_catalyst", new SimpleDatagenIngredient(Mods.SHIMMER, "shimmer_bucket").toVanilla(), CCBlocks.FAN_TRANSMUTATION_CATALYST::asItem,
+            new ModLoadedCondition(Mods.SHIMMER.id()));
+    GeneratedRecipe GLOOMING_CATALYST = fanCatalystFromEmpty(
+            "glooming_catalyst", new SimpleDatagenIngredient(Mods.TWILIGHT_FOREST, "exanimate_essence").toVanilla(), CCBlocks.FAN_GLOOMING_CATALYST::asItem,
+            new ModLoadedCondition(Mods.SHIMMER.id()));
+    GeneratedRecipe SOUL_STRIPPING_CATALYST = fanCatalystFromEmpty(
+            "soul_stripping_catalyst", new SimpleDatagenIngredient(Mods.NETHER_INDUSTRY, "mysterious_ancient_mechanism").toVanilla(), CCBlocks.FAN_SOUL_STRIPPING_CATALYST::asItem,
+            new ModLoadedCondition(Mods.NETHER_INDUSTRY.id()));
 
     protected GeneratedRecipe fanCatalystFromEmpty(String type, ItemLike ingredient, Supplier<ItemLike> output) {
         return fanCatalystFromEmpty(type, Ingredient.of(ingredient), output);

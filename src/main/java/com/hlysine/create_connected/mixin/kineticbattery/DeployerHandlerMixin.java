@@ -1,7 +1,7 @@
 package com.hlysine.create_connected.mixin.kineticbattery;
 
-import com.hlysine.create_connected.CCBlocks;
-import com.hlysine.create_connected.CCItems;
+import com.hlysine.create_connected.registries.CCBlocks;
+import com.hlysine.create_connected.registries.CCItems;
 import com.simibubi.create.content.kinetics.deployer.DeployerHandler;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

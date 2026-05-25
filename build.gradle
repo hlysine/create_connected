@@ -5,7 +5,7 @@ plugins {
     id 'net.minecraftforge.gradle' version '[6.0,6.2)'
     id 'org.parchmentmc.librarian.forgegradle' version '1.+'
     id 'org.spongepowered.mixin' version '0.7.38'
-    id 'me.modmuss50.mod-publish-plugin' version '0.4.5'
+    id 'me.modmuss50.mod-publish-plugin' version '2.0.0-beta.1'
 }
 
 def secrets = new Properties()
@@ -141,6 +141,11 @@ repositories {
         name = "DragonsPlusMinecraft"
         url "https://maven.dragons.plus/releases"
     }
+    maven {
+        // Sable + Create: Aeronautics
+        name = "RyanHCode Maven"
+        url = "https://maven.ryanhcode.dev/releases"
+    }
     exclusiveContent {
         forRepository {
             maven {
@@ -172,6 +177,13 @@ repositories {
     }
 }
 
+configurations {
+    localCompile
+    compileClasspath {
+        extendsFrom(localCompile)
+    }
+}
+
 dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 
@@ -194,13 +206,28 @@ dependencies {
 //    runtimeOnly("maven.modrinth:create-dreams-and-desires:${dreams_desires_version}")
 //    runtimeOnly("plus.dragons.createdragonsplus:create-dragons-plus-${minecraft_version}:${create_dragons_plus_version}")
 //    runtimeOnly("maven.modrinth:create-henry:${create_henry_version}")
-    implementation(fg.deobf("com.copycatsplus:copycats:${copycats_version}"))
+    implementation(fg.deobf("com.copycatsplus:copycats:${copycats_version}")) { transitive = false }
     implementation(fg.deobf("maven.modrinth:additional-placements:${additional_placements_version}"))
 //    runtimeOnly("maven.modrinth:create-steam-n-rails:${steam_n_rails_version}")
 
 //    runtimeOnly("maven.modrinth:adorn:${adorn_version}")
 
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+    /*
+    // Sable compatibility
+    implementation("dev.ryanhcode.sable:sable-neoforge-${minecraft_version}:${sable_version}")
+    implementation("dev.simulated_team.simulated:simulated-neoforge-${minecraft_version}:${simulated_version}") {
+        transitive = false
+    }
+    implementation("dev.eriksonn.aeronautics:aeronautics-neoforge-${minecraft_version}:${aeronautics_version}") {
+        transitive = false
+    }
+    jarJar(api("dev.ryanhcode.sable-companion:sable-companion-common-${minecraft_version}:[${sable_companion_version},)")) {
+        version {
+            prefer sable_companion_version
+        }
+    }
+    */
 }
 
 // Expands all declared replace properties in the specified resource targets.
@@ -224,7 +251,7 @@ tasks.named('processResources', ProcessResources).configure {
     inputs.properties replaceProperties
 
     filesMatching(['META-INF/mods.toml', 'pack.mcmeta']) {
-        expand replaceProperties + [project: project]
+        expand replaceProperties
     }
 }
 

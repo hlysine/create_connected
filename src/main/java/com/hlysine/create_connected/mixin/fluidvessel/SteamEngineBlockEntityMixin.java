@@ -1,6 +1,6 @@
 package com.hlysine.create_connected.mixin.fluidvessel;
 
-import com.hlysine.create_connected.CCBlocks;
+import com.hlysine.create_connected.registries.CCBlocks;
 import com.simibubi.create.content.kinetics.steamEngine.SteamEngineBlock;
 import com.simibubi.create.content.kinetics.steamEngine.SteamEngineBlockEntity;
 import net.minecraft.core.Direction;

@@ -1,7 +1,7 @@
 package com.hlysine.create_connected.ponder;
 
-import com.hlysine.create_connected.CCBlocks;
-import com.hlysine.create_connected.CCItems;
+import com.hlysine.create_connected.registries.CCBlocks;
+import com.hlysine.create_connected.registries.CCItems;
 import com.hlysine.create_connected.content.kineticbattery.KineticBatteryBlock;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllItems;
@@ -100,6 +100,16 @@ public class KineticBatteryScene {
         scene.world().modifyBlock(battery, state -> state.setValue(KineticBatteryBlock.LEVEL, 3), false);
         scene.effects().indicateSuccess(battery);
         scene.idle(75);
+
+        scene.world().hideSection(util.select().position(saw), Direction.UP);
+        scene.idle(10);
+
+        scene.overlay().showText(120)
+                .text("If the network has zero stress impact, the battery enters power saving mode and only consumes a tiny amount of stress units")
+                .attachKeyFrame()
+                .placeNearTarget()
+                .pointAt(util.vector().topOf(battery));
+        scene.idle(110);
 
         scene.world().showSection(comparatorGroup, Direction.DOWN);
         scene.idle(20);

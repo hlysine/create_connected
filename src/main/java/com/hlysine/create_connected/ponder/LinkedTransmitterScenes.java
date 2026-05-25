@@ -1,7 +1,7 @@
 package com.hlysine.create_connected.ponder;
 
-import com.hlysine.create_connected.CCBlocks;
-import com.hlysine.create_connected.CCItems;
+import com.hlysine.create_connected.registries.CCBlocks;
+import com.hlysine.create_connected.registries.CCItems;
 import com.hlysine.create_connected.content.linkedtransmitter.LinkedTransmitterBlockEntity;
 import com.simibubi.create.AllItems;
 import com.simibubi.create.content.redstone.link.RedstoneLinkBlockEntity;
@@ -13,7 +13,6 @@ import net.createmod.ponder.api.scene.SceneBuildingUtil;
 import net.createmod.ponder.api.scene.Selection;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
@@ -117,7 +116,7 @@ public class LinkedTransmitterScenes {
         scene.idle(10);
 
         scene.overlay().showText(50)
-                .text("Placing items in the two slots can specify a Frequency")
+                .text("Place items in the two slots to specify a frequency")
                 .placeNearTarget()
                 .pointAt(backSlot);
         scene.idle(60);
@@ -162,7 +161,7 @@ public class LinkedTransmitterScenes {
         scene.world().toggleRedstonePower(util.select().fromTo(1, 2, 2, 1, 2, 3));
         scene.overlay().showText(90)
                 .attachKeyFrame()
-                .text("Only the links with matching Frequencies will communicate")
+                .text("Only the links with matching frequencies will communicate")
                 .placeNearTarget()
                 .pointAt(linkRightVec);
 
@@ -182,15 +181,29 @@ public class LinkedTransmitterScenes {
                 .placeNearTarget()
                 .pointAt(transmitVec);
         scene.idle(30);
-        scene.overlay().showControls(transmitVec, Pointing.DOWN,40)
+        scene.overlay().showControls(transmitVec, Pointing.DOWN, 40)
                 .rightClick()
-                .whileSneaking();
+                .withItem(new ItemStack(Items.HONEYCOMB));
         scene.idle(20);
         scene.world().modifyBlock(lever, s -> s.cycle(LOCKED)
                 , false);
         scene.idle(20);
         scene.overlay().showText(80)
-                .text("...right-click the transmitter while sneaking to lock the frequency slots")
+                .text("...right-click the transmitter with honeycomb to wax it")
+                .placeNearTarget()
+                .pointAt(transmitVec);
+
+        scene.idle(80);
+
+        scene.overlay().showControls(transmitVec, Pointing.DOWN, 40)
+                .rightClick()
+                .withItem(new ItemStack(Items.WOODEN_AXE));
+        scene.idle(20);
+        scene.world().modifyBlock(lever, s -> s.cycle(LOCKED)
+                , false);
+        scene.idle(20);
+        scene.overlay().showText(80)
+                .text("Right-click again with an axe to edit the frequencies again")
                 .placeNearTarget()
                 .pointAt(transmitVec);
 
@@ -204,7 +217,7 @@ public class LinkedTransmitterScenes {
                 .rightClick()
                 .withItem(new ItemStack(CCItems.LINKED_TRANSMITTER));
         scene.idle(5);
-        scene.overlay().showControls(util.vector().blockSurface(button, Direction.DOWN).add(0, 2 / 16.0, 0), Pointing.DOWN,40)
+        scene.overlay().showControls(util.vector().blockSurface(button, Direction.DOWN).add(0, 2 / 16.0, 0), Pointing.DOWN, 40)
                 .rightClick()
                 .withItem(new ItemStack(CCItems.LINKED_TRANSMITTER));
         scene.idle(20);

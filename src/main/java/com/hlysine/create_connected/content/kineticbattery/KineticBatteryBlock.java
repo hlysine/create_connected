@@ -1,22 +1,23 @@
 package com.hlysine.create_connected.content.kineticbattery;
 
 
-import com.hlysine.create_connected.CCBlockEntityTypes;
-import com.hlysine.create_connected.CCBlocks;
-import com.hlysine.create_connected.CCItems;
+import com.hlysine.create_connected.registries.CCBlockEntityTypes;
+import com.hlysine.create_connected.registries.CCBlocks;
+import com.hlysine.create_connected.registries.CCItems;
 import com.simibubi.create.content.kinetics.base.DirectionalKineticBlock;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
 import com.simibubi.create.foundation.block.IBE;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.common.util.FakePlayer;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -28,7 +29,6 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
-import net.minecraftforge.common.util.FakePlayer;
 import org.jetbrains.annotations.NotNull;
 
 public class KineticBatteryBlock extends DirectionalKineticBlock implements IBE<KineticBatteryBlockEntity> {

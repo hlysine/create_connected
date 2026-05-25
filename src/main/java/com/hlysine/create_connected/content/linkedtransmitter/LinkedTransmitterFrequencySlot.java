@@ -34,14 +34,15 @@ public class LinkedTransmitterFrequencySlot extends ValueBoxTransform.Dual {
     public Vec3 getLocalOffset(LevelAccessor level, BlockPos pos, BlockState state) {
         Direction facing = state.getValue(LinkedButtonBlock.FACING);
         AttachFace face = state.getValue(LinkedButtonBlock.FACE);
+        boolean locked = state.getValue(LinkedButtonBlock.LOCKED);
 
         Vec3 location = switch (face) {
             case FLOOR ->
-                    VecHelper.voxelSpace(2.5f, 1.1f, 10.5f).add(isFirst() ? Vec3.ZERO : VecHelper.voxelSpace(0, 0, -5));
+                    VecHelper.voxelSpace(2.5f, 0.1f + (locked ? 0.5f : 1), 10.5f).add(isFirst() ? Vec3.ZERO : VecHelper.voxelSpace(0, 0, -5));
             case WALL ->
-                    VecHelper.voxelSpace(13.5f, 10.5f, 1.1f).add(isFirst() ? Vec3.ZERO : VecHelper.voxelSpace(0, -5, 0));
+                    VecHelper.voxelSpace(13.5f, 10.5f, 0.1f + (locked ? 0.5f : 1)).add(isFirst() ? Vec3.ZERO : VecHelper.voxelSpace(0, -5, 0));
             case CEILING ->
-                    VecHelper.voxelSpace(2.5f, 14.9f, 5.5f).add(isFirst() ? Vec3.ZERO : VecHelper.voxelSpace(0, 0, 5));
+                    VecHelper.voxelSpace(2.5f, 15.9f - (locked ? 0.5f : 1), 5.5f).add(isFirst() ? Vec3.ZERO : VecHelper.voxelSpace(0, 0, 5));
         };
         location = VecHelper.rotateCentered(location, AngleHelper.horizontalAngle(facing), Axis.Y);
         return location;

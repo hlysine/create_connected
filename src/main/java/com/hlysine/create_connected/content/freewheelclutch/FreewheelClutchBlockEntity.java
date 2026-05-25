@@ -1,6 +1,6 @@
 package com.hlysine.create_connected.content.freewheelclutch;
 
-import com.hlysine.create_connected.CCBlocks;
+import com.hlysine.create_connected.registries.CCBlocks;
 import com.hlysine.create_connected.content.ClutchValueBox;
 import com.simibubi.create.content.kinetics.RotationPropagator;
 import com.simibubi.create.content.kinetics.transmission.SplitShaftBlockEntity;

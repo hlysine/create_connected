@@ -1,6 +1,6 @@
 package com.hlysine.create_connected.mixin.sequencedgearshift;
 
-import com.hlysine.create_connected.CCSequencerInstructions;
+import com.hlysine.create_connected.registries.CCSequencerInstructions;
 import com.simibubi.create.content.kinetics.transmission.sequencer.Instruction;
 import com.simibubi.create.content.kinetics.transmission.sequencer.InstructionSpeedModifiers;
 import com.simibubi.create.content.kinetics.transmission.sequencer.OnIsPoweredResult;

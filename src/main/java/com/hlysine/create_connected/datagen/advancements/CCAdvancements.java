@@ -1,8 +1,8 @@
 package com.hlysine.create_connected.datagen.advancements;
 
 import com.google.common.collect.Sets;
-import com.hlysine.create_connected.CCBlocks;
-import com.hlysine.create_connected.CCItems;
+import com.hlysine.create_connected.registries.CCBlocks;
+import com.hlysine.create_connected.registries.CCItems;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;

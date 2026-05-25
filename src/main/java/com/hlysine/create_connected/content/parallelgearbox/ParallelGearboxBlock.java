@@ -1,7 +1,7 @@
 package com.hlysine.create_connected.content.parallelgearbox;
 
-import com.hlysine.create_connected.CCBlockEntityTypes;
-import com.hlysine.create_connected.CCItems;
+import com.hlysine.create_connected.registries.CCBlockEntityTypes;
+import com.hlysine.create_connected.registries.CCItems;
 import com.simibubi.create.content.kinetics.base.RotatedPillarKineticBlock;
 import com.simibubi.create.foundation.block.IBE;
 import net.minecraft.core.BlockPos;
@@ -10,7 +10,6 @@ import net.minecraft.core.Direction.Axis;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;

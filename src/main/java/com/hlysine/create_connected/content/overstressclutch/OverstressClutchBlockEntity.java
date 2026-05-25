@@ -1,6 +1,6 @@
 package com.hlysine.create_connected.content.overstressclutch;
 
-import com.hlysine.create_connected.CCBlocks;
+import com.hlysine.create_connected.registries.CCBlocks;
 import com.hlysine.create_connected.ConnectedLang;
 import com.hlysine.create_connected.content.overstressclutch.OverstressClutchBlock.ClutchState;
 import com.hlysine.create_connected.datagen.advancements.AdvancementBehaviour;

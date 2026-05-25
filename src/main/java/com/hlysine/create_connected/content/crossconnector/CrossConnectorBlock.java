@@ -1,11 +1,10 @@
 package com.hlysine.create_connected.content.crossconnector;
 
-import com.hlysine.create_connected.CCShapes;
+import com.hlysine.create_connected.registries.CCShapes;
 import com.hlysine.create_connected.content.IConnectionForwardingBlock;
 import com.hlysine.create_connected.content.KineticHelper;
 import com.simibubi.create.content.decoration.encasing.EncasableBlock;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
-import com.simibubi.create.content.kinetics.base.GeneratingKineticBlockEntity;
 import com.simibubi.create.content.kinetics.base.IRotate;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
 import net.createmod.catnip.data.Iterate;

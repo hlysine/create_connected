@@ -5,6 +5,76 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 1.2.0 - 2026-05-25
+
+### Added
+
+- **Dashboard**
+    - A mini-display that can send info to the HUD of players sitting in front
+- **Brass Chute**
+    - Middle ground between a regular chute and a smart chute. Supports diagonal item transport and can extract 64 items
+      at a time.
+- **Catalyst compatibilities for Create: More Catalysts, Create: Shimmer and Create: Nether Industry**
+    - Enables bulk chocolate coating, honey coating, exploding, glooming, purifying, resonance, sculking, soul stripping
+      and transmutation (thanks @HgTlPbBi-4 and @JustAGuy4447 for implementation)
+
+### Changed
+
+- **Reworked Sequenced Pulse Generator**
+    - Faster reaction time of 1 game tick instead of 2
+    - New instructions for signal strength comparison, arithmetic and bitwise operations
+    - GUI improvements
+- **Centrifugal clutch now accepts a maximum or minimum speed threshold**
+    - Configured via the value panel
+- **Linked transmitters can now be locked by waxing and unlocked with an axe**
+- Updated ponder and tooltip for Kinetic Battery to explain power saving mode
+- Brass gearbox rotation can only be toggled with a wrench now to avoid misclicks
+- Inventory access ports and inventory bridges can no longer be used to bypass restriction between packagers and
+  portable storage interfaces
+- Retextured the Redstone Link Wildcard (thanks @ThatB0i)
+- Updated usage and license information in the readme and license files
+
+### Fixed
+
+- Linked receivers losing signal on server restart
+- Brass gearbox not rotating properly in schematics and contraption disassembly
+- Linked transmitter losing texture transparency with certain mod combinations
+- Wrench rotation of crank wheels not updating properly
+- Missing audio in crank wheels
+
+## 1.1.16 - 2026-05-06
+
+### Fixed
+
+- Incorrect discharge calculation for Kinetic Batteries
+
+## 1.1.15 - 2026-05-05
+
+### Added
+
+- Kinetic Batteries now support display links
+- Linked Transmitters can now be attached to Throttle Levers from Create: Aeronautics
+
+### Changed
+
+- **Kinetic Batteries now have a minimum su consumption of 1**
+    - They will now run out of charge after 512 hours if they are used to power structures that have no stress impact
+
+### Fixed
+
+- Item duplication when an Item Silo is assembled into a physics contraption
+- Mip level 4 not supported due to incorrect texture size for the Fluid Vessel
+- Crank wheel handle rotating at incorrect speed
+
+## 1.1.14 - 2026-04-27
+
+### Fixed
+
+- Cross connector compatibility with Create: Aeronautics - no longer interferes with the swivel bearing (thanks
+  @KIN-4096)
+- Redstone link wildcard compatibility with Sable - now works across physics contraptions (thanks @electicsteve)
+- Ponder entry for Kinetic Bridge
+
 ## 1.1.13 - 2026-02-08
 
 ### Fixed
@@ -56,7 +126,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- Redo fix: incompatibility with Create: Steam n Rails due to both mods registering the same set of interaction behaviors
+- Redo fix: incompatibility with Create: Steam n Rails due to both mods registering the same set of interaction
+  behaviors
 
 ## 1.1.6 - 2025-06-23
 
@@ -103,15 +174,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - **Kinetic Bridge**
-  - Transfer stress capacity from one network to another while keeping the networks separate
+    - Transfer stress capacity from one network to another while keeping the networks separate
 - **Kinetic Battery**
-  - Stores kinetic stress for later use. Retains charge in item form to enable long-distance energy transport
+    - Stores kinetic stress for later use. Retains charge in item form to enable long-distance energy transport
 - **Redstone Link Wildcard**
-  - Allows a redstone link frequency slot to match any item, including air
+    - Allows a redstone link frequency slot to match any item, including air
 - **Cross Connector**
-  - Relays rotation in two directions independently
+    - Relays rotation in two directions independently
 - **Catalyst compatibilities for Create: Dragons Plus, Create: Nuclear and Create: Henry**
-  - Enables bulk freezing, sanding, ending, enriched and withering for the compatible mods
+    - Enables bulk freezing, sanding, ending, enriched and withering for the compatible mods
 
 ### Fixed
 

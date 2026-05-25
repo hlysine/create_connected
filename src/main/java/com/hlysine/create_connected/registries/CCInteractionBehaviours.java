@@ -1,0 +1,23 @@
+package com.hlysine.create_connected.registries;
+
+import com.hlysine.create_connected.compat.Mods;
+import com.hlysine.create_connected.content.contraption.jukebox.JukeboxInteractionBehaviour;
+import com.hlysine.create_connected.content.contraption.menu.MenuBlockInteractionBehaviour;
+import com.hlysine.create_connected.content.contraption.noteblock.NoteBlockInteractionBehaviour;
+import com.simibubi.create.api.behaviour.interaction.MovingInteractionBehaviour;
+import net.minecraft.world.level.block.Blocks;
+
+public class CCInteractionBehaviours {
+    public static void register() {
+        MovingInteractionBehaviour.REGISTRY.register(Blocks.NOTE_BLOCK, new NoteBlockInteractionBehaviour());
+        MovingInteractionBehaviour.REGISTRY.register(Blocks.JUKEBOX, new JukeboxInteractionBehaviour());
+        if (!Mods.STEAM_N_RAILS.isLoaded()) { // Give priority to Steam 'n' Rails' interaction behavior implementation
+            MovingInteractionBehaviour.REGISTRY.register(Blocks.CRAFTING_TABLE, new MenuBlockInteractionBehaviour());
+            MovingInteractionBehaviour.REGISTRY.register(Blocks.STONECUTTER, new MenuBlockInteractionBehaviour());
+            MovingInteractionBehaviour.REGISTRY.register(Blocks.GRINDSTONE, new MenuBlockInteractionBehaviour());
+            MovingInteractionBehaviour.REGISTRY.register(Blocks.SMITHING_TABLE, new MenuBlockInteractionBehaviour());
+            MovingInteractionBehaviour.REGISTRY.register(Blocks.LOOM, new MenuBlockInteractionBehaviour());
+            MovingInteractionBehaviour.REGISTRY.register(Blocks.CARTOGRAPHY_TABLE, new MenuBlockInteractionBehaviour());
+        }
+    }
+}
