@@ -24,6 +24,7 @@
   "block.create_connected.brass_gearbox": "Латунна коробка передач",
   "block.create_connected.brass_gearbox.tooltip.summary": "Коробка передач із _незалежно налаштовними_ напрямками обертання всіх 4 сторін.",
   "block.create_connected.centrifugal_clutch": "Відцентрове зчеплення",
+  "block.create_connected.centrifugal_clutch.tooltip.summary": "Зчеплення, яке _підтримує_ з'єднання, коли вхідна швидкість обертання _перевищує_ певний зазначений поріг.",
   "block.create_connected.copycat_beam": "Імітаційний брус",
   "block.create_connected.copycat_beam.tooltip.behaviour1": "Принагідно застосовує _утримуваний предмет_ як його _матеріал_. Клацніть ще раз, щоб змінити _спрямування_ або перемикнути стан _живлення_. Використовуйте _гайковий ключ_ для _скидання_ матеріалу.",
   "block.create_connected.copycat_beam.tooltip.condition1": "Коли клацнуто ПКМ",
