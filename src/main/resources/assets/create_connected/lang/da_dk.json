@@ -24,7 +24,6 @@
   "block.create_connected.brass_gearbox": "Messing Gearkasse",
   "block.create_connected.brass_gearbox.tooltip.summary": "En gearkasse, hvor rotationsretningen af alle 4 sider er _uafhængigt konfigurerbar_.",
   "block.create_connected.centrifugal_clutch": "Centrifugalkobling",
-  "block.create_connected.centrifugal_clutch.tooltip.summary": "En kobling, der kun er _coupled_ hvis input RPM er _faster_ end en konfigurerbar tærskel.",
   "block.create_connected.copycat_beam": "Kobberstråle",
   "block.create_connected.copycat_beam.tooltip.behaviour1": "Gælder _held item_ som dens _material_ hvis det er muligt. _Click again_ at cykle _orientation_ eller _powered_ tilstand. Brug en _Wrench_ til _reset_ materialet.",
   "block.create_connected.copycat_beam.tooltip.condition1": "Når R-klikket",
