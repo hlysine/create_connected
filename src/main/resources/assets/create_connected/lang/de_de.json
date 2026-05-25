@@ -24,7 +24,6 @@
   "block.create_connected.brass_gearbox": "Messing Getriebe",
   "block.create_connected.brass_gearbox.tooltip.summary": "Ein Getriebe, bei dem die Drehrichtung aller 4 Seiten unabhängig von einander konfigurierbar ist.",
   "block.create_connected.centrifugal_clutch": "Zentrifugal Kupplung",
-  "block.create_connected.centrifugal_clutch.tooltip.summary": "Eine Kupplung, die nur _gekuppelt_ ist, wenn die Eingabe-UMP _schneller_ als ein konfigurierbarer Schwellenwert ist.",
   "block.create_connected.copycat_beam": "Copycat Balken",
   "block.create_connected.copycat_beam.tooltip.behaviour1": "Nutzt _gehaltenes Item_ als _Material_ wenn möglich, _Clicke erneut_ um _Orientierung_ oder _Redstone_ Status zu wechseln. Benutze den _Schraubenschlüssel_ um das Material zurückzusetzen.",
   "block.create_connected.copycat_beam.tooltip.condition1": "Wenn R-Klick",
