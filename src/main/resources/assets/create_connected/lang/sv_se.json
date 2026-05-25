@@ -22,7 +22,6 @@
   "block.create_connected.brass_gearbox": "Mässing Växellåda",
   "block.create_connected.brass_gearbox.tooltip.summary": "En växellåda där rotationsriktningen på alla 4 sidor är _oberoende konfigurerbar_.",
   "block.create_connected.centrifugal_clutch": "Centrifugalkoppling",
-  "block.create_connected.centrifugal_clutch.tooltip.summary": "En koppling som bara är _kopplad_ om inmatningsvarvtalet är _snabbare_ än en konfigurerbar tröskel.",
   "block.create_connected.copycat_beam": "Kopiera stråle",
   "block.create_connected.copycat_beam.tooltip.behaviour1": "Tillämpar _hållna objekt_ som dess _material_ om möjligt. _Klicka igen_ för att cykla _orientering_ eller _drivna_ tillstånd. Använd en _nyckla_ för att _återställa_ materialet.",
   "block.create_connected.copycat_beam.tooltip.condition1": "När R-klickad",
