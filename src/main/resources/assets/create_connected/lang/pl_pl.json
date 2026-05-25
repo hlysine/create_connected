@@ -24,7 +24,6 @@
   "block.create_connected.brass_gearbox": "Mosiężna przekładnia",
   "block.create_connected.brass_gearbox.tooltip.summary": "Przekładnia, w której kierunek obrotu wszystkich 4 stron jest _konfigurowalnalny_.",
   "block.create_connected.centrifugal_clutch": "Wirówkowe Sprzęgło",
-  "block.create_connected.centrifugal_clutch.tooltip.summary": "Sprzęgło, które jest tylko _połączone_ jeśli wejściowy RPM jest _szybszy_ niż konfigurowalny próg.",
   "block.create_connected.copycat_beam": "Belka Kopiująca",
   "block.create_connected.copycat_beam.tooltip.behaviour1": "Stosuje _trzymany przedmiot_ jako jego _materiał_ jeśli to możliwe. _Kliknij ponownie_, aby wycyklować _orientację_ lub _powtórzenie_ stanu. Użyj _Klucza_ aby _zresetować_ materiał.",
   "block.create_connected.copycat_beam.tooltip.condition1": "Kiedy kliknięto Prawym Przyciskiem Myszy",
