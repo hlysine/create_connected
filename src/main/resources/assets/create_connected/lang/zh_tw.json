@@ -24,7 +24,6 @@
   "block.create_connected.brass_gearbox": "黃銅十字齒輪箱",
   "block.create_connected.brass_gearbox.tooltip.summary": "齒輪箱4個側面的旋轉方向均可_獨立設定_。",
   "block.create_connected.centrifugal_clutch": "離心離合器",
-  "block.create_connected.centrifugal_clutch.tooltip.summary": "僅當輸入 RPM 快於可設定閾值時，離合器才會耦合。",
   "block.create_connected.copycat_beam": "偽裝樑",
   "block.create_connected.copycat_beam.tooltip.behaviour1": "如果可以，將根據手持物品改變材質。再次點擊以循環切換方向或充能狀態。使用扳手重置材質。",
   "block.create_connected.copycat_beam.tooltip.condition1": "當右鍵時",
