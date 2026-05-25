@@ -22,7 +22,6 @@
   "block.create_connected.brass_gearbox": "Cutie de Viteze din Alamă",
   "block.create_connected.brass_gearbox.tooltip.summary": "O cutie de viteze în care direcția de rotație a tuturor celor 4 laturi este _configurabilă independent_.",
   "block.create_connected.centrifugal_clutch": "Ambreiaj centrifugal",
-  "block.create_connected.centrifugal_clutch.tooltip.summary": "Un ambreiaj care este _cuplat_ numai dacă turația de intrare este _mai rapidă_ decât un prag configurabil.",
   "block.create_connected.copycat_beam": "Bârnă de copiat",
   "block.create_connected.copycat_beam.tooltip.behaviour1": "Dacă este posibil, aplică _obiectului ținut în mână_ ca _material_. _Faceți din nou clic_ pentru a schimba starea de _orientare_ sau _alimentare_. Folosiți o _cheie_ pentru a _reseta_ materialul.",
   "block.create_connected.copycat_beam.tooltip.condition1": "Când se face Clic R",
