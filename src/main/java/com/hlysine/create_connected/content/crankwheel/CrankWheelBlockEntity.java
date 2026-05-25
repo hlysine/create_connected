@@ -1,10 +1,12 @@
 package com.hlysine.create_connected.content.crankwheel;
 
 import com.hlysine.create_connected.CCPartialModels;
+import com.simibubi.create.AllSoundEvents;
 import com.simibubi.create.content.kinetics.base.IRotate;
 import com.simibubi.create.content.kinetics.crank.HandCrankBlock;
 import com.simibubi.create.content.kinetics.crank.HandCrankBlockEntity;
 import com.simibubi.create.content.kinetics.simpleRelays.ICogWheel;
+import net.createmod.catnip.animation.AnimationTickHolder;
 import net.createmod.catnip.render.CachedBuffers;
 import net.createmod.catnip.render.SuperByteBuffer;
 import net.minecraft.core.BlockPos;
@@ -42,5 +44,16 @@ public class CrankWheelBlockEntity extends HandCrankBlockEntity {
                 .orElse(Direction.UP);
         boolean isLarge = blockState.getBlock() instanceof CrankWheelBlock block && block.largeCog;
         return CachedBuffers.partialFacing(isLarge ? CCPartialModels.LARGE_CRANK_WHEEL_HANDLE : CCPartialModels.CRANK_WHEEL_HANDLE, blockState, facing.getOpposite());
+    }
+
+    @Override
+    @OnlyIn(Dist.CLIENT)
+    public void tickAudio() {
+        super.tickAudio();
+        if (inUse > 0 && AnimationTickHolder.getTicks() % 10 == 0) {
+            if (!(getBlockState().getBlock() instanceof HandCrankBlock))
+                return;
+            AllSoundEvents.CRANKING.playAt(level, worldPosition, (inUse) / 2.5f, .65f + (10 - inUse) / 10f, true);
+        }
     }
 }
