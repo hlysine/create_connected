@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "create_connected:block/fan_exploding_catalyst/block"
+      "model": "create_connected:block/empty_fan_catalyst/block"
     }
   }
 }
