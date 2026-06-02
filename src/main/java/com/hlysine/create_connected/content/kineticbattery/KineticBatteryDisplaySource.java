@@ -4,7 +4,10 @@ package com.hlysine.create_connected.content.kineticbattery;
 import com.hlysine.create_connected.ConnectedLang;
 import com.simibubi.create.content.redstone.displayLink.DisplayLinkContext;
 import com.simibubi.create.content.redstone.displayLink.source.PercentOrProgressBarDisplaySource;
+import com.simibubi.create.content.trains.display.FlapDisplayBlockEntity;
 import com.simibubi.create.foundation.gui.ModularGuiLineBuilder;
+import com.simibubi.create.foundation.utility.CreateLang;
+import net.createmod.catnip.lang.LangBuilder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.util.Mth;
@@ -35,7 +38,11 @@ public class KineticBatteryDisplaySource extends PercentOrProgressBarDisplaySour
     protected MutableComponent formatNumeric(DisplayLinkContext context, Float currentLevel) {
         if (context.sourceConfig().getInt("Mode") == 1)
             return super.formatNumeric(context, currentLevel);
-        return Component.literal((int) Math.round(currentLevel * KineticBatteryBlockEntity.getMaxBatteryLevel() / 3600 / 20) + " su-hours");
+        LangBuilder builder = ConnectedLang.number(Math.round(currentLevel * KineticBatteryBlockEntity.getMaxBatteryLevel() / 3600 / 20));
+        if (context.getTargetBlockEntity() instanceof FlapDisplayBlockEntity)
+            builder.space();
+        return builder.translate("generic.unit.su_hours")
+                .component();
     }
 
     @Override
