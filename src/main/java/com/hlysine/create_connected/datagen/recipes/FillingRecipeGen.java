@@ -1,9 +1,9 @@
 package com.hlysine.create_connected.datagen.recipes;
 
-import com.hlysine.create_connected.registries.CCBlocks;
-import com.hlysine.create_connected.registries.CCTags;
 import com.hlysine.create_connected.CreateConnected;
 import com.hlysine.create_connected.compat.Mods;
+import com.hlysine.create_connected.registries.CCBlocks;
+import com.hlysine.create_connected.registries.CCTags;
 import com.simibubi.create.AllFluids;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
@@ -49,6 +49,24 @@ public class FillingRecipeGen extends com.simibubi.create.api.data.recipe.Fillin
             .withCondition(new FeatureEnabledCondition(CCBlocks.EMPTY_FAN_CATALYST.getId()))
             .withCondition(new ModLoadedCondition(Mods.SHIMMER.id()))
             .output(CCBlocks.FAN_TRANSMUTATION_CATALYST));
+
+    GeneratedRecipe FAN_DYEING_CATALYSTS = fillFanDyeingCatalysts();
+
+    private GeneratedRecipe fillFanDyeingCatalysts() {
+        CCBlocks.FAN_DYEING_CATALYSTS.forEach((color, block) -> {
+            create(color.getName() + "_fan_dyeing_catalyst_dragons_plus", b -> b.require(new SizedFluidIngredient(new SimpleFluidIngredient(Mods.DRAGONS_PLUS, color.getName() + "_dye"), 1000))
+                    .require(CCBlocks.EMPTY_FAN_CATALYST)
+                    .withCondition(new FeatureEnabledCondition(CCBlocks.EMPTY_FAN_CATALYST.getId()))
+                    .withCondition(new ModLoadedCondition(Mods.DRAGONS_PLUS.id()))
+                    .output(CCBlocks.FAN_DYEING_CATALYSTS.get(color)));
+            create(color.getName() + "_fan_dyeing_catalyst_garnished", b -> b.require(new SizedFluidIngredient(new SimpleFluidIngredient(Mods.GARNISHED, color.getName() + "_mastic_resin"), 1000))
+                    .require(CCBlocks.EMPTY_FAN_CATALYST)
+                    .withCondition(new FeatureEnabledCondition(CCBlocks.EMPTY_FAN_CATALYST.getId()))
+                    .withCondition(new ModLoadedCondition(Mods.GARNISHED.id()))
+                    .output(CCBlocks.FAN_DYEING_CATALYSTS.get(color)));
+        });
+        return null;
+    }
 
     public FillingRecipeGen(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
         super(output, registries, CreateConnected.MODID);

@@ -67,7 +67,10 @@ import com.hlysine.create_connected.content.sequencedpulsegenerator.SequencedPul
 import com.hlysine.create_connected.content.shearpin.ShearPinBlock;
 import com.hlysine.create_connected.content.sixwaygearbox.SixWayGearboxBlock;
 import com.hlysine.create_connected.datagen.CCBlockStateGen;
-import com.simibubi.create.*;
+import com.simibubi.create.AllBlocks;
+import com.simibubi.create.AllSpriteShifts;
+import com.simibubi.create.AllTags;
+import com.simibubi.create.Create;
 import com.simibubi.create.api.behaviour.display.DisplaySource;
 import com.simibubi.create.api.connectivity.ConnectivityHandler;
 import com.simibubi.create.api.contraption.BlockMovementChecks;
@@ -93,6 +96,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
@@ -880,6 +884,31 @@ public class CCBlocks {
             .item()
             .transform(customItemModel())
             .register();
+
+    public static final Map<DyeColor, BlockEntry<WrenchableBlock>> FAN_DYEING_CATALYSTS = new HashMap<>();
+
+    static {
+        for (DyeColor color : DyeColor.values()) {
+            FAN_DYEING_CATALYSTS.put(color, REGISTRATE.block(color.getName() + "_fan_dyeing_catalyst", WrenchableBlock::new)
+                    .initialProperties(() -> Blocks.IRON_BLOCK)
+                    .properties(p -> p
+                            .mapColor(MapColor.TERRACOTTA_YELLOW)
+                            .requiresCorrectToolForDrops()
+                            .noOcclusion()
+                            .isRedstoneConductor((state, level, pos) -> false)
+                    )
+                    .addLayer(() -> RenderType::cutoutMipped)
+                    .transform(pickaxeOnly())
+                    .transform(FeatureToggle.registerDependent(CCBlocks.EMPTY_FAN_CATALYST))
+                    .transform(FeatureToggle.addCondition(() -> Mods.DRAGONS_PLUS.isLoaded() || Mods.GARNISHED.isLoaded()))
+                    .blockstate((c, p) -> p.simpleBlock(c.getEntry(), p.models().withExistingParent(c.getName(), p.modLoc("block/fan_catalyst/with_content"))
+                            .texture("content", ResourceLocation.withDefaultNamespace("block/" + color.getName() + "_concrete_powder"))
+                    ))
+                    .tag(AllTags.AllBlockTags.FAN_TRANSPARENT.tag)
+                    .simpleItem()
+                    .register());
+        }
+    }
 
     public static final BlockEntry<ItemSiloBlock> ITEM_SILO = REGISTRATE.block("item_silo", ItemSiloBlock::new)
             .initialProperties(SharedProperties::softMetal)

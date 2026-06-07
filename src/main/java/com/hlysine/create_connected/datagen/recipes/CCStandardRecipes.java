@@ -320,6 +320,15 @@ public class CCStandardRecipes extends BaseRecipeProvider {
     GeneratedRecipe EMPTY_CATALYST_FROM_GLOOMING = clearFanCatalyst("glooming", CCBlocks.FAN_GLOOMING_CATALYST);
     GeneratedRecipe EMPTY_CATALYST_FROM_SOUL_STRIPPING = clearFanCatalyst("soul_stripping", CCBlocks.FAN_SOUL_STRIPPING_CATALYST);
 
+    GeneratedRecipe EMPTY_CATALYST_FROM_DYES = clearFanDyeingCatalysts();
+
+    private GeneratedRecipe clearFanDyeingCatalysts() {
+        CCBlocks.FAN_DYEING_CATALYSTS.forEach((color, block) -> {
+            clearFanCatalyst(color.getName() + "_dye", block);
+        });
+        return null;
+    }
+
     private final Marker PALETTES = enterFolder("palettes");
 
     GeneratedRecipe COPYCAT_SLAB = copycat(CCBlocks.COPYCAT_SLAB, 2);
