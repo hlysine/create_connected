@@ -1,122 +1,48 @@
 {
-	"credit": "Made with Blockbench",
 	"parent": "minecraft:block/block",
+	"loader": "neoforge:composite",
 	"textures": {
-		"0": "create:block/funnel/brass_funnel_frame",
-		"1": "create_connected:block/fan_catalyst_core",
-		"particle": "create:block/funnel/brass_funnel_frame",
-        "obsidian": "block/obsidian",
-        "beacon": "block/beacon"
+		"particle": "create:block/funnel/brass_funnel_frame"
 	},
-	"elements": [
-		{
-			"name": "frame",
-			"from": [0, 0, 0],
-			"to": [16, 16, 16],
-			"faces": {
-				"north": {"uv": [0, 0, 16, 16], "texture": "#0"},
-				"east": {"uv": [0, 0, 16, 16], "texture": "#0"},
-				"south": {"uv": [0, 0, 16, 16], "texture": "#0"},
-				"west": {"uv": [0, 0, 16, 16], "texture": "#0"},
-				"up": {"uv": [0, 0, 16, 16], "texture": "#0"},
-				"down": {"uv": [0, 0, 16, 16], "texture": "#0"}
-			}
+	"children": {
+		"frame": {
+			"parent": "create_connected:block/fan_catalyst/empty"
 		},
-		{
-			"name": "side",
-			"from": [2, 2, 2],
-			"to": [14, 14, 0],
-			"faces": {
-				"north": {"uv": [2, 2, 14, 14], "texture": "#1"},
-				"east": {"uv": [0, 2, 2, 14], "rotation": 180, "texture": "#1"},
-				"west": {"uv": [14, 2, 16, 14], "rotation": 180, "texture": "#1"},
-				"up": {"uv": [2, 2, 14, 0], "rotation": 180, "texture": "#1"},
-				"down": {"uv": [2, 14, 14, 16], "texture": "#1"}
-			}
-		},
-		{
-			"name": "side",
-			"from": [2, 2, 16],
-			"to": [14, 14, 14],
-			"faces": {
-				"east": {"uv": [14, 2, 16, 14], "rotation": 180, "texture": "#1"},
-				"south": {"uv": [2, 2, 14, 14], "texture": "#1"},
-				"west": {"uv": [0, 2, 2, 14], "rotation": 180, "texture": "#1"},
-				"up": {"uv": [2, 0, 14, 2], "rotation": 180, "texture": "#1"},
-				"down": {"uv": [2, 14, 14, 16], "rotation": 180, "texture": "#1"}
-			}
-		},
-		{
-			"name": "side",
-			"from": [16, 2, 2],
-			"to": [14, 14, 14],
-			"faces": {
-				"north": {"uv": [14, 2, 16, 14], "rotation": 180, "texture": "#1"},
-				"east": {"uv": [2, 2, 14, 14], "texture": "#1"},
-				"south": {"uv": [0, 2, 2, 14], "rotation": 180, "texture": "#1"},
-				"up": {"uv": [2, 0, 14, 2], "rotation": 90, "texture": "#1"},
-				"down": {"uv": [2, 14, 14, 16], "rotation": 270, "texture": "#1"}
-			}
-		},
-		{
-			"name": "side",
-			"from": [2, 2, 2],
-			"to": [0, 14, 14],
-			"faces": {
-				"north": {"uv": [0, 2, 2, 14], "rotation": 180, "texture": "#1"},
-				"south": {"uv": [14, 2, 16, 14], "rotation": 180, "texture": "#1"},
-				"west": {"uv": [2, 2, 14, 14], "texture": "#1"},
-				"up": {"uv": [2, 2, 14, 0], "rotation": 90, "texture": "#1"},
-				"down": {"uv": [2, 14, 14, 16], "rotation": 90, "texture": "#1"}
-			}
-		},
-		{
-			"name": "side",
-			"from": [2, 16, 2],
-			"to": [14, 14, 14],
-			"faces": {
-				"north": {"uv": [2, 0, 14, 2], "texture": "#1"},
-				"east": {"uv": [14, 2, 16, 14], "rotation": 270, "texture": "#1"},
-				"south": {"uv": [2, 14, 14, 16], "rotation": 180, "texture": "#1"},
-				"west": {"uv": [0, 2, 2, 14], "rotation": 90, "texture": "#1"},
-				"up": {"uv": [2, 2, 14, 14], "texture": "#1"}
-			}
-		},
-		{
-			"name": "side",
-			"from": [2, 2, 2],
-			"to": [14, 0, 14],
-			"faces": {
-				"north": {"uv": [2, 0, 14, 2], "rotation": 180, "texture": "#1"},
-				"east": {"uv": [14, 2, 16, 14], "rotation": 90, "texture": "#1"},
-				"south": {"uv": [2, 14, 14, 16], "texture": "#1"},
-				"west": {"uv": [0, 2, 2, 14], "rotation": 270, "texture": "#1"},
-				"down": {"uv": [2, 2, 14, 14], "texture": "#1"}
-			}
-		},
-        {   "__comment": "Obsidian base",
-            "from": [ 2.2, 0.1, 2.2 ],
-            "to": [ 13.8, 3, 13.8 ],
-            "faces": {
-                "down":  { "uv": [ 2,  2, 14, 14 ], "texture": "#obsidian" },
-                "up":    { "uv": [ 2,  2, 14, 14 ], "texture": "#obsidian" },
-                "north": { "uv": [ 2, 13, 14, 16 ], "texture": "#obsidian" },
-                "south": { "uv": [ 2, 13, 14, 16 ], "texture": "#obsidian" },
-                "west":  { "uv": [ 2, 13, 14, 16 ], "texture": "#obsidian" },
-                "east":  { "uv": [ 2, 13, 14, 16 ], "texture": "#obsidian" }
-            }
-        },
-        {   "__comment": "Inner beacon texture",
-            "from": [ 3, 2, 3 ],
-            "to": [ 13, 13, 13 ],
-            "faces": {
-                "down":  { "uv": [ 3, 3, 13, 13 ], "texture": "#beacon" },
-                "up":    { "uv": [ 3, 3, 13, 13 ], "texture": "#beacon" },
-                "north": { "uv": [ 3, 2, 13, 13 ], "texture": "#beacon" },
-                "south": { "uv": [ 3, 2, 13, 13 ], "texture": "#beacon" },
-                "west":  { "uv": [ 3, 2, 13, 13 ], "texture": "#beacon" },
-                "east":  { "uv": [ 3, 2, 13, 13 ], "texture": "#beacon" }
-            }
-        }
-	]
+		"beacon": {
+			"credit": "Made with Blockbench",
+			"parent": "minecraft:block/block",
+			"textures": {
+				"particle": "block/beacon",
+				"obsidian": "block/obsidian",
+				"beacon": "block/beacon"
+			},
+			"elements": [
+				{   "__comment": "Obsidian base",
+					"from": [ 2.2, 0.1, 2.2 ],
+					"to": [ 13.8, 3, 13.8 ],
+					"faces": {
+						"down":  { "uv": [ 2,  2, 14, 14 ], "texture": "#obsidian" },
+						"up":    { "uv": [ 2,  2, 14, 14 ], "texture": "#obsidian" },
+						"north": { "uv": [ 2, 13, 14, 16 ], "texture": "#obsidian" },
+						"south": { "uv": [ 2, 13, 14, 16 ], "texture": "#obsidian" },
+						"west":  { "uv": [ 2, 13, 14, 16 ], "texture": "#obsidian" },
+						"east":  { "uv": [ 2, 13, 14, 16 ], "texture": "#obsidian" }
+					}
+				},
+				{   "__comment": "Inner beacon texture",
+					"from": [ 3, 2, 3 ],
+					"to": [ 13, 13, 13 ],
+					"faces": {
+						"down":  { "uv": [ 3, 3, 13, 13 ], "texture": "#beacon" },
+						"up":    { "uv": [ 3, 3, 13, 13 ], "texture": "#beacon" },
+						"north": { "uv": [ 3, 2, 13, 13 ], "texture": "#beacon" },
+						"south": { "uv": [ 3, 2, 13, 13 ], "texture": "#beacon" },
+						"west":  { "uv": [ 3, 2, 13, 13 ], "texture": "#beacon" },
+						"east":  { "uv": [ 3, 2, 13, 13 ], "texture": "#beacon" }
+					}
+				}
+			]
+		}
+	}
 }
+
