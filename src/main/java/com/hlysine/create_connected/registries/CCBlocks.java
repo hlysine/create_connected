@@ -38,7 +38,7 @@ import com.hlysine.create_connected.content.crankwheel.CrankWheelBlock;
 import com.hlysine.create_connected.content.crossconnector.CrossConnectorBlock;
 import com.hlysine.create_connected.content.crossconnector.EncasedCrossConnectorBlock;
 import com.hlysine.create_connected.content.dashboard.DashboardBlock;
-import com.hlysine.create_connected.content.fancatalyst.FanEndingCatalystDragonHeadBlock;
+import com.hlysine.create_connected.content.fancatalyst.FanCatalystRotatingHeadBlock;
 import com.hlysine.create_connected.content.fluidvessel.FluidVesselBlock;
 import com.hlysine.create_connected.content.fluidvessel.FluidVesselGenerator;
 import com.hlysine.create_connected.content.fluidvessel.FluidVesselItem;
@@ -672,7 +672,8 @@ public class CCBlocks {
             .lang("Fan Ending Catalyst with Dragon's Breath")
             .register();
 
-    public static final BlockEntry<FanEndingCatalystDragonHeadBlock> FAN_ENDING_CATALYST_DRAGON_HEAD = REGISTRATE.block("fan_ending_catalyst_dragon_head", FanEndingCatalystDragonHeadBlock::new)
+    public static final BlockEntry<FanCatalystRotatingHeadBlock> FAN_ENDING_CATALYST_DRAGON_HEAD = REGISTRATE
+            .block("fan_ending_catalyst_dragon_head", properties -> new FanCatalystRotatingHeadBlock(properties, CCBlockEntityTypes.FAN_ENDING_CATALYST_DRAGON_HEAD))
             .initialProperties(() -> Blocks.IRON_BLOCK)
             .properties(p -> p
                     .mapColor(MapColor.TERRACOTTA_YELLOW)
@@ -748,7 +749,8 @@ public class CCBlocks {
             .transform(customItemModel())
             .register();
 
-    public static final BlockEntry<WrenchableBlock> FAN_EXPLODING_CATALYST = REGISTRATE.block("fan_exploding_catalyst", WrenchableBlock::new)
+    public static final BlockEntry<FanCatalystRotatingHeadBlock> FAN_EXPLODING_CATALYST = REGISTRATE
+            .block("fan_exploding_catalyst", properties -> new FanCatalystRotatingHeadBlock(properties, CCBlockEntityTypes.FAN_EXPLODING_CATALYST))
             .initialProperties(() -> Blocks.IRON_BLOCK)
             .properties(p -> p
                     .mapColor(MapColor.TERRACOTTA_YELLOW)
@@ -760,7 +762,7 @@ public class CCBlocks {
             .transform(pickaxeOnly())
             .transform(FeatureToggle.registerDependent(CCBlocks.EMPTY_FAN_CATALYST))
             .transform(FeatureToggle.addCondition(Mods.MORE_CATALYSTS::isLoaded))
-            .blockstate((c, p) -> p.simpleBlock(c.getEntry(), AssetLookup.partialBaseModel(c, p)))
+            .blockstate((c, p) -> p.simpleBlock(c.getEntry(), p.models().getExistingFile(p.modLoc("block/empty_fan_catalyst/block"))))
             .tag(AllTags.AllBlockTags.FAN_TRANSPARENT.tag)
             .item()
             .transform(customItemModel())

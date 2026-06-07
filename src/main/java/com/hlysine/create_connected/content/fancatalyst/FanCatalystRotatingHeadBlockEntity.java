@@ -8,8 +8,8 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.List;
 
-public class FanEndingCatalystDragonHeadBlockEntity extends SmartBlockEntity {
-    public FanEndingCatalystDragonHeadBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
+public class FanCatalystRotatingHeadBlockEntity extends SmartBlockEntity {
+    public FanCatalystRotatingHeadBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
     }
 
