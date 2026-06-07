@@ -20,6 +20,7 @@
   "block.create_connected.brass_gearbox": "Blwch Gêr Pres",
   "block.create_connected.brass_gearbox.tooltip.summary": "Blwch gêr lle mae cyfeiriad cylchdroi pob un o'r 4 ochr yn _ ffurfweddu'n annibynnol _.",
   "block.create_connected.centrifugal_clutch": "Clutch Allgyrchol",
+  "block.create_connected.centrifugal_clutch.tooltip.summary": "Cydiwr sydd ond yn _coupled_ os yw'r RPM mewnbwn yn _gyflymach_ na throthwy ffurfweddadwy.",
   "block.create_connected.copycat_beam": "Trawst Copi",
   "block.create_connected.copycat_beam.tooltip.behaviour1": "Yn cymhwyso _held item_ fel ei _material_ os yn bosibl. _Cliciwch eto_ i feicio _cyfeiriadedd_ neu gyflwr _powered_. Defnyddiwch _ Wrench _ i _ ailosod y defnydd.",
   "block.create_connected.copycat_beam.tooltip.condition1": "Pan gliciwyd ar y dde",

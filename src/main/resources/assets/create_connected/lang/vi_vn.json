@@ -22,6 +22,7 @@
   "block.create_connected.brass_gearbox": "Hộp số bằng đồng thau",
   "block.create_connected.brass_gearbox.tooltip.summary": "Một hộp số mà hướng quay của cả 4 mặt đều có thể cấu hình độc lập.",
   "block.create_connected.centrifugal_clutch": "Bộ ly hợp ly tâm",
+  "block.create_connected.centrifugal_clutch.tooltip.summary": "Bộ ly hợp chỉ được _kết nối_ nếu RPM đầu vào _nhanh hơn_ ngưỡng có thể cấu hình.",
   "block.create_connected.copycat_beam": "Chùm tia bắt chước",
   "block.create_connected.copycat_beam.tooltip.behaviour1": "Áp dụng _vật phẩm được giữ_ làm _vật liệu_ của nó nếu có thể. _Nhấp lại_ để chuyển đổi trạng thái _hướng_ hoặc _được cấp nguồn_. Sử dụng _Cờ lê _ để _ thiết lập lại vật liệu.",
   "block.create_connected.copycat_beam.tooltip.condition1": "Khi nhấp chuột phải",
