@@ -93,6 +93,26 @@ public class ItemApplicationRecipeGen extends com.simibubi.create.api.data.recip
             new ModLoadedCondition(Mods.NETHER_INDUSTRY.id()));
      */
 
+    GeneratedRecipe FAN_DYEING_CATALYSTS = applyFanDyeingCatalysts();
+
+    private GeneratedRecipe applyFanDyeingCatalysts() {
+        CCBlocks.FAN_DYEING_CATALYSTS.forEach((color, block) -> {
+            fanCatalystFromEmpty(
+                    color.getName() + "_dyeing_catalyst_dragons_plus",
+                    new SimpleDatagenIngredient(Mods.DRAGONS_PLUS, color.getName() + "_dye_bucket").toVanilla(),
+                    block::asItem,
+                    new ModLoadedCondition(Mods.DRAGONS_PLUS.id())
+            );
+            fanCatalystFromEmpty(
+                    color.getName() + "_dyeing_catalyst_garnished",
+                    new SimpleDatagenIngredient(Mods.GARNISHED, color.getName() + "_mastic_resin_bucket").toVanilla(),
+                    block::asItem,
+                    new ModLoadedCondition(Mods.GARNISHED.id())
+            );
+        });
+        return null;
+    }
+
     protected GeneratedRecipe fanCatalystFromEmpty(String type, ItemLike ingredient, Supplier<ItemLike> output) {
         return fanCatalystFromEmpty(type, Ingredient.of(ingredient), output);
     }

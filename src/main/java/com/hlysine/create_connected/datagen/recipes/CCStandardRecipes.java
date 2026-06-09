@@ -20,26 +20,25 @@ import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.TagKey;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.AbstractCookingRecipe;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.crafting.SimpleCraftingRecipeSerializer;
-import net.minecraft.world.level.ItemLike;
-import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.crafting.ConditionalRecipe;
 import net.minecraftforge.common.crafting.CraftingHelper;
+import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.common.crafting.conditions.ICondition;
 import net.minecraftforge.common.crafting.conditions.ModLoadedCondition;
 import net.minecraftforge.common.crafting.conditions.NotCondition;
+import net.minecraft.world.level.block.Blocks;
+import java.util.function.Consumer;
 import org.jetbrains.annotations.NotNull;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
 import java.util.function.UnaryOperator;
 
 @SuppressWarnings("unused")
@@ -305,6 +304,15 @@ public class CCStandardRecipes extends BaseRecipeProvider {
     GeneratedRecipe EMPTY_CATALYST_FROM_RESONANCE = clearFanCatalyst("resonance", CCBlocks.FAN_RESONANCE_CATALYST);
     GeneratedRecipe EMPTY_CATALYST_FROM_SCULKING = clearFanCatalyst("sculking", CCBlocks.FAN_SCULKING_CATALYST);
     GeneratedRecipe EMPTY_CATALYST_FROM_PURIFYING = clearFanCatalyst("purifying", CCBlocks.FAN_PURIFYING_CATALYST);
+
+    GeneratedRecipe EMPTY_CATALYST_FROM_DYES = clearFanDyeingCatalysts();
+
+    private GeneratedRecipe clearFanDyeingCatalysts() {
+        CCBlocks.FAN_DYEING_CATALYSTS.forEach((color, block) -> {
+            clearFanCatalyst(color.getName() + "_dye", block);
+        });
+        return null;
+    }
     /*
     GeneratedRecipe EMPTY_CATALYST_FROM_TRANSMUTATION = clearFanCatalyst("transmutation", CCBlocks.FAN_TRANSMUTATION_CATALYST);
     GeneratedRecipe EMPTY_CATALYST_FROM_GLOOMING = clearFanCatalyst("glooming", CCBlocks.FAN_GLOOMING_CATALYST);
@@ -768,11 +776,6 @@ public class CCStandardRecipes extends BaseRecipeProvider {
         private final ResourceLocation outputOverride;
 
         @Override
-        public ResourceLocation getAdvancementId() {
-            return wrapped.getAdvancementId();
-        }
-
-        @Override
         public void serializeRecipeData(@NotNull JsonObject object) {
             wrapped.serializeRecipeData(object);
             object.addProperty("result", outputOverride.toString());
@@ -804,6 +807,11 @@ public class CCStandardRecipes extends BaseRecipeProvider {
         @Override
         public JsonObject serializeAdvancement() {
             return wrapped.serializeAdvancement();
+        }
+
+        @Override
+        public ResourceLocation getAdvancementId() {
+            return wrapped.getAdvancementId();
         }
 
     }

@@ -156,6 +156,15 @@ public class BoilerData extends com.simibubi.create.content.fluids.tank.BoilerDa
         return isPassive();
     }
 
+    public void queueSoundOnSide(BlockPos pos, Direction side) {
+        SoundPool pool = pools.get(side);
+        if (pool == null) {
+            pool = new SoundPool(4, 2, sound);
+            pools.put(side, pool);
+        }
+        pool.queueAt(pos);
+    }
+
     @Override
     public float getEngineEfficiency(int boilerSize) {
         if (isPassive(boilerSize))

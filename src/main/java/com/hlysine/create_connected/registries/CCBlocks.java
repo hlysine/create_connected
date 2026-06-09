@@ -37,7 +37,7 @@ import com.hlysine.create_connected.content.crankwheel.CrankWheelBlock;
 import com.hlysine.create_connected.content.crossconnector.CrossConnectorBlock;
 import com.hlysine.create_connected.content.crossconnector.EncasedCrossConnectorBlock;
 import com.hlysine.create_connected.content.dashboard.DashboardBlock;
-import com.hlysine.create_connected.content.fancatalyst.FanEndingCatalystDragonHeadBlock;
+import com.hlysine.create_connected.content.fancatalyst.FanCatalystRotatingHeadBlock;
 import com.hlysine.create_connected.content.fluidvessel.FluidVesselBlock;
 import com.hlysine.create_connected.content.fluidvessel.FluidVesselGenerator;
 import com.hlysine.create_connected.content.fluidvessel.FluidVesselItem;
@@ -66,7 +66,10 @@ import com.hlysine.create_connected.content.sequencedpulsegenerator.SequencedPul
 import com.hlysine.create_connected.content.shearpin.ShearPinBlock;
 import com.hlysine.create_connected.content.sixwaygearbox.SixWayGearboxBlock;
 import com.hlysine.create_connected.datagen.CCBlockStateGen;
-import com.simibubi.create.*;
+import com.simibubi.create.AllBlocks;
+import com.simibubi.create.AllSpriteShifts;
+import com.simibubi.create.AllTags;
+import com.simibubi.create.Create;
 import com.simibubi.create.api.behaviour.display.DisplaySource;
 import com.simibubi.create.api.connectivity.ConnectivityHandler;
 import com.simibubi.create.api.contraption.BlockMovementChecks;
@@ -91,6 +94,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
@@ -110,6 +114,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.function.Function;
 
 import static com.simibubi.create.api.behaviour.display.DisplaySource.displaySource;
@@ -671,7 +676,8 @@ public class CCBlocks {
             .lang("Fan Ending Catalyst with Dragon's Breath")
             .register();
 
-    public static final BlockEntry<FanEndingCatalystDragonHeadBlock> FAN_ENDING_CATALYST_DRAGON_HEAD = REGISTRATE.block("fan_ending_catalyst_dragon_head", FanEndingCatalystDragonHeadBlock::new)
+    public static final BlockEntry<FanCatalystRotatingHeadBlock> FAN_ENDING_CATALYST_DRAGON_HEAD = REGISTRATE
+            .block("fan_ending_catalyst_dragon_head", properties -> new FanCatalystRotatingHeadBlock(properties, CCBlockEntityTypes.FAN_ENDING_CATALYST_DRAGON_HEAD))
             .initialProperties(() -> Blocks.IRON_BLOCK)
             .properties(p -> p
                     .mapColor(MapColor.TERRACOTTA_YELLOW)
@@ -747,7 +753,8 @@ public class CCBlocks {
             .transform(customItemModel())
             .register();
 
-    public static final BlockEntry<WrenchableBlock> FAN_EXPLODING_CATALYST = REGISTRATE.block("fan_exploding_catalyst", WrenchableBlock::new)
+    public static final BlockEntry<FanCatalystRotatingHeadBlock> FAN_EXPLODING_CATALYST = REGISTRATE
+            .block("fan_exploding_catalyst", properties -> new FanCatalystRotatingHeadBlock(properties, CCBlockEntityTypes.FAN_EXPLODING_CATALYST))
             .initialProperties(() -> Blocks.IRON_BLOCK)
             .properties(p -> p
                     .mapColor(MapColor.TERRACOTTA_YELLOW)
@@ -759,7 +766,7 @@ public class CCBlocks {
             .transform(pickaxeOnly())
             .transform(FeatureToggle.registerDependent(CCBlocks.EMPTY_FAN_CATALYST))
             .transform(FeatureToggle.addCondition(Mods.MORE_CATALYSTS::isLoaded))
-            .blockstate((c, p) -> p.simpleBlock(c.getEntry(), AssetLookup.partialBaseModel(c, p)))
+            .blockstate((c, p) -> p.simpleBlock(c.getEntry(), p.models().getExistingFile(p.modLoc("block/empty_fan_catalyst/block"))))
             .tag(AllTags.AllBlockTags.FAN_TRANSPARENT.tag)
             .item()
             .transform(customItemModel())
@@ -877,6 +884,31 @@ public class CCBlocks {
             .item()
             .transform(customItemModel())
             .register();
+
+    public static final Map<DyeColor, BlockEntry<WrenchableBlock>> FAN_DYEING_CATALYSTS = new TreeMap<>();
+
+    static {
+        for (DyeColor color : DyeColor.values()) {
+            FAN_DYEING_CATALYSTS.put(color, REGISTRATE.block(color.getName() + "_fan_dyeing_catalyst", WrenchableBlock::new)
+                    .initialProperties(() -> Blocks.IRON_BLOCK)
+                    .properties(p -> p
+                            .mapColor(MapColor.TERRACOTTA_YELLOW)
+                            .requiresCorrectToolForDrops()
+                            .noOcclusion()
+                            .isRedstoneConductor((state, level, pos) -> false)
+                    )
+                    .addLayer(() -> RenderType::cutoutMipped)
+                    .transform(pickaxeOnly())
+                    .transform(FeatureToggle.registerDependent(CCBlocks.EMPTY_FAN_CATALYST))
+                    .transform(FeatureToggle.addCondition(() -> Mods.DRAGONS_PLUS.isLoaded() || Mods.GARNISHED.isLoaded()))
+                    .blockstate((c, p) -> p.simpleBlock(c.getEntry(), p.models().withExistingParent(c.getName(), p.modLoc("block/fan_catalyst/with_content"))
+                            .texture("content", ResourceLocation.withDefaultNamespace("block/" + color.getName() + "_concrete_powder"))
+                    ))
+                    .tag(AllTags.AllBlockTags.FAN_TRANSPARENT.tag)
+                    .simpleItem()
+                    .register());
+        }
+    }
 
     public static final BlockEntry<ItemSiloBlock> ITEM_SILO = REGISTRATE.block("item_silo", ItemSiloBlock::new)
             .initialProperties(SharedProperties::softMetal)

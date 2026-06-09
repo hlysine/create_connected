@@ -16,6 +16,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.HoneycombItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.SignApplicator;
@@ -99,7 +100,7 @@ public class DashboardBlock extends HorizontalDirectionalBlock implements IWrenc
             return InteractionResult.PASS;
         }
 
-        if (stack.getItem() instanceof final SignApplicator signApplicator) {
+        if (stack.getItem() instanceof final SignApplicator signApplicator && !(stack.getItem() instanceof HoneycombItem)) {
             final MutableBoolean success = new MutableBoolean(false);
             this.withBlockEntityDo(level, blockPos, be -> {
                 final SignBlockEntity dummySign = new SignBlockEntity(blockPos, Blocks.OAK_SIGN.defaultBlockState());
@@ -112,7 +113,7 @@ public class DashboardBlock extends HorizontalDirectionalBlock implements IWrenc
                     success.setTrue();
                 }
             });
-            return success.booleanValue() ? InteractionResult.SUCCESS : InteractionResult.PASS;
+            return InteractionResult.SUCCESS;
         }
 
         return InteractionResult.PASS;

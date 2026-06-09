@@ -8,6 +8,7 @@ import com.simibubi.create.AllTags;
 import com.simibubi.create.foundation.data.TagGen;
 import com.tterrag.registrate.providers.ProviderType;
 import com.tterrag.registrate.providers.RegistrateTagsProvider;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
@@ -81,6 +82,15 @@ public class CCTagGen {
         prov.tag(BlockTags.create(Mods.NETHER_INDUSTRY.rl("fan_soul_stripping_catalysts")))
                 .add(CCBlocks.FAN_SOUL_STRIPPING_CATALYST.get());
 		*/
+        CCBlocks.FAN_DYEING_CATALYSTS.forEach((color, block) -> {
+            prov.tag(BlockTags.create(Mods.GARNISHED.rl("fan_processing_catalysts/dye/" + color.getName())))
+                    .add(block.get());
+            prov.tag(BlockTags.create(ResourceLocation.fromNamespaceAndPath("c", "dyes/" + color.getName())))
+                    .add(block.get());
+            prov.tag(BlockTags.create(ResourceLocation.fromNamespaceAndPath("c", "dyes")))
+                    .add(block.get());
+
+        });
     }
 
     private static void genItemTags(RegistrateTagsProvider<Item> provIn) {

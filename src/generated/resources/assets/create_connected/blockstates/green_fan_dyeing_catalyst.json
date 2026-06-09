@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "create_connected:block/green_fan_dyeing_catalyst"
+    }
+  }
+}

@@ -11,8 +11,9 @@ import com.hlysine.create_connected.content.crankwheel.CrankWheelBlockEntity;
 import com.hlysine.create_connected.content.crankwheel.CrankWheelVisual;
 import com.hlysine.create_connected.content.dashboard.DashboardBlockEntity;
 import com.hlysine.create_connected.content.dashboard.DashboardRenderer;
-import com.hlysine.create_connected.content.fancatalyst.FanEndingCatalystDragonHeadBlockEntity;
-import com.hlysine.create_connected.content.fancatalyst.FanEndingCatalystDragonHeadRenderer;
+import com.hlysine.create_connected.content.fancatalyst.FanCatalystRotatingHeadBlockEntity;
+import com.hlysine.create_connected.content.fancatalyst.FanCatalystRotatingHeadRenderer;
+import com.hlysine.create_connected.content.fancatalyst.SkullTypes;
 import com.hlysine.create_connected.content.fluidvessel.CreativeFluidVesselBlockEntity;
 import com.hlysine.create_connected.content.fluidvessel.FluidVesselBlockEntity;
 import com.hlysine.create_connected.content.fluidvessel.FluidVesselRenderer;
@@ -55,6 +56,10 @@ import com.simibubi.create.content.redstone.analogLever.AnalogLeverVisual;
 import com.simibubi.create.foundation.blockEntity.renderer.SmartBlockEntityRenderer;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
+import net.minecraft.client.model.SkullModel;
+import net.minecraft.client.model.dragon.DragonHeadModel;
+import net.minecraft.client.model.geom.ModelLayers;
+import net.minecraft.world.level.block.SkullBlock;
 
 public class CCBlockEntityTypes {
     private static final CreateRegistrate REGISTRATE = CreateConnected.getRegistrate();
@@ -243,10 +248,16 @@ public class CCBlockEntityTypes {
                     )
                     .register();
 
-    public static final BlockEntityEntry<FanEndingCatalystDragonHeadBlockEntity> FAN_ENDING_CATALYST_DRAGON_HEAD = REGISTRATE
-            .blockEntity("fan_ending_catalyst_dragon_head", FanEndingCatalystDragonHeadBlockEntity::new)
+    public static final BlockEntityEntry<FanCatalystRotatingHeadBlockEntity> FAN_ENDING_CATALYST_DRAGON_HEAD = REGISTRATE
+            .blockEntity("fan_ending_catalyst_dragon_head", FanCatalystRotatingHeadBlockEntity::new)
             .validBlocks(CCBlocks.FAN_ENDING_CATALYST_DRAGON_HEAD)
-            .renderer(() -> FanEndingCatalystDragonHeadRenderer::new)
+            .renderer(() -> context -> new FanCatalystRotatingHeadRenderer(SkullTypes.DRAGON.withModelFromContext(context)))
+            .register();
+
+    public static final BlockEntityEntry<FanCatalystRotatingHeadBlockEntity> FAN_EXPLODING_CATALYST = REGISTRATE
+            .blockEntity("fan_exploding_catalyst", FanCatalystRotatingHeadBlockEntity::new)
+            .validBlocks(CCBlocks.FAN_EXPLODING_CATALYST)
+            .renderer(() -> context -> new FanCatalystRotatingHeadRenderer(SkullTypes.CREEPER.withModelFromContext(context)))
             .register();
 
 

@@ -49,6 +49,7 @@ public class CCDatagen {
 
     private static void addExtraRegistrateData() {
         CCTagGen.addGenerators();
+        CCDataMapGen.addGenerators();
 
         REGISTRATE.addDataGenerator(ProviderType.LANG, provider -> {
             BiConsumer<String, String> langConsumer = provider::add;

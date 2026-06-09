@@ -22,6 +22,7 @@
   "block.create_connected.brass_gearbox": "Messing Versnellingsbak",
   "block.create_connected.brass_gearbox.tooltip.summary": "Een versnellingsbak waarvan de rotatierichting van de 4 zijden _apart in te stellen_ is.",
   "block.create_connected.centrifugal_clutch": "Centrifugale Koppeling",
+  "block.create_connected.centrifugal_clutch.tooltip.summary": "Een koppeling dat alleen _gekoppeld_ is als de input RPM _hoger_ is dan een in te stellen hoeveelheid.",
   "block.create_connected.copycat_beam": "Imitatiebalk",
   "block.create_connected.copycat_beam.tooltip.behaviour1": "Gebruikt het _vastgehouden item_ als het materiaal, indien mogelijk. _Klik opnieuw_ om de _oriëntatie_ te veranderen of om het _aan/uit_ te zetten. Gebruik een _Moersleutel_ om het materiaal te _resetten_.",
   "block.create_connected.copycat_beam.tooltip.condition1": "Bij rechter muisklik",

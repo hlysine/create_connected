@@ -1,0 +1,6 @@
+{
+  "parent": "create_connected:block/fan_catalyst/with_content",
+  "textures": {
+    "content": "minecraft:block/magenta_concrete_powder"
+  }
+}

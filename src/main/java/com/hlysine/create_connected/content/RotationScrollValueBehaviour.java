@@ -43,7 +43,7 @@ public class RotationScrollValueBehaviour extends ScrollValueBehaviour {
     }
 
     public MutableComponent formatSettings(ValueSettings settings) {
-        return CreateLang.text(settings.row() == 0 ? "<=" : ">=")
+        return CreateLang.text(settings.row() == 0 ? "≤" : "≥")
                 .add(CreateLang.number(Math.max(1, Math.abs(settings.value()))))
                 .component();
     }

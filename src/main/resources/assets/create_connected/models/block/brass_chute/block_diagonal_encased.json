@@ -16,7 +16,7 @@
 				"east": {"uv": [0, 0, 16, 16], "texture": "#particle"},
 				"south": {"uv": [0, 0, 16, 16], "texture": "#particle"},
 				"west": {"uv": [0, 0, 16, 16], "texture": "#particle"},
-				"up": {"uv": [0, 0, 16, 16], "texture": "#missing"},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#particle"},
 				"down": {"uv": [0, 0, 8, 8], "texture": "#4"}
 			}
 		},

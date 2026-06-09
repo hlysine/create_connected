@@ -20,6 +20,7 @@
   "block.create_connected.brass_gearbox": "Messingist käigukast",
   "block.create_connected.brass_gearbox.tooltip.summary": "Käigukast, mille kõigi nelja külje pöörlemissuund on sõltumatult konfigureeritav.",
   "block.create_connected.centrifugal_clutch": "Tsentrifugaalsidur",
+  "block.create_connected.centrifugal_clutch.tooltip.summary": "Sidur, mis _ühendatakse_ ainult siis, kui sisendpöörded on _kiiremad_ kui konfigureeritav läviväärtus.",
   "block.create_connected.copycat_beam": "Kopeeri kiir",
   "block.create_connected.copycat_beam.tooltip.behaviour1": "Rakendab _hoitud_ eset_ selle _materjalina_, kui võimalik. _Klõpsake uuesti_, et _orientatsiooni_ või _toite_ olekut_ vahetada. _Materjali_ lähtestamiseks_ kasutage _mutrivõtit_.",
   "block.create_connected.copycat_beam.tooltip.condition1": "R-klahvi klõpsamisel",

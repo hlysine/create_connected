@@ -73,16 +73,16 @@ public class SequencedPulseGeneratorScreen extends AbstractSimiScreen {
         Instruction instruction = instructions.get(row);
 
         ScrollInput type =
-                new SelectionScrollInput(x, y + rowHeight * row, 139, 18)
+                new SelectionScrollInput(x, y + rowHeight * row, 138, 18)
                         .forOptions(Instruction.getOptions())
                         .calling(state -> instructionUpdated(row, state))
                         .setState(instruction.getOrdinal())
                         .titled(ConnectedLang.translateDirect("gui.sequenced_pulse_generator.instruction"));
         ScrollInput value =
-                new ScrollInput(x + 141, y + rowHeight * row, 28, 18)
+                new ScrollInput(x + 140, y + rowHeight * row, 28, 18)
                         .calling(state -> instructions.get(row).setParam(state));
         ScrollInput signal =
-                new ScrollInput(x + 171, y + rowHeight * row, 28, 18)
+                new ScrollInput(x + 170, y + rowHeight * row, 28, 18)
                         .withRange(0, 16)
                         .setState(instruction.getSignal())
                         .calling(state -> instructions.get(row).setSignal(state));
@@ -154,10 +154,10 @@ public class SequencedPulseGeneratorScreen extends AbstractSimiScreen {
                 Function<Integer, Component> formatter = instruction.paramConfig.formatter();
                 Component text = formatter == null ? Component.literal(String.valueOf(instruction.getParam())) : formatter.apply(instruction.getParam());
                 int stringWidth = font.width(text);
-                label(graphics, 173 + (12 - stringWidth / 2), yOffset - 1, text);
+                label(graphics, 172 + (12 - stringWidth / 2), yOffset - 1, text);
             }
             if (instruction.hasSignal)
-                label(graphics, 210, yOffset - 1, Component.literal(String.valueOf(instruction.getSignal())));
+                label(graphics, 209, yOffset - 1, Component.literal(String.valueOf(instruction.getSignal())));
         }
 
         graphics.drawString(font, title, x + (background.width - 8) / 2 - font.width(title) / 2, y + 4, 0x592424, false);

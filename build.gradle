@@ -202,9 +202,9 @@ dependencies {
     compileOnly fg.deobf("mezz.jei:jei-${jei_minecraft_version}-forge-api:${jei_version}")
     runtimeOnly fg.deobf("mezz.jei:jei-${jei_minecraft_version}-forge:${jei_version}")
 
-//    implementation("maven.modrinth:create-garnished:${garnished_version}")
+    runtimeOnly("maven.modrinth:create-garnished:${garnished_version}")
 //    runtimeOnly("maven.modrinth:create-dreams-and-desires:${dreams_desires_version}")
-//    runtimeOnly("plus.dragons.createdragonsplus:create-dragons-plus-${minecraft_version}:${create_dragons_plus_version}")
+    runtimeOnly("plus.dragons.createdragonsplus:create-dragons-plus-${minecraft_version}:${create_dragons_plus_version}")
 //    runtimeOnly("maven.modrinth:create-henry:${create_henry_version}")
     implementation(fg.deobf("com.copycatsplus:copycats:${copycats_version}")) { transitive = false }
     implementation(fg.deobf("maven.modrinth:additional-placements:${additional_placements_version}"))
@@ -302,7 +302,11 @@ tasks.publishMods.dependsOn(tasks.assemble)
 tasks.publishMods.mustRunAfter(tasks.build)
 
 publishMods {
-    changelog = "## NOTE: Create: Connected 1.0.0 or above only works with Create 6.0.0 or above!\n\nCheck out the detailed changelog at https://github.com/hlysine/create_connected/blob/main/CHANGELOG.md"
+    changelog = "## NOTE: Create: Connected 1.2.0 contains breaking changes for dependents\n" +
+            "\n" +
+            "- Mod registrations moved to `registries` package\n" +
+            "\n" +
+            "Check out the detailed changelog at https://github.com/hlysine/create_connected/blob/main/CHANGELOG.md"
     type = STABLE
     file = tasks.jarJar.archiveFile
     modLoaders.add("forge")

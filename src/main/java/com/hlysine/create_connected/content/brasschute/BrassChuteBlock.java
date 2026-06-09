@@ -45,14 +45,31 @@ public class BrassChuteBlock extends ChuteBlock {
         return InteractionResult.SUCCESS;
     }
 
+    protected ItemInteractionResult retrieveItem(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player,
+                                                 InteractionHand hand, BlockHitResult hitResult) {
+        if (!stack.isEmpty())
+            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        if (level.isClientSide)
+            return ItemInteractionResult.SUCCESS;
+
+        return onBlockEntityUseItemOn(level, pos, be -> {
+            if (be.getItem().isEmpty())
+                return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+            player.getInventory()
+                    .placeItemBackInInventory(be.getItem());
+            be.setItem(ItemStack.EMPTY);
+            return ItemInteractionResult.SUCCESS;
+        });
+    }
+
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand,
                                  BlockHitResult hitResult) {
         Shape shape = state.getValue(SHAPE);
         if (!AllBlocks.BRASS_BLOCK.isIn(player.getItemInHand(hand)))
-            return super.use(state, level, pos, player, hand, hitResult);
+            return retrieveItem(state, level, pos, player, hand, hitResult);
         if (shape == Shape.INTERSECTION || shape == Shape.ENCASED)
-            return super.use(state, level, pos, player, hand, hitResult);
+            return retrieveItem(state, level, pos, player, hand, hitResult);
         if (player == null || level.isClientSide)
             return InteractionResult.SUCCESS;
 
