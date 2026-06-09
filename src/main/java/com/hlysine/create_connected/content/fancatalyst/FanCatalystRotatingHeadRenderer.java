@@ -4,6 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.foundation.blockEntity.renderer.SafeBlockEntityRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.blockentity.SkullBlockRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
@@ -14,6 +15,14 @@ public class FanCatalystRotatingHeadRenderer extends SafeBlockEntityRenderer<Fan
 
     public FanCatalystRotatingHeadRenderer(SkullTypes skullType) {
         this.skullType = skullType;
+    }
+
+    public static FanCatalystRotatingHeadRenderer creeper(BlockEntityRendererProvider.Context context) {
+        return new FanCatalystRotatingHeadRenderer(SkullTypes.CREEPER.withModelFromContext(context));
+    }
+
+    public static FanCatalystRotatingHeadRenderer dragon(BlockEntityRendererProvider.Context context) {
+        return new FanCatalystRotatingHeadRenderer(SkullTypes.DRAGON.withModelFromContext(context));
     }
 
     public RenderType getRenderType() {
