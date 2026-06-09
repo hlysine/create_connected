@@ -1,32 +1,28 @@
 {
-  "neoforge:conditions": [
+  "type": "create:filling",
+  "conditions": [
     {
       "type": "create_connected:feature_enabled",
-      "tag": "create_connected:empty_fan_catalyst"
+      "feature": "create_connected:empty_fan_catalyst"
     },
     {
-      "type": "neoforge:mod_loaded",
+      "type": "forge:mod_loaded",
       "modid": "garnished"
     }
   ],
-  "type": "create:filling",
   "ingredients": [
     {
-      "item": "create_connected:empty_fan_catalyst"
+      "amount": 1000,
+      "fluid": "garnished:lime_mastic_resin",
+      "nbt": {}
     },
     {
-      "type": "neoforge:compound",
-      "amount": 1000,
-      "ingredients": [
-        {
-          "fluid": "garnished:lime_mastic_resin"
-        }
-      ]
+      "item": "create_connected:empty_fan_catalyst"
     }
   ],
   "results": [
     {
-      "id": "create_connected:lime_fan_dyeing_catalyst"
+      "item": "create_connected:lime_fan_dyeing_catalyst"
     }
   ]
 }

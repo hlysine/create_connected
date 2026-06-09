@@ -1,31 +1,26 @@
 {
-  "neoforge:conditions": [
+  "type": "create:item_application",
+  "conditions": [
     {
       "type": "create_connected:feature_enabled",
-      "tag": "create_connected:empty_fan_catalyst"
+      "feature": "create_connected:empty_fan_catalyst"
     },
     {
-      "type": "neoforge:mod_loaded",
+      "type": "forge:mod_loaded",
       "modid": "create_dragons_plus"
     }
   ],
-  "type": "create:item_application",
   "ingredients": [
     {
       "item": "create_connected:empty_fan_catalyst"
     },
     {
-      "type": "neoforge:compound",
-      "ingredients": [
-        {
-          "item": "create_dragons_plus:purple_dye_bucket"
-        }
-      ]
+      "item": "create_dragons_plus:purple_dye_bucket"
     }
   ],
   "results": [
     {
-      "id": "create_connected:purple_fan_dyeing_catalyst"
+      "item": "create_connected:purple_fan_dyeing_catalyst"
     }
   ]
 }

@@ -1,32 +1,28 @@
 {
-  "neoforge:conditions": [
+  "type": "create:filling",
+  "conditions": [
     {
       "type": "create_connected:feature_enabled",
-      "tag": "create_connected:empty_fan_catalyst"
+      "feature": "create_connected:empty_fan_catalyst"
     },
     {
-      "type": "neoforge:mod_loaded",
+      "type": "forge:mod_loaded",
       "modid": "create_dragons_plus"
     }
   ],
-  "type": "create:filling",
   "ingredients": [
     {
-      "item": "create_connected:empty_fan_catalyst"
+      "amount": 1000,
+      "fluid": "create_dragons_plus:lime_dye",
+      "nbt": {}
     },
     {
-      "type": "neoforge:compound",
-      "amount": 1000,
-      "ingredients": [
-        {
-          "fluid": "create_dragons_plus:lime_dye"
-        }
-      ]
+      "item": "create_connected:empty_fan_catalyst"
     }
   ],
   "results": [
     {
-      "id": "create_connected:lime_fan_dyeing_catalyst"
+      "item": "create_connected:lime_fan_dyeing_catalyst"
     }
   ]
 }
