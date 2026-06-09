@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/block",
-  "loader": "neoforge:composite",
+  "loader": "forge:composite",
   "textures": {
     "particle": "create:block/funnel/brass_funnel_frame"
   },
