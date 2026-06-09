@@ -45,12 +45,12 @@ public class FillingRecipeGen extends com.simibubi.create.api.data.recipe.Fillin
 
     private GeneratedRecipe fillFanDyeingCatalysts() {
         CCBlocks.FAN_DYEING_CATALYSTS.forEach((color, block) -> {
-            create(color.getName() + "_fan_dyeing_catalyst_dragons_plus", b -> b.require(new SizedFluidIngredient(new SimpleFluidIngredient(Mods.DRAGONS_PLUS, color.getName() + "_dye"), 1000))
+            create(color.getName() + "_fan_dyeing_catalyst_dragons_plus", b -> b.require(new SimpleFluidIngredient(Mods.DRAGONS_PLUS, color.getName() + "_dye", 1000))
                     .require(CCBlocks.EMPTY_FAN_CATALYST)
                     .withCondition(new FeatureEnabledCondition(CCBlocks.EMPTY_FAN_CATALYST.getId()))
                     .withCondition(new ModLoadedCondition(Mods.DRAGONS_PLUS.id()))
                     .output(CCBlocks.FAN_DYEING_CATALYSTS.get(color)));
-            create(color.getName() + "_fan_dyeing_catalyst_garnished", b -> b.require(new SizedFluidIngredient(new SimpleFluidIngredient(Mods.GARNISHED, color.getName() + "_mastic_resin"), 1000))
+            create(color.getName() + "_fan_dyeing_catalyst_garnished", b -> b.require(new SimpleFluidIngredient(Mods.GARNISHED, color.getName() + "_mastic_resin", 1000))
                     .require(CCBlocks.EMPTY_FAN_CATALYST)
                     .withCondition(new FeatureEnabledCondition(CCBlocks.EMPTY_FAN_CATALYST.getId()))
                     .withCondition(new ModLoadedCondition(Mods.GARNISHED.id()))

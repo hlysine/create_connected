@@ -29,7 +29,7 @@ public class FanCatalystRotatingHeadRenderer extends SafeBlockEntityRenderer<Fan
         skullType.translate(ms);
         skullType.scale(ms);
         skullType.getModel().setupAnim(0, animationTick, 0.0F);
-        skullType.getModel().renderToBuffer(ms, bufferSource.getBuffer(getRenderType()), light, OverlayTexture.NO_OVERLAY);
+        skullType.getModel().renderToBuffer(ms, bufferSource.getBuffer(getRenderType()), light, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
         ms.popPose();
     }
 }
