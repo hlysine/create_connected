@@ -5,6 +5,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 1.2.1 - 2026-06-07
+
+### Added
+
+- Fan dyeing catalysts for Create: Garnished and Create: Dragons Plus
+
+### Changed
+
+- Fan exploding catalyst now uses an animated model (thanks @JustAGuy4447)
+
+### Fixed
+
+- Missing texture on diagonal encased brass chute
+- Brass chute incorrectly accepting industrial iron block for encasing
+- Missing sound effects for steam engines on fluid vessels
+- Pixel glitch on Sequenced Pulse Generator screen
+- Hardcoded "su-hours" unit in Kinetic Battery display source (thanks @VladisCrafter)
+- Dashboard not being able to be re-dyed (thanks @VladisCrafter)
+
 ## 1.2.0 - 2026-05-25
 
 ### Breaking code changes

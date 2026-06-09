@@ -272,7 +272,11 @@ tasks.publishMods.dependsOn(tasks.assemble)
 tasks.publishMods.mustRunAfter(tasks.build)
 
 publishMods {
-    changelog = "Check out the detailed changelog at https://github.com/hlysine/create_connected/blob/main/CHANGELOG.md"
+    changelog = "## NOTE: Create: Connected 1.2.0 contains breaking changes for dependents\n" +
+            "\n" +
+            "- Mod registrations moved to `registries` package\n" +
+            "\n" +
+            "Check out the detailed changelog at https://github.com/hlysine/create_connected/blob/main/CHANGELOG.md"
     type = STABLE
     file = jar.archiveFile
     modLoaders.add("neoforge")

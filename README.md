@@ -36,7 +36,9 @@ The middle ground between a regular chute and a smart chute. Supports diagonal i
 
 ![empty_fan_catalyst](https://github.com/hlysine/create_connected/assets/25472513/871b1ee6-33c6-4102-80ed-3670641a8d33) **Even more catalysts**
 
-For Create: More Catalysts, Create: Shimmer and Create: Nether Industry. (Thanks HgTlPbBi-4 and JustAGuy4447 for implementation)
+Dyeing catalysts for Create: Garnished and Create: Dragons Plus.
+
+Also supports new fan processing for Create: More Catalysts, Create: Shimmer and Create: Nether Industry. (Thanks HgTlPbBi-4 and JustAGuy4447 for implementation)
 
 ![sequenced_pulse_generator](https://github.com/user-attachments/assets/20c675f8-7275-47f4-ab45-d0fb3b3150b5) **Reworked Sequenced Pulse Generator**
 
