@@ -115,6 +115,7 @@ import net.neoforged.neoforge.common.Tags;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.function.Function;
 
 import static com.simibubi.create.api.behaviour.display.DisplaySource.displaySource;
@@ -885,7 +886,7 @@ public class CCBlocks {
             .transform(customItemModel())
             .register();
 
-    public static final Map<DyeColor, BlockEntry<WrenchableBlock>> FAN_DYEING_CATALYSTS = new HashMap<>();
+    public static final Map<DyeColor, BlockEntry<WrenchableBlock>> FAN_DYEING_CATALYSTS = new TreeMap<>();
 
     static {
         for (DyeColor color : DyeColor.values()) {
