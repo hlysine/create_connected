@@ -21,7 +21,7 @@
   "block.create_connected.brake": "Bremse",
   "block.create_connected.brake.tooltip.summary": "Ein Gerät das _immense Belastung_ erzeugt wann aktiviert, das Netzwerk Anhalt durch _Überbelastung_.",
   "block.create_connected.brass_chute": "Messingschacht",
-  "block.create_connected.brass_chute.tooltip.summary": "Ein verbesserter Schacht für den Gegenstand Transport mit hohem Durchsatz.\nKann bis zu _64 Gegenstände_ auf einmal transportieren.",
+  "block.create_connected.brass_chute.tooltip.summary": "Ein verbesserter Schacht für den Gegenstand Transport mit hohem Durchsatz.\nKann bis zu 64 Gegenstände auf einmal transportieren.",
   "block.create_connected.brass_encased_cross_connector": "Ummantelter Messing Kreuzverbinder",
   "block.create_connected.brass_gearbox": "Messing Getriebe",
   "block.create_connected.brass_gearbox.tooltip.summary": "Ein Getriebe, bei dem die Drehrichtung aller 4 Seiten unabhängig von einander konfigurierbar ist.",
