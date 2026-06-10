@@ -1,16 +1,20 @@
 package com.hlysine.create_connected.datagen.recipes;
 
 import com.hlysine.create_connected.CreateConnected;
+import com.hlysine.create_connected.compat.DyeDepotCompat;
 import com.hlysine.create_connected.compat.Mods;
 import com.hlysine.create_connected.registries.CCBlocks;
 import com.hlysine.create_connected.registries.CCTags;
 import com.simibubi.create.AllFluids;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.material.Fluids;
+import net.neoforged.neoforge.common.conditions.AndCondition;
 import net.neoforged.neoforge.common.conditions.ModLoadedCondition;
 import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 @SuppressWarnings("unused")
@@ -54,15 +58,21 @@ public class FillingRecipeGen extends com.simibubi.create.api.data.recipe.Fillin
 
     private GeneratedRecipe fillFanDyeingCatalysts() {
         CCBlocks.FAN_DYEING_CATALYSTS.forEach((color, block) -> {
-            create(color.getName() + "_fan_dyeing_catalyst_dragons_plus", b -> b.require(new SizedFluidIngredient(new SimpleFluidIngredient(Mods.DRAGONS_PLUS, color.getName() + "_dye"), 1000))
+            String namespace = DyeDepotCompat.getColorNamespace(color);
+            boolean isVanilla = namespace.equals(ResourceLocation.DEFAULT_NAMESPACE);
+            create(color.getName() + "_fan_dyeing_catalyst_dragons_plus", b -> b.require(new SizedFluidIngredient(new SimpleFluidIngredient(Mods.DRAGONS_PLUS, (isVanilla ? "" : (namespace + "_")) + color.getName() + "_dye"), 1000))
                     .require(CCBlocks.EMPTY_FAN_CATALYST)
                     .withCondition(new FeatureEnabledCondition(CCBlocks.EMPTY_FAN_CATALYST.getId()))
-                    .withCondition(new ModLoadedCondition(Mods.DRAGONS_PLUS.id()))
+                    .withCondition(isVanilla
+                            ? new ModLoadedCondition(Mods.DRAGONS_PLUS.id())
+                            : new AndCondition(List.of(new ModLoadedCondition(Mods.DRAGONS_PLUS.id()), new ModLoadedCondition(Mods.DYE_DEPOT.id()))))
                     .output(CCBlocks.FAN_DYEING_CATALYSTS.get(color)));
-            create(color.getName() + "_fan_dyeing_catalyst_garnished", b -> b.require(new SizedFluidIngredient(new SimpleFluidIngredient(Mods.GARNISHED, color.getName() + "_mastic_resin"), 1000))
+            create(color.getName() + "_fan_dyeing_catalyst_garnished", b -> b.require(new SizedFluidIngredient(new SimpleFluidIngredient(Mods.GARNISHED, (isVanilla ? "" : (namespace + "_")) + color.getName() + "_mastic_resin"), 1000))
                     .require(CCBlocks.EMPTY_FAN_CATALYST)
                     .withCondition(new FeatureEnabledCondition(CCBlocks.EMPTY_FAN_CATALYST.getId()))
-                    .withCondition(new ModLoadedCondition(Mods.GARNISHED.id()))
+                    .withCondition(isVanilla
+                            ? new ModLoadedCondition(Mods.GARNISHED.id())
+                            : new AndCondition(List.of(new ModLoadedCondition(Mods.GARNISHED.id()), new ModLoadedCondition(Mods.DYE_DEPOT.id()))))
                     .output(CCBlocks.FAN_DYEING_CATALYSTS.get(color)));
         });
         return null;

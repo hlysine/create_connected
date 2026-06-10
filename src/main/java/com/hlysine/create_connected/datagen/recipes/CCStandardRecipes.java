@@ -2,6 +2,8 @@ package com.hlysine.create_connected.datagen.recipes;
 
 import com.google.common.base.Supplier;
 import com.google.common.collect.ImmutableList;
+import com.hlysine.create_connected.compat.DyeDepotCompat;
+import com.hlysine.create_connected.compat.Mods;
 import com.hlysine.create_connected.registries.CCBlocks;
 import com.hlysine.create_connected.registries.CCItems;
 import com.hlysine.create_connected.CreateConnected;
@@ -38,9 +40,7 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
-import net.neoforged.neoforge.common.conditions.ICondition;
-import net.neoforged.neoforge.common.conditions.ModLoadedCondition;
-import net.neoforged.neoforge.common.conditions.NotCondition;
+import net.neoforged.neoforge.common.conditions.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -303,28 +303,60 @@ public class CCStandardRecipes extends BaseRecipeProvider {
     GeneratedRecipe EMPTY_CATALYST_FROM_SMOKING = clearFanCatalyst("smoking", CCBlocks.FAN_SMOKING_CATALYST);
     GeneratedRecipe EMPTY_CATALYST_FROM_SPLASHING = clearFanCatalyst("splashing", CCBlocks.FAN_SPLASHING_CATALYST);
     GeneratedRecipe EMPTY_CATALYST_FROM_HAUNTING = clearFanCatalyst("haunting", CCBlocks.FAN_HAUNTING_CATALYST);
-    GeneratedRecipe EMPTY_CATALYST_FROM_FREEZING = clearFanCatalyst("freezing", CCBlocks.FAN_FREEZING_CATALYST);
-    GeneratedRecipe EMPTY_CATALYST_FROM_SEETHING = clearFanCatalyst("seething", CCBlocks.FAN_SEETHING_CATALYST);
-    GeneratedRecipe EMPTY_CATALYST_FROM_SANDING = clearFanCatalyst("sanding", CCBlocks.FAN_SANDING_CATALYST);
-    GeneratedRecipe EMPTY_CATALYST_FROM_ENRICHED = clearFanCatalyst("enriched", CCBlocks.FAN_ENRICHED_CATALYST);
-    GeneratedRecipe EMPTY_CATALYST_FROM_ENDING_DRAGONS_BREATH = clearFanCatalyst("ending_dragons_breath", CCBlocks.FAN_ENDING_CATALYST_DRAGONS_BREATH);
-    GeneratedRecipe EMPTY_CATALYST_FROM_ENDING_DRAGON_HEAD = clearFanCatalyst("ending_dragon_head", CCBlocks.FAN_ENDING_CATALYST_DRAGON_HEAD);
-    GeneratedRecipe EMPTY_CATALYST_FROM_WITHERING = clearFanCatalyst("withering", CCBlocks.FAN_WITHERING_CATALYST);
-    GeneratedRecipe EMPTY_CATALYST_FROM_CHOCOLATE_COATING = clearFanCatalyst("chocolate_coating", CCBlocks.FAN_CHOCOLATE_COATING_CATALYST);
-    GeneratedRecipe EMPTY_CATALYST_FROM_HONEY_COATING = clearFanCatalyst("honey_coating", CCBlocks.FAN_HONEY_COATING_CATALYST);
-    GeneratedRecipe EMPTY_CATALYST_FROM_EXPLODING = clearFanCatalyst("exploding", CCBlocks.FAN_EXPLODING_CATALYST);
-    GeneratedRecipe EMPTY_CATALYST_FROM_RESONANCE = clearFanCatalyst("resonance", CCBlocks.FAN_RESONANCE_CATALYST);
-    GeneratedRecipe EMPTY_CATALYST_FROM_SCULKING = clearFanCatalyst("sculking", CCBlocks.FAN_SCULKING_CATALYST);
-    GeneratedRecipe EMPTY_CATALYST_FROM_PURIFYING = clearFanCatalyst("purifying", CCBlocks.FAN_PURIFYING_CATALYST);
-    GeneratedRecipe EMPTY_CATALYST_FROM_TRANSMUTATION = clearFanCatalyst("transmutation", CCBlocks.FAN_TRANSMUTATION_CATALYST);
-    GeneratedRecipe EMPTY_CATALYST_FROM_GLOOMING = clearFanCatalyst("glooming", CCBlocks.FAN_GLOOMING_CATALYST);
-    GeneratedRecipe EMPTY_CATALYST_FROM_SOUL_STRIPPING = clearFanCatalyst("soul_stripping", CCBlocks.FAN_SOUL_STRIPPING_CATALYST);
+    GeneratedRecipe EMPTY_CATALYST_FROM_FREEZING = clearFanCatalyst("freezing", CCBlocks.FAN_FREEZING_CATALYST,
+            new OrCondition(List.of(
+                    new ModLoadedCondition(Mods.DREAMS_DESIRES.id()),
+                    new ModLoadedCondition(Mods.GARNISHED.id()),
+                    new ModLoadedCondition(Mods.DRAGONS_PLUS.id())
+            )));
+    GeneratedRecipe EMPTY_CATALYST_FROM_SEETHING = clearFanCatalyst("seething", CCBlocks.FAN_SEETHING_CATALYST,
+            new ModLoadedCondition(Mods.DREAMS_DESIRES.id()));
+    GeneratedRecipe EMPTY_CATALYST_FROM_SANDING = clearFanCatalyst("sanding", CCBlocks.FAN_SANDING_CATALYST,
+            new OrCondition(List.of(
+                    new ModLoadedCondition(Mods.DREAMS_DESIRES.id()),
+                    new ModLoadedCondition(Mods.DRAGONS_PLUS.id())
+            )));
+    GeneratedRecipe EMPTY_CATALYST_FROM_ENRICHED = clearFanCatalyst("enriched", CCBlocks.FAN_ENRICHED_CATALYST,
+            new ModLoadedCondition(Mods.NUCLEAR.id()));
+    GeneratedRecipe EMPTY_CATALYST_FROM_ENDING_DRAGONS_BREATH = clearFanCatalyst("ending_dragons_breath", CCBlocks.FAN_ENDING_CATALYST_DRAGONS_BREATH,
+            new ModLoadedCondition(Mods.DRAGONS_PLUS.id()));
+    GeneratedRecipe EMPTY_CATALYST_FROM_ENDING_DRAGON_HEAD = clearFanCatalyst("ending_dragon_head", CCBlocks.FAN_ENDING_CATALYST_DRAGON_HEAD,
+            new ModLoadedCondition(Mods.DRAGONS_PLUS.id()));
+    GeneratedRecipe EMPTY_CATALYST_FROM_WITHERING = clearFanCatalyst("withering", CCBlocks.FAN_WITHERING_CATALYST,
+            FalseCondition.INSTANCE);
+    GeneratedRecipe EMPTY_CATALYST_FROM_CHOCOLATE_COATING = clearFanCatalyst("chocolate_coating", CCBlocks.FAN_CHOCOLATE_COATING_CATALYST,
+            new ModLoadedCondition(Mods.MORE_CATALYSTS.id()));
+    GeneratedRecipe EMPTY_CATALYST_FROM_HONEY_COATING = clearFanCatalyst("honey_coating", CCBlocks.FAN_HONEY_COATING_CATALYST,
+            new ModLoadedCondition(Mods.MORE_CATALYSTS.id()));
+    GeneratedRecipe EMPTY_CATALYST_FROM_EXPLODING = clearFanCatalyst("exploding", CCBlocks.FAN_EXPLODING_CATALYST,
+            new ModLoadedCondition(Mods.MORE_CATALYSTS.id()));
+    GeneratedRecipe EMPTY_CATALYST_FROM_RESONANCE = clearFanCatalyst("resonance", CCBlocks.FAN_RESONANCE_CATALYST,
+            new ModLoadedCondition(Mods.MORE_CATALYSTS.id()));
+    GeneratedRecipe EMPTY_CATALYST_FROM_SCULKING = clearFanCatalyst("sculking", CCBlocks.FAN_SCULKING_CATALYST,
+            new ModLoadedCondition(Mods.MORE_CATALYSTS.id()));
+    GeneratedRecipe EMPTY_CATALYST_FROM_PURIFYING = clearFanCatalyst("purifying", CCBlocks.FAN_PURIFYING_CATALYST,
+            new ModLoadedCondition(Mods.MORE_CATALYSTS.id()));
+    GeneratedRecipe EMPTY_CATALYST_FROM_TRANSMUTATION = clearFanCatalyst("transmutation", CCBlocks.FAN_TRANSMUTATION_CATALYST,
+            new ModLoadedCondition(Mods.SHIMMER.id()));
+    GeneratedRecipe EMPTY_CATALYST_FROM_GLOOMING = clearFanCatalyst("glooming", CCBlocks.FAN_GLOOMING_CATALYST,
+            new ModLoadedCondition(Mods.SHIMMER.id()));
+    GeneratedRecipe EMPTY_CATALYST_FROM_SOUL_STRIPPING = clearFanCatalyst("soul_stripping", CCBlocks.FAN_SOUL_STRIPPING_CATALYST,
+            new ModLoadedCondition(Mods.NETHER_INDUSTRY.id()));
 
     GeneratedRecipe EMPTY_CATALYST_FROM_DYES = clearFanDyeingCatalysts();
 
     private GeneratedRecipe clearFanDyeingCatalysts() {
         CCBlocks.FAN_DYEING_CATALYSTS.forEach((color, block) -> {
-            clearFanCatalyst(color.getName() + "_dye", block);
+            ICondition hasDyeingMods = new OrCondition(List.of(
+                    new ModLoadedCondition(Mods.GARNISHED.id()),
+                    new ModLoadedCondition(Mods.DRAGONS_PLUS.id())
+            ));
+            String namespace = DyeDepotCompat.getColorNamespace(color);
+            boolean isVanilla = namespace.equals(ResourceLocation.DEFAULT_NAMESPACE);
+            clearFanCatalyst((isVanilla ? "" : (namespace + "_")) + color.getName() + "_dye", block,
+                    isVanilla
+                            ? hasDyeingMods
+                            : new AndCondition(List.of(hasDyeingMods, new ModLoadedCondition(Mods.DYE_DEPOT.id()))));
         });
         return null;
     }
@@ -468,6 +500,17 @@ public class CCStandardRecipes extends BaseRecipeProvider {
         return create(CCBlocks.EMPTY_FAN_CATALYST)
                 .withSuffix("_from_" + key)
                 .unlockedBy(CCBlocks.EMPTY_FAN_CATALYST::get)
+                .requiresResultFeature()
+                .viaShapeless(b -> b
+                        .requires(from)
+                );
+    }
+
+    GeneratedRecipe clearFanCatalyst(String key, ItemProviderEntry<? extends ItemLike, ? extends ItemLike> from, ICondition condition) {
+        return create(CCBlocks.EMPTY_FAN_CATALYST)
+                .withSuffix("_from_" + key)
+                .unlockedBy(CCBlocks.EMPTY_FAN_CATALYST::get)
+                .withCondition(condition)
                 .requiresResultFeature()
                 .viaShapeless(b -> b
                         .requires(from)

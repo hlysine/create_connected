@@ -1,6 +1,7 @@
 package com.hlysine.create_connected.registries;
 
 import com.hlysine.create_connected.CreateConnected;
+import com.hlysine.create_connected.compat.DyeDepotCompat;
 import com.hlysine.create_connected.compat.Mods;
 import com.hlysine.create_connected.compat.SimCompatRegistry;
 import com.hlysine.create_connected.config.CStress;
@@ -88,6 +89,7 @@ import com.simibubi.create.foundation.block.render.ReducedDestroyEffects;
 import com.simibubi.create.foundation.data.*;
 import com.tterrag.registrate.providers.DataGenContext;
 import com.tterrag.registrate.providers.RegistrateBlockstateProvider;
+import com.tterrag.registrate.providers.RegistrateLangProvider;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import net.createmod.catnip.data.Iterate;
 import net.createmod.catnip.registry.RegisteredObjectsHelper;
@@ -890,7 +892,9 @@ public class CCBlocks {
 
     static {
         for (DyeColor color : DyeColor.values()) {
-            FAN_DYEING_CATALYSTS.put(color, REGISTRATE.block(color.getName() + "_fan_dyeing_catalyst", WrenchableBlock::new)
+            String namespace = DyeDepotCompat.getColorNamespace(color);
+            boolean isVanilla = namespace.equals(ResourceLocation.DEFAULT_NAMESPACE);
+            FAN_DYEING_CATALYSTS.put(color, REGISTRATE.block((isVanilla ? "" : (namespace + "_")) + color.getName() + "_fan_dyeing_catalyst", WrenchableBlock::new)
                     .initialProperties(() -> Blocks.IRON_BLOCK)
                     .properties(p -> p
                             .mapColor(MapColor.TERRACOTTA_YELLOW)
@@ -901,10 +905,11 @@ public class CCBlocks {
                     .addLayer(() -> RenderType::cutoutMipped)
                     .transform(pickaxeOnly())
                     .transform(FeatureToggle.registerDependent(CCBlocks.EMPTY_FAN_CATALYST))
-                    .transform(FeatureToggle.addCondition(() -> Mods.DRAGONS_PLUS.isLoaded() || Mods.GARNISHED.isLoaded()))
+                    .transform(FeatureToggle.addCondition(() -> (Mods.DRAGONS_PLUS.isLoaded() || Mods.GARNISHED.isLoaded()) && (isVanilla || Mods.DYE_DEPOT.isLoaded())))
                     .blockstate((c, p) -> p.simpleBlock(c.getEntry(), p.models().withExistingParent(c.getName(), p.modLoc("block/fan_catalyst/with_content"))
-                            .texture("content", ResourceLocation.withDefaultNamespace("block/" + color.getName() + "_concrete_powder"))
+                            .texture("content", ResourceLocation.fromNamespaceAndPath(DyeDepotCompat.getColorNamespace(color), "block/" + color.getName() + "_concrete_powder"))
                     ))
+                    .lang(RegistrateLangProvider.toEnglishName(color.getName() + "_fan_dyeing_catalyst"))
                     .tag(AllTags.AllBlockTags.FAN_TRANSPARENT.tag)
                     .simpleItem()
                     .register());

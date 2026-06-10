@@ -1,4 +1,4 @@
-  {
+{
   "neoforge:conditions": [
     {
       "type": "create_connected:feature_enabled",

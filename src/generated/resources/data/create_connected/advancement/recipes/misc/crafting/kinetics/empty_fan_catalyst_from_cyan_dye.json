@@ -1,6 +1,19 @@
 {
   "neoforge:conditions": [
     {
+      "type": "neoforge:or",
+      "values": [
+        {
+          "type": "neoforge:mod_loaded",
+          "modid": "garnished"
+        },
+        {
+          "type": "neoforge:mod_loaded",
+          "modid": "create_dragons_plus"
+        }
+      ]
+    },
+    {
       "type": "create_connected:feature_enabled",
       "tag": "create_connected:empty_fan_catalyst"
     }

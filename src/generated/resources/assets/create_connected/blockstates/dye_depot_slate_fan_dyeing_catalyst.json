@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "create_connected:block/dye_depot_slate_fan_dyeing_catalyst"
+    }
+  }
+}

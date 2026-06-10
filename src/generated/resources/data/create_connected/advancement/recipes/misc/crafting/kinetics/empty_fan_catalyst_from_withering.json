@@ -1,6 +1,9 @@
 {
   "neoforge:conditions": [
     {
+      "type": "neoforge:false"
+    },
+    {
       "type": "create_connected:feature_enabled",
       "tag": "create_connected:empty_fan_catalyst"
     }

@@ -36,6 +36,294 @@
       ],
       "neoforge:value": "minecraft:cyan"
     },
+    "create_connected:dye_depot_amber_fan_dyeing_catalyst": {
+      "neoforge:conditions": [
+        {
+          "type": "neoforge:and",
+          "values": [
+            {
+              "type": "neoforge:mod_loaded",
+              "modid": "create_dragons_plus"
+            },
+            {
+              "type": "neoforge:mod_loaded",
+              "modid": "dye_depot"
+            }
+          ]
+        }
+      ],
+      "neoforge:value": "dye_depot:amber"
+    },
+    "create_connected:dye_depot_aqua_fan_dyeing_catalyst": {
+      "neoforge:conditions": [
+        {
+          "type": "neoforge:and",
+          "values": [
+            {
+              "type": "neoforge:mod_loaded",
+              "modid": "create_dragons_plus"
+            },
+            {
+              "type": "neoforge:mod_loaded",
+              "modid": "dye_depot"
+            }
+          ]
+        }
+      ],
+      "neoforge:value": "dye_depot:aqua"
+    },
+    "create_connected:dye_depot_beige_fan_dyeing_catalyst": {
+      "neoforge:conditions": [
+        {
+          "type": "neoforge:and",
+          "values": [
+            {
+              "type": "neoforge:mod_loaded",
+              "modid": "create_dragons_plus"
+            },
+            {
+              "type": "neoforge:mod_loaded",
+              "modid": "dye_depot"
+            }
+          ]
+        }
+      ],
+      "neoforge:value": "dye_depot:beige"
+    },
+    "create_connected:dye_depot_coral_fan_dyeing_catalyst": {
+      "neoforge:conditions": [
+        {
+          "type": "neoforge:and",
+          "values": [
+            {
+              "type": "neoforge:mod_loaded",
+              "modid": "create_dragons_plus"
+            },
+            {
+              "type": "neoforge:mod_loaded",
+              "modid": "dye_depot"
+            }
+          ]
+        }
+      ],
+      "neoforge:value": "dye_depot:coral"
+    },
+    "create_connected:dye_depot_forest_fan_dyeing_catalyst": {
+      "neoforge:conditions": [
+        {
+          "type": "neoforge:and",
+          "values": [
+            {
+              "type": "neoforge:mod_loaded",
+              "modid": "create_dragons_plus"
+            },
+            {
+              "type": "neoforge:mod_loaded",
+              "modid": "dye_depot"
+            }
+          ]
+        }
+      ],
+      "neoforge:value": "dye_depot:forest"
+    },
+    "create_connected:dye_depot_ginger_fan_dyeing_catalyst": {
+      "neoforge:conditions": [
+        {
+          "type": "neoforge:and",
+          "values": [
+            {
+              "type": "neoforge:mod_loaded",
+              "modid": "create_dragons_plus"
+            },
+            {
+              "type": "neoforge:mod_loaded",
+              "modid": "dye_depot"
+            }
+          ]
+        }
+      ],
+      "neoforge:value": "dye_depot:ginger"
+    },
+    "create_connected:dye_depot_indigo_fan_dyeing_catalyst": {
+      "neoforge:conditions": [
+        {
+          "type": "neoforge:and",
+          "values": [
+            {
+              "type": "neoforge:mod_loaded",
+              "modid": "create_dragons_plus"
+            },
+            {
+              "type": "neoforge:mod_loaded",
+              "modid": "dye_depot"
+            }
+          ]
+        }
+      ],
+      "neoforge:value": "dye_depot:indigo"
+    },
+    "create_connected:dye_depot_maroon_fan_dyeing_catalyst": {
+      "neoforge:conditions": [
+        {
+          "type": "neoforge:and",
+          "values": [
+            {
+              "type": "neoforge:mod_loaded",
+              "modid": "create_dragons_plus"
+            },
+            {
+              "type": "neoforge:mod_loaded",
+              "modid": "dye_depot"
+            }
+          ]
+        }
+      ],
+      "neoforge:value": "dye_depot:maroon"
+    },
+    "create_connected:dye_depot_mint_fan_dyeing_catalyst": {
+      "neoforge:conditions": [
+        {
+          "type": "neoforge:and",
+          "values": [
+            {
+              "type": "neoforge:mod_loaded",
+              "modid": "create_dragons_plus"
+            },
+            {
+              "type": "neoforge:mod_loaded",
+              "modid": "dye_depot"
+            }
+          ]
+        }
+      ],
+      "neoforge:value": "dye_depot:mint"
+    },
+    "create_connected:dye_depot_navy_fan_dyeing_catalyst": {
+      "neoforge:conditions": [
+        {
+          "type": "neoforge:and",
+          "values": [
+            {
+              "type": "neoforge:mod_loaded",
+              "modid": "create_dragons_plus"
+            },
+            {
+              "type": "neoforge:mod_loaded",
+              "modid": "dye_depot"
+            }
+          ]
+        }
+      ],
+      "neoforge:value": "dye_depot:navy"
+    },
+    "create_connected:dye_depot_olive_fan_dyeing_catalyst": {
+      "neoforge:conditions": [
+        {
+          "type": "neoforge:and",
+          "values": [
+            {
+              "type": "neoforge:mod_loaded",
+              "modid": "create_dragons_plus"
+            },
+            {
+              "type": "neoforge:mod_loaded",
+              "modid": "dye_depot"
+            }
+          ]
+        }
+      ],
+      "neoforge:value": "dye_depot:olive"
+    },
+    "create_connected:dye_depot_rose_fan_dyeing_catalyst": {
+      "neoforge:conditions": [
+        {
+          "type": "neoforge:and",
+          "values": [
+            {
+              "type": "neoforge:mod_loaded",
+              "modid": "create_dragons_plus"
+            },
+            {
+              "type": "neoforge:mod_loaded",
+              "modid": "dye_depot"
+            }
+          ]
+        }
+      ],
+      "neoforge:value": "dye_depot:rose"
+    },
+    "create_connected:dye_depot_slate_fan_dyeing_catalyst": {
+      "neoforge:conditions": [
+        {
+          "type": "neoforge:and",
+          "values": [
+            {
+              "type": "neoforge:mod_loaded",
+              "modid": "create_dragons_plus"
+            },
+            {
+              "type": "neoforge:mod_loaded",
+              "modid": "dye_depot"
+            }
+          ]
+        }
+      ],
+      "neoforge:value": "dye_depot:slate"
+    },
+    "create_connected:dye_depot_tan_fan_dyeing_catalyst": {
+      "neoforge:conditions": [
+        {
+          "type": "neoforge:and",
+          "values": [
+            {
+              "type": "neoforge:mod_loaded",
+              "modid": "create_dragons_plus"
+            },
+            {
+              "type": "neoforge:mod_loaded",
+              "modid": "dye_depot"
+            }
+          ]
+        }
+      ],
+      "neoforge:value": "dye_depot:tan"
+    },
+    "create_connected:dye_depot_teal_fan_dyeing_catalyst": {
+      "neoforge:conditions": [
+        {
+          "type": "neoforge:and",
+          "values": [
+            {
+              "type": "neoforge:mod_loaded",
+              "modid": "create_dragons_plus"
+            },
+            {
+              "type": "neoforge:mod_loaded",
+              "modid": "dye_depot"
+            }
+          ]
+        }
+      ],
+      "neoforge:value": "dye_depot:teal"
+    },
+    "create_connected:dye_depot_verdant_fan_dyeing_catalyst": {
+      "neoforge:conditions": [
+        {
+          "type": "neoforge:and",
+          "values": [
+            {
+              "type": "neoforge:mod_loaded",
+              "modid": "create_dragons_plus"
+            },
+            {
+              "type": "neoforge:mod_loaded",
+              "modid": "dye_depot"
+            }
+          ]
+        }
+      ],
+      "neoforge:value": "dye_depot:verdant"
+    },
     "create_connected:gray_fan_dyeing_catalyst": {
       "neoforge:conditions": [
         {

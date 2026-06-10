@@ -25,7 +25,8 @@ public enum Mods {
     SHIMMER("create_shimmer"),
     NETHER_INDUSTRY("createnetherindustry"),
     TWILIGHT_FOREST("twilightforest"),
-    SIMULATED("simulated");
+    SIMULATED("simulated"),
+    DYE_DEPOT("dye_depot");
 
     private final String id;
 

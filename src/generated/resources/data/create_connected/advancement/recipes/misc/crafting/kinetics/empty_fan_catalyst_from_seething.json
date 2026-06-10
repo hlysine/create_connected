@@ -1,6 +1,10 @@
 {
   "neoforge:conditions": [
     {
+      "type": "neoforge:mod_loaded",
+      "modid": "dndesires"
+    },
+    {
       "type": "create_connected:feature_enabled",
       "tag": "create_connected:empty_fan_catalyst"
     }
