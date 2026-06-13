@@ -36,6 +36,7 @@ import com.hlysine.create_connected.content.copycat.wall.CopycatWallBlock;
 import com.hlysine.create_connected.content.copycat.wall.CopycatWallModel;
 import com.hlysine.create_connected.content.copycat.wall.WrappedWallBlock;
 import com.hlysine.create_connected.content.crankwheel.CrankWheelBlock;
+import com.hlysine.create_connected.content.crankwheel.CrankWheelItem;
 import com.hlysine.create_connected.content.crossconnector.CrossConnectorBlock;
 import com.hlysine.create_connected.content.crossconnector.EncasedCrossConnectorBlock;
 import com.hlysine.create_connected.content.dashboard.DashboardBlock;
@@ -84,7 +85,6 @@ import com.simibubi.create.content.kinetics.chainDrive.ChainDriveGenerator;
 import com.simibubi.create.content.kinetics.simpleRelays.BracketedKineticBlockModel;
 import com.simibubi.create.content.logistics.chute.ChuteGenerator;
 import com.simibubi.create.content.logistics.chute.ChuteItem;
-import com.simibubi.create.foundation.block.ItemUseOverrides;
 import com.simibubi.create.foundation.block.render.ReducedDestroyEffects;
 import com.simibubi.create.foundation.data.*;
 import com.tterrag.registrate.providers.DataGenContext;
@@ -158,8 +158,7 @@ public class CCBlocks {
             .onRegister(BlockStressValues.setGeneratorSpeed(32))
             .transform(FeatureToggle.register(FeatureCategory.KINETIC))
             .tag(AllTags.AllBlockTags.BRITTLE.tag)
-            .onRegister(ItemUseOverrides::addBlock)
-            .item()
+            .item(CrankWheelItem::new)
             .transform(customItemModel())
             .register();
 
@@ -172,8 +171,7 @@ public class CCBlocks {
             .onRegister(BlockStressValues.setGeneratorSpeed(32))
             .transform(FeatureToggle.register(FeatureCategory.KINETIC))
             .tag(AllTags.AllBlockTags.BRITTLE.tag)
-            .onRegister(ItemUseOverrides::addBlock)
-            .item()
+            .item(CrankWheelItem::new)
             .transform(customItemModel())
             .register();
 
