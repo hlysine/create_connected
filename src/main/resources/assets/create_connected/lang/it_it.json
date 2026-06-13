@@ -191,7 +191,6 @@
   "create_connected.ponder.inventory_bridge_filter.text_2": "Gli elementi che non corrispondono a nessuno dei due filtri non possono essere inseriti nel bridge",
   "create_connected.ponder.inventory_bridge_filter.text_3": "I filtri non vuoti hanno la precedenza su quelli vuoti...",
   "create_connected.ponder.inventory_bridge_filter.text_4": "...ed evitare che gli elementi corrispondenti vadano sul lato non filtrato",
-  "create_connected.ponder.inventory_bridge_filter.text_5": "I filtri vengono ignorati quando si estraggono oggetti dalle scorte",
   "create_connected.ponder.inverted_clutch.header": "Controllare la forza di rotazione utilizzando una frizione invertita",
   "create_connected.ponder.inverted_clutch.text_1": "Le frizioni invertite non avranno rotazione relè...",
   "create_connected.ponder.inverted_clutch.text_2": "...a meno che non siano alimentati da Redstone",
