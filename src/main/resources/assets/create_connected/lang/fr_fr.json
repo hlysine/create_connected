@@ -217,7 +217,6 @@
   "create_connected.ponder.inventory_bridge_filter.text_2": "Les éléments qui ne correspondent à aucun des filtres ne peuvent pas être insérés dans le pont de connexion",
   "create_connected.ponder.inventory_bridge_filter.text_3": "Les filtres non vides ont la préséance sur les filtres vides...",
   "create_connected.ponder.inventory_bridge_filter.text_4": "...et empêche les éléments correspondants d'aller sur le côté non filtré",
-  "create_connected.ponder.inventory_bridge_filter.text_5": "Les filtres sont ignorés lors de l'extraction d'objets des inventaires",
   "create_connected.ponder.inverted_clutch.header": "Contrôle de la force de rotation à l'aide d'un embrayage inversé",
   "create_connected.ponder.inverted_clutch.text_1": "Les embrayages inversés ne relanceront pas la rotation...",
   "create_connected.ponder.inverted_clutch.text_2": "... à moins qu'ils ne soient alimentés par la redstone",
