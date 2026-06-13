@@ -288,7 +288,6 @@
   "create_connected.ponder.inventory_bridge_filter.text_2": "Gegenstände, die mit keinem Filter übereinstimmen, können nicht in die Brücke eingefügt werden",
   "create_connected.ponder.inventory_bridge_filter.text_3": "Nicht leere Filter haben Vorrang vor leeren Filtern...",
   "create_connected.ponder.inventory_bridge_filter.text_4": "...und verhindert, dass passende Items zur ungefilterten Seite gehen",
-  "create_connected.ponder.inventory_bridge_filter.text_5": "Filter werden beim Extrahieren von Artikeln aus dem Inventar ignoriert",
   "create_connected.ponder.inverted_clutch.header": "Steuerung der Rotationskraft mit einer invertierten Kupplung",
   "create_connected.ponder.inverted_clutch.text_1": "Invertierte Kupplungen werden keine Drehung weiterleiten...",
   "create_connected.ponder.inverted_clutch.text_2": "...es sei denn, sie werden von Redstone angetrieben",
