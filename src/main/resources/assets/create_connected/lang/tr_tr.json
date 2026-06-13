@@ -206,7 +206,6 @@
   "create_connected.ponder.inventory_bridge_filter.text_2": "Her iki filtreye de uymayan öğeler köprüye eklenemez",
   "create_connected.ponder.inventory_bridge_filter.text_3": "Boş olmayan filtreler boş olanlara göre önceliklidir...",
   "create_connected.ponder.inventory_bridge_filter.text_4": "...ve eşleşen öğelerin filtrelenmemiş tarafa gitmesini önle",
-  "create_connected.ponder.inventory_bridge_filter.text_5": "Stoklardan ürün çıkartılırken filtreler göz ardı ediliyor",
   "create_connected.ponder.inverted_clutch.header": "Ters Debriyaj kullanarak dönme kuvvetinin kontrol edilmesi",
   "create_connected.ponder.inverted_clutch.text_1": "Ters Debriyajlar dönüşü iletmez...",
   "create_connected.ponder.inverted_clutch.text_2": "...Redstone tarafından desteklenmedikleri sürece",

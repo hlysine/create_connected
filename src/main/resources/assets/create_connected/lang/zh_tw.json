@@ -213,7 +213,6 @@
   "create_connected.ponder.inventory_bridge_filter.text_2": "不符合任一過濾器的項目無法放入橋接器中",
   "create_connected.ponder.inventory_bridge_filter.text_3": "非空過濾器優先於空過濾器……",
   "create_connected.ponder.inventory_bridge_filter.text_4": "....並防止匹配項進入未過濾的一側",
-  "create_connected.ponder.inventory_bridge_filter.text_5": "從庫存中提取物品時會忽略過濾器",
   "create_connected.ponder.inverted_clutch.header": "使用反向離合器控制應力",
   "create_connected.ponder.inverted_clutch.text_1": "反向離合器不會主動傳遞應力……",
   "create_connected.ponder.inverted_clutch.text_2": "...除非輸入紅石訊號",

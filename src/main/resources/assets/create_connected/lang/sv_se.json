@@ -194,7 +194,6 @@
   "create_connected.ponder.inventory_bridge_filter.text_2": "Objekt som inte matchar endera filtret kan inte infogas i bryggan",
   "create_connected.ponder.inventory_bridge_filter.text_3": "Icke-tomma filter har företräde framför tomma filter...",
   "create_connected.ponder.inventory_bridge_filter.text_4": "...och förhindra matchande objekt från att gå till den ofiltrerade sidan",
-  "create_connected.ponder.inventory_bridge_filter.text_5": "Filter ignoreras vid extrahering av föremål från lager",
   "create_connected.ponder.inverted_clutch.header": "Styra rotationskraft med hjälp av en inverterad lutch",
   "create_connected.ponder.inverted_clutch.text_1": "Inverterade kopplingar kommer inte att vidarebefordra rotation...",
   "create_connected.ponder.inverted_clutch.text_2": "...om de inte drivs av Redstone",

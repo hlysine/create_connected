@@ -262,7 +262,6 @@
   "create_connected.ponder.inventory_bridge_filter.text_2": "Elementy, które nie pasują do żadnego z filtrów nie mogą być wstawione do mostu",
   "create_connected.ponder.inventory_bridge_filter.text_3": "Nie puste filtry mają pierwszeństwo nad pustymi filtrami...",
   "create_connected.ponder.inventory_bridge_filter.text_4": "...i zapobiega pójście pasujących przedmiotów przed do niefiltrowanej strony",
-  "create_connected.ponder.inventory_bridge_filter.text_5": "Filtry są ignorowane, gdy przedmioty są wydobywane z ekwipunków",
   "create_connected.ponder.inverted_clutch.header": "Kontrolowanie siły obrotowej używając Odwróconego Sprzęgła",
   "create_connected.ponder.inverted_clutch.text_1": "Odwrócone Sprzęgło nie będą przekazywać obrotu...",
   "create_connected.ponder.inverted_clutch.text_2": "...chyba że będą zasilone przez redstone",

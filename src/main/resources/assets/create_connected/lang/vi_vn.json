@@ -196,7 +196,6 @@
   "create_connected.ponder.inventory_bridge_filter.text_2": "Các mục không khớp với bất kỳ bộ lọc nào đều không thể được chèn vào cầu",
   "create_connected.ponder.inventory_bridge_filter.text_3": "Các bộ lọc không trống sẽ được ưu tiên hơn các bộ lọc trống...",
   "create_connected.ponder.inventory_bridge_filter.text_4": "...và ngăn chặn các mục trùng khớp đi đến phía chưa được lọc",
-  "create_connected.ponder.inventory_bridge_filter.text_5": "Bộ lọc bị bỏ qua khi trích xuất các mục từ kho",
   "create_connected.ponder.inverted_clutch.header": "Kiểm soát lực quay bằng cách sử dụng bộ ly hợp đảo ngược",
   "create_connected.ponder.inverted_clutch.text_1": "Bộ ly hợp đảo ngược sẽ không chuyển tiếp vòng quay...",
   "create_connected.ponder.inverted_clutch.text_2": "...trừ khi chúng được cung cấp năng lượng bởi Redstone",

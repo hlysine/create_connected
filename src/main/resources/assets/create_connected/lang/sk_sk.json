@@ -208,7 +208,6 @@
   "create_connected.ponder.inventory_bridge_filter.text_2": "Položky, ktoré nezodpovedajú žiadnemu z filtrov, nie je možné vložiť do mostíka",
   "create_connected.ponder.inventory_bridge_filter.text_3": "Neprázdne filtre majú prednosť pred prázdnymi...",
   "create_connected.ponder.inventory_bridge_filter.text_4": "...a zabrániť tomu, aby sa zodpovedajúce položky dostali na nefiltrovanú stranu",
-  "create_connected.ponder.inventory_bridge_filter.text_5": "Pri extrakcii položiek zo zásob sa filtre ignorujú",
   "create_connected.ponder.inverted_clutch.header": "Ovládanie rotačnej sily pomocou obrátenej spojky",
   "create_connected.ponder.inverted_clutch.text_1": "Obrátené spojky nebudú prenášať otáčanie...",
   "create_connected.ponder.inverted_clutch.text_2": "...pokiaľ nie sú poháňané Redstone",

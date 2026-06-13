@@ -196,7 +196,6 @@
   "create_connected.ponder.inventory_bridge_filter.text_2": "Předměty, které neodpovídají žádnému z filtrů, nelze do mostu vložit",
   "create_connected.ponder.inventory_bridge_filter.text_3": "Neprázdné filtry mají přednost před prázdnými...",
   "create_connected.ponder.inventory_bridge_filter.text_4": "...a brání tomu, aby se shodné předměty dostaly na nefiltrovanou stranu",
-  "create_connected.ponder.inventory_bridge_filter.text_5": "Filtry jsou při extrakci předmětů ze zásob ignorovány",
   "create_connected.ponder.inverted_clutch.header": "Ovládání točivého momentu pomocí obrácené spojky",
   "create_connected.ponder.inverted_clutch.text_1": "Obrácené spojky nebudou přenášet rotaci...",
   "create_connected.ponder.inverted_clutch.text_2": "...pokud nejsou poháněny redstonem",

@@ -213,7 +213,6 @@
   "create_connected.ponder.inventory_bridge_filter.text_2": "Элементы, якія не адпавядаюць ні аднаму з фільтраў, не могуць быць устаўлены ў мост",
   "create_connected.ponder.inventory_bridge_filter.text_3": "Непустыя фільтры маюць прыярытэт перад пустымі...",
   "create_connected.ponder.inventory_bridge_filter.text_4": "...і прадухіліць пераход адпаведных элементаў на нефільтраваны бок",
-  "create_connected.ponder.inventory_bridge_filter.text_5": "Фільтры ігнаруюцца пры здабычы прадметаў з інвентара",
   "create_connected.ponder.inverted_clutch.header": "Кіраванне сілай кручэння з дапамогай перавернутага счаплення",
   "create_connected.ponder.inverted_clutch.text_1": "Перавернутыя счапленні не будуць перадаваць кручэнне...",
   "create_connected.ponder.inverted_clutch.text_2": "...калі яны не працуюць ад рэдстоун",

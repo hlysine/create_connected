@@ -192,7 +192,6 @@
   "create_connected.ponder.inventory_bridge_filter.text_2": "Ni ellir gosod eitemau nad ydynt yn cyfateb i'r naill hidlydd na'r llall yn y bont",
   "create_connected.ponder.inventory_bridge_filter.text_3": "Mae hidlwyr nad ydynt yn wag yn cael blaenoriaeth dros rai gwag...",
   "create_connected.ponder.inventory_bridge_filter.text_4": "...ac atal eitemau sy'n cyfateb rhag mynd i'r ochr heb ei hidlo",
-  "create_connected.ponder.inventory_bridge_filter.text_5": "Mae hidlwyr yn cael eu hanwybyddu wrth echdynnu eitemau o restrau",
   "create_connected.ponder.inverted_clutch.header": "Rheoli grym cylchdro gan ddefnyddio Inverted Clutch",
   "create_connected.ponder.inverted_clutch.text_1": "Ni fydd Inverted Clutches yn trosglwyddo cylchdro...",
   "create_connected.ponder.inverted_clutch.text_2": "...oni bai eu bod yn cael eu pweru gan Redstone",

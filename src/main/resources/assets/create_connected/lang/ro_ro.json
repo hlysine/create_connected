@@ -195,7 +195,6 @@
   "create_connected.ponder.inventory_bridge_filter.text_2": "Elemente care nu se potrivesc nici un filtru nu poate fi inserat în punte",
   "create_connected.ponder.inventory_bridge_filter.text_3": "Filtrele care nu sunt goale au prioritate față de cele goale...",
   "create_connected.ponder.inventory_bridge_filter.text_4": "...și să împiedice potrivirea elementelor să ajungă în partea nefiltrată",
-  "create_connected.ponder.inventory_bridge_filter.text_5": "Filtrele sunt ignorate când se extrag elemente din inventar",
   "create_connected.ponder.inverted_clutch.header": "Controlarea forței de rotație folosind o înclinare inversată",
   "create_connected.ponder.inverted_clutch.text_1": "Cuvintele inversate nu vor relansa rotația...",
   "create_connected.ponder.inverted_clutch.text_2": "...dacă nu sunt alimentate de Piatră Roșie",

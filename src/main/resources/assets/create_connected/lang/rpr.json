@@ -271,7 +271,6 @@
   "create_connected.ponder.inventory_bridge_filter.text_2": "Предметы, не соотвѣтствующіе ни одному фильтру, не попадаютъ внутрь",
   "create_connected.ponder.inventory_bridge_filter.text_3": "Заполненные фильтры имѣютъ пріоритетъ передъ пустыми...",
   "create_connected.ponder.inventory_bridge_filter.text_4": "...и не даютъ соотвѣтствующимъ имъ предметамъ проходить черезъ обратную сторону",
-  "create_connected.ponder.inventory_bridge_filter.text_5": "Фильтры игнорируются, когда предметы поступаютъ изъ самихъ хранилищъ",
   "create_connected.ponder.inverted_clutch.header": "Управленіемъ силой вращенія съ помощью инвертированнаго сцѣпленія",
   "create_connected.ponder.inverted_clutch.text_1": "Инвертированное сцѣпленіе не будетъ пропускать вращеніе...",
   "create_connected.ponder.inverted_clutch.text_2": "...пока не будетъ активировано редстоуномъ",

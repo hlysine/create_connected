@@ -213,7 +213,6 @@
   "create_connected.ponder.inventory_bridge_filter.text_2": "Los objetos que no coincidan con ningún filtro no pueden ser insertados en el puente",
   "create_connected.ponder.inventory_bridge_filter.text_3": "Los filtros no vacíos tienen prioridad sobre los vacíos...",
   "create_connected.ponder.inventory_bridge_filter.text_4": "...y evitar que los objetos coincidentes vayan al lado sin filtrar",
-  "create_connected.ponder.inventory_bridge_filter.text_5": "Los filtros son ignorados cuando se extraen objetos de los inventarios",
   "create_connected.ponder.inverted_clutch.header": "Controlando la fuerza rotacional mediante una caja de trasmisión invertida",
   "create_connected.ponder.inverted_clutch.text_1": "Las cajas de trasmisión invertidas no dependerán de rotación...",
   "create_connected.ponder.inverted_clutch.text_2": "...a menos a que sean encendidas por redstone",
