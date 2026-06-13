@@ -2,6 +2,7 @@ package com.hlysine.create_connected.ponder;
 
 import com.hlysine.create_connected.content.inventorybridge.InventoryBridgeBlock;
 import com.hlysine.create_connected.content.inventorybridge.InventoryBridgeBlockEntity;
+import com.simibubi.create.AllBlocks;
 import com.simibubi.create.foundation.ponder.CreateSceneBuilder;
 import net.createmod.catnip.math.Pointing;
 import net.createmod.ponder.api.PonderPalette;
@@ -316,18 +317,9 @@ public class InventoryBridgeScenes {
         scene.idle(10);
 
         scene.overlay().showText(80)
-                .text("Filters are ignored when extracting items from inventories")
+                .text("Filters are also respected when extracting items from inventories...")
                 .placeNearTarget()
                 .pointAt(util.vector().centerOf(funnelOut));
-
-        scene.idle(20);
-        itemIn = scene.world().createItemEntity(util.vector().centerOf(chute1).add(0, 2, 0), util.vector().of(0, 0, 0), new ItemStack(Items.GOLD_INGOT, 16));
-        scene.idle(10);
-        scene.world().modifyEntity(itemIn, Entity::discard);
-        scene.idle(1);
-        itemOut = scene.world().createItemEntity(util.vector().centerOf(funnelOut).add(0, -0.5, 0), util.vector().of(0, 0, 0), new ItemStack(Items.GOLD_INGOT, 16));
-        scene.idle(30);
-        scene.world().modifyEntity(itemOut, Entity::discard);
 
         scene.idle(20);
         itemIn = scene.world().createItemEntity(util.vector().centerOf(chute2).add(0, 2, 0), util.vector().of(0, 0, 0), new ItemStack(Items.GOLD_INGOT, 16));
@@ -337,5 +329,33 @@ public class InventoryBridgeScenes {
         itemOut = scene.world().createItemEntity(util.vector().centerOf(funnelOut).add(0, -0.5, 0), util.vector().of(0, 0, 0), new ItemStack(Items.GOLD_INGOT, 16));
         scene.idle(30);
         scene.world().modifyEntity(itemOut, Entity::discard);
+        scene.idle(20);
+
+        scene.overlay().showText(80)
+                .text("...and an empty filter rejects items that match the other side")
+                .placeNearTarget()
+                .pointAt(util.vector().centerOf(funnelOut));
+
+        scene.idle(20);
+        itemIn = scene.world().createItemEntity(util.vector().centerOf(chute1).add(0, 2, 0), util.vector().of(0, 0, 0), new ItemStack(Items.GOLD_INGOT, 16));
+        scene.idle(65);
+        scene.world().modifyEntity(itemIn, Entity::discard);
+
+        scene.idle(20);
+        scene.world().hideSection(util.select().position(funnelOut).add(util.select().position(funnelOut.above())), Direction.NORTH);
+        scene.idle(20);
+        scene.world().setBlock(funnelOut, AllBlocks.PACKAGER.getDefaultState(), false);
+        scene.world().setBlock(funnelOut.above(), AllBlocks.STOCK_LINK.getDefaultState(), false);
+
+        scene.addKeyframe();
+
+        scene.world().showSection(util.select().position(funnelOut).add(util.select().position(funnelOut.above())), Direction.SOUTH);
+        scene.idle(10);
+
+        scene.overlay().showText(80)
+                .text("Items rejected by filters are not visible in stock link networks")
+                .placeNearTarget()
+                .pointAt(util.vector().centerOf(funnelOut));
+        scene.idle(80);
     }
 }

@@ -196,12 +196,36 @@ public class InventoryBridgeBlockEntity extends SmartBlockEntity {
                 if (handler1 == null && handler2 == null) {
                     return ItemStack.EMPTY;
                 } else if (handler1 == null) {
-                    return handler2.getStackInSlot(slot);
+                    ItemStack stack = handler2.getStackInSlot(slot);
+                    boolean negative = negativeFilter.test(stack);
+                    boolean positive = positiveFilter.test(stack);
+                    if (!positive) return ItemStack.EMPTY;
+                    if (negative && !negativeFilter.getFilter().isEmpty() && positiveFilter.getFilter().isEmpty())
+                        return ItemStack.EMPTY;
+                    return stack;
                 } else if (handler2 == null) {
-                    return handler1.getStackInSlot(slot);
+                    ItemStack stack = handler1.getStackInSlot(slot);
+                    boolean negative = negativeFilter.test(stack);
+                    boolean positive = positiveFilter.test(stack);
+                    if (!negative) return ItemStack.EMPTY;
+                    if (positive && !positiveFilter.getFilter().isEmpty() && negativeFilter.getFilter().isEmpty())
+                        return ItemStack.EMPTY;
+                    return stack;
                 } else {
                     int size1 = handler1.getSlots();
-                    return slot < size1 ? handler1.getStackInSlot(slot) : handler2.getStackInSlot(slot - size1);
+                    ItemStack stack = slot < size1 ? handler1.getStackInSlot(slot) : handler2.getStackInSlot(slot - size1);
+                    boolean negative = negativeFilter.test(stack);
+                    boolean positive = positiveFilter.test(stack);
+                    if (!negative && !positive) return ItemStack.EMPTY;
+                    if (negative && !positive && slot >= size1) return ItemStack.EMPTY;
+                    if (positive && !negative && slot < size1) return ItemStack.EMPTY;
+                    boolean negativeFilterEmpty = negativeFilter.getFilter().isEmpty();
+                    boolean positiveFilterEmpty = positiveFilter.getFilter().isEmpty();
+                    if (!negativeFilterEmpty || !positiveFilterEmpty) {
+                        if (slot >= size1 && negative && positiveFilterEmpty) return ItemStack.EMPTY;
+                        if (slot < size1 && positive && negativeFilterEmpty) return ItemStack.EMPTY;
+                    }
+                    return stack;
                 }
             }, ItemStack.EMPTY);
         }
@@ -255,11 +279,35 @@ public class InventoryBridgeBlockEntity extends SmartBlockEntity {
                 if (handler1 == null && handler2 == null) {
                     return ItemStack.EMPTY;
                 } else if (handler1 == null) {
+                    ItemStack stack = handler2.extractItem(slot, amount, true);
+                    boolean negative = negativeFilter.test(stack);
+                    boolean positive = positiveFilter.test(stack);
+                    if (!positive) return ItemStack.EMPTY;
+                    if (negative && !negativeFilter.getFilter().isEmpty() && positiveFilter.getFilter().isEmpty())
+                        return ItemStack.EMPTY;
                     return handler2.extractItem(slot, amount, simulate);
                 } else if (handler2 == null) {
+                    ItemStack stack = handler1.extractItem(slot, amount, true);
+                    boolean negative = negativeFilter.test(stack);
+                    boolean positive = positiveFilter.test(stack);
+                    if (!negative) return ItemStack.EMPTY;
+                    if (positive && !positiveFilter.getFilter().isEmpty() && negativeFilter.getFilter().isEmpty())
+                        return ItemStack.EMPTY;
                     return handler1.extractItem(slot, amount, simulate);
                 } else {
                     int size1 = handler1.getSlots();
+                    ItemStack stack = slot < size1 ? handler1.extractItem(slot, amount, true) : handler2.extractItem(slot - size1, amount, true);
+                    boolean negative = negativeFilter.test(stack);
+                    boolean positive = positiveFilter.test(stack);
+                    if (!negative && !positive) return ItemStack.EMPTY;
+                    if (negative && !positive && slot >= size1) return ItemStack.EMPTY;
+                    if (positive && !negative && slot < size1) return ItemStack.EMPTY;
+                    boolean negativeFilterEmpty = negativeFilter.getFilter().isEmpty();
+                    boolean positiveFilterEmpty = positiveFilter.getFilter().isEmpty();
+                    if (!negativeFilterEmpty || !positiveFilterEmpty) {
+                        if (slot >= size1 && negative && positiveFilterEmpty) return ItemStack.EMPTY;
+                        if (slot < size1 && positive && negativeFilterEmpty) return ItemStack.EMPTY;
+                    }
                     return slot < size1 ? handler1.extractItem(slot, amount, simulate) : handler2.extractItem(slot - size1, amount, simulate);
                 }
             }, ItemStack.EMPTY);
