@@ -219,7 +219,6 @@
   "create_connected.ponder.inventory_bridge_filter.text_2": "Itens que não correspondem a nenhum filtro não podem ser inseridos na ponte",
   "create_connected.ponder.inventory_bridge_filter.text_3": "Filtros não vazios são priorizados acima dos vazios...",
   "create_connected.ponder.inventory_bridge_filter.text_4": "...e previnem que itens correspondentes vão para o lado sem filtro",
-  "create_connected.ponder.inventory_bridge_filter.text_5": "Filtros são ignorados quando itens são extraídos dos inventários",
   "create_connected.ponder.inverted_clutch.header": "Controlando a força rotacional usando uma Embreagem Invertida",
   "create_connected.ponder.inverted_clutch.text_1": "As Embreagens invertidas não irão repassar a rotação...",
   "create_connected.ponder.inverted_clutch.text_2": "...a menos que eles sejam energizados por Redstone",
