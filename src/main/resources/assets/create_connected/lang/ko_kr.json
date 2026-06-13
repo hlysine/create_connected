@@ -219,7 +219,6 @@
   "create_connected.ponder.inventory_bridge_filter.text_2": "어느 필터와도 일치하지 않는 아이템은 연결 장치에 집어 넣을 수 없습니다",
   "create_connected.ponder.inventory_bridge_filter.text_3": "비어 있지 않은 필터는 비어 있는 필터보다 우선합니다",
   "create_connected.ponder.inventory_bridge_filter.text_4": "...일치하는 항목이 필터링되지 않은 쪽으로 이동하는 것을 방지합니다",
-  "create_connected.ponder.inventory_bridge_filter.text_5": "인벤토리에서 항목을 추출할 때는 필터가 무시됩니다",
   "create_connected.ponder.inverted_clutch.header": "반전 클러치로 동력 제어하기",
   "create_connected.ponder.inverted_clutch.text_1": "반전 클러치는 기본적으로 회전을 전달하지 않으며...",
   "create_connected.ponder.inverted_clutch.text_2": "...레드스톤 신호를 받아야만 회전합니다.",
