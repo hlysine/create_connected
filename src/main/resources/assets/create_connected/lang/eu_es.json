@@ -196,7 +196,6 @@
   "create_connected.ponder.inventory_bridge_filter.text_2": "Iragazkietako batekin bat ez datozen elementuak ezin dira zubian sartu",
   "create_connected.ponder.inventory_bridge_filter.text_3": "Hutsik ez dauden iragazkiek lehentasuna dute hutsik daudenen aurrean...",
   "create_connected.ponder.inventory_bridge_filter.text_4": "...eta elementu berdinak iragazkirik gabeko aldera joatea eragotzi",
-  "create_connected.ponder.inventory_bridge_filter.text_5": "Elementuak inbentarioetatik ateratzean, iragazkiak ez dira kontuan hartzen",
   "create_connected.ponder.inverted_clutch.header": "Enbrage alderantzikatu bat erabiliz biraketa-indarra kontrolatzea",
   "create_connected.ponder.inverted_clutch.text_1": "Enbrage alderantzikatuak ez dute biraketa errelebatuko...",
   "create_connected.ponder.inverted_clutch.text_2": "...Redstone-k elikatzen ez badituzte behintzat",
