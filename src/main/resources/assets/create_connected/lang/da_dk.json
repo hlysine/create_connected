@@ -197,7 +197,6 @@
   "create_connected.ponder.inventory_bridge_filter.text_2": "Elementer, der ikke matcher nogen af filtre, kan ikke indsættes i broen",
   "create_connected.ponder.inventory_bridge_filter.text_3": "Ikke-tomme filtre har forrang over tomme filtre...",
   "create_connected.ponder.inventory_bridge_filter.text_4": "...og forhindre matchende elementer i at gå til den ufiltrerede side",
-  "create_connected.ponder.inventory_bridge_filter.text_5": "Filtre ignoreres ved udtræk af varer fra lagerbeholdninger",
   "create_connected.ponder.inverted_clutch.header": "Styrer rotationskraft ved hjælp af en omvendt kobling",
   "create_connected.ponder.inverted_clutch.text_1": "Inverterede koblinger vil ikke relærotation...",
   "create_connected.ponder.inverted_clutch.text_2": "...medmindre de er drevet af Redstone",
