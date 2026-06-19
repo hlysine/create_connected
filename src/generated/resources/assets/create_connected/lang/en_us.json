@@ -26,7 +26,7 @@
   "block.create_connected.brass_chute.tooltip.summary": "An improved chute for high throughput item transport. Moves up to _64 items_ at a time.",
   "block.create_connected.brass_encased_cross_connector": "Brass Encased Cross Connector",
   "block.create_connected.brass_gearbox": "Brass Gearbox",
-  "block.create_connected.brass_gearbox.tooltip.summary": "A gearbox where the rotation direction of all 4 sides are _independently configurable_.",
+  "block.create_connected.brass_gearbox.tooltip.summary": "A gearbox where the rotation direction of all 4 sides are _independently configurable with a wrench_.",
   "block.create_connected.brown_fan_dyeing_catalyst": "Brown Fan Dyeing Catalyst",
   "block.create_connected.centrifugal_clutch": "Centrifugal Clutch",
   "block.create_connected.centrifugal_clutch.tooltip.summary": "A clutch that is only _coupled_ if the _input RPM_ meets a configurable threshold.",
