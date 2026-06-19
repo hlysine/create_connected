@@ -20,7 +20,6 @@
   "block.create_connected.brake": "Brzda",
   "block.create_connected.brake.tooltip.summary": "Zařízení, které při napájení vytváří _velké napětí_ a zastavuje síť tím, že ji _přetíží_.",
   "block.create_connected.brass_gearbox": "Mosazná převodovka",
-  "block.create_connected.brass_gearbox.tooltip.summary": "Převodovka, u které lze _nezávisle_ nastavit směr otáčení všech 4 stran.",
   "block.create_connected.centrifugal_clutch": "Odstředivá spojka",
   "block.create_connected.centrifugal_clutch.tooltip.summary": "Spojka, která je _spřáhnuta_ pouze tehdy, pokud jsou vstupní otáčky _vyšší_ než konfigurovatelná prahová hodnota.",
   "block.create_connected.copycat_beam": "Imitační sloup",
