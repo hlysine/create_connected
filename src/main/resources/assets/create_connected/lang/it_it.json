@@ -20,7 +20,6 @@
   "block.create_connected.brake": "Freno",
   "block.create_connected.brake.tooltip.summary": "Un dispositivo che produce _immenso stress_ quando è alimentato, arrestando la rete da _overstressing_ esso.",
   "block.create_connected.brass_gearbox": "Cambio In Ottone",
-  "block.create_connected.brass_gearbox.tooltip.summary": "Un riduttore in cui la direzione di rotazione di tutti e 4 i lati è _configurabile in modo indipendente.",
   "block.create_connected.centrifugal_clutch": "Frizione Centrifuga",
   "block.create_connected.centrifugal_clutch.tooltip.summary": "Una frizione che è _accoppiata_ solo se l'RPM in ingresso è _più veloce_ di una soglia configurabile.",
   "block.create_connected.copycat_beam.tooltip.behaviour1": "Applica _elemento tenuto_ come suo _materiale_ se possibile. _Clicca di nuovo_ per ciclare lo stato _orientation_ o _powered_. Usa una _chiave _ per _reset_ il materiale.",
