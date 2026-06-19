@@ -18,7 +18,6 @@
   "advancement.create_connected.shear_pin.desc": "Chwythu Pin Cneifio",
   "block.create_connected.brake.tooltip.summary": "Dyfais sy'n cynhyrchu _dirfawr straen_ pan gaiff ei bweru, gan atal y rhwydwaith drwy ei _overstressing_.",
   "block.create_connected.brass_gearbox": "Blwch Gêr Pres",
-  "block.create_connected.brass_gearbox.tooltip.summary": "Blwch gêr lle mae cyfeiriad cylchdroi pob un o'r 4 ochr yn _ ffurfweddu'n annibynnol _.",
   "block.create_connected.centrifugal_clutch": "Clutch Allgyrchol",
   "block.create_connected.centrifugal_clutch.tooltip.summary": "Cydiwr sydd ond yn _coupled_ os yw'r RPM mewnbwn yn _gyflymach_ na throthwy ffurfweddadwy.",
   "block.create_connected.copycat_beam": "Trawst Copi",
