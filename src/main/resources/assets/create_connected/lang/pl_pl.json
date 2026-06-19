@@ -24,7 +24,6 @@
   "block.create_connected.brass_chute.tooltip.summary": "Ulepszony zsyp dla większej przepustowości. Przenosi do _64 przedmiotów_ na raz.",
   "block.create_connected.brass_encased_cross_connector": "Krzyżownik Osłonięty Mosiądzem",
   "block.create_connected.brass_gearbox": "Mosiężna Przekładnia",
-  "block.create_connected.brass_gearbox.tooltip.summary": "Przekładnia, w której kierunek obrotu wszystkich 4 stron jest _konfigurowalnalny_.",
   "block.create_connected.centrifugal_clutch": "Sprzęgło Odśrodkowe",
   "block.create_connected.centrifugal_clutch.tooltip.summary": "Sprzęgło, które jest _połączone_ tylko, jeśli _wejściowy RPM_ jest szybszy niż konfigurowalny próg.",
   "block.create_connected.copycat_beam": "Belka Naśladująca",
