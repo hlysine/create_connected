@@ -22,7 +22,6 @@
   "block.create_connected.brake.tooltip.summary": "Un dispositivo que produce _inmensa carga_ cuando se alimenta, deteniendo la red _sobrecargada_ de ella.",
   "block.create_connected.brass_encased_cross_connector": "Conector en cruz revestido de latón",
   "block.create_connected.brass_gearbox": "Caja de transmisión de latón",
-  "block.create_connected.brass_gearbox.tooltip.summary": "Una caja de transmisión donde la dirección de la rotación de los 4 lados son _configurables independientemente_.",
   "block.create_connected.centrifugal_clutch": "Embrague centrífugo",
   "block.create_connected.centrifugal_clutch.tooltip.summary": "Un embrague que sólo es _acoplado_ si el RPM de entrada es _más rápido_ que el de el limite configurable.",
   "block.create_connected.copycat_beam": "Viga Imitadora",
