@@ -26,7 +26,6 @@
   "block.create_connected.brass_chute.tooltip.summary": "Покращений жолоб зі збільшеною пропускною здатністю предметів. Може переміщувати до _64 предметів_ водночас.",
   "block.create_connected.brass_encased_cross_connector": "Облицьований латунню перехресний з’єднувач",
   "block.create_connected.brass_gearbox": "Латунна коробка передач",
-  "block.create_connected.brass_gearbox.tooltip.summary": "Коробка передач із _незалежно налаштовними_ напрямками обертання всіх 4 сторін.",
   "block.create_connected.brown_fan_dyeing_catalyst": "Каталізатор фарбування у коричневий",
   "block.create_connected.centrifugal_clutch": "Відцентрове зчеплення",
   "block.create_connected.centrifugal_clutch.tooltip.summary": "Зчеплення, яке _підтримує_ з’єднання, поки _вхідна швидкість обертання_ відповідає зазначеному порогу.",
