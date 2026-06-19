@@ -20,7 +20,6 @@
   "block.create_connected.brake": "Balazta",
   "block.create_connected.brake.tooltip.summary": "Elikatuta dagoenean _estres izugarria_ sortzen duen gailua, sarea geldiaraziz _sobera estresatuz_.",
   "block.create_connected.brass_gearbox": "Letoizko engranaje-kutxa",
-  "block.create_connected.brass_gearbox.tooltip.summary": "Engranaje-kutxa non 4 aldeen biraketa-noranzkoa _ modu independentean konfigura daitekeena _.",
   "block.create_connected.centrifugal_clutch": "Enbrage zentrifugoa",
   "block.create_connected.centrifugal_clutch.tooltip.summary": "Sarrerako RPM-a konfigura daitekeen atalase bat baino _azkarragoa_ bada soilik _akoplatuta_ dagoen enbragea.",
   "block.create_connected.copycat_beam": "Kopiatu",
