@@ -20,7 +20,6 @@
   "block.create_connected.brake": "Rem",
   "block.create_connected.brake.tooltip.summary": "Een apparaat dat _intense stress_ genereert als hij geactiveerd is, wat het systeem stopt door het te _overbelasten_.",
   "block.create_connected.brass_gearbox": "Messing Versnellingsbak",
-  "block.create_connected.brass_gearbox.tooltip.summary": "Een versnellingsbak waarvan de rotatierichting van de 4 zijden _apart in te stellen_ is.",
   "block.create_connected.centrifugal_clutch": "Centrifugale Koppeling",
   "block.create_connected.centrifugal_clutch.tooltip.summary": "Een koppeling dat alleen _gekoppeld_ is als de input RPM _hoger_ is dan een in te stellen hoeveelheid.",
   "block.create_connected.copycat_beam": "Imitatiebalk",
