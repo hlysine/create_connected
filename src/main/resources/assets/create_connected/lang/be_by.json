@@ -22,7 +22,6 @@
   "block.create_connected.brake.tooltip.summary": "Прылада, якая стварае _вялікую нагрузку_ пры сілкаванні, спыняючы сетку, _перанапружваючы_ яе.",
   "block.create_connected.brass_encased_cross_connector": "Крыжападобны злучальнік у латуневым корпусе",
   "block.create_connected.brass_gearbox": "Латуневая скрынка перадач",
-  "block.create_connected.brass_gearbox.tooltip.summary": "Скрынка перадач, у якой кірунак кручэння ўсіх 4 бакоў _ наладжваецца незалежна _.",
   "block.create_connected.centrifugal_clutch": "Цэнтрабежная муфта",
   "block.create_connected.centrifugal_clutch.tooltip.summary": "Счапленне, якое _злучана_, толькі калі ўваходныя абароты _хутчэй_, чым наладжвальны парог.",
   "block.create_connected.copycat_beam": "Капіявальны прамень",
