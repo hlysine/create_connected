@@ -20,7 +20,6 @@
   "block.create_connected.brake": "Freno",
   "block.create_connected.brake.tooltip.summary": "Um dispositivo que produz _imenso estresse_ quando energizado, travando a rede por _exagerar_ nele.",
   "block.create_connected.brass_gearbox": "Caixa de Latão",
-  "block.create_connected.brass_gearbox.tooltip.summary": "Uma engrenagem onde a direção de rotação de todos os 4 lados são _independentemente configuráveis_.",
   "block.create_connected.centrifugal_clutch": "Flauta centrífuga",
   "block.create_connected.centrifugal_clutch.tooltip.summary": "Uma bagunça que só é _associada_ se o RPM de entrada for _mais rápido_ do que um limite configurável.",
   "block.create_connected.copycat_beam": "Imitador de Feixe",
