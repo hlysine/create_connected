@@ -22,7 +22,6 @@
   "block.create_connected.brake.tooltip.summary": "Güç verildiğinde _muazzam_ bir stres yaratan ve _aşırı stres_ uygulayarak ağı durduran bir cihaz.",
   "block.create_connected.brass_encased_cross_connector": "Pirinç alışımlı çapraz bağlayıcı",
   "block.create_connected.brass_gearbox": "Pirinç Şanzıman",
-  "block.create_connected.brass_gearbox.tooltip.summary": "Her 4 tarafın dönüş yönünün bağımsız olarak ayarlanabildiği bir şanzıman.",
   "block.create_connected.centrifugal_clutch": "Santrifüj Debriyaj",
   "block.create_connected.centrifugal_clutch.tooltip.summary": "Yalnızca giriş RPM'si yapılandırılabilir bir eşikten _daha hızlı_ olduğunda _birleştirilen_ bir kavrama.",
   "block.create_connected.copycat_beam": "Taklitçi Kiriş",
