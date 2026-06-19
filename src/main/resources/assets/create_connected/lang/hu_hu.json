@@ -18,7 +18,6 @@
   "block.create_connected.brake": "Fék",
   "block.create_connected.brake.tooltip.summary": "Egy készülék, ami ha jelet kap _hatalmas erővel_ fékezi le a hálózatot, annak túlterhelésével.",
   "block.create_connected.brass_gearbox": "Sárgaréz-fogaskerékház",
-  "block.create_connected.brass_gearbox.tooltip.summary": "Egy fogaskerékház, amely mind a négy oldalának forgási iránya _külön-külön_ állítható.",
   "block.create_connected.centrifugal_clutch": "Centrifugakuplung",
   "block.create_connected.centrifugal_clutch.tooltip.summary": "Egy kuplung, ami csak akkor kapcsolt, ha a bemeneti sebesség nagyobb a beállított határnál.",
   "block.create_connected.copycat_beam": "Imitátor-oszlop",
