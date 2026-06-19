@@ -22,7 +22,6 @@
   "block.create_connected.brake.tooltip.summary": "輸入紅石信號時會產生_大量動能消耗_，透過_動能過載_來停止應力網路。",
   "block.create_connected.brass_encased_cross_connector": "黃銅十字傳動箱",
   "block.create_connected.brass_gearbox": "黃銅十字齒輪箱",
-  "block.create_connected.brass_gearbox.tooltip.summary": "齒輪箱4個側面的旋轉方向均可_獨立設定_。",
   "block.create_connected.centrifugal_clutch": "離心離合器",
   "block.create_connected.centrifugal_clutch.tooltip.summary": "僅當輸入 RPM 快於可設定閾值時，離合器才會耦合。",
   "block.create_connected.copycat_beam": "偽裝樑",
