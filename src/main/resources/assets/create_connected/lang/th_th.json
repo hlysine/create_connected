@@ -18,7 +18,6 @@
   "block.create_connected.brake": "เบรค",
   "block.create_connected.brake.tooltip.summary": "อุปกรณ์ที่สร้าง _ความเครียดมหาศาล_ เมื่อเปิดเครื่อง ทำให้เครือข่ายหยุดทำงานโดย _สร้างความเครียดเกิน_",
   "block.create_connected.brass_gearbox": "กระปุกเกียร์ทองเหลือง",
-  "block.create_connected.brass_gearbox.tooltip.summary": "กล่องเกียร์ที่สามารถกำหนดทิศทางการหมุนทั้ง 4 ได้อย่างอิสระ",
   "block.create_connected.centrifugal_clutch": "คลัตช์แรงเหวี่ยง",
   "block.create_connected.copycat_beam": "เลียนแบบบีม",
   "block.create_connected.copycat_beam.tooltip.behaviour1": "ใช้รายการที่ถือไว้เป็นวัสดุหากเป็นไปได้ คลิกอีกครั้งเพื่อเปลี่ยนทิศทางหรือสถานะเปิดเครื่อง ใช้ประแจเพื่อรีเซ็ตวัสดุ",
