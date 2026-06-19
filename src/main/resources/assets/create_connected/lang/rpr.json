@@ -24,7 +24,6 @@
   "block.create_connected.brass_chute.tooltip.summary": "Улучшенный жёлоб для ускоренной транспортировки предметов — способен перемещать до _64 предметов_ за раз.",
   "block.create_connected.brass_encased_cross_connector": "Перекрестный соединитель въ латунномъ корпусѣ",
   "block.create_connected.brass_gearbox": "Латунная коробка передачъ",
-  "block.create_connected.brass_gearbox.tooltip.summary": "Коробка передачъ съ _независимо настраиваемыми_ направленіями каждаго выхода.",
   "block.create_connected.centrifugal_clutch": "Центробѣжное сцѣпленіе",
   "block.create_connected.centrifugal_clutch.tooltip.summary": "Сцѣпленіе, _срабатывающее_, если скорость входящаго вращенія _ниже_ настраиваемаго порога.",
   "block.create_connected.copycat_beam": "Заполняемая балка",
