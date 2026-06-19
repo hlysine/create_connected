@@ -22,7 +22,6 @@
   "block.create_connected.brake.tooltip.summary": "信号を受けると_膨大な応力_を生み出し、ネットワークに_応力超過_を起こして停止させるデバイス。",
   "block.create_connected.brass_encased_cross_connector": "真鍮エンクロージャー十字コネクタ",
   "block.create_connected.brass_gearbox": "真鍮ギアボックス",
-  "block.create_connected.brass_gearbox.tooltip.summary": "4面すべての回転方向を_個別に設定できる_ギアボックス。",
   "block.create_connected.centrifugal_clutch": "遠心クラッチ",
   "block.create_connected.centrifugal_clutch.tooltip.summary": "入力されたRPMが設定したしきい値より_高速_な場合にのみ、_結合_されるクラッチ。",
   "block.create_connected.copycat_beam": "コピー梁",
