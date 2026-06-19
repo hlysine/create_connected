@@ -20,7 +20,6 @@
   "block.create_connected.brake": "Broms",
   "block.create_connected.brake.tooltip.summary": "En enhet som producerar _enorm stress_ när den är påslagen, stoppa nätverket genom att _överstressa_ den.",
   "block.create_connected.brass_gearbox": "Mässing Växellåda",
-  "block.create_connected.brass_gearbox.tooltip.summary": "En växellåda där rotationsriktningen på alla 4 sidor är _oberoende konfigurerbar_.",
   "block.create_connected.centrifugal_clutch": "Centrifugalkoppling",
   "block.create_connected.centrifugal_clutch.tooltip.summary": "En koppling som bara är _kopplad_ om inmatningsvarvtalet är _snabbare_ än en konfigurerbar tröskel.",
   "block.create_connected.copycat_beam": "Kopiera stråle",
