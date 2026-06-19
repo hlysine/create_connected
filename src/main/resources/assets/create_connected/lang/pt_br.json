@@ -22,7 +22,6 @@
   "block.create_connected.brake.tooltip.summary": "Um mecanismo que produz um _estresse imenso_ quando energizado, _sobrecarregando_ e parando a rede.",
   "block.create_connected.brass_encased_cross_connector": "Conector Cruzado Revestido de Latão",
   "block.create_connected.brass_gearbox": "Caixa de Transmissão de Latão",
-  "block.create_connected.brass_gearbox.tooltip.summary": "Uma Caixa de Transmissão onde as 4 saídas são _configuráveis de forma independente_.",
   "block.create_connected.centrifugal_clutch": "Embreagem Centrífuga",
   "block.create_connected.centrifugal_clutch.tooltip.summary": "Uma Embreagem que só é _acoplada_ se o RPM de entrada for _igual ou maior_ que o limite ajustado.",
   "block.create_connected.copycat_beam": "Viga Central Imitadora",
