@@ -26,6 +26,7 @@
   "block.create_connected.brass_chute.tooltip.summary": "一种高物品吞吐量的改进溜槽。一次最多传输_64个物品_。",
   "block.create_connected.brass_encased_cross_connector": "黄铜交叉传动箱",
   "block.create_connected.brass_gearbox": "黄铜十字齿轮箱",
+  "block.create_connected.brass_gearbox.tooltip.summary": "四个面均可_使用扳手独立配置_旋转方向的齿轮箱。",
   "block.create_connected.brown_fan_dyeing_catalyst": "棕色鼓风机染色触媒",
   "block.create_connected.centrifugal_clutch": "离心离合器",
   "block.create_connected.centrifugal_clutch.tooltip.summary": "仅当_输入转速_符合配置阈值才会_耦合_的离合器。",
