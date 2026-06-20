@@ -56,6 +56,7 @@ public class CreateConnected {
 
         REGISTRATE.setCreativeTab(CCCreativeTabs.MAIN);
         CCSoundEvents.prepare();
+        CCDataComponents.register(modEventBus);
         CCBlocks.register();
         CCItems.register();
         CCBlockEntityTypes.register();

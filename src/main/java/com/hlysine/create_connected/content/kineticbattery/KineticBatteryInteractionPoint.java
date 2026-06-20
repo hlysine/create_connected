@@ -21,7 +21,7 @@ public class KineticBatteryInteractionPoint extends AllArmInteractionPointTypes.
     public ItemStack insert(ArmBlockEntity armBlockEntity, ItemStack stack, boolean simulate) {
         ItemStack input = stack.copy();
         InteractionResultHolder<ItemStack> res =
-                KineticBatteryBlock.tryInsert(cachedState, level, pos, input, false, false, simulate);
+                KineticBatteryBlock.tryInsert(cachedState, level, pos, input, false, simulate);
         ItemStack remainder = res.getObject();
         if (input.isEmpty()) {
             return remainder;

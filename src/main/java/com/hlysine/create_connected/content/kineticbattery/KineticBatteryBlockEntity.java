@@ -6,6 +6,7 @@ import com.hlysine.create_connected.content.ISplitShaftBlockEntity;
 import com.hlysine.create_connected.datagen.advancements.AdvancementBehaviour;
 import com.hlysine.create_connected.datagen.advancements.CCAdvancements;
 import com.hlysine.create_connected.mixin.kineticbattery.KineticNetworkAccessor;
+import com.hlysine.create_connected.registries.CCDataComponents;
 import com.simibubi.create.content.contraptions.bearing.WindmillBearingBlockEntity;
 import com.simibubi.create.content.kinetics.KineticNetwork;
 import com.simibubi.create.content.kinetics.base.GeneratingKineticBlockEntity;
@@ -16,10 +17,13 @@ import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour
 import com.simibubi.create.foundation.blockEntity.behaviour.scrollValue.ScrollOptionBehaviour;
 import com.simibubi.create.foundation.utility.CreateLang;
 import joptsimple.internal.Strings;
+import net.createmod.catnip.codecs.CatnipCodecUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.component.DataComponentMap;
+import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -35,9 +39,9 @@ import static com.hlysine.create_connected.content.kineticbattery.KineticBattery
 public class KineticBatteryBlockEntity extends GeneratingKineticBlockEntity implements ISplitShaftBlockEntity, ThresholdSwitchObservable {
 
     private static final int SYNC_RATE = 20;
-    public static final double CHARGE_THRESHOlD = 3600 * 20;
 
     private double batteryLevel;
+    private DataComponentPatch componentPatch = DataComponentPatch.EMPTY;
 
     private int syncCooldown;
     protected boolean queuedSync;
@@ -80,12 +84,12 @@ public class KineticBatteryBlockEntity extends GeneratingKineticBlockEntity impl
         return CServer.BatteryDischargeRPM.get();
     }
 
-    public int getCrudeBatteryLevel(int totalLevels) {
-        if (batteryLevel >= getMaxBatteryLevel())
+    public static int getCrudeBatteryLevel(double level, int totalLevels) {
+        if (level >= getMaxBatteryLevel())
             return totalLevels;
-        if (batteryLevel <= 0)
+        if (level <= 0)
             return 0;
-        return (int) Math.floor((batteryLevel / getMaxBatteryLevel()) * (totalLevels - 1)) + 1;
+        return (int) Math.floor((level / getMaxBatteryLevel()) * (totalLevels - 1)) + 1;
     }
 
     @Override
@@ -182,7 +186,7 @@ public class KineticBatteryBlockEntity extends GeneratingKineticBlockEntity impl
     }
 
     private void updateLevel() {
-        int crudeLevel = getCrudeBatteryLevel(5);
+        int crudeLevel = getCrudeBatteryLevel(getBatteryLevel(), 5);
         int oldLevel = getBlockState().getValue(LEVEL);
         if (oldLevel != crudeLevel) {
             if (crudeLevel == 5) {
@@ -201,6 +205,24 @@ public class KineticBatteryBlockEntity extends GeneratingKineticBlockEntity impl
         this.batteryLevel = batteryLevel;
         updateLevel();
         sendDataImmediately();
+    }
+
+    public void setComponentPatch(DataComponentPatch componentPatch) {
+        this.componentPatch = componentPatch;
+    }
+
+    public DataComponentPatch getComponentPatch() {
+        return componentPatch;
+    }
+
+    @Override
+    protected void applyImplicitComponents(DataComponentInput componentInput) {
+        setBatteryLevel(componentInput.getOrDefault(CCDataComponents.KINETIC_BATTERY_CHARGE, 0.0));
+    }
+
+    @Override
+    protected void collectImplicitComponents(DataComponentMap.Builder components) {
+        components.set(CCDataComponents.KINETIC_BATTERY_CHARGE, getBatteryLevel());
     }
 
     public void sendDataImmediately() {
@@ -262,6 +284,7 @@ public class KineticBatteryBlockEntity extends GeneratingKineticBlockEntity impl
         queuedSync = compound.getBoolean("queuedSync");
         consumedStress = compound.getFloat("consumedStress");
         applyMinStress = compound.getBoolean("applyMinStress");
+        componentPatch = CatnipCodecUtils.decode(DataComponentPatch.CODEC, registries, compound.getCompound("Components")).orElse(DataComponentPatch.EMPTY);
     }
 
     @Override
@@ -271,6 +294,7 @@ public class KineticBatteryBlockEntity extends GeneratingKineticBlockEntity impl
         compound.putBoolean("queuedSync", queuedSync);
         compound.putFloat("consumedStress", consumedStress);
         compound.putBoolean("applyMinStress", applyMinStress);
+        compound.put("Components", CatnipCodecUtils.encode(DataComponentPatch.CODEC, registries, componentPatch).orElse(new CompoundTag()));
     }
 
     @Override
@@ -280,7 +304,7 @@ public class KineticBatteryBlockEntity extends GeneratingKineticBlockEntity impl
         ConnectedLang.builder().add(ConnectedLang.translateDirect("battery.charge")
                         .withStyle(ChatFormatting.GRAY)
                         .append(" ")
-                        .append(barComponent(0, getCrudeBatteryLevel(20), 20)))
+                        .append(barComponent(0, getCrudeBatteryLevel(getBatteryLevel(), 20), 20)))
                 .forGoggles(tooltip);
         ConnectedLang.number(batteryLevel / 3600 / 20)
                 .style(ChatFormatting.BLUE)
@@ -331,7 +355,7 @@ public class KineticBatteryBlockEntity extends GeneratingKineticBlockEntity impl
         }
     }
 
-    private MutableComponent barComponent(int minValue, int level, int maxValue) {
+    static MutableComponent barComponent(int minValue, int level, int maxValue) {
         return Component.empty()
                 .append(bars(java.lang.Math.max(0, minValue - 1), ChatFormatting.DARK_GREEN))
                 .append(bars(minValue > 0 ? 1 : 0, ChatFormatting.GREEN))
@@ -342,7 +366,7 @@ public class KineticBatteryBlockEntity extends GeneratingKineticBlockEntity impl
 
     }
 
-    private MutableComponent bars(int level, ChatFormatting format) {
+    static MutableComponent bars(int level, ChatFormatting format) {
         return Component.literal(Strings.repeat('|', level))
                 .withStyle(format);
     }

@@ -60,6 +60,8 @@ public class CCItems {
                     .transform(FeatureToggle.registerDependent(CCBlocks.BRASS_GEARBOX))
                     .register();
 
+    @SuppressWarnings("removal")
+    @Deprecated(forRemoval = true, since = "1.3.0")
     public static final ItemEntry<ChargedKineticBatteryItem> CHARGED_KINETIC_BATTERY =
             REGISTRATE.item("charged_kinetic_battery", ChargedKineticBatteryItem::new)
                     .model(AssetLookup.customBlockItemModel("kinetic_battery", "item_charged"))

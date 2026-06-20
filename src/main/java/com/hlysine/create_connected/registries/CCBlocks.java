@@ -55,7 +55,9 @@ import com.hlysine.create_connected.content.itemsilo.ItemSiloBlock;
 import com.hlysine.create_connected.content.itemsilo.ItemSiloCTBehaviour;
 import com.hlysine.create_connected.content.itemsilo.ItemSiloItem;
 import com.hlysine.create_connected.content.kineticbattery.KineticBatteryBlock;
+import com.hlysine.create_connected.content.kineticbattery.KineticBatteryBlockItem;
 import com.hlysine.create_connected.content.kineticbattery.KineticBatteryGenerator;
+import com.hlysine.create_connected.content.kineticbattery.KineticBatteryOverrides;
 import com.hlysine.create_connected.content.kineticbridge.KineticBridgeBlock;
 import com.hlysine.create_connected.content.kineticbridge.KineticBridgeBlockItem;
 import com.hlysine.create_connected.content.kineticbridge.KineticBridgeDestinationBlock;
@@ -108,8 +110,10 @@ import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.functions.CopyComponentsFunction;
 import net.minecraft.world.level.storage.loot.predicates.ExplosionCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
+import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
@@ -404,29 +408,19 @@ public class CCBlocks {
             .blockstate(new KineticBatteryGenerator()::generate)
             .loot((lt, block) -> {
                 LootTable.Builder builder = LootTable.lootTable();
-                builder.withPool(
-                        LootPool.lootPool()
-                                .setRolls(ConstantValue.exactly(1.0F))
-                                .when(ExplosionCondition.survivesExplosion())
-                                .when(LootItemBlockStatePropertyCondition
-                                        .hasBlockStateProperties(block)
-                                        .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(KineticBatteryBlock.LEVEL, 5)))
-                                .add(LootItem.lootTableItem(CCItems.CHARGED_KINETIC_BATTERY))
-                );
-                builder.withPool(
-                        LootPool.lootPool()
-                                .setRolls(ConstantValue.exactly(1.0F))
-                                .when(ExplosionCondition.survivesExplosion())
-                                .when(LootItemBlockStatePropertyCondition
-                                        .hasBlockStateProperties(block)
-                                        .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(KineticBatteryBlock.LEVEL, 5))
-                                        .invert())
-                                .add(LootItem.lootTableItem(block))
-                );
-                lt.add(block, builder);
+                LootItemCondition.Builder survivesExplosion = ExplosionCondition.survivesExplosion();
+                lt.add(block, builder.withPool(LootPool.lootPool()
+                        .when(survivesExplosion)
+                        .setRolls(ConstantValue.exactly(1))
+                        .add(LootItem.lootTableItem(CCBlocks.KINETIC_BATTERY.asItem())
+                                .apply(CopyComponentsFunction.copyComponents(CopyComponentsFunction.Source.BLOCK_ENTITY)
+                                        .include(CCDataComponents.KINETIC_BATTERY_CHARGE)))));
             })
-            .item()
-            .transform(customItemModel())
+            .item(KineticBatteryBlockItem::new)
+            .properties(p -> p.component(CCDataComponents.KINETIC_BATTERY_CHARGE, 0.0))
+            .onRegister(KineticBatteryBlockItem::registerModelOverrides)
+            .model(KineticBatteryOverrides::addOverrideModels)
+            .build()
             .register();
 
     public static final BlockEntry<SequencedPulseGeneratorBlock> SEQUENCED_PULSE_GENERATOR =

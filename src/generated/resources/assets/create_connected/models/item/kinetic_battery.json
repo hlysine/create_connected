@@ -1,3 +1,40 @@
 {
-  "parent": "create_connected:block/kinetic_battery/item"
+  "overrides": [
+    {
+      "model": "create_connected:item/kinetic_battery_level_0",
+      "predicate": {
+        "create_connected:kinetic_battery_level": 0.0
+      }
+    },
+    {
+      "model": "create_connected:item/kinetic_battery_level_1",
+      "predicate": {
+        "create_connected:kinetic_battery_level": 1.0
+      }
+    },
+    {
+      "model": "create_connected:item/kinetic_battery_level_2",
+      "predicate": {
+        "create_connected:kinetic_battery_level": 2.0
+      }
+    },
+    {
+      "model": "create_connected:item/kinetic_battery_level_3",
+      "predicate": {
+        "create_connected:kinetic_battery_level": 3.0
+      }
+    },
+    {
+      "model": "create_connected:item/kinetic_battery_level_4",
+      "predicate": {
+        "create_connected:kinetic_battery_level": 4.0
+      }
+    },
+    {
+      "model": "create_connected:item/kinetic_battery_level_5",
+      "predicate": {
+        "create_connected:kinetic_battery_level": 5.0
+      }
+    }
+  ]
 }

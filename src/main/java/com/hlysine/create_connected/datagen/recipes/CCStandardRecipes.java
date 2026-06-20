@@ -2,12 +2,14 @@ package com.hlysine.create_connected.datagen.recipes;
 
 import com.google.common.base.Supplier;
 import com.google.common.collect.ImmutableList;
-import com.hlysine.create_connected.compat.DyeDepotCompat;
-import com.hlysine.create_connected.compat.Mods;
-import com.hlysine.create_connected.registries.CCBlocks;
-import com.hlysine.create_connected.registries.CCItems;
 import com.hlysine.create_connected.CreateConnected;
 import com.hlysine.create_connected.compat.CopycatsManager;
+import com.hlysine.create_connected.compat.DyeDepotCompat;
+import com.hlysine.create_connected.compat.Mods;
+import com.hlysine.create_connected.content.kineticbattery.KineticBatteryBlockEntity;
+import com.hlysine.create_connected.registries.CCBlocks;
+import com.hlysine.create_connected.registries.CCDataComponents;
+import com.hlysine.create_connected.registries.CCItems;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -205,6 +207,26 @@ public class CCStandardRecipes extends BaseRecipeProvider {
                     .pattern(" p ")
                     .pattern(" b ")
                     .pattern("iri")
+            );
+
+    @Deprecated(forRemoval = true, since = "1.3.0")
+    @SuppressWarnings("removal")
+    GeneratedRecipe CHARGED_KINETIC_BATTERY = create(CCBlocks.KINETIC_BATTERY).unlockedBy(CCItems.CHARGED_KINETIC_BATTERY::get)
+            .withSuffix("_from_charged")
+            .requiresResultFeature()
+            .modifyStack(stack -> {
+                stack.set(CCDataComponents.KINETIC_BATTERY_CHARGE, KineticBatteryBlockEntity.getMaxBatteryLevel());
+                return stack;
+            })
+            .viaShapeless(b -> b
+                    .requires(CCItems.CHARGED_KINETIC_BATTERY)
+            );
+
+    GeneratedRecipe DISCHARGE_KINETIC_BATTERY = create(CCBlocks.KINETIC_BATTERY).unlockedBy(CCBlocks.KINETIC_BATTERY::get)
+            .withSuffix("_discharge")
+            .requiresResultFeature()
+            .viaShapeless(b -> b
+                    .requires(CCBlocks.KINETIC_BATTERY)
             );
 
     GeneratedRecipe SEQUENCED_PULSE_GENERATOR = create(CCBlocks.SEQUENCED_PULSE_GENERATOR).unlockedBy(CCItems.CONTROL_CHIP::get)
@@ -549,12 +571,14 @@ public class CCStandardRecipes extends BaseRecipeProvider {
 
         private Supplier<ItemPredicate> unlockedBy;
         private int amount;
+        private Function<ItemStack, ItemStack> stackModifier;
 
         private GeneratedRecipeBuilder(String path) {
             this.path = path;
             this.recipeConditions = new ArrayList<>();
             this.suffix = "";
             this.amount = 1;
+            this.stackModifier = stack -> stack;
         }
 
         public GeneratedRecipeBuilder(String path, Supplier<? extends ItemLike> result) {
@@ -569,6 +593,11 @@ public class CCStandardRecipes extends BaseRecipeProvider {
 
         GeneratedRecipeBuilder returns(int amount) {
             this.amount = amount;
+            return this;
+        }
+
+        GeneratedRecipeBuilder modifyStack(Function<ItemStack, ItemStack> stackModifier) {
+            this.stackModifier = stackModifier;
             return this;
         }
 
@@ -633,7 +662,7 @@ public class CCStandardRecipes extends BaseRecipeProvider {
         // FIXME 5.1 refactor - recipe categories as markers instead of sections?
         GeneratedRecipe viaShaped(UnaryOperator<ShapedRecipeBuilder> builder) {
             return register(consumer -> {
-                ShapedRecipeBuilder b = builder.apply(ShapedRecipeBuilder.shaped(category == null ? RecipeCategory.MISC : category, result.get(), amount));
+                ShapedRecipeBuilder b = builder.apply(ShapedRecipeBuilder.shaped(category == null ? RecipeCategory.MISC : category, stackModifier.apply(new ItemStack(result.get(), amount))));
                 if (unlockedBy != null)
                     b.unlockedBy("has_item", inventoryTrigger(unlockedBy.get()));
                 if (!recipeConditions.isEmpty()) {
@@ -645,7 +674,7 @@ public class CCStandardRecipes extends BaseRecipeProvider {
 
         GeneratedRecipe viaShapeless(UnaryOperator<ShapelessRecipeBuilder> builder) {
             return register(consumer -> {
-                ShapelessRecipeBuilder b = builder.apply(ShapelessRecipeBuilder.shapeless(category == null ? RecipeCategory.MISC : category, result.get(), amount));
+                ShapelessRecipeBuilder b = builder.apply(ShapelessRecipeBuilder.shapeless(category == null ? RecipeCategory.MISC : category, stackModifier.apply(new ItemStack(result.get(), amount))));
                 if (unlockedBy != null)
                     b.unlockedBy("has_item", inventoryTrigger(unlockedBy.get()));
                 if (!recipeConditions.isEmpty()) {

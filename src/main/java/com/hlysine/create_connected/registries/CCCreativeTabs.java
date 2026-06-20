@@ -2,6 +2,7 @@ package com.hlysine.create_connected.registries;
 
 import com.hlysine.create_connected.CreateConnected;
 import com.hlysine.create_connected.config.FeatureToggle;
+import com.hlysine.create_connected.content.kineticbattery.KineticBatteryBlockEntity;
 import com.simibubi.create.AllCreativeModeTabs;
 import com.tterrag.registrate.util.entry.ItemProviderEntry;
 import net.minecraft.core.registries.Registries;
@@ -44,7 +45,6 @@ public class CCCreativeTabs {
                 CCBlocks.BRAKE,
                 CCBlocks.KINETIC_BRIDGE,
                 CCBlocks.KINETIC_BATTERY,
-                CCItems.CHARGED_KINETIC_BATTERY,
                 CCBlocks.ITEM_SILO,
                 CCBlocks.FLUID_VESSEL,
                 CCBlocks.CREATIVE_FLUID_VESSEL,
@@ -129,7 +129,13 @@ public class CCCreativeTabs {
         public void accept(@NotNull CreativeModeTab.ItemDisplayParameters params, @NotNull CreativeModeTab.Output output) {
             for (ItemProviderEntry<?, ?> item : items) {
                 if (FeatureToggle.isEnabled(item.getId())) {
-                    output.accept(item);
+                    if (item.is(CCBlocks.KINETIC_BATTERY.asItem())) {
+                        ItemStack stack = new ItemStack(item.asItem());
+                        stack.set(CCDataComponents.KINETIC_BATTERY_CHARGE, KineticBatteryBlockEntity.getMaxBatteryLevel());
+                        output.accept(stack);
+                    } else {
+                        output.accept(item);
+                    }
                 }
             }
         }
