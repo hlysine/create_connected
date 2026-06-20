@@ -5,6 +5,7 @@ import com.hlysine.create_connected.registries.CCBlockEntityTypes;
 import com.hlysine.create_connected.registries.CCBlocks;
 import com.hlysine.create_connected.registries.CCDataComponents;
 import com.hlysine.create_connected.registries.CCItems;
+import com.simibubi.create.content.contraptions.bearing.WindmillBearingBlockEntity;
 import com.simibubi.create.content.kinetics.base.DirectionalKineticBlock;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
 import com.simibubi.create.foundation.block.IBE;
@@ -97,6 +98,19 @@ public class KineticBatteryBlock extends DirectionalKineticBlock implements IBE<
             return;
         if (stack == null)
             return;
+
+        Direction facing = state.getValue(FACING);
+        WindmillBearingBlockEntity.RotationDirection preferredRotation = null;
+        BlockEntity forwardBE = worldIn.getBlockEntity(pos.relative(facing));
+        if (forwardBE instanceof KineticBatteryBlockEntity forwardBattery && forwardBattery.getBlockState().getValue(FACING) == facing) {
+            preferredRotation = forwardBattery.getRotationDirection();
+        }
+        BlockEntity backwardBE = worldIn.getBlockEntity(pos.relative(facing.getOpposite()));
+        if (backwardBE instanceof KineticBatteryBlockEntity backwardBattery && backwardBattery.getBlockState().getValue(FACING) == facing) {
+            preferredRotation = backwardBattery.getRotationDirection();
+        }
+        WindmillBearingBlockEntity.RotationDirection finalRotation = preferredRotation;
+
         withBlockEntityDo(worldIn, pos, be -> {
             //noinspection removal
             if (stack.is(CCItems.CHARGED_KINETIC_BATTERY))
@@ -104,6 +118,8 @@ public class KineticBatteryBlock extends DirectionalKineticBlock implements IBE<
             else
                 be.setBatteryLevel(stack.getOrDefault(CCDataComponents.KINETIC_BATTERY_CHARGE, 0.0));
             be.setComponentPatch(stack.getComponentsPatch());
+            if (finalRotation != null)
+                be.setRotationDirection(finalRotation);
         });
     }
 

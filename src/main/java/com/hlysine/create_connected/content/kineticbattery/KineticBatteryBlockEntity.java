@@ -197,6 +197,14 @@ public class KineticBatteryBlockEntity extends GeneratingKineticBlockEntity impl
         sendData();
     }
 
+    public WindmillBearingBlockEntity.RotationDirection getRotationDirection() {
+        return movementDirection.get();
+    }
+
+    public void setRotationDirection(WindmillBearingBlockEntity.RotationDirection direction) {
+        movementDirection.setValue(direction.ordinal());
+    }
+
     public double getBatteryLevel() {
         return batteryLevel;
     }
