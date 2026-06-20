@@ -10,7 +10,7 @@ import com.simibubi.create.content.contraptions.bearing.WindmillBearingBlockEnti
 import com.simibubi.create.content.kinetics.KineticNetwork;
 import com.simibubi.create.content.kinetics.base.GeneratingKineticBlockEntity;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
-import com.simibubi.create.content.kinetics.simpleRelays.AbstractSimpleShaftBlock;
+import com.simibubi.create.content.kinetics.belt.BeltBlock;
 import com.simibubi.create.content.redstone.thresholdSwitch.ThresholdSwitchObservable;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.scrollValue.ScrollOptionBehaviour;
@@ -108,7 +108,7 @@ public class KineticBatteryBlockEntity extends GeneratingKineticBlockEntity impl
                     calculateAddedStressCapacity();
                 }
                 if (consumedStress < 0) {
-                    consumedStress = updateConsumedStress();
+                    updateConsumedStress();
                 }
                 batteryLevel = Math.max(batteryLevel - getConsumedStress(), 0);
                 changed = true;
@@ -129,10 +129,10 @@ public class KineticBatteryBlockEntity extends GeneratingKineticBlockEntity impl
     @Override
     public void updateFromNetwork(float maxStress, float currentStress, int networkSize) {
         super.updateFromNetwork(maxStress, currentStress, networkSize);
-        consumedStress = updateConsumedStress();
+        updateConsumedStress();
     }
 
-    private float updateConsumedStress() {
+    private void updateConsumedStress() {
         KineticNetwork network = getOrCreateNetwork();
 
         float presentCapacity = 0;
@@ -159,7 +159,7 @@ public class KineticBatteryBlockEntity extends GeneratingKineticBlockEntity impl
                     iterator.remove();
                     continue;
                 }
-                if (!(be.getBlockState().getBlock() instanceof AbstractSimpleShaftBlock) && !(be instanceof KineticBatteryBlockEntity)) {
+                if (BeltBlock.canTransportObjects(be.getBlockState())) {
                     applyMinStress = true;
                     break;
                 }
@@ -167,16 +167,18 @@ public class KineticBatteryBlockEntity extends GeneratingKineticBlockEntity impl
         }
 
         if (batteryCapacity <= 0) {
-            return 0;
+            consumedStress = 0;
+        } else {
+            consumedStress = batteryCapacity / batteryCount;
         }
-        return batteryCapacity / batteryCount;
+        sendDataImmediately();
     }
 
     public float getConsumedStress() {
         if (applyMinStress) {
             return Math.max(CServer.BatteryMinDischarge.get().floatValue(), consumedStress);
         }
-        return consumedStress;
+        return Math.max(0, consumedStress);
     }
 
     private void updateLevel() {
@@ -289,14 +291,23 @@ public class KineticBatteryBlockEntity extends GeneratingKineticBlockEntity impl
                         .add(ConnectedLang.translate("generic.unit.su_hours"))
                         .style(ChatFormatting.DARK_GRAY))
                 .forGoggles(tooltip, 1);
-        if (isDischarging(getBlockState())) {
+        if (isDischarging(getBlockState()) && getBatteryLevel() > 0) {
             ConnectedLang.translate("battery.consumption")
                     .style(ChatFormatting.GRAY)
                     .forGoggles(tooltip);
-            CreateLang.number(getConsumedStress())
-                    .translate("generic.unit.stress")
-                    .style(ChatFormatting.BLUE)
-                    .forGoggles(tooltip, 1);
+            if (consumedStress == 0 && getConsumedStress() > 0) {
+                CreateLang.number(getConsumedStress())
+                        .translate("generic.unit.stress")
+                        .style(ChatFormatting.BLUE)
+                        .space()
+                        .add(ConnectedLang.translate("battery.powering_belts").style(ChatFormatting.DARK_GRAY))
+                        .forGoggles(tooltip, 1);
+            } else {
+                CreateLang.number(getConsumedStress())
+                        .translate("generic.unit.stress")
+                        .style(ChatFormatting.BLUE)
+                        .forGoggles(tooltip, 1);
+            }
         }
 
 

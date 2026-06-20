@@ -52,7 +52,7 @@ public class CServer extends ConfigBase {
         static String vesselMaxLevel = "Limit the max boiler level achievable with a Fluid Vessel";
         static String batteryDischargeRPM = "RPM of a Kinetic Battery when discharging";
         static String batteryCapacity = "Max capacity of a Kinetic Battery in su-hours";
-        static String batteryMinDischarge = "Minimum su consumption per tick of a discharging Kinetic Battery";
+        static String batteryMinDischarge = "Minimum su consumption per tick of a discharging Kinetic Battery when powering belts";
         static String allowDualWildcardLink = "Allow Redstone Links to have wildcards in both slots [restart required]";
     }
 }
