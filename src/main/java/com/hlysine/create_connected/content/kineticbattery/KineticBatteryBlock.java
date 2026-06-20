@@ -8,16 +8,21 @@ import com.hlysine.create_connected.registries.CCItems;
 import com.simibubi.create.content.kinetics.base.DirectionalKineticBlock;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
 import com.simibubi.create.foundation.block.IBE;
+import com.simibubi.create.foundation.placement.PoleHelper;
 import net.createmod.catnip.data.Iterate;
+import net.createmod.catnip.placement.IPlacementHelper;
+import net.createmod.catnip.placement.PlacementHelpers;
+import net.createmod.catnip.placement.PlacementOffset;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -37,9 +42,12 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Predicate;
 
 @SuppressWarnings("deprecation")
 public class KineticBatteryBlock extends DirectionalKineticBlock implements IBE<KineticBatteryBlockEntity> {
+
+    public static final int placementHelperId = PlacementHelpers.register(new PlacementHelper());
 
     public static final IntegerProperty LEVEL = IntegerProperty.create("level", 0, 5);
     public static final IntegerProperty POWER = BlockStateProperties.POWER;
@@ -155,7 +163,15 @@ public class KineticBatteryBlock extends DirectionalKineticBlock implements IBE<
             }
         }
 
-        return res.getResult() == InteractionResult.SUCCESS ? ItemInteractionResult.SUCCESS : ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        if (res.getResult().consumesAction())
+            return ItemInteractionResult.SUCCESS;
+
+        IPlacementHelper helper = PlacementHelpers.get(placementHelperId);
+        if (helper.matchesItem(stack))
+            return helper.getOffset(player, level, state, pos, hitResult)
+                    .placeInWorld(level, (BlockItem) stack.getItem(), player, hand, hitResult);
+
+        return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
     }
 
     @SuppressWarnings("removal")
@@ -317,6 +333,30 @@ public class KineticBatteryBlock extends DirectionalKineticBlock implements IBE<
     @Override
     public BlockEntityType<? extends KineticBatteryBlockEntity> getBlockEntityType() {
         return CCBlockEntityTypes.KINETIC_BATTERY.get();
+    }
+
+    @MethodsReturnNonnullByDefault
+    private static class PlacementHelper extends PoleHelper<Direction> {
+        private PlacementHelper() {
+            super(state -> state.getBlock() instanceof KineticBatteryBlock && state.getValue(LEVEL) == 0, state -> state.getValue(FACING).getAxis(), FACING);
+        }
+
+        @Override
+        public Predicate<ItemStack> getItemPredicate() {
+            return i -> i.getItem() instanceof BlockItem blockItem
+                    && blockItem.getBlock() instanceof KineticBatteryBlock
+                    && i.getOrDefault(CCDataComponents.KINETIC_BATTERY_CHARGE, 0.0) <= 0
+                    || i.is(CCItems.CHARGED_KINETIC_BATTERY.asItem());
+        }
+
+        @Override
+        public PlacementOffset getOffset(Player player, Level world, BlockState state, BlockPos pos, BlockHitResult ray) {
+            PlacementOffset offset = super.getOffset(player, world, state, pos, ray);
+            if (offset.isSuccessful())
+                offset.withTransform(offset.getTransform());
+            return offset;
+        }
+
     }
 }
 
