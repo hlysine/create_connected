@@ -30,7 +30,7 @@ public class KineticBatteryGenerator extends SpecialBlockStateGen {
     public <T extends Block> ModelFile getModel(DataGenContext<Block, T> ctx, RegistrateBlockstateProvider prov,
                                                 BlockState state) {
         int level = state.getValue(KineticBatteryBlock.LEVEL);
-        boolean powered = state.getValue(KineticBatteryBlock.POWERED);
+        boolean powered = state.getValue(KineticBatteryBlock.POWER) > 0;
         String path = "block/kinetic_battery/block";
         String suffix = level + "_" + (powered ? "discharge" : "charge");
         return prov.models()

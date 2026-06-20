@@ -8,6 +8,7 @@ import com.hlysine.create_connected.registries.CCItems;
 import com.simibubi.create.content.kinetics.base.DirectionalKineticBlock;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
 import com.simibubi.create.foundation.block.IBE;
+import net.createmod.catnip.data.Iterate;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponentPatch;
@@ -28,7 +29,6 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
@@ -42,20 +42,20 @@ import java.util.Optional;
 public class KineticBatteryBlock extends DirectionalKineticBlock implements IBE<KineticBatteryBlockEntity> {
 
     public static final IntegerProperty LEVEL = IntegerProperty.create("level", 0, 5);
-    public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
+    public static final IntegerProperty POWER = BlockStateProperties.POWER;
 
     public KineticBatteryBlock(Properties properties) {
         super(properties);
         registerDefaultState(defaultBlockState()
                 .setValue(FACING, Direction.NORTH)
-                .setValue(POWERED, false)
+                .setValue(POWER, 0)
                 .setValue(LEVEL, 0)
         );
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(POWERED, LEVEL);
+        builder.add(POWER, LEVEL);
         super.createBlockStateDefinition(builder);
     }
 
@@ -66,9 +66,20 @@ public class KineticBatteryBlock extends DirectionalKineticBlock implements IBE<
             return super.getStateForPlacement(context);
         Direction preferredDirection = getPreferredFacing(context);
         return this.defaultBlockState()
-                .setValue(FACING, preferredDirection == null ? context.getNearestLookingDirection() : preferredDirection)
-                .setValue(POWERED, context.getLevel().hasNeighborSignal(context.getClickedPos()))
-                .setValue(LEVEL, 0);
+                .setValue(FACING, preferredDirection == null ? context.getNearestLookingDirection() : preferredDirection);
+    }
+
+    @Override
+    public Direction getPreferredFacing(BlockPlaceContext context) {
+        for (Direction side : Iterate.directions) {
+            BlockState blockState = context.getLevel()
+                    .getBlockState(context.getClickedPos().relative(side));
+            if (!(blockState.getBlock() instanceof KineticBatteryBlock))
+                continue;
+            if (blockState.getValue(FACING).getAxis() == side.getAxis())
+                return blockState.getValue(FACING);
+        }
+        return super.getPreferredFacing(context);
     }
 
     @Override
@@ -130,7 +141,7 @@ public class KineticBatteryBlock extends DirectionalKineticBlock implements IBE<
                                                        @NotNull BlockState state,
                                                        @NotNull Level level,
                                                        @NotNull BlockPos pos,
-                                                       Player player,
+                                                       @NotNull Player player,
                                                        @NotNull InteractionHand hand,
                                                        @NotNull BlockHitResult hitResult) {
         InteractionResultHolder<ItemStack> res =
@@ -221,15 +232,59 @@ public class KineticBatteryBlock extends DirectionalKineticBlock implements IBE<
     }
 
     @Override
-    public void neighborChanged(@NotNull BlockState state, Level worldIn, @NotNull BlockPos pos, @NotNull Block blockIn, @NotNull BlockPos fromPos,
-                                boolean isMoving) {
-        if (worldIn.isClientSide)
-            return;
-
-        boolean previouslyPowered = state.getValue(POWERED);
-        if (previouslyPowered != worldIn.hasNeighborSignal(pos)) {
-            KineticBlockEntity.switchToBlockState(worldIn, pos, state.cycle(POWERED));
+    protected void neighborChanged(@NotNull BlockState state,
+                                   @NotNull Level level,
+                                   @NotNull BlockPos pos,
+                                   @NotNull Block block,
+                                   @NotNull BlockPos fromPos,
+                                   boolean isMoving) {
+        super.neighborChanged(state, level, pos, block, fromPos, isMoving);
+        if (!level.isClientSide) {
+            updatePower(state, level, pos);
         }
+    }
+
+    @Override
+    public void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean isMoving) {
+        super.onPlace(state, level, pos, oldState, isMoving);
+        if (!level.isClientSide && !state.is(oldState.getBlock())) {
+            updatePower(state, level, pos);
+        }
+    }
+
+    private void updatePower(BlockState state, Level level, BlockPos pos) {
+        int currentPower = state.getValue(POWER);
+        int expectedPower = calculatePower(state, level, pos);
+
+        if (currentPower != expectedPower) {
+            KineticBlockEntity.switchToBlockState(level, pos, state.setValue(POWER, expectedPower));
+        }
+    }
+
+    private int calculatePower(BlockState state, Level level, BlockPos pos) {
+        if (level.hasNeighborSignal(pos)) {
+            return 15;
+        }
+
+        int maxNeighborPower = 0;
+        Direction facing = state.getValue(FACING);
+
+        BlockPos posForward = pos.relative(facing);
+        BlockPos posBackward = pos.relative(facing.getOpposite());
+
+        maxNeighborPower = Math.max(maxNeighborPower, getConnectedBatteryPower(state, level, posForward));
+        maxNeighborPower = Math.max(maxNeighborPower, getConnectedBatteryPower(state, level, posBackward));
+
+        return Math.max(0, maxNeighborPower - 1);
+    }
+
+    private int getConnectedBatteryPower(BlockState myState, Level level, BlockPos targetPos) {
+        BlockState targetState = level.getBlockState(targetPos);
+
+        if (targetState.is(this) && targetState.getValue(FACING) == myState.getValue(FACING)) {
+            return targetState.getValue(POWER);
+        }
+        return 0;
     }
 
     @Override
@@ -243,7 +298,7 @@ public class KineticBatteryBlock extends DirectionalKineticBlock implements IBE<
     }
 
     public static boolean isDischarging(BlockState state) {
-        return state.getValue(POWERED);
+        return state.getValue(POWER) > 0;
     }
 
     public static boolean isCurrentStageComplete(BlockState state) {

@@ -84,7 +84,7 @@ public class KineticBatteryScene {
 
         scene.world().toggleRedstonePower(util.select().position(lever));
         scene.effects().indicateRedstone(lever);
-        scene.world().modifyBlock(battery, state -> state.setValue(KineticBatteryBlock.POWERED, true), false);
+        scene.world().modifyBlock(battery, state -> state.setValue(KineticBatteryBlock.POWER, 15), false);
         scene.world().setKineticSpeed(util.select().position(battery).add(util.select().position(shaft)).add(util.select().position(saw)), -64);
 
         scene.idle(20);
@@ -187,7 +187,7 @@ public class KineticBatteryScene {
         scene.idle(15);
         scene.world().toggleRedstonePower(util.select().position(tempLever));
         scene.effects().indicateRedstone(tempLever);
-        scene.world().modifyBlock(battery, state -> state.setValue(KineticBatteryBlock.POWERED, true).setValue(KineticBatteryBlock.LEVEL, 4), false);
+        scene.world().modifyBlock(battery, state -> state.setValue(KineticBatteryBlock.POWER, 15).setValue(KineticBatteryBlock.LEVEL, 4), false);
         scene.world().setKineticSpeed(util.select().position(battery), 0);
         scene.idle(20);
 
@@ -199,7 +199,7 @@ public class KineticBatteryScene {
 
         scene.idle(100);
         scene.world().hideSection(util.select().position(tempLever), Direction.UP);
-        scene.world().modifyBlock(battery, state -> state.setValue(KineticBatteryBlock.POWERED, false), false);
+        scene.world().modifyBlock(battery, state -> state.setValue(KineticBatteryBlock.POWER, 0), false);
         scene.idle(10);
         scene.world().showSection(util.select().position(battery2), Direction.DOWN);
         scene.idle(5);
@@ -214,9 +214,9 @@ public class KineticBatteryScene {
 
         scene.world().toggleRedstonePower(util.select().position(lever).add(redstone));
         scene.effects().indicateRedstone(lever);
-        scene.world().modifyBlock(battery, state -> state.setValue(KineticBatteryBlock.POWERED, true).setValue(KineticBatteryBlock.LEVEL, 3), false);
-        scene.world().modifyBlock(battery2, state -> state.setValue(KineticBatteryBlock.POWERED, true), false);
-        scene.world().modifyBlock(battery3, state -> state.setValue(KineticBatteryBlock.POWERED, true), false);
+        scene.world().modifyBlock(battery, state -> state.setValue(KineticBatteryBlock.POWER, 15).setValue(KineticBatteryBlock.LEVEL, 3), false);
+        scene.world().modifyBlock(battery2, state -> state.setValue(KineticBatteryBlock.POWER, 15), false);
+        scene.world().modifyBlock(battery3, state -> state.setValue(KineticBatteryBlock.POWER, 15), false);
         scene.world().setKineticSpeed(util.select().position(battery), 64);
         scene.world().setKineticSpeed(util.select().position(battery2).add(util.select().position(battery3)), 0);
         scene.idle(30);
@@ -240,7 +240,7 @@ public class KineticBatteryScene {
         scene.world().hideSection(util.select().position(battery).add(util.select().position(battery2)).add(util.select().position(battery3)), Direction.UP);
         scene.idle(10);
         scene.world().hideSection(casings.add(redstone).add(util.select().position(lever)), Direction.UP);
-        scene.world().modifyBlock(battery, state -> state.setValue(KineticBatteryBlock.POWERED, false), false);
+        scene.world().modifyBlock(battery, state -> state.setValue(KineticBatteryBlock.POWER, 0), false);
         scene.idle(10);
         scene.world().hideSection(util.select().position(shaft), Direction.UP);
         scene.world().setKineticSpeed(util.select().position(battery), 0);
@@ -263,7 +263,7 @@ public class KineticBatteryScene {
 
         scene.world().toggleRedstonePower(util.select().position(lever2).add(redstone2));
         scene.effects().indicateRedstone(lever2);
-        scene.world().modifyBlocks(parallelBatteries.add(util.select().position(battery)), state -> state.setValue(KineticBatteryBlock.POWERED, true).setValue(KineticBatteryBlock.LEVEL, 4), false);
+        scene.world().modifyBlocks(parallelBatteries.add(util.select().position(battery)), state -> state.setValue(KineticBatteryBlock.POWER, 15).setValue(KineticBatteryBlock.LEVEL, 4), false);
         scene.world().setKineticSpeed(util.select().layer(1), 64);
         scene.idle(30);
 
@@ -329,7 +329,7 @@ public class KineticBatteryScene {
         scene.world().toggleRedstonePower(util.select().position(lever));
         scene.effects().indicateRedstone(lever);
         scene.world().setKineticSpeed(util.select().position(battery).add(saw), 64);
-        scene.world().modifyBlock(battery, state -> state.setValue(KineticBatteryBlock.POWERED, true).setValue(KineticBatteryBlock.LEVEL, 1), false);
+        scene.world().modifyBlock(battery, state -> state.setValue(KineticBatteryBlock.POWER, 15).setValue(KineticBatteryBlock.LEVEL, 1), false);
         scene.idle(20);
 
         scene.overlay().showControls(util.vector().blockSurface(battery, Direction.UP), Pointing.DOWN, 30).withItem(CCItems.CHARGED_KINETIC_BATTERY.asStack());
@@ -352,7 +352,7 @@ public class KineticBatteryScene {
         scene.world().hideSection(util.select().position(battery), Direction.UP);
         scene.idle(20);
         scene.world().setKineticSpeed(util.select().position(battery), 0);
-        scene.world().modifyBlock(battery, state -> state.setValue(KineticBatteryBlock.POWERED, false).setValue(KineticBatteryBlock.LEVEL, 5), false);
+        scene.world().modifyBlock(battery, state -> state.setValue(KineticBatteryBlock.POWER, 0).setValue(KineticBatteryBlock.LEVEL, 5), false);
         scene.world().showSection(util.select().position(battery), Direction.DOWN);
         scene.idle(20);
 
