@@ -234,6 +234,8 @@ public class KineticBatteryBlock extends DirectionalKineticBlock implements IBE<
                 stack.shrink(1);
             }
             if (simulate) {
+                // a hack to force mechanical arm to interact, since it normally cancels the interaction
+                // if the returned item is the same as the input item
                 return InteractionResultHolder.success(ItemStack.EMPTY);
             } else {
                 return InteractionResultHolder.success(returnedItem);
