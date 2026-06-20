@@ -221,6 +221,8 @@
   "create_connected.ponder.kinetic_battery.header": "Almacenar estrés cinético con batería cinética",
   "create_connected.ponder.kinetic_battery.text_1": "La batería cinética almacena unidades de estrés para uso futuro",
   "create_connected.ponder.kinetic_battery.text_2": "Cuando no se enciende, consume estrés cinético del frente para recargar",
+  "create_connected.ponder.kinetic_battery.text_7": "Usa un interruptor de umbral para una lectura más precisa",
+  "create_connected.ponder.kinetic_battery.text_8": "Usa un interruptor de umbral para una lectura más precisa",
   "create_connected.ponder.kinetic_battery_automation.header": "Automatizando transferencia de energía",
   "create_connected.ponder.kinetic_battery_automation.text_2": "Cuando una batería está descargando, haga clic derecho con una batería cargada para recargar",
   "create_connected.ponder.kinetic_battery_automation.text_4": "Los lanzadores y brazos mecánicos pueden automatizar la transferencia de energía",
