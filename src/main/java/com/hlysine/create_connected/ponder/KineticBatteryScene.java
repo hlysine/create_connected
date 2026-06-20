@@ -1,13 +1,17 @@
 package com.hlysine.create_connected.ponder;
 
-import com.hlysine.create_connected.registries.CCBlocks;
-import com.hlysine.create_connected.registries.CCItems;
 import com.hlysine.create_connected.content.kineticbattery.KineticBatteryBlock;
+import com.hlysine.create_connected.content.kineticbattery.KineticBatteryBlockEntity;
+import com.hlysine.create_connected.registries.CCBlocks;
+import com.hlysine.create_connected.registries.CCDataComponents;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllItems;
+import com.simibubi.create.content.kinetics.belt.BeltBlock;
+import com.simibubi.create.content.kinetics.belt.BeltPart;
 import com.simibubi.create.content.kinetics.chainDrive.ChainDriveBlock;
 import com.simibubi.create.content.kinetics.deployer.DeployerBlockEntity;
 import com.simibubi.create.content.kinetics.saw.SawBlock;
+import com.simibubi.create.content.redstone.displayLink.DisplayLinkBlock;
 import com.simibubi.create.content.redstone.thresholdSwitch.ThresholdSwitchBlock;
 import com.simibubi.create.foundation.ponder.CreateSceneBuilder;
 import net.createmod.catnip.math.Pointing;
@@ -17,6 +21,7 @@ import net.createmod.ponder.api.scene.Selection;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LeverBlock;
 import net.minecraft.world.level.block.RedStoneWireBlock;
@@ -35,8 +40,11 @@ public class KineticBatteryScene {
         Selection leverGroup = util.select().fromTo(4, 1, 2, 4, 2, 2);
         Selection rotation0 = util.select().position(2, 0, 5);
         Selection rotation1 = util.select().fromTo(1, 1, 2, 1, 1, 5);
+        BlockPos cog1 = util.grid().at(1, 1, 5);
+        Selection rotation2 = util.select().fromTo(0, 1, 2, 0, 1, 5);
         BlockPos shaft = util.grid().at(2, 1, 2);
         BlockPos saw = util.grid().at(1, 1, 2);
+        BlockPos saw2 = util.grid().at(0, 1, 2);
         BlockPos comparator = util.grid().at(3, 1, 1);
         Selection comparatorGroup = util.select().fromTo(3, 1, 0, 3, 1, 1);
 
@@ -89,25 +97,59 @@ public class KineticBatteryScene {
 
         scene.idle(20);
 
-        scene.overlay().showText(100)
-                .text("When powered by redstone, it discharges by generating a fixed amount of stress units at a fixed speed")
+        scene.overlay().showText(80)
+                .text("When powered by redstone, it discharges by generating a set amount of stress capacity at a fixed speed")
                 .attachKeyFrame()
                 .placeNearTarget()
                 .pointAt(util.vector().topOf(saw.below()));
 
-        scene.idle(60);
+        scene.idle(40);
         scene.world().modifyBlock(battery, state -> state.setValue(KineticBatteryBlock.LEVEL, 3), false);
         scene.effects().indicateSuccess(battery);
         scene.idle(75);
 
+        scene.world().setBlock(saw2, AllBlocks.MECHANICAL_SAW.getDefaultState().setValue(SawBlock.FACING, Direction.UP), false);
+        scene.world().setKineticSpeed(util.select().position(saw2), -64);
+        scene.world().showSection(util.select().position(saw2), Direction.DOWN);
+
+        scene.overlay().showText(90)
+                .text("But the amount of battery charge consumed depends on the actual amount of stress capacity in use")
+                .attachKeyFrame()
+                .placeNearTarget()
+                .pointAt(util.vector().topOf(saw2.below()));
+        scene.idle(100);
+
+        scene.world().hideSection(util.select().position(saw2), Direction.UP);
+        scene.idle(20);
+        scene.world().setBlock(saw2, CCBlocks.PARALLEL_GEARBOX.getDefaultState(), false);
+        scene.world().setKineticSpeed(util.select().position(saw2), 64);
+        scene.idle(5);
+        scene.world().showSection(util.select().position(cog1), Direction.DOWN);
+        scene.idle(5);
+        scene.world().showSection(rotation2, Direction.DOWN);
+
+        scene.overlay().showText(90)
+                .text("When other kinetic sources provide enough stress capacity, batteries will not discharge")
+                .attachKeyFrame()
+                .placeNearTarget()
+                .pointAt(util.vector().topOf(saw2.below()));
+        scene.idle(90);
+
         scene.world().hideSection(util.select().position(saw), Direction.UP);
+        scene.world().hideSection(rotation2, Direction.UP);
+        scene.world().hideSection(util.select().position(cog1), Direction.UP);
+        scene.idle(20);
+        scene.world().setBlock(saw, AllBlocks.BELT.getDefaultState(), false);
+        scene.world().setBlock(saw.relative(Direction.NORTH), AllBlocks.BELT.getDefaultState().setValue(BeltBlock.PART, BeltPart.END), false);
+        scene.world().setKineticSpeed(util.select().position(saw).add(util.select().position(saw.relative(Direction.NORTH))), -64);
+        scene.world().showSection(util.select().position(saw).add(util.select().position(saw.relative(Direction.NORTH))), Direction.DOWN);
         scene.idle(10);
 
         scene.overlay().showText(120)
-                .text("If the network has zero stress impact, the battery enters power saving mode and only consumes a tiny amount of stress units")
+                .text("Even if the network has zero stress impact, batteries still consume a tiny amount of charge to drive belts for item transport")
                 .attachKeyFrame()
                 .placeNearTarget()
-                .pointAt(util.vector().topOf(battery));
+                .pointAt(util.vector().topOf(saw.below()));
         scene.idle(110);
 
         scene.world().showSection(comparatorGroup, Direction.DOWN);
@@ -132,6 +174,18 @@ public class KineticBatteryScene {
                 .pointAt(util.vector().topOf(comparator));
         scene.idle(90);
 
+        scene.world().hideSection(util.select().position(comparator), Direction.UP);
+        scene.idle(20);
+        scene.world().setBlock(battery.above(), AllBlocks.DISPLAY_LINK.getDefaultState().setValue(DisplayLinkBlock.FACING, Direction.UP), false);
+        scene.world().showSection(util.select().position(battery.above()), Direction.DOWN);
+        scene.idle(20);
+
+        scene.overlay().showText(80)
+                .text("Or use a Display Link to display battery level")
+                .placeNearTarget()
+                .pointAt(util.vector().topOf(battery));
+        scene.idle(90);
+
         scene.markAsFinished();
     }
 
@@ -146,9 +200,7 @@ public class KineticBatteryScene {
         Selection rotation0 = util.select().position(5, 0, 3);
         Selection rotation1 = util.select().fromTo(5, 1, 2, 4, 1, 2);
         BlockPos tempLever = util.grid().at(3, 1, 1);
-        Selection casings = util.select().fromTo(0, 1, 3, 3, 1, 3);
-        Selection redstone = util.select().fromTo(1, 2, 3, 3, 2, 3);
-        BlockPos lever = util.grid().at(0, 2, 3);
+        BlockPos lever = util.grid().at(0, 1, 2);
         BlockPos shaft = util.grid().at(4, 1, 2);
         Selection chainDrives = util.select().fromTo(4, 1, 0, 4, 1, 2);
         Selection parallelBatteries = util.select().fromTo(3, 1, 0, 3, 1, 2);
@@ -205,14 +257,10 @@ public class KineticBatteryScene {
         scene.idle(5);
         scene.world().showSection(util.select().position(battery3), Direction.DOWN);
         scene.idle(10);
-        scene.world().showSection(casings, Direction.DOWN);
-        scene.idle(10);
-        scene.world().showSection(redstone, Direction.DOWN);
-        scene.idle(10);
         scene.world().showSection(util.select().position(lever), Direction.DOWN);
         scene.idle(20);
 
-        scene.world().toggleRedstonePower(util.select().position(lever).add(redstone));
+        scene.world().toggleRedstonePower(util.select().position(lever));
         scene.effects().indicateRedstone(lever);
         scene.world().modifyBlock(battery, state -> state.setValue(KineticBatteryBlock.POWER, 15).setValue(KineticBatteryBlock.LEVEL, 3), false);
         scene.world().modifyBlock(battery2, state -> state.setValue(KineticBatteryBlock.POWER, 15), false);
@@ -237,9 +285,16 @@ public class KineticBatteryScene {
         scene.world().modifyBlock(battery2, state -> state.setValue(KineticBatteryBlock.LEVEL, 2), false);
         scene.idle(30);
 
+        scene.overlay().showText(80)
+                .text("When one battery receives a redstone signal, all batteries in the chain get powered")
+                .placeNearTarget()
+                .attachKeyFrame()
+                .pointAt(util.vector().blockSurface(lever, Direction.DOWN));
+        scene.idle(90);
+
         scene.world().hideSection(util.select().position(battery).add(util.select().position(battery2)).add(util.select().position(battery3)), Direction.UP);
         scene.idle(10);
-        scene.world().hideSection(casings.add(redstone).add(util.select().position(lever)), Direction.UP);
+        scene.world().hideSection(util.select().position(lever), Direction.UP);
         scene.world().modifyBlock(battery, state -> state.setValue(KineticBatteryBlock.POWER, 0), false);
         scene.idle(10);
         scene.world().hideSection(util.select().position(shaft), Direction.UP);
@@ -296,24 +351,20 @@ public class KineticBatteryScene {
         scene.world().showSection(util.select().position(battery), Direction.DOWN);
         scene.idle(20);
 
-        scene.overlay().showText(70)
-                .text("When the battery is fully charged...")
-                .attachKeyFrame()
-                .placeNearTarget()
-                .pointAt(util.vector().topOf(battery));
-        scene.idle(90);
-
         scene.overlay().showControls(util.vector().blockSurface(battery, Direction.UP), Pointing.DOWN, 30).withItem(AllItems.WRENCH.asStack());
         scene.idle(30);
         scene.world().destroyBlock(battery);
-        var item = scene.world().createItemEntity(util.vector().centerOf(battery), Vec3.ZERO, CCItems.CHARGED_KINETIC_BATTERY.asStack());
+        ItemStack batteryStack = CCBlocks.KINETIC_BATTERY.asStack();
+        batteryStack.set(CCDataComponents.KINETIC_BATTERY_CHARGE, KineticBatteryBlockEntity.getMaxBatteryLevel());
+        var item = scene.world().createItemEntity(util.vector().centerOf(battery), Vec3.ZERO, batteryStack);
         scene.idle(20);
 
         scene.overlay().showText(70)
-                .text("the charge is retained in item form")
+                .text("Batteries retain their charge in item form")
+                .attachKeyFrame()
                 .placeNearTarget()
-                .pointAt(util.vector().topOf(battery.below()));
-        scene.idle(70);
+                .pointAt(util.vector().blockSurface(battery, Direction.DOWN));
+        scene.idle(90);
 
         scene.world().hideSection(util.select().position(battery), Direction.UP);
         scene.world().modifyEntity(item, e -> e.remove(Entity.RemovalReason.DISCARDED));
@@ -332,7 +383,7 @@ public class KineticBatteryScene {
         scene.world().modifyBlock(battery, state -> state.setValue(KineticBatteryBlock.POWER, 15).setValue(KineticBatteryBlock.LEVEL, 1), false);
         scene.idle(20);
 
-        scene.overlay().showControls(util.vector().blockSurface(battery, Direction.UP), Pointing.DOWN, 30).withItem(CCItems.CHARGED_KINETIC_BATTERY.asStack());
+        scene.overlay().showControls(util.vector().blockSurface(battery, Direction.UP), Pointing.DOWN, 30).withItem(batteryStack);
         scene.idle(30);
         scene.world().modifyBlock(battery, state -> state.setValue(KineticBatteryBlock.LEVEL, 5), false);
         item = scene.world().createItemEntity(util.vector().centerOf(battery.above()), Vec3.ZERO, CCBlocks.KINETIC_BATTERY.asStack());
@@ -359,17 +410,17 @@ public class KineticBatteryScene {
         scene.overlay().showControls(util.vector().blockSurface(battery, Direction.UP), Pointing.DOWN, 30).withItem(CCBlocks.KINETIC_BATTERY.asStack());
         scene.idle(30);
         scene.world().modifyBlock(battery, state -> state.setValue(KineticBatteryBlock.LEVEL, 0), false);
-        item = scene.world().createItemEntity(util.vector().centerOf(battery.above()), Vec3.ZERO, CCItems.CHARGED_KINETIC_BATTERY.asStack());
+        item = scene.world().createItemEntity(util.vector().centerOf(battery.above()), Vec3.ZERO, batteryStack);
 
         scene.overlay().showText(120)
-                .text("When a battery is fully charged, right click with an empty battery to discharge")
+                .text("When a battery is in charging mode, right click with another battery to discharge")
                 .placeNearTarget()
                 .attachKeyFrame()
                 .pointAt(util.vector().topOf(battery));
         scene.idle(140);
         scene.world().modifyEntity(item, e -> e.remove(Entity.RemovalReason.DISCARDED));
 
-        scene.world().modifyBlockEntityNBT(util.select().position(deployer), DeployerBlockEntity.class, nbt -> nbt.put("HeldItem", CCItems.CHARGED_KINETIC_BATTERY.asStack().saveOptional(scene.world().getHolderLookupProvider())));
+        scene.world().modifyBlockEntityNBT(util.select().position(deployer), DeployerBlockEntity.class, nbt -> nbt.put("HeldItem", batteryStack.saveOptional(scene.world().getHolderLookupProvider())));
         scene.world().showSection(deployerGroup, Direction.DOWN);
         scene.idle(10);
         scene.world().showSection(armGroup, Direction.DOWN);
