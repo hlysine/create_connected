@@ -23,26 +23,26 @@ This is the Forge/NeoForge version of the mod.
 > **Want reliable, immersive chunk-loading for your Create machines? Check
 out [Create: Power Loader](https://modrinth.com/mod/create-power-loader)**
 
-## What's new in 1.2
+## What's new in 1.3
 
-![dashboard](https://github.com/user-attachments/assets/44317627-5d24-494d-a923-44167c6f10c4) **Dashboard**
+**Support for Minecraft 1.20.1 has been dropped**
 
-A mini-display that can send info to the HUD of players sitting in front. Perfect for controlling your vehicle while in
-contraption camera.
+Minecraft 1.20.1 will not receive the 1.3 update. Critical bug fixes in version 1.3.0 will be backported to version 1.2.3 exclusive
+to Minecraft 1.20.1.
 
-![brass_chute](https://github.com/user-attachments/assets/1526ec68-aedb-4d43-a7bc-79fe2af4a27c) **Brass Chute**
+![kinetic_battery](https://github.com/user-attachments/assets/02d33d98-ac20-4629-8993-149fe1123d24) **Reworked Kinetic Battery**
 
-The middle ground between a regular chute and a smart chute. Supports diagonal item transport and extracts 64 items at a time.
+Kinetic Batteries now retain their charge in item form and only discharge the necessary amount of stress units 
+to keep the network running. Check out the new ponder scenes for more info!
+
+![inventory_bridge](https://github.com/user-attachments/assets/60382812-0859-4a47-bbd1-88a9ececed30) **Improved Inventory Bridge**
+
+Filters on Inventory Bridges are now respected when extracting items through the bridge. You can also use this to
+control what items are visible in a stock link network.
 
 ![empty_fan_catalyst](https://github.com/hlysine/create_connected/assets/25472513/871b1ee6-33c6-4102-80ed-3670641a8d33) **Even more catalysts**
 
-Dyeing catalysts for Create: Garnished and Create: Dragons Plus.
-
-Also supports new fan processing for Create: More Catalysts, Create: Shimmer and Create: Nether Industry. (Thanks HgTlPbBi-4 and JustAGuy4447 for implementation)
-
-![sequenced_pulse_generator](https://github.com/user-attachments/assets/20c675f8-7275-47f4-ab45-d0fb3b3150b5) **Reworked Sequenced Pulse Generator**
-
-Faster reaction time and more instructions. Perform signal strength comparison, simple arithmetics and bitwise operations on the input signal.
+Dyeing catalysts for Create: Dragons Plus now support Dye Depot colors.
 
 [...and more changes and fixes](https://github.com/hlysine/create_connected/blob/main/CHANGELOG.md)
 
