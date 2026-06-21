@@ -2,7 +2,7 @@ package com.hlysine.create_connected.compat;
 
 import mezz.jei.api.runtime.IIngredientManager;
 import net.minecraft.resources.ResourceLocation;
-import net.neoforged.bus.api.Event;
+import net.minecraftforge.eventbus.api.Event;
 
 /*
  * Base class of the two feature refresh events.

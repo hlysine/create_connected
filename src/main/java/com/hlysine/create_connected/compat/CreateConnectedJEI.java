@@ -11,7 +11,7 @@ import mezz.jei.api.runtime.IIngredientManager;
 import mezz.jei.api.runtime.IJeiRuntime;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
-import net.neoforged.neoforge.common.NeoForge;
+import net.minecraftforge.common.MinecraftForge;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.stream.Collectors;
@@ -35,7 +35,7 @@ public class CreateConnectedJEI implements IModPlugin {
 
     public static void refreshItemList() {
         if (MANAGER != null && Minecraft.getInstance().level != null) {
-            NeoForge.EVENT_BUS.post(new FeatureRefreshEvent.Pre(ID, MANAGER));
+            MinecraftForge.EVENT_BUS.post(new FeatureRefreshEvent.Pre(ID, MANAGER));
             MANAGER.removeIngredientsAtRuntime(
                     VanillaTypes.ITEM_STACK,
                     CCCreativeTabs.ITEMS.stream()
@@ -49,7 +49,7 @@ public class CreateConnectedJEI implements IModPlugin {
                             .map(ItemProviderEntry::asStack)
                             .collect(Collectors.toList())
             );
-            NeoForge.EVENT_BUS.post(new FeatureRefreshEvent.Post(ID, MANAGER));
+            MinecraftForge.EVENT_BUS.post(new FeatureRefreshEvent.Post(ID, MANAGER));
         }
     }
 }
