@@ -17,6 +17,9 @@
     "create_connected:linked_lever",
     "create_connected:linked_analog_lever",
     "create_connected:creative_fluid_vessel",
-    "create_connected:linked_throttle_lever"
+    {
+      "id": "create_connected:linked_throttle_lever",
+      "required": false
+    }
   ]
 }

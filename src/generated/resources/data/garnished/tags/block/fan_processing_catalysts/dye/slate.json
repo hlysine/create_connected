@@ -1,5 +1,8 @@
 {
   "values": [
-    "create_connected:dye_depot_slate_fan_dyeing_catalyst"
+    {
+      "id": "create_connected:dye_depot_slate_fan_dyeing_catalyst",
+      "required": false
+    }
   ]
 }

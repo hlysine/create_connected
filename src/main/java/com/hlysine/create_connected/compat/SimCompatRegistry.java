@@ -27,6 +27,7 @@ public class SimCompatRegistry {
             .blockstate(CCBlockStateGen.linkedLeverNoPower(
                     Simulated.path("block/throttle_lever/block")
             ))
+            .asOptional()
             .register();
 
     public static final BlockEntityEntry<LinkedThrottleLeverBlockEntity> LINKED_THROTTLE_LEVER_ENTITY = REGISTRATE

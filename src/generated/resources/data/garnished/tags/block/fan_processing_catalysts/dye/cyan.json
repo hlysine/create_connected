@@ -1,5 +1,8 @@
 {
   "values": [
-    "create_connected:cyan_fan_dyeing_catalyst"
+    {
+      "id": "create_connected:cyan_fan_dyeing_catalyst",
+      "required": false
+    }
   ]
 }

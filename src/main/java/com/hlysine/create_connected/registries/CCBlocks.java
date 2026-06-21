@@ -903,6 +903,7 @@ public class CCBlocks {
                     ))
                     .lang(RegistrateLangProvider.toEnglishName(color.getName() + "_fan_dyeing_catalyst"))
                     .tag(AllTags.AllBlockTags.FAN_TRANSPARENT.tag)
+                    .asOptional()
                     .simpleItem()
                     .register());
         }

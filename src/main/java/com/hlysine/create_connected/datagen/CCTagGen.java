@@ -67,12 +67,11 @@ public class CCTagGen {
                 .add(CCBlocks.FAN_SOUL_STRIPPING_CATALYST.get());
         CCBlocks.FAN_DYEING_CATALYSTS.forEach((color, block) -> {
             prov.tag(BlockTags.create(Mods.GARNISHED.rl("fan_processing_catalysts/dye/" + color.getName())))
-                    .add(block.get());
+                    .addOptional(block.getId());
             prov.tag(BlockTags.create(ResourceLocation.fromNamespaceAndPath("c", "dyes/" + color.getName())))
-                    .add(block.get());
+                    .addOptional(block.getId());
             prov.tag(BlockTags.create(ResourceLocation.fromNamespaceAndPath("c", "dyes")))
-                    .add(block.get());
-
+                    .addOptional(block.getId());
         });
     }
 

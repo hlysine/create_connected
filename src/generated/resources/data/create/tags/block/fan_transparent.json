@@ -21,37 +21,133 @@
     "create_connected:fan_transmutation_catalyst",
     "create_connected:fan_glooming_catalyst",
     "create_connected:fan_soul_stripping_catalyst",
-    "create_connected:white_fan_dyeing_catalyst",
-    "create_connected:orange_fan_dyeing_catalyst",
-    "create_connected:magenta_fan_dyeing_catalyst",
-    "create_connected:light_blue_fan_dyeing_catalyst",
-    "create_connected:yellow_fan_dyeing_catalyst",
-    "create_connected:lime_fan_dyeing_catalyst",
-    "create_connected:pink_fan_dyeing_catalyst",
-    "create_connected:gray_fan_dyeing_catalyst",
-    "create_connected:light_gray_fan_dyeing_catalyst",
-    "create_connected:cyan_fan_dyeing_catalyst",
-    "create_connected:purple_fan_dyeing_catalyst",
-    "create_connected:blue_fan_dyeing_catalyst",
-    "create_connected:brown_fan_dyeing_catalyst",
-    "create_connected:green_fan_dyeing_catalyst",
-    "create_connected:red_fan_dyeing_catalyst",
-    "create_connected:black_fan_dyeing_catalyst",
-    "create_connected:dye_depot_maroon_fan_dyeing_catalyst",
-    "create_connected:dye_depot_rose_fan_dyeing_catalyst",
-    "create_connected:dye_depot_coral_fan_dyeing_catalyst",
-    "create_connected:dye_depot_indigo_fan_dyeing_catalyst",
-    "create_connected:dye_depot_navy_fan_dyeing_catalyst",
-    "create_connected:dye_depot_slate_fan_dyeing_catalyst",
-    "create_connected:dye_depot_olive_fan_dyeing_catalyst",
-    "create_connected:dye_depot_amber_fan_dyeing_catalyst",
-    "create_connected:dye_depot_beige_fan_dyeing_catalyst",
-    "create_connected:dye_depot_teal_fan_dyeing_catalyst",
-    "create_connected:dye_depot_mint_fan_dyeing_catalyst",
-    "create_connected:dye_depot_aqua_fan_dyeing_catalyst",
-    "create_connected:dye_depot_verdant_fan_dyeing_catalyst",
-    "create_connected:dye_depot_forest_fan_dyeing_catalyst",
-    "create_connected:dye_depot_ginger_fan_dyeing_catalyst",
-    "create_connected:dye_depot_tan_fan_dyeing_catalyst"
+    {
+      "id": "create_connected:white_fan_dyeing_catalyst",
+      "required": false
+    },
+    {
+      "id": "create_connected:orange_fan_dyeing_catalyst",
+      "required": false
+    },
+    {
+      "id": "create_connected:magenta_fan_dyeing_catalyst",
+      "required": false
+    },
+    {
+      "id": "create_connected:light_blue_fan_dyeing_catalyst",
+      "required": false
+    },
+    {
+      "id": "create_connected:yellow_fan_dyeing_catalyst",
+      "required": false
+    },
+    {
+      "id": "create_connected:lime_fan_dyeing_catalyst",
+      "required": false
+    },
+    {
+      "id": "create_connected:pink_fan_dyeing_catalyst",
+      "required": false
+    },
+    {
+      "id": "create_connected:gray_fan_dyeing_catalyst",
+      "required": false
+    },
+    {
+      "id": "create_connected:light_gray_fan_dyeing_catalyst",
+      "required": false
+    },
+    {
+      "id": "create_connected:cyan_fan_dyeing_catalyst",
+      "required": false
+    },
+    {
+      "id": "create_connected:purple_fan_dyeing_catalyst",
+      "required": false
+    },
+    {
+      "id": "create_connected:blue_fan_dyeing_catalyst",
+      "required": false
+    },
+    {
+      "id": "create_connected:brown_fan_dyeing_catalyst",
+      "required": false
+    },
+    {
+      "id": "create_connected:green_fan_dyeing_catalyst",
+      "required": false
+    },
+    {
+      "id": "create_connected:red_fan_dyeing_catalyst",
+      "required": false
+    },
+    {
+      "id": "create_connected:black_fan_dyeing_catalyst",
+      "required": false
+    },
+    {
+      "id": "create_connected:dye_depot_maroon_fan_dyeing_catalyst",
+      "required": false
+    },
+    {
+      "id": "create_connected:dye_depot_rose_fan_dyeing_catalyst",
+      "required": false
+    },
+    {
+      "id": "create_connected:dye_depot_coral_fan_dyeing_catalyst",
+      "required": false
+    },
+    {
+      "id": "create_connected:dye_depot_indigo_fan_dyeing_catalyst",
+      "required": false
+    },
+    {
+      "id": "create_connected:dye_depot_navy_fan_dyeing_catalyst",
+      "required": false
+    },
+    {
+      "id": "create_connected:dye_depot_slate_fan_dyeing_catalyst",
+      "required": false
+    },
+    {
+      "id": "create_connected:dye_depot_olive_fan_dyeing_catalyst",
+      "required": false
+    },
+    {
+      "id": "create_connected:dye_depot_amber_fan_dyeing_catalyst",
+      "required": false
+    },
+    {
+      "id": "create_connected:dye_depot_beige_fan_dyeing_catalyst",
+      "required": false
+    },
+    {
+      "id": "create_connected:dye_depot_teal_fan_dyeing_catalyst",
+      "required": false
+    },
+    {
+      "id": "create_connected:dye_depot_mint_fan_dyeing_catalyst",
+      "required": false
+    },
+    {
+      "id": "create_connected:dye_depot_aqua_fan_dyeing_catalyst",
+      "required": false
+    },
+    {
+      "id": "create_connected:dye_depot_verdant_fan_dyeing_catalyst",
+      "required": false
+    },
+    {
+      "id": "create_connected:dye_depot_forest_fan_dyeing_catalyst",
+      "required": false
+    },
+    {
+      "id": "create_connected:dye_depot_ginger_fan_dyeing_catalyst",
+      "required": false
+    },
+    {
+      "id": "create_connected:dye_depot_tan_fan_dyeing_catalyst",
+      "required": false
+    }
   ]
 }
