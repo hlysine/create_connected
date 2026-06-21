@@ -18,6 +18,7 @@
   "block.create_connected.brake": "Pidur",
   "block.create_connected.brake.tooltip.summary": "Seade, mis tekitab toite sisselülitamisel _tohutut pinget_, peatades võrgu _ülekoormuse_ tõttu.",
   "block.create_connected.brass_gearbox": "Messingist käigukast",
+  "block.create_connected.brass_gearbox.tooltip.summary": "Käigukast, mille kõigi nelja külje pöörlemissuund on sõltumatult konfigureeritav.",
   "block.create_connected.centrifugal_clutch": "Tsentrifugaalsidur",
   "block.create_connected.centrifugal_clutch.tooltip.summary": "Sidur, mis _ühendatakse_ ainult siis, kui sisendpöörded on _kiiremad_ kui konfigureeritav läviväärtus.",
   "block.create_connected.copycat_beam": "Kopeeri kiir",
