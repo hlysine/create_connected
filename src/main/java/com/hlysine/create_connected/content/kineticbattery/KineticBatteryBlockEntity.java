@@ -98,8 +98,12 @@ public class KineticBatteryBlockEntity extends GeneratingKineticBlockEntity impl
 
         if (syncCooldown > 0) {
             syncCooldown--;
-            if (syncCooldown == 0 && queuedSync)
+            if (syncCooldown == 0 && queuedSync) {
+                if (!getLevel().isClientSide() && isDischarging(getBlockState()) && batteryLevel > 0) {
+                    updateMinStress();
+                }
                 sendData();
+            }
         }
 
         if (getSpeed() == 0 || !hasNetwork())
@@ -137,6 +141,12 @@ public class KineticBatteryBlockEntity extends GeneratingKineticBlockEntity impl
     }
 
     private void updateConsumedStress() {
+        if (getLevel().isClientSide()) {
+            if (consumedStress < 0) {
+                consumedStress = 0;
+            }
+            return;
+        }
         KineticNetwork network = getOrCreateNetwork();
 
         float presentCapacity = 0;
@@ -154,28 +164,34 @@ public class KineticBatteryBlockEntity extends GeneratingKineticBlockEntity impl
             presentCapacity += network.getActualCapacityOf(be);
         }
         float batteryCapacity = stress - presentCapacity - ((KineticNetworkAccessor) network).getUnloadedStress();
-
-        applyMinStress = false;
-        if (stress <= 0) {
-            for (Iterator<KineticBlockEntity> iterator = network.members.keySet().iterator(); iterator.hasNext(); ) {
-                KineticBlockEntity be = iterator.next();
-                if (be.getLevel().getBlockEntity(be.getBlockPos()) != be) {
-                    iterator.remove();
-                    continue;
-                }
-                if (BeltBlock.canTransportObjects(be.getBlockState())) {
-                    applyMinStress = true;
-                    break;
-                }
-            }
-        }
-
         if (batteryCapacity <= 0) {
             consumedStress = 0;
         } else {
             consumedStress = batteryCapacity / batteryCount;
         }
+
+        updateMinStress();
         sendDataImmediately();
+    }
+
+    private void updateMinStress() {
+        if (stress > CServer.BatteryMinDischarge.get().floatValue()) {
+            applyMinStress = false;
+            return;
+        }
+        KineticNetwork network = getOrCreateNetwork();
+        applyMinStress = false;
+        for (Iterator<KineticBlockEntity> iterator = network.members.keySet().iterator(); iterator.hasNext(); ) {
+            KineticBlockEntity be = iterator.next();
+            if (be.getLevel().getBlockEntity(be.getBlockPos()) != be) {
+                iterator.remove();
+                continue;
+            }
+            if (BeltBlock.canTransportObjects(be.getBlockState())) {
+                applyMinStress = true;
+                break;
+            }
+        }
     }
 
     public float getConsumedStress() {
