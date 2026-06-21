@@ -99,7 +99,7 @@ public class CCCreativeTabs {
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> MAIN = CREATIVE_MODE_TABS.register("main", () -> CreativeModeTab.builder()
             .title(Component.translatable("itemGroup.create_connected.main"))
             .withTabsBefore(AllCreativeModeTabs.PALETTES_CREATIVE_TAB.getKey())
-            .icon(CCBlocks.PARALLEL_GEARBOX::asStack)
+            .icon(CCBlocks.BRASS_GEARBOX::asStack)
             .displayItems(new DisplayItemsGenerator(ITEMS))
             .build());
 
