@@ -31,7 +31,6 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import org.joml.Math;
 
-import java.util.Iterator;
 import java.util.List;
 
 import static com.hlysine.create_connected.content.kineticbattery.KineticBatteryBlock.*;
@@ -151,12 +150,7 @@ public class KineticBatteryBlockEntity extends GeneratingKineticBlockEntity impl
 
         float presentCapacity = 0;
         int batteryCount = 0;
-        for (Iterator<KineticBlockEntity> iterator = network.sources.keySet().iterator(); iterator.hasNext(); ) {
-            KineticBlockEntity be = iterator.next();
-            if (be.getLevel().getBlockEntity(be.getBlockPos()) != be) {
-                iterator.remove();
-                continue;
-            }
+        for (KineticBlockEntity be : network.sources.keySet()) {
             if (be instanceof KineticBatteryBlockEntity) {
                 batteryCount += 1;
                 continue;
@@ -181,12 +175,7 @@ public class KineticBatteryBlockEntity extends GeneratingKineticBlockEntity impl
         }
         KineticNetwork network = getOrCreateNetwork();
         applyMinStress = false;
-        for (Iterator<KineticBlockEntity> iterator = network.members.keySet().iterator(); iterator.hasNext(); ) {
-            KineticBlockEntity be = iterator.next();
-            if (be.getLevel().getBlockEntity(be.getBlockPos()) != be) {
-                iterator.remove();
-                continue;
-            }
+        for (KineticBlockEntity be : network.members.keySet()) {
             if (BeltBlock.canTransportObjects(be.getBlockState())) {
                 applyMinStress = true;
                 break;
