@@ -1,6 +1,7 @@
 package com.hlysine.create_connected.registries;
 
 import com.hlysine.create_connected.CreateConnected;
+import com.hlysine.create_connected.content.kineticbattery.KineticBatteryBlockEntity;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
@@ -16,7 +17,7 @@ public class CCDataComponents {
 
     public static final DataComponentType<Double> KINETIC_BATTERY_CHARGE = register(
             "kinetic_battery_charge",
-            builder -> builder.persistent(Codec.DOUBLE).networkSynchronized(ByteBufCodecs.DOUBLE)
+            builder -> builder.persistent(Codec.doubleRange(0.0, KineticBatteryBlockEntity.getMaxBatteryLevel() / 3600 / 20)).networkSynchronized(ByteBufCodecs.DOUBLE)
     );
 
     private static <T> DataComponentType<T> register(String name, UnaryOperator<DataComponentType.Builder<T>> builder) {
