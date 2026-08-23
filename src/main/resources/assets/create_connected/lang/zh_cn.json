@@ -6,7 +6,7 @@
   "advancement.create_connected.kinetic_battery": "完全充能",
   "advancement.create_connected.kinetic_battery.desc": "充满一个动力电池",
   "advancement.create_connected.overpowered_brake_0": "大力出奇迹",
-  "advancement.create_connected.overpowered_brake_0.desc": "动力网络中有一个被红石激活的制动器时仍然保持高速运行\n§7（隐藏进度）",
+  "advancement.create_connected.overpowered_brake_0.desc": "在接上激活的制动器的情况下，动力网络仍然保持高速运行\n§7（隐藏进度）",
   "advancement.create_connected.overstress_clutch": "断路器",
   "advancement.create_connected.overstress_clutch.desc": "触发过应力离合器",
   "advancement.create_connected.pulse_generator_infinite_loop": "无限循环",
