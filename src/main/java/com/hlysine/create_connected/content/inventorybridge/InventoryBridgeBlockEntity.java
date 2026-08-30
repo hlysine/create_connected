@@ -3,6 +3,8 @@ package com.hlysine.create_connected.content.inventorybridge;
 import com.hlysine.create_connected.registries.CCBlockEntityTypes;
 import com.hlysine.create_connected.CreateConnected;
 import com.hlysine.create_connected.content.inventoryaccessport.WrappedItemHandler;
+import com.simibubi.create.api.packager.InventoryIdentifier;
+import com.simibubi.create.content.logistics.packager.IdentifiedInventory;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.filtering.FilteringBehaviour;
@@ -126,6 +128,14 @@ public class InventoryBridgeBlockEntity extends SmartBlockEntity {
                     .setValue(ATTACHED_POSITIVE, attachedPositive);
             level.setBlockAndUpdate(worldPosition, state);
         }
+    }
+
+    @Nullable
+    public InventoryIdentifier getInventoryId() {
+        // best we can do is identify as one of the two connected inventory
+        // not currently possible to completely dedupe inventory contents in stock networks
+        IdentifiedInventory inv = negativeInventory.getIdentifiedInventory();
+        return inv == null ? null : inv.identifier();
     }
 
     @Override

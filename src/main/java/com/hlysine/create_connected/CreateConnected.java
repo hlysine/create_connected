@@ -84,6 +84,7 @@ public class CreateConnected {
             CCMountedStorageTypes.register();
             CCDisplaySources.register();
             CCDisplayTargets.register();
+            CCInventoryIdentifiers.register();
         });
     }
 

@@ -2,6 +2,8 @@ package com.hlysine.create_connected.content.inventoryaccessport;
 
 import com.hlysine.create_connected.registries.CCBlockEntityTypes;
 import com.hlysine.create_connected.CreateConnected;
+import com.simibubi.create.api.packager.InventoryIdentifier;
+import com.simibubi.create.content.logistics.packager.IdentifiedInventory;
 import com.simibubi.create.content.redstone.DirectedDirectionalBlock;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
@@ -87,6 +89,12 @@ public class InventoryAccessPortBlockEntity extends SmartBlockEntity {
             BlockState state = getBlockState().cycle(ATTACHED);
             level.setBlockAndUpdate(worldPosition, state);
         }
+    }
+
+    @Nullable
+    public InventoryIdentifier getInventoryId() {
+        IdentifiedInventory inv = observedInventory.getIdentifiedInventory();
+        return inv == null ? null : inv.identifier();
     }
 
     @Override
