@@ -45,6 +45,11 @@ public class InventoryBridgeBlockEntity extends SmartBlockEntity {
 
     private boolean powered;
 
+    private IItemHandler cachedNegativeHandler;
+    private IItemHandler cachedPositiveHandler;
+    private boolean negativeHandlerDirty = true;
+    private boolean positiveHandlerDirty = true;
+
     public InventoryBridgeBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
 
@@ -115,6 +120,8 @@ public class InventoryBridgeBlockEntity extends SmartBlockEntity {
     public void updateConnectedInventory() {
         negativeInventory.findNewCapability();
         positiveInventory.findNewCapability();
+        negativeHandlerDirty = true;
+        positiveHandlerDirty = true;
         boolean previouslyPowered = powered;
         powered = level.hasNeighborSignal(worldPosition);
         if (powered != previouslyPowered) {
@@ -152,16 +159,22 @@ public class InventoryBridgeBlockEntity extends SmartBlockEntity {
 
     private IItemHandler getNegativeHandler() {
         if (powered) return null;
-        IItemHandler handler = negativeInventory.getInventory();
-        if (handler instanceof WrappedItemHandler) return null;
-        return handler;
+        if (negativeHandlerDirty) {
+            IItemHandler h = negativeInventory.getInventory();
+            cachedNegativeHandler = (h instanceof WrappedItemHandler) ? null : h;
+            negativeHandlerDirty = false;
+        }
+        return cachedNegativeHandler;
     }
 
     private IItemHandler getPositiveHandler() {
         if (powered) return null;
-        IItemHandler handler = positiveInventory.getInventory();
-        if (handler instanceof WrappedItemHandler) return null;
-        return handler;
+        if (positiveHandlerDirty) {
+            IItemHandler h = positiveInventory.getInventory();
+            cachedPositiveHandler = (h instanceof WrappedItemHandler) ? null : h;
+            positiveHandlerDirty = false;
+        }
+        return cachedPositiveHandler;
     }
 
     private void refreshCapability() {
@@ -171,14 +184,16 @@ public class InventoryBridgeBlockEntity extends SmartBlockEntity {
 
     private class InventoryBridgeHandler implements WrappedItemHandler {
 
-        private final ThreadLocal<Boolean> recursionGuard = ThreadLocal.withInitial(() -> false);
+        private static boolean inRecursion = false;
 
         private <T> T preventRecursion(Supplier<T> value, T defaultValue) {
-            if (recursionGuard.get()) return defaultValue;
-            recursionGuard.set(true);
-            T result = value.get();
-            recursionGuard.set(false);
-            return result;
+            if (inRecursion) return defaultValue;
+            inRecursion = true;
+            try {
+                return value.get();
+            } finally {
+                inRecursion = false;
+            }
         }
 
         @Override

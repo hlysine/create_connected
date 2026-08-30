@@ -35,6 +35,9 @@ public class InventoryAccessPortBlockEntity extends SmartBlockEntity {
     private InvManipulationBehaviour observedInventory;
     private boolean powered;
 
+    private IItemHandler cachedHandler;
+    private boolean handlerDirty = true;
+
     public InventoryAccessPortBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
 
@@ -79,6 +82,7 @@ public class InventoryAccessPortBlockEntity extends SmartBlockEntity {
 
     public void updateConnectedInventory() {
         observedInventory.findNewCapability();
+        handlerDirty = true;
         boolean previouslyPowered = powered;
         assert level != null;
         powered = level.hasNeighborSignal(worldPosition);
@@ -111,9 +115,12 @@ public class InventoryAccessPortBlockEntity extends SmartBlockEntity {
 
     private IItemHandler getConnectedItemHandler() {
         if (powered) return null;
-        IItemHandler handler = observedInventory.getInventory();
-        if (handler instanceof WrappedItemHandler) return null;
-        return handler;
+        if (handlerDirty) {
+            IItemHandler h = observedInventory.getInventory();
+            cachedHandler = (h instanceof WrappedItemHandler) ? null : h;
+            handlerDirty = false;
+        }
+        return cachedHandler;
     }
 
     private void refreshCapability() {
@@ -123,14 +130,16 @@ public class InventoryAccessPortBlockEntity extends SmartBlockEntity {
 
     private class InventoryAccessHandler implements WrappedItemHandler {
 
-        private final ThreadLocal<Boolean> recursionGuard = ThreadLocal.withInitial(() -> false);
+        private static boolean inRecursion = false;
 
         private <T> T preventRecursion(Supplier<T> value, T defaultValue) {
-            if (recursionGuard.get()) return defaultValue;
-            recursionGuard.set(true);
-            T result = value.get();
-            recursionGuard.set(false);
-            return result;
+            if (inRecursion) return defaultValue;
+            inRecursion = true;
+            try {
+                return value.get();
+            } finally {
+                inRecursion = false;
+            }
         }
 
         @Override
