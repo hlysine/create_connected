@@ -2,8 +2,28 @@
 
 All notable changes to this project will be documented in this file.
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres
+to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## 1.3.3 - 2026-08-31
+
+### Added
+
+- Mechanical crafter compatibility for inventory access ports / inventory bridges
+    - When packagers unpack into inventory extensions, the crafting layout is preserved when connected to mechanical
+      crafters
+    - Crafting is automatically triggered after insertion
+    - Inventory bridges can now connect a packager to two mechanical crafters, and insert ingredients to the first
+      available crafter for double crafting speed
+    - All crafting ingredients must pass the set filter on an inventory bridge for the whole recipe to unpack
+
+### Fixed
+
+- Performance issues with inventory access ports / inventory bridges (#294)
+- Inventory access ports not unlocking after losing redstone signal
+- Duplicate stock count when an inventory is connected to multiple stock links via inventory access ports (#305)
+- Sequenced pulse generator getting stuck in "wait until" instructions (#296)
+- Rare concurrent modification in copycat migration
 
 ## 1.3.2 - 2026-06-22
 
@@ -393,8 +413,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - A new config for Fluid Vessels to limit the maximum boiler level
-- Translations for new features in Russian, Japanese and Simplified Chinese (
-  thanks [Crowdin contributors](https://crowdin.com/project/create-connected-mod/reports/top-members)!)
+- Translations for new features in Russian, Japanese and Simplified Chinese
+  (thanks [Crowdin contributors](https://crowdin.com/project/create-connected-mod/reports/top-members)!)
 
 ### Fixed
 
@@ -417,8 +437,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - Hand Crank + Cogwheels = Crank Wheels
 - Fan Freezing Catalyst
     - Works with bulk freezing in Create: Garnished and Create: Dreams & Desires
-- New translations and new languages (
-  thanks [Crowdin contributors](https://crowdin.com/project/create-connected-mod/reports/top-members)!)
+- New translations and new languages
+  (thanks [Crowdin contributors](https://crowdin.com/project/create-connected-mod/reports/top-members)!)
 
 ### Fixed
 
