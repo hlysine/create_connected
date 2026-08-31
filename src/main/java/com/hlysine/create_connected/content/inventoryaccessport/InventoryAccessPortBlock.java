@@ -7,6 +7,8 @@ import com.simibubi.create.foundation.block.IBE;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Axis;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
@@ -76,6 +78,20 @@ public class InventoryAccessPortBlock extends DirectedDirectionalBlock implement
     @Override
     public void onNeighborChange(@NotNull BlockState state, @NotNull LevelReader level, @NotNull BlockPos pos, @NotNull BlockPos neighbor) {
         super.onNeighborChange(state, level, pos, neighbor);
+    }
+
+    @Override
+    public void neighborChanged(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos, @NotNull Block block, @NotNull BlockPos fromPos,
+                                boolean isMoving) {
+        super.neighborChanged(state, level, pos, block, fromPos, isMoving);
+        if (level.isClientSide)
+            return;
+        if (!level.getBlockTicks().willTickThisTick(pos, this))
+            level.scheduleTick(pos, this, 1);
+    }
+
+    @Override
+    public void tick(@NotNull BlockState state, @NotNull ServerLevel level, @NotNull BlockPos pos, @NotNull RandomSource r) {
         withBlockEntityDo(level, pos, InventoryAccessPortBlockEntity::updateConnectedInventory);
     }
 

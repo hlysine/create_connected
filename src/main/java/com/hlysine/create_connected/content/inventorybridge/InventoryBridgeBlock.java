@@ -6,7 +6,8 @@ import com.simibubi.create.foundation.block.IBE;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Axis;
-import net.minecraft.core.Vec3i;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -71,15 +72,18 @@ public class InventoryBridgeBlock extends Block implements IBE<InventoryBridgeBl
     }
 
     @Override
-    public void neighborChanged(@NotNull BlockState pState, @NotNull Level pLevel, @NotNull BlockPos pPos, @NotNull Block pBlock, @NotNull BlockPos pFromPos, boolean pIsMoving) {
-        withBlockEntityDo(pLevel, pPos, InventoryBridgeBlockEntity::updateConnectedInventory);
-        super.neighborChanged(pState, pLevel, pPos, pBlock, pFromPos, pIsMoving);
-        Vec3i diff = pFromPos.subtract(pPos);
-        Direction fromSide = Direction.fromDelta(diff.getX(), diff.getY(), diff.getZ());
-        if (fromSide == null)
-            pLevel.updateNeighborsAt(pPos, this);
-        else
-            pLevel.updateNeighborsAtExceptFromFacing(pPos, this, fromSide);
+    public void neighborChanged(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos, @NotNull Block block, @NotNull BlockPos fromPos,
+                                boolean isMoving) {
+        super.neighborChanged(state, level, pos, block, fromPos, isMoving);
+        if (level.isClientSide)
+            return;
+        if (!level.getBlockTicks().willTickThisTick(pos, this))
+            level.scheduleTick(pos, this, 1);
+    }
+
+    @Override
+    public void tick(@NotNull BlockState state, @NotNull ServerLevel level, @NotNull BlockPos pos, @NotNull RandomSource r) {
+        withBlockEntityDo(level, pos, InventoryBridgeBlockEntity::updateConnectedInventory);
     }
 
     public static Direction getNegativeTarget(BlockState state) {
