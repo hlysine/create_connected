@@ -59,6 +59,8 @@ public class CCPonderPlugin implements PonderPlugin {
                 .addStoryBoard("inverted_gearshift", InvertedGearshiftScenes::invertedGearshift, AllCreatePonderTags.KINETIC_RELAYS);
         SCENE_HELPER.forComponents(CCBlocks.PARALLEL_GEARBOX, CCItems.VERTICAL_PARALLEL_GEARBOX)
                 .addStoryBoard("parallel_gearbox", ParallelGearboxScenes::parallelGearbox, AllCreatePonderTags.KINETIC_RELAYS);
+        SCENE_HELPER.forComponents(CCBlocks.SIX_WAY_GEARBOX, CCItems.VERTICAL_SIX_WAY_GEARBOX)
+                .addStoryBoard("six_way_gearbox", SixWayGearboxScenes::sixWayGearbox, AllCreatePonderTags.KINETIC_RELAYS);
         SCENE_HELPER.forComponents(CCBlocks.KINETIC_BRIDGE)
                 .addStoryBoard("kinetic_bridge", KineticBridgeScene::kineticBridge, AllCreatePonderTags.KINETIC_RELAYS);
         SCENE_HELPER.forComponents(CCBlocks.KINETIC_BATTERY, CCItems.CHARGED_KINETIC_BATTERY)
@@ -94,6 +96,7 @@ public class CCPonderPlugin implements PonderPlugin {
                 .add(CCBlocks.INVERTED_CLUTCH)
                 .add(CCBlocks.INVERTED_GEARSHIFT)
                 .add(CCBlocks.PARALLEL_GEARBOX)
+                .add(CCBlocks.SIX_WAY_GEARBOX)
                 .add(CCBlocks.KINETIC_BRIDGE);
         TAG_HELPER.addToTag(AllCreatePonderTags.REDSTONE)
                 .add(CCBlocks.SEQUENCED_PULSE_GENERATOR)
