@@ -20,6 +20,14 @@
     {
       "id": "create_connected:linked_throttle_lever",
       "required": false
+    },
+    {
+      "id": "create_connected:linked_copycat_wooden_button",
+      "required": false
+    },
+    {
+      "id": "create_connected:linked_copycat_stone_button",
+      "required": false
     }
   ]
 }

@@ -1,6 +1,7 @@
 package com.hlysine.create_connected.registries;
 
 import com.hlysine.create_connected.CreateConnected;
+import com.hlysine.create_connected.compat.CopycatsCompatButtonRegistry;
 import com.hlysine.create_connected.compat.DyeDepotCompat;
 import com.hlysine.create_connected.compat.Mods;
 import com.hlysine.create_connected.compat.SimCompatRegistry;
@@ -1185,6 +1186,7 @@ public class CCBlocks {
 
     public static void register() {
         Mods.SIMULATED.executeIfInstalled(() -> SimCompatRegistry::register);
+        Mods.COPYCATS.executeIfInstalled(() -> CopycatsCompatButtonRegistry::register);
     }
 
     private static Function<BlockState, ModelFile> forBoolean(DataGenContext<?, ?> ctx,

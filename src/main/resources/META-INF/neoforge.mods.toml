@@ -35,6 +35,13 @@ issueTrackerURL="https://github.com/hlysine/create_connected/issues"
     ordering="NONE"
     side="BOTH"
 
+[[dependencies.${mod_id}]]
+    modId="copycats"
+    mandatory=false
+    type="optional"
+    ordering="AFTER"
+    side="BOTH"
+
 [[mixins]]
     config="create_connected.mixins.json"
 
