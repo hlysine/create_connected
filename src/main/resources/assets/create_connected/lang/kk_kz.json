@@ -3,5 +3,7 @@
   "create_connected.gui.sequenced_pulse_generator.instruction.output.param": "Ұзақтық",
   "create_connected.gui.sequenced_pulse_generator.instruction.wait_for.param": "Мақсатты күй",
   "create_connected.ponder.linked_transmitter.text_10": "Таратқышты кірістен ажырату үшін оны кілтпен тінтуірдің оң жақ түймешігімен басыңыз",
-  "create_connected.ponder.linked_transmitter.text_9": "Байланыстырылған таратқыштар түймелер мен аналогтық тетіктерде де жұмыс істейді"
+  "create_connected.ponder.linked_transmitter.text_9": "Байланыстырылған таратқыштар түймелер мен аналогтық тетіктерде де жұмыс істейді",
+  "create_connected.ponder.six_way_gearbox.text_1": "Бұл орнату қарапайым, бірақ қазіргі уақытта мүмкін емес",
+  "create_connected.ponder.six_way_gearbox.text_3": "Бұрыштардың айналасындағы біліктер бір бағытта айналады"
 }
