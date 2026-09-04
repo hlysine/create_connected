@@ -232,6 +232,8 @@
   "create_connected.ponder.sequenced_pulse_generator.text_6": "Gellir defnyddio cymharydd carreg goch i ddarllen y cynnydd presennol",
   "create_connected.ponder.sequenced_pulse_generator.text_7": "Ar ôl derbyn signal o'i ochrau ...",
   "create_connected.ponder.sequenced_pulse_generator.text_8": "...bydd yn ailosod ac yn terfynu'r dilyniant ar unwaith",
+  "create_connected.ponder.six_way_gearbox.text_1": "Mae'r gosodiad hwn yn syml ond yn amhosibl ar hyn o bryd",
+  "create_connected.ponder.six_way_gearbox.text_3": "Mae siafftiau o amgylch corneli yn cylchdroi i'r un cyfeiriad",
   "item.create_connected.charged_kinetic_battery": "Batri Cinetig Wedi'i Wefru",
   "item.create_connected.control_chip": "Sglodion Rheoli",
   "item.create_connected.copycat_box": "Blwch Copi",
