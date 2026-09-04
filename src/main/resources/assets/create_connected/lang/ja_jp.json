@@ -290,6 +290,8 @@
   "create_connected.ponder.sequenced_pulse_generator.text_6": "レッドストーンコンパレーターで、現在の進捗を読み取れます",
   "create_connected.ponder.sequenced_pulse_generator.text_7": "横から信号を受信すると...",
   "create_connected.ponder.sequenced_pulse_generator.text_8": "...すぐにプログラムをリセットして終了します",
+  "create_connected.ponder.six_way_gearbox.text_1": "この設定はシンプルですが、現在は不可能です",
+  "create_connected.ponder.six_way_gearbox.text_3": "直角に曲げて伝達すると、同じ方向に回転します",
   "item.create_connected.charged_kinetic_battery": "チャージされた運動用バッテリー",
   "item.create_connected.control_chip": "制御チップ",
   "item.create_connected.copycat_box": "コピーボックス",
