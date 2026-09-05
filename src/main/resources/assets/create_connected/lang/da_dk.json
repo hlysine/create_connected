@@ -237,6 +237,8 @@
   "create_connected.ponder.sequenced_pulse_generator.text_6": "En redstone komparator kan bruges til at læse de aktuelle fremskridt",
   "create_connected.ponder.sequenced_pulse_generator.text_7": "Ved modtagelse af et signal fra siderne...",
   "create_connected.ponder.sequenced_pulse_generator.text_8": "...det vil nulstille og afslutte sekvensen straks",
+  "create_connected.ponder.six_way_gearbox.text_1": "Denne opsætning er enkel, men i øjeblikket umulig",
+  "create_connected.ponder.six_way_gearbox.text_3": "Aksler omkring hjørner roterer i samme retning",
   "item.create_connected.charged_kinetic_battery": "Opladt Kinetisk Batteri",
   "item.create_connected.control_chip": "Kontroller Chip",
   "item.create_connected.copycat_box": "Kobberboks",

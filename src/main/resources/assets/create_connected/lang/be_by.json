@@ -272,6 +272,8 @@
   "create_connected.ponder.sequenced_pulse_generator.text_6": "Для прачытання бягучага прагрэсу можна выкарыстоўваць кампаратар рэдстоун",
   "create_connected.ponder.sequenced_pulse_generator.text_7": "Атрымаўшы сігнал са сваіх бакоў...",
   "create_connected.ponder.sequenced_pulse_generator.text_8": "...ён скіне і неадкладна спыніць паслядоўнасць",
+  "create_connected.ponder.six_way_gearbox.text_1": "Гэтая ўстаноўка простая, але зараз немагчымая",
+  "create_connected.ponder.six_way_gearbox.text_3": "Валы па кутах круцяцца ў адным кірунку",
   "item.create_connected.charged_kinetic_battery": "Зараджаная кінетычная батарэя",
   "item.create_connected.control_chip": "Чып кіравання",
   "item.create_connected.copycat_box": "Скрынка-копія",

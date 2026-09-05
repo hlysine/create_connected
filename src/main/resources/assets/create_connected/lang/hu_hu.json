@@ -217,6 +217,8 @@
   "create_connected.ponder.sequenced_pulse_generator.text_6": "Egy redstone komparátorral leolvasható az aktuális haladás",
   "create_connected.ponder.sequenced_pulse_generator.text_7": "Miután jelet kapott az oldaláról...",
   "create_connected.ponder.sequenced_pulse_generator.text_8": "...azonnal visszaáll és megszakítja a sorozatot",
+  "create_connected.ponder.six_way_gearbox.text_1": "Ez a beállítás egyszerű, de jelenleg nem lehetséges",
+  "create_connected.ponder.six_way_gearbox.text_3": "A sarkok körüli tengelyek ugyanabba az irányba forognak",
   "item.create_connected.control_chip": "Vezérlőchip",
   "item.create_connected.copycat_box": "Másolódoboz",
   "item.create_connected.copycat_box.tooltip.behaviour1": "A _tartott_ elemet _anyagként_ alkalmazza, ha lehetséges. _Kattintson újra_ a _tájolás_ vagy a _meghajtás_ állapotának váltásához. Használjon _ villáskulcsot _ az _ anyag _ visszaállításához.",

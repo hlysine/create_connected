@@ -396,6 +396,8 @@
   "create_connected.ponder.sequenced_pulse_generator.text_6": "Можно использовать компараторъ для считыванія текущаго прогресса выполненія инструкцій",
   "create_connected.ponder.sequenced_pulse_generator.text_7": "При полученіи сигнала со стороны...",
   "create_connected.ponder.sequenced_pulse_generator.text_8": "...онъ немедленно сброситъ выполненіе послѣдовательности",
+  "create_connected.ponder.six_way_gearbox.text_1": "Такая конструкція проста, но на данный моментъ невозможна",
+  "create_connected.ponder.six_way_gearbox.text_3": "Валы по угламъ поворачиваются въ одномъ направленіи",
   "item.create_connected.charged_kinetic_battery": "Заряженный кинетический накопитель",
   "item.create_connected.charged_kinetic_battery.tooltip.summary": "_Повреждён_; поместите в сетку создания для сброса заряда.",
   "item.create_connected.control_chip": "Контролирующій чипъ",

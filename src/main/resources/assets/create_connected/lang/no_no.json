@@ -21,5 +21,7 @@
   "create_connected.gui.sequenced_pulse_generator.instruction.output.param": "Tidslengd",
   "create_connected.gui.sequenced_pulse_generator.instruction.wait_for.param": "Målets tilstand",
   "create_connected.ponder.linked_transmitter.text_10": "Høyreklikk på senderen med en momentnøkkel for å koble den fra inngangen",
-  "create_connected.ponder.linked_transmitter.text_9": "Sammenkoblede Senderne fungerer også på knapper og analoge spaker"
+  "create_connected.ponder.linked_transmitter.text_9": "Sammenkoblede Senderne fungerer også på knapper og analoge spaker",
+  "create_connected.ponder.six_way_gearbox.text_1": "Dette oppsettet er enkelt, men i øyeblikket umulig",
+  "create_connected.ponder.six_way_gearbox.text_3": "Skygger rundt hjørner roterer i samme retning"
 }

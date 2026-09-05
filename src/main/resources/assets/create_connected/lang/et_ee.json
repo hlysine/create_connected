@@ -211,6 +211,8 @@
   "create_connected.ponder.sequenced_pulse_generator.text_6": "Praeguse edenemise lugemiseks saab kasutada redstone'i võrdlusprogrammi",
   "create_connected.ponder.sequenced_pulse_generator.text_7": "Pärast signaali saamist selle külgedelt...",
   "create_connected.ponder.sequenced_pulse_generator.text_8": "...see lähtestab ja lõpetab jada koheselt",
+  "create_connected.ponder.six_way_gearbox.text_1": "See seadistus on lihtne, kuid praegu võimatu",
+  "create_connected.ponder.six_way_gearbox.text_3": "Nurkade ümber olevad võllid pöörlevad samas suunas",
   "item.create_connected.control_chip": "Juhtkiip",
   "item.create_connected.copycat_box": "Kopeeri kast",
   "item.create_connected.copycat_box.tooltip.behaviour1": "Rakendab _hoitud_ eset_ selle _materjalina_, kui võimalik. _Klõpsake uuesti_, et _orientatsiooni_ või _toite_ olekut_ vahetada. _Materjali_ lähtestamiseks_ kasutage _mutrivõtit_.",
