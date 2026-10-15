@@ -282,6 +282,8 @@
   "create_connected.ponder.sequenced_pulse_generator.text_6": "레드스톤 비교기를 사용하면 현재 진행 상황을 알 수 있습니다.",
   "create_connected.ponder.sequenced_pulse_generator.text_7": "측면에서 신호를 받으면...",
   "create_connected.ponder.sequenced_pulse_generator.text_8": "...초기화와 동시에 동작을 즉시 종료합니다.",
+  "create_connected.ponder.six_way_gearbox.text_1": "이 설계는 간단하지만 현재로서는 불가능합니다.",
+  "create_connected.ponder.six_way_gearbox.text_3": "인접한 축들은 같은 방향으로 회전합니다.",
   "item.create_connected.charged_kinetic_battery": "충전된 운동 배터리",
   "item.create_connected.control_chip": "제어 칩",
   "item.create_connected.copycat_box": "모방 상자",

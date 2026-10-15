@@ -396,6 +396,8 @@
   "create_connected.ponder.sequenced_pulse_generator.text_6": "Ein Redstone-Vergleicher kann verwendet werden, um den aktuellen Fortschritt zu lesen",
   "create_connected.ponder.sequenced_pulse_generator.text_7": "Beim Empfangen eines Signals von der Seite...",
   "create_connected.ponder.sequenced_pulse_generator.text_8": "...wird die Sequenz sofort zurückgesetzt und beendet",
+  "create_connected.ponder.six_way_gearbox.text_1": "Dieses Setup ist einfach, aber derzeit unmöglich",
+  "create_connected.ponder.six_way_gearbox.text_3": "Schafte um Ecken drehen sich in derselben Richtung",
   "item.create_connected.charged_kinetic_battery": "Aufgeladene Kinetische Batterie",
   "item.create_connected.charged_kinetic_battery.tooltip.summary": "Veraltet. Konvertieren Sie diese in eine normale kinetische Batterie via Crafting.",
   "item.create_connected.control_chip": "Kontrollchip",

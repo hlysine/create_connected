@@ -321,6 +321,8 @@
   "create_connected.ponder.sequenced_pulse_generator.text_6": "Komparator może być użyty do odczytania obecnego postępu",
   "create_connected.ponder.sequenced_pulse_generator.text_7": "Po otrzymaniu sygnału ze swoich stron...",
   "create_connected.ponder.sequenced_pulse_generator.text_8": "...zresetuje się i natychmiast zakończy sekwencję",
+  "create_connected.ponder.six_way_gearbox.text_1": "Ta konfiguracja jest prosta, ale obecnie niemożliwa",
+  "create_connected.ponder.six_way_gearbox.text_3": "Wały przy narożnikach obracają się w tym samym kierunku",
   "item.create_connected.charged_kinetic_battery": "Naładowana bateria kinetyczna",
   "item.create_connected.control_chip": "Sterujący Procesor",
   "item.create_connected.copycat_box": "Naśladowcze pudełko",

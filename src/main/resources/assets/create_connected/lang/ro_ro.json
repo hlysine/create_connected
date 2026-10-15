@@ -235,6 +235,8 @@
   "create_connected.ponder.sequenced_pulse_generator.text_6": "Un comparator de piatră roșie poate fi folosit pentru a citi progresul actual",
   "create_connected.ponder.sequenced_pulse_generator.text_7": "La primirea unui semnal din laturile sale...",
   "create_connected.ponder.sequenced_pulse_generator.text_8": "...va reseta și va închide secvența imediat",
+  "create_connected.ponder.six_way_gearbox.text_1": "Această configurare este simplă, dar în prezent imposibilă",
+  "create_connected.ponder.six_way_gearbox.text_3": "Coboturile din jurul colțurilor rotesc în aceeași direcție",
   "item.create_connected.charged_kinetic_battery": "Baterie cinetică încărcată",
   "item.create_connected.control_chip": "Chip de control",
   "item.create_connected.copycat_box": "Cutie de Copycat",

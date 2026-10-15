@@ -9,5 +9,7 @@
   "create_connected.gui.sequenced_pulse_generator.instruction.output.param": "Kesto",
   "create_connected.gui.sequenced_pulse_generator.instruction.wait_for.param": "Kohteen tila",
   "create_connected.ponder.linked_transmitter.text_10": "Napsauta hiiren kakkospainikkeella lähetin avaimella irrottaaksesi sen syötteestä",
-  "create_connected.ponder.linked_transmitter.text_9": "Linkitetyt lähettimet toimivat myös painikkeilla ja analogisilla vivuilla"
+  "create_connected.ponder.linked_transmitter.text_9": "Linkitetyt lähettimet toimivat myös painikkeilla ja analogisilla vivuilla",
+  "create_connected.ponder.six_way_gearbox.text_1": "Tämä asetus on yksinkertainen, mutta tällä hetkellä mahdoton",
+  "create_connected.ponder.six_way_gearbox.text_3": "Kulmien ympärillä olevat akselit pyörivät samaan suuntaan"
 }

@@ -3,5 +3,7 @@
   "create_connected.gui.sequenced_pulse_generator.instruction.output.param": "Tímalengd",
   "create_connected.gui.sequenced_pulse_generator.instruction.wait_for.param": "Markmiðsástand",
   "create_connected.ponder.linked_transmitter.text_10": "Hægrismelltu á sendinn með skiptilykli til að losa hann frá inntakinu",
-  "create_connected.ponder.linked_transmitter.text_9": "Tengdir sendar virka einnig á hnöppum og hliðrænum stýripinnum"
+  "create_connected.ponder.linked_transmitter.text_9": "Tengdir sendar virka einnig á hnöppum og hliðrænum stýripinnum",
+  "create_connected.ponder.six_way_gearbox.text_1": "Þessi uppsetning er einföld en ómöguleg eins og er",
+  "create_connected.ponder.six_way_gearbox.text_3": "Skaftar í kringum horn snúast í sömu átt"
 }
