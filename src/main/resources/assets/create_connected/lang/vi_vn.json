@@ -236,6 +236,8 @@
   "create_connected.ponder.sequenced_pulse_generator.text_6": "Một bộ so sánh đá đỏ có thể được sử dụng để đọc tiến trình hiện tại",
   "create_connected.ponder.sequenced_pulse_generator.text_7": "Khi nhận được tín hiệu từ hai bên...",
   "create_connected.ponder.sequenced_pulse_generator.text_8": "...nó sẽ thiết lập lại và chấm dứt chuỗi ngay lập tức",
+  "create_connected.ponder.six_way_gearbox.text_1": "Thiết lập này đơn giản nhưng hiện tại không thể thực hiện đượco",
+  "create_connected.ponder.six_way_gearbox.text_3": "Các trục quanh góc quay theo cùng một hướng",
   "item.create_connected.charged_kinetic_battery": "Pin động học tích điện",
   "item.create_connected.control_chip": "Chip điều khiển",
   "item.create_connected.copycat_box": "Hộp Bắt chước",

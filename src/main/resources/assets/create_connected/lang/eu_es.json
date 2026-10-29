@@ -236,6 +236,8 @@
   "create_connected.ponder.sequenced_pulse_generator.text_6": "Redstone konparagailu bat erabil daiteke uneko aurrerapena irakurtzeko",
   "create_connected.ponder.sequenced_pulse_generator.text_7": "Alboetatik seinalea jasotzean...",
   "create_connected.ponder.sequenced_pulse_generator.text_8": "...berrezarri eta sekuentzia berehala amaituko du",
+  "create_connected.ponder.six_way_gearbox.text_1": "Konfigurazio hau sinplea da, baina oraingoz ezinezkoa",
+  "create_connected.ponder.six_way_gearbox.text_3": "Izkinen inguruko ardatzak norabide berean biratzen dira",
   "item.create_connected.charged_kinetic_battery": "Bateria zinetiko kargatua",
   "item.create_connected.control_chip": "Kontrol Txipa",
   "item.create_connected.copycat_box": "Kopiatu Kutxa",

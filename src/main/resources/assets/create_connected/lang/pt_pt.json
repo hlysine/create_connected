@@ -235,6 +235,8 @@
   "create_connected.ponder.sequenced_pulse_generator.text_6": "Um comparador de redstone pode ser usado para ler o progresso atual",
   "create_connected.ponder.sequenced_pulse_generator.text_7": "Ao receber um sinal de seus lados...",
   "create_connected.ponder.sequenced_pulse_generator.text_8": "...irá reiniciar e encerrar a sequência imediatamente",
+  "create_connected.ponder.six_way_gearbox.text_1": "Esta configuração é simples mas é impossível no momento",
+  "create_connected.ponder.six_way_gearbox.text_3": "Balanços em torno dos cantos rotacionados na mesma direção",
   "item.create_connected.charged_kinetic_battery": "Bateria cinética carregada",
   "item.create_connected.control_chip": "Chip de controle",
   "item.create_connected.copycat_box": "Imitador de Caixa",

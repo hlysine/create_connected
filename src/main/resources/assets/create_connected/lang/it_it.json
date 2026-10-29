@@ -231,6 +231,8 @@
   "create_connected.ponder.sequenced_pulse_generator.text_6": "Un comparatore di redstone può essere usato per leggere i progressi attuali",
   "create_connected.ponder.sequenced_pulse_generator.text_7": "Dopo aver ricevuto un segnale dai suoi lati...",
   "create_connected.ponder.sequenced_pulse_generator.text_8": "...resetterà e terminerà immediatamente la sequenza",
+  "create_connected.ponder.six_way_gearbox.text_1": "Questa configurazione è semplice ma al momento impossibile",
+  "create_connected.ponder.six_way_gearbox.text_3": "Alberi intorno agli angoli ruotano nella stessa direzione",
   "item.create_connected.charged_kinetic_battery": "Batteria Cinetica Caricata",
   "item.create_connected.control_chip": "Chip Di Controllo",
   "item.create_connected.copycat_box.tooltip.behaviour1": "Applica _elemento tenuto_ come suo _materiale_ se possibile. _Clicca di nuovo_ per ciclare lo stato _orientation_ o _powered_. Usa una _chiave _ per _reset_ il materiale.",
