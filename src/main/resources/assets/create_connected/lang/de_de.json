@@ -11,7 +11,7 @@
   "advancement.create_connected.overstress_clutch.desc": "Löse einer Überlassungskupplung aus",
   "advancement.create_connected.pulse_generator_infinite_loop": "Endlosschleife",
   "advancement.create_connected.pulse_generator_infinite_loop.desc": "Überlade einen Sequenzierten Pulsgenerator mit einem fehlerhaften Programm\n§7(Ausgeblendeter Fortschritt)",
-  "advancement.create_connected.root": "Wilkommen zu Create: Connected",
+  "advancement.create_connected.root": "Willkommen zu Create: Connected",
   "advancement.create_connected.root.desc": "Gadgets für alle Situationen",
   "advancement.create_connected.sequenced_pulse_generator": "Rechenüberlegenheit",
   "advancement.create_connected.sequenced_pulse_generator.desc": "Platziere einen Sequenzierten Pulsgenerator",
