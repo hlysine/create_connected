@@ -157,7 +157,10 @@ public class SequencedPulseGeneratorBlockEntity extends SmartBlockEntity {
     public void onRedstoneUpdate(int input) {
         this.currentInput = input;
         if (currentInput == previousInput) return;
-        if (!isIdle() || currentInput == 0) {
+        if (!isIdle()) {
+            return;
+        }
+        if (currentInput == 0) {
             previousInput = currentInput;
             return;
         }
