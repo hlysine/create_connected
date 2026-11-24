@@ -41,10 +41,10 @@
 			"from": [2, 1, 1],
 			"to": [14, 15, 15],
 			"faces": {
-				"north": {"uv": [2, 1, 14, 15], "rotation": 90, "texture": "#gearbox"},
-				"south": {"uv": [2, 1, 14, 15], "rotation": 90, "texture": "#gearbox"},
-				"up": {"uv": [2, 1, 14, 15], "rotation": 270, "texture": "#gearbox_toggled"},
-				"down": {"uv": [2, 1, 14, 15], "rotation": 270, "texture": "#gearbox_toggled"}
+				"north": {"uv": [1, 2, 15, 14], "rotation": 90, "texture": "#gearbox"},
+				"south": {"uv": [1, 2, 15, 14], "rotation": 90, "texture": "#gearbox_toggled"},
+				"up": {"uv": [1, 2, 15, 14], "rotation": 270, "texture": "#gearbox_toggled"},
+				"down": {"uv": [1, 2, 15, 14], "rotation": 270, "texture": "#gearbox_toggled"}
 			}
 		},
 		{
