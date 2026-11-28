@@ -240,6 +240,8 @@
   "create_connected.ponder.sequenced_pulse_generator.text_6": "Ke čtení aktuálního průběhu lze použít redstonový porovnávač",
   "create_connected.ponder.sequenced_pulse_generator.text_7": "Po přijetí signálu ze stran...",
   "create_connected.ponder.sequenced_pulse_generator.text_8": "...se resetuje a okamžitě ukončí sekvenci",
+  "create_connected.ponder.six_way_gearbox.text_1": "Toto uspořádání je jednoduché, ale v současné době nemožné",
+  "create_connected.ponder.six_way_gearbox.text_3": "Hřídele kolem rohů se otáčejí stejným směrem",
   "item.create_connected.charged_kinetic_battery": "Nabitá Kinetická baterie",
   "item.create_connected.control_chip": "Řídící čip",
   "item.create_connected.copycat_box": "Imitační krabice",
