@@ -1,0 +1,729 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block_powered_locked",
+        "y": 180
+      },
+      "when": {
+        "face": "floor",
+        "facing": "north",
+        "locked": "true",
+        "powered": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block_locked",
+        "y": 180
+      },
+      "when": {
+        "face": "floor",
+        "facing": "north",
+        "locked": "true",
+        "powered": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block_powered",
+        "y": 180
+      },
+      "when": {
+        "face": "floor",
+        "facing": "north",
+        "locked": "false",
+        "powered": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "minecraft:block/air"
+      },
+      "when": {
+        "face": "floor",
+        "facing": "north"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block",
+        "y": 180
+      },
+      "when": {
+        "face": "floor",
+        "facing": "north",
+        "locked": "false",
+        "powered": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block_powered_locked",
+        "y": 360
+      },
+      "when": {
+        "face": "floor",
+        "facing": "south",
+        "locked": "true",
+        "powered": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block_locked",
+        "y": 360
+      },
+      "when": {
+        "face": "floor",
+        "facing": "south",
+        "locked": "true",
+        "powered": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block_powered",
+        "y": 360
+      },
+      "when": {
+        "face": "floor",
+        "facing": "south",
+        "locked": "false",
+        "powered": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "minecraft:block/air",
+        "y": 180
+      },
+      "when": {
+        "face": "floor",
+        "facing": "south"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block",
+        "y": 360
+      },
+      "when": {
+        "face": "floor",
+        "facing": "south",
+        "locked": "false",
+        "powered": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block_powered_locked",
+        "y": 450
+      },
+      "when": {
+        "face": "floor",
+        "facing": "west",
+        "locked": "true",
+        "powered": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block_locked",
+        "y": 450
+      },
+      "when": {
+        "face": "floor",
+        "facing": "west",
+        "locked": "true",
+        "powered": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block_powered",
+        "y": 450
+      },
+      "when": {
+        "face": "floor",
+        "facing": "west",
+        "locked": "false",
+        "powered": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "minecraft:block/air",
+        "y": 270
+      },
+      "when": {
+        "face": "floor",
+        "facing": "west"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block",
+        "y": 450
+      },
+      "when": {
+        "face": "floor",
+        "facing": "west",
+        "locked": "false",
+        "powered": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block_powered_locked",
+        "y": 270
+      },
+      "when": {
+        "face": "floor",
+        "facing": "east",
+        "locked": "true",
+        "powered": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block_locked",
+        "y": 270
+      },
+      "when": {
+        "face": "floor",
+        "facing": "east",
+        "locked": "true",
+        "powered": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block_powered",
+        "y": 270
+      },
+      "when": {
+        "face": "floor",
+        "facing": "east",
+        "locked": "false",
+        "powered": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "minecraft:block/air",
+        "y": 90
+      },
+      "when": {
+        "face": "floor",
+        "facing": "east"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block",
+        "y": 270
+      },
+      "when": {
+        "face": "floor",
+        "facing": "east",
+        "locked": "false",
+        "powered": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block_powered_vertical_locked",
+        "x": 90
+      },
+      "when": {
+        "face": "wall",
+        "facing": "north",
+        "locked": "true",
+        "powered": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block_vertical_locked",
+        "x": 90
+      },
+      "when": {
+        "face": "wall",
+        "facing": "north",
+        "locked": "true",
+        "powered": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block_powered_vertical",
+        "x": 90
+      },
+      "when": {
+        "face": "wall",
+        "facing": "north",
+        "locked": "false",
+        "powered": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "minecraft:block/air",
+        "x": 90
+      },
+      "when": {
+        "face": "wall",
+        "facing": "north"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block_vertical",
+        "x": 90
+      },
+      "when": {
+        "face": "wall",
+        "facing": "north",
+        "locked": "false",
+        "powered": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block_powered_vertical_locked",
+        "x": 90,
+        "y": 180
+      },
+      "when": {
+        "face": "wall",
+        "facing": "south",
+        "locked": "true",
+        "powered": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block_vertical_locked",
+        "x": 90,
+        "y": 180
+      },
+      "when": {
+        "face": "wall",
+        "facing": "south",
+        "locked": "true",
+        "powered": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block_powered_vertical",
+        "x": 90,
+        "y": 180
+      },
+      "when": {
+        "face": "wall",
+        "facing": "south",
+        "locked": "false",
+        "powered": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "minecraft:block/air",
+        "x": 90,
+        "y": 180
+      },
+      "when": {
+        "face": "wall",
+        "facing": "south"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block_vertical",
+        "x": 90,
+        "y": 180
+      },
+      "when": {
+        "face": "wall",
+        "facing": "south",
+        "locked": "false",
+        "powered": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block_powered_vertical_locked",
+        "x": 90,
+        "y": 270
+      },
+      "when": {
+        "face": "wall",
+        "facing": "west",
+        "locked": "true",
+        "powered": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block_vertical_locked",
+        "x": 90,
+        "y": 270
+      },
+      "when": {
+        "face": "wall",
+        "facing": "west",
+        "locked": "true",
+        "powered": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block_powered_vertical",
+        "x": 90,
+        "y": 270
+      },
+      "when": {
+        "face": "wall",
+        "facing": "west",
+        "locked": "false",
+        "powered": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "minecraft:block/air",
+        "x": 90,
+        "y": 270
+      },
+      "when": {
+        "face": "wall",
+        "facing": "west"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block_vertical",
+        "x": 90,
+        "y": 270
+      },
+      "when": {
+        "face": "wall",
+        "facing": "west",
+        "locked": "false",
+        "powered": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block_powered_vertical_locked",
+        "x": 90,
+        "y": 90
+      },
+      "when": {
+        "face": "wall",
+        "facing": "east",
+        "locked": "true",
+        "powered": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block_vertical_locked",
+        "x": 90,
+        "y": 90
+      },
+      "when": {
+        "face": "wall",
+        "facing": "east",
+        "locked": "true",
+        "powered": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block_powered_vertical",
+        "x": 90,
+        "y": 90
+      },
+      "when": {
+        "face": "wall",
+        "facing": "east",
+        "locked": "false",
+        "powered": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "minecraft:block/air",
+        "x": 90,
+        "y": 90
+      },
+      "when": {
+        "face": "wall",
+        "facing": "east"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block_vertical",
+        "x": 90,
+        "y": 90
+      },
+      "when": {
+        "face": "wall",
+        "facing": "east",
+        "locked": "false",
+        "powered": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block_powered_locked",
+        "x": 180,
+        "y": 180
+      },
+      "when": {
+        "face": "ceiling",
+        "facing": "north",
+        "locked": "true",
+        "powered": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block_locked",
+        "x": 180,
+        "y": 180
+      },
+      "when": {
+        "face": "ceiling",
+        "facing": "north",
+        "locked": "true",
+        "powered": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block_powered",
+        "x": 180,
+        "y": 180
+      },
+      "when": {
+        "face": "ceiling",
+        "facing": "north",
+        "locked": "false",
+        "powered": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "minecraft:block/air",
+        "x": 180,
+        "y": 180
+      },
+      "when": {
+        "face": "ceiling",
+        "facing": "north"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block",
+        "x": 180,
+        "y": 180
+      },
+      "when": {
+        "face": "ceiling",
+        "facing": "north",
+        "locked": "false",
+        "powered": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block_powered_locked",
+        "x": 180
+      },
+      "when": {
+        "face": "ceiling",
+        "facing": "south",
+        "locked": "true",
+        "powered": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block_locked",
+        "x": 180
+      },
+      "when": {
+        "face": "ceiling",
+        "facing": "south",
+        "locked": "true",
+        "powered": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block_powered",
+        "x": 180
+      },
+      "when": {
+        "face": "ceiling",
+        "facing": "south",
+        "locked": "false",
+        "powered": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "minecraft:block/air",
+        "x": 180
+      },
+      "when": {
+        "face": "ceiling",
+        "facing": "south"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block",
+        "x": 180
+      },
+      "when": {
+        "face": "ceiling",
+        "facing": "south",
+        "locked": "false",
+        "powered": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block_powered_locked",
+        "x": 180,
+        "y": 90
+      },
+      "when": {
+        "face": "ceiling",
+        "facing": "west",
+        "locked": "true",
+        "powered": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block_locked",
+        "x": 180,
+        "y": 90
+      },
+      "when": {
+        "face": "ceiling",
+        "facing": "west",
+        "locked": "true",
+        "powered": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block_powered",
+        "x": 180,
+        "y": 90
+      },
+      "when": {
+        "face": "ceiling",
+        "facing": "west",
+        "locked": "false",
+        "powered": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "minecraft:block/air",
+        "x": 180,
+        "y": 90
+      },
+      "when": {
+        "face": "ceiling",
+        "facing": "west"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block",
+        "x": 180,
+        "y": 90
+      },
+      "when": {
+        "face": "ceiling",
+        "facing": "west",
+        "locked": "false",
+        "powered": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block_powered_locked",
+        "x": 180,
+        "y": 270
+      },
+      "when": {
+        "face": "ceiling",
+        "facing": "east",
+        "locked": "true",
+        "powered": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block_locked",
+        "x": 180,
+        "y": 270
+      },
+      "when": {
+        "face": "ceiling",
+        "facing": "east",
+        "locked": "true",
+        "powered": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block_powered",
+        "x": 180,
+        "y": 270
+      },
+      "when": {
+        "face": "ceiling",
+        "facing": "east",
+        "locked": "false",
+        "powered": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "minecraft:block/air",
+        "x": 180,
+        "y": 270
+      },
+      "when": {
+        "face": "ceiling",
+        "facing": "east"
+      }
+    },
+    {
+      "apply": {
+        "model": "create_connected:block/linked_transmitter/block",
+        "x": 180,
+        "y": 270
+      },
+      "when": {
+        "face": "ceiling",
+        "facing": "east",
+        "locked": "false",
+        "powered": "false"
+      }
+    }
+  ]
+}
