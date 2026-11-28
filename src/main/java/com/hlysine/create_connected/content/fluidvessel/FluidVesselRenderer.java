@@ -4,7 +4,6 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.simibubi.create.AllPartialModels;
 import com.simibubi.create.foundation.blockEntity.renderer.SafeBlockEntityRenderer;
-import com.simibubi.create.foundation.fluid.FluidRenderer;
 import dev.engine_room.flywheel.lib.transform.TransformStack;
 import net.createmod.catnip.animation.LerpedFloat;
 import net.createmod.catnip.data.Iterate;
@@ -105,20 +104,18 @@ public class FluidVesselRenderer extends SafeBlockEntityRenderer<FluidVesselBloc
         for (Direction d : Iterate.horizontalDirections) {
             if (be.boiler.occludedDirections[d.get2DDataValue()])
                 continue;
-            if (d.getAxis() != axis)
-                continue;
             ms.pushPose();
             float yRot = -d.toYRot() - 90;
             CachedBuffers.partial(AllPartialModels.BOILER_GAUGE, blockState)
                     .rotateYDegrees(yRot)
                     .uncenter()
-                    .translate(be.getWidth() / 2f - 6 / 16f, 0, 0)
+                    .translate((d.getAxis() == axis ? be.getHeight() : be.getWidth()) / 2f - 6 / 16f, 0, 0)
                     .light(light)
                     .renderInto(ms, vb);
             CachedBuffers.partial(AllPartialModels.BOILER_GAUGE_DIAL, blockState)
                     .rotateYDegrees(yRot)
                     .uncenter()
-                    .translate(be.getWidth() / 2f - 6 / 16f, 0, 0)
+                    .translate((d.getAxis() == axis ? be.getHeight() : be.getWidth()) / 2f - 6 / 16f, 0, 0)
                     .translate(0, dialPivotY, dialPivotZ)
                     .rotateXDegrees(-145 * progress + 90)
                     .translate(0, -dialPivotY, -dialPivotZ)
