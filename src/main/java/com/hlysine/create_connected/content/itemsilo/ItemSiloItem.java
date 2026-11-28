@@ -103,8 +103,7 @@ public class ItemSiloItem extends BlockItem {
 
         for (int xOffset = 0; xOffset < width; xOffset++) {
             for (int zOffset = 0; zOffset < width; zOffset++) {
-                BlockPos offsetPos = vaultBlockAxis == Axis.X ? startPos.offset(0, xOffset, zOffset)
-                        : startPos.offset(xOffset, zOffset, 0);
+                BlockPos offsetPos = startPos.offset(xOffset, 0, zOffset);
                 BlockState blockState = world.getBlockState(offsetPos);
                 if (ItemSiloBlock.isVault(blockState))
                     continue;
