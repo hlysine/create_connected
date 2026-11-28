@@ -1,7 +1,7 @@
 package com.hlysine.create_connected.content.inventoryaccessport;
 
-import com.hlysine.create_connected.registries.CCBlockEntityTypes;
 import com.hlysine.create_connected.CreateConnected;
+import com.hlysine.create_connected.registries.CCBlockEntityTypes;
 import com.simibubi.create.api.packager.InventoryIdentifier;
 import com.simibubi.create.content.logistics.packager.IdentifiedInventory;
 import com.simibubi.create.content.redstone.DirectedDirectionalBlock;
@@ -9,6 +9,7 @@ import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.inventory.CapManipulationBehaviourBase;
 import com.simibubi.create.foundation.blockEntity.behaviour.inventory.InvManipulationBehaviour;
+import com.simibubi.create.foundation.blockEntity.behaviour.inventory.VersionedInventoryWrapper;
 import net.createmod.catnip.math.BlockFace;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
@@ -21,6 +22,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.items.IItemHandler;
+import net.neoforged.neoforge.items.IItemHandlerModifiable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -35,7 +37,6 @@ public class InventoryAccessPortBlockEntity extends SmartBlockEntity {
     private InvManipulationBehaviour observedInventory;
     private boolean powered;
 
-    private IItemHandler cachedHandler;
     private boolean handlerDirty = true;
 
     public InventoryAccessPortBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
@@ -56,11 +57,7 @@ public class InventoryAccessPortBlockEntity extends SmartBlockEntity {
         event.registerBlockEntity(
                 Capabilities.ItemHandler.BLOCK,
                 CCBlockEntityTypes.INVENTORY_ACCESS_PORT.get(),
-                (be, context) -> {
-                    if (be.itemCapability == null)
-                        be.refreshCapability();
-                    return be.itemCapability;
-                }
+                (be, context) -> be.refreshCapability()
         );
     }
 
@@ -81,8 +78,8 @@ public class InventoryAccessPortBlockEntity extends SmartBlockEntity {
     }
 
     public void updateConnectedInventory() {
-        observedInventory.findNewCapability();
         handlerDirty = true;
+        observedInventory.findNewCapability();
         boolean previouslyPowered = powered;
         assert level != null;
         powered = level.hasNeighborSignal(worldPosition);
@@ -115,79 +112,190 @@ public class InventoryAccessPortBlockEntity extends SmartBlockEntity {
 
     private IItemHandler getConnectedItemHandler() {
         if (powered) return null;
-        if (handlerDirty) {
-            IItemHandler h = observedInventory.getInventory();
-            cachedHandler = (h instanceof WrappedItemHandler) ? null : h;
+        return observedInventory.getInventory();
+    }
+
+    private IItemHandler refreshCapability() {
+        if (handlerDirty || itemCapability == null) {
+            if (getLevel().isClientSide()) {
+                itemCapability = new InventoryAccessHandler(null);
+            } else {
+                IItemHandler connectedHandler = getConnectedItemHandler();
+                if (connectedHandler instanceof VersionedInventoryWrapper versionedHandler) {
+                    itemCapability = new VersionedInventoryAccessHandler(versionedHandler);
+                } else if (connectedHandler instanceof IItemHandlerModifiable modifiableHandler) {
+                    itemCapability = new ModifiableInventoryAccessHandler(modifiableHandler);
+                } else {
+                    itemCapability = new InventoryAccessHandler(connectedHandler);
+                }
+            }
+            invalidateCapabilities();
             handlerDirty = false;
         }
-        return cachedHandler;
+        return itemCapability;
     }
 
-    private void refreshCapability() {
-        itemCapability = new InventoryAccessHandler();
-        invalidateCapabilities();
+    private static boolean inRecursion = false;
+
+    private static <T> T preventRecursion(Supplier<T> value, T defaultValue) {
+        if (inRecursion) return defaultValue;
+        inRecursion = true;
+        try {
+            return value.get();
+        } finally {
+            inRecursion = false;
+        }
     }
 
-    private class InventoryAccessHandler implements WrappedItemHandler {
+    private static final class VersionedInventoryAccessHandler extends VersionedInventoryWrapper implements WrappedItemHandler {
 
-        private static boolean inRecursion = false;
+        private final VersionedInventoryWrapper handler;
 
-        private <T> T preventRecursion(Supplier<T> value, T defaultValue) {
-            if (inRecursion) return defaultValue;
-            inRecursion = true;
-            try {
-                return value.get();
-            } finally {
-                inRecursion = false;
-            }
+        public VersionedInventoryAccessHandler(VersionedInventoryWrapper inventory) {
+            super(inventory);
+            this.handler = inventory;
+        }
+
+        public void incrementVersion() {
+            preventRecursion(() -> {
+                if (handler != null)
+                    handler.incrementVersion();
+                return 0;
+            }, 0);
+        }
+
+        public int getVersion() {
+            return preventRecursion(() -> handler == null ? -1 : handler.getVersion(), super.getVersion());
+        }
+
+        public int getId() {
+            return preventRecursion(() -> handler == null ? -1 : handler.getId(), super.getId());
         }
 
         @Override
         public int getSlots() {
-            return preventRecursion(() -> {
-                IItemHandler handler = getConnectedItemHandler();
-                return handler == null ? 0 : handler.getSlots();
-            }, 0);
+            return preventRecursion(() -> handler == null ? 0 : handler.getSlots(), 0);
         }
 
         @Override
         public @NotNull ItemStack getStackInSlot(int i) {
-            return preventRecursion(() -> {
-                IItemHandler handler = getConnectedItemHandler();
-                return handler == null ? ItemStack.EMPTY : handler.getStackInSlot(i);
-            }, ItemStack.EMPTY);
+            return preventRecursion(() -> handler == null ? ItemStack.EMPTY : handler.getStackInSlot(i), ItemStack.EMPTY);
         }
 
         @Override
         public @NotNull ItemStack insertItem(int i, @NotNull ItemStack itemStack, boolean b) {
-            return preventRecursion(() -> {
-                IItemHandler handler = getConnectedItemHandler();
-                return handler == null ? itemStack : handler.insertItem(i, itemStack, b);
-            }, itemStack);
+            return preventRecursion(() -> handler == null ? itemStack : handler.insertItem(i, itemStack, b), itemStack);
         }
 
         @Override
         public @NotNull ItemStack extractItem(int i, int i1, boolean b) {
-            return preventRecursion(() -> {
-                IItemHandler handler = getConnectedItemHandler();
-                return handler == null ? ItemStack.EMPTY : handler.extractItem(i, i1, b);
-            }, ItemStack.EMPTY);
+            return preventRecursion(() -> handler == null ? ItemStack.EMPTY : handler.extractItem(i, i1, b), ItemStack.EMPTY);
         }
 
         @Override
         public int getSlotLimit(int i) {
-            return preventRecursion(() -> {
-                IItemHandler handler = getConnectedItemHandler();
-                return handler == null ? 0 : handler.getSlotLimit(i);
-            }, 0);
+            return preventRecursion(() -> handler == null ? 0 : handler.getSlotLimit(i), 0);
         }
 
         @Override
         public boolean isItemValid(int i, @NotNull ItemStack itemStack) {
-            return preventRecursion(() -> {
-                IItemHandler handler = getConnectedItemHandler();
-                return handler != null && handler.isItemValid(i, itemStack);
+            return preventRecursion(() -> handler != null && handler.isItemValid(i, itemStack), false);
+        }
+
+        @Override
+        public void setStackInSlot(int slot, ItemStack stack) {
+            preventRecursion(() -> {
+                if (handler != null)
+                    handler.setStackInSlot(slot, stack);
+                return false;
             }, false);
+        }
+    }
+
+    private static final class ModifiableInventoryAccessHandler implements IItemHandlerModifiable, WrappedItemHandler {
+
+        private final IItemHandlerModifiable handler;
+
+        private ModifiableInventoryAccessHandler(IItemHandlerModifiable handler) {
+            this.handler = handler;
+        }
+
+        @Override
+        public int getSlots() {
+            return preventRecursion(() -> handler == null ? 0 : handler.getSlots(), 0);
+        }
+
+        @Override
+        public @NotNull ItemStack getStackInSlot(int i) {
+            return preventRecursion(() -> handler == null ? ItemStack.EMPTY : handler.getStackInSlot(i), ItemStack.EMPTY);
+        }
+
+        @Override
+        public @NotNull ItemStack insertItem(int i, @NotNull ItemStack itemStack, boolean b) {
+            return preventRecursion(() -> handler == null ? itemStack : handler.insertItem(i, itemStack, b), itemStack);
+        }
+
+        @Override
+        public @NotNull ItemStack extractItem(int i, int i1, boolean b) {
+            return preventRecursion(() -> handler == null ? ItemStack.EMPTY : handler.extractItem(i, i1, b), ItemStack.EMPTY);
+        }
+
+        @Override
+        public int getSlotLimit(int i) {
+            return preventRecursion(() -> handler == null ? 0 : handler.getSlotLimit(i), 0);
+        }
+
+        @Override
+        public boolean isItemValid(int i, @NotNull ItemStack itemStack) {
+            return preventRecursion(() -> handler != null && handler.isItemValid(i, itemStack), false);
+        }
+
+        @Override
+        public void setStackInSlot(int slot, ItemStack stack) {
+            preventRecursion(() -> {
+                if (handler != null)
+                    handler.setStackInSlot(slot, stack);
+                return false;
+            }, false);
+        }
+    }
+
+    private static final class InventoryAccessHandler implements WrappedItemHandler {
+
+        private final IItemHandler handler;
+
+        private InventoryAccessHandler(IItemHandler handler) {
+            this.handler = handler;
+        }
+
+        @Override
+        public int getSlots() {
+            return preventRecursion(() -> handler == null ? 0 : handler.getSlots(), 0);
+        }
+
+        @Override
+        public @NotNull ItemStack getStackInSlot(int i) {
+            return preventRecursion(() -> handler == null ? ItemStack.EMPTY : handler.getStackInSlot(i), ItemStack.EMPTY);
+        }
+
+        @Override
+        public @NotNull ItemStack insertItem(int i, @NotNull ItemStack itemStack, boolean b) {
+            return preventRecursion(() -> handler == null ? itemStack : handler.insertItem(i, itemStack, b), itemStack);
+        }
+
+        @Override
+        public @NotNull ItemStack extractItem(int i, int i1, boolean b) {
+            return preventRecursion(() -> handler == null ? ItemStack.EMPTY : handler.extractItem(i, i1, b), ItemStack.EMPTY);
+        }
+
+        @Override
+        public int getSlotLimit(int i) {
+            return preventRecursion(() -> handler == null ? 0 : handler.getSlotLimit(i), 0);
+        }
+
+        @Override
+        public boolean isItemValid(int i, @NotNull ItemStack itemStack) {
+            return preventRecursion(() -> handler != null && handler.isItemValid(i, itemStack), false);
         }
     }
 }

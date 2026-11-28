@@ -1,8 +1,8 @@
 package com.hlysine.create_connected.content.inventorybridge;
 
-import com.hlysine.create_connected.registries.CCBlockEntityTypes;
 import com.hlysine.create_connected.CreateConnected;
 import com.hlysine.create_connected.content.inventoryaccessport.WrappedItemHandler;
+import com.hlysine.create_connected.registries.CCBlockEntityTypes;
 import com.simibubi.create.api.packager.InventoryIdentifier;
 import com.simibubi.create.content.logistics.packager.IdentifiedInventory;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
@@ -11,6 +11,7 @@ import com.simibubi.create.foundation.blockEntity.behaviour.filtering.FilteringB
 import com.simibubi.create.foundation.blockEntity.behaviour.filtering.SidedFilteringBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.inventory.CapManipulationBehaviourBase;
 import com.simibubi.create.foundation.blockEntity.behaviour.inventory.InvManipulationBehaviour;
+import com.simibubi.create.foundation.blockEntity.behaviour.inventory.VersionedInventoryWrapper;
 import net.createmod.catnip.math.BlockFace;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -24,6 +25,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.items.IItemHandler;
+import net.neoforged.neoforge.items.IItemHandlerModifiable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -45,10 +47,7 @@ public class InventoryBridgeBlockEntity extends SmartBlockEntity {
 
     private boolean powered;
 
-    private IItemHandler cachedNegativeHandler;
-    private IItemHandler cachedPositiveHandler;
-    private boolean negativeHandlerDirty = true;
-    private boolean positiveHandlerDirty = true;
+    private boolean handlerDirty = true;
 
     public InventoryBridgeBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
@@ -68,11 +67,7 @@ public class InventoryBridgeBlockEntity extends SmartBlockEntity {
         event.registerBlockEntity(
                 Capabilities.ItemHandler.BLOCK,
                 CCBlockEntityTypes.INVENTORY_BRIDGE.get(),
-                (be, context) -> {
-                    if (be.itemCapability == null)
-                        be.refreshCapability();
-                    return be.itemCapability;
-                }
+                (be, context) -> be.refreshCapability()
         );
     }
 
@@ -118,10 +113,9 @@ public class InventoryBridgeBlockEntity extends SmartBlockEntity {
     }
 
     public void updateConnectedInventory() {
+        handlerDirty = true;
         negativeInventory.findNewCapability();
         positiveInventory.findNewCapability();
-        negativeHandlerDirty = true;
-        positiveHandlerDirty = true;
         boolean previouslyPowered = powered;
         powered = level.hasNeighborSignal(worldPosition);
         if (powered != previouslyPowered) {
@@ -159,242 +153,397 @@ public class InventoryBridgeBlockEntity extends SmartBlockEntity {
 
     private IItemHandler getNegativeHandler() {
         if (powered) return null;
-        if (negativeHandlerDirty) {
-            IItemHandler h = negativeInventory.getInventory();
-            cachedNegativeHandler = (h instanceof WrappedItemHandler) ? null : h;
-            negativeHandlerDirty = false;
-        }
-        return cachedNegativeHandler;
+        return negativeInventory.getInventory();
     }
 
     private IItemHandler getPositiveHandler() {
         if (powered) return null;
-        if (positiveHandlerDirty) {
-            IItemHandler h = positiveInventory.getInventory();
-            cachedPositiveHandler = (h instanceof WrappedItemHandler) ? null : h;
-            positiveHandlerDirty = false;
-        }
-        return cachedPositiveHandler;
+        return positiveInventory.getInventory();
     }
 
-    private void refreshCapability() {
-        itemCapability = new InventoryBridgeHandler();
-        invalidateCapabilities();
-    }
-
-    private class InventoryBridgeHandler implements WrappedItemHandler {
-
-        private static boolean inRecursion = false;
-
-        private <T> T preventRecursion(Supplier<T> value, T defaultValue) {
-            if (inRecursion) return defaultValue;
-            inRecursion = true;
-            try {
-                return value.get();
-            } finally {
-                inRecursion = false;
+    private IItemHandler refreshCapability() {
+        if (handlerDirty || itemCapability == null) {
+            if (getLevel().isClientSide()) {
+                itemCapability = new InventoryBridgeHandler(null, null);
+            } else {
+                IItemHandler negativeHandler = getNegativeHandler();
+                IItemHandler positiveHandler = getPositiveHandler();
+                if (negativeHandler instanceof VersionedInventoryWrapper negativeVersioned && positiveHandler instanceof VersionedInventoryWrapper positiveVersioned) {
+                    itemCapability = new VersionedInventoryBridgeHandler(negativeVersioned, positiveVersioned);
+                } else if (negativeHandler instanceof IItemHandlerModifiable negativeModifiable && positiveHandler instanceof IItemHandlerModifiable positiveModifiable) {
+                    itemCapability = new ModifiableInventoryBridgeHandler(negativeModifiable, positiveModifiable);
+                } else {
+                    itemCapability = new InventoryBridgeHandler(negativeHandler, positiveHandler);
+                }
             }
+            invalidateCapabilities();
+            handlerDirty = false;
+        }
+        return itemCapability;
+    }
+
+    private static boolean inRecursion = false;
+
+    private static <T> T preventRecursion(Supplier<T> value, T defaultValue) {
+        if (inRecursion) return defaultValue;
+        inRecursion = true;
+        try {
+            return value.get();
+        } finally {
+            inRecursion = false;
+        }
+    }
+
+    private int getSlots(IItemHandler negativeHandler, IItemHandler positiveHandler) {
+        return preventRecursion(() -> {
+            if (negativeHandler == null && positiveHandler == null) {
+                return 0;
+            } else if (negativeHandler == null) {
+                return positiveHandler.getSlots();
+            } else if (positiveHandler == null) {
+                return negativeHandler.getSlots();
+            } else {
+                return negativeHandler.getSlots() + positiveHandler.getSlots();
+            }
+        }, 0);
+    }
+
+    private @NotNull ItemStack getStackInSlot(IItemHandler negativeHandler, IItemHandler positiveHandler, int slot) {
+        return preventRecursion(() -> {
+            if (negativeHandler == null && positiveHandler == null) {
+                return ItemStack.EMPTY;
+            } else if (negativeHandler == null) {
+                ItemStack stack = positiveHandler.getStackInSlot(slot);
+                boolean negative = negativeFilter.test(stack);
+                boolean positive = positiveFilter.test(stack);
+                if (!positive) return ItemStack.EMPTY;
+                if (negative && !negativeFilter.getFilter().isEmpty() && positiveFilter.getFilter().isEmpty())
+                    return ItemStack.EMPTY;
+                return stack;
+            } else if (positiveHandler == null) {
+                ItemStack stack = negativeHandler.getStackInSlot(slot);
+                boolean negative = negativeFilter.test(stack);
+                boolean positive = positiveFilter.test(stack);
+                if (!negative) return ItemStack.EMPTY;
+                if (positive && !positiveFilter.getFilter().isEmpty() && negativeFilter.getFilter().isEmpty())
+                    return ItemStack.EMPTY;
+                return stack;
+            } else {
+                int size1 = negativeHandler.getSlots();
+                ItemStack stack = slot < size1 ? negativeHandler.getStackInSlot(slot) : positiveHandler.getStackInSlot(slot - size1);
+                boolean negative = negativeFilter.test(stack);
+                boolean positive = positiveFilter.test(stack);
+                if (!negative && !positive) return ItemStack.EMPTY;
+                if (negative && !positive && slot >= size1) return ItemStack.EMPTY;
+                if (positive && !negative && slot < size1) return ItemStack.EMPTY;
+                boolean negativeFilterEmpty = negativeFilter.getFilter().isEmpty();
+                boolean positiveFilterEmpty = positiveFilter.getFilter().isEmpty();
+                if (!negativeFilterEmpty || !positiveFilterEmpty) {
+                    if (slot >= size1 && negative && positiveFilterEmpty) return ItemStack.EMPTY;
+                    if (slot < size1 && positive && negativeFilterEmpty) return ItemStack.EMPTY;
+                }
+                return stack;
+            }
+        }, ItemStack.EMPTY);
+    }
+
+    private @NotNull ItemStack insertItem(IItemHandler negativeHandler, IItemHandler positiveHandler, int slot, @NotNull ItemStack stack, boolean simulate) {
+        return preventRecursion(() -> {
+            if (negativeHandler == null && positiveHandler == null) {
+                return stack;
+            } else if (negativeHandler == null) {
+                boolean negative = negativeFilter.test(stack);
+                boolean positive = positiveFilter.test(stack);
+                if (!positive) return stack;
+                if (negative && !negativeFilter.getFilter().isEmpty() && positiveFilter.getFilter().isEmpty())
+                    return stack;
+                return positiveHandler.insertItem(slot, stack, simulate);
+            } else if (positiveHandler == null) {
+                boolean negative = negativeFilter.test(stack);
+                boolean positive = positiveFilter.test(stack);
+                if (!negative) return stack;
+                if (positive && !positiveFilter.getFilter().isEmpty() && negativeFilter.getFilter().isEmpty())
+                    return stack;
+                return negativeHandler.insertItem(slot, stack, simulate);
+            } else {
+                boolean negative = negativeFilter.test(stack);
+                boolean positive = positiveFilter.test(stack);
+                int size1 = negativeHandler.getSlots();
+                if (!negative && !positive) return stack;
+                if (negative && !positive && slot >= size1) return stack;
+                if (positive && !negative && slot < size1) return stack;
+                boolean negativeFilterEmpty = negativeFilter.getFilter().isEmpty();
+                boolean positiveFilterEmpty = positiveFilter.getFilter().isEmpty();
+                if (!negativeFilterEmpty || !positiveFilterEmpty) {
+                    if (slot >= size1 && negative && positiveFilterEmpty) return stack;
+                    if (slot < size1 && positive && negativeFilterEmpty) return stack;
+                }
+                return slot < size1
+                        ? negativeHandler.insertItem(slot, stack, simulate)
+                        : positiveHandler.insertItem(slot - size1, stack, simulate);
+            }
+        }, stack);
+    }
+
+    private @NotNull ItemStack extractItem(IItemHandler negativeHandler, IItemHandler positiveHandler, int slot, int amount, boolean simulate) {
+        return preventRecursion(() -> {
+            if (negativeHandler == null && positiveHandler == null) {
+                return ItemStack.EMPTY;
+            } else if (negativeHandler == null) {
+                ItemStack stack = positiveHandler.extractItem(slot, amount, true);
+                boolean negative = negativeFilter.test(stack);
+                boolean positive = positiveFilter.test(stack);
+                if (!positive) return ItemStack.EMPTY;
+                if (negative && !negativeFilter.getFilter().isEmpty() && positiveFilter.getFilter().isEmpty())
+                    return ItemStack.EMPTY;
+                return positiveHandler.extractItem(slot, amount, simulate);
+            } else if (positiveHandler == null) {
+                ItemStack stack = negativeHandler.extractItem(slot, amount, true);
+                boolean negative = negativeFilter.test(stack);
+                boolean positive = positiveFilter.test(stack);
+                if (!negative) return ItemStack.EMPTY;
+                if (positive && !positiveFilter.getFilter().isEmpty() && negativeFilter.getFilter().isEmpty())
+                    return ItemStack.EMPTY;
+                return negativeHandler.extractItem(slot, amount, simulate);
+            } else {
+                int size1 = negativeHandler.getSlots();
+                ItemStack stack = slot < size1 ? negativeHandler.extractItem(slot, amount, true) : positiveHandler.extractItem(slot - size1, amount, true);
+                boolean negative = negativeFilter.test(stack);
+                boolean positive = positiveFilter.test(stack);
+                if (!negative && !positive) return ItemStack.EMPTY;
+                if (negative && !positive && slot >= size1) return ItemStack.EMPTY;
+                if (positive && !negative && slot < size1) return ItemStack.EMPTY;
+                boolean negativeFilterEmpty = negativeFilter.getFilter().isEmpty();
+                boolean positiveFilterEmpty = positiveFilter.getFilter().isEmpty();
+                if (!negativeFilterEmpty || !positiveFilterEmpty) {
+                    if (slot >= size1 && negative && positiveFilterEmpty) return ItemStack.EMPTY;
+                    if (slot < size1 && positive && negativeFilterEmpty) return ItemStack.EMPTY;
+                }
+                return slot < size1 ? negativeHandler.extractItem(slot, amount, simulate) : positiveHandler.extractItem(slot - size1, amount, simulate);
+            }
+        }, ItemStack.EMPTY);
+    }
+
+    private int getSlotLimit(IItemHandler negativeHandler, IItemHandler positiveHandler, int slot) {
+        return preventRecursion(() -> {
+            if (negativeHandler == null && positiveHandler == null) {
+                return 0;
+            } else if (negativeHandler == null) {
+                return positiveHandler.getSlotLimit(slot);
+            } else if (positiveHandler == null) {
+                return negativeHandler.getSlotLimit(slot);
+            } else {
+                int size1 = negativeHandler.getSlots();
+                return slot < size1 ? negativeHandler.getSlotLimit(slot) : positiveHandler.getSlotLimit(slot - size1);
+            }
+        }, 0);
+    }
+
+    private boolean isItemValid(IItemHandler negativeHandler, IItemHandler positiveHandler, int slot, @NotNull ItemStack stack) {
+        return preventRecursion(() -> {
+            if (negativeHandler == null && positiveHandler == null) {
+                return false;
+            } else if (negativeHandler == null) {
+                boolean negative = negativeFilter.test(stack);
+                boolean positive = positiveFilter.test(stack);
+                if (!positive) return false;
+                if (negative && !negativeFilter.getFilter().isEmpty() && positiveFilter.getFilter().isEmpty())
+                    return false;
+                return positiveHandler.isItemValid(slot, stack);
+            } else if (positiveHandler == null) {
+                boolean negative = negativeFilter.test(stack);
+                boolean positive = positiveFilter.test(stack);
+                if (!negative) return false;
+                if (positive && !positiveFilter.getFilter().isEmpty() && negativeFilter.getFilter().isEmpty())
+                    return false;
+                return negativeHandler.isItemValid(slot, stack);
+            } else {
+                boolean negative = negativeFilter.test(stack);
+                boolean positive = positiveFilter.test(stack);
+                int size1 = negativeHandler.getSlots();
+                if (!negative && !positive) return false;
+                if (negative && !positive && slot >= size1) return false;
+                if (positive && !negative && slot < size1) return false;
+                boolean negativeFilterEmpty = negativeFilter.getFilter().isEmpty();
+                boolean positiveFilterEmpty = positiveFilter.getFilter().isEmpty();
+                if (!negativeFilterEmpty || !positiveFilterEmpty) {
+                    if (slot >= size1 && negative && positiveFilterEmpty) return false;
+                    if (slot < size1 && positive && negativeFilterEmpty) return false;
+                }
+                return slot < size1
+                        ? negativeHandler.isItemValid(slot, stack)
+                        : positiveHandler.isItemValid(slot - size1, stack);
+            }
+        }, false);
+    }
+
+    private void setStackInSlot(IItemHandlerModifiable negativeHandler, IItemHandlerModifiable positiveHandler, int slot, @NotNull ItemStack stack) {
+        preventRecursion(() -> {
+            if (negativeHandler == null && positiveHandler == null) {
+                // do nothing
+            } else if (negativeHandler == null) {
+                positiveHandler.setStackInSlot(slot, stack);
+            } else if (positiveHandler == null) {
+                negativeHandler.setStackInSlot(slot, stack);
+            } else {
+                int size1 = negativeHandler.getSlots();
+                if (slot < size1) {
+                    negativeHandler.setStackInSlot(slot, stack);
+                } else {
+                    positiveHandler.setStackInSlot(slot - size1, stack);
+                }
+            }
+            return 0;
+        }, 0);
+    }
+
+    private class VersionedInventoryBridgeHandler extends VersionedInventoryWrapper implements WrappedItemHandler {
+
+        private final VersionedInventoryWrapper negativeHandler;
+        private final VersionedInventoryWrapper positiveHandler;
+
+        public VersionedInventoryBridgeHandler(VersionedInventoryWrapper negativeHandler, VersionedInventoryWrapper positiveHandler) {
+            super(negativeHandler);
+            this.negativeHandler = negativeHandler;
+            this.positiveHandler = positiveHandler;
+        }
+
+        @Override
+        public void incrementVersion() {
+            if (positiveHandler != null) positiveHandler.incrementVersion();
+            if (negativeHandler != null) negativeHandler.incrementVersion();
+        }
+
+        @Override
+        public int getVersion() {
+            return positiveHandler.getVersion() + negativeHandler.getVersion();
+        }
+
+        @Override
+        public int getId() {
+            return -positiveHandler.getId() - negativeHandler.getId();
         }
 
         @Override
         public int getSlots() {
-            return preventRecursion(() -> {
-                IItemHandler handler1 = getNegativeHandler();
-                IItemHandler handler2 = getPositiveHandler();
-                if (handler1 == null && handler2 == null) {
-                    return 0;
-                } else if (handler1 == null) {
-                    return handler2.getSlots();
-                } else if (handler2 == null) {
-                    return handler1.getSlots();
-                } else {
-                    return handler1.getSlots() + handler2.getSlots();
-                }
-            }, 0);
+            return InventoryBridgeBlockEntity.this.getSlots(negativeHandler, positiveHandler);
         }
 
         @Override
         public @NotNull ItemStack getStackInSlot(int slot) {
-            return preventRecursion(() -> {
-                IItemHandler handler1 = getNegativeHandler();
-                IItemHandler handler2 = getPositiveHandler();
-                if (handler1 == null && handler2 == null) {
-                    return ItemStack.EMPTY;
-                } else if (handler1 == null) {
-                    ItemStack stack = handler2.getStackInSlot(slot);
-                    boolean negative = negativeFilter.test(stack);
-                    boolean positive = positiveFilter.test(stack);
-                    if (!positive) return ItemStack.EMPTY;
-                    if (negative && !negativeFilter.getFilter().isEmpty() && positiveFilter.getFilter().isEmpty())
-                        return ItemStack.EMPTY;
-                    return stack;
-                } else if (handler2 == null) {
-                    ItemStack stack = handler1.getStackInSlot(slot);
-                    boolean negative = negativeFilter.test(stack);
-                    boolean positive = positiveFilter.test(stack);
-                    if (!negative) return ItemStack.EMPTY;
-                    if (positive && !positiveFilter.getFilter().isEmpty() && negativeFilter.getFilter().isEmpty())
-                        return ItemStack.EMPTY;
-                    return stack;
-                } else {
-                    int size1 = handler1.getSlots();
-                    ItemStack stack = slot < size1 ? handler1.getStackInSlot(slot) : handler2.getStackInSlot(slot - size1);
-                    boolean negative = negativeFilter.test(stack);
-                    boolean positive = positiveFilter.test(stack);
-                    if (!negative && !positive) return ItemStack.EMPTY;
-                    if (negative && !positive && slot >= size1) return ItemStack.EMPTY;
-                    if (positive && !negative && slot < size1) return ItemStack.EMPTY;
-                    boolean negativeFilterEmpty = negativeFilter.getFilter().isEmpty();
-                    boolean positiveFilterEmpty = positiveFilter.getFilter().isEmpty();
-                    if (!negativeFilterEmpty || !positiveFilterEmpty) {
-                        if (slot >= size1 && negative && positiveFilterEmpty) return ItemStack.EMPTY;
-                        if (slot < size1 && positive && negativeFilterEmpty) return ItemStack.EMPTY;
-                    }
-                    return stack;
-                }
-            }, ItemStack.EMPTY);
+            return InventoryBridgeBlockEntity.this.getStackInSlot(negativeHandler, positiveHandler, slot);
         }
 
         @Override
         public @NotNull ItemStack insertItem(int slot, @NotNull ItemStack stack, boolean simulate) {
-            return preventRecursion(() -> {
-                IItemHandler handler1 = getNegativeHandler();
-                IItemHandler handler2 = getPositiveHandler();
-                if (handler1 == null && handler2 == null) {
-                    return stack;
-                } else if (handler1 == null) {
-                    boolean negative = negativeFilter.test(stack);
-                    boolean positive = positiveFilter.test(stack);
-                    if (!positive) return stack;
-                    if (negative && !negativeFilter.getFilter().isEmpty() && positiveFilter.getFilter().isEmpty())
-                        return stack;
-                    return handler2.insertItem(slot, stack, simulate);
-                } else if (handler2 == null) {
-                    boolean negative = negativeFilter.test(stack);
-                    boolean positive = positiveFilter.test(stack);
-                    if (!negative) return stack;
-                    if (positive && !positiveFilter.getFilter().isEmpty() && negativeFilter.getFilter().isEmpty())
-                        return stack;
-                    return handler1.insertItem(slot, stack, simulate);
-                } else {
-                    boolean negative = negativeFilter.test(stack);
-                    boolean positive = positiveFilter.test(stack);
-                    int size1 = handler1.getSlots();
-                    if (!negative && !positive) return stack;
-                    if (negative && !positive && slot >= size1) return stack;
-                    if (positive && !negative && slot < size1) return stack;
-                    boolean negativeFilterEmpty = negativeFilter.getFilter().isEmpty();
-                    boolean positiveFilterEmpty = positiveFilter.getFilter().isEmpty();
-                    if (!negativeFilterEmpty || !positiveFilterEmpty) {
-                        if (slot >= size1 && negative && positiveFilterEmpty) return stack;
-                        if (slot < size1 && positive && negativeFilterEmpty) return stack;
-                    }
-                    return slot < size1
-                            ? handler1.insertItem(slot, stack, simulate)
-                            : handler2.insertItem(slot - size1, stack, simulate);
-                }
-            }, stack);
+            return InventoryBridgeBlockEntity.this.insertItem(negativeHandler, positiveHandler, slot, stack, simulate);
         }
 
         @Override
         public @NotNull ItemStack extractItem(int slot, int amount, boolean simulate) {
-            return preventRecursion(() -> {
-                IItemHandler handler1 = getNegativeHandler();
-                IItemHandler handler2 = getPositiveHandler();
-                if (handler1 == null && handler2 == null) {
-                    return ItemStack.EMPTY;
-                } else if (handler1 == null) {
-                    ItemStack stack = handler2.extractItem(slot, amount, true);
-                    boolean negative = negativeFilter.test(stack);
-                    boolean positive = positiveFilter.test(stack);
-                    if (!positive) return ItemStack.EMPTY;
-                    if (negative && !negativeFilter.getFilter().isEmpty() && positiveFilter.getFilter().isEmpty())
-                        return ItemStack.EMPTY;
-                    return handler2.extractItem(slot, amount, simulate);
-                } else if (handler2 == null) {
-                    ItemStack stack = handler1.extractItem(slot, amount, true);
-                    boolean negative = negativeFilter.test(stack);
-                    boolean positive = positiveFilter.test(stack);
-                    if (!negative) return ItemStack.EMPTY;
-                    if (positive && !positiveFilter.getFilter().isEmpty() && negativeFilter.getFilter().isEmpty())
-                        return ItemStack.EMPTY;
-                    return handler1.extractItem(slot, amount, simulate);
-                } else {
-                    int size1 = handler1.getSlots();
-                    ItemStack stack = slot < size1 ? handler1.extractItem(slot, amount, true) : handler2.extractItem(slot - size1, amount, true);
-                    boolean negative = negativeFilter.test(stack);
-                    boolean positive = positiveFilter.test(stack);
-                    if (!negative && !positive) return ItemStack.EMPTY;
-                    if (negative && !positive && slot >= size1) return ItemStack.EMPTY;
-                    if (positive && !negative && slot < size1) return ItemStack.EMPTY;
-                    boolean negativeFilterEmpty = negativeFilter.getFilter().isEmpty();
-                    boolean positiveFilterEmpty = positiveFilter.getFilter().isEmpty();
-                    if (!negativeFilterEmpty || !positiveFilterEmpty) {
-                        if (slot >= size1 && negative && positiveFilterEmpty) return ItemStack.EMPTY;
-                        if (slot < size1 && positive && negativeFilterEmpty) return ItemStack.EMPTY;
-                    }
-                    return slot < size1 ? handler1.extractItem(slot, amount, simulate) : handler2.extractItem(slot - size1, amount, simulate);
-                }
-            }, ItemStack.EMPTY);
+            return InventoryBridgeBlockEntity.this.extractItem(negativeHandler, positiveHandler, slot, amount, simulate);
         }
 
         @Override
         public int getSlotLimit(int slot) {
-            return preventRecursion(() -> {
-                IItemHandler handler1 = getNegativeHandler();
-                IItemHandler handler2 = getPositiveHandler();
-                if (handler1 == null && handler2 == null) {
-                    return 0;
-                } else if (handler1 == null) {
-                    return handler2.getSlotLimit(slot);
-                } else if (handler2 == null) {
-                    return handler1.getSlotLimit(slot);
-                } else {
-                    int size1 = handler1.getSlots();
-                    return slot < size1 ? handler1.getSlotLimit(slot) : handler2.getSlotLimit(slot - size1);
-                }
-            }, 0);
+            return InventoryBridgeBlockEntity.this.getSlotLimit(negativeHandler, positiveHandler, slot);
         }
 
         @Override
         public boolean isItemValid(int slot, @NotNull ItemStack stack) {
-            return preventRecursion(() -> {
-                IItemHandler handler1 = getNegativeHandler();
-                IItemHandler handler2 = getPositiveHandler();
-                if (handler1 == null && handler2 == null) {
-                    return false;
-                } else if (handler1 == null) {
-                    boolean negative = negativeFilter.test(stack);
-                    boolean positive = positiveFilter.test(stack);
-                    if (!positive) return false;
-                    if (negative && !negativeFilter.getFilter().isEmpty() && positiveFilter.getFilter().isEmpty())
-                        return false;
-                    return handler2.isItemValid(slot, stack);
-                } else if (handler2 == null) {
-                    boolean negative = negativeFilter.test(stack);
-                    boolean positive = positiveFilter.test(stack);
-                    if (!negative) return false;
-                    if (positive && !positiveFilter.getFilter().isEmpty() && negativeFilter.getFilter().isEmpty())
-                        return false;
-                    return handler1.isItemValid(slot, stack);
-                } else {
-                    boolean negative = negativeFilter.test(stack);
-                    boolean positive = positiveFilter.test(stack);
-                    int size1 = handler1.getSlots();
-                    if (!negative && !positive) return false;
-                    if (negative && !positive && slot >= size1) return false;
-                    if (positive && !negative && slot < size1) return false;
-                    boolean negativeFilterEmpty = negativeFilter.getFilter().isEmpty();
-                    boolean positiveFilterEmpty = positiveFilter.getFilter().isEmpty();
-                    if (!negativeFilterEmpty || !positiveFilterEmpty) {
-                        if (slot >= size1 && negative && positiveFilterEmpty) return false;
-                        if (slot < size1 && positive && negativeFilterEmpty) return false;
-                    }
-                    return slot < size1
-                            ? handler1.isItemValid(slot, stack)
-                            : handler2.isItemValid(slot - size1, stack);
-                }
-            }, false);
+            return InventoryBridgeBlockEntity.this.isItemValid(negativeHandler, positiveHandler, slot, stack);
+        }
+
+        @Override
+        public void setStackInSlot(int slot, @NotNull ItemStack stack) {
+            InventoryBridgeBlockEntity.this.setStackInSlot(negativeHandler, positiveHandler, slot, stack);
+        }
+    }
+
+    private class ModifiableInventoryBridgeHandler implements IItemHandlerModifiable, WrappedItemHandler {
+
+        private final IItemHandlerModifiable negativeHandler;
+        private final IItemHandlerModifiable positiveHandler;
+
+        public ModifiableInventoryBridgeHandler(IItemHandlerModifiable negativeHandler, IItemHandlerModifiable positiveHandler) {
+            this.negativeHandler = negativeHandler;
+            this.positiveHandler = positiveHandler;
+        }
+
+        @Override
+        public int getSlots() {
+            return InventoryBridgeBlockEntity.this.getSlots(negativeHandler, positiveHandler);
+        }
+
+        @Override
+        public @NotNull ItemStack getStackInSlot(int slot) {
+            return InventoryBridgeBlockEntity.this.getStackInSlot(negativeHandler, positiveHandler, slot);
+        }
+
+        @Override
+        public @NotNull ItemStack insertItem(int slot, @NotNull ItemStack stack, boolean simulate) {
+            return InventoryBridgeBlockEntity.this.insertItem(negativeHandler, positiveHandler, slot, stack, simulate);
+        }
+
+        @Override
+        public @NotNull ItemStack extractItem(int slot, int amount, boolean simulate) {
+            return InventoryBridgeBlockEntity.this.extractItem(negativeHandler, positiveHandler, slot, amount, simulate);
+        }
+
+        @Override
+        public int getSlotLimit(int slot) {
+            return InventoryBridgeBlockEntity.this.getSlotLimit(negativeHandler, positiveHandler, slot);
+        }
+
+        @Override
+        public boolean isItemValid(int slot, @NotNull ItemStack stack) {
+            return InventoryBridgeBlockEntity.this.isItemValid(negativeHandler, positiveHandler, slot, stack);
+        }
+
+        @Override
+        public void setStackInSlot(int slot, @NotNull ItemStack stack) {
+            InventoryBridgeBlockEntity.this.setStackInSlot(negativeHandler, positiveHandler, slot, stack);
+        }
+    }
+
+    private class InventoryBridgeHandler implements WrappedItemHandler {
+
+        private final IItemHandler negativeHandler;
+        private final IItemHandler positiveHandler;
+
+        public InventoryBridgeHandler(IItemHandler negativeHandler, IItemHandler positiveHandler) {
+            this.negativeHandler = negativeHandler;
+            this.positiveHandler = positiveHandler;
+        }
+
+        @Override
+        public int getSlots() {
+            return InventoryBridgeBlockEntity.this.getSlots(negativeHandler, positiveHandler);
+        }
+
+        @Override
+        public @NotNull ItemStack getStackInSlot(int slot) {
+            return InventoryBridgeBlockEntity.this.getStackInSlot(negativeHandler, positiveHandler, slot);
+        }
+
+        @Override
+        public @NotNull ItemStack insertItem(int slot, @NotNull ItemStack stack, boolean simulate) {
+            return InventoryBridgeBlockEntity.this.insertItem(negativeHandler, positiveHandler, slot, stack, simulate);
+        }
+
+        @Override
+        public @NotNull ItemStack extractItem(int slot, int amount, boolean simulate) {
+            return InventoryBridgeBlockEntity.this.extractItem(negativeHandler, positiveHandler, slot, amount, simulate);
+        }
+
+        @Override
+        public int getSlotLimit(int slot) {
+            return InventoryBridgeBlockEntity.this.getSlotLimit(negativeHandler, positiveHandler, slot);
+        }
+
+        @Override
+        public boolean isItemValid(int slot, @NotNull ItemStack stack) {
+            return InventoryBridgeBlockEntity.this.isItemValid(negativeHandler, positiveHandler, slot, stack);
         }
     }
 }
