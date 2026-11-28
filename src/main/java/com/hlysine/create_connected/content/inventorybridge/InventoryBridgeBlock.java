@@ -1,5 +1,6 @@
 package com.hlysine.create_connected.content.inventorybridge;
 
+import com.hlysine.create_connected.content.inventoryaccessport.WrappedItemHandler;
 import com.hlysine.create_connected.registries.CCBlockEntityTypes;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.foundation.block.IBE;
@@ -53,9 +54,12 @@ public class InventoryBridgeBlock extends Block implements IBE<InventoryBridgeBl
             BlockEntity be = context.getLevel()
                     .getBlockEntity(context.getClickedPos()
                             .relative(face));
-            if (be != null && context.getLevel().getCapability(itemCap, be.getBlockPos(), null) != null) {
-                preferredFacing = face;
-                break;
+            if (be != null) {
+                IItemHandler cap = context.getLevel().getCapability(itemCap, be.getBlockPos(), null);
+                if (cap != null && !(cap instanceof WrappedItemHandler)) {
+                    preferredFacing = face;
+                    break;
+                }
             }
         }
 

@@ -50,9 +50,12 @@ public class InventoryAccessPortBlock extends DirectedDirectionalBlock implement
             BlockEntity be = context.getLevel()
                     .getBlockEntity(context.getClickedPos()
                             .relative(face));
-            if (be != null && context.getLevel().getCapability(itemCap, be.getBlockPos(), null) != null) {
-                preferredFacing = face;
-                break;
+            if (be != null) {
+                IItemHandler cap = context.getLevel().getCapability(itemCap, be.getBlockPos(), null);
+                if (cap != null && !(cap instanceof WrappedItemHandler)) {
+                    preferredFacing = face;
+                    break;
+                }
             }
         }
 
