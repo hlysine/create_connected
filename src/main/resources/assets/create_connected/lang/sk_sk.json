@@ -235,6 +235,8 @@
   "create_connected.ponder.sequenced_pulse_generator.text_6": "Na odčítanie aktuálneho pokroku možno použiť komparátor redstone",
   "create_connected.ponder.sequenced_pulse_generator.text_7": "Po prijatí signálu z jeho strán...",
   "create_connected.ponder.sequenced_pulse_generator.text_8": "...okamžite sa resetuje a ukončí sekvencia",
+  "create_connected.ponder.six_way_gearbox.text_1": "Toto nastavenie je jednoduché, ale v súčasnosti nemožné",
+  "create_connected.ponder.six_way_gearbox.text_3": "Hriadele okolo rohov sa otáčajú rovnakým smerom",
   "item.create_connected.control_chip": "Kontrolný čip",
   "item.create_connected.copycat_box": "Imitačný box",
   "item.create_connected.copycat_box.tooltip.behaviour1": "Ak je to možné, použije _podržanú položku_ ako svoj _materiál_. _Opätovným kliknutím_ prepnete _orientáciu_ alebo _napájaný_ stav. Použite _ kľúč _ na _ resetovanie _ materiálu.",

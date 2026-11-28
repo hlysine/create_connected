@@ -276,6 +276,8 @@
   "create_connected.ponder.sequenced_pulse_generator.text_6": "紅石比較器可用於讀取當前進度",
   "create_connected.ponder.sequenced_pulse_generator.text_7": "當收到來自其側面的信號時…",
   "create_connected.ponder.sequenced_pulse_generator.text_8": "……它將立即重置並終止序列",
+  "create_connected.ponder.six_way_gearbox.text_1": "此設定很簡單，但目前無法實現",
+  "create_connected.ponder.six_way_gearbox.text_3": "轉角處的軸以相同方向旋轉",
   "item.create_connected.charged_kinetic_battery": "充電動能電池",
   "item.create_connected.control_chip": "控制晶片",
   "item.create_connected.copycat_box": "偽裝盒子",

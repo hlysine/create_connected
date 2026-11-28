@@ -252,6 +252,8 @@
   "create_connected.ponder.sequenced_pulse_generator.text_6": "Een Redstonevergelijker kan gebruikt worden om de huidige voortgang af te lezen",
   "create_connected.ponder.sequenced_pulse_generator.text_7": "Zodra het een signaal via de zijkant ontvangt...",
   "create_connected.ponder.sequenced_pulse_generator.text_8": "...herstelt en stopt de sequentie onmiddellijk",
+  "create_connected.ponder.six_way_gearbox.text_1": "Deze opstelling is simpel, maar momenteel onmogelijk",
+  "create_connected.ponder.six_way_gearbox.text_3": "Assen om hoeken draaien in dezelfde richting",
   "item.create_connected.charged_kinetic_battery": "Opgeladen inetische batterij",
   "item.create_connected.control_chip": "Controlechip",
   "item.create_connected.copycat_box": "Imitatiedoos",

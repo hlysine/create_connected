@@ -234,6 +234,8 @@
   "create_connected.ponder.sequenced_pulse_generator.text_6": "En rödstensjämförelse kan användas för att läsa den aktuella utvecklingen",
   "create_connected.ponder.sequenced_pulse_generator.text_7": "Vid mottagande av en signal från sina sidor...",
   "create_connected.ponder.sequenced_pulse_generator.text_8": "...det kommer att återställa och avsluta sekvensen omedelbart",
+  "create_connected.ponder.six_way_gearbox.text_1": "Denna inställning är enkel men för närvarande omöjlig",
+  "create_connected.ponder.six_way_gearbox.text_3": "Axlar runt hörn roterar i samma riktning",
   "item.create_connected.charged_kinetic_battery": "Laddat kinetiskt batteri",
   "item.create_connected.control_chip": "Kontrollera Chip",
   "item.create_connected.copycat_box": "Kopiera Box",
